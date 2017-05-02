@@ -61,7 +61,7 @@
 	</update>
 	<!-- 식자재 삭제 -->
 	<delete id="fooddelete" parameterType="string">
-	
+		
 	</delete>
 	
 	
