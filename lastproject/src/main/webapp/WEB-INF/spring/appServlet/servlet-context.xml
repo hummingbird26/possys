@@ -52,5 +52,33 @@
 	        <beans:constructor-arg index="0" ref="sqlSessionFactory" />
 	    </beans:bean>
 
+
+<!-- 로그인 인터셉터 테스트 -->
+		<interceptors>
+		<interceptor>
+			<mapping path="/test"/>
+			<mapping path="/logout"/>
+			<mapping path="/home"/>
+			<beans:bean class="kr.or.possys.Staff_service.Staff_interceptor"></beans:bean>
+		</interceptor>
+		</interceptors>
+	
+	
+	<!-- 로그아웃 인터셉터(캐쉬날리기) -->
+	<interceptors>
+	<beans:bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+	        <beans:property name="cacheSeconds" value="0" />
+	        <beans:property name="useExpiresHeader" value="true" />
+	        <beans:property name="useCacheControlHeader" value="true" />
+	        <beans:property name="useCacheControlNoStore" value="true" />
+		<!--           예외처리 하여 캐쉬 적용이 가능 하다.
+		     <property name="cacheMappings">
+		                   <props>
+		                      <prop key="/test/test/**">86400</prop>
+		                   </props>
+		      </property>
+		--> 
+    	</beans:bean>
+		</interceptors>
 	
 </beans:beans>
