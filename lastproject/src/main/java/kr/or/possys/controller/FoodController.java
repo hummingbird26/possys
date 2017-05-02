@@ -40,11 +40,9 @@ public class FoodController {
 		System.out.println("FoodController.java ->>foodlist 요청");
 		int foodcount = dao.getfoodcount();
 		int pageRow = 20;
-		int lastPage = (int)(Math.ceil(foodcount/pageRow));
+		int lastPage = (int)(Math.ceil((double)foodcount/(double)pageRow));
 		List<Food> list = dao.foodlist(currentPage, pageRow);
-		System.out.println(foodcount);
-		System.out.println(Math.ceil(foodcount/pageRow));
-		System.out.println(lastPage);
+		
 		
 		model.addAttribute("foodcount", foodcount);
 		model.addAttribute("currentPage", currentPage);
@@ -53,4 +51,31 @@ public class FoodController {
 		model.addAttribute("list", list);
 		return "/wonbin/food_list";
 	}
+	//식재료 수정화면 요청
+	@RequestMapping(value="/food_modify_view", method = RequestMethod.GET)
+	public String foodview(Model model, @RequestParam(value="food_id",required=true) String food_id){
+		System.out.println("FoodController.java ->>foodview 요청");
+		Food food = dao.foodview(food_id);
+		model.addAttribute("food",food);
+		return "/wonbin/food_modify_view";
+	}
+	//식재료 수정액션 요청
+	@RequestMapping(value="/food_modify", method = RequestMethod.POST)
+	public String foodmodify(Food food){
+		System.out.println("FoodController.java ->>foodmodify 요청");
+		dao.foodmodify(food);
+		return "redirect:/food_modify_view?food_id="+food.getFood_id();
+		
+	}
+	//식재료 삭제 요청
+	@RequestMapping(value="/food_delete", method = RequestMethod.GET)
+	public String fooddelete(@RequestParam(value="food_id", required=true) String food_id){
+		dao.fooddelete(food_id);
+		return null;
+	}
+	
+	
+	
+	
+	
 }

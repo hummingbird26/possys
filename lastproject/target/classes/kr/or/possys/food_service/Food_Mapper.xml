@@ -4,7 +4,7 @@
 <mapper namespace="kr.or.possys.food_service.Food_Mapper">
 	<!-- 식자재 품목 입력 -->
 	<insert id="insertfood" parameterType="kr.or.possys.food_service.Food">
-		insert into food_manage(
+		insert into food_manage( 
 		food_id
 		,food_name
 		,food_size
@@ -38,4 +38,32 @@
 		order by food_id desc
 		limit #{beginRow}, #{pageRow}
 	</select>
+	<!-- 식자재 수정화면 -->
+	<select id="foodview" parameterType="string" resultType="kr.or.possys.food_service.Food">
+		select food_id
+		,food_name
+		,food_size
+		,food_unit
+		,food_shelflife
+		,staff_id
+		,food_date
+		from food_manage where food_id=#{food_id}	
+	</select>
+	<!-- 식자재 수정 -->
+	<update id="foodmodify" parameterType="kr.or.possys.food_service.Food">
+		update food_manage
+		set food_name = #{food_name}
+		,food_size= #{food_size}
+		,food_unit= #{food_unit}
+		,food_shelflife= #{food_shelflife}
+		,food_date= sysdate()
+		where food_id= #{food_id}
+	</update>
+	<!-- 식자재 삭제 -->
+	<delete id="fooddelete" parameterType="string">
+	
+	</delete>
+	
+	
+	
 </mapper>

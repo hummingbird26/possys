@@ -5,7 +5,7 @@ public class Food {
 	private String food_name;
 	private String food_size;
 	private String food_unit;
-	private String food_shelflife;
+	private int food_shelflife;
 	private String food_date;
 	private String staff_id;
 	
@@ -39,10 +39,10 @@ public class Food {
 	public void setFood_unit(String food_unit) {
 		this.food_unit = food_unit;
 	}
-	public String getFood_shelflife() {
+	public int getFood_shelflife() {
 		return food_shelflife;
 	}
-	public void setFood_shelflife(String food_shelflife) {
+	public void setFood_shelflife(int food_shelflife) {
 		this.food_shelflife = food_shelflife;
 	}
 	public String getFood_date() {

@@ -32,4 +32,20 @@ public class Food_Dao {
 		map.put("pageRow", pageRow);
 		return sqlSessionTemplate.selectList("kr.or.possys.food_service.Food_Mapper.foodlist",map);
 	}
+	//food 수정폼 요청
+	public Food foodview(String food_id){
+		System.out.println("04_Food_dao.java->>foodview 실행");
+		return sqlSessionTemplate.selectOne("kr.or.possys.food_service.Food_Mapper.foodview",food_id);
+	}
+	//food 수정액션 요청
+	public int foodmodify(Food food){
+		System.out.println("05_Food_dao.java->>foodmodify 실행");
+		return sqlSessionTemplate.update("kr.or.possys.food_service.Food_Mapper.foodmodify",food);
+		
+	}
+	//food 삭제 요청
+	public int fooddelete(String food_id){
+		System.out.println("06_Food_dao.java->>fooddelete 실행");
+		return 0;
+	}
 }
