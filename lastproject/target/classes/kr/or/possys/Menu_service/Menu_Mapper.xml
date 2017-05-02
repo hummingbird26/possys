@@ -1,0 +1,31 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.possys.menu_service.Menu_Mapper">
+	<!-- 식자재 품목 입력 -->
+	<insert id="insertmenu" parameterType="kr.or.possys.Menu_service.Menu">
+			insert into menu(
+		 menu_id
+		 ,menu_name
+		 ,menu_cate
+		 ,menu_price
+		 ,menu_sprice
+		 ,menu_sale
+		 ,menu_Kcal
+		 ,menu_picture
+		 ,menu_explanation)		
+		select
+		concat('MN',(select lpad(count(*)+1,4,'0') from menu))
+		,#{menu_name}	
+		,#{menu_cate}
+		,#{menu_price}
+		,#{menu_sprice}
+		,#{menu_sale}
+		,#{menu_Kcal}
+		,#{menu_picture}
+		,#{menu_explanation}
+		
+		
+	</insert>
+	
+</mapper>
