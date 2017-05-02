@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	<!-- D1ispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
@@ -44,6 +44,8 @@
         <beans:property name="mapperLocations">
             <beans:list>
                 <beans:value>classpath:kr/or/possys/food_service/Food_Mapper.xml</beans:value>
+                <beans:value>classpath:kr/or/possys/order_service/Order_Mapper.xml</beans:value>
+                
             </beans:list>
         </beans:property>
 	    </beans:bean>
@@ -80,5 +82,4 @@
 		--> 
     	</beans:bean>
 		</interceptors>
-	
 </beans:beans>
