@@ -52,8 +52,6 @@
 	        <beans:constructor-arg index="0" ref="sqlSessionFactory" />
 	    </beans:bean>
 
-<<<<<<< HEAD
-=======
 
 <!-- 로그인 인터셉터 테스트 -->
 		<interceptors>
@@ -82,6 +80,4 @@
 		--> 
     	</beans:bean>
 		</interceptors>
->>>>>>> branch 'master' of https://github.com/hummingbird26/possys
-	
 </beans:beans>
