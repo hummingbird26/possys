@@ -1,9 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
-Built-By: 201-14
-=======
 Built-By: smart-202-10
->>>>>>> branch 'master' of https://github.com/hummingbird26/possys
 Build-Jdk: 1.8.0_31
 Created-By: Maven Integration for Eclipse
 
