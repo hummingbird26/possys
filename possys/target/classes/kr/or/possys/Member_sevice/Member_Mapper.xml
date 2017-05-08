@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.possys.Member_sevice.Member_Mapper">
+
+<!-- 검색 조건에 맞는 회원수 조회 쿼리 -->
+<select id="getsearchCount" parameterType="kr.or.possys.Member_sevice.mVo" resultType="int">
+SELECT COUNT(*) FROM 
+(SELECT member_name
+		,member_phone
+		,member_point
+		,member_sign
+		,member_join
+	   COUNT FROM member
+		where ${selBox}=#{search}) AS submember
+		where ${selBox}=#{search}
+</select>
+
+<!-- 검색조건 선택하고 내용 입력받아 검색하는 쿼리 -->
+<select id="Msearch" parameterType="kr.or.possys.Member_sevice.mVo" resultType="kr.or.possys.Member_sevice.Member">
+SELECT 	 member_name
+		,member_phone
+		,member_point
+		,member_sign
+		,member_join
+		FROM member
+		where ${selBox} = #{search}
+		ORDER BY member_sign DESC 
+		LIMIT #{beginRow},#{pagePerRow};
+
+<!-- SELECT 	 member_name
+		,member_phone
+		,member_point
+		,member_sign
+		,member_join
+		FROM member
+		where ${selBox} = #{search}; -->
+</select>
+
+<!-- 전체 회원 수 조회 쿼리 --> 
+<select id="getMemberCount" resultType="int">
+SELECT COUNT(*) FROM member
+</select>
+<!-- 전체 회원 정보 조회 쿼리 -->
+<select id="getMemberList" parameterType="java.util.HashMap" resultType="kr.or.possys.Member_sevice.Member">
+SELECT  member_phone
+			,member_name
+			, member_point
+			, member_sign
+			,member_join
+			FROM member
+			ORDER BY member_sign DESC 
+			LIMIT #{beginRow},#{pagePerRow}
+</select>
+
+<!-- 한명 회원정보 조회 쿼리 -->
+<select id="MselectOne" parameterType="int" resultType="kr.or.possys.Member_sevice.Member">
+SELECT  member_phone
+		,member_name
+		,member_point
+		,member_sign
+		,member_join
+		FROM member 
+		where member_phone = #{member_phone};
+</select>
+<!-- 한명의 회원정보 수정 쿼리 -->
+<update id="Mupdate" parameterType="kr.or.possys.Member_sevice.Member">
+UPDATE member SET 
+member_phone= #{member_phone}
+ ,member_name= #{member_name}
+ ,member_point= #{member_point}
+ WHERE member_phone= #{member_phone}
+</update>
+
+<delete id="deleteMember" parameterType="int">
+DELETE FROM member 
+		WHERE member_phone= #{member_phone}
+</delete>
+</mapper>
