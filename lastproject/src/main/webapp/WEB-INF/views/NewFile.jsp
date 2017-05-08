@@ -9,27 +9,7 @@
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
-  <script type="text/javascript">
-$(function() {
-$('#jrnlNm').keyup(function() {
-$.get("/JRNLList.do", {
-JRNLNm : $("#jrnlNm").val()
-}, function(data) {
-$('#message').html(data).show();
-});
-});
-});
-</script>
 
-
-<div ID="message">
-
-<input type="text" name="jrnlNm" id="jrnlNm" />
-<c:forEach>
-<tr>
-<td><c:out value="${ list }"></c:out></td>
-</tr>
-</c:forEach>
 
 <div>
   <script>

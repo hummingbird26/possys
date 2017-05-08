@@ -10,7 +10,11 @@
 <a href="${pageContext.request.contextPath}/logout">로그아웃</a>
 <a href="${pageContext.request.contextPath}/member_list">목록</a>
 <a href="${pageContext.request.contextPath}/test">Jquery autocomplete</a>
-
+<!-- 원빈 -->
+<a href="${pageContext.request.contextPath}/food_list">식재자 품목 목록</a>
+<a href="${pageContext.request.contextPath}/drop_list">폐기 품목 목록</a>
+<a href="${pageContext.request.contextPath}/ep_manage_list">발주업체 목록</a>
+<!-- 원빈 끝 -->
 
 아이디:${sessionScope.admin.admin_id}
 이름:${sessionScope.admin.admin_name}
