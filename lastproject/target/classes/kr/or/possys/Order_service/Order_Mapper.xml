@@ -9,4 +9,12 @@
 		table_order_date 
 		from table_order
 	</select>
+ 	<select id="order_modify_form" parameterType = "String" resultType="kr.or.possys.Order_service.Order">
+		select table_order_id,
+		table_order_num,
+		table_order_end,
+		table_order_date 
+		from table_order
+		where table_order_id = #{table_order_id}
+	</select>
 </mapper>
