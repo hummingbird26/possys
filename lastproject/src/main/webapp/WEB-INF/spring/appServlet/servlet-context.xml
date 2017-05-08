@@ -45,7 +45,8 @@
             <beans:list>
                 <beans:value>classpath:kr/or/possys/food_service/Food_Mapper.xml</beans:value>
                 <beans:value>classpath:kr/or/possys/Order_service/Order_Mapper.xml</beans:value>
-                
+                 <beans:value>classpath:kr/or/possys/Staff_service/Staff_Mapper.xml</beans:value>
+                <beans:value>classpath:kr/or/possys/Member_sevice/Member_Mapper.xml</beans:value>
             </beans:list>
         </beans:property>
 	    </beans:bean>

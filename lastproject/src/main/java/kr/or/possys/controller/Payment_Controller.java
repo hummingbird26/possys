@@ -18,11 +18,14 @@ public class Payment_Controller {
 	private Payment_Dao pdao;
 	
 	// view 페이지가 제대로 표시되도록 하기 위해서 다른 컨트롤러의 루트(/) 값을 모두 지우거나 주석처리해놓음
-	@RequestMapping(value="/", method = RequestMethod.GET)
+	
+	//Staff 컨트롤러에서 login 페이지를 메인으로 보내기 위해 주석처리 했다 경로 다르게 잡아서 수정바람
+	
+	/*@RequestMapping(value="/", method = RequestMethod.GET)
 	public String start(){
 		System.out.println("start");
 		return "tori_home";
-	}
+	}*/
 	
 	//리스트 입력 폼으로 이동한다
 	@RequestMapping(value="/tori/payment/payment_add_form", method = RequestMethod.GET)

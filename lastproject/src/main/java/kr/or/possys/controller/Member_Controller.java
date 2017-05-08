@@ -20,6 +20,27 @@ public class Member_Controller {
 
 	@Autowired
 	private	Member_Dao	Mdao;
+	
+	
+	//Jquery autocomplete test
+	@RequestMapping(value="/test", method = RequestMethod.GET)
+		public String test(Model model,@RequestParam(value="currentPage",required=false,defaultValue="1" )int currentPage){
+			System.out.println("test 메서드 실행");
+			int pagePerRow = 10;
+			List<Member> list = Mdao.getMemberList(currentPage, pagePerRow);
+			model.addAttribute("list",list);
+			
+		
+			
+			return "NewFile";
+		}
+		
+
+	
+	
+	
+	
+	
 	// 검색처리 메서드
 			@RequestMapping(value="/member_select",method = RequestMethod.GET)
 			public String memberselect(HttpServletRequest request
@@ -107,7 +128,7 @@ public class Member_Controller {
 	
 	//회원 개인 정보 열람 화면
 	@RequestMapping(value="/member_information_view" ,method = RequestMethod.GET)
-	public String memberView(Model model,@RequestParam(value="member_phone",required=false,defaultValue="1")int member_phone){
+	public String memberView(Model model,@RequestParam(value="member_phone",required=false,defaultValue="1")String member_phone){
 		System.out.println("memberView 메서드 실행 확인  Member_Controller.java ");
 		Member m = Mdao.getMember(member_phone);
 		model.addAttribute("Member",m);
@@ -117,7 +138,7 @@ public class Member_Controller {
 	
 	//수정처리 화면 출력 메서드 
 	@RequestMapping(value ="/member_update", method = RequestMethod.GET)
-		public String update(Model model,@RequestParam(value="member_phone")int member_phone){
+		public String update(Model model,@RequestParam(value="member_phone")String member_phone){
 			System.out.println("update 메서드 호출    Member_Controller.java");
 			Member m = Mdao.getMember(member_phone);
 			model.addAttribute("Member",m);
@@ -134,7 +155,7 @@ public class Member_Controller {
 	}
 	//삭제화면 출력 메서드
 	@RequestMapping(value="/member_Secede",method = RequestMethod.GET)
-	public String memberDeletePage(Model model , @RequestParam(value="member_phone")int member_phone){
+	public String memberDeletePage(Model model , @RequestParam(value="member_phone")String member_phone){
 		Member m = Mdao.getMember(member_phone);
 		model.addAttribute("Member",m);
 		
@@ -143,7 +164,7 @@ public class Member_Controller {
 	}
 	// 삭제처리 메서드
 		@RequestMapping(value="/member_SecedeAction",method = RequestMethod.POST)
-		public String memberDelete(@RequestParam(value="member_phone")int member_phone){
+		public String memberDelete(@RequestParam(value="member_phone")String member_phone){
 			System.out.println("memberDelete메서드 호출    Member_Controller.java");
 			Mdao.deleteMember(member_phone);
 			return "redirect:member_list";

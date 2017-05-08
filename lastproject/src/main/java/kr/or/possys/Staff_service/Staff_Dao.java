@@ -15,7 +15,14 @@ public class Staff_Dao {
 	// Staff테이블에 맞게 DAO 수정하기.
 	@Autowired
 private SqlSessionTemplate sqlSessionTemplate;
-	
+	//직원 로그인 체크 메서드 
+		public Staff loginSelect(String s){
+			System.out.println("loginSelect 메서드 실행 Staff_Dao.java");
+
+		
+			return sqlSessionTemplate.selectOne("kr.or.possys.Staff_service.Staff_Mapper.login", s);
+		}
+		
 	public int updateStaff(Staff Staff) {
 		System.out.println("updateStaff");
         return sqlSessionTemplate.update("kr.or.possys.Staff_service.Staff_Mapper.updateStaff", Staff);

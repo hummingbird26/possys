@@ -1,24 +1,47 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>BOARD LIST(¸ğµ¨2 ¹æ½Ä)</title>
-<!-- bootstrapÀ» »ç¿ëÇÏ±â À§ÇÑ CDNÁÖ¼Ò -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>íšŒì› ë¦¬ìŠ¤íŠ¸</title>
+<!-- bootstrapì„ ì‚¬ìš©í•˜ê¸° ìœ„í•œ CDNì£¼ì†Œ -->
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
- 
+ <style>
+            .bu{
+               /*  display: inline-block; */
+                background-color: white;
+                color: black;
+            }
+            .bu{
+                color: black;
+            }
+            /* ë§ˆìš°ìŠ¤ ì˜¤ë²„(ë§ˆìš°ìŠ¤ ì˜¬ë ¸ì„ë•Œ) */
+            .bu:hover{
+                background-color: chocolate;
+            }
+            /* ë§ˆìš°ìŠ¤ í´ë¦­í•˜ê³ ìˆì„ë•Œ */
+            .bu:active{
+                background-color: aqua;
+            }
+            /* ë§ˆìš°ìŠ¤ í•œë²ˆí´ë¦­í›„ */
+            .bu:visited{
+                color: black;
+            	background-color:#FFD8D8;
+            }
+        
+        </style>
 </head>
 <body>
 <div class="container">
     <h1>MEMBER LIST</h1>
-    <div>ÀüÃ¼ÇàÀÇ ¼ö : ${memberCount}</div>
+    <div>ì „ì²´í–‰ì˜ ìˆ˜ : ${memberCount}</div>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -43,19 +66,19 @@
     </table>
     <ul class="pager">
         <c:if test="${currentPage < lastpage}">
-            <li class="previous"><a href="${pageContext.request.contextPath}/member_list?currentPage=${currentPage-1}">ÀÌÀü</a></li>
+            <li class="previous"><a href="${pageContext.request.contextPath}/member_list?currentPage=${currentPage-1}">ì´ì „</a></li>
         </c:if>
       
       	<c:forEach var="i" begin="${expage}" end="${lastpage}" step="1">
              <c:choose>
-                <c:when test="${i eq currentPage}"><li class="previous"><a href="${pageContext.request.contextPath}/member_list?currentPage=${i}" class="choice">[${i}]</a></li></c:when>
-                <c:otherwise><li class="previous"><a href="${pageContext.request.contextPath}/member_list?currentPage=${i}">[${i}]</a></li></c:otherwise>
+                <c:when test="${i eq currentPage}"><li><a href="${pageContext.request.contextPath}/member_list?currentPage=${i}"><button class ="bu">${i}</button></a></li></c:when>
+                <c:otherwise><li><a href="${pageContext.request.contextPath}/member_list?currentPage=${i}" ><button class ="bu">${i}</button></a></li></c:otherwise>
             </c:choose>
 
         </c:forEach>
         
         <c:if test="${currentPage > 4}">
-            <li class="next"><a href="${pageContext.request.contextPath}/member_list?currentPage=${currentPage+1}">´ÙÀ½</a></li>
+            <li class="next"><a href="${pageContext.request.contextPath}/member_list?currentPage=${currentPage+1}">ë‹¤ìŒ</a></li>
         </c:if>
     </ul>
     
@@ -70,24 +93,37 @@ $(document).ready(function(){
 			/* alert(va); */
 			frm.submit();	
 		}else{
-			 alert('°Ë»öÁ¶°ÇÀ» ¼±ÅÃÇÏ¼¼¿ä');
+			 alert('ê²€ìƒ‰ì¡°ê±´ì„ ì„ íƒí•˜ì„¸ìš”');
 		}
 		
 	});
 });
 </script>
 
+<!-- <script type="text/javascript"> 
+
+    function change1(obj){
+        obj.style.background = '#FFD8D8';
+        obj.style.color = 'white';
+       /*  $(obj).css("background-color", "#FFD8D8"); 
+        $(obj).siblings().removeClass("selected"); */
+    }
+    
+
+</script> -->
+
+
     <div>
     <form id="frm" name="frm" action="${pageContext.request.contextPath}/member_select" method="get">
     	<select  id="selBox" name="selBox">
-    	<option>-- ¼±ÅÃÇÏ¼¼¿ä--</option>
-        <option  value="member_phone">ÇÚµåÆù¹øÈ£</option>
-        <option  value="member_name">ÀÌ¸§</option>
-        <option  value="member_sign">°¡ÀÔÀÏÀÚ</option>
-        <option  value="member_join">ÃÖ±Ù¹æ¹®ÀÏÀÚ</option>
+    	<option>-- ì„ íƒí•˜ì„¸ìš”--</option>
+        <option  value="member_phone">í•¸ë“œí°ë²ˆí˜¸</option>
+        <option  value="member_name">ì´ë¦„</option>
+        <option  value="member_sign">ê°€ì…ì¼ì</option>
+        <option  value="member_join">ìµœê·¼ë°©ë¬¸ì¼ì</option>
         </select>
         <input type="search" name="search" id="search">
-        <input type="button" name="button" id="button" value="°Ë»ö">
+        <input type="button" name="button" id="button" value="ê²€ìƒ‰">
      </form>
     </div>
 </div>

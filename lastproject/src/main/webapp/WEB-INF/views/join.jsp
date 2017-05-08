@@ -10,8 +10,8 @@
 
 	<!-- Google Fonts -->
 	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="./resources/assets/css/style.css" />
-	<link rel="stylesheet" href="./resources/assets/css/animate.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/style.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/animate.css">
 	<!-- Custom Stylesheet -->
 	<link rel="stylesheet" href="css/style.css">
 
@@ -46,7 +46,7 @@
 </head>
 
 <body>
-<form action="/PosSystem2/loginAction" name="frm" method="POST">
+<form action="${pageContext.request.contextPath}/loginAction" name="frm" method="POST">
 
 	<div class="container">
 		<div class="top">

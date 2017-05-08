@@ -30,9 +30,9 @@ public class Member_Dao {
 		
 	}
 	//한명 회원정보 조회 메서드
-	public Member getMember(int phone){
+	public Member getMember(String member_phone){
 		System.out.println("getMember 메서드 실행   Member_Dao.java ");
-		return Msql.selectOne("kr.or.possys.Member_sevice.Member_Mapper.MselectOne", phone);
+		return Msql.selectOne("kr.or.possys.Member_sevice.Member_Mapper.MselectOne", member_phone);
 	}
 	//수정처리 메서드
 	public int Mupdate(Member m){
@@ -40,7 +40,7 @@ public class Member_Dao {
 		return Msql.update("kr.or.possys.Member_sevice.Member_Mapper.Mupdate",m);
 	}
 	//삭제처리 메서드
-	public int deleteMember(int member_phone){
+	public int deleteMember(String member_phone){
 		System.out.println("deleteMember 메서드 실행 Member_Dao.java");
 		
 		return Msql.delete("kr.or.possys.Member_sevice.Member_Mapper.deleteMember", member_phone);
