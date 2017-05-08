@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<title>ì‹ìžìž¬ ëª©ë¡</title>
+<title>½ÄÀÚÀç ¸ñ·Ï</title>
 <script type="text/javascript">
 	$(document).ready(function(){
 			
@@ -26,19 +26,19 @@
 </script>
 </head>
 <body>
-<h1>ì‹ìžìž¬ ëª©ë¡</h1>
-<div>ì „ì²´ ì‹ìžìž¬ ìˆ˜ : ${foodcount}</div>
+<h1>½ÄÀÚÀç ¸ñ·Ï</h1>
+<div>ÀüÃ¼ ½ÄÀÚÀç ¼ö : ${foodcount}</div>
 	<table border=1>
 		<thead>
-			<th>ë²ˆí˜¸</th>
-			<th>ì‹ìž¬ì½”ë“œë²ˆí˜¸</th>
-			<th>ìƒí’ˆëª…</th>
-			<th>ê·œê²©</th>
-			<th>ë‹¨ìœ„</th>
-			<th>ìœ í†µê¸°í•œ</th>
-			<th>ë‹´ë‹¹ìž</th>
-			<th>ë“±ë¡ì¼ìž</th>
-			<th>ìˆ˜ì •</th>
+			<th>¹øÈ£</th>
+			<th>½ÄÀçÄÚµå¹øÈ£</th>
+			<th>»óÇ°¸í</th>
+			<th>±Ô°Ý</th>
+			<th>´ÜÀ§</th>
+			<th>À¯Åë±âÇÑ</th>
+			<th>´ã´çÀÚ</th>
+			<th>µî·ÏÀÏÀÚ</th>
+			<th>¼öÁ¤</th>
 						
 		</thead>
 		<tbody>
@@ -52,51 +52,32 @@
 				<td>${f.food_shelflife}</td>
 				<td>${f.staff_id}</td>
 				<td>${f.food_date}</td>
-				<td><a href="${pageContext.request.contextPath}/food_modify_view?food_id=${f.food_id}">ìˆ˜ì •</a></td>
+				<td><a href="${pageContext.request.contextPath}/food_modify_view?food_id=${f.food_id}">¼öÁ¤</a></td>
 			</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 	<ul>
 		<c:if test="${currentPage > 1}">
-			<li><a href="${pageContext.request.contextPath}/food_list?currentPage=${currentPage-1}">ì´ì „</a></li>
+			<li><a href="${pageContext.request.contextPath}/food_list?currentPage=${currentPage-1}">ÀÌÀü</a></li>
 		</c:if>
-		
-			<c:if test="${selbox != null && keyWord != null}">
-			<c:forEach var="i" begin="${expage}" end="${lastPage}" step="1">
-				<c:choose>
-					<c:when test="${i eq currentPage}"><li><a href="${pageContext.request.contextPath}/food_search?currentPage=${i}&selbox=${selbox}&keyWord=${keyWord}">[${i}]</a></li></c:when>
-					<c:otherwise><li><a href="${pageContext.request.contextPath}/food_search?currentPage=${i}&selbox=${selbox}&keyWord=${keyWord}">[${i}]</a></li></c:otherwise>
-				</c:choose>
-			</c:forEach>
-			</c:if>
-			<c:if test="${selbox == null && keyWord == null}">
-			<c:forEach var="i" begin="${expage}" end="${lastPage}" step="1">
-				<c:choose>
-					<c:when test="${i eq currentPage}"><li><a href="${pageContext.request.contextPath}/food_list?currentPage=${i}">[${i}]</a></li></c:when>
-					<c:otherwise><li><a href="${pageContext.request.contextPath}/food_list?currentPage=${i}">[${i}]</a></li></c:otherwise>
-				</c:choose>
-			</c:forEach>
-			</c:if>
-			
-			
 		<c:if test="${currentPage < lastPage}">
-			<li><a href="${pageContext.request.contextPath}/food_list?currentPage=${currentPage+1}">ë‹¤ìŒ</a></li>
+			<li><a href="${pageContext.request.contextPath}/food_list?currentPage=${currentPage+1}">´ÙÀ½</a></li>
 		</c:if>
 	</ul>
 	<div>
 		<form id ="frm" name="frm" action="${pageContext.request.contextPath}/food_search" method="get">
 			<select id="selbox"name="selbox" size="1">
-				<option value="food_id">ì‹ìž¬ì½”ë“œë²ˆí˜¸</option>
-				<option value="food_name">ìƒí’ˆëª…</option>
+				<option value="food_id">½ÄÀçÄÚµå¹øÈ£</option>
+				<option value="food_name">»óÇ°¸í</option>
 			</select>
 			<input  size="16" name="keyWord" type="text">
-			<input id="fbutton" type="button" value="ê²€ìƒ‰">
+			<input id="fbutton" type="button" value="°Ë»ö">
 		</form>
 	</div>
 	
 	<div>
-		<a href="${pageContext.request.contextPath}/food_add_form"><button>ì‹ìžìž¬ ì¶”ê°€</button></a>
+		<a href="${pageContext.request.contextPath}/food_add_form"><button>½ÄÀÚÀç Ãß°¡</button></a>
 	</div>
 	
 </body>

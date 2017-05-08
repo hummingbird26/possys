@@ -1,101 +1,54 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<title>íê¸° ëª©ë¡</title>
-<script type="text/javascript">
-	$(document).ready(function(){
-			
-		$('#dbutton').click(function(){
-			
-			var va = $("#selbox option:selected").val();
-			
-			var regexp = /\s/g;
-			if(va !=null || va != "" || va != regexp){
-				
-				frm.submit();
-			}else{
-				/* alert('asd'); */
-			}
-		});		
-	});
-</script>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>½ÄÀÚÀç ¸ñ·Ï</title>
 </head>
 <body>
-<h1>íê¸° ëª©ë¡</h1>
-<div>ì „ì²´ ì‹ìì¬ ìˆ˜ : ${dropcount}</div>
+<h1>½ÄÀÚÀç ¸ñ·Ï</h1>
+<div>ÀüÃ¼ ½ÄÀÚÀç ¼ö : ${foodcount}</div>
 	<table border=1>
 		<thead>
-			<th>ë²ˆí˜¸</th>
-			<th>íê¸° ë²ˆí˜¸</th>
-			<th>ìƒí’ˆ ë²ˆí˜¸</th>
-			<th>ìˆ˜ëŸ‰</th>
-			<th>íê¸° ì‚¬ìœ </th>
-			<th>ë‹´ë‹¹ì</th>
-			<th>íê¸° ì¼ì</th>
-			<th>ìˆ˜ì •</th>
+			<th>¹øÈ£</th>
+			<th>»óÇ° ¹øÈ£</th>
+			<th>»óÇ°¸í</th>
+			<th>±Ô°İ</th>
+			<th>´ÜÀ§</th>
+			<th>À¯Åë±âÇÑ</th>
+			<th>´ã´çÀÚ</th>
+			<th>µî·ÏÀÏÀÚ</th>
+			<th>¼öÁ¤</th>
 						
 		</thead>
 		<tbody>
-			<c:forEach varStatus="status" var="d" items="${list}">
+			<c:forEach varStatus="status" var="f" items="${list}">
 			<tr>
-				<td>${(dropcount-status.index)-((currentPage-1)*pageRow)}</td>
-				<td>${d.drop_id}</td>
-				<td>${d.food_id}</td>
-				<td>${d.drop_ea}</td>
-				<td>${d.drop_reason}</td>
-				<td>${d.staff_id}</td>
-				<td>${d.drop_date}</td>				
-				<td><a href="${pageContext.request.contextPath}/drop_modify_view?drop_id=${d.drop_id}">ìˆ˜ì •</a></td>
+				<td>${(foodcount-status.index)-((currentPage-1)*pageRow)}</td>
+				<td>${f.food_id}</td>
+				<td>${f.food_name}</td>
+				<td>${f.food_size}</td>
+				<td>${f.food_unit}</td>
+				<td>${f.food_shelflife}</td>
+				<td>${f.staff_id}</td>
+				<td>${f.food_date}</td>
+				<td><a href="${pageContext.request.contextPath}/food_modify_view?food_id=${f.food_id}">¼öÁ¤</a></td>
 			</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 	<ul>
 		<c:if test="${currentPage > 1}">
-			<li><a href="${pageContext.request.contextPath}/drop_list?currentPage=${currentPage-1}">ì´ì „</a></li>
+			<li><a href="${pageContext.request.contextPath}/food_list?currentPage=${currentPage-1}">ÀÌÀü</a></li>
 		</c:if>
-		
-			<c:if test="${selbox != null && keyWord != null}">
-			<c:forEach var="i" begin="${expage}" end="${lastPage}" step="1">
-				<c:choose>
-					<c:when test="${i eq currentPage}"><li><a href="${pageContext.request.contextPath}/drop_search?currentPage=${i}&selbox=${selbox}&keyWord=${keyWord}">[${i}]</a></li></c:when>
-					<c:otherwise><li><a href="${pageContext.request.contextPath}/drop_search?currentPage=${i}&selbox=${selbox}&keyWord=${keyWord}">[${i}]</a></li></c:otherwise>
-				</c:choose>
-			</c:forEach>
-			</c:if>
-			<c:if test="${selbox == null && keyWord == null}">
-			<c:forEach var="i" begin="${expage}" end="${lastPage}" step="1">
-				<c:choose>
-					<c:when test="${i eq currentPage}"><li><a href="${pageContext.request.contextPath}/drop_list?currentPage=${i}">[${i}]</a></li></c:when>
-					<c:otherwise><li><a href="${pageContext.request.contextPath}/drop_list?currentPage=${i}">[${i}]</a></li></c:otherwise>
-				</c:choose>
-			</c:forEach>
-			</c:if>
-			
-			
 		<c:if test="${currentPage < lastPage}">
-			<li><a href="${pageContext.request.contextPath}/drop_list?currentPage=${currentPage+1}">ë‹¤ìŒ</a></li>
+			<li><a href="${pageContext.request.contextPath}/food_list?currentPage=${currentPage+1}">´ÙÀ½</a></li>
 		</c:if>
 	</ul>
 	<div>
-		<form id ="frm" name="frm" action="${pageContext.request.contextPath}/drop_search" method="get">
-			<select id="selbox"name="selbox" size="1">
-				<option value="drop_id">íê¸°ë²ˆí˜¸</option>
-				<option value="food_id">ìƒí’ˆë²ˆí˜¸</option>
-			</select>
-			<input  size="16" name="keyWord" type="text">
-			<input id="dbutton" type="button" value="ê²€ìƒ‰">
-		</form>
+		<a href="${pageContext.request.contextPath}/food_add_form"><button>½ÄÀÚÀç Ãß°¡</button></a>
 	</div>
-	
-	<div>
-		<a href="${pageContext.request.contextPath}/drop_add_form"><button>ì‹ìì¬ ì¶”ê°€</button></a>
-	</div>
-	
 </body>
 </html>

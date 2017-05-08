@@ -1,30 +1,33 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ìˆ˜ì • í™”ë©´</title>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>¼öÁ¤ È­¸é</title>
 </head>
 <body>
-<h1>íê¸°ë²ˆí˜¸ - ${drop.drop_id} ìˆ˜ì • í™”ë©´</h1>
+<h1>½ÄÀÚÀç - ${food.food_id} ¼öÁ¤ È­¸é</h1>
 <br>
 
-<form id="addform" action="${pageContext.request.contextPath}/drop_modify" method="post">
+<form id="addform" action="${pageContext.request.contextPath}/food_modify" method="post">
 		
-		<div>íê¸°ë²ˆí˜¸ : <input name ="drop_id" id ="drop_id" type ="text" value="${drop.drop_id}" readonly="readonly"/></div>
-		<div>ì‹ìž¬ ì½”ë“œ ë²ˆí˜¸ : <input name ="food_id" id ="food_id" type ="text" value="${drop.food_id}" readonly="readonly"/></div>
-		<div>íê¸° ìˆ˜ëŸ‰ : <input name ="drop_ea" id ="drop_ea" type ="text" value="${drop.drop_ea}"/></div>
-		<div>íê¸° ì‚¬ìœ  : <input name ="drop_reason" id ="drop_reason" type ="text" value="${drop.drop_reason}"/></div>
-		<div>ë‹´ë‹¹ìž : <input name ="staff_id" id ="staff_id" type ="text" value="${drop.staff_id}"/></div>
+		<div>»óÇ°¹øÈ£ : <input name ="food_id" id ="food_id" type ="text" value="${food.food_id}" readonly="readonly"/></div>
+		<div>»óÇ°¸í : <input name ="food_name" id ="food_name" type ="text" value="${food.food_name}"/></div>
+		<div>±Ô°Ý : <input name ="food_size" id ="food_size" type ="text" value="${food.food_size}"/></div>
+		<div>´ÜÀ§ : <input name ="food_unit" id ="food_unit" type ="text" value="${food.food_unit}"/></div>
+		<div>À¯Åë±âÇÑ : <input name ="food_shelflife" id ="food_shelflife" type ="text" value="${food.food_shelflife}"/></div>
+		<div>´ã´çÀÚ : <input name ="staff_id" id ="staff_id" type ="text" value="${food.staff_id}" readonly="readonly"/></div>
 		
+		
+
 <br>
 		<div>
-			<input type="submit" id="adddrop" value="ìˆ˜ì •">
-			<input type="reset" id="reset" value="ì´ˆê¸°í™”">
-			<a href="${pageContext.request.contextPath}/drop_list">ì·¨ì†Œ</a>
-			<a href="${pageContext.request.contextPath}/drop_delete?drop_id=${drop.drop_id}">ì‚­ì œ</a>
+			<input type="submit" id="addfood" value="¼öÁ¤">
+			<input type="reset" id="reset" value="ÃÊ±âÈ­">
+			<a href="${pageContext.request.contextPath}/food_list">Ãë¼Ò</a>
+			<a href="${pageContext.request.contextPath}/food_delete?food_id=${food.food_id}">»èÁ¦</a>
 		</div>
 	</form>
 

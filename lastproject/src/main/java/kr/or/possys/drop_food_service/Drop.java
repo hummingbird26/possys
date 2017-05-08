@@ -7,10 +7,8 @@ public class Drop {
 	private int drop_ea;
 	private String drop_reason;
 	private String staff_id;
-	
-	
 	public String getDrop_id() {
-	return drop_id;
+		return drop_id;
 	}
 	public void setDrop_id(String drop_id) {
 		this.drop_id = drop_id;

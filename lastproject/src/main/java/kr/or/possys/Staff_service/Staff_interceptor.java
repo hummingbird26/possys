@@ -13,7 +13,7 @@ public class Staff_interceptor extends HandlerInterceptorAdapter{
 	        try {
 	            //admin이라는 세션key를 가진 정보가 널일경우 로그인페이지로 이동
 	            if(request.getSession().getAttribute("admin") == null ){
-	                    response.sendRedirect("/lastproject/");
+	                    response.sendRedirect("/possys/");
 	                    System.out.println("세션정보없음 로그인 화면으로 이동");
 	                    return false;
 	            }

@@ -71,7 +71,6 @@ public class Food_Dao {
 	}
 	//food 검색 수 요청
 	public int foodSRlist(String selbox,String keyWord){
-		System.out.println("08_Food_dao.java->>foodSRlist 실행");
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("selbox", selbox);

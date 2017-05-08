@@ -21,7 +21,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	
+	<!-- 아래의 작업 및 kr.or.possys 패키지의 homeController 클래스를, view폴더의 home.jsp 제거한다 -->
 	<context:component-scan base-package="kr.or.possys" />
 	<!-- 커넥션 풀 설정 -->
 	 <beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
@@ -31,9 +31,11 @@
         <beans:property name="username" value="art9000"/>
         <beans:property name="password" value="tkdgns12"/>
 
-<!--         <beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/lastproject?useUnicode=true&amp;characterEncoding=euckr"/> -->
-<!--         <beans:property name="username" value="okjid"/> -->
-<!--         <beans:property name="password" value="okjpw"/> -->
+     <!--    <beans:property name="url" value="jdbc:mysql://127.0.0.1:3308/dade?useUnicode=true&amp;characterEncoding=euckr"/>
+        <beans:property name="username" value="dadeid"/>
+        <beans:property name="password" value="dadepw"/> -->
+        
+        <!--  이래놓고 정작 데이터베이스 구성 자체가 안되어있으면 실행에러 발생. -->
     </beans:bean>
 	
 	<!-- mybatis설정 1. SqlSessionFactory -->
@@ -42,18 +44,21 @@
         <beans:property name="dataSource" ref="dataSource" />
         <!-- mybatis 세션생성후 쿼리를 실행시킬때 사용할 쿼리위치(메퍼)설정 -->
         <beans:property name="mapperLocations">
+            
             <beans:list>
-                <!-- wonbin forder Start-->
-                <beans:value>classpath:kr/or/possys/food_service/Food_Mapper.xml</beans:value>
-            	<beans:value>classpath:kr/or/possys/drop_food_service/Drop_Mapper.xml</beans:value>
-            	<beans:value>classpath:kr/or/possys/ep_order_manage_service/Ep_Manage_Mapper.xml</beans:value>
+            <!-- wonbin forder Start-->
+               <!--  <beans:value>classpath:kr/or/possys/food_service/Food_Mapper.xml</beans:value>
+            	<beans:value>classpath:kr/or/possys/drop_food_service/Drop_Mapper.xml</beans:value> -->
              <!-- wonbin forder End -->
-                <!-- <beans:value>classpath:kr/or/possys/order_service/Order_Mapper.xml</beans:value> -->
-                
-
-                <beans:value>classpath:kr/or/possys/Menu_service/Menu_Mapper.xml</beans:value>
-
+             <!-- tori start -->
+             	<beans:value>classpath:kr/or/possys/Payment_service/Payment_Mapper.xml</beans:value>
+             	<!-- <beans:value>classpath:kr/or/possys/Payment_Cancel_service/Payment_Cancel_Mapper.xml</beans:value> -->
+             	<!-- <beans:value>classpath:kr/or/possys/Card_Payment_service/Card_Payment_Mapper.xml</beans:value> -->
+             	<beans:value>classpath:kr/or/possys/Staff_service/Staff_Mapper.xml</beans:value>
+             <!-- tori end -->
             </beans:list>
+           
+            
         </beans:property>
 	    </beans:bean>
 	    <!-- mybatis설정 2. SqlSessionTemplate-->
