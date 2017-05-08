@@ -1,0 +1,69 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.possys.drop_food_service.Drop_Mapper">
+	<!-- 식자재 품목 입력 -->
+<!-- 	<insert id="insertfood" parameterType="kr.or.possys.food_service.Food"> -->
+<!-- 		insert into food_manage(  -->
+<!-- 		food_id -->
+<!-- 		,food_name -->
+<!-- 		,food_size -->
+<!-- 		,food_unit -->
+<!-- 		,food_shelflife -->
+<!-- 		,staff_id -->
+<!-- 		,food_date) -->
+<!-- 		select -->
+<!-- 		concat('FN',(select date_format(sysdate(),'%y%m%d%s'))) -->
+<!-- 		,#{food_name} -->
+<!-- 		,#{food_size} -->
+<!-- 		,#{food_unit} -->
+<!-- 		,#{food_shelflife} -->
+<!-- 		,'staff' -->
+<!-- 		,sysdate() -->
+<!-- 	</insert> -->
+	<!-- 식자제 품목 카운트 -->
+<!-- 	<select id="getfoodcount" resultType="int"> -->
+<!-- 		SELECT COUNT(*) FROM food_manage -->
+<!-- 	</select> -->
+	<!-- 식자제 품목 목록 -->
+<!-- 	<select id="foodlist" parameterType="java.util.Map" resultType="kr.or.possys.food_service.Food"> -->
+<!-- 		select food_id -->
+<!-- 			,food_name -->
+<!-- 			,food_size -->
+<!-- 			,food_unit -->
+<!-- 			,food_shelflife -->
+<!-- 			,staff_id -->
+<!-- 			,food_date -->
+<!-- 		from food_manage -->
+<!-- 		order by food_date desc -->
+<!-- 		limit #{beginRow}, #{pageRow} -->
+<!-- 	</select> -->
+	<!-- 식자재 수정화면 -->
+<!-- 	<select id="foodview" parameterType="string" resultType="kr.or.possys.food_service.Food"> -->
+<!-- 		select food_id -->
+<!-- 		,food_name -->
+<!-- 		,food_size -->
+<!-- 		,food_unit -->
+<!-- 		,food_shelflife -->
+<!-- 		,staff_id -->
+<!-- 		,food_date -->
+<!-- 		from food_manage where food_id=#{food_id}	 -->
+<!-- 	</select> -->
+	<!-- 식자재 수정 -->
+<!-- 	<update id="foodmodify" parameterType="kr.or.possys.food_service.Food"> -->
+<!-- 		update food_manage -->
+<!-- 		set food_name = #{food_name} -->
+<!-- 		,food_size= #{food_size} -->
+<!-- 		,food_unit= #{food_unit} -->
+<!-- 		,food_shelflife= #{food_shelflife} -->
+<!-- 		,food_date= sysdate() -->
+<!-- 		where food_id= #{food_id} -->
+<!-- 	</update> -->
+	<!-- 식자재 삭제 -->
+<!-- 	<delete id="fooddelete" parameterType="string"> -->
+<!-- 		delete from food_manage where food_id=#{food_id} -->
+<!-- 	</delete> -->
+	
+	
+	
+</mapper>

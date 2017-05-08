@@ -1,0 +1,68 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper">
+	<!-- 업체 입력 -->
+	<insert id="insertep_m" parameterType="kr.or.possys.ep_order_manage_service.Ep_Manage">
+		insert into ep_order_manage( 
+		ep_id
+		,food_id
+		,ep_name
+		,ep_phone
+		,ep_director
+		,ep_address
+		,ep_text)
+		select
+		concat('EPMN',(select date_format(sysdate(),'%y%m%d%s')))
+		,'food_id'
+		,#{ep_name}
+		,#{ep_phone}
+		,#{ep_director}
+		,#{ep_address}
+		,#{ep_text}
+	</insert>
+	<!-- 업체 카운트 -->
+	<select id="getep_mcount" resultType="int">
+		SELECT COUNT(*) FROM ep_order_manage
+	</select>
+	<!-- 업체 목록 -->
+	<select id="ep_mlist" parameterType="java.util.Map" resultType="kr.or.possys.ep_order_manage_service.Ep_Manage">
+		select *
+		from ep_order_manage
+		order by ep_id desc
+		limit #{beginRow}, #{pageRow}
+	</select>
+	<!-- 업체 수정화면 -->
+	<select id="ep_mview" parameterType="string" resultType="kr.or.possys.ep_order_manage_service.Ep_Manage">
+		select *
+		from ep_order_manage where ep_id=#{ep_id}	
+	</select>
+	<!-- 업체 수정액션 -->
+	<update id="ep_mmodify" parameterType="kr.or.possys.ep_order_manage_service.Ep_Manage">
+		update ep_order_manage
+		set food_id = #{food_id}
+		,ep_phone= #{ep_phone}
+		,ep_name= #{ep_name}
+		,ep_director= #{ep_director}
+		,ep_address= #{ep_address}
+		,ep_text= #{ep_text}
+		where ep_id= #{ep_id}
+	</update>
+	<!-- 업체 삭제 -->
+	<delete id="ep_mdelete" parameterType="string">
+		delete from ep_order_manage where ep_id=#{ep_id}
+	</delete>
+	<!-- 업체 검색 -->
+	<select id="ep_msearch" parameterType="java.util.Map"  resultType="kr.or.possys.ep_order_manage_service.Ep_Manage">
+		select *
+		from ep_order_manage
+		where ${selbox} like concat('%',#{keyWord},'%')
+		order by ep_id desc
+		limit #{beginRow}, #{pageRow}
+	</select>
+<!-- 업체 검색 수 -->
+	<select id="ep_mSRlist" parameterType="java.util.Map" resultType="int">
+		select count(*) from ep_order_manage where ${selbox} like concat('%',#{keyWord},'%')
+	</select>
+	
+</mapper>

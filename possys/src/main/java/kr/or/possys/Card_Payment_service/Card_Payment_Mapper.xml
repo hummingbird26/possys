@@ -1,0 +1,60 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="kr.or.possys.Card_Payment_service.Card_Payment_Mapper">
+  
+  <update parameterType="kr.or.possys.Card_Payment_service.Card_Payment" id="updateCardPayment">
+  	UPDATE payment SET payment_id = #{payment_id},
+  	card_app = #{card_app},
+  	card_detail = #{card_detail},
+  	card_date = #{card_date},
+  	card_company = #{card_company},
+  	card_total = #{card_total},
+  	card_price = #{card_price},
+  	card_tax = #{card_tax}
+	WHERE card_id = #{card_id}
+  </update>
+  
+  <delete parameterType="kr.or.possys.Payment_service.Payment" id="deletePayment"> 
+DELETE FROM payment WHERE payment_id = #{paymentId} </delete>
+
+<select parameterType="int" id="getPayment" resultType="kr.or.possys.Payment_service.Payment"> 
+SELECT * FROM payment WHERE payment_id = #{paymentId}</select>
+
+<select parameterType="java.util.Map" id="getPaymentList" resultType="kr.or.possys.Payment_service.Payment"> 
+SELECT payment_id, table_order_id , payment_total 
+, payment_pay , payment_date , payment_cate , payment_state 
+FROM payment ORDER BY payment_id DESC LIMIT #{beginRow}, #{pagePerRow} </select>
+
+<select id="getPaymentCount" resultType="int"> SELECT COUNT(*) FROM payment </select>
+
+ <insert parameterType="kr.or.possys.Payment_service.Payment" id="insertPayment">
+<!-- <insert id="kr.or.possys.Payment_service.Payment" parameterType="insertPayment">  -->
+ INSERT INTO payment(payment_id
+ , table_order_id 
+ , member_phone
+ , payment_total
+ , payment_pay
+ , payment_addmileage
+ , payment_usemileage
+ , payment_date
+ , payment_cate
+ , payment_state) 
+ 
+ VALUES( #{payment_id} 
+ , #{table_order_id} 
+ , #{member_phone} 
+ , #{payment_total} 
+ , #{payment_pay} 
+ , #{payment_addmileage}
+ , #{payment_usemileage}
+ , #{payment_date}
+ , #{payment_cate}
+ , #{payment_state}) 
+ </insert>
+  
+  
+  
+  
+  </mapper>
