@@ -46,6 +46,39 @@ public class Food_Dao {
 	//food 삭제 요청
 	public int fooddelete(String food_id){
 		System.out.println("06_Food_dao.java->>fooddelete 실행");
-		return 0;
+		return sqlSessionTemplate.delete("kr.or.possys.food_service.Food_Mapper.fooddelete",food_id);
+	}
+	//food 검색 요청
+	public List<Food> foodsearch(String selbox, String keyWord, int currentPage, int pageRow){
+		System.out.println("07_Food_dao.java->>foodsearch 실행");
+		System.out.println(selbox);
+		System.out.println(keyWord);
+		System.out.println(currentPage);
+		System.out.println(pageRow);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("selbox", selbox);
+		map.put("keyWord", keyWord);
+		map.put("beginRow", (currentPage-1)*pageRow);
+		map.put("pageRow", pageRow);
+		System.out.println(map.get("selbox"));
+		System.out.println(map.get("keyWord"));
+		System.out.println(map.get("beginRow"));
+		System.out.println(map.get("pageRow"));
+		
+			
+		return sqlSessionTemplate.selectList("kr.or.possys.food_service.Food_Mapper.foodsearch", map);
+	}
+	//food 검색 수 요청
+	public int foodSRlist(String selbox,String keyWord){
+		System.out.println("08_Food_dao.java->>foodSRlist 실행");
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("selbox", selbox);
+		map.put("keyWord", keyWord);
+		System.out.println(map.get("selbox"));
+		System.out.println(map.get("keyWord"));
+		return sqlSessionTemplate.selectOne("kr.or.possys.food_service.Food_Mapper.foodSRlist",map);
+		
 	}
 }

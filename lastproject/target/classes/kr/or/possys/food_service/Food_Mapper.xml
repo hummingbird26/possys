@@ -13,7 +13,7 @@
 		,staff_id
 		,food_date)
 		select
-		concat('FN',(select lpad(count(*)+1,4,'0') from food_manage))
+		concat('FN',(select date_format(sysdate(),'%y%m%d%s')))
 		,#{food_name}
 		,#{food_size}
 		,#{food_unit}
@@ -35,7 +35,7 @@
 			,staff_id
 			,food_date
 		from food_manage
-		order by food_id desc
+		order by food_date desc
 		limit #{beginRow}, #{pageRow}
 	</select>
 	<!-- 식자재 수정화면 -->
@@ -61,9 +61,25 @@
 	</update>
 	<!-- 식자재 삭제 -->
 	<delete id="fooddelete" parameterType="string">
-		
+		delete from food_manage where food_id=#{food_id}
 	</delete>
-	
-	
+	<!-- 식자재 검색 -->
+	<select id="foodsearch" parameterType="java.util.Map"  resultType="kr.or.possys.food_service.Food">
+		select food_id
+		,food_name
+		,food_size
+		,food_unit
+		,food_shelflife
+		,staff_id
+		,food_date
+		from food_manage
+		where ${selbox} like concat('%',#{keyWord},'%')
+		order by food_date desc
+		limit #{beginRow}, #{pageRow}
+	</select>
+	<!-- 식자재 검색 수 -->
+	<select id="foodSRlist" parameterType="java.util.Map" resultType="int">
+		select count(*) from food_manage where ${selbox} like concat('%',#{keyWord},'%')
+	</select>
 	
 </mapper>
