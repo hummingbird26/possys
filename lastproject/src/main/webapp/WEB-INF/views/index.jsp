@@ -10,6 +10,8 @@
 <a href="${pageContext.request.contextPath}/logout">로그아웃</a>
 <a href="${pageContext.request.contextPath}/member_list">목록</a>
 <a href="${pageContext.request.contextPath}/test">Jquery autocomplete</a>
+<a href="${pageContext.request.contextPath}/tori/payment/payment_add_form">결제관리업무</a>
+<a href="${pageContext.request.contextPath}/tori/staff/staff_add_form">직원관리업무</a>
 
 
 아이디:${sessionScope.admin.admin_id}
