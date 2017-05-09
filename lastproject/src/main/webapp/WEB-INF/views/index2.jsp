@@ -191,7 +191,7 @@
 							<!-- 메뉴 입력 링크 -->
                         	<li class="item-thumbs span3 design">
                             	<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                            	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="menu_add_form" <a href="${pageContext.request.contextPath}/menu_add_form">
+                            	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="menu_add_form" href="${pageContext.request.contextPath}/menu_add_form">
                                 	<span class="overlay-img">menu_add</span>
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
