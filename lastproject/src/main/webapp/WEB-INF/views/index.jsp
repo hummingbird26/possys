@@ -15,6 +15,8 @@
 <a href="${pageContext.request.contextPath}/drop_list">폐기 품목 목록</a>
 <a href="${pageContext.request.contextPath}/ep_manage_list">발주업체 목록</a>
 <!-- 원빈 끝 -->
+<!-- 홍경인 -->
+<a href="${pageContext.request.contextPath}/order_list">주문리스트</a>
 
 <a href="${pageContext.request.contextPath}/menu_add_form">메뉴 입력</a>
 
