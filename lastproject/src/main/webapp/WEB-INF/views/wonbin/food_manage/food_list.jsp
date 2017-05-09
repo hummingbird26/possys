@@ -26,6 +26,7 @@
 </script>
 </head>
 <body>
+<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <h1>식자재 목록</h1>
 <div>전체 식자재 수 : ${foodcount}</div>
 	<table border=1>

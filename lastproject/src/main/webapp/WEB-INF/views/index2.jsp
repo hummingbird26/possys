@@ -208,7 +208,7 @@
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/image-03.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
+                                <img src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/order.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
                             </li>
                         	<!-- End Item Project -->
                             
@@ -220,7 +220,7 @@
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/image-08.jpg" alt="Video">
+                                <img src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/food.jpg" alt="Video">
                             </li>
                         	<!-- End Item Project -->
                             
@@ -232,7 +232,7 @@
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/image-04.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
+                                <img src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/drop_list.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
                             </li>
                         	<!-- End Item Project -->
                             
@@ -244,31 +244,31 @@
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/image-05.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
+                                <img src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/ep_manage_list.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
                             </li>
                         	<!-- End Item Project -->
                             
-							<!-- Item Project and Filter Name -->
+							<!-- 결제관리업무 -->
                         	<li class="item-thumbs span3 video">
                             	<!-- Fancybox Media - Gallery Enabled - Title - Link to Video -->
-                            	<a class="hover-wrap fancybox-media" data-fancybox-group="video" title="Video Content From Vimeo" href="http://vimeo.com/50834315">
-                                	<span class="overlay-img"></span>
+                            	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="payment_add_form" href="${pageContext.request.contextPath}/tori/payment/payment_add_form">
+                                	<span class="overlay-img">payment_add_form</span>
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/image-09.jpg" alt="Video">
+                                <img src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/payment.jpg" alt="Video">
                             </li>
                         	<!-- End Item Project -->
                             
-							<!-- Item Project and Filter Name -->
+							<!-- 직원관리업무 -->
                         	<li class="item-thumbs span3 design">
                             	<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                            	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Dark" href="${pageContext.request.contextPath}/resources/_include/img/work/full/image-06-full.jpg">
-                                	<span class="overlay-img"></span>
+                            	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="staff_add_form" href="${pageContext.request.contextPath}/tori/staff/staff_add_form">
+                                	<span class="overlay-img">staff_add_form</span>
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/image-06.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
+                                <img src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/images.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
                             </li>
                         	<!-- End Item Project -->
                             

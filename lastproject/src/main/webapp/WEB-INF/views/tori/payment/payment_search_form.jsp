@@ -14,6 +14,7 @@
 
 </head>
 <body>
+<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <br><br>
 <div class="container">
 	<form class="form-inline" action="${pageContext.request.contextPath}/tori/payment/payment_search_action" method="post">

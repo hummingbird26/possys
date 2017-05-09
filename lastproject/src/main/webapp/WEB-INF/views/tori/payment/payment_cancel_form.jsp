@@ -54,6 +54,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 	<div class="container">
 		<form action="" method="post" class="form-inline">
 			<table class="table table-hover table-stripped">

@@ -8,6 +8,7 @@
 <title>수정 화면</title>
 </head>
 <body>
+<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <h1>식자재 - ${food.food_id} 수정 화면</h1>
 <br>
 

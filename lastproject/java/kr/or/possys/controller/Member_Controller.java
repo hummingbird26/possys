@@ -21,6 +21,11 @@ public class Member_Controller {
 	@Autowired
 	private	Member_Dao	Mdao;
 	
+	//ÆË¾÷Ã¢
+	@RequestMapping(value="/popup.html")
+	public String pop(){
+		return "test";
+	}
 	
 	//Jquery autocomplete test
 	@RequestMapping(value="/test", method = RequestMethod.GET)
