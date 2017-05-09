@@ -32,7 +32,8 @@ public class Member_Controller {
 			
 		
 			
-			return "NewFile";
+			/*return "NewFile";*/
+			return "index2";
 		}
 		
 

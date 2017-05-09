@@ -1,11 +1,12 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
 <head>
 	<title>POS SYSTEM</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta charset="utf-8">
 	
 
 	<!-- Google Fonts -->
@@ -19,7 +20,7 @@
 	<script type="text/javascript"> 
 		$(document).ready(function(){
 			$('#btn').click(function(){
-				 var regExp = /\s/g;//공백이 있나 확인하는 정규식
+				 var regExp = /\s/g;//ê³µë°±ì´ ìë íì¸íë ì ê·ì
 				 var id = $('#usercode').val();
 				 var pw = $('#password').val();
 			if($('#usercode').val()==""||id.match(regExp)) {
@@ -58,12 +59,12 @@
 			</div>
 			<label for="usercode">Usercode</label>
 			<br/>
-			<input type="text" id="usercode" name="usercode">
+			<input type="text" id="usercode" name="usercode" value="id001">
 			<div id="idre" style="display:none;"></div> 
 			<br/>
 			<label for="password">Password</label>
 			<br/>
-			<input type="password" id="password" name="password">
+			<input type="password" id="password" name="password" value="pw001">
 			<div id="pwre" style="display:none;"></div>
 			<br/>
 			
