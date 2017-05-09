@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.or.possys.Staff_service.Staff;
 import kr.or.possys.Staff_service.Staff_Dao;
+import kr.or.possys.food_service.Food;
 
 @Controller
 public class Staff_Controller {
@@ -129,11 +130,13 @@ public class Staff_Controller {
 	}
 	
 	@RequestMapping(value={"/tori/staff/staff_list"}, method = RequestMethod.GET)
-	public String stafflist(Model model, @RequestParam(value="currentpage", required=false, defaultValue="1") int currentPage){
+	public String stafflist(Model model, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage){
 		System.out.println("02_Staff_Controller.java -> stafflist");
 		int staffcount = sdao.getStaffCount();
+		System.out.println(staffcount);
 		System.out.println("02_1 Staff_Controller.java -> stafflist");
 		int pagePerRow = 10;
+		int expage = 1;
 		int lastPage = (int)(Math.ceil((double)staffcount/(double)pagePerRow));
 		List<Staff> list = sdao.getStaffList(currentPage, pagePerRow);
 		System.out.println(staffcount);
@@ -141,9 +144,10 @@ public class Staff_Controller {
 		System.out.println(lastPage);
 		// paymentcount 및 pagePerRpw(구 pageRow -> list페이지에는 pagePerRow로 el식의 이름이 작성되어 있는 것을 확인하고(무분별 복붙의 폐해) 변수명을 해당 이름에 맞게 수정 및 double형 타입 캐스팅)
 		
+		model.addAttribute("expage",expage);
+		model.addAttribute("pagePerRow",pagePerRow);
 		model.addAttribute("staffcount",staffcount);
 		model.addAttribute("currentPage",currentPage);
-		model.addAttribute("staffcount",staffcount);
 		model.addAttribute("lastPage",lastPage);
 		model.addAttribute("list",list);
 		
@@ -167,6 +171,8 @@ public class Staff_Controller {
 			model.addAttribute("staff",staff);
 			return "/tori/staff/staff_update_form";
 		}
+		
+	
 	//업뎃폼에서 업뎃액션 진행
 		@RequestMapping(value={"/tori/staff/staff_update_action"}, method = RequestMethod.POST)
 		public String staffupdate(Staff staff){
