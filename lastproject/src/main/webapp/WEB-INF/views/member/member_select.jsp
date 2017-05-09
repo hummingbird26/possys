@@ -43,6 +43,7 @@
         </style>
 </head>
 <body>
+<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <div class="container" id="container">
     <h1>MEMBER LIST</h1>
     <div>전체행의 수 : ${SmemberCount}</div>

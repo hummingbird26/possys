@@ -18,6 +18,7 @@
 <title>회원 개인정보 화면</title>
 </head>
 <body>
+<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <div class="container">
     <h1>회원정보 화면</h1>
      <table class="table">

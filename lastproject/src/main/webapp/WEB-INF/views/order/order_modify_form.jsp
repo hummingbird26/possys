@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>주문수정</title>
 </head>
+<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <body>
 
 

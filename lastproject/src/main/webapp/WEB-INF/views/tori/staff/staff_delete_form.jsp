@@ -16,6 +16,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 	<div class="container">
 		<form class="form-inline" action="${pageContext.request.contextPath}/tori/staff/staff_delete_action" method="POST">
 			<div><label for="staff_pw">비밀번호 :</label></div>
