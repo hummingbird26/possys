@@ -17,15 +17,15 @@
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <br><br>
 <div class="container">
-	<form class="form-inline" action="${pageContext.request.contextPath}/tori/payment/payment_search_action" method="post">
-		<select name="select" class="form-inline" value="선택하세요">
+	<form id="form" name="form" class="form-inline" action="${pageContext.request.contextPath}/tori/payment/payment_search_action" method="get">
+		<select id="select" name="select" class="form-inline" value="선택하세요">
 			<option value="payment_date">날짜별검색</option>
 			<option value="payment_cate">결제유형별검색</option>
 			<option value="payment_id">결제번호별검색</option>
 			<option value="member_phone">회원번호별검색</option>
 		</select>
-		<input type="text" class="form-inline" name="search">
-		<input type="submit" class="form-inline" name="검색버튼">
+		<input type="text" class="form-inline" name="keyWord" id="keyWord">
+		<input type="submit" class="form-inline" name="search" id="search">
 	
 	</form>
 </div>

@@ -44,13 +44,27 @@
         </tbody>
     </table>
     <ul class="pager">
-        <c:if test="${currentPage > 0}">
-        <li class="previous">
-        <a href="${pageContext.request.contextPath}/tori/staff/staff_list?currentPage=${currentPage-1}">이전</a></li>
+        <c:if test="${currentPage > 1}">
+        <li class="previous"><a href="${pageContext.request.contextPath}/tori/staff/staff_list?currentPage=${currentPage-1}">이전</a></li>
+        </c:if>
+        <c:if test="${selbox != null && keyWord != null}">
+        <c:forEach var="i" begin="${expage}" end="${lastPage}" step="1">
+        	<c:choose>
+        		<c:when test="${i eq currentPage}"><li><a href="${pageContext.request.contextPath}/tori/staff/staff_list?currentPage=${i}">[${i}]</a></li></c:when>
+        		<c:otherwise><li><a href="${pageContext.request.contextPath}/tori/staff/staff_list?currentPage=${i}">[${i}]</a></li>></c:otherwise>
+        	</c:choose>
+        </c:forEach>
+        </c:if>
+        <c:if test="${selbox == null && keyWord == null}">
+        <c:forEach var="i" begin="${expage}" end="${lastPage}" step="1">
+        	<c:choose>
+        		<c:when test="${i eq currentPage}"><li><a href="${pageContext.request.contextPath}/tori/staff/staff_list?currentPage=${1}">[${i}]</a></li></c:when>
+        		<c:otherwise><li><a href="${pageContext.request.contextPath}/tori/staff/staff_list?currentPage=${i}">[${i}]</a></li></c:otherwise>
+        		</c:choose>
+        	</c:forEach>
         </c:if>
         <c:if test="${currentPage < lastPage}">
-        <li class="next">
-        <a href="${pageContext.request.contextPath}/tori/staff/staff_list?currentPage=${currentPage+1}">다음</a></li>
+        <li class="next"><a href="${pageContext.request.contextPath}/tori/staff/staff_list?currentPage=${currentPage+1}">다음</a></li>
         </c:if>
     </ul>
     <div>

@@ -27,31 +27,31 @@
 		</tr>
 		<tr>
 		<td>비밀번호</td>
-		<td><input class="form-control" size="auto" id="staff_pw" name="staff_pw" type="password"></td>
+		<td><input class="form-control" size="auto" id="staff_pw" name="staff_pw" type="password" value="${staff.staff_pw}"></td>
 		</tr>
 		<tr>
 		<td>성명</td>
-		<td><input class="form-control" size="auto" id="staff_name" name="staff_name" type="text"></td>
+		<td><input class="form-control" size="auto" id="staff_name" name="staff_name" type="text" value="${staff.staff_name}"></td>
 		</tr>
 		<tr>
 		<td>직급</td>
-		<td><input class="form-control" size="auto" id="staff_level" name="staff_level" type="text"></td>
+		<td><input class="form-control" size="auto" id="staff_level" name="staff_level" type="text" value="${staff.staff_level}"></td>
 		</tr>
 		<tr>
 		<td>나이</td>
-		<td><input class="form-control" size="auto" id="staff_age" name="staff_age" type="text"></td>
+		<td><input class="form-control" size="auto" id="staff_age" name="staff_age" type="text" value="${staff.staff_age}"></td>
 		</tr>
 		<tr>
 		<td>주소</td>
-		<td><input class="form-control" size="auto" id="staff_addr" name="staff_addr" type="text"></td>
+		<td><input class="form-control" size="auto" id="staff_addr" name="staff_addr" type="text" value="${staff.staff_addr}"></td>
 		</tr>
 		<tr>
 		<td>성별</td>
-		<td><input class="form-control" size="auto" id="staff_gender" name="staff_gender" type="text"></td>
+		<td><input class="form-control" size="auto" id="staff_gender" name="staff_gender" type="text" value="${staff.staff_gender}"></td>
 		</tr>
 		<tr>
 		<td>핸드폰</td>
-		<td><input class="form-control" size="auto" id="staff_phone" name="staff_phone" type="text"></td>
+		<td><input class="form-control" size="auto" id="staff_phone" name="staff_phone" type="text" value="${staff.staff_phone}"></td>
 		</tr>
 		<tr>
 		<td>가입일자</td>
