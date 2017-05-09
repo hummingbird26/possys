@@ -46,8 +46,11 @@
   </script>
 </head>
 <body>
- 
-<div class="ui-widget">
+ <b>ㅡ2조 POS_SYSTEM 메뉴얼 입니다.ㅡ</b> 
+</br>
+ 아직 진행 상태가 미흡한 점 양해 부탁드립니다.
+ 로그인 후 
+<%-- <div class="ui-widget">
   <label for="tags">Tags: </label>
   <input id="tags" />
   
@@ -74,6 +77,6 @@
         </tbody>
     </table>
               
-</div>
+</div> --%>
 </body>
 </html>

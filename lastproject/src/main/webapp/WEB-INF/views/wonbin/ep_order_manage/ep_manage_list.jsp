@@ -26,6 +26,7 @@
 </script>
 </head>
 <body>
+<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <h1>업체 목록</h1>
 <div>전체 업체 수 : ${ep_mcount}</div>
 	<table border=1>

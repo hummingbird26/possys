@@ -7,6 +7,7 @@
 <title>발주 현황 및 식재현황 상세 관리</title>
 </head>
 <body>
+<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <h1>발주 현황 및 식재현황 상세 관리</h1>
 	<form id="addform" action="${pageContext.request.contextPath}/ep_order_add_form" method="post">
 		

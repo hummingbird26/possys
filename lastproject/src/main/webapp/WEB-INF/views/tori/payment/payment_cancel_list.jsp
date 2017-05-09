@@ -15,6 +15,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
+<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <body>
 
 	<div class="container">
