@@ -1,6 +1,20 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.or.possys.food_service.Food_Mapper">
-
+<mapper namespace="kr.or.possys.Order_service.Order_Mapper">
+ 	<select id="order_list" resultType="kr.or.possys.Order_service.Order">
+		select table_order_id,
+		table_order_num,
+		table_order_end,
+		table_order_date 
+		from table_order
+	</select>
+ 	<select id="order_modify_form" parameterType = "String" resultType="kr.or.possys.Order_service.Order">
+		select table_order_id,
+		table_order_num,
+		table_order_end,
+		table_order_date 
+		from table_order
+		where table_order_id = #{table_order_id}
+	</select>
 </mapper>

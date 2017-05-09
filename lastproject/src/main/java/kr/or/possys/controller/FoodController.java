@@ -21,11 +21,7 @@ import kr.or.possys.food_service.Food_Dao;
 public class FoodController {
 	@Autowired
 	private Food_Dao dao;
-	
-	@RequestMapping(value="/", method = RequestMethod.GET)
-	public String start(){
-		return "index";
-	}
+		
 	//식재료 입력폼 요청
 	@RequestMapping(value="/food_add_form", method = RequestMethod.GET)
 	public String foodadd(){

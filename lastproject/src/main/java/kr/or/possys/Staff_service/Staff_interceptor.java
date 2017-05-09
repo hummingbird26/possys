@@ -12,12 +12,12 @@ public class Staff_interceptor extends HandlerInterceptorAdapter{
 	    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 	        try {
 	            //admin이라는 세션key를 가진 정보가 널일경우 로그인페이지로 이동
-	            if(request.getSession().getAttribute("admin") == null ){
-	                    response.sendRedirect("/lastproject/");
+	            if(request.getSession().getAttribute("admin") == null && request.getSession().getAttribute("Staff") == null ){
+	                    response.sendRedirect("/possys/");
 	                    System.out.println("세션정보없음 로그인 화면으로 이동");
 	                    return false;
 	            }
-	            System.out.println("세션정보있음");
+	            System.out.println("세션정보있음 Staff_interceptor.java");
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }

@@ -7,7 +7,7 @@ public class Menu {
 	private int menu_price;
 	private int menu_sprice;
 	private String menu_sale;
-	private int menu_Kcal;
+	private int menu_kcal;
 	private String menu_picture;
 	private String menu_explanation;
 	
@@ -47,11 +47,11 @@ public class Menu {
 	public void setMenu_sale(String menu_sale) {
 		this.menu_sale = menu_sale;
 	}
-	public int getMenu_Kcal() {
-		return menu_Kcal;
+	public int getMenu_kcal() {
+		return menu_kcal;
 	}
-	public void setMenu_Kcal(int menu_Kcal) {
-		this.menu_Kcal = menu_Kcal;
+	public void setMenu_kcal(int menu_kcal) {
+		this.menu_kcal = menu_kcal;
 	}
 	public String getMenu_picture() {
 		return menu_picture;

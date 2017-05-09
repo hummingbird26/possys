@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	<!-- D1ispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
@@ -43,16 +43,17 @@
         <!-- mybatis 세션생성후 쿼리를 실행시킬때 사용할 쿼리위치(메퍼)설정 -->
         <beans:property name="mapperLocations">
             <beans:list>
-                <!-- wonbin forder Start-->
+            	<!-- 원빈 -->
                 <beans:value>classpath:kr/or/possys/food_service/Food_Mapper.xml</beans:value>
-            	<beans:value>classpath:kr/or/possys/drop_food_service/Drop_Mapper.xml</beans:value>
-            	<beans:value>classpath:kr/or/possys/ep_order_manage_service/Ep_Manage_Mapper.xml</beans:value>
-             <!-- wonbin forder End -->
-                <!-- <beans:value>classpath:kr/or/possys/order_service/Order_Mapper.xml</beans:value> -->
+                <beans:value>classpath:kr/or/possys/drop_food_service/Drop_Mapper.xml</beans:value>
+                <beans:value>classpath:kr/or/possys/ep_order_manage_service/Ep_Manage_Mapper.xml</beans:value>
+                <!-- 원빈 끝 -->
                 
-
+                <beans:value>classpath:kr/or/possys/Order_service/Order_Mapper.xml</beans:value>
+                 <beans:value>classpath:kr/or/possys/Staff_service/Staff_Mapper.xml</beans:value>
+                <beans:value>classpath:kr/or/possys/Member_sevice/Member_Mapper.xml</beans:value>
+                <!-- 메뉴 -->
                 <beans:value>classpath:kr/or/possys/Menu_service/Menu_Mapper.xml</beans:value>
-
             </beans:list>
         </beans:property>
 	    </beans:bean>
@@ -89,5 +90,5 @@
 		--> 
     	</beans:bean>
 		</interceptors>
-	
+
 </beans:beans>

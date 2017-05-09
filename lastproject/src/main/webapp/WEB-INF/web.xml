@@ -15,18 +15,16 @@
   </servlet-mapping>
   
   <!-- 한글처리를 위한 filter 추가 -->
-  <filter>
-    <display-name>CharacterEncodingFilter</display-name>
-    <filter-name>CharacterEncodingFilter</filter-name>
-    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-    <init-param>
-      <description></description>
-      <param-name>encoding</param-name>
-      <param-value>UTF-8</param-value>
-    </init-param>
-  </filter>
-  <filter-mapping>
-    <filter-name>CharacterEncodingFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
+  <filter> 
+	<filter-name>encodingFilter</filter-name> 
+	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class> 
+	<init-param> 
+		<param-name>encoding</param-name> 
+		<param-value>UTF-8</param-value> 
+	</init-param> 
+</filter>
+<filter-mapping>
+	<filter-name>encodingFilter</filter-name>
+	<url-pattern>/*</url-pattern>
+</filter-mapping>
 </web-app>

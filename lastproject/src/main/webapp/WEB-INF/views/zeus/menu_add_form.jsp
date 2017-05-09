@@ -30,32 +30,32 @@
     <h1></h1>
     <form id="addform" action="${pageContext.request.contextPath}/menu_add_form" method="post">
         <div class="form-group">
-            <label for="boardPw"> 메뉴명:</label>
+            <label for="menuPw"> 메뉴명:</label>
             <input class="form-control" name="menu_name" id="menu_name" type="text"/>
         </div>
         <div class="form-group">
-            <label for="boardPw">상품 카테고리 :</label>
+            <label for="menuPw">상품 카테고리 :</label>
             <input class="form-control" name="menu_cate" id="menu_cate" type="text"/>
         </div>
         <div class="form-group">
-            <label for="boardName">가격 :</label>
+            <label for="menuName">가격 :</label>
             <input class="form-control" name="menu_price" id="menu_price" type="text"/>
         </div>
         <div class="form-group">
-            <label for="boardName">할인가격 :</label>
+            <label for="menuName">할인가격 :</label>
             <input class="form-control" name="menu_sprice" id="menu_sprice" type="text"/>
         </div>
         <div class="form-group">
-            <label for="boardName">칼로리 :</label>
+            <label for="menuName">칼로리 :</label>
             <input class="form-control" name="menu_kcal" id="menu_kcal" type="text"/>
         </div>
          <div class="form-group">
-            <label for="boardName">설명 :</label>
+            <label for="menuName">설명 :</label>
             <input class="form-control" name="menu_explanation" id="menu_explanation" type="text"/>
         </div>
         <div>
             <input class="btn btn-default" id="addmenu" type="submit" value="등록"/>
-            <a class="btn btn-default" href="${pageContext.request.contextPath}/menu_list">글목록</a>
+            <a class="btn btn-default" href="${pageContext.request.contextPath}/menu_list">메뉴 목록</a>
         </div>
     </form>
 </div>
