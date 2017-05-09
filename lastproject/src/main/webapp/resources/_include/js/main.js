@@ -77,7 +77,7 @@ BRUSHED.slider = function(){
 		thumb_links				:	0,			// Individual thumb links for each slide
 		thumbnail_navigation    :   0,			// Thumbnail navigation
 		slides 					:  	[			// Slideshow Images
-											{image : '/possys/resources/_include/img/slider-images/20.jpg', title : '<div class="slide-content">pos system</div>', thumb : '', url : ''},
+											{image : '/possys/resources/_include/img/slider-images/tt.jpg', title : '<div class="slide-content">pos system</div>', thumb : '', url : ''},
 											{image : '/possys/resources/_include/img/slider-images/sample1.jpg', title : '<div class="slide-content">pos system</div>', thumb : '', url : ''},
 											{image : '/possys/resources/_include/img/slider-images/bgimg01.jpg', title : '<div class="slide-content">pos system</div>', thumb : '', url : ''},
 											{image : '/possys/resources/_include/img/slider-images/pos.jpg', title : '<div class="slide-content">pos system</div>', thumb : '', url : ''}  
