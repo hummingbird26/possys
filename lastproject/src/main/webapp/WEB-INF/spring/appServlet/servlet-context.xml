@@ -50,21 +50,18 @@
                 <!-- 원빈 끝 -->
                 
                 <beans:value>classpath:kr/or/possys/Order_service/Order_Mapper.xml</beans:value>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
+
                 <beans:value>classpath:kr/or/possys/Menu_service/Menu_Mapper.xml</beans:value>
-                
-=======
+
                 <!-- 결제 -->
                 <beans:value>classpath:kr/or/possys/Payment_service/Payment_Mapper.xml</beans:value>
                 <!-- 직원&로그인 -->
->>>>>>> branch 'master' of https://github.com/hummingbird26/possys
+
                  <beans:value>classpath:kr/or/possys/Staff_service/Staff_Mapper.xml</beans:value>
                 <beans:value>classpath:kr/or/possys/Member_sevice/Member_Mapper.xml</beans:value>
                 <!-- 메뉴 -->
                 <beans:value>classpath:kr/or/possys/Menu_service/Menu_Mapper.xml</beans:value>
->>>>>>> branch 'master' of https://github.com/hummingbird26/possys.git
+
             </beans:list>
         </beans:property>
 	    </beans:bean>
