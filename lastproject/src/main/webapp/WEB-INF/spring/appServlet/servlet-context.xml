@@ -50,6 +50,8 @@
                 <!-- 원빈 끝 -->
                 <!-- 주문 -->
                 <beans:value>classpath:kr/or/possys/Order_service/Order_Mapper.xml</beans:value>
+                <!-- 결제 -->
+                <beans:value>classpath:kr/or/possys/Payment_service/Payment_Mapper.xml</beans:value>
                 <!-- 직원&로그인 -->
                  <beans:value>classpath:kr/or/possys/Staff_service/Staff_Mapper.xml</beans:value>
                 <!-- 회원 -->

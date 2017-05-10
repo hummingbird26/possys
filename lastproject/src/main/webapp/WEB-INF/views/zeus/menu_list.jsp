@@ -18,6 +18,7 @@
 </script>
 </head>
 <body>
+<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <h1>메뉴 목록</h1>
 <div>전체 메뉴 목록 ${menucount}</div>
 	<table border=1>

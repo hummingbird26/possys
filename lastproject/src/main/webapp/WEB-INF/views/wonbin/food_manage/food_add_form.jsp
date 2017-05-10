@@ -7,6 +7,7 @@
 <title>식자재 품목관리</title>
 </head>
 <body>
+<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <h1>식자재 입력폼</h1>
 	<form id="addform" action="${pageContext.request.contextPath}/food_add_form" method="post">
 		

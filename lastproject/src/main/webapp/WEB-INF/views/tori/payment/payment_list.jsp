@@ -15,6 +15,7 @@
 
 </head>
 <body>
+<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 	<div class="container">
     <h1>Payment List</h1>
     <div>전체행의 수 : ${paymentcount}</div>
@@ -31,7 +32,7 @@
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="p" items="${list}">
+            <c:forEach varStatus="status" var="p" items="${list}">
                 <tr>
                     <td><a href="${pageContext.request.contextPath}/tori/payment/payment_view?payment_id=${p.payment_id}">${p.payment_id}</a></td>
                     <td>${p.table_order_id}</td>
@@ -47,6 +48,22 @@
     <ul class="pager">
         <c:if test="${currentPage > 1}">
             <li class="previous"><a href="${pageContext.request.contextPath}/tori/payment/payment_list?currentPage=${currentPage-1}">이전</a></li>
+        </c:if>
+        <c:if test="${selbox != null && keyWord != null}">
+        <c:forEach var="i" begin="${expage}" end="${lastPage}" step="1">
+        	<c:choose>
+        		<c:when test="${i eq currentPage}"><li><a href="${pageContext.request.contextPath}/tori/payment/payment_list?currentPage=${i}">[${i}]</a></li></c:when>
+        		<c:otherwise><li><a href="${pageContext.request.contextPath}/tori/payment/payment_list?currentPage=${i}">[${i}]</a></li>></c:otherwise>
+        	</c:choose>
+        </c:forEach>
+        </c:if>
+         <c:if test="${selbox == null && keyWord == null}">
+        <c:forEach var="i" begin="${expage}" end="${lastPage}" step="1">
+        	<c:choose>
+        		<c:when test="${i eq currentPage}"><li><a href="${pageContext.request.contextPath}/tori/payment/payment_list?currentPage=${1}">[${i}]</a></li></c:when>
+        		<c:otherwise><li><a href="${pageContext.request.contextPath}/tori/payment/payment_list?currentPage=${i}">[${i}]</a></li></c:otherwise>
+        		</c:choose>
+        	</c:forEach>
         </c:if>
         <c:if test="${currentPage < lastPage}">
             <li class="next"><a href="${pageContext.request.contextPath}/tori/payment/payment_list?currentPage=${currentPage+1}">다음</a></li>

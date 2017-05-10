@@ -15,6 +15,7 @@
 <title>payment_home</title>
 </head>
 <body>
+<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <div class="container">
 	<br><br><br><br>
 	<fieldset>

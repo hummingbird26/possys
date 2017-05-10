@@ -10,6 +10,10 @@
 <a href="${pageContext.request.contextPath}/logout">로그아웃</a>
 <a href="${pageContext.request.contextPath}/member_list">목록</a>
 <a href="${pageContext.request.contextPath}/test">Jquery autocomplete</a>
+<<<<<<< HEAD
+<a href="${pageContext.request.contextPath}/tori/payment/payment_add_form">결제관리업무</a>
+<a href="${pageContext.request.contextPath}/tori/staff/staff_add_form">직원관리업무</a>
+=======
 <!-- 원빈 -->
 <a href="${pageContext.request.contextPath}/food_list">식재자 품목 목록</a>
 <a href="${pageContext.request.contextPath}/drop_list">폐기 품목 목록</a>
@@ -17,6 +21,7 @@
 <!-- 원빈 끝 -->
 <!-- 홍경인 -->
 <a href="${pageContext.request.contextPath}/order_list">주문리스트</a>
+>>>>>>> branch 'master' of https://github.com/hummingbird26/possys.git
 
 <a href="${pageContext.request.contextPath}/menu_add_form">메뉴 입력</a>
 

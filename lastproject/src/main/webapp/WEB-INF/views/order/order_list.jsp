@@ -8,6 +8,7 @@
 <title>OrderList</title>
 </head>
 <body>
+<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 	<table>
 		<tbody>
 			<c:forEach var="f" items="${list}">
