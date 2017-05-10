@@ -25,19 +25,59 @@ public class Payment_Dao {
         return sqlSessionTemplate.delete("kr.or.possys.Payment_service.Payment_Mapper.deletePayment", Payment);
     }*/
     
+	public List<Payment> paymentSearch(String select, String keyWord, int currentPage, int pagePerRow){
+		System.out.println("paymentSearch");
+		System.out.println(select);
+		System.out.println(keyWord);
+		System.out.println(currentPage);
+		System.out.println(pagePerRow);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("select", select);
+		map.put("keyWord", keyWord);
+		map.put("beginRow", (currentPage-1)*pagePerRow);
+		map.put("pagePerRow", pagePerRow);
+		
+		System.out.println(map.get("select"));
+		System.out.println(map.get("keyWord"));
+		System.out.println(map.get("beginRow"));
+		System.out.println(map.get("pagePerRow"));
+		
+		
+		return sqlSessionTemplate.selectList("kr.or.possys.payment_service.Payment_Mapper.paymentSearch",map);
+	}
+	
+	public int paymentSRlist(String select,String keyWord){
+		System.out.println("paymentSRlist");
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("select", select);
+		map.put("keyWord", keyWord);
+		System.out.println(map.get("select"));
+		System.out.println(map.get("keyWord"));
+		
+		return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.paymentSRlist",map);
+	}
+	
     public Payment getPayment(String payment_id) {
+    	System.out.println("getPayment");
         return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.getPayment", payment_id);
         
     }
  
     public List<Payment> getPaymentList(int currentPage, int pagePerRow) {
+    	System.out.println("getPaymentList");
         Map<String, Integer> map = new HashMap<String, Integer>();
         map.put("beginRow", (currentPage-1)*pagePerRow);
         map.put("pagePerRow", pagePerRow);
+        System.out.println(map.get("beginRow"));
+        System.out.println(map.get("pagePerRow"));
+        
         return sqlSessionTemplate.selectList("kr.or.possys.Payment_service.Payment_Mapper.getPaymentList", map);
     }
     
     public int getPaymentCount() {
+    	System.out.println("getPaymentCount");
         return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.getPaymentCount");
     }
  

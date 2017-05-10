@@ -11,25 +11,44 @@ WHERE payment_id = #{payment_id}</update>
 <delete parameterType="kr.or.possys.Payment_service.Payment" id="deletePayment"> 
 DELETE FROM payment WHERE payment_id = #{payment_id} </delete>
 
-<!-- <select parameterType="String" id="getPayment1" resultType="kr.or.possys.Payment_service.Payment">
-SELECT * FROM payment WHERE #{select} = #{search};
-SELECT * FROM payment WHERE payment_cate = #{payment_cate};
-SELECT * FROM payment WHERE member_phone = #{member_phone};
-SELECT * FROM payment WHERE payment_date = #{payment_date};
-</select> -->
+<select id="paymentSearch" parameterType="java.util.Map" resultType="kr.or.possys.Payment_service.Payment">
+SELECT
+payment_id,
+table_order_id,
+payment_total,
+payment_pay,
+payment_date,
+payment_cate,
+payment_state 
+FROM payment
+WHERE ${select} LIKE CONCAT('%',#{keyWord},'%')
+ORDER BY payment_id DESC 
+LIMIT #{beginRow}, #{pagePerRow}
+</select>
+
+<select id="foodSRlist" parameterType="java.util.Map" resultType="int">
+	SELECT COUNT(*) FROM payment WHERE ${select} LIKE CONCAT('%',#{keyWord},'%')
+</select>
 
 <select parameterType="String" id="getPayment" resultType="kr.or.possys.Payment_service.Payment"> 
 SELECT * FROM payment WHERE payment_id = #{payment_id}</select>
 
 <select parameterType="java.util.Map" id="getPaymentList" resultType="kr.or.possys.Payment_service.Payment"> 
-SELECT payment_id, table_order_id , payment_total 
-, payment_pay , payment_date , payment_cate , payment_state 
-FROM payment ORDER BY payment_id DESC LIMIT #{beginRow}, #{pagePerRow}
-
-<!-- SELECT CASE WHEN 'payment_date'!='0000-00-00' THEN 'date' END new_date FROM payment; -->
+SELECT 
+payment_id,
+table_order_id,
+payment_total,
+payment_pay,
+payment_date,
+payment_cate,
+payment_state 
+FROM payment 
+ORDER BY payment_id DESC LIMIT #{beginRow}, #{pagePerRow}
 </select>
 
-<select id="getPaymentCount" resultType="int"> SELECT COUNT(*) FROM payment </select>
+<select id="getPaymentCount" resultType="int"> 
+SELECT COUNT(*) FROM payment 
+</select>
 
  <insert parameterType="kr.or.possys.Payment_service.Payment" id="insertPayment">
 <!-- <insert id="kr.or.possys.Payment_service.Payment" parameterType="insertPayment">  -->
