@@ -7,14 +7,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>메뉴 목록</title>
 <script type="text/javascript">
-	function check(){
-		if(document.search.keyWord.value == ""){
-			alert("검색어를 입력하세요.");
-			document.search.keyWord.focus();
-			return;
-		}
-		document.search.submit();
-	}
+	$(document).ready(function(){
+			
+		$('#fbutton').click(function(){
+			
+			var va = $("#selbox option:selected").val();
+			
+			var regexp = /\s/g;
+			if(va !=null || va != "" || va != regexp){
+				
+				frm.submit();
+			}else{
+				/* alert('asd'); */
+			}
+		});		
+	});
 </script>
 </head>
 <body>
@@ -54,13 +61,13 @@
 		</c:if>
 	</ul>
 	<div>
-		<form action="${pageContext.request.contextPath}/menu_search" method="post">
-			<select size="1">
+		<form id ="frm" name="frm" action="${pageContext.request.contextPath}/menu_search" method="get">
+			<select id="selbox"name="selbox" size="1">
 				<option value="menu_id">메뉴코드</option>
 				<option value="menu_name">메뉴명</option>
 			</select>
-			<input size='16' name="keyWord" type="text">
-			<input type="submit" value="검색">
+			<input  size="16" name="keyWord" type="text">
+			<input id="fbutton" type="submit" value="검색">
 		</form>
 	</div>
 	
