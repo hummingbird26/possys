@@ -27,6 +27,11 @@ WHERE staff_id= #{staff_id} AND staff_date = #{staff_date}
 DELETE FROM staff WHERE staff_id = #{staff_id} AND staff_pw = #{staff_pw} 
 </delete>
 
+<select id="staffSRlist" parameterType="java.util.Map" resultType="int">
+	select count(*) from food_manage where ${selbox} like concat('%',#{keyWord},'%')
+</select>
+
+
 <select parameterType="String" id="getStaff" resultType="kr.or.possys.Staff_service.Staff"> 
 SELECT * FROM staff WHERE staff_id=#{staff_id} 
 </select>
