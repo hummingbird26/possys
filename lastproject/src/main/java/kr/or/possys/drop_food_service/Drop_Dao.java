@@ -8,44 +8,79 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
+
 @Repository
 public class Drop_Dao {
 
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-	//food 입력요청
-	public int insertfood(Drop food){
-		System.out.println("01_Food_dao.java->>insertfood 실행 ");	
-		return sqlSessionTemplate.insert("kr.or.possys.food_service.Food_Mapper.insertfood",food);
+	//drop 입력요청
+	public int insertdrop(Drop drop){
+		System.out.println("01_Drop_dao.java->>insertfood 실행 ");	
+		return sqlSessionTemplate.insert("kr.or.possys.drop_food_service.Drop_Mapper.insertdrop",drop);
 	}
-	//food 목록 갯수 카운트
-	public int getfoodcount(){
-		System.out.println("02_Food_dao.java->>getfoodcount 실행 ");
-		return sqlSessionTemplate.selectOne("kr.or.possys.food_service.Food_Mapper.getfoodcount");
+	//drop 목록 갯수 카운트
+	public int getdropcount(){
+		System.out.println("02_Drop_dao.java->>getdropcount 실행 ");
+		return sqlSessionTemplate.selectOne("kr.or.possys.drop_food_service.Drop_Mapper.getdropcount");
 	}
-	//food 목록요청
-	public List<Drop> foodlist(int currentPage, int pageRow){
-		System.out.println("03_Food_dao.java->>foodlist 실행");
+	//drop 목록요청
+	public List<Drop> droplist(int currentPage, int pageRow){
+		System.out.println("03_drop_dao.java->>droplist 실행");
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("beginRow", (currentPage-1)*pageRow);
 		map.put("pageRow", pageRow);
-		return sqlSessionTemplate.selectList("kr.or.possys.food_service.Food_Mapper.foodlist",map);
+		return sqlSessionTemplate.selectList("kr.or.possys.drop_food_service.Drop_Mapper.droplist",map);
 	}
-	//food 수정폼 요청
-	public Drop foodview(String food_id){
-		System.out.println("04_Food_dao.java->>foodview 실행");
-		return sqlSessionTemplate.selectOne("kr.or.possys.food_service.Food_Mapper.foodview",food_id);
+	//drop 수정폼 요청
+	public Drop dropview(String drop_id){
+		System.out.println("04_drop_dao.java->>dropview 실행");
+		return sqlSessionTemplate.selectOne("kr.or.possys.drop_food_service.Drop_Mapper.dropview",drop_id);
 	}
-	//food 수정액션 요청
-	public int foodmodify(Drop food){
-		System.out.println("05_Food_dao.java->>foodmodify 실행");
-		return sqlSessionTemplate.update("kr.or.possys.food_service.Food_Mapper.foodmodify",food);
+	//drop 수정액션 요청
+	public int dropmodify(Drop drop){
+		System.out.println("05_drop_dao.java->>dropmodify 실행");
+		return sqlSessionTemplate.update("kr.or.possys.drop_food_service.Drop_Mapper.dropmodify",drop);
 		
 	}
-	//food 삭제 요청
-	public int fooddelete(String food_id){
-		System.out.println("06_Food_dao.java->>fooddelete 실행");
-		return sqlSessionTemplate.delete("kr.or.possys.food_service.Food_Mapper.fooddelete",food_id);
+	//drop 삭제 요청
+	public int dropdelete(String drop_id){
+		System.out.println("06_drop_dao.java->>dropdelete 실행");
+		return sqlSessionTemplate.delete("kr.or.possys.drop_food_service.Drop_Mapper.dropdelete",drop_id);
 	}
+	//drop 검색 요청
+		public List<Drop> dropsearch(String selbox, String keyWord, int currentPage, int pageRow){
+			System.out.println("07_drop_dao.java->>dropsearch 실행");
+			System.out.println(selbox);
+			System.out.println(keyWord);
+			System.out.println(currentPage);
+			System.out.println(pageRow);
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("selbox", selbox);
+			map.put("keyWord", keyWord);
+			map.put("beginRow", (currentPage-1)*pageRow);
+			map.put("pageRow", pageRow);
+			System.out.println(map.get("selbox"));
+			System.out.println(map.get("keyWord"));
+			System.out.println(map.get("beginRow"));
+			System.out.println(map.get("pageRow"));
+			
+				
+			return sqlSessionTemplate.selectList("kr.or.possys.drop_food_service.Drop_Mapper.dropsearch", map);
+		}
+		//drop 검색 수 요청
+		public int dropSRlist(String selbox,String keyWord){
+			System.out.println("08_Drop_dao.java->>foodSRlist 실행");
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("selbox", selbox);
+			map.put("keyWord", keyWord);
+			System.out.println(map.get("selbox"));
+			System.out.println(map.get("keyWord"));
+			return sqlSessionTemplate.selectOne("kr.or.possys.drop_food_service.Drop_Mapper.dropSRlist",map);
+			
+		}
 }

@@ -1,17 +1,18 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
 <head>
 	<title>POS SYSTEM</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta charset="utf-8">
 	
 
 	<!-- Google Fonts -->
 	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="./resources/assets/css/style.css" />
-	<link rel="stylesheet" href="./resources/assets/css/animate.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/style.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/animate.css">
 	<!-- Custom Stylesheet -->
 	<link rel="stylesheet" href="css/style.css">
 
@@ -19,7 +20,7 @@
 	<script type="text/javascript"> 
 		$(document).ready(function(){
 			$('#btn').click(function(){
-				 var regExp = /\s/g;//공백이 있나 확인하는 정규식
+				 var regExp = /\s/g;//ê³µë°±ì´ ìë íì¸íë ì ê·ì
 				 var id = $('#usercode').val();
 				 var pw = $('#password').val();
 			if($('#usercode').val()==""||id.match(regExp)) {
@@ -41,12 +42,19 @@
 			});
 		});
 	
+		/* 팝업창이나 띄우자 */
+		
+		function open_win(){
+			window.open('popup.html','popup','width=300,height=200,left=0,top=0,toolbar=no,locaton=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no');
+			
+		}
 	</script>	
 
 </head>
 
-<body>
-<form action="/PosSystem2/loginAction" name="frm" method="POST">
+<body onLoad="javascript:open_win();">
+
+<form action="${pageContext.request.contextPath}/loginAction" name="frm" method="POST">
 
 	<div class="container">
 		<div class="top">
@@ -58,12 +66,12 @@
 			</div>
 			<label for="usercode">Usercode</label>
 			<br/>
-			<input type="text" id="usercode" name="usercode">
+			<input type="text" id="usercode" name="usercode" value="id001">
 			<div id="idre" style="display:none;"></div> 
 			<br/>
 			<label for="password">Password</label>
 			<br/>
-			<input type="password" id="password" name="password">
+			<input type="password" id="password" name="password" value="pw001">
 			<div id="pwre" style="display:none;"></div>
 			<br/>
 			

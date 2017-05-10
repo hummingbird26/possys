@@ -16,11 +16,13 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 	<div class="container">
 		<form class="form-inline" action="${pageContext.request.contextPath}/tori/staff/staff_delete_action" method="POST">
-			<div><label for="staff_pw">비밀번호 :</label></div>
+			<div><label for="staff_id">회원아이디 :</label></div>
 			<div><input type="text" class="form-control" size="auto" id="staff_id" name="staff_id" value="${staff.staff_id}" readonly></div><br>
-			<div><input type="text" class="form-control" size="auto" id="staff_pw" name="staff_pw"></div>
+			<div><label for="staff_id">비밀번호 :</label></div>
+			<div><input type="text" class="form-control" size="auto" id="staff_pw" name="staff_pw"></div><br>
 			<div><input class="btn btn-default" type="submit" id="staffUpdate" name="staffUpdate" value="제출"></div>
 		</form>
 	

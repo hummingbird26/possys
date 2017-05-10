@@ -18,6 +18,7 @@
 <div class="container">
 <br><br>
 <div>
+<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 	<div class="col-sm-6">
 		<img src="" height="auto" width="auto" alt="결제회사정보">
 	

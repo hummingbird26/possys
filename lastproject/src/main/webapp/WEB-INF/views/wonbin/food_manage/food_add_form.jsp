@@ -1,28 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>½ÄÀÚÀç Ç°¸ñ°ü¸®</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ì‹ìžìž¬ í’ˆëª©ê´€ë¦¬</title>
 </head>
 <body>
-<h1>½ÄÀÚÀç ÀÔ·ÂÆû</h1>
+<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
+<h1>ì‹ìžìž¬ ìž…ë ¥í¼</h1>
 	<form id="addform" action="${pageContext.request.contextPath}/food_add_form" method="post">
 		
-		<div>»óÇ°¸í : <input name ="food_name" id ="food_name" type ="text"/></div>
-		<div>±Ô°Ý : <input name ="food_size" id ="food_size" type ="text"/></div>
-		<div>´ÜÀ§ : <input name ="food_unit" id ="food_unit" type ="text"/></div>
-		<div>À¯Åë±âÇÑ : <input name ="food_shelflife" id ="food_shelflife" type ="text"/></div>
-		<div>´ã´çÀÚ : <input name ="staff_id" id ="staff_id" type ="text"/></div>
+		<div>ìƒí’ˆëª… : <input name ="food_name" id ="food_name" type ="text"/></div>
+		<div>ê·œê²© : <input name ="food_size" id ="food_size" type ="text"/></div>
+		<div>ë‹¨ìœ„ : <input name ="food_unit" id ="food_unit" type ="text"/></div>
+		<div>ìœ í†µê¸°í•œ : <input name ="food_shelflife" id ="food_shelflife" type ="text"/></div>
+		<div>ë‹´ë‹¹ìž : <input name ="staff_id" id ="staff_id" type ="text"/></div>
 		
 		
 
 <br>
 		<div>
-			<input type="submit" id="addfood" value="µî·Ï">
-			<input type="reset" id="reset" value="ÃÊ±âÈ­">
-			<a href="${pageContext.request.contextPath}/food_list">Ãë¼Ò</a>
+			<input type="submit" id="addfood" value="ë“±ë¡">
+			<input type="reset" id="reset" value="ì´ˆê¸°í™”">
+			<a href="${pageContext.request.contextPath}/food_list">ì·¨ì†Œ</a>
 		</div>
 	</form>
 </body>

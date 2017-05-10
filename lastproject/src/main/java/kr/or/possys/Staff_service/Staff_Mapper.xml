@@ -3,7 +3,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.possys.Staff_service.Staff_Mapper">
-
+<select id="login" parameterType="String" resultType="kr.or.possys.Staff_service.Staff">
+		select staff_pw
+		,staff_name
+		,staff_level
+		,staff_id 
+		from staff 
+		where staff_id=#{staff_id}
+	</select>
 <update parameterType="kr.or.possys.Staff_service.Staff" id="updateStaff"> 
 UPDATE staff 
 SET staff_pw= #{staff_pw},
@@ -19,6 +26,11 @@ WHERE staff_id= #{staff_id} AND staff_date = #{staff_date}
 <delete parameterType="kr.or.possys.Staff_service.Staff" id="deleteStaff"> 
 DELETE FROM staff WHERE staff_id = #{staff_id} AND staff_pw = #{staff_pw} 
 </delete>
+
+<select id="staffSRlist" parameterType="java.util.Map" resultType="int">
+	select count(*) from food_manage where ${selbox} like concat('%',#{keyWord},'%')
+</select>
+
 
 <select parameterType="String" id="getStaff" resultType="kr.or.possys.Staff_service.Staff"> 
 SELECT * FROM staff WHERE staff_id=#{staff_id} 

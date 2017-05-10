@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -55,6 +55,7 @@
 
 </head>
 <body>
+<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <h1>식자재 입력폼</h1>
 	<form id="frm" action="${pageContext.request.contextPath}/member_update" method="post">
         <div class="form-group">전화번호 :

@@ -1,24 +1,26 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<!-- bootstrapÀ» »ç¿ëÇÏ±â À§ÇÑ CDNÁÖ¼Ò -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- bootstrapì„ ì‚¬ìš©í•˜ê¸° ìœ„í•œ CDNì£¼ì†Œ -->
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
  
-<!-- jquery¸¦ »ç¿ëÇÏ±âÀ§ÇÑ CDNÁÖ¼Ò -->
+<!-- jqueryë¥¼ ì‚¬ìš©í•˜ê¸°ìœ„í•œ CDNì£¼ì†Œ -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<title>È¸¿ø °³ÀÎÁ¤º¸ È­¸é</title>
+<title>íšŒì› ê°œì¸ì •ë³´ í™”ë©´</title>
 </head>
 <body>
+<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <div class="container">
-    <h1>È¸¿øÁ¤º¸ È­¸é</h1>
+    <h1>íšŒì›ì •ë³´ í™”ë©´</h1>
      <table class="table">
          <tbody>
              <tr>
@@ -43,9 +45,9 @@
             </tr>
         </tbody>
     </table>
-    <a class="btn btn-default" href="${pageContext.request.contextPath}/member_update?member_phone=${Member.member_phone}">¼öÁ¤</a>
-    <a class="btn btn-default" href="${pageContext.request.contextPath}/member_Secede?member_phone=${Member.member_phone}">»èÁ¦</a>
-    <a class="btn btn-default" href="${pageContext.request.contextPath}/member_list">±Û¸ñ·Ï</a>
+    <a class="btn btn-default" href="${pageContext.request.contextPath}/member_update?member_phone=${Member.member_phone}">ìˆ˜ì •</a>
+    <a class="btn btn-default" href="${pageContext.request.contextPath}/member_Secede?member_phone=${Member.member_phone}">ì‚­ì œ</a>
+    <a class="btn btn-default" href="${pageContext.request.contextPath}/member_list">ê¸€ëª©ë¡</a>
 </div>
 </body>
 </html>

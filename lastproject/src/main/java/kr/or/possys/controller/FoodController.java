@@ -1,6 +1,10 @@
 package kr.or.possys.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,11 +21,7 @@ import kr.or.possys.food_service.Food_Dao;
 public class FoodController {
 	@Autowired
 	private Food_Dao dao;
-	
-	/*@RequestMapping(value="/", method = RequestMethod.GET)
-	public String start(){
-		return "index";
-	}*/
+		
 	//식재료 입력폼 요청
 	@RequestMapping(value="/food_add_form", method = RequestMethod.GET)
 	public String foodadd(){
@@ -37,13 +37,18 @@ public class FoodController {
 	}
 	//식재료 목록 요청
 	@RequestMapping(value="/food_list", method = RequestMethod.GET)
-	public String foodlist(Model model, @RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage){
+	public String foodlist(Model model
+			, @RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage){
 		System.out.println("FoodController.java ->>foodlist 요청");
+		
+		
 		int foodcount = dao.getfoodcount();
-		int pageRow = 20;
+		int pageRow = 10;
+		int expage = 1;
 		int lastPage = (int)(Math.ceil((double)foodcount/(double)pageRow));
 		List<Food> list = dao.foodlist(currentPage, pageRow);
 		
+		model.addAttribute("expage",expage);
 		model.addAttribute("pageRow",pageRow);
 		model.addAttribute("foodcount", foodcount);
 		model.addAttribute("currentPage", currentPage);
@@ -64,7 +69,7 @@ public class FoodController {
 	public String foodmodify(Food food){
 		System.out.println("FoodController.java ->>foodmodify 요청");
 		dao.foodmodify(food);
-		return "redirect:/food_modify_view?food_id="+food.getFood_id();
+		return "redirect:/food_list";
 		
 	}
 	//식재료 삭제 요청
@@ -75,15 +80,20 @@ public class FoodController {
 	}
 	//식재료 검색 요청
 	@RequestMapping(value="/food_search", method = RequestMethod.GET)
-	public String foodSRlist(Model model, @RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage
+	public String foodSRlist(HttpServletRequest request
+			,Model model, @RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage
 			,@RequestParam(value="selbox") String selbox
 			,@RequestParam(name="keyWord") String keyWord){
-			
+
 		int foodSRcount = dao.foodSRlist(selbox,keyWord);
-		int pageRow = 20;
+		int pageRow = 10;
 		int lastPage = (int)(Math.ceil((double)foodSRcount/(double)pageRow));
 		List<Food> list = dao.foodsearch(selbox, keyWord, currentPage, pageRow);
-			
+		int expage = 1;
+		
+		model.addAttribute("selbox",selbox);
+		model.addAttribute("keyWord",keyWord);
+		model.addAttribute("expage",expage);
 		model.addAttribute("pageRow",pageRow);
 		model.addAttribute("foodcount", foodSRcount);
 		model.addAttribute("currentPage", currentPage);

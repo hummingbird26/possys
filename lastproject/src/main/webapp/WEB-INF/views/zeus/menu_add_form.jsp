@@ -26,6 +26,7 @@
 <title></title>
 </head>
 <body>
+<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <div class="container">
     <h1></h1>
     <form id="addform" action="${pageContext.request.contextPath}/menu_add_form" method="post">
