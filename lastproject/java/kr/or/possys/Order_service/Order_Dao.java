@@ -24,7 +24,7 @@ public class Order_Dao {
 	
 	public Order order_modify_form(String table_order_id){
 		System.out.println("주문수정폼실행");
-		return sqlSessionTemplate2.selectOne("kr.or.possys.Order_service.Order_Mapper.order_modify_form",table_order_id);	
+		return sqlSessionTemplate2.selectOne("kr.or.possys.Order_service.Order_Mapper.order_modify_form",table_order_id);
 	}
 
 }
