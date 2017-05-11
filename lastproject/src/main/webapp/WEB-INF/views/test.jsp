@@ -19,10 +19,9 @@
             $.ajax({
                 url: "http://localhost/possys/json",
                 dataType: "json",
-                data:member_name,
                 success: function (data) {
                 	alert('성공');
-                	console.log(data.jsonString+"<<<<<<<<");
+                	console.log(ajax.response.Text+"<<<<<<<<");
                 	/* alert(data); */
                     $.each(data, function () {
                         $('#tblList').append("<tr><td>" + this.member_name + "</td><td>" + this["member_name"] + "</td></tr>");
