@@ -1,51 +1,86 @@
 package kr.or.possys.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import kr.or.possys.Member_sevice.Member;
 import kr.or.possys.Member_sevice.Member_Dao;
 import kr.or.possys.Member_sevice.mVo;
+import net.sf.json.JSONArray;
 
 @Controller
 public class Member_Controller {
 
 	@Autowired
 	private	Member_Dao	Mdao;
+	private	Member	m;
 	
-	//팝업창
-	@RequestMapping(value="/popup.html")
-	public String pop(){
+	//제이손 방식으로 받아오기
+	@RequestMapping(value="/json", method = RequestMethod.GET)
+	@ResponseBody
+	public void jj(Model model
+			 ,HttpServletResponse re
+			 ,@RequestParam(value="currentPage",required=false,defaultValue="1" )int currentPage) throws IOException{
+		//한글화
+				re.setCharacterEncoding("EUC-KR");
+				//out 객체 사용하기 위해 준비
+				PrintWriter out = re.getWriter();
+				
+				int pagePerRow = 10;
+				//json방식 사용
+				JSONArray memberListJson = null;
+				//리스트 쿼리 호출
+				List<Member> list = Mdao.getMemberList(currentPage, pagePerRow);
+				//받아온 리스트 값을 제이손 객체에 넣어줌 
+				memberListJson = JSONArray.fromObject(list);
+				
+				//새로운 화면에서 json방식으로 받아온 값 출력
+				out.write(memberListJson.toString());
+				model.addAttribute("jsonString", memberListJson.toString());
+				//메모리 초기화
+				out.flush();
+	}
+	
+	
+	
+	@RequestMapping(value="/popup.html", method = RequestMethod.GET)
+	public String pop(Model model
+					 ,@RequestParam(value="currentPage",required=false,defaultValue="1" )int currentPage) throws IOException{
+		
+		System.out.println("팝업창 실행 확인");
+
+		int pagePerRow = 10;
+		//json방식 사용
+		JSONArray memberListJson = null;
+		//리스트 쿼리 호출
+		List<Member> list = Mdao.getMemberList(currentPage, pagePerRow);		
+		if(list != null){
+			//받아온 리스트 값을 제이손 객체에 넣어줌 
+			memberListJson = JSONArray.fromObject(list);
+		}
+		
+		if(memberListJson != null){			
+			model.addAttribute("jsonString", memberListJson.toString());
+		}else{
+			model.addAttribute("jsonString", "");
+		}
+
+		model.addAttribute("list", list);
+		
 		return "test";
 	}
 	
-	//Jquery autocomplete test
-	@RequestMapping(value="/test", method = RequestMethod.GET)
-		public String test(Model model,@RequestParam(value="currentPage",required=false,defaultValue="1" )int currentPage){
-			System.out.println("test 메서드 실행");
-			int pagePerRow = 10;
-			List<Member> list = Mdao.getMemberList(currentPage, pagePerRow);
-			model.addAttribute("list",list);
-			
-		
-			
-			/*return "NewFile";*/
-			return "index2";
-		}
-		
 
-	
-	
-	
-	
 	
 	// 검색처리 메서드
 			@RequestMapping(value="/member_select",method = RequestMethod.GET)
@@ -65,9 +100,9 @@ public class Member_Controller {
 				m.setSelBox(selBox);
 			    request.getSession().setAttribute("m", m);
 				
-				/*System.out.println("["+selBox+"]<---검색 조건 memberselect 메서드 Member_Controller.java");
+				System.out.println("["+selBox+"]<---검색 조건 memberselect 메서드 Member_Controller.java");
 				System.out.println(search+"<---검색어 memberselect 메서드 Member_Controller.java");
-				*/
+			
 			    int SpagePerRow = 5;
 				//메서드 호출 배열로 검색 한 조건에 맞는 값을 담아온다
 				List<Member> Mlist = Mdao.searchMember(selBox, search,ScurrentPage,SpagePerRow);
@@ -115,7 +150,22 @@ public class Member_Controller {
 			currentPage = lastpage;
 		}
 		
-		List<Member> list = Mdao.getMemberList(currentPage, pagePerRow);
+		
+		//json방식 사용
+				JSONArray memberListJson = null;
+				//리스트 쿼리 호출
+				List<Member> list = Mdao.getMemberList(currentPage, pagePerRow);		
+				if(list != null){
+					//받아온 리스트 값을 제이손 객체에 넣어줌 
+					memberListJson = JSONArray.fromObject(list);
+				}
+				
+				if(memberListJson != null){			
+					model.addAttribute("jsonString", memberListJson.toString());
+				}else{
+					model.addAttribute("jsonString", "");
+				}
+	
 		System.out.println(lastpage+"lastpage 리턴값 확인");
 		System.out.println(currentPage+"currentPage 리턴값 확인");
 		

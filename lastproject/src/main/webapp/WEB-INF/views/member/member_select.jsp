@@ -95,22 +95,25 @@
 
 <script type="text/javascript" src="/js/jquery-1.8.0.min.js'" charset="utf-8"></script>
 <script type="text/javascript" src="/js/jquery.highlight-4.js"></script>
-<script type="text/javascript"> 
+<script type="text/javascript">
 $(document).ready(function(){
-	$('#button').click(function(){
-		
-		var va = $("#selBox option:selected").val();
-		 var regExp = /\s/g;
-		if(va != null || va != "" || va !=regExp){
-			/* alert(va); */
-			frm.submit();	
-		}else{
-			 alert('검색조건을 선택하세요');
-		}
-		
-	});
-});
+		$('#button').click(function(){
+			
+			var va = $("#selBox option:selected").val();
+			 var regExp = /\s/g;
+			var search =$('#search').val();
+			
+			if(search != null && search != "" && search != regExp){
+				 /* alert(search); */
+				frm.submit();	
+			}else{
+				 alert('내용을 입력 하세요');
+			}
+		}); 				
+}); 
 
+  </script>
+<script type="text/javascript">
 var sKey1 = '${sessionScope.m.search}'; // 해당 검색어
 if(sKey1 != ''){
 $('.sch1').highlight(sKey1); // 하이라이트(여러개의 검색어라면 단순하게 여러번 사용
