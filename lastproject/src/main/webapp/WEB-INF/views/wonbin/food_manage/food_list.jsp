@@ -32,45 +32,24 @@
 		});
 	//발주업체 관리 버튼을 클릭하면 체크박스 행(row) 값 가져오기
 		$("#ep_submit").click(function(){
-			if($("input[name=food_chk]").is(":checked") == false){
+			if($("input[name=food_id]").is(":checked") == false){
 				alert("선택된 항목이 없습니다.");
 				return;	
 			}else{ /* alert("선택됐습니다."); */
-				var sum = 0;
-				var idx;
-				var code;
-				var subdir;
-				$('.td_chk').each(function(){
-					if($(this).is(":checked")){
-						idx = $('.td_chk').index(this);
-						subdir = $('.subdir:eq('+idx+')').text();
-						code = $('.code:eq('+idx+')').text();
-						sum++
-					}
-				});
-				alert("총"+sum+"선택");
-				alert(code);
-				alert(subdir);
+				ep_chkbox.submit();
+				/* $("input[name=food_chk]:checked").each(function() {
+					var test = $(this).val();
+					var food_id = $(this).closest("tr").find(".td_id").text();
+					var food_name = $(this).closest("tr").find("#td_name").text(); */
+// 					var param = "";
+// 						if(param == "")
+// 							param = "food_id="+id
+// 						else param = param + "&food_id"+id
+// 						param = param + "&food_name="+name
+//						ep_chkbox.submit();
+// 					 console.log(food_id);
+//				})
 			}
-// 				var checkObj = new Object();
-// 				var key = $("input[name=food_chk]:checked").val();
-// 				/*var foodId = $(this).parent().find('#chk').val(); */
-// 				var test = $('#food_chk').prop('checked');
-// 				var si = $(":input[name=food_chk]:checked").val();
-// 				alert(si);
-// 				if(si.length>1){
-// 				var valueArr = new Array();
-// 				alert('값이 많다');
-// 				for(var i=0; i<si.length; i++){
-// 					var si2 = $(":input[name=food_chk]:checked");
-// 					if(si2[i].checked==true){
-// 						var ab =  valueArr.push(si[i].value);
-// 						alert('배열에 담았다');
-// 						alert(ab);
-// 					}					
-// 				}				
-// 				}				
-// 			}
 		});
 		
 	});
@@ -80,42 +59,44 @@
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <h1>식자재 목록</h1>
 <div>전체 식자재 수 : ${foodcount}</div>
-	<div><input id="ep_submit" type="button" value="발주업체 관리"/></div>
-	<div>
-	<table class="chkclass" border=1>
-		<thead>
-			<th><input type="checkbox" id="food_chkall" name="food_chkall"/> ▼</th>
-			<th>번호</th>
-			<th>식재코드번호</th>
-			<th>상품명</th>
-			<th>규격</th>
-			<th>단위</th>
-			<th>유통기한</th>
-			<th>담당자</th>
-			<th>등록일자</th>
-			<th>수정</th>
-						
-		</thead>
-		<tbody>
-		
-			<c:forEach varStatus="status" var="f" items="${list}">
+	<form id="ep_chkbox" action="${pageContext.request.contextPath}/ep_chkbox" method="post">
+	<input id="ep_submit" type="button" value="발주업체 관리"/>
+	
+		<table class="chkclass" border=1>
+			<thead>
+				<th><input type="checkbox" id="food_chkall"/> ▼</th>
+				<th>번호</th>
+				<th>식재코드번호</th>
+				<th>상품명</th>
+				<th>규격</th>
+				<th>단위</th>
+				<th>유통기한</th>
+				<th>담당자</th>
+				<th>등록일자</th>
+				<th>수정</th>
+							
+			</thead>
+			<tbody>
 			
-			<tr>
-				<td><input class = "td_chk" type="checkbox" name="food_chk" id="food_chk" value="${f.food_id}"></td>
-				<td>${(foodcount-status.index)-((currentPage-1)*pageRow)}</td>
-				<td id="food_id">${f.food_id}</td>
-				<td>${f.food_name}</td>
-				<td>${f.food_size}</td>
-				<td>${f.food_unit}</td>
-				<td>제조일로 부터 ${f.food_shelflife}일 까지</td>
-				<td>${f.staff_id}</td>
-				<td>${f.food_date}</td>
-				<td><a href="${pageContext.request.contextPath}/food_modify_view?food_id=${f.food_id}">수정</a></td>
-			</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	</div>
+				<c:forEach varStatus="status" var="f" items="${list}">
+				
+				<tr>
+					<td><input class = "td_chk" type="checkbox" name="food_id" value="${f.food_id}"></td>
+					<td>${(foodcount-status.index)-((currentPage-1)*pageRow)}</td>
+					<td>${f.food_id}</td>
+					<td>${f.food_name}</td>
+					<td>${f.food_size}</td>
+					<td>${f.food_unit}</td>
+					<td>제조일로 부터 ${f.food_shelflife}일 까지</td>
+					<td>${f.staff_id}</td>
+					<td>${f.food_date}</td>
+					<td><a href="${pageContext.request.contextPath}/food_modify_view?food_id=${f.food_id}">수정</a></td>
+				</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</form>
+	
 	<ul>
 		<c:if test="${currentPage > 1}">
 			<li><a href="${pageContext.request.contextPath}/food_list?currentPage=${currentPage-1}">이전</a></li>
