@@ -11,7 +11,7 @@ WHERE payment_id = #{payment_id}</update>
 <delete parameterType="kr.or.possys.Payment_service.Payment" id="deletePayment"> 
 DELETE FROM payment WHERE payment_id = #{payment_id} </delete>
 
-<select id="paymentSearch" parameterType="java.util.Map" resultType="kr.or.possys.Payment_service.Payment">
+<select id="paymentSRlist" parameterType="java.util.Map" resultType="kr.or.possys.Payment_service.Payment">
 SELECT
 payment_id,
 table_order_id,
@@ -26,7 +26,8 @@ ORDER BY payment_id DESC
 LIMIT #{beginRow}, #{pagePerRow}
 </select>
 
-<select id="foodSRlist" parameterType="java.util.Map" resultType="int">
+<!-- 결제목록 검색 수 -->
+<select id="paymentSRsearch" parameterType="java.util.Map" resultType="kr.or.possys.Payment_service.Payment">
 	SELECT COUNT(*) FROM payment WHERE ${select} LIKE CONCAT('%',#{keyWord},'%')
 </select>
 
@@ -46,10 +47,12 @@ FROM payment
 ORDER BY payment_id DESC LIMIT #{beginRow}, #{pagePerRow}
 </select>
 
+<!-- 결제내역 카운트 -->
 <select id="getPaymentCount" resultType="int"> 
 SELECT COUNT(*) FROM payment 
 </select>
 
+<!-- 결제목록 입력 -->
  <insert parameterType="kr.or.possys.Payment_service.Payment" id="insertPayment">
 <!-- <insert id="kr.or.possys.Payment_service.Payment" parameterType="insertPayment">  -->
  INSERT INTO payment(payment_id

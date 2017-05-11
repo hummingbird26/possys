@@ -98,16 +98,18 @@ public class Payment_Controller {
 		
 	}
 	
-	//조건별 검색 액션으로 수행
+	//조건별 검색 리스트 표현
 	@RequestMapping(value="/tori/payment/payment_search_action", method = RequestMethod.GET)
-	public String paymentSRlist(HttpServletRequest request , Model model , 
+	public String paymentSRsearch(Model model , 
 			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
 			@RequestParam(value="select") String select,
 			@RequestParam(name="keyWord") String keyWord){
-		int paymentSRcount = pdao.paymentSRlist(select, keyWord);
+		System.out.println("05 Payment_Controller.java -> paymentSRlist");
+		//int paymentSRcount = pdao.paymentSRsearch(select,keyWord);
+		int paymentSRcount = pdao.getPaymentCount();
 		int pagePerRow = 10;
 		int lastPage = (int)(Math.ceil((double)paymentSRcount/(double)pagePerRow));
-		List<Payment> list = pdao.paymentSearch(select,keyWord,currentPage,pagePerRow);
+		List<Payment> list = pdao.paymentSRlist(select,keyWord,currentPage,pagePerRow);
 		int expage = 1;
 		
 		model.addAttribute("select",select);
@@ -121,6 +123,35 @@ public class Payment_Controller {
 		
 		return "/tori/payment/payment_search_list";
 	}
+	
+	
+	//조건별 검색결과 리스트 표현
+	@RequestMapping(value="/tori/payment/payment_search_list", method = RequestMethod.GET)
+	public String paymentsearchlist(Model model,@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage){
+		System.out.println("06_Payment_Controller.java -> paymentlist");
+		int paymentSRcount = pdao.getPaymentCount();
+		System.out.println(paymentSRcount);
+		System.out.println("06_1 Payment_Controller.java -> paymentlist");
+		int pagePerRow = 10;
+		int expage = 1;
+		int lastPage = (int)(Math.ceil((double)paymentSRcount/(double)pagePerRow));
+		List<Payment> list = pdao.getPaymentList(currentPage, pagePerRow);
+		System.out.println(paymentSRcount);
+		System.out.println(Math.ceil(paymentSRcount/pagePerRow));
+		System.out.println(lastPage);
+		// paymentcount 및 pagePerRpw(구 pageRow -> list페이지에는 pagePerRow로 el식의 이름이 작성되어 있는 것을 확인하고(무분별 복붙의 폐해) 변수명을 해당 이름에 맞게 수정 및 double형 타입 캐스팅)
+		
+		model.addAttribute("expage",expage);
+		model.addAttribute("pagePerRow",pagePerRow);
+		model.addAttribute("paymentSRcount", paymentSRcount);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("list",list);
+		
+		return "/tori/payment/payment_search_list";
+		
+	}
+	
 	
 }
 	
