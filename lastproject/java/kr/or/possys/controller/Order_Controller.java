@@ -31,7 +31,9 @@ public class Order_Controller {
 	public String order_modify_form(Model model,@RequestParam(value="table_order_id") String table_order_id){
 		System.out.println("주문수정폼 요청");
 		Order order = odao.order_modify_form(table_order_id);
+		List<Order> list = odao.order_detail(table_order_id);
 		model.addAttribute("order",order);
+		model.addAttribute("list",list);
 		return "/order/order_modify_form";
 	}
 }

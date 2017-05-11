@@ -18,17 +18,12 @@
 		where table_order_id = #{table_order_id}
 	</select>
 	
-	<!-- <select id="order_modify_form" parameterType = "String" resultType="kr.or.possys.Order_service.Order">
-		select 
-		order_detail.table_order_id
-		,order_detail.menu_id
-		,order_detail.menu_name
-		,order_detail.order_detail_ea
-		,order_detail.order_detail_sum
-		,table_order.table_order_num
-		,table_order.table_order_end 
-		from order_detail,table_order 
-		where order_detail.table_order_id = table_order.table_order_id 
-		and order_detail.table_order_id = #{table_order_id}
-	</select> -->
+	 <select id="order_detail" parameterType = "String" resultType="kr.or.possys.Order_service.Order">
+		select table_order_id,
+		menu_id,
+		menu_name,
+		order_detail_ea,
+		order_detail_sum 
+		from order_detail where table_order_id= #{table_order_id}
+	</select>
 </mapper>

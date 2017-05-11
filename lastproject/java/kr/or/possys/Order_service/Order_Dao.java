@@ -26,5 +26,10 @@ public class Order_Dao {
 		System.out.println("주문수정폼실행");
 		return sqlSessionTemplate2.selectOne("kr.or.possys.Order_service.Order_Mapper.order_modify_form",table_order_id);
 	}
+	
+	public List<Order> order_detail(String table_order_id){
+		System.out.println("주문상세실행");
+		return sqlSessionTemplate2.selectList("kr.or.possys.Order_service.Order_Mapper.order_detail",table_order_id);
+	}
 
 }
