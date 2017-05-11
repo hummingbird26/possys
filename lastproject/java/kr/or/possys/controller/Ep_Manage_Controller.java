@@ -1,18 +1,24 @@
 package kr.or.possys.controller;
 
+import java.lang.annotation.Target;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 import kr.or.possys.ep_order_manage_service.Ep_Manage;
 import kr.or.possys.ep_order_manage_service.Ep_Manage_Dao;
+import kr.or.possys.food_service.Food;
+
 
 
 @Controller
@@ -20,11 +26,27 @@ public class Ep_Manage_Controller {
 	@Autowired
 	private Ep_Manage_Dao dao;
 	
+	@RequestMapping(value="/ep_chkbox", method = RequestMethod.POST)
+	public String ep_chkbox(Model model
+			,@RequestParam(value="food_id") List<String> food_id){
+		System.out.println(food_id);
+		List<Food> list = dao.ep_mchck(food_id);
+//		for(String srt : food_id){
+//			/*System.out.println(srt+"for문");*/
+//			list = dao.ep_mchck(srt);
+//		}
+		System.out.println(list);
+		model.addAttribute("list",list);
+		return "/wonbin/ep_order_manage/ep_manage_add_form";
+		
+	}
 	//업체관리 입력폼 요청
 	@RequestMapping(value="/ep_manage_add_form", method = RequestMethod.GET)
-	public String ep_madd(){
+	public String ep_madd(Model model
+			,@RequestParam(value="food_id") List<String> food_id){
 		System.out.println("01_Ep_Manage_Controller.java ->>ep_madd 폼 요청");
-		return "/wonbin/ep_order_manage/ep_manage_add_form";
+		
+		return null/*"/wonbin/ep_order_manage/ep_manage_add_form"*/;
 	}
 	//업체관리 입력액션 요청
 	@RequestMapping(value="/ep_manage_add_form", method = RequestMethod.POST)

@@ -64,5 +64,14 @@
 	<select id="ep_mSRlist" parameterType="java.util.Map" resultType="int">
 		select count(*) from ep_order_manage where ${selbox} like concat('%',#{keyWord},'%')
 	</select>
+	<!-- 업체 등록 폼 요청 -->
+	<select id="ep_chkadd" parameterType="java.util.Map" resultType="kr.or.possys.food_service.Food">
+		select *
+		from food_manage where 
+		food_id =
+		<foreach collection="map" item="type">
+            #{type.food_id}
+        </foreach>	
+	</select>
 	
 </mapper>
