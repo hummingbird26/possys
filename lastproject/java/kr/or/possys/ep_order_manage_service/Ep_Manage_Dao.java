@@ -41,13 +41,16 @@ public class Ep_Manage_Dao {
 		return sqlSessionTemplate.selectOne("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.ep_mview",ep_id);
 	}
 	//###업체 입력폼 요청
-	public List<Food> ep_mchck(List<String> food_id){
-		System.out.println("Ep_Manage_Dao.java ->> ep_mchck 실행");
-		System.out.println(food_id+"<--- dao");
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("map", food_id);
-		System.out.println(map.get("map")+"<---map");
-		return sqlSessionTemplate.selectList("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.ep_chkadd",map);
+
+	public Food ep_mchck(String food_id){
+		System.out.println(food_id+"<==== dao list");
+		
+		
+			
+		return  sqlSessionTemplate.selectOne("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.ep_chkadd",food_id);
+			 
+		
+		
 	}
 	//업체 수정액션 요청
 	public int ep_mmodify(Ep_Manage ep_m){
