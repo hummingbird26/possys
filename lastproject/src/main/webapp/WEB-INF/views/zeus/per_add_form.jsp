@@ -29,32 +29,28 @@
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <div class="container">
     <h1></h1>
-    <form id="addform" action="${pageContext.request.contextPath}/menu_add_form" method="post">
+    <form id="addform" action="${pageContext.request.contextPath}/per_add_form" method="post">
         <div class="form-group">
-            <label for="menuPw"> 메뉴명:</label>
+            <label for="menuPw"> 메뉴코드:</label>
+            <input class="form-control" name="menu_id" id="menu_id" type="text"/>
+        </div>
+        <div class="form-group">
+            <label for="menuPw">식재코드 :</label>
+            <input class="form-control" name="food_id" id="food_id" type="text"/>
+        </div>
+        <div class="form-group">
+            <label for="menuName">메뉴명:</label>
             <input class="form-control" name="menu_name" id="menu_name" type="text"/>
         </div>
         <div class="form-group">
-            <label for="menuPw">상품카테고리:</label>
-            <input class="form-control" name="menu_cate" id="menu_cate" type="text"/>
-        </div>
-        <div class="form-group">
-            <label for="menuName">가격:</label>
-            <input class="form-control" name="menu_price" id="menu_price" type="text"/>
-        </div>
-        <div class="form-group">
             <label for="menuName">수량:</label>
-            <input class="form-control" name="menu_sale" id="menu_sale" type="text"/>
+            <input class="form-control" name="fpm_ea" id="fpm_ea" type="text"/>
         </div>
         <div class="form-group">
             <label for="menuName">단위 :</label>
-            <input class="form-control" name="menu_kcal" id="menu_kcal" type="text"/>
+            <input class="form-control" name="fpm_unit" id="fpm_unit" type="text"/>
         </div>
-        <div class="form-group">
-            <label for="menuName">설명:</label>
-            <input class="form-control" name="menu_picture" id="menu_picture" type="text"/>
-        </div>
-        <div>
+         <div>
 			<input type="submit" id="addmenu" value="등록">
 			<input type="reset" id="reset" value="초기화">
 			<a href="${pageContext.request.contextPath}/menu_list">취소</a>

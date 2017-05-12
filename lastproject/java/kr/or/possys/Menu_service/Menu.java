@@ -10,7 +10,14 @@ public class Menu {
 	private int menu_kcal;
 	private String menu_picture;
 	private String menu_explanation;
+	private String food_id;
 	
+	public String getFood_id() {
+		return food_id;
+	}
+	public void setFood_id(String food_id) {
+		this.food_id = food_id;
+	}
 	public String getMenu_id() {
 		return menu_id;
 	}
