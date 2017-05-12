@@ -8,21 +8,11 @@ public class Order {
 	private String table_order_date;
 	private String menu_id;
 	private String menu_name;
+	
 	private String order_detail_ea;
 	private String order_detail_sum;
+
 	
-	public String getMenu_id() {
-		return menu_id;
-	}
-	public void setMenu_id(String menu_id) {
-		this.menu_id = menu_id;
-	}
-	public String getMenu_name() {
-		return menu_name;
-	}
-	public void setMenu_name(String menu_name) {
-		this.menu_name = menu_name;
-	}
 	public String getOrder_detail_ea() {
 		return order_detail_ea;
 	}
@@ -35,6 +25,19 @@ public class Order {
 	public void setOrder_detail_sum(String order_detail_sum) {
 		this.order_detail_sum = order_detail_sum;
 	}
+	public String getMenu_id() {
+		return menu_id;
+	}
+	public void setMenu_id(String menu_id) {
+		this.menu_id = menu_id;
+	}
+	public String getMenu_name() {
+		return menu_name;
+	}
+	public void setMenu_name(String menu_name) {
+		this.menu_name = menu_name;
+	}
+
 	public String getTable_order_id() {
 		return table_order_id;
 	}

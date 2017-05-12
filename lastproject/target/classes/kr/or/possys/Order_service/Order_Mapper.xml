@@ -25,5 +25,27 @@
 		order_detail_ea,
 		order_detail_sum 
 		from order_detail where table_order_id= #{table_order_id}
-	</select>
+		</select>
+		
+	<update id="order_end_t" parameterType="String">
+		update table_order
+		set table_order_end = 't'
+		where table_order_id = #{table_order_id}
+	</update>
+	
+	<update id="order_modify_action" parameterType="kr.or.possys.Order_service.Order">
+		update order_detail
+		set 
+		where table_order_id = #{table_order_id}
+	</update>
+	
+		<update id="order_detail_modify" parameterType="kr.or.possys.Order_service.Order">
+		update order_detail
+		set
+		menu_name = #{menu_name},
+		order_detail_ea = #{order_detail_ea},
+		order_detail_sum = #{order_detail_sum}
+		where table_order_id = #{table_order_id} and
+		menu_id = #{menu_id}
+	</update>
 </mapper>
