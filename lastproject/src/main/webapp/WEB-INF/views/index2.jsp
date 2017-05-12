@@ -64,14 +64,17 @@
 
 <!-- Analytics -->
 <script type="text/javascript">
+
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'Insert Your Code']);
   _gaq.push(['_trackPageview']);
+
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
+
 </script>
 <!-- End Analytics -->
 
@@ -290,6 +293,7 @@
     </div>
 </div>
 <!-- End Our Work Section -->
+
 <!-- About Section -->
 <div id="about" class="page-alternate">
 <div class="container">
@@ -381,6 +385,10 @@
 </div>
 </div>
 <!-- End About Section -->
+
+
+
+
 <!-- Twitter Feed -->
 <div id="twitter-feed" class="page-alternate">
 	<div class="container">
@@ -397,6 +405,7 @@
     </div>
 </div>
 <!-- End Twitter Feed -->
+
 <!-- Socialize -->
 <div id="social-area" class="page">
 	<div class="container">
@@ -420,16 +429,20 @@
     </div>
 </div>
 <!-- End Socialize -->
+
 <!-- Footer -->
 <footer>
 	<p class="credits">&copy;2016 Brushed. Crafted by <a href="http://designscrazed.org/" title="Brushed | Responsive One Page Template">Allie</a></p>
 </footer>
 <!-- End Footer -->
+
 <!-- Back To Top -->
 <a id="back-to-top" href="#">
 	<i class="font-icon-arrow-simple-up"></i>
 </a>
 <!-- End Back to Top -->
+
+
 <!-- Js -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> <!-- jQuery Core -->
@@ -444,5 +457,5 @@
 <script src="${pageContext.request.contextPath}/resources/_include/js/plugins.js"></script> <!-- Contains: jPreloader, jQuery Easing, jQuery ScrollTo, jQuery One Page Navi -->
 <script src="${pageContext.request.contextPath}/resources/_include/js/main.js"></script> <!-- Default JS -->
 <!-- End Js -->
+
 </body>
-</html>

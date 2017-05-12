@@ -18,23 +18,30 @@ public class Payment_Cancel_Dao {
 	
 	// update, delete는 필요시에 구현한다.
 	
-	public Payment getPayment(String payment_id) {
-        return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.getPayment", payment_id);
+	public Payment_Cancel getPaymentCancel(String payment_cancel_id) {
+        return sqlSessionTemplate.selectOne("kr.or.possys.Cancel_Payment_service.Payment_Cancel_Mapper.getPaymentCancel", payment_cancel_id);
         
     }
  
     public List<Payment_Cancel> getPaymentCancelList(int currentPage, int pagePerRow) {
-        Map<String, Integer> map = new HashMap<String, Integer>();
+        System.out.println("getPaymentCancelList");
+    	Map<String, Integer> map = new HashMap<String, Integer>();
+    	System.out.println(map);
         map.put("beginRow", (currentPage-1)*pagePerRow);
         map.put("pagePerRow", pagePerRow);
-        return sqlSessionTemplate.selectList("kr.or.possys.Payment_Cancel_service.Payment_Cancel_Mapper.getPaymentCancelList", map);
+        System.out.println(map.get("beginRow"));
+        System.out.println(map.get("pagePerRow"));
+        
+        return sqlSessionTemplate.selectList("kr.or.possys.Cancel_Payment_service.Payment_Cancel_Mapper.getPaymentCancelList", map);
     }
     
     public int getPaymentCancelCount() {
-        return sqlSessionTemplate.selectOne("kr.or.possys.Payment_Cancel_service.Payment_Cancel_Mapper.getPaymentCancelCount");
+    	System.out.println("getPaymentCancelCount");
+        return sqlSessionTemplate.selectOne("kr.or.possys.Cancel_Payment_service.Payment_Cancel_Mapper.getPaymentCancelCount");
     }
  
-    public int insertCancelPayment(Payment_Cancel Payment_Cancel) {
-        return sqlSessionTemplate.insert("kr.or.possys.Payment_Cancel_service.Payment_Cancel_Mapper.insertCancelPayment", Payment_Cancel);
+    public int insertPaymentCancel(Payment_Cancel payment_cancel) {
+    	System.out.println("insertPaymentCancel");
+        return sqlSessionTemplate.insert("kr.or.possys.Cancel_Payment_service.Payment_Cancel_Mapper.insertPaymentCancel", payment_cancel);
     }
 }

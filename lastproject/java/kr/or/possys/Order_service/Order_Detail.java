@@ -1,6 +1,6 @@
 package kr.or.possys.Order_service;
 
-public class Order_Detale {
+public class Order_Detail {
 	private String table_order_id;
 	private String menu_id;
 	private String menu_name;

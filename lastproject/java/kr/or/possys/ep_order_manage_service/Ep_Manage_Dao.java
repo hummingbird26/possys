@@ -1,5 +1,6 @@
 package kr.or.possys.ep_order_manage_service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,8 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import kr.or.possys.food_service.Food;
 
 @Repository
 public class Ep_Manage_Dao {
@@ -36,6 +39,14 @@ public class Ep_Manage_Dao {
 	public Ep_Manage ep_mview(String ep_id){
 		System.out.println("04_Ep_Manage_Dao.java->>ep_mview 실행");
 		return sqlSessionTemplate.selectOne("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.ep_mview",ep_id);
+	}
+	//###업체 입력폼 요청
+
+	public Food ep_mchck(Food food_id){
+		System.out.println(food_id+"<==== dao list");
+		return  sqlSessionTemplate.selectOne("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.ep_chkadd",food_id);
+		
+		
 	}
 	//업체 수정액션 요청
 	public int ep_mmodify(Ep_Manage ep_m){

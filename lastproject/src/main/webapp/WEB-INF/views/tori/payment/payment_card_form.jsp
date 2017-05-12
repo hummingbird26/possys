@@ -56,12 +56,12 @@
 <body>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 	<div class="container">
-		<form action="${pageContext.request.contextPath}/tori/payment/payment_cancel_action" method="post" class="form-inline">
+		<form action="${pageContext.request.contextPath}/tori/payment/payment_card_action" method="post" class="form-inline">
 			<table class="table table-hover table-stripped">
 				<tr>
-					<td>결제취소코드 :
+					<td>승인번호 :
 					</td>
-					<td><input type="text" class="form-control" name="payment_cancel_id" id="payment_cancel_id" size="auto">
+					<td><input type="text" class="form-control" name="card_id" id="card_id" size="auto">
 					</td>
 				</tr>
 				<tr>
@@ -71,57 +71,51 @@
 					</td>
 				</tr>
 				<tr>
-					<td>테이블사용코드 : 
+					<td>승인구분 : 
 					</td>
-					<td><input type="text" class="form-control" name="table_order_id" id="table_order_id" size="auto">
-					</td>
-				</tr>
-				<tr>
-					<td>전화번호 : 
-					</td>
-					<td><input type="text" class="form-control" name="member_phone" id="member_phone" size="auto">
+					<td><input type="text" class="form-control" name="card_app" id="card_app" size="auto">
 					</td>
 				</tr>
 				<tr>
-					<td>총액 : 
+					<td>상세내역 : 
 					</td>
-					<td><input type="text" class="form-control" name="payment_cancel_total" id="payment_cancel_total" size="auto">
-					</td>
-				</tr>
-				<tr>
-					<td>결제금액 :
-					</td>
-					<td><input type="text" class="form-control" name="payment_cancel_pay" id="payment_cancel_pay" size="auto">
+					<td><input type="text" class="form-control" name="card_detail" id="card_detail" size="auto">
 					</td>
 				</tr>
 				<tr>
-					<td>회수마일리지 : 
+					<td>승인날짜 : 
 					</td>
-					<td><input type="text" class="form-control" name="payment_cancel_backmileage" id="payment_cancel_backmileage" size="auto">
-					</td>
-				</tr>
-				<tr>
-					<td>환불마일리지 : 
-					</td>
-					<td><input type="text" class="form-control" name="payment_cancel_returnmileage" id="payment_cancel_returnmileage" size="auto">
+					<td><input type="text" class="form-control" name="card_date" id="card_date" size="auto">
 					</td>
 				</tr>
 				<tr>
-					<td>날짜 : 
+					<td>카드사 : 
 					</td>
-					<td><input type="date" class="form-control" name="payment_cancel_date" id="payment_cancel_date" size="auto">
+					<td><input type="text" class="form-control" name="card_company" id="card_company" size="auto">
 					</td>
 				</tr>
 				<tr>
-					<td>구분 : 
+					<td>카드결제금액 :
 					</td>
-					<td><input type="text" class="form-control" name="payment_cancel_cate" id="payment_cancel_cate" size="auto">
+					<td><input type="text" class="form-control" name="card_total" id="card_total" size="auto">
+					</td>
+				</tr>
+				<tr>
+					<td>공급가액: 
+					</td>
+					<td><input type="text" class="form-control" name="card_price" id="card_price" size="auto">
+					</td>
+				</tr>
+				<tr>
+					<td>부가세 : 
+					</td>
+					<td><input type="text" class="form-control" name="card_tax" id="card_tax" size="auto">
 					</td>
 				</tr>
 				</table>
-		<input type="submit" id="paymentCancelAdd" name="paymentCancelAdd" value="제출">
+		<input type="submit" id="paymentCardAdd" name="paymentCardAdd" value="제출">
 		<input type="reset" id="paymentCancel" name="paymentCancel" value="되돌림">
-		<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_list">글목록</a>
+		<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_card_list">글목록</a>
 		</form>
 	
 	

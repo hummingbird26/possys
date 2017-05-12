@@ -13,11 +13,15 @@
 		<tbody>
 			<c:forEach var="f" items="${list}">
 			<tr>
-				<td>${f.table_order_id}</td>
+				<td><a href="${pageContext.request.contextPath}/order_detail?table_order_id=${f.table_order_id}">${f.table_order_id}</a></td>
 				<td>${f.table_order_num}</td>
 				<td>${f.table_order_end}</td>
 				<td>${f.table_order_date}</td>
+				
+				
 				<td><a href="${pageContext.request.contextPath}/order_modify_form?table_order_id=${f.table_order_id}">주문수정</a></td>
+				<td><a href="${pageContext.request.contextPath}/order_end_t?table_order_id=${f.table_order_id}">종결처리</a></td>
+				
 			</tr>
 			</c:forEach>
 		</tbody>

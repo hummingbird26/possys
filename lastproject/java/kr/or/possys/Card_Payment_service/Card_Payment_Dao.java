@@ -9,8 +9,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kr.or.possys.Payment_service.Payment;
-
 @Repository
 public class Card_Payment_Dao {
 
@@ -28,23 +26,24 @@ public class Card_Payment_Dao {
 	        return sqlSessionTemplate.delete("kr.or.possys.Payment_service.Payment_Mapper.deletePayment", Payment);
 	    }*/
 	    
-	    public Payment getPayment(String card_id) {
-	        return sqlSessionTemplate.selectOne("kr.or.possys.Card_Payment_service.Card_Payment_Mapper.getPayment", card_id);
+	    public Card_Payment getCardPayment(String card_id) {
+	    	System.out.println("getCardPayment");
+	        return sqlSessionTemplate.selectOne("kr.or.possys.Card_Payment_service.Card_Payment_Mapper.getCardPayment", card_id);
 	        
 	    }
 	 
-	    public List<Payment> getPaymentList(int currentPage, int pagePerRow) {
+	    public List<Card_Payment> getCardPaymentList(int currentPage, int pagePerRow) {
 	        Map<String, Integer> map = new HashMap<String, Integer>();
 	        map.put("beginRow", (currentPage-1)*pagePerRow);
 	        map.put("pagePerRow", pagePerRow);
-	        return sqlSessionTemplate.selectList("kr.or.possys.Payment_service.Payment_Mapper.getPaymentList", map);
+	        return sqlSessionTemplate.selectList("kr.or.possys.Card_Payment_service.Card_Payment_Mapper.getCardPaymentList", map);
 	    }
 	    
-	    public int getPaymentCount() {
-	        return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.getPaymentCount");
+	    public int getCardPaymentCount() {
+	        return sqlSessionTemplate.selectOne("kr.or.possys.Card_Payment_service.Card_Payment_Mapper.getCardPaymentCount");
 	    }
 	 
-	    public int insertPayment(Payment Payment) {
-	        return sqlSessionTemplate.insert("kr.or.possys.Payment_service.Payment_Mapper.insertPayment", Payment);
+	    public int insertCardPayment(Card_Payment card_payment) {
+	        return sqlSessionTemplate.insert("kr.or.possys.Card_Payment_service.Card_Payment_Mapper.insertCardPayment", card_payment);
 	    }
 }

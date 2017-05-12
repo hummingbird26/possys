@@ -106,7 +106,11 @@ $(document).ready(function(){
 	<input class="btn btn-default" type="reset" id="paymentCancel" name="paymentCancel" value="되돌림">
 	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_list">글목록</a>
 	</form>
-	
+	<br><br>
+	<div>
+	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_form">결제취소직권입력</a>
+	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_card_form">카드결제직권입력</a>
+	</div>
 </div>
 </body>
 </html>
