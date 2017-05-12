@@ -4,8 +4,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>주문수정</title>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('button').click(function(){
+			var cls = "."+this.id;
+			alert(cls);
+			$(cls).remove();
+
+			
+			/* $(cls).remove(); */
+		});
+		
+		
+	});
+</script>
 </head>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <body>
@@ -20,9 +35,9 @@
 		<div>테이블 번호 : <input name ="table_order_num" id ="table_order_num" type ="text" value="${order.table_order_num}"/></div>
 		<div>주문종결 : <input name ="table_order_end" id ="table_order_end" type ="text" value="${order.table_order_end}"/></div>
 		<div>주문날짜 : <input name ="table_order_date" id ="table_order_date" type ="text" value="${order.table_order_date}"/></div>
-
-		
-		
+	<c:forEach var="f" items="${list}">
+		<div class = "${f.menu_id}"> 메뉴코드 : <input name ="menu_id" id ="menu_id" class = "${f.menu_id}" type ="text" value="${f.menu_id}"/>메뉴명 : <input name ="menu_name" id ="menu_name" class = "${f.menu_id}" type ="text" value="${f.menu_name}"/>수량 : <input name ="order_detail_ea" id ="order_detail_ea" class = "${f.menu_id}" type ="text" value="${f.order_detail_ea}"/>소계 : <input name ="order_detail_sum" id ="order_detail_sum" class = "${f.menu_id}" type ="text" value="${f.order_detail_sum}"/><button  type="button" id = "${f.menu_id}" class = "plusbutton">+</button></div>
+	</c:forEach>
 
 <br>
 		<div>

@@ -18,60 +18,60 @@
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 	<div class="container">
     <h1>Payment Cancel List</h1>
-    <div>전체행의 수 : ${paymentcancelcount}</div>
+    <div>전체행의 수 : ${paymentcardcount}</div>
     <table class="table table-striped table-hover" border="1">
         <thead>
             <tr>
-                <th>결제취소아이디</th>
-                <th>결제아이디</th>
-                <th>테이블주문아이디</th>
-                <th>결제취소금액</th>
-                <th>결제취소총액</th>
-                <th>결제취소일자</th>
-                <th>결제취소유형</th>
+                <th>승인번호</th>
+                <th>결제번호</th>
+                <th>승인구분</th>
+                <th>결제일자</th>
+                <th>카드사</th>
+                <th>카드결제금액</th>
+                <th>카드공급가액</th>
             </tr>
         </thead>
         <tbody>
-            <c:forEach varStatus="status" var="pc" items="${list}">
+            <c:forEach varStatus="status" var="cp" items="${list}">
                 <tr>
-                    <td><a href="${pageContext.request.contextPath}/tori/payment/payment_cancel_view?payment_cancel_id=${pc.payment_cancel_id}">${pc.payment_cancel_id}</a></td>
-                    <td>${pc.payment_id}</td>
-                    <td>${pc.table_order_id}</td>
-                    <td>${pc.payment_cancel_pay}</td>
-                    <td>${pc.payment_cancel_total}</td>
-                    <td>${pc.payment_cancel_date}</td>
-                    <td>${pc.payment_cancel_cate}</td>
+                    <td><a href="${pageContext.request.contextPath}/tori/payment/payment_card_view?card_id=${cp.card_id}">${cp.card_id}</a></td>
+                    <td>${cp.payment_id}</td>
+                    <td>${cp.card_app}</td>
+                    <td>${cp.card_date}</td>
+                    <td>${cp.card_company}</td>
+                    <td>${cp.card_total}</td>
+                    <td>${cp.card_price}</td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
     <ul class="pager">
         <c:if test="${currentPage > 1}">
-            <li class="previous"><a href="${pageContext.request.contextPath}/tori/payment/payment_cancel_list?currentPage=${currentPage-1}">이전</a></li>
+            <li class="previous"><a href="${pageContext.request.contextPath}/tori/payment/payment_card_list?currentPage=${currentPage-1}">이전</a></li>
         </c:if>
         <c:if test="${selbox != null && keyWord != null}">
         <c:forEach var="i" begin="${expage}" end="${lastPage}" step="1">
         	<c:choose>
-        		<c:when test="${i eq currentPage}"><li><a href="${pageContext.request.contextPath}/tori/payment/payment_cancel_list?currentPage=${i}">[${i}]</a></li></c:when>
-        		<c:otherwise><li><a href="${pageContext.request.contextPath}/tori/payment/payment_cancel_list?currentPage=${i}">[${i}]</a></li>></c:otherwise>
+        		<c:when test="${i eq currentPage}"><li><a href="${pageContext.request.contextPath}/tori/payment/payment_card_list?currentPage=${i}">[${i}]</a></li></c:when>
+        		<c:otherwise><li><a href="${pageContext.request.contextPath}/tori/payment/payment_card_list?currentPage=${i}">[${i}]</a></li>></c:otherwise>
         	</c:choose>
         </c:forEach>
         </c:if>
          <c:if test="${selbox == null && keyWord == null}">
         <c:forEach var="i" begin="${expage}" end="${lastPage}" step="1">
         	<c:choose>
-        		<c:when test="${i eq currentPage}"><li><a href="${pageContext.request.contextPath}/tori/payment/payment_cancel_list?currentPage=${1}">[${i}]</a></li></c:when>
-        		<c:otherwise><li><a href="${pageContext.request.contextPath}/tori/payment/payment_cancel_list?currentPage=${i}">[${i}]</a></li></c:otherwise>
+        		<c:when test="${i eq currentPage}"><li><a href="${pageContext.request.contextPath}/tori/payment/payment_card_list?currentPage=${1}">[${i}]</a></li></c:when>
+        		<c:otherwise><li><a href="${pageContext.request.contextPath}/tori/payment/payment_card_list?currentPage=${i}">[${i}]</a></li></c:otherwise>
         		</c:choose>
         	</c:forEach>
         </c:if>
         <c:if test="${currentPage < lastPage}">
-            <li class="next"><a href="${pageContext.request.contextPath}/tori/payment/payment_cancel_list?currentPage=${currentPage+1}">다음</a></li>
+            <li class="next"><a href="${pageContext.request.contextPath}/tori/payment/payment_card_list?currentPage=${currentPage+1}">다음</a></li>
         </c:if>
     </ul>
     <div>
-        <a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_form">게시글 입력</a>
-        <a href="${pageContext.request.contextPath}/tori/payment/payment_cancel_search_form" class="btn btn-default">조건검색</a>
+        <a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_card_form">게시글 입력</a>
+        <a href="${pageContext.request.contextPath}/tori/payment/payment_card_search_form" class="btn btn-default">조건검색</a>
     </div>
     <br><br>
     <div>
