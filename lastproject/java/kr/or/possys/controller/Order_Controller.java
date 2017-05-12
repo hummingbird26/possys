@@ -89,6 +89,12 @@ public class Order_Controller {
 		System.out.println("주문수정폼 요청");
 		Order order = odao.order_modify_form(table_order_id);
 		List<Order> list = odao.order_detail(table_order_id);
+		for(int i = 0; i< list.size(); i++){
+			String menu_id = list.get(i).getMenu_id();
+			String menu_price =odao.get_price(menu_id);
+			list.get(i).setMenu_price(menu_price);
+			System.out.println(list.get(i).getMenu_price()+"가격");
+		}
 		model.addAttribute("order",order);
 		model.addAttribute("list",list);
 		return "/order/order_modify_form";

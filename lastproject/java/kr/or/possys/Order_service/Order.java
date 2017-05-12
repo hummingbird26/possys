@@ -11,8 +11,15 @@ public class Order {
 	
 	private String order_detail_ea;
 	private String order_detail_sum;
+	private String menu_price;
 
 	
+	public String getMenu_price() {
+		return menu_price;
+	}
+	public void setMenu_price(String menu_price) {
+		this.menu_price = menu_price;
+	}
 	public String getOrder_detail_ea() {
 		return order_detail_ea;
 	}
