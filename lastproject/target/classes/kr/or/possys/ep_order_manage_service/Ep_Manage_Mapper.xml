@@ -68,9 +68,6 @@
 	<select id="ep_chkadd" parameterType="string" resultType="kr.or.possys.food_service.Food">
 		select *
 		from food_manage  where food_id = #{food_id}
-			
-	
-		
 	</select>
 	
 </mapper>

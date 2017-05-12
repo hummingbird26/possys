@@ -33,21 +33,19 @@ public class Ep_Manage_Controller {
 	public String ep_chkbox(Model model
 			,@RequestParam(value="food_id") List<String> food_id){
 		System.out.println(food_id);
-		List<String> d;
-		String[] food_id1;
-		d = food_id;
-		
-//		d.split(",");
-		
+
+		List<Food> list = new ArrayList<Food>();
 		for(String s : food_id){
-			List<Food> list = new ArrayList<Food>(); 
-			System.out.println(s+"<<<<<<controller");
-			Food fo = dao.ep_mchck(s);
-			System.out.println(fo+"<<<<<<<<<<<<<<<<?");
-			/*list.add(s);*/
+			
+			Food food = new Food();
+			food.setFood_id(s);
+			Food fo = dao.ep_mchck(food);
+			System.out.println(food.getFood_id()+"<<<<<<<<<<<<<<??");
+			
 			list.add(fo);
+			model.addAttribute("list",list);
 		}
-	
+		System.out.println(list);
 		
 
 		return "/wonbin/ep_order_manage/ep_manage_add_form";

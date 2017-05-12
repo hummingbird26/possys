@@ -42,13 +42,9 @@ public class Ep_Manage_Dao {
 	}
 	//###업체 입력폼 요청
 
-	public Food ep_mchck(String food_id){
+	public Food ep_mchck(Food food_id){
 		System.out.println(food_id+"<==== dao list");
-		
-		
-			
 		return  sqlSessionTemplate.selectOne("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.ep_chkadd",food_id);
-			 
 		
 		
 	}
