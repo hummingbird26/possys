@@ -9,23 +9,39 @@
 </head>
 <body>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
-<h1>메뉴 - ${menu.menu_id} 수정 화면</h1>
+<h1>메뉴 - ${menu.menu_id} 식재 화면</h1>
 <br>
 
 <form id="addform" action="${pageContext.request.contextPath}/menu_modify" method="post">
 		
 		<div>메뉴코드 : <input name ="menu_id" id ="menu_id" type ="text" value="${menu.menu_id}" readonly="readonly"/></div>
 		<div>메뉴명: <input name ="menu_name" id ="menu_name" type ="text" value="${menu.menu_name}"/></div>
-		<div>상품카테고리: <input name ="menu_cate" id ="menu_cate" type ="text" value="${menu.menu_cate}"/></div>
-		<div>가격: <input name ="menu_price" id ="menu_price" type ="text" value="${menu.menu_price}"/></div>
-		<div>할인여부 : <input name ="menu_sprice" id ="menu_sprice" type ="text" value="${menu.menu_sprice}"/></div>
-		<div>칼로리: <input name ="menu_kcal" id ="menu_kcal" type ="text" value="${menu.menu_kcal}" readonly="readonly"/></div>
-		
-		
-
+<table border=1>
+		<thead>
+			<th>식재코드</th>
+			<th>상품명</th>
+			<th>추가</th>					
+		</thead>
+		<tbody>
+			<c:forEach varStatus="status" var="f" items="${list}">
+			<tr>			
+				<td>${f.food_id}</td>
+				<td>${f.food_name}</td>
+				<td><a href="${pageContext.request.contextPath}/menu_per_view?menu_id=${m.menu_id}">소비</a></td>
+			</tr>
+			</c:forEach>
+		</tbody>
+	</table>		
+		<div class="form-group">
+            <label for="menuPw"> 수량:</label>
+            <input class="form-control" name="menu_name" id="menu_name" type="text"/>
+        </div>
+        <div class="form-group">
+            <label for="menuPw"> 단위:</label>
+            <input class="form-control" name="menu_name" id="menu_name" type="text"/>
+        </div>
 <br>
 		<div>
-			<input type="submit" id="addmenu" value="수정">
 			<input type="reset" id="reset" value="초기화">
 			<a href="${pageContext.request.contextPath}/menu_list">취소</a>
 			<a href="${pageContext.request.contextPath}/menu_delete?menu_id=${menu.menu_id}">삭제</a>

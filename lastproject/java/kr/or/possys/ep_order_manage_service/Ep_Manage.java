@@ -1,5 +1,7 @@
 package kr.or.possys.ep_order_manage_service;
 
+import java.util.List;
+
 public class Ep_Manage {
 	private String ep_id;
 	private String food_id;
@@ -8,6 +10,15 @@ public class Ep_Manage {
 	private String ep_director;
 	private String ep_address;
 	private String ep_text;
+	private List<String> food_list;
+	
+	
+	public List<String> getFood_list() {
+		return food_list;
+	}
+	public void setFood_list(List<String> food_list) {
+		this.food_list = food_list;
+	}
 	public String getEp_id() {
 		return ep_id;
 	}

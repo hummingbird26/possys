@@ -1,7 +1,10 @@
 package kr.or.possys.controller;
 
 import java.lang.annotation.Target;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,13 +33,21 @@ public class Ep_Manage_Controller {
 	public String ep_chkbox(Model model
 			,@RequestParam(value="food_id") List<String> food_id){
 		System.out.println(food_id);
-		List<Food> list = dao.ep_mchck(food_id);
-//		for(String srt : food_id){
-//			/*System.out.println(srt+"for¹®");*/
-//			list = dao.ep_mchck(srt);
-//		}
+
+		List<Food> list = new ArrayList<Food>();
+		for(String s : food_id){
+			
+			Food food = new Food();
+			food.setFood_id(s);
+			Food fo = dao.ep_mchck(food);
+			System.out.println(food.getFood_id()+"<<<<<<<<<<<<<<??");
+			
+			list.add(fo);
+			model.addAttribute("list",list);
+		}
 		System.out.println(list);
-		model.addAttribute("list",list);
+		
+
 		return "/wonbin/ep_order_manage/ep_manage_add_form";
 		
 	}
