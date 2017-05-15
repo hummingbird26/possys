@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
@@ -12,114 +12,112 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<title>Payment_Cancel_ADD</title>
+<title>Card_Payment_ADD</title>
 <script>
-/* $(document).ready(function(){
-	$('#paymentCancelAdd').click(function(){
-		if($('#paymentCancelId').val.length<4){
-			alert('¾ÆÀÌµğ¸¦ 4±ÛÀÚ ÀÌ»ó ÀÔ·ÂÇÏ½Ã¿À.');
-      $('#paymentCancelId').focus();
-		}else if($('#paymentId').val().length<4){
-			alert('°áÁ¦¾ÆÀÌµğ¸¦ 4ÀÚ¸® ÀÌ»ó ÀÔ·ÂÇÏ½Ã¿À.');
-      $('#paymentId').focus();
-		}else if($('#tableOrderId').val()==''){
-			alert('Å×ÀÌºíÁÖ¹®ÄÚµå¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.');
-      $('#tableOrderId').focus();
-		}else if($('#memberPhone').val()==''){
-			alert('ÀüÈ­¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.');
-      $('#memberPhone').focus();
-		}else if($('#paymentCancelTotal').val()==''){
-			alert('ÁÖ¹®Ãë¼Ò±İ¾×À» ÀÔ·ÂÇØÁÖ¼¼¿ä.');
-      $('#paymentCancelTotal').focus();
-		}else if($('#paymentCancelPay').val()==''){
-			alert('°áÁ¦±İ¾×À» ÀÔ·ÂÇØÁÖ¼¼¿ä.');
-      $('#paymentCancelPay').focus();
-		}else if($('#paymentCancelBackMileage').val()==''){
-			alert('È¸¼öÇÑ ¸¶ÀÏ¸®Áö´Â ¾ó¸¶ÀÎÁö ÀÔ·ÂÇØÁÖ¼¼¿ä.');
-      $('#paymentCancelBackMileage').focus();
-		}else if($('#paymentCancelReturnMileage').val()==''){
-			alert('È¯ºÒÇÑ ¸¶ÀÏ¸®Áö´Â ¾ó¸¶ÀÎÁö ÀÔ·ÂÇØÁÖ¼¼¿ä.');
-      $('#paymentCancelReturnMileage').focus();
-		}else if($('#paymentCancelDate').val()!="Çö±İ"|"Ä«µå"){
-			alert('°Å·¡Ãë¼Ò³¯Â¥´Â ¾ğÁ¦ÀÎÁö ÀÔ·ÂÇØÁÖ¼¼¿ä.');
-      $('#paymentCancelDate').focus();
-		}else if($('#paymentCancelCate').val()==''){
-			alert('°Å·¡Ãë¼Ò±¸ºĞÀº ¾î¶°ÇÑÁö ÀÔ·ÂÇØÁÖ¼¼¿ä.');
-      $('#paymentCancelCate').focus();
+$(document).ready(function(){
+	$('#paymentCardAdd').click(function(){
+		if($('#card_id').val().length<4){
+			alert('ì•„ì´ë””ë¥¼ 4ê¸€ì ì´ìƒ ì…ë ¥í•˜ì‹œì˜¤.');
+      $('#card_id').focus();
+		}else if($('#payment_id').val().length<4){
+			alert('ê²°ì œì•„ì´ë””ë¥¼ 4ìë¦¬ ì´ìƒ ì…ë ¥í•˜ì‹œì˜¤.');
+      $('#payment_id').focus();
+		}else if($('#card_app').val()==''){
+			alert('ì‹ ìš©êµ¬ë¸ë¥¼ ì…ë ¥í•´ì£¼ì‹­ì‹œì˜¤.');
+      $('#card_app').focus();
+		}else if($('#card_detail').val()==''){
+			alert('ì¹´ë“œì‚¬ìƒì„¸ì •ë³´ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.');
+      $('#card_detail').focus();
+		}else if($('#card_date').val()==''){
+			alert('ì¹´ë“œê²°ì œê¸°ì¼ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.');
+      $('#card_date').focus();
+		}else if($('#card_company').val()==''){
+			alert('ì‹ ìš©ì¹´ë“œì‚¬ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.');
+      $('#card_company').focus();
+		}else if($('#card_company').val()==''){
+			alert('ì‹ ìš©ì¹´ë“œì‚¬ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.');
+      $('#card_company').focus();
+		}else if($('#card_total').val()==''){
+			alert('ì¹´ë“œì´ê²°ì œê¸ˆì•¡ì€ ì–¼ë§ˆì¸ì§€ ì…ë ¥í•´ì£¼ì„¸ìš”!');
+      $('#card_total').focus();
+		}else if($('#card_price').val()==''){
+			alert('ê³µê¸‰ê°€ì•¡ì€ ì–¼ë§ˆì¸ì§€ ì…ë ¥í•´ì£¼ì„¸ìš”.');
+      $('#card_price').focus();
+		}else if($('#card_tax').val()==''){
+			alert('ì¹´ë“œ ë¶€ê°€ì„¸ëŠ” ì–¼ë§ˆì¸ê°€ìš”?');
+      $('#card_tax').focus();
 		}else {
-			$('#paymentCancelAdd').submit();
+			$('#paymentCardForm').submit();
 		}
 	});
-}); */
+});
 </script>
 </head>
 <body>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 	<div class="container">
-		<form action="${pageContext.request.contextPath}/tori/payment/payment_card_action" method="post" class="form-inline">
+		<form id="paymentCardForm" action="${pageContext.request.contextPath}/tori/payment/payment_card_action" method="post" class="form-inline">
 			<table class="table table-hover table-stripped">
 				<tr>
-					<td>½ÂÀÎ¹øÈ£ :
+					<td>ìŠ¹ì¸ë²ˆí˜¸ :
 					</td>
 					<td><input type="text" class="form-control" name="card_id" id="card_id" size="auto">
 					</td>
 				</tr>
 				<tr>
-					<td>°áÁ¦¹øÈ£ : 
+					<td>ê²°ì œë²ˆí˜¸ : 
 					</td>
 					<td><input type="text" class="form-control" name="payment_id" id="payment_id" size="auto">
 					</td>
 				</tr>
 				<tr>
-					<td>½ÂÀÎ±¸ºĞ : 
+					<td>ìŠ¹ì¸êµ¬ë¶„ : 
 					</td>
 					<td><input type="text" class="form-control" name="card_app" id="card_app" size="auto">
 					</td>
 				</tr>
 				<tr>
-					<td>»ó¼¼³»¿ª : 
+					<td>ìƒì„¸ë‚´ì—­ : 
 					</td>
 					<td><input type="text" class="form-control" name="card_detail" id="card_detail" size="auto">
 					</td>
 				</tr>
 				<tr>
-					<td>½ÂÀÎ³¯Â¥ : 
+					<td>ìŠ¹ì¸ë‚ ì§œ : 
 					</td>
-					<td><input type="text" class="form-control" name="card_date" id="card_date" size="auto">
+					<td><input type="date" class="form-control" name="card_date" id="card_date" size="auto">
 					</td>
 				</tr>
 				<tr>
-					<td>Ä«µå»ç : 
+					<td>ì¹´ë“œì‚¬ : 
 					</td>
 					<td><input type="text" class="form-control" name="card_company" id="card_company" size="auto">
 					</td>
 				</tr>
 				<tr>
-					<td>Ä«µå°áÁ¦±İ¾× :
+					<td>ì¹´ë“œê²°ì œê¸ˆì•¡ :
 					</td>
 					<td><input type="text" class="form-control" name="card_total" id="card_total" size="auto">
 					</td>
 				</tr>
 				<tr>
-					<td>°ø±Ş°¡¾×: 
+					<td>ê³µê¸‰ê°€ì•¡: 
 					</td>
 					<td><input type="text" class="form-control" name="card_price" id="card_price" size="auto">
 					</td>
 				</tr>
 				<tr>
-					<td>ºÎ°¡¼¼ : 
+					<td>ë¶€ê°€ì„¸ : 
 					</td>
 					<td><input type="text" class="form-control" name="card_tax" id="card_tax" size="auto">
 					</td>
 				</tr>
 				</table>
-		<input type="submit" id="paymentCardAdd" name="paymentCardAdd" value="Á¦Ãâ">
-		<input type="reset" id="paymentCancel" name="paymentCancel" value="µÇµ¹¸²">
-		<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_card_list">±Û¸ñ·Ï</a>
+		<input type="submit" class="btn btn-default" id="paymentCardAdd" name="paymentCardAdd" value="ì œì¶œ">
+		<input type="reset" class="btn btn-default" id="paymentCancel" name="paymentCancel" value="ë˜ëŒë¦¼">
+		<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_card_list">ê¸€ëª©ë¡</a>
 		</form>
-	
-	
-	
+
 	</div>
 </body>
 </html>

@@ -11,7 +11,7 @@ WHERE payment_id = #{payment_id}</update>
 <delete parameterType="kr.or.possys.Payment_service.Payment" id="deletePayment"> 
 DELETE FROM payment WHERE payment_id = #{payment_id} </delete>
 
-<select id="paymentSRlist" parameterType="java.util.Map" resultType="kr.or.possys.Payment_service.Payment">
+<select id="paymentSRsearch" parameterType="java.util.Map" resultType="kr.or.possys.Payment_service.Payment">
 SELECT
 payment_id,
 table_order_id,
@@ -27,13 +27,15 @@ LIMIT #{beginRow}, #{pagePerRow}
 </select>
 
 <!-- 결제목록 검색 수 -->
-<select id="paymentSRsearch" parameterType="java.util.Map" resultType="kr.or.possys.Payment_service.Payment">
+<select id="paymentSRlist" parameterType="java.util.Map" resultType="int">
 	SELECT COUNT(*) FROM payment WHERE ${select} LIKE CONCAT('%',#{keyWord},'%')
 </select>
 
+<!-- 뷰파일로 DB에서 결제테이블 전체의 내용 가져오기 -->
 <select parameterType="String" id="getPayment" resultType="kr.or.possys.Payment_service.Payment"> 
 SELECT * FROM payment WHERE payment_id = #{payment_id}</select>
 
+<!-- 결제내역 리스트 화면에 표시할 내용 DB에서 가져오기 -->
 <select parameterType="java.util.Map" id="getPaymentList" resultType="kr.or.possys.Payment_service.Payment"> 
 SELECT 
 payment_id,
