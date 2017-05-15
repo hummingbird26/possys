@@ -52,13 +52,6 @@ public class Menu_Controller {
 		model.addAttribute("menu",menu);
 		return "/zeus/menu_modify_view";
 	}
-	@RequestMapping(value="/menu_per_view", method = RequestMethod.GET)
-	public String menuperview(Model model, @RequestParam(value="menu_id",required=true) String menu_id){
-			System.out.println("MenuController.java ->>menuview 요청");
-			Menu menu = dao.menuview(menu_id);
-			model.addAttribute("menu",menu);
-			return "/zeus/menu_per_view";
-	}
 	
 	//메뉴 수정액션 요청
 	@RequestMapping(value="/menu_modify", method = RequestMethod.POST)

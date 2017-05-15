@@ -1,13 +1,17 @@
-<!-- <!DOCTYPE mapper
+ <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
 <mapper namespace="kr.or.possys.Menu_service.Per_Mapper">
-	
-	식자제 품목 카운트
+	<select id="menuview" parameterType="string" resultType="kr.or.possys.Menu_service.Per">
+		select *	
+		from menu where menu_id=#{menu_id}	
+	</select>
+<!-- 	식자제 품목 카운트 -->
 	<select id="getmenucount" resultType="int">
 		SELECT COUNT(*) FROM food_manage
 	</select>
-	식자제 품목 목록
+<!-- 	식자제 품목 목록 -->
 	<select id="perlist" parameterType="java.util.Map" resultType="kr.or.possys.Menu_service.Per">
 		select food_id
 			,food_name
@@ -20,5 +24,22 @@
 		order by food_date desc
 		limit #{beginRow}, #{pageRow}
 	</select>
+<!-- 	식자재 검색 -->
+	<select id="foodsearch" parameterType="java.util.Map"  resultType="kr.or.possys.Menu_service.Per">
+		select food_id
+		,food_name
+		,food_size
+		,food_unit
+		,food_shelflife
+		,staff_id
+		,food_date
+		from food_manage
+		where ${selbox} like concat('%',#{keyWord},'%')
+		order by food_name desc
+		limit #{beginRow}, #{pageRow}
+	</select>
+<!-- 	식자재 검색 수 -->
+	<select id="foodSRlist" parameterType="java.util.Map" resultType="int">
+		select count(*) from food_manage where ${selbox} like concat('%',#{keyWord},'%')
+	</select>
 </mapper>
- -->

@@ -49,7 +49,7 @@
 				<td>${m.menu_sprice}</td>
 				<td>${m.menu_kcal}</td>
 				<td><a href="${pageContext.request.contextPath}/menu_view?menu_id=${m.menu_id}">수정</a></td>
-				<td><a href="${pageContext.request.contextPath}/menu_per_view?menu_id=${m.menu_id}">소비</a></td>
+				<td><a href="${pageContext.request.contextPath}/menu_per_view?menu_id=${m.menu_id}&menu_name=${m.menu_name}">소비</a></td>
 			</tr>
 			</c:forEach>
 		</tbody>
