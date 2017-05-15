@@ -26,19 +26,19 @@ public class Payment_Dao {
     }*/
 	
     //payment 검색 수 요청
-    public int paymentSRsearch(String select, String keyWord){
-    	System.out.println("paymentSRsearch");
+    public int paymentSRlist(String select, String keyWord){
+    	System.out.println("paymentSRlist");
     	System.out.println(select);
     	System.out.println(keyWord);
     	Map<String, Object> map = new HashMap<String, Object>();
     	map.put("select", select);
     	map.put("keyWord", keyWord);
-    	return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.paymentSRsearch",map);
+    	return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.paymentSRlist",map);
     }
-	
+
     //payment 검색요청
-	public List<Payment> paymentSRlist(String select,String keyWord, int currentPage, int pagePerRow){
-		System.out.println("paymentSRlist");
+	public List<Payment> paymentSRsearch(String select,String keyWord, int currentPage, int pagePerRow){
+		System.out.println("paymentSRsearch");
 		System.out.println(select);
 		System.out.println(keyWord);
 		System.out.println(currentPage);
@@ -56,7 +56,7 @@ public class Payment_Dao {
 		
 		//selectOne이 아닌 selectList 메서드가 실행되어야 일단 화면이라도 잘 넘어가진다.
 		//리턴타입이 리스트인데 정작 리턴을 selectList가 아니라 한 레코드의 값만 받는 selectOne으로 하고 있었으니..
-		return sqlSessionTemplate.selectList("kr.or.possys.Payment_service.Payment_Mapper.paymentSRlist",map);
+		return sqlSessionTemplate.selectList("kr.or.possys.Payment_service.Payment_Mapper.paymentSRsearch",map);
 	}
 	
 	

@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>°áÁ¦ »ó¼¼Á¤º¸</title>
+<title>ê²°ì œ ìƒì„¸ì •ë³´</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <!-- Optional theme -->
@@ -19,52 +19,52 @@
 <br><br>
 <div>
 	<div class="col-sm-6">
-		<img src="" height="auto" width="auto" alt="Ä«µå°áÁ¦Á¤º¸">
+		<img src="" height="auto" width="auto" alt="ì¹´ë“œê²°ì œì •ë³´">
 	
 	</div>
 	<div class="col-sm-6">
 		<table class="table table-hover table-stripped">
-		<caption>Ä«µå°áÁ¦±âº»Á¤º¸</caption>
+		<caption>ì¹´ë“œê²°ì œê¸°ë³¸ì •ë³´</caption>
 			<tr>
-			<td>½ÂÀÎ¹øÈ£
+			<td>ìŠ¹ì¸ë²ˆí˜¸
 			</td>
-			<td>${card_payment.card_id}
+			<td>${card.card_id}
 			</td>
 			</tr>
 			<tr>
-			<td>°áÁ¦¹øÈ£
+			<td>ê²°ì œë²ˆí˜¸
 			</td>
-			<td>${card_payment.payment_id}
-			</td>
-			</tr>
-			<tr>
-			<td>½ÂÀÎ±¸ºĞ
-			</td>
-			<td>${card_payment.card_app}
+			<td>${card.payment_id}
 			</td>
 			</tr>
 			<tr>
-			<td>°áÁ¦ÀÏÀÚ
+			<td>ìŠ¹ì¸êµ¬ë¶„
 			</td>
-			<td>${card_payment.card_date}
-			</td>
-			</tr>
-			<tr>
-			<td>Ä«µå»ç
-			</td>
-			<td>${card_payment.card_company}
+			<td>${card.card_app}
 			</td>
 			</tr>
 			<tr>
-			<td>Ä«µå°áÁ¦±İ¾×
+			<td>ê²°ì œì¼ì
 			</td>
-			<td>${card_payment.card_total}
+			<td>${card.card_date}
 			</td>
 			</tr>
 			<tr>
-			<td>Ä«µå°ø±Ş°¡¾×
+			<td>ì¹´ë“œì‚¬
 			</td>
-			<td>${card_payment.card_price}
+			<td>${card.card_company}
+			</td>
+			</tr>
+			<tr>
+			<td>ì¹´ë“œê²°ì œê¸ˆì•¡
+			</td>
+			<td>${card.card_total}
+			</td>
+			</tr>
+			<tr>
+			<td>ì¹´ë“œê³µê¸‰ê°€ì•¡
+			</td>
+			<td>${card.card_price}
 			</td>
 			</tr>
 		</table>
@@ -74,29 +74,24 @@
 <br><br>
 <div class="container">
 	<table class="table table-stripped table-hover">
-	<caption>Ãß°¡Á¤º¸</caption>
+	<caption>ì¶”ê°€ì •ë³´</caption>
 			<tr>
-			<td>¼¼ºÎ»çÇ×
+			<td>ì„¸ë¶€ì‚¬í•­
 			</td>
-			<td>${card_payment.card_detail}
+			<td>${card.card_detail}
 			</td>
 			</tr>
 			<tr>
-			<td>È¯±Ş¸¶ÀÏ¸®Áö
+			<td>ë¶€ê°€ì„¸
 			</td>
-			<td>${card_payment.card_backmileage}
-			</td>
-			</tr>
-			<tr>
-			<td>È¸¼ö¸¶ÀÏ¸®Áö
-			</td>
-			<td>${card_payment.card_returnmileage}
+			<td>${card.card_tax}
 			</td>
 			</tr>
+			<!-- elì‹ì„ í†µí•´ì„œ dbì˜ ë°ì´í„°ë¥¼ ê°€ì ¸ì˜¬ ë•ŒëŠ” dbë‚´ì˜ í…Œì´ë¸”ëª….ì»¬ëŸ¼ëª…ìœ¼ë¡œ ê°€ì ¸ì˜¨ë‹¤. -->
 	</table>
 	<br><br>
 	
-	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_card_list">¸®½ºÆ®·Î</a>
+	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_card_list">ë¦¬ìŠ¤íŠ¸ë¡œ</a>
 </div>
 
 </div>

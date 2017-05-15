@@ -19,20 +19,24 @@
   SELECT * FROM payment_cancel WHERE payment_cancel_id = #{payment_cancel_id}
   </select>
   
- <!--  <select parameterType="int" id="getPaymentCancel" resultType="kr.or.possys.Cancel_Payment_service.Payment_Cancel">
-  	SELECT payment_cancel_id AS payment_cancel_id 
-  	, payment_id AS payment_id 
-  	, table_order_id AS table_order_id
-  	, member_phone AS member_phone
-  	, payment_cancel_total AS payment_cancel_total
-  	, payment_cancel_pay AS payment_cancel_pay
-  	, payment_cancel_backmileage AS payment_cancel_backmileage
-  	, payment_cancel_returnmileage AS payment_cancel_returnmileage
-  	, payment_cancel_date AS payment_cancel_date
- 	, payment_cancel_cate AS payment_cancel_cate
- 	FROM payment_cancel WHERE payment_cancel_id = #{payment_cancel_id};
+  <select id="paymentCSRlist" parameterType="java.util.Map" resultType="int">
+  	SELECT COUNT(*) FROM payment_cancel WHERE ${select} LIKE CONCAT('%',#{keyWord},'%')
+  </select>
   
-  </select> -->
+ <select id="paymentCSRsearch" parameterType="java.util.Map" resultType="kr.or.possys.Cancel_Payment_service.Payment_Cancel">
+	 SELECT
+	payment_cancel_id,
+	payment_id
+ 	, table_order_id
+ 	, payment_cancel_pay
+ 	, payment_cancel_total
+ 	, payment_cancel_date
+ 	, payment_cancel_cate
+	FROM payment_cancel
+	WHERE ${select} LIKE CONCAT('%',#{keyWord},'%')
+	ORDER BY payment_cancel_id DESC 
+	LIMIT #{beginRow}, #{pagePerRow}
+ </select>
   
   <select parameterType="java.util.Map" id="getPaymentCancelList" resultType="kr.or.possys.Cancel_Payment_service.Payment_Cancel">
  	SELECT payment_cancel_id

@@ -9,8 +9,9 @@ public class Payment_Cancel {
 	private int payment_cancel_pay;
 	private int payment_cancel_backmileage;
 	private int payment_cancel_returnmileage;
-	private int payment_cancel_date;
-	private int payment_cancel_cate;
+	private String payment_cancel_date;
+	private String payment_cancel_cate;
+	
 	public String getPayment_cancel_id() {
 		return payment_cancel_id;
 	}
@@ -59,16 +60,16 @@ public class Payment_Cancel {
 	public void setPayment_cancel_returnmileage(int payment_cancel_returnmileage) {
 		this.payment_cancel_returnmileage = payment_cancel_returnmileage;
 	}
-	public int getPayment_cancel_date() {
+	public String getPayment_cancel_date() {
 		return payment_cancel_date;
 	}
-	public void setPayment_cancel_date(int payment_cancel_date) {
+	public void setPayment_cancel_date(String payment_cancel_date) {
 		this.payment_cancel_date = payment_cancel_date;
 	}
-	public int getPayment_cancel_cate() {
+	public String getPayment_cancel_cate() {
 		return payment_cancel_cate;
 	}
-	public void setPayment_cancel_cate(int payment_cancel_cate) {
+	public void setPayment_cancel_cate(String payment_cancel_cate) {
 		this.payment_cancel_cate = payment_cancel_cate;
 	}
 	@Override

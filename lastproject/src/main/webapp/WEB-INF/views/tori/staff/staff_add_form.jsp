@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,93 +14,90 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Staff_ADD</title>
 
-<!-- <script>
+<script>
 $(document).ready(function(){
-	$('#paymentAdd').click(function(){
-		if($('#paymentId').val().length<4){
-			alert('¾ÆÀÌµğ¸¦ 4±ÛÀÚ ÀÌ»ó ÀÔ·ÂÇÏ½Ã¿À.');
-      		$('#paymentId').focus();
-		}else if($('#table_order_ID').val().length<4){
-			alert('Å×ÀÌºíÁÖ¹®¹øÈ£¸¦ 4ÀÚ¸® ÀÌ»ó ÀÔ·ÂÇÏ½Ã¿À.');
-      		$('#table_order_ID').focus();
-		}else if($('#memberPhone').val()==''){
-			alert('°í°´ÀÇ ÇÚµåÆù¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.');
-      		$('#memberPhone').focus();
-		}else if($('#paymentTotal').val()==''){
-			alert('ÁÖ¹®ÃÑ¾×À» ÀÔ·ÂÇØÁÖ¼¼¿ä.');
-      		$('#paymentTotal').focus();
-		}else if($('#paymentPay').val()==''){
-			alert('ÁÖ¹®±İ¾×À» ÀÔ·ÂÇØÁÖ¼¼¿ä.');
-      		$('#paymentPay').focus();
-		}else if($('#paymentAddmileage').val()==''){
-			alert('Ãß°¡µÈ¸¶ÀÏ¸®Áö¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.');
-      		$('#paymentAddmileage').focus();
-		}else if($('#paymentUsemileage').val()==''){
-			alert('»ç¿ëÇÑ¸¶ÀÏ¸®Áö´Â ¾ó¸¶ÀÎÁö ÀÔ·ÂÇØÁÖ¼¼¿ä.');
-      		$('#paymentUsemileage').focus();
-		}else if($('#paymentDate').val()==''){
-			alert('°Å·¡³¯Â¥´Â ¾ğÁ¦ÀÎÁö ÀÔ·ÂÇØÁÖ¼¼¿ä.');
-      		$('#paymentDate').focus();
-		}else if($('#paymentCate').val()!="Çö±İ"|"Ä«µå"){
-			alert('°Å·¡±¸ºĞÀº ¹«¾ùÀÎÁö ÀÔ·ÂÇØÁÖ¼¼¿ä.');
-      		$('#paymentCate').focus();
-		}else if($('#paymentState').val()==''){
-			alert('°Å·¡»óÅÂ´Â ¾î¶°ÇÑÁö ÀÔ·ÂÇØÁÖ¼¼¿ä.');
-      		$('#paymentState').focus();
+	$('#staffAdd').click(function(){
+		if($('#staff_id').val().length<4){
+			alert('ì§ì›ì•„ì´ë””ë¥¼ 4ê¸€ì ì´ìƒ ì…ë ¥í•˜ì‹œì˜¤.');
+      		$('#staff_id').focus();
+		}else if($('#staff_pw').val().length<4){
+			alert('ì§ì›ë¹„ë²ˆë¥¼ 4ìë¦¬ ì´ìƒ ì…ë ¥í•˜ì‹œì˜¤.');
+      		$('#staff_pw').focus();
+		}else if($('#staff_name').val()==''){
+			alert('ì§ì›ì˜ ì´ë¦„ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.');
+      		$('#staff_name').focus();
+		}else if($('#staff_level').val()==''){
+			alert('ì§ê¸‰ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.');
+      		$('#staff_level').focus();
+		}else if($('#staff_age').val()==''){
+			alert('ë‚˜ì´ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.');
+      		$('#staff_age').focus();
+		}else if($('#staff_addr').val()==''){
+			alert('ì£¼ì†Œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.');
+      		$('#staff_addr').focus();
+		}else if($('#staff_gender').val()==''){
+			alert('ì„±ë³„êµ¬ë¶„ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.');
+      		$('#staff_gender').focus();
+		}else if($('#staff_phone').val()==''){
+			alert('ì§ì›ì˜ í•¸ë“œí°ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.');
+      		$('#staff_phone').focus();
+		}else if($('#staff_date').val()==''){
+			alert('ì§ì›ê°€ì…ì¼ìëŠ” ì–¸ì œì¸ê°€ìš”.');
+      		$('#staff_date').focus();
 		}else {
-			$('#paymentAdd').submit();
+			$('#staffForm').submit();
 		}
 	});
 });
 
-</script> -->
+</script>
 </head>
 <body>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <div class="container">
-<!-- form action¿¡µµ ÀÔ·ÂÆû ¹× ¸®½ºÆ®·Î °¡´Â °ÍÀ» ÀÛ¼ºÇÏÁö ¾Ê°í ´Ù¸¥ °æ·Î¸¦ ÀÛ¼ºÇØº»´Ù. ±×¸®°í  ÄÁÆ®·Ñ·¯, ¸®½ºÆ®, ¸ÅÆÛ, DTO, DAO, ¹× ÀÔ·Â ÆûÀÇ name¼Ó¼ºÀÇ °ªµéÀ» ÀüºÎ  DB³»ÀÇ ÄÃ·³¸íÀ¸·Î ÅëÀÏÇØ¼­ ÀÛ¼ºÇÑ´Ù-->
-	<form class="form-inline" action="${pageContext.request.contextPath}/tori/staff/staff_add_action" method="post">
+<!-- form actionì—ë„ ì…ë ¥í¼ ë° ë¦¬ìŠ¤íŠ¸ë¡œ ê°€ëŠ” ê²ƒì„ ì‘ì„±í•˜ì§€ ì•Šê³  ë‹¤ë¥¸ ê²½ë¡œë¥¼ ì‘ì„±í•´ë³¸ë‹¤. ê·¸ë¦¬ê³   ì»¨íŠ¸ë¡¤ëŸ¬, ë¦¬ìŠ¤íŠ¸, ë§¤í¼, DTO, DAO, ë° ì…ë ¥ í¼ì˜ nameì†ì„±ì˜ ê°’ë“¤ì„ ì „ë¶€  DBë‚´ì˜ ì»¬ëŸ¼ëª…ìœ¼ë¡œ í†µì¼í•´ì„œ ì‘ì„±í•œë‹¤-->
+	<form id="staffForm" class="form-inline" action="${pageContext.request.contextPath}/tori/staff/staff_add_action" method="post">
 	<table class="table table-stripped table-hover">
 		<tr>
-		<td>½ºÅÂÇÁID</td>
+		<td>ìŠ¤íƒœí”„ID</td>
 		<td><input class="form-control" size="auto" id="staff_id" name="staff_id" type="text"></td>
 		</tr>
 		<tr>
-		<td>ºñ¹Ğ¹øÈ£</td>
+		<td>ë¹„ë°€ë²ˆí˜¸</td>
 		<td><input class="form-control" size="auto" id="staff_pw" name="staff_pw" type="password"></td>
 		</tr>
 		<tr>
-		<td>¼º¸í</td>
+		<td>ì„±ëª…</td>
 		<td><input class="form-control" size="auto" id="staff_name" name="staff_name" type="text"></td>
 		</tr>
 		<tr>
-		<td>Á÷±Ş</td>
+		<td>ì§ê¸‰</td>
 		<td><input class="form-control" size="auto" id="staff_level" name="staff_level" type="text"></td>
 		</tr>
 		<tr>
-		<td>³ªÀÌ</td>
+		<td>ë‚˜ì´</td>
 		<td><input class="form-control" size="auto" id="staff_age" name="staff_age" type="text"></td>
 		</tr>
 		<tr>
-		<td>ÁÖ¼Ò</td>
+		<td>ì£¼ì†Œ</td>
 		<td><input class="form-control" size="auto" id="staff_addr" name="staff_addr" type="text"></td>
 		</tr>
 		<tr>
-		<td>¼ºº°</td>
+		<td>ì„±ë³„</td>
 		<td><input class="form-control" size="auto" id="staff_gender" name="staff_gender" type="text"></td>
 		</tr>
 		<tr>
-		<td>ÇÚµåÆù</td>
-		<td><input class="form-control" size="auto" id="staff_phone" name="staff_phone" type="text"></td>
+		<td>í•¸ë“œí°</td>
+		<td><input class="form-control" size="auto" id="staff_phone" name="staff_phone" type="tel"></td>
 		</tr>
 		<tr>
-		<td>°¡ÀÔÀÏÀÚ</td>
+		<td>ê°€ì…ì¼ì</td>
 		<td><input class="form-control" size="auto" id="staff_date" name="staff_date" type="date"></td>
 		</tr>
 	</table>
-	<input class="btn btn-default" type="submit" id="staffAdd" name="staffAdd" value="Á¦Ãâ">
-	<input class="btn btn-default" type="reset" id="staffCancel" name="staffCancel" value="µÇµ¹¸²">
-	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/staff/staff_list">±Û¸ñ·Ï</a>
+	<input class="btn btn-default" type="submit" id="staffAdd" name="staffAdd" value="ì œì¶œ">
+	<input class="btn btn-default" type="reset" id="staffCancel" name="staffCancel" value="ë˜ëŒë¦¼">
+	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/staff/staff_list">ê¸€ëª©ë¡</a>
 	</form>
 	
 </div>
