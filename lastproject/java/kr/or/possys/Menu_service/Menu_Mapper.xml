@@ -46,7 +46,10 @@
 		select *	
 		from menu where menu_id=#{menu_id}	
 	</select>
-	<!-- 식자재 수정 -->
+<!-- 	<select id="menuperview"  resultType="kr.or.possys.Menu_service.Menu"> -->
+<!-- 		select menu.menu_id,menu.menu_name,food_manage.food_id from menu,food_manage;	 -->
+<!-- 	</select> -->
+	<!-- 메뉴 수정 -->
 	<update id="menumodify" parameterType="kr.or.possys.Menu_service.Menu">
 		update menu
 		set menu_name = #{menu_name}
@@ -56,7 +59,29 @@
 		,menu_kcal= #{menu_kcal}
 		where menu_id= #{menu_id}
 	</update>
-	<!-- 식자재 삭제 -->
+	<delete id="menudelete" parameterType="string">
+		delete from menu where menu_id=#{menu_id}
+	</delete>
+	<!-- 메뉴 검색 -->
+	<select id="menusearch" parameterType="java.util.Map"  resultType="kr.or.possys.Menu_service.Menu">
+		select menu_id
+		,menu_name
+		,menu_cate
+		,menu_price
+		,menu_sprice
+		,menu_sale
+		,menu_kcal
+		,menu_picture
+		,menu_explanation
+		from menu
+		where ${selbox} like concat('%',#{keyWord},'%')
+		order by menu_id desc
+		limit #{beginRow}, #{pageRow}
+	</select>
+	<!-- 메뉴 검색 수 -->
+	<select id="menuSRlist" parameterType="java.util.Map" resultType="int">
+		select count(*) from menu where ${selbox} like concat('%',#{keyWord},'%')
+	</select>
 	
 	
 </mapper>

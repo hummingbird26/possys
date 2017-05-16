@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Á¶°Çº°°áÁ¦³»¿ª°Ë»ö</title>
+<title>ì¡°ê±´ë³„ê²°ì œë‚´ì—­ê²€ìƒ‰</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <!-- Optional theme -->
@@ -17,12 +17,12 @@
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <br><br>
 <div class="container">
-	<form id="form" name="form" class="form-inline" action="${pageContext.request.contextPath}/tori/payment/payment_search_action" method="get">
-		<select id="select" name="select" class="form-inline" value="¼±ÅÃÇÏ¼¼¿ä">
-			<option value="payment_date">³¯Â¥º°°Ë»ö</option>
-			<option value="payment_cate">°áÁ¦À¯Çüº°°Ë»ö</option>
-			<option value="payment_id">°áÁ¦¹øÈ£º°°Ë»ö</option>
-			<option value="member_phone">È¸¿ø¹øÈ£º°°Ë»ö</option>
+	<form id="form" name="form" class="form-inline" action="${pageContext.request.contextPath}/tori/payment/payment_search_list" method="get">
+		<select id="select" name="select" class="form-inline" value="ì„ íƒí•˜ì„¸ìš”">
+			<option value="payment_date">ë‚ ì§œë³„ê²€ìƒ‰</option>
+			<option value="payment_cate">ê²°ì œìœ í˜•ë³„ê²€ìƒ‰</option>
+			<option value="payment_id">ê²°ì œë²ˆí˜¸ë³„ê²€ìƒ‰</option>
+			<option value="member_phone">íšŒì›ë²ˆí˜¸ë³„ê²€ìƒ‰</option>
 		</select>
 		<input type="text" class="form-inline" name="keyWord" id="keyWord">
 		<input type="submit" class="form-inline" name="search" id="search">

@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>�޴� ���</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>메뉴 목록</title>
 <script type="text/javascript">
 	$(document).ready(function(){
 			
@@ -26,18 +26,18 @@
 </head>
 <body>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
-<h1>�޴� ���</h1>
-<div>��ü �޴� ��� ${menucount}</div>
+<h1>메뉴 목록</h1>
+<div>전체 메뉴 목록 ${menucount}</div>
 	<table border=1>
 		<thead>
-			<th>�޴��ڵ�</th>
-			<th>�޴���</th>
-			<th>��ǰī�װ���</th>
-			<th>����</th>
-			<th>���ο���</th>
-			<th>Į�θ�</th>
-			<th>���� </th>
-						
+			<th>메뉴코드</th>
+			<th>메뉴명</th>
+			<th>상품카테고리</th>
+			<th>가격</th>
+			<th>할인여부</th>
+			<th>칼로리</th>
+			<th>수정 </th>
+			<th>식재별 소비 </th>			
 		</thead>
 		<tbody>
 			<c:forEach varStatus="status" var="m" items="${list}">
@@ -48,32 +48,33 @@
 				<td>${m.menu_price}</td>
 				<td>${m.menu_sprice}</td>
 				<td>${m.menu_kcal}</td>
-				<td><a href="${pageContext.request.contextPath}/menu_view?menu_id=${m.menu_id}">����</a></td>
+				<td><a href="${pageContext.request.contextPath}/menu_view?menu_id=${m.menu_id}">수정</a></td>
+				<td><a href="${pageContext.request.contextPath}/menu_per_view?menu_id=${m.menu_id}&menu_name=${m.menu_name}">소비</a></td>
 			</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 	<ul>
 		<c:if test="${currentPage > 1}">
-			<li><a href="${pageContext.request.contextPath}/menu_list?currentPage=${currentPage-1}">����</a></li>
+			<li><a href="${pageContext.request.contextPath}/menu_list?currentPage=${currentPage-1}">이전</a></li>
 		</c:if>
 		<c:if test="${currentPage < lastPage}">
-			<li><a href="${pageContext.request.contextPath}/menu_list?currentPage=${currentPage+1}">����</a></li>
+			<li><a href="${pageContext.request.contextPath}/menu_list?currentPage=${currentPage+1}">다음</a></li>
 		</c:if>
 	</ul>
 	<div>
 		<form id ="frm" name="frm" action="${pageContext.request.contextPath}/menu_search" method="get">
 			<select id="selbox"name="selbox" size="1">
-				<option value="menu_id">�޴��ڵ�</option>
-				<option value="menu_name">�޴���</option>
+				<option value="menu_id">메뉴코드</option>
+				<option value="menu_name">메뉴명</option>
 			</select>
 			<input  size="16" name="keyWord" type="text">
-			<input id="fbutton" type="submit" value="�˻�">
+			<input id="fbutton" type="submit" value="검색">
 		</form>
 	</div>
 	
 	<div>
-		<a href="${pageContext.request.contextPath}/menu_add_form"><button>�޴� �߰�</button></a>
+		<a href="${pageContext.request.contextPath}/menu_add_form"><button>메뉴 추가</button></a>
 	</div>
 	
 </body>

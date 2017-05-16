@@ -41,9 +41,11 @@ public class FoodController {
 		System.out.println("FoodController.java ->>foodlist ø‰√ª");
 		int foodcount = dao.getfoodcount();
 		int pageRow = 20;
+		int expage = 1;
 		int lastPage = (int)(Math.ceil((double)foodcount/(double)pageRow));
 		List<Food> list = dao.foodlist(currentPage, pageRow);
 		
+		model.addAttribute("expage",expage);
 		model.addAttribute("pageRow",pageRow);
 		model.addAttribute("foodcount", foodcount);
 		model.addAttribute("currentPage", currentPage);
@@ -81,9 +83,11 @@ public class FoodController {
 			
 		int foodSRcount = dao.foodSRlist(selbox,keyWord);
 		int pageRow = 20;
+		int expage = 1;
 		int lastPage = (int)(Math.ceil((double)foodSRcount/(double)pageRow));
 		List<Food> list = dao.foodsearch(selbox, keyWord, currentPage, pageRow);
-			
+		
+		model.addAttribute("expage",expage);
 		model.addAttribute("pageRow",pageRow);
 		model.addAttribute("foodcount", foodSRcount);
 		model.addAttribute("currentPage", currentPage);

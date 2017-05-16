@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>°áÁ¦¸ñ·Ï</title>
+<title>ê²°ì œëª©ë¡</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <!-- Optional theme -->
@@ -17,21 +17,21 @@
 <body>
 	<div class="container">
     <h1>Payment List</h1>
-    <div>ÀüÃ¼ÇàÀÇ ¼ö : ${paymentSRcount}</div>
+    <div>ì „ì²´í–‰ì˜ ìˆ˜ : ${paymentSRcount}</div>
     <table class="table table-striped table-hover" border="1">
         <thead>
             <tr>
-                <th>°áÁ¦¾ÆÀÌµð</th>
-                <th>Å×ÀÌºíÁÖ¹®¾ÆÀÌµð</th>
-                <th>±Ý¾×ÃÑÇÕ</th>
-                <th>ÁöºÒ±Ý¾×</th>
-                <th>°áÁ¦ÀÏÀÚ</th>
-                <th>°áÁ¦À¯Çü</th>
-                <th>°áÁ¦»óÅÂ</th>
+                <th>ê²°ì œì•„ì´ë””</th>
+                <th>í…Œì´ë¸”ì£¼ë¬¸ì•„ì´ë””</th>
+                <th>ê¸ˆì•¡ì´í•©</th>
+                <th>ì§€ë¶ˆê¸ˆì•¡</th>
+                <th>ê²°ì œì¼ìž</th>
+                <th>ê²°ì œìœ í˜•</th>
+                <th>ê²°ì œìƒíƒœ</th>
             </tr>
         </thead>
         <tbody>
-            <c:forEach varStatus="status" var="p" items="${paymentSRlist}">
+            <c:forEach var="p" items="${paymentSRsearch}">
                 <tr>
                     <td><a href="${pageContext.request.contextPath}/tori/payment/payment_view?payment_id=${p.payment_id}">${p.payment_id}</a></td>
                     <td>${p.table_order_id}</td>
@@ -46,7 +46,7 @@
     </table>
     <ul class="pager">
         <c:if test="${currentPage > 1}">
-            <li class="previous"><a href="${pageContext.request.contextPath}/tori/payment/payment_search_list?currentPage=${currentPage-1}">ÀÌÀü</a></li>
+            <li class="previous"><a href="${pageContext.request.contextPath}/tori/payment/payment_search_list?currentPage=${currentPage-1}">ì´ì „</a></li>
         </c:if>
         <c:if test="${select != null && keyWord != null}">
         <c:forEach var="i" begin="${expage}" end="${lastPage}" step="1">
@@ -65,22 +65,22 @@
         	</c:forEach>
         </c:if>
         <c:if test="${currentPage < lastPage}">
-            <li class="next"><a href="${pageContext.request.contextPath}/tori/payment/payment_search_list?currentPage=${currentPage+1}">´ÙÀ½</a></li>
+            <li class="next"><a href="${pageContext.request.contextPath}/tori/payment/payment_search_list?currentPage=${currentPage+1}">ë‹¤ìŒ</a></li>
         </c:if>
     </ul>
     <div>
-        <a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_add_form">°Ô½Ã±Û ÀÔ·Â</a>
-        <a href="${pageContext.request.contextPath}/tori/payment/payment_search_form" class="btn btn-default">Á¶°Ç°Ë»ö</a>
+        <a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_add_form">ê²Œì‹œê¸€ ìž…ë ¥</a>
+        <a href="${pageContext.request.contextPath}/tori/payment/payment_search_form" class="btn btn-default">ì¡°ê±´ê²€ìƒ‰</a>
     </div>
     <br><br>
     <div>
-    <!-- payment_search_date.jsp¸¦ payment_search_form.jsp·Î ÀÌ¸§À» º¯°æÇÏ¿´´Ù.
-    ¿Ö³ÄÇÏ¸é formÀ¸·Î ³¯Â¥º°°Ë»ö, Ä«µå°áÁ¦°Ë»ö µîÀ» ¼öÇàÇÏ±â À§ÇØ¼­ -->
-	    <!-- <button class="btn btn-default">Ä«µå°áÁ¦³»¿ªÀÌµ¿</button>
-		<button class="btn btn-default">°áÁ¦Ãë¼Ò³»¿ªÈ®ÀÎ</button>
-		<button class="btn btn-default">Á¶°Ç°Ë»ö</button> -->
-		<%-- <a href="${pageContext.request.contextPath}/tori/payment/payment_card_form?payment_cate=${p.payment_cate}" class="btn btn-default">Ä«µå°áÁ¦³»¿ª</a>
-		<a href="${pageContext.request.contextPath}/tori/payment/payment_cancel_form?payment_state=${p.payment_state}" class="btn btn-default">°áÁ¦Ãë¼Ò³»¿ª</a> --%>
+    <!-- payment_search_date.jspë¥¼ payment_search_form.jspë¡œ ì´ë¦„ì„ ë³€ê²½í•˜ì˜€ë‹¤.
+    ì™œëƒí•˜ë©´ formìœ¼ë¡œ ë‚ ì§œë³„ê²€ìƒ‰, ì¹´ë“œê²°ì œê²€ìƒ‰ ë“±ì„ ìˆ˜í–‰í•˜ê¸° ìœ„í•´ì„œ -->
+	    <!-- <button class="btn btn-default">ì¹´ë“œê²°ì œë‚´ì—­ì´ë™</button>
+		<button class="btn btn-default">ê²°ì œì·¨ì†Œë‚´ì—­í™•ì¸</button>
+		<button class="btn btn-default">ì¡°ê±´ê²€ìƒ‰</button> -->
+		<%-- <a href="${pageContext.request.contextPath}/tori/payment/payment_card_form?payment_cate=${p.payment_cate}" class="btn btn-default">ì¹´ë“œê²°ì œë‚´ì—­</a>
+		<a href="${pageContext.request.contextPath}/tori/payment/payment_cancel_form?payment_state=${p.payment_state}" class="btn btn-default">ê²°ì œì·¨ì†Œë‚´ì—­</a> --%>
 		
     </div>
 </div>

@@ -1,5 +1,7 @@
 package kr.or.possys.food_service;
 
+import java.util.List;
+
 public class Food {
 	private String food_id;
 	private String food_name;
@@ -8,8 +10,15 @@ public class Food {
 	private int food_shelflife;
 	private String food_date;
 	private String staff_id;
+	private List<String> food_list;
 			
 	
+	public List<String> getFood_list() {
+		return food_list;
+	}
+	public void setFood_list(List<String> food_list) {
+		this.food_list = food_list;
+	}
 	public String getStaff_id() {
 		return staff_id;
 	}
