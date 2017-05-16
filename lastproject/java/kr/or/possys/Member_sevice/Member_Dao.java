@@ -14,6 +14,20 @@ public class Member_Dao {
 	@Autowired
 	private SqlSessionTemplate Msql;
 	
+	//실시간 회원 조회 메서드
+	public List<Member> AjaxMemberList(int currentPage, int pagePerRow ,String insert){
+		System.out.println("getMemberList 메서드 실행   Member_Dao.java ");
+		Map<String, Object> map = new HashMap<String, Object>();
+        map.put("beginRow", (currentPage-1)*pagePerRow);
+        map.put("pagePerRow", pagePerRow);
+        map.put("insert", insert);
+        
+        System.out.println(map.get("insert")+"입력값 AjaxMemberList Member_Dao");
+		return Msql.selectList("kr.or.possys.Member_sevice.Member_Mapper.AjaxMemberList", map);
+		
+	}
+	
+	
 	//회원 숫자 카운트 메서드
 	public int getMemberCount(){
 		System.out.println("getMemberCount 메서드 실행   Member_Dao.java ");

@@ -133,10 +133,10 @@
                 <li><a href="#about">About Us</a></li>
                 <li><a href="#contact">Contact</a></li>
 				</nav>
-				
+			
             </ul>
         	
-        
+       
     </div>
 </header>
 <!-- End Header -->

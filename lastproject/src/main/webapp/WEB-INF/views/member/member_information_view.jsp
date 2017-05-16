@@ -16,9 +16,13 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <title>회원 개인정보 화면</title>
+<%@ include file="../modal/wide_menu.jsp" %>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
+<br/>
+<br/>
+<br/>
+<br/>
 <div class="container">
     <h1>회원정보 화면</h1>
      <table class="table">

@@ -46,5 +46,15 @@ public class Order_Dao {
 		System.out.println("주문상세실행");
 		return sqlSessionTemplate2.update("kr.or.possys.Order_service.Order_Mapper.order_detail_modify",order);
 	}
+	
+	public int order_detail_delete(String table_ordere_id){
+		System.out.println("주문삭제실행");
+		return sqlSessionTemplate2.delete("kr.or.possys.Order_service.Order_Mapper.order_detail_delete",table_ordere_id);
+	}
+	
+	public int order_detail_insert(Order order){
+		System.out.println("주문상세입력실행");
+		return sqlSessionTemplate2.update("kr.or.possys.Order_service.Order_Mapper.order_detail_insert",order);
+	}
 
 }

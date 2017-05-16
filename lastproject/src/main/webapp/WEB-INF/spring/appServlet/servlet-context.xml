@@ -48,6 +48,9 @@
                 <beans:value>classpath:kr/or/possys/drop_food_service/Drop_Mapper.xml</beans:value>
                 <beans:value>classpath:kr/or/possys/ep_order_manage_service/Ep_Manage_Mapper.xml</beans:value>
                 <!-- 원빈 끝 -->
+
+                <!-- 원빈 끝 -->
+
                 <!-- 주문 -->
                 <beans:value>classpath:kr/or/possys/Order_service/Order_Mapper.xml</beans:value>
 
@@ -71,13 +74,20 @@
                 <beans:value>classpath:kr/or/possys/Menu_service/Per_Mapper.xml</beans:value>
 
                	<!-- <beans:value>classpath:kr/or/possys/Menu_service/Per_Mapper.xml</beans:value> -->
+<<<<<<< HEAD
 		</beans:list>
+=======
+>>>>>>> branch 'master' of https://github.com/hummingbird26/possys.git
 
+<<<<<<< HEAD
                 
                 
                
 
             
+=======
+</beans:list>
+>>>>>>> branch 'master' of https://github.com/hummingbird26/possys.git
 
         </beans:property>
 	    </beans:bean>
