@@ -46,13 +46,13 @@
 			<c:forEach varStatus="status" var="e" items="${list}">
 			<tr>
 				<td>${(ep_mcount-status.index)-((currentPage-1)*pageRow)}</td>
-				<td>${e.ep_id}</td>
-				<td>${e.ep_name}</td>
+				<td id="ep_id">${e.ep_id}</td>
+				<td id="ep_name">${e.ep_name}</td>
 				<td>${e.food_id}</td>
-				<td>${e.ep_phone}</td>
-				<td>${e.ep_director}</td>
-				<td>${e.ep_address}</td>
-				<td>${e.ep_text}</td>
+				<td id="ep_phone">${e.ep_phone}</td>
+				<td id="ep_director">${e.ep_director}</td>
+				<td id="ep_address">${e.ep_address}</td>
+				<td id="ep_text">${e.ep_text}</td>
 				<td><a href="${pageContext.request.contextPath}/ep_manage_modify_view?ep_id=${e.ep_id}">수정</a></td>
 			</tr>
 			</c:forEach>
