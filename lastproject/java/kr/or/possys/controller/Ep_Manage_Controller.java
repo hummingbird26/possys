@@ -40,12 +40,12 @@ public class Ep_Manage_Controller {
 			Food food = new Food();
 			food.setFood_id(s);
 			Food fo = dao.ep_mchck(food);
-			System.out.println(food.getFood_id()+"<<<<<<<<<<<<<<??");
+//			System.out.println(food.getFood_id()+"<<<<<<<<<<<<<<??");
 			
 			list.add(fo);
 			model.addAttribute("list",list);
 		}
-		System.out.println(list);
+//		System.out.println(list);
 		
 
 		return "/wonbin/ep_order_manage/ep_manage_add_form";
@@ -61,8 +61,17 @@ public class Ep_Manage_Controller {
 	}
 	//업체관리 입력액션 요청
 	@RequestMapping(value="/ep_manage_add_form", method = RequestMethod.POST)
-	public String ep_madd(Ep_Manage ep_m){
+	public String ep_madd(Ep_Manage ep_m
+			,@RequestParam(value="food_id") List<String> food_id){
+		
 		System.out.println("02_Ep_Manage_Controller.java ->>ep_madd 액션 요청");
+//		System.out.println(food_id);
+		List<Ep_Manage> list = new ArrayList<Ep_Manage>();
+		for(String s : food_id){
+//			System.out.println(s+"<<<<<<<food_id");
+			Ep_Manage epm = new Ep_Manage();
+			epm.setFood_id(s);
+		}
 		dao.insertep_m(ep_m);
 		return "redirect:/ep_manage_list";
 	}
