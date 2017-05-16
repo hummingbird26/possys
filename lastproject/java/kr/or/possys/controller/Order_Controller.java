@@ -53,6 +53,8 @@ public class Order_Controller {
 		
 		/*List<Order> list = new ArrayList<Order>();*/
 		
+		odao.order_detail_delete(order.getTable_order_id());
+		if(order.getMenu_id() != null){
 		String [] menu_id = order.getMenu_id().split(",");
 		String [] menu_name = order.getMenu_name().split(",");
 		String [] order_detail_ea = order.getOrder_detail_ea().split(",");
@@ -66,19 +68,24 @@ public class Order_Controller {
 			order2.setMenu_name(menu_name[i]);
 			order2.setOrder_detail_ea(order_detail_ea[i]);
 			order2.setOrder_detail_sum(order_detail_sum[i]);
+			odao.order_detail_insert(order2);
+			System.out.println(order2.getMenu_id()+order2.getTable_order_id());
+		}
+		
+		}
+		
+/*		for(int i = 0; i < menu_id.length; i++){
+			Order order2 = new Order();
+			order2.setTable_order_id(order.getTable_order_id());
+			order2.setMenu_id(menu_id[i]);
+			order2.setMenu_name(menu_name[i]);
+			order2.setOrder_detail_ea(order_detail_ea[i]);
+			order2.setOrder_detail_sum(order_detail_sum[i]);
 			odao.order_detail_modify(order2);
 			System.out.println(order2.getMenu_id()+order2.getTable_order_id());
-/*			list.add(order2);*/
-		}
-/*		for(int i = 0; i< list.size(); i ++){
-			Order order3 = list.get(i);
-			odao.order_detail_modify(order3);
+
 		}*/
-		
-		
-		/*System.out.println(list.size()+"Å©±â"+list.get(0).getTable_order_id());*/
-		
-		
+
 		
 		
 		return "redirect:/order_list";
