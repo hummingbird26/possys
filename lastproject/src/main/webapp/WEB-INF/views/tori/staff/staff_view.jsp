@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Á÷¿ø »ó¼¼Á¤º¸</title>
+<title>ì§ì› ìƒì„¸ì •ë³´</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <!-- Optional theme -->
@@ -20,44 +20,44 @@
 <div>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 	<div class="col-sm-6">
-		<img src="" height="auto" width="auto" alt="°áÁ¦È¸»çÁ¤º¸">
+		<img src="" height="auto" width="auto" alt="ê²°ì œíšŒì‚¬ì •ë³´">
 	
 	</div>
 	<div class="col-sm-6">
 		<table class="table table-hover table-stripped">
-		<caption>Á÷¿ø°ü¸®±âº»Á¤º¸</caption>
+		<caption>ì§ì›ê´€ë¦¬ê¸°ë³¸ì •ë³´</caption>
 			<tr>
-			<td>Á÷¿øID
+			<td>ì§ì›ID
 			</td>
 			<td>${staff.staff_id}
 			</td>
 			</tr>
 			<tr>
-			<td>Á÷¿øÀÌ¸§
+			<td>ì§ì›ì´ë¦„
 			</td>
 			<td>${staff.staff_name}
 			</td>
 			</tr>
 			<tr>
-			<td>Á÷±Ş
+			<td>ì§ê¸‰
 			</td>
 			<td>${staff.staff_level}
 			</td>
 			</tr>
 			<tr>
-			<td>¼ºº°
+			<td>ì„±ë³„
 			</td>
 			<td>${staff.staff_gender}
 			</td>
 			</tr>
 			<tr>
-			<td>ÀüÈ­¹øÈ£
+			<td>ì „í™”ë²ˆí˜¸
 			</td>
 			<td>${staff.staff_phone}
 			</td>
 			</tr>
 			<tr>
-			<td>Á÷¿øµî·ÏÀÏÀÚ
+			<td>ì§ì›ë“±ë¡ì¼ì
 			</td>
 			<td>${staff.staff_date}
 			</td>
@@ -69,30 +69,30 @@
 <br><br>
 <div class="container">
 	<table class="table table-stripped table-hover">
-	<caption>Ãß°¡Á¤º¸</caption>
+	<caption>ì¶”ê°€ì •ë³´</caption>
 			<tr>
-			<td>È¸¿øºñ¹Ğ¹øÈ£
+			<td>íšŒì›ë¹„ë°€ë²ˆí˜¸
 			</td>
 			<td>${staff.staff_pw}
 			</td>
 			</tr>
 			<tr>
-			<td>Á÷¿ø¿¬·É
+			<td>ì§ì›ì—°ë ¹
 			</td>
 			<td>${staff.staff_age}
 			</td>
 			</tr>
 			<tr>
-			<td>Á÷¿øÁÖ¼Ò
+			<td>ì§ì›ì£¼ì†Œ
 			</td>
 			<td>${staff.staff_addr}
 			</td>
 			</tr>
 	</table>
 	<br><br>
-	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/staff/staff_update_form?staff_id=${staff.staff_id}">¼öÁ¤</a>
-	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/staff/staff_delete_form?staff_id=${staff.staff_id}">»èÁ¦</a>
-	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/staff/staff_list">¸®½ºÆ®·Î</a>
+	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/staff/staff_update_form?staff_id=${staff.staff_id}">ìˆ˜ì •</a>
+	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/staff/staff_delete_form?staff_id=${staff.staff_id}">ì‚­ì œ</a>
+	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/staff/staff_list">ë¦¬ìŠ¤íŠ¸ë¡œ</a>
 </div>
 
 </div>

@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
@@ -14,114 +14,114 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Payment_Cancel_ADD</title>
 <script>
-/* $(document).ready(function(){
+$(document).ready(function(){
 	$('#paymentCancelAdd').click(function(){
-		if($('#paymentCancelId').val.length<4){
-			alert('���̵� 4���� �̻� �Է��Ͻÿ�.');
-      $('#paymentCancelId').focus();
-		}else if($('#paymentId').val().length<4){
-			alert('�������̵� 4�ڸ� �̻� �Է��Ͻÿ�.');
-      $('#paymentId').focus();
-		}else if($('#tableOrderId').val()==''){
-			alert('���̺��ֹ��ڵ带 �Է����ּ���.');
-      $('#tableOrderId').focus();
-		}else if($('#memberPhone').val()==''){
-			alert('��ȭ��ȣ�� �Է����ּ���.');
-      $('#memberPhone').focus();
-		}else if($('#paymentCancelTotal').val()==''){
-			alert('�ֹ���ұݾ��� �Է����ּ���.');
-      $('#paymentCancelTotal').focus();
-		}else if($('#paymentCancelPay').val()==''){
-			alert('�����ݾ��� �Է����ּ���.');
-      $('#paymentCancelPay').focus();
-		}else if($('#paymentCancelBackMileage').val()==''){
-			alert('ȸ���� ���ϸ����� ������ �Է����ּ���.');
-      $('#paymentCancelBackMileage').focus();
-		}else if($('#paymentCancelReturnMileage').val()==''){
-			alert('ȯ���� ���ϸ����� ������ �Է����ּ���.');
-      $('#paymentCancelReturnMileage').focus();
-		}else if($('#paymentCancelDate').val()!="����"|"ī��"){
-			alert('�ŷ���ҳ�¥�� �������� �Է����ּ���.');
-      $('#paymentCancelDate').focus();
-		}else if($('#paymentCancelCate').val()==''){
-			alert('�ŷ���ұ����� ����� �Է����ּ���.');
-      $('#paymentCancelCate').focus();
+		if($('#payment_cancel_id').val().length<4){
+			alert('아이디를 4글자 이상 입력하시오.');
+      $('#payment_cancel_id').focus();
+		}else if($('#payment_id').val().length<4){
+			alert('결제아이디를 4자리 이상 입력하시오.');
+      $('#payment_id').focus();
+		}else if($('#table_order_id').val()==''){
+			alert('테이블주문코드를 입력해주세요.');
+      $('#table_order_id').focus();
+		}else if($('#member_phone').val()==''){
+			alert('전화번호를 입력해주세요.');
+      $('#member_phone').focus();
+		}else if($('#payment_cancel_total').val()==''){
+			alert('주문취소금액을 입력해주세요.');
+      $('#payment_cancel_total').focus();
+		}else if($('#payment_cancel_pay').val()==''){
+			alert('결제금액을 입력해주세요.');
+      $('#payment_cancel_pay').focus();
+		}else if($('#payment_cancel_backmileage').val()==''){
+			alert('회수한 마일리지는 얼마인지 입력해주세요.');
+      $('#payment_cancel_backmileage').focus();
+		}else if($('#payment_cancel_returnmileage').val()==''){
+			alert('환불한 마일리지는 얼마인지 입력해주세요.');
+      $('#payment_cancel_returnmileage').focus();
+		}else if($('#payment_cancel_date').val()==''){
+			alert('거래취소날짜는 언제인지 입력해주세요.');
+      $('#payment_cancel_date').focus();
+		}else if($('#payment_cancel_cate').val()==''){
+			alert('거래취소구분은 어떠한지 입력해주세요.');
+      $('#payment_cancel_cate').focus();
 		}else {
-			$('#paymentCancelAdd').submit();
+			$('#paymentCancelForm').submit();
 		}
 	});
-}); */
+});
 </script>
 </head>
 <body>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 	<div class="container">
-		<form action="${pageContext.request.contextPath}/tori/payment/payment_cancel_action" method="post" class="form-inline">
+		<form id="paymentCancelForm" action="${pageContext.request.contextPath}/tori/payment/payment_cancel_action" method="post" class="form-inline">
 			<table class="table table-hover table-stripped">
 				<tr>
-					<td>��������ڵ� :
+					<td>결제취소코드 :
 					</td>
 					<td><input type="text" class="form-control" name="payment_cancel_id" id="payment_cancel_id" size="auto">
 					</td>
 				</tr>
 				<tr>
-					<td>������ȣ : 
+					<td>결제번호 : 
 					</td>
 					<td><input type="text" class="form-control" name="payment_id" id="payment_id" size="auto">
 					</td>
 				</tr>
 				<tr>
-					<td>���̺�����ڵ� : 
+					<td>테이블사용코드 : 
 					</td>
 					<td><input type="text" class="form-control" name="table_order_id" id="table_order_id" size="auto">
 					</td>
 				</tr>
 				<tr>
-					<td>��ȭ��ȣ : 
+					<td>전화번호 : 
 					</td>
 					<td><input type="text" class="form-control" name="member_phone" id="member_phone" size="auto">
 					</td>
 				</tr>
 				<tr>
-					<td>�Ѿ� : 
+					<td>총액 : 
 					</td>
 					<td><input type="text" class="form-control" name="payment_cancel_total" id="payment_cancel_total" size="auto">
 					</td>
 				</tr>
 				<tr>
-					<td>�����ݾ� :
+					<td>결제금액 :
 					</td>
 					<td><input type="text" class="form-control" name="payment_cancel_pay" id="payment_cancel_pay" size="auto">
 					</td>
 				</tr>
 				<tr>
-					<td>ȸ�����ϸ��� : 
+					<td>회수마일리지 : 
 					</td>
 					<td><input type="text" class="form-control" name="payment_cancel_backmileage" id="payment_cancel_backmileage" size="auto">
 					</td>
 				</tr>
 				<tr>
-					<td>ȯ�Ҹ��ϸ��� : 
+					<td>환불마일리지 : 
 					</td>
 					<td><input type="text" class="form-control" name="payment_cancel_returnmileage" id="payment_cancel_returnmileage" size="auto">
 					</td>
 				</tr>
 				<tr>
-					<td>��¥ : 
+					<td>날짜 : 
 					</td>
 					<td><input type="date" class="form-control" name="payment_cancel_date" id="payment_cancel_date" size="auto">
 					</td>
 				</tr>
 				<tr>
-					<td>���� : 
+					<td>구분 : 
 					</td>
 					<td><input type="text" class="form-control" name="payment_cancel_cate" id="payment_cancel_cate" size="auto">
 					</td>
 				</tr>
 				</table>
-		<input type="submit" id="paymentCancelAdd" name="paymentCancelAdd" value="����">
-		<input type="reset" id="paymentCancel" name="paymentCancel" value="�ǵ���">
-		<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_list">�۸��</a>
+		<input type="submit" id="paymentCancelAdd" name="paymentCancelAdd" value="제출">
+		<input type="reset" id="paymentCancel" name="paymentCancel" value="되돌림">
+		<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_list">글목록</a>
 		</form>
 	
 	

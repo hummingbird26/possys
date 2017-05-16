@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,19 +19,19 @@
 <div class="container">
 	<br><br><br><br>
 	<fieldset>
-	<legend>°áÁ¦¾÷¹«_¼±ÅÃ</legend>
+	<legend>ê²°ì œì—…ë¬´_ì„ íƒ</legend>
 	<table class="table table-hover">
 	<tr>
-	<td><a href="#{pageContext.request.contextPath}/tori/payment/payment_add_form"><button class="btn btn-default">°áÁ¦°ü¸®</button></a></td>
-	<td><a href="#{pageContext.request.contextPath}/tori/payment/payment_cancel_add_form"><button class="btn btn-default">°áÁ¦Ãë¼Ò°ü¸®</button></a></td>
+	<td><a href="#{pageContext.request.contextPath}/tori/payment/payment_add_form"><button class="btn btn-default">ê²°ì œê´€ë¦¬</button></a></td>
+	<td><a href="#{pageContext.request.contextPath}/tori/payment/payment_cancel_add_form"><button class="btn btn-default">ê²°ì œì·¨ì†Œê´€ë¦¬</button></a></td>
 	</tr>
 	<tr>
-	<td><a href="#{pageContext.request.contextPath}/tori/payment/payment_add_form"><button class="btn btn-default">Ä«µå°áÁ¦°ü¸®</button></a></td>
+	<td><a href="#{pageContext.request.contextPath}/tori/payment/payment_add_form"><button class="btn btn-default">ì¹´ë“œê²°ì œê´€ë¦¬</button></a></td>
 	<td></td>
 	</tr>
 	</table>
 	</fieldset>
 </div>
-<!-- ±¸¼º¸¸ ÇÏ´Â È­¸é : ÀÛ¼º¸¸ ÇÏ°í ¸µÅ©¸¦ °ÉÁö´Â ¾Ê´Â´Ù! -->
+<!-- êµ¬ì„±ë§Œ í•˜ëŠ” í™”ë©´ : ìž‘ì„±ë§Œ í•˜ê³  ë§í¬ë¥¼ ê±¸ì§€ëŠ” ì•ŠëŠ”ë‹¤! -->
 </body>
 </html>

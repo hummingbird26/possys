@@ -109,17 +109,17 @@ public class Payment_Controller {
 	}
 	
 	//조건별 검색 리스트 표현
-	@RequestMapping(value="/tori/payment/payment_search_action", method = RequestMethod.GET)
+	@RequestMapping(value={"/tori/payment/payment_search_action"}, method = RequestMethod.GET)
 	public String paymentSRsearch(Model model , 
 			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
 			@RequestParam(value="select") String select,
 			@RequestParam(name="keyWord") String keyWord){
 		System.out.println("05 Payment_Controller.java -> paymentSRlist");
-		//int paymentSRcount = pdao.paymentSRsearch(select,keyWord);
-		int paymentSRcount = pdao.getPaymentCount();
+		int paymentSRcount = pdao.paymentSRlist(select,keyWord);
+		//int paymentSRcount = pdao.getPaymentCount();
 		int pagePerRow = 10;
 		int lastPage = (int)(Math.ceil((double)paymentSRcount/(double)pagePerRow));
-		List<Payment> list = pdao.paymentSRlist(select,keyWord,currentPage,pagePerRow);
+		List<Payment> list = pdao.paymentSRsearch(select,keyWord,currentPage,pagePerRow);
 		int expage = 1;
 		
 		model.addAttribute("select",select);
@@ -136,27 +136,31 @@ public class Payment_Controller {
 	
 	
 	//조건별 검색결과 리스트 표현
-	@RequestMapping(value="/tori/payment/payment_search_list", method = RequestMethod.GET)
-	public String paymentsearchlist(Model model,@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage){
+	@RequestMapping(value={"/tori/payment/payment_search_list"}, method = RequestMethod.GET)
+	public String paymentSRlist(Model model,@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage
+			,@RequestParam(value="select") String select
+			,@RequestParam(value="keyWord") String keyWord){
 		System.out.println("06_Payment_Controller.java -> paymentlist");
-		int paymentSRcount = pdao.getPaymentCount();
+		int paymentSRcount = pdao.paymentSRlist(select,keyWord);
 		System.out.println(paymentSRcount);
 		System.out.println("06_1 Payment_Controller.java -> paymentlist");
 		int pagePerRow = 10;
 		int expage = 1;
 		int lastPage = (int)(Math.ceil((double)paymentSRcount/(double)pagePerRow));
-		List<Payment> list = pdao.getPaymentList(currentPage, pagePerRow);
+		List<Payment> paymentSRsearch = pdao.paymentSRsearch(select,keyWord,currentPage, pagePerRow);
 		System.out.println(paymentSRcount);
 		System.out.println(Math.ceil(paymentSRcount/pagePerRow));
 		System.out.println(lastPage);
 		// paymentcount 및 pagePerRpw(구 pageRow -> list페이지에는 pagePerRow로 el식의 이름이 작성되어 있는 것을 확인하고(무분별 복붙의 폐해) 변수명을 해당 이름에 맞게 수정 및 double형 타입 캐스팅)
 		
+		model.addAttribute("select",select);
+		model.addAttribute("keyWord",keyWord);
 		model.addAttribute("expage",expage);
 		model.addAttribute("pagePerRow",pagePerRow);
 		model.addAttribute("paymentSRcount", paymentSRcount);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPage", lastPage);
-		model.addAttribute("list",list);
+		model.addAttribute("paymentSRsearch",paymentSRsearch);
 		
 		return "/tori/payment/payment_search_list";
 		
@@ -178,7 +182,7 @@ public class Payment_Controller {
 		public String paymentcanceladd(Payment_Cancel payment_cancel){
 			System.out.println("01_1 Payment_Controller.java -> paymentadd");
 			
-			String id = payment_cancel.getPayment_id();
+			String id = payment_cancel.getPayment_cancel_id();
 			System.out.println(id+"<------ 컨트롤러 값 확인 ");
 			
 			
@@ -197,7 +201,7 @@ public class Payment_Controller {
 			int pagePerRow = 10;
 			int expage = 1;
 			int lastPage = (int)(Math.ceil((double)paymentcancelcount/(double)pagePerRow));
-			List<Payment_Cancel> list = pcdao.getPaymentCancelList(currentPage, pagePerRow);
+			List<Payment_Cancel> paymentcancellist = pcdao.getPaymentCancelList(currentPage, pagePerRow);
 			System.out.println(paymentcancelcount);
 			System.out.println(Math.ceil(paymentcancelcount/pagePerRow));
 			System.out.println(lastPage);
@@ -208,19 +212,87 @@ public class Payment_Controller {
 			model.addAttribute("paymentcancelcount", paymentcancelcount);
 			model.addAttribute("currentPage", currentPage);
 			model.addAttribute("lastPage", lastPage);
-			model.addAttribute("list",list);
+			model.addAttribute("paymentcancellist",paymentcancellist);
 			
 			return "/tori/payment/payment_cancel_list";
 			
 		}
 		
+		//검색버튼을 클릭한 후 검색화면으로 넘어간다
+		@RequestMapping(value={"/tori/payment/payment_cancel_search_form"}, method = RequestMethod.GET)
+		public String paymentcancelsearch(){
+			System.out.println("04 Payment_Controller.java -> paymentcancelsearch");
+			return "/tori/payment/payment_cancel_search_form";
+			//tori_home에서 설정한 경로와 매핑경로값 및 리턴값을 일치하게끔 설정한다.
+			
+		}
+		
+		//조건별 검색 리스트 표현
+		@RequestMapping(value={"/tori/payment/payment_cancel_search_action"}, method = RequestMethod.GET)
+		public String paymentCSRsearch(Model model , 
+				@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
+				@RequestParam(value="select") String select,
+				@RequestParam(name="keyWord") String keyWord){
+			System.out.println("05 Payment_Controller.java -> paymentCSRlist");
+			int paymentCSRcount = pcdao.paymentCSRlist(select,keyWord);
+			//int paymentSRcount = pdao.getPaymentCount();
+			int pagePerRow = 10;
+			int lastPage = (int)(Math.ceil((double)paymentCSRcount/(double)pagePerRow));
+			List<Payment_Cancel> paymentCSRlist = pcdao.paymentCSRsearch(select,keyWord,currentPage,pagePerRow);
+			int expage = 1;
+			
+			model.addAttribute("select",select);
+			model.addAttribute("keyWord",keyWord);
+			model.addAttribute("expage",expage);
+			model.addAttribute("pagePerRow",pagePerRow);
+			model.addAttribute("paymentCSRcount",paymentCSRcount);
+			model.addAttribute("currentPage",currentPage);
+			model.addAttribute("lastPage",lastPage);
+			model.addAttribute("paymentCSRlist",paymentCSRlist);
+			
+			return "/tori/payment/payment_cancel_search_list";
+		}
+		
+		
+		//조건별 검색결과 리스트 표현
+		@RequestMapping(value={"/tori/payment/payment_cancel_search_list"}, method = RequestMethod.GET)
+		public String paymentCSRlist(Model model,@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage
+				,@RequestParam(value="select") String select
+				,@RequestParam(value="keyWord") String keyWord){
+			System.out.println("06_Payment_Controller.java -> paymentCSRlist");
+			int paymentCSRcount = pcdao.paymentCSRlist(select,keyWord);
+			System.out.println(paymentCSRcount);
+			System.out.println("06_1 Payment_Controller.java -> paymentCSRlist");
+			int pagePerRow = 10;
+			int expage = 1;
+			int lastPage = (int)(Math.ceil((double)paymentCSRcount/(double)pagePerRow));
+			List<Payment_Cancel> paymentCSRsearch = pcdao.paymentCSRsearch(select,keyWord,currentPage, pagePerRow);
+			System.out.println(paymentCSRcount);
+			System.out.println(Math.ceil(paymentCSRcount/pagePerRow));
+			System.out.println(lastPage);
+			// paymentcount 및 pagePerRpw(구 pageRow -> list페이지에는 pagePerRow로 el식의 이름이 작성되어 있는 것을 확인하고(무분별 복붙의 폐해) 변수명을 해당 이름에 맞게 수정 및 double형 타입 캐스팅)
+			
+			model.addAttribute("select",select);
+			model.addAttribute("keyWord",keyWord);
+			model.addAttribute("expage",expage);
+			model.addAttribute("pagePerRow",pagePerRow);
+			model.addAttribute("paymentCSRcount", paymentCSRcount);
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("lastPage", lastPage);
+			model.addAttribute("paymentCSRsearch",paymentCSRsearch);
+			
+			return "/tori/payment/payment_cancel_search_list";
+			
+		}
+		
+		
 		
 		//리스트에서 뷰로 넘어간다
 		@RequestMapping(value={"/tori/payment/payment_cancel_view"}, method = RequestMethod.GET)
-		public String paymentcancelview(Model model , @RequestParam(value="payment_cancel_id",required=true) String payment_id){
+		public String paymentcancelview(Model model , @RequestParam(value="payment_cancel_id",required=true) String payment_cancel_id){
 			System.out.println("03_Payment_Controller.java -> paymentcancelview");
-			Payment payment = pdao.getPayment(payment_id);
-			model.addAttribute("payment",payment);
+			Payment_Cancel paymentcancel = pcdao.getPaymentCancel(payment_cancel_id);
+			model.addAttribute("paymentcancel",paymentcancel);
 			return "/tori/payment/payment_cancel_view";
 		}
 	
@@ -288,6 +360,67 @@ public class Payment_Controller {
 			model.addAttribute("card",card);
 			return "/tori/payment/payment_card_view";
 		}
+		
+		//검색버튼을 클릭한 후 검색화면으로 넘어간다
+				@RequestMapping(value={"/tori/payment/payment_card_search_form"}, method = RequestMethod.GET)
+				public String paymentcardsearch(){
+					System.out.println("04 Payment_Controller.java -> paymentcardsearch");
+					return "/tori/payment/payment_card_search_form";
+					//tori_home에서 설정한 경로와 매핑경로값 및 리턴값을 일치하게끔 설정한다.
+					
+				}
+				
+				//조건별 검색 리스트 표현
+				@RequestMapping(value={"/tori/payment/payment_card_search_action"}, method = RequestMethod.GET)
+				public String paymentcardsearch(Model model , 
+						@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
+						@RequestParam(value="select") String select,
+						@RequestParam(name="keyWord") String keyWord){
+					System.out.println("05 Payment_Controller.java -> paymentcardsearch");
+					int CPScount = cpdao.CPSlist(select,keyWord);
+					//int paymentSRcount = pdao.getPaymentCount();
+					int pagePerRow = 10;
+					int lastPage = (int)(Math.ceil((double)CPScount/(double)pagePerRow));
+					List<Card_Payment> CPSlist = cpdao.CPSsearch(select,keyWord,currentPage,pagePerRow);
+					int expage = 1;
+					
+					model.addAttribute("select",select);
+					model.addAttribute("keyWord",keyWord);
+					model.addAttribute("expage",expage);
+					model.addAttribute("pagePerRow",pagePerRow);
+					model.addAttribute("CPScount",CPScount);
+					model.addAttribute("currentPage",currentPage);
+					model.addAttribute("lastPage",lastPage);
+					model.addAttribute("CPSlist",CPSlist);
+					
+					return "/tori/payment/payment_card_search_list";
+				}
+				
+				
+				//조건별 검색결과 리스트 표현
+				@RequestMapping(value={"/tori/payment/payment_card_search_list"}, method = RequestMethod.GET)
+				public String paymentcardlist(Model model,@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage
+						,@RequestParam(value="select") String select
+						,@RequestParam(value="keyWord") String keyWord){
+					System.out.println("06_Payment_Controller.java -> paymentCSRlist");
+					int CPScount = cpdao.CPSlist(select,keyWord);
+					//int paymentSRcount = pdao.getPaymentCount();
+					int pagePerRow = 10;
+					int lastPage = (int)(Math.ceil((double)CPScount/(double)pagePerRow));
+					List<Card_Payment> CPSlist = cpdao.CPSsearch(select,keyWord,currentPage,pagePerRow);
+					int expage = 1;
+					
+					model.addAttribute("select",select);
+					model.addAttribute("keyWord",keyWord);
+					model.addAttribute("expage",expage);
+					model.addAttribute("pagePerRow",pagePerRow);
+					model.addAttribute("CPScount",CPScount);
+					model.addAttribute("currentPage",currentPage);
+					model.addAttribute("lastPage",lastPage);
+					model.addAttribute("CPSlist",CPSlist);
+					
+					return "/tori/payment/payment_card_search_list";
+				}
 }
 	
 	

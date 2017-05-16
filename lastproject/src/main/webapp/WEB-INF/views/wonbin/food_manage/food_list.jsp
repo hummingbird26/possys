@@ -25,9 +25,9 @@
 		//체크박스 전체 선택/해제
 		$("#food_chkall").click(function(){
 			if($("#food_chkall").prop("checked")){
-				$("input[name=food_chk]").prop("checked",true);
+				$("input[name=food_id]").prop("checked",true);
 			}else{
-				$("input[name=food_chk]").prop("checked",false);
+				$("input[name=food_id]").prop("checked",false);
 			}
 		});
 	//발주업체 관리 버튼을 클릭하면 체크박스 행(row) 값 가져오기

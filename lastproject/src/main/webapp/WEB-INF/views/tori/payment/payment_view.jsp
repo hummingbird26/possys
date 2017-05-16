@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>°áÁ¦ »ó¼¼Á¤º¸</title>
+<title>ê²°ì œ ìƒì„¸ì •ë³´</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <!-- Optional theme -->
@@ -19,50 +19,50 @@
 <br><br>
 <div>
 	<div class="col-sm-6">
-		<img src="" height="auto" width="auto" alt="°áÁ¦È¸»çÁ¤º¸">
+		<img src="" height="auto" width="auto" alt="ê²°ì œíšŒì‚¬ì •ë³´">
 	
 	</div>
 	<div class="col-sm-6">
 		<table class="table table-hover table-stripped">
-		<caption>°áÁ¦°ü¸®±âº»Á¤º¸</caption>
+		<caption>ê²°ì œê´€ë¦¬ê¸°ë³¸ì •ë³´</caption>
 			<tr>
-			<td>°áÁ¦ID
+			<td>ê²°ì œID
 			</td>
 			<td>${payment.payment_id}
 			</td>
 			</tr>
 			<tr>
-			<td>Å×ÀÌºíÁÖ¹®¹øÈ£
+			<td>í…Œì´ë¸”ì£¼ë¬¸ë²ˆí˜¸
 			</td>
 			<td>${payment.table_order_id}
 			</td>
 			</tr>
 			<tr>
-			<td>°áÁ¦ÃÑ¾×
+			<td>ê²°ì œì´ì•¡
 			</td>
 			<td>${payment.payment_total}
 			</td>
 			</tr>
 			<tr>
-			<td>°áÁ¦±İ¾×
+			<td>ê²°ì œê¸ˆì•¡
 			</td>
 			<td>${payment.payment_pay}
 			</td>
 			</tr>
 			<tr>
-			<td>°áÁ¦ÀÏÀÚ
+			<td>ê²°ì œì¼ì
 			</td>
 			<td>${payment.payment_date}
 			</td>
 			</tr>
 			<tr>
-			<td>°áÁ¦À¯Çü
+			<td>ê²°ì œìœ í˜•
 			</td>
 			<td>${payment.payment_cate}
 			</td>
 			</tr>
 			<tr>
-			<td>°áÁ¦»óÅÂ
+			<td>ê²°ì œìƒíƒœ
 			</td>
 			<td>${payment.payment_state}
 			</td>
@@ -74,21 +74,21 @@
 <br><br>
 <div class="container">
 	<table class="table table-stripped table-hover">
-	<caption>Ãß°¡Á¤º¸</caption>
+	<caption>ì¶”ê°€ì •ë³´</caption>
 			<tr>
-			<td>È¸¿øÀüÈ­¹øÈ£
+			<td>íšŒì›ì „í™”ë²ˆí˜¸
 			</td>
 			<td>${payment.member_phone}
 			</td>
 			</tr>
 			<tr>
-			<td>Àû¸³¸¶ÀÏ¸®Áö
+			<td>ì ë¦½ë§ˆì¼ë¦¬ì§€
 			</td>
 			<td>${payment.payment_addmileage}
 			</td>
 			</tr>
 			<tr>
-			<td>»ç¿ë¸¶ÀÏ¸®Áö
+			<td>ì‚¬ìš©ë§ˆì¼ë¦¬ì§€
 			</td>
 			<td>${payment.payment_usemileage}
 			</td>
@@ -96,7 +96,7 @@
 	</table>
 	<br><br>
 	
-	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_list">¸®½ºÆ®·Î</a>
+	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_list">ë¦¬ìŠ¤íŠ¸ë¡œ</a>
 </div>
 
 </div>

@@ -57,7 +57,7 @@
         <div>
 			<input type="submit" id="addmenu" value="등록">
 			<input type="reset" id="reset" value="초기화">
-			<a href="${pageContext.request.contextPath}/menu_list">취소</a>
+			<a href="${pageContext.request.contextPath}/menu_add_form">새로고침</a>
 		</div>
     </form>
 </div>
