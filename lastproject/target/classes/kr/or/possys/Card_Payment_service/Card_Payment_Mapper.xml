@@ -17,8 +17,29 @@
 	WHERE card_id = #{card_id}
   </update>
   
-  <delete parameterType="kr.or.possys.Card_Payment_service.Card_Payment" id="deleteCardPayment"> 
+<delete parameterType="kr.or.possys.Card_Payment_service.Card_Payment" id="deleteCardPayment"> 
 DELETE FROM card WHERE card_id = #{card_id} </delete>
+
+ <select id="CPSlist" parameterType="java.util.Map" resultType="int">
+  	SELECT COUNT(*) FROM card WHERE ${select} LIKE CONCAT('%',#{keyWord},'%')
+  </select>
+  
+ <select id="CPSsearch" parameterType="java.util.Map" resultType="kr.or.possys.Card_Payment_service.Card_Payment">
+	SELECT card_id
+	, payment_id
+	, card_app
+	, card_detail
+	, card_date
+	, card_company
+	, card_total
+	, card_price
+	, card_tax
+	FROM card
+	WHERE ${select} LIKE CONCAT('%',#{keyWord},'%')
+	ORDER BY card_id DESC 
+	LIMIT #{beginRow}, #{pagePerRow}
+ </select>
+
 
 <select parameterType="String" id="getCardPayment" resultType="kr.or.possys.Card_Payment_service.Card_Payment"> 
 SELECT * FROM card WHERE card_id = #{card_id}</select>

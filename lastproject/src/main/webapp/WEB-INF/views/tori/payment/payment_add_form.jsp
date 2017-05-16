@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,102 +14,102 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Payment_ADD</title>
 
-<!-- <script>
+<script>
 $(document).ready(function(){
 	$('#paymentAdd').click(function(){
-		if($('#paymentId').val().length<4){
-			alert('¾ÆÀÌµð¸¦ 4±ÛÀÚ ÀÌ»ó ÀÔ·ÂÇÏ½Ã¿À.');
-      		$('#paymentId').focus();
-		}else if($('#table_order_ID').val().length<4){
-			alert('Å×ÀÌºíÁÖ¹®¹øÈ£¸¦ 4ÀÚ¸® ÀÌ»ó ÀÔ·ÂÇÏ½Ã¿À.');
-      		$('#table_order_ID').focus();
-		}else if($('#memberPhone').val()==''){
-			alert('°í°´ÀÇ ÇÚµåÆù¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.');
-      		$('#memberPhone').focus();
-		}else if($('#paymentTotal').val()==''){
-			alert('ÁÖ¹®ÃÑ¾×À» ÀÔ·ÂÇØÁÖ¼¼¿ä.');
-      		$('#paymentTotal').focus();
-		}else if($('#paymentPay').val()==''){
-			alert('ÁÖ¹®±Ý¾×À» ÀÔ·ÂÇØÁÖ¼¼¿ä.');
-      		$('#paymentPay').focus();
-		}else if($('#paymentAddmileage').val()==''){
-			alert('Ãß°¡µÈ¸¶ÀÏ¸®Áö¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä.');
-      		$('#paymentAddmileage').focus();
-		}else if($('#paymentUsemileage').val()==''){
-			alert('»ç¿ëÇÑ¸¶ÀÏ¸®Áö´Â ¾ó¸¶ÀÎÁö ÀÔ·ÂÇØÁÖ¼¼¿ä.');
-      		$('#paymentUsemileage').focus();
-		}else if($('#paymentDate').val()==''){
-			alert('°Å·¡³¯Â¥´Â ¾ðÁ¦ÀÎÁö ÀÔ·ÂÇØÁÖ¼¼¿ä.');
-      		$('#paymentDate').focus();
-		}else if($('#paymentCate').val()!="Çö±Ý"|"Ä«µå"){
-			alert('°Å·¡±¸ºÐÀº ¹«¾ùÀÎÁö ÀÔ·ÂÇØÁÖ¼¼¿ä.');
-      		$('#paymentCate').focus();
-		}else if($('#paymentState').val()==''){
-			alert('°Å·¡»óÅÂ´Â ¾î¶°ÇÑÁö ÀÔ·ÂÇØÁÖ¼¼¿ä.');
-      		$('#paymentState').focus();
+		if($('#payment_id').val().length<4){
+			alert('ì•„ì´ë””ë¥¼ 4ê¸€ìž ì´ìƒ ìž…ë ¥í•˜ì‹œì˜¤.');
+      		$('#payment_id').focus();
+		}else if($('#table_order_id').val().length<4){
+			alert('í…Œì´ë¸”ì£¼ë¬¸ë²ˆí˜¸ë¥¼ 4ìžë¦¬ ì´ìƒ ìž…ë ¥í•˜ì‹œì˜¤.');
+      		$('#table_order_id').focus();
+		}else if($('#member_phone').val()==''){
+			alert('ê³ ê°ì˜ í•¸ë“œí°ë²ˆí˜¸ë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš”.');
+      		$('#member_phone').focus();
+		}else if($('#payment_total').val()==''){
+			alert('ì£¼ë¬¸ì´ì•¡ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”.');
+      		$('#payment_total').focus();
+		}else if($('#payment_pay').val()==''){
+			alert('ì£¼ë¬¸ê¸ˆì•¡ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”.');
+      		$('#payment_pay').focus();
+		}else if($('#payment_addmileage').val()==''){
+			alert('ì¶”ê°€ëœë§ˆì¼ë¦¬ì§€ë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš”.');
+      		$('#payment_addmileage').focus();
+		}else if($('#payment_usemileage').val()==''){
+			alert('ì‚¬ìš©í•œë§ˆì¼ë¦¬ì§€ëŠ” ì–¼ë§ˆì¸ì§€ ìž…ë ¥í•´ì£¼ì„¸ìš”.');
+      		$('#payment_usemileage').focus();
+		}else if($('#payment_date').val()==''){
+			alert('ê±°ëž˜ë‚ ì§œëŠ” ì–¸ì œì¸ì§€ ìž…ë ¥í•´ì£¼ì„¸ìš”.');
+      		$('#payment_date').focus();
+		}else if($('#payment_cate').val()==''){
+			alert('ê±°ëž˜êµ¬ë¶„ì€ ë¬´ì—‡ì¸ì§€ ìž…ë ¥í•´ì£¼ì„¸ìš”.');
+      		$('#payment_cate').focus();
+		}else if($('#payment_state').val()==''){
+			alert('ê±°ëž˜ìƒíƒœëŠ” ì–´ë– í•œì§€ ìž…ë ¥í•´ì£¼ì„¸ìš”.');
+      		$('#payment_state').focus();
 		}else {
-			$('#paymentAdd').submit();
+			$('#paymentForm').submit();
 		}
 	});
 });
 
-</script> -->
+</script>
 </head>
 <body>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <div class="container">
-<!-- form action¿¡µµ ÀÔ·ÂÆû ¹× ¸®½ºÆ®·Î °¡´Â °ÍÀ» ÀÛ¼ºÇÏÁö ¾Ê°í ´Ù¸¥ °æ·Î¸¦ ÀÛ¼ºÇØº»´Ù. ±×¸®°í  ÄÁÆ®·Ñ·¯, ¸®½ºÆ®, ¸ÅÆÛ, DTO, DAO, ¹× ÀÔ·Â ÆûÀÇ name¼Ó¼ºÀÇ °ªµéÀ» ÀüºÎ  DB³»ÀÇ ÄÃ·³¸íÀ¸·Î ÅëÀÏÇØ¼­ ÀÛ¼ºÇÑ´Ù-->
-	<form class="form-inline" action="${pageContext.request.contextPath}/tori/payment/payment_add_action" method="post">
+<!-- form actionì—ë„ ìž…ë ¥í¼ ë° ë¦¬ìŠ¤íŠ¸ë¡œ ê°€ëŠ” ê²ƒì„ ìž‘ì„±í•˜ì§€ ì•Šê³  ë‹¤ë¥¸ ê²½ë¡œë¥¼ ìž‘ì„±í•´ë³¸ë‹¤. ê·¸ë¦¬ê³   ì»¨íŠ¸ë¡¤ëŸ¬, ë¦¬ìŠ¤íŠ¸, ë§¤í¼, DTO, DAO, ë° ìž…ë ¥ í¼ì˜ nameì†ì„±ì˜ ê°’ë“¤ì„ ì „ë¶€  DBë‚´ì˜ ì»¬ëŸ¼ëª…ìœ¼ë¡œ í†µì¼í•´ì„œ ìž‘ì„±í•œë‹¤-->
+	<form id="paymentForm" class="form-inline" action="${pageContext.request.contextPath}/tori/payment/payment_add_action" method="post">
 	<table class="table table-stripped table-hover">
 		<tr>
-		<td>°áÁ¦¹øÈ£</td>
+		<td>ê²°ì œë²ˆí˜¸</td>
 		<td><input class="form-control" size="auto" id="payment_id" name="payment_id"></td>
 		</tr>
 		<tr>
-		<td>Å×ÀÌºí»ç¿ëÄÚµå</td>
+		<td>í…Œì´ë¸”ì‚¬ìš©ì½”ë“œ</td>
 		<td><input class="form-control" size="auto" id="table_order_id" name="table_order_id" type="text"></td>
 		</tr>
 		<tr>
-		<td>ÀüÈ­¹øÈ£</td>
-		<td><input class="form-control" size="auto" id="member_phone" name="member_phone" type="text"></td>
+		<td>ì „í™”ë²ˆí˜¸</td>
+		<td><input class="form-control" size="auto" id="member_phone" name="member_phone" type="tel"></td>
 		</tr>
 		<tr>
-		<td>ÃÑ¾×</td>
+		<td>ì´ì•¡</td>
 		<td><input class="form-control" size="auto" id="payment_total" name="payment_total" type="text"></td>
 		</tr>
 		<tr>
-		<td>°áÁ¦±Ý¾×</td>
+		<td>ê²°ì œê¸ˆì•¡</td>
 		<td><input class="form-control" size="auto" id="payment_pay" name="payment_pay" type="text"></td>
 		</tr>
 		<tr>
-		<td>Àû¸³¸¶ÀÏ¸®Áö</td>
+		<td>ì ë¦½ë§ˆì¼ë¦¬ì§€</td>
 		<td><input class="form-control" size="auto" id="payment_addmileage" name="payment_addmileage" type="text"></td>
 		</tr>
 		<tr>
-		<td>»ç¿ë¸¶ÀÏ¸®Áö</td>
+		<td>ì‚¬ìš©ë§ˆì¼ë¦¬ì§€</td>
 		<td><input class="form-control" size="auto" id="payment_usemileage" name="payment_usemileage" type="text"></td>
 		</tr>
 		<tr>
-		<td>³¯Â¥</td>
+		<td>ë‚ ì§œ</td>
 		<td><input class="form-control" size="auto" id="payment_date" name="payment_date" type="date"></td>
 		</tr>
 		<tr>
-		<td>±¸ºÐ</td>
+		<td>êµ¬ë¶„</td>
 		<td><input class="form-control" size="auto" id="payment_cate" name="payment_cate" type="text"></td>
 		</tr>
 		<tr>
-		<td>»óÅÂ</td>
+		<td>ìƒíƒœ</td>
 		<td><input class="form-control" size="auto" id="payment_state" name="payment_state" type="text"></td>
 		</tr>
 	</table>
-	<input class="btn btn-default" type="submit" id="paymentAdd" name="paymentAdd" value="Á¦Ãâ">
-	<input class="btn btn-default" type="reset" id="paymentCancel" name="paymentCancel" value="µÇµ¹¸²">
-	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_list">±Û¸ñ·Ï</a>
+	<input class="btn btn-default" type="submit" id="paymentAdd" name="paymentAdd" value="ì œì¶œ">
+	<input class="btn btn-default" type="reset" id="paymentCancel" name="paymentCancel" value="ë˜ëŒë¦¼">
+	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_list">ê¸€ëª©ë¡</a>
 	</form>
 	<br><br>
 	<div>
-	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_form">°áÁ¦Ãë¼ÒÁ÷±ÇÀÔ·Â</a>
-	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_card_form">Ä«µå°áÁ¦Á÷±ÇÀÔ·Â</a>
+	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_form">ê²°ì œì·¨ì†Œì§ê¶Œìž…ë ¥</a>
+	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_card_form">ì¹´ë“œê²°ì œì§ê¶Œìž…ë ¥</a>
 	</div>
 </div>
 </body>

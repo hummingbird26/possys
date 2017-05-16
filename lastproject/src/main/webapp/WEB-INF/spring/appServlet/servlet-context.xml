@@ -44,12 +44,16 @@
         <beans:property name="mapperLocations">
             <beans:list>
             	<!-- 원빈 -->
-                <beans:value>classpath:kr/or/possys/food_service/Food_Mapper.xml</beans:value>
+<!--                 <beans:value>classpath:kr/or/possys/food_service/Food_Mapper.xml</beans:value> -->
                 <beans:value>classpath:kr/or/possys/drop_food_service/Drop_Mapper.xml</beans:value>
                 <beans:value>classpath:kr/or/possys/ep_order_manage_service/Ep_Manage_Mapper.xml</beans:value>
                 <!-- 원빈 끝 -->
+                <!-- 주문 -->
+                <beans:value>classpath:kr/or/possys/Order_service/Order_Mapper.xml</beans:value>
+
                 
                 <beans:value>classpath:kr/or/possys/Order_service/Order_Mapper.xml</beans:value>
+
 
                 <beans:value>classpath:kr/or/possys/Menu_service/Menu_Mapper.xml</beans:value>
 
@@ -62,9 +66,19 @@
                  <beans:value>classpath:kr/or/possys/Staff_service/Staff_Mapper.xml</beans:value>
                 <beans:value>classpath:kr/or/possys/Member_sevice/Member_Mapper.xml</beans:value>
                 <!-- 메뉴 -->
+<<<<<<< HEAD
                 <beans:value>classpath:kr/or/possys/Menu_service/Menu_Mapper.xml</beans:value>
+                <beans:value>classpath:kr/or/possys/Menu_service/Per_Mapper.xml</beans:value>
+
+               	<!-- <beans:value>classpath:kr/or/possys/Menu_service/Per_Mapper.xml</beans:value> -->
+</beans:list>
+=======
+                <beans:value>classpath:kr/or/possys/Menu_service/Menu_Mapper.xml</beans:value>
+                
+               	<!-- <beans:value>classpath:kr/or/possys/Menu_service/Per_Mapper.xml</beans:value> -->
 
             </beans:list>
+>>>>>>> branch 'master' of https://github.com/hummingbird26/possys.git
         </beans:property>
 	    </beans:bean>
 	    <!-- mybatis설정 2. SqlSessionTemplate-->

@@ -18,13 +18,19 @@
 		where table_order_id = #{table_order_id}
 	</select>
 	
-	 <select id="order_detail" parameterType = "String" resultType="kr.or.possys.Order_service.Order">
+	 	<select id="order_detail" parameterType = "String" resultType="kr.or.possys.Order_service.Order">
 		select table_order_id,
 		menu_id,
 		menu_name,
 		order_detail_ea,
 		order_detail_sum 
 		from order_detail where table_order_id= #{table_order_id}
+		</select>
+		
+		<select id="get_price" parameterType = "String" resultType="String">
+		select
+		menu_price
+		from menu where menu_id= #{menu_id}
 		</select>
 		
 	<update id="order_end_t" parameterType="String">
@@ -47,5 +53,5 @@
 		order_detail_sum = #{order_detail_sum}
 		where table_order_id = #{table_order_id} and
 		menu_id = #{menu_id}
-	</update>
+		</update>
 </mapper>

@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>°áÁ¦ »ó¼¼Á¤º¸</title>
+<title>ê²°ì œ ìƒì„¸ì •ë³´</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <!-- Optional theme -->
@@ -19,52 +19,52 @@
 <br><br>
 <div>
 	<div class="col-sm-6">
-		<img src="" height="auto" width="auto" alt="°áÁ¦È¸»çÁ¤º¸">
+		<img src="" height="auto" width="auto" alt="ê²°ì œíšŒì‚¬ì •ë³´">
 	
 	</div>
 	<div class="col-sm-6">
 		<table class="table table-hover table-stripped">
-		<caption>°áÁ¦°ü¸®±âº»Á¤º¸</caption>
+		<caption>ê²°ì œì·¨ì†Œê¸°ë³¸ì •ë³´</caption>
 			<tr>
-			<td>°áÁ¦Ãë¼ÒID
+			<td>ê²°ì œì·¨ì†ŒID
 			</td>
-			<td>${payment_cancel.payment_cancel_id}
+			<td>${paymentcancel.payment_cancel_id}
 			</td>
 			</tr>
 			<tr>
-			<td>°áÁ¦ID
+			<td>ê²°ì œID
 			</td>
-			<td>${payment_cancel.payment_id}
-			</td>
-			</tr>
-			<tr>
-			<td>Å×ÀÌºíÁÖ¹®¾ÆÀÌµğ
-			</td>
-			<td>${payment_cancel.table_order_id}
+			<td>${paymentcancel.payment_id}
 			</td>
 			</tr>
 			<tr>
-			<td>°áÁ¦Ãë¼Ò±İ¾×
+			<td>í…Œì´ë¸”ì£¼ë¬¸ì•„ì´ë””
 			</td>
-			<td>${payment_cancel.payment_cancel_pay}
-			</td>
-			</tr>
-			<tr>
-			<td>°áÁ¦Ãë¼ÒÃÑ¾×
-			</td>
-			<td>${payment_cancel.payment_cancel_total}
+			<td>${paymentcancel.table_order_id}
 			</td>
 			</tr>
 			<tr>
-			<td>°áÁ¦Ãë¼ÒÀÏÀÚ
+			<td>ê²°ì œì·¨ì†Œê¸ˆì•¡
 			</td>
-			<td>${payment_cancel.payment_cancel_date}
+			<td>${paymentcancel.payment_cancel_pay}
 			</td>
 			</tr>
 			<tr>
-			<td>°áÁ¦Ãë¼ÒÀ¯Çü
+			<td>ê²°ì œì·¨ì†Œì´ì•¡
 			</td>
-			<td>${payment_cancel.payment_cancel_cate}
+			<td>${paymentcancel.payment_cancel_total}
+			</td>
+			</tr>
+			<tr>
+			<td>ê²°ì œì·¨ì†Œì¼ì
+			</td>
+			<td>${paymentcancel.payment_cancel_date}
+			</td>
+			</tr>
+			<tr>
+			<td>ê²°ì œì·¨ì†Œìœ í˜•
+			</td>
+			<td>${paymentcancel.payment_cancel_cate}
 			</td>
 			</tr>
 		</table>
@@ -74,29 +74,29 @@
 <br><br>
 <div class="container">
 	<table class="table table-stripped table-hover">
-	<caption>Ãß°¡Á¤º¸</caption>
+	<caption>ì¶”ê°€ì •ë³´</caption>
 			<tr>
-			<td>È¸¿øÀüÈ­¹øÈ£
+			<td>íšŒì›ì „í™”ë²ˆí˜¸
 			</td>
-			<td>${payment_cancel.member_phone}
+			<td>${paymentcancel.member_phone}
 			</td>
 			</tr>
 			<tr>
-			<td>¹İÈ¯¸¶ÀÏ¸®Áö
+			<td>ë°˜í™˜ë§ˆì¼ë¦¬ì§€
 			</td>
-			<td>${payment_cancel.payment_cancel_backmileage}
+			<td>${paymentcancel.payment_cancel_backmileage}
 			</td>
 			</tr>
 			<tr>
-			<td>È¸¼ö¸¶ÀÏ¸®Áö
+			<td>íšŒìˆ˜ë§ˆì¼ë¦¬ì§€
 			</td>
-			<td>${payment_cancel.payment_cancel_usemileage}
+			<td>${paymentcancel.payment_cancel_returnmileage}
 			</td>
 			</tr>
 	</table>
 	<br><br>
 	
-	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_list">¸®½ºÆ®·Î</a>
+	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_list">ë¦¬ìŠ¤íŠ¸ë¡œ</a>
 </div>
 
 </div>

@@ -27,6 +27,11 @@ public class Order_Dao {
 		return sqlSessionTemplate2.selectOne("kr.or.possys.Order_service.Order_Mapper.order_modify_form",table_order_id);
 	}
 	
+	public String get_price(String menu_id){
+		System.out.println("가격가져오기");
+		return sqlSessionTemplate2.selectOne("kr.or.possys.Order_service.Order_Mapper.get_price",menu_id);
+	}
+	
 	public List<Order> order_detail(String table_order_id){
 		System.out.println("주문상세실행");
 		return sqlSessionTemplate2.selectList("kr.or.possys.Order_service.Order_Mapper.order_detail",table_order_id);
