@@ -52,10 +52,14 @@
 		});
 	
 	</script>	
-
+<%@ include file="../modal/wide_menu.jsp" %>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
+<div class="container">
+<br/>
+<br/>
+<br/>
+<br/>
 <h1>식자재 입력폼</h1>
 	<form id="frm" action="${pageContext.request.contextPath}/member_update" method="post">
         <div class="form-group">전화번호 :
@@ -82,5 +86,6 @@
         <input type="button" id="btn" value="등록">
 		<input type="reset" id="reset" value="초기화">
     </form>
+    </div>
 </body>
 </html>

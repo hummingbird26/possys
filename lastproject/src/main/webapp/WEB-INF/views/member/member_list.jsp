@@ -37,12 +37,20 @@
             }
         
         </style>
+
+<%@ include file="../modal/wide_menu.jsp" %>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
+
+<%-- <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1> --%>
+
 <div class="container">
+	<br/>
+	<br/>
+	<br/>
+	<br/>
     <h1>MEMBER LIST</h1>
-    <div>전체행의 수 : ${memberCount}</div>
+    <div class="member">전체행의 수 : ${memberCount}</div>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -53,17 +61,18 @@
                 <th>member_join</th>
             </tr>
         </thead>
-        <tbody>
-            <c:forEach var="m" items="${list}">
-                <tr>
-                    <td><a href="${pageContext.request.contextPath}/member_information_view?member_phone=${m.member_phone}">${m.member_phone}</a></td>
+        <tbody id="retd">
+           <c:forEach var="m" items="${list}">
+                <tr class="retd">
+                 <td><a href="${pageContext.request.contextPath}/member_information_view?member_phone=${m.member_phone}">${m.member_phone}</a></td>
                     <td>${m.member_name}</td>
                     <td>${m.member_point}</td>
                     <td>${m.member_sign}</td>
                     <td>${m.member_join}</td>
                 </tr>
-            </c:forEach>
+           </c:forEach>
         </tbody>
+        
     </table>
     <ul class="pager">
         <c:if test="${currentPage < lastpage}">
@@ -113,20 +122,20 @@ $(document).ready(function(){
 						
 						
 						if(selbox == 'member_phone'){
-				    	$( "#search" ).autocomplete({
+				    	$( "#search2" ).autocomplete({
 					      source: member_phone
 				    	});
 						
 						}else if(selbox == 'member_name'){
-							$( "#search" ).autocomplete({
+							$( "#search2" ).autocomplete({
 							 source: member_name
 						    });	
 						}else if(selbox == 'member_sign'){
-							$( "#search" ).autocomplete({
+							$( "#search2" ).autocomplete({
 								 source: member_sign
 							    });	
 						}else if(selbox == 'member_join'){
-							$( "#search" ).autocomplete({
+							$( "#search2" ).autocomplete({
 								 source: member_join
 							    });	
 						}else if(selbox ==0){
@@ -142,9 +151,9 @@ $(document).ready(function(){
 			
 			var va = $("#selBox option:selected").val();
 			 var regExp = /\s/g;
-			var search =$('#search').val();
+			var search2 =$('#search2').val();
 			
-			if(search != null && search != "" && search != regExp){
+			if(search2 != null && search2 != "" && search2 != regExp){
 				 /* alert(search); */
 				frm.submit();	
 			}else{
@@ -156,7 +165,7 @@ $(document).ready(function(){
   </script>
 
     <div>
-    <form id="frm" name="frm" action="${pageContext.request.contextPath}/member_select" method="get">
+ <form id="frm" name="frm" action="${pageContext.request.contextPath}/member_select" method="get">
     	<select  id="selBox" name="selBox">
     	<option  value="0">-- 선택하세요--</option>
         <option  value="member_phone">핸드폰번호</option>
@@ -164,7 +173,7 @@ $(document).ready(function(){
         <option  value="member_sign">가입일자</option>
         <option  value="member_join">최근방문일자</option>
         </select>
-        <input type="input" name="search" id="search">
+      <input type="input" name="search2" id="search2">
         <input type="button" name="button" id="button" value="검색">
      </form>
     </div>

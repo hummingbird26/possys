@@ -17,4 +17,13 @@
 		from table_order
 		where table_order_id = #{table_order_id}
 	</select>
+	
+	 <select id="order_detail" parameterType = "String" resultType="kr.or.possys.Order_service.Order">
+		select table_order_id,
+		menu_id,
+		menu_name,
+		order_detail_ea,
+		order_detail_sum 
+		from order_detail where table_order_id= #{table_order_id}
+	</select>
 </mapper>

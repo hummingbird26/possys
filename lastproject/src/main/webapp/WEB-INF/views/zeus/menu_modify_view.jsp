@@ -27,8 +27,8 @@
 		<div>
 			<input type="submit" id="addmenu" value="수정">
 			<input type="reset" id="reset" value="초기화">
-			<a href="${pageContext.request.contextPath}/food_list">취소</a>
-			<a href="${pageContext.request.contextPath}/food_delete?food_id=${food.food_id}">삭제</a>
+			<a href="${pageContext.request.contextPath}/menu_list">취소</a>
+			<a href="${pageContext.request.contextPath}/menu_delete?menu_id=${menu.menu_id}">삭제</a>
 		</div>
 	</form>
 

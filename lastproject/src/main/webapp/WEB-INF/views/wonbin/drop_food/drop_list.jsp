@@ -31,6 +31,7 @@
 <div>전체 식자재 수 : ${dropcount}</div>
 	<table border=1>
 		<thead>
+			<th>선택</th>
 			<th>번호</th>
 			<th>폐기 번호</th>
 			<th>상품 번호</th>
@@ -44,6 +45,7 @@
 		<tbody>
 			<c:forEach varStatus="status" var="d" items="${list}">
 			<tr>
+				<td><input type="checkbox" id = "drop_chk"/></td>
 				<td>${(dropcount-status.index)-((currentPage-1)*pageRow)}</td>
 				<td>${d.drop_id}</td>
 				<td>${d.food_id}</td>
@@ -93,7 +95,6 @@
 			<input id="dbutton" type="button" value="검색">
 		</form>
 	</div>
-	
 	<div>
 		<a href="${pageContext.request.contextPath}/drop_add_form"><button>식자재 추가</button></a>
 	</div>

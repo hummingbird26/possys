@@ -2,6 +2,8 @@ package kr.or.possys.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,10 +54,13 @@ public class Payment_Controller {
 	
 	//리스트로 값을 받아온다
 	@RequestMapping(value={"/tori/payment/payment_list"}, method = RequestMethod.GET)
-	public String paymentlist(Model model,@RequestParam(value="currentpage",required=false,defaultValue="1") int currentPage){
+	public String paymentlist(Model model,@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage){
 		System.out.println("02_Payment_Controller.java -> paymentlist");
 		int paymentcount = pdao.getPaymentCount();
+		System.out.println(paymentcount);
+		System.out.println("02_1 Payment_Controller.java -> paymentlist");
 		int pagePerRow = 10;
+		int expage = 1;
 		int lastPage = (int)(Math.ceil((double)paymentcount/(double)pagePerRow));
 		List<Payment> list = pdao.getPaymentList(currentPage, pagePerRow);
 		System.out.println(paymentcount);
@@ -63,6 +68,8 @@ public class Payment_Controller {
 		System.out.println(lastPage);
 		// paymentcount 및 pagePerRpw(구 pageRow -> list페이지에는 pagePerRow로 el식의 이름이 작성되어 있는 것을 확인하고(무분별 복붙의 폐해) 변수명을 해당 이름에 맞게 수정 및 double형 타입 캐스팅)
 		
+		model.addAttribute("expage",expage);
+		model.addAttribute("pagePerRow",pagePerRow);
 		model.addAttribute("paymentcount", paymentcount);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPage", lastPage);
@@ -71,6 +78,7 @@ public class Payment_Controller {
 		return "/tori/payment/payment_list";
 		
 	}
+	
 	
 	//리스트에서 뷰로 넘어간다
 	@RequestMapping(value={"/tori/payment/payment_view"}, method = RequestMethod.GET)
@@ -90,19 +98,61 @@ public class Payment_Controller {
 		
 	}
 	
-	//검색리스트 조회과정을 수행한다.
-		@RequestMapping(value="/tori/payment/payment_search_action", method = RequestMethod.POST)
-		public String paymentsearch(Payment Payment){
-			System.out.println("01_1 Payment_Controller.java -> paymentadd");
-			
-			String id = Payment.getPayment_id();
-			System.out.println(id+"<------ 컨트롤러 값 확인 ");
-			
-			
-			pdao.insertPayment(Payment);
-			return "/tori/payment/payment_search_list";
-			
-		}
+	//조건별 검색 리스트 표현
+	@RequestMapping(value="/tori/payment/payment_search_action", method = RequestMethod.GET)
+	public String paymentSRsearch(Model model , 
+			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
+			@RequestParam(value="select") String select,
+			@RequestParam(name="keyWord") String keyWord){
+		System.out.println("05 Payment_Controller.java -> paymentSRlist");
+		//int paymentSRcount = pdao.paymentSRsearch(select,keyWord);
+		int paymentSRcount = pdao.getPaymentCount();
+		int pagePerRow = 10;
+		int lastPage = (int)(Math.ceil((double)paymentSRcount/(double)pagePerRow));
+		List<Payment> list = pdao.paymentSRlist(select,keyWord,currentPage,pagePerRow);
+		int expage = 1;
+		
+		model.addAttribute("select",select);
+		model.addAttribute("keyWord",keyWord);
+		model.addAttribute("expage",expage);
+		model.addAttribute("pagePerRow",pagePerRow);
+		model.addAttribute("paymentSRcount",paymentSRcount);
+		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("lastPage",lastPage);
+		model.addAttribute("list",list);
+		
+		return "/tori/payment/payment_search_list";
+	}
+	
+	
+	//조건별 검색결과 리스트 표현
+	@RequestMapping(value="/tori/payment/payment_search_list", method = RequestMethod.GET)
+	public String paymentsearchlist(Model model,@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage){
+		System.out.println("06_Payment_Controller.java -> paymentlist");
+		int paymentSRcount = pdao.getPaymentCount();
+		System.out.println(paymentSRcount);
+		System.out.println("06_1 Payment_Controller.java -> paymentlist");
+		int pagePerRow = 10;
+		int expage = 1;
+		int lastPage = (int)(Math.ceil((double)paymentSRcount/(double)pagePerRow));
+		List<Payment> list = pdao.getPaymentList(currentPage, pagePerRow);
+		System.out.println(paymentSRcount);
+		System.out.println(Math.ceil(paymentSRcount/pagePerRow));
+		System.out.println(lastPage);
+		// paymentcount 및 pagePerRpw(구 pageRow -> list페이지에는 pagePerRow로 el식의 이름이 작성되어 있는 것을 확인하고(무분별 복붙의 폐해) 변수명을 해당 이름에 맞게 수정 및 double형 타입 캐스팅)
+		
+		model.addAttribute("expage",expage);
+		model.addAttribute("pagePerRow",pagePerRow);
+		model.addAttribute("paymentSRcount", paymentSRcount);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("list",list);
+		
+		return "/tori/payment/payment_search_list";
+		
+	}
+	
+	
 }
 	
 	

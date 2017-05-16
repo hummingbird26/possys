@@ -101,9 +101,13 @@ $(document).ready(function(){
 });
 </script>
 <title>회원 탈퇴 Page</title>
+<%@ include file="../modal/wide_menu.jsp" %>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
+<br/>
+<br/>
+<br/>
+<br/>
 <div class="container">
 <h1>회원 탈퇴 화면</h1>
  

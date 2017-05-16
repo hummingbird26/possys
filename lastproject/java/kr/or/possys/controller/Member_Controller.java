@@ -2,7 +2,11 @@ package kr.or.possys.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
+import java.sql.ResultSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,28 +28,50 @@ public class Member_Controller {
 	@Autowired
 	private	Member_Dao	Mdao;
 	private	Member	m;
+	private ResultSet result;
 	
+	//알림창 테스트
+	@RequestMapping(value="al")
+	public String alram(){
+		return "alram";
+	}
+	//실시간 검색 호출
+	@RequestMapping(value="real_time")
+	public String real_time(){
+		return "/member/real_time";
+	}
 	//제이손 방식으로 받아오기
 	@RequestMapping(value="/json", method = RequestMethod.GET)
 	@ResponseBody
-	public void jj(Model model
-			 ,HttpServletResponse re
-			 ,@RequestParam(value="currentPage",required=false,defaultValue="1" )int currentPage) throws IOException{
-		//한글화
-				re.setCharacterEncoding("EUC-KR");
+	public void jj(@RequestParam(value="insert") String insert
+				,Model model
+				,HttpServletResponse re
+				,@RequestParam(value="currentPage",required=false,defaultValue="1" )int currentPage) throws IOException{
+				System.out.println("josn 호출확인");
+				//ajax로 받아온 매개변수 입력값
+				System.out.println(insert+"입력값");
+				
+				URLEncoder.encode(insert , "UTF-8");
+				//한글화
+				re.setCharacterEncoding("UTF-8");
 				//out 객체 사용하기 위해 준비
 				PrintWriter out = re.getWriter();
+				
 				
 				int pagePerRow = 10;
 				//json방식 사용
 				JSONArray memberListJson = null;
+				
+				
 				//리스트 쿼리 호출
-				List<Member> list = Mdao.getMemberList(currentPage, pagePerRow);
+				List<Member> list = Mdao.AjaxMemberList(currentPage, pagePerRow,insert);
 				//받아온 리스트 값을 제이손 객체에 넣어줌 
 				memberListJson = JSONArray.fromObject(list);
+				System.out.println(memberListJson);
 				
 				//새로운 화면에서 json방식으로 받아온 값 출력
 				out.write(memberListJson.toString());
+				
 				model.addAttribute("jsonString", memberListJson.toString());
 				//메모리 초기화
 				out.flush();
@@ -92,7 +118,7 @@ public class Member_Controller {
 				System.out.println("memberselect메서드 호출    Member_Controller.java");
 				
 				
-				String search =	request.getParameter("search");
+				String search =	request.getParameter("search2");
 				String selBox = request.getParameter("selBox");
 				
 				mVo m = new mVo();

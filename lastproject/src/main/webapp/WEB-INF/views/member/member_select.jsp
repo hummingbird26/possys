@@ -41,10 +41,15 @@
             }
         
         </style>
+<%@ include file="../modal/wide_menu.jsp" %>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
+<%-- <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1> --%>
 <div class="container" id="container">
+	<br/>
+	<br/>
+	<br/>
+	<br/>
     <h1>MEMBER LIST</h1>
     <div>전체행의 수 : ${SmemberCount}</div>
     <table class="table table-striped">
@@ -60,14 +65,14 @@
          
         <tbody>
        
-            <c:forEach var="m" items="${Mlist}">
+          <c:forEach var="m" items="${Mlist}">
                 <tr class="sch1">
-                    <td><a href="${pageContext.request.contextPath}/member_information_view?member_phone=${m.member_phone}">${m.member_phone}</a></td>
+                   <td><a href="${pageContext.request.contextPath}/member_information_view?member_phone=${m.member_phone}">${m.member_phone}</a></td>
                     <td>${m.member_name}</td>
                     <td>${m.member_point}</td>
                     <td>${m.member_sign}</td>
                     <td>${m.member_join}</td>
-                </tr>
+                 </tr>
             
             </c:forEach>
             
@@ -132,8 +137,8 @@ $('.sch1').highlight(sKey);
 
 </script>
 
-    <div>
-    <form id="frm" name="frm" action="${pageContext.request.contextPath}/member_select" method="get">
+  <div>
+<%--     <form id="frm" name="frm" action="${pageContext.request.contextPath}/member_select" method="get">
     	<select  id="selBox" name="selBox">
     	<option>-- 선택하세요--</option>
         <option  value="member_phone">핸드폰번호</option>
@@ -141,13 +146,13 @@ $('.sch1').highlight(sKey);
         <option  value="member_sign">가입일자</option>
         <option  value="member_join">최근방문일자</option>
         </select>
-        <input type="search" name="search" id="search">
+        <input type="search" name="search2" id="search2">
         <input type="button" name="button" id="button" value="검색">
      	
-     </form>
+     </form> --%>
      <a href="${pageContext.request.contextPath}/member_list">목록</a>
     
-    </div>
+    </div> 
 </div>
 </body>
 </html>

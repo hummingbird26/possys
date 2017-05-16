@@ -3,7 +3,23 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.possys.Member_sevice.Member_Mapper">
+<!-- 실시간 리스트 쿼리 -->
+<select id="AjaxMemberList" parameterType="java.util.HashMap" resultType="kr.or.possys.Member_sevice.Member">
+SELECT  member_phone
+			,member_name
+			, member_point
+			, member_sign
+			,member_join
+			FROM member
+			where member_phone like concat('%',#{insert},'%')
+			or member_name like concat('%',#{insert},'%')
+			or member_point like concat('%',#{insert},'%')
+			or member_sign like concat('%',#{insert},'%')
+			or member_join like concat('%',#{insert},'%')
+			ORDER BY member_sign DESC 
+			LIMIT #{beginRow},#{pagePerRow}
 
+</select>
 <!-- 검색 조건에 맞는 회원수 조회 쿼리 -->
 <select id="getsearchCount" parameterType="kr.or.possys.Member_sevice.mVo" resultType="int">
 
