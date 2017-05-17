@@ -26,7 +26,7 @@
 <title></title>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
+<h1><center><a href="${pageContext.request.contextPath}/home">홍락이짱</a></center></h1>
 <div class="container">
     <h1></h1>
     <form id="addform" action="${pageContext.request.contextPath}/menu_add_form" method="post">
@@ -57,7 +57,6 @@
         <div>
 			<input type="submit" id="addmenu" value="등록">
 			<input type="reset" id="reset" value="초기화">
-			<a href="${pageContext.request.contextPath}/menu_add_form">새로고침</a>
 		</div>
     </form>
 </div>

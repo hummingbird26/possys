@@ -55,5 +55,13 @@ public class Food_Per_Menu_Controller {
 		return "/zeus/menu_per_view";
 	
 	}
+	@RequestMapping(value="/menu_per_modify", method = RequestMethod.GET)
+	public String menuview(Model model, @RequestParam(value="menu_id",required=true) String menu_id){
+		System.out.println("MenuController.java ->>menuview ฟไรป");
+		Menu menu = dao.menuview(menu_id);
+		model.addAttribute("menu",menu);
+		return "/zeus/menu_per_modify";
+	}
+	
 	
 }
