@@ -7,18 +7,26 @@
 <title>Insert title here</title>
 </head>
 <body>
-<button id="requestPermissionButton" class="btn btn-warning btn-lg btn-block">데스크탑 알림 권한 요청</button>
-<hr />
+<button id="requestPermissionButton" class="btn btn-warning btn-lg btn-block">데스크탑 알림 권한 요청(<---1번 click)</button>
+</br>
 <div id="notificationBlock" class="form-group">
-    <label class="control-label">알림 메시지</label>
+    <label class="control-label">(알림 메시지 내용 입력후 주문신청 click)</label></br>
+   주문내역입력</br>
+<input type="text" id="test1"></br>
+<input type="text" id="test2"></br>
+<input type="text" id="test3"></br>
+<input type="text" id="test4">
+   
+   
     <div class="input-group">
-        <span class="input-group-addon">메시지</span>
-        <input id="notificationMessage" type="text" class="form-control" disabled/>
+        <!-- <span class="input-group-addon">메시지</span>
+        <input id="notificationMessage" type="text" class="form-control" disabled/> -->
         <span class="input-group-btn">
-            <button id="notificationButton" class="btn btn-info" type="button" disabled>알림</button>
+            <button id="notificationButton" class="btn btn-info" type="button" disabled>주문신청</button>(<----2번 click)
         </span>
     </div>
 </div>
+
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 <script>
@@ -52,12 +60,11 @@ requestPermissionButton.on("click", function () {
 
 //데스크탑 알림 버튼을 누르면,
 notificationButton.on("click", function () {
-	$.ajax({
-		type:'GET',
-		url:"${pageContext.request.contextPath}/json",
-		
-	});
-    var message = notificationMessage.val();
+	
+	var test1 = $('#test1').val()+$('#test2').val()+$('#test3').val()+$('#test4').val();
+	/* alert(test1); */
+    /* var message = notificationMessage.val(); */
+    var message = test1
     
     //메시지를 입력한 경우에만,
     if (message !== null && message.length > 0) {
@@ -68,13 +75,13 @@ notificationButton.on("click", function () {
         }
        
         //데스크탑 알림 요청
-        var notification = new Notification("데스크탑 알림 예제 타이틀", options);
+        var notification = new Notification("주문신청내역", options);
         
         //알림 후 5초 뒤,
         setTimeout(function () {
             //얼람 메시지 닫기
             notification.close();
-        }, 5000);
+        }, 50000);
     }
 });
 </script>

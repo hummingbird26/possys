@@ -49,18 +49,19 @@
       </li>
       <li ><a href="#" title="Link">member</a>
         <ul >
-          <li ><a href="${pageContext.request.contextPath}/real_time" title="link ">실시간검색</a></li>
-          <li ><a href="${pageContext.request.contextPath}/member_list" title="Link">회원목록</a></li>
+          <li ><a href="${pageContext.request.contextPath}/real_time" title="link ">실시간검색(아직 한글X)</a></li>
+          <li ><a href="${pageContext.request.contextPath}/member_list" title="Link">회원목록(회원관리)</a></li>
+          <li ><a href="${pageContext.request.contextPath}/ho" title="Link">알림창(test)</a></li>
         </ul>
       </li>
-      <li ><a href="#Link" title="Link">Portfolio</a>
+      <li ><a href="#Link" title="Link">Order</a>
         <ul >
           <li ><a href="#Link" title="Link">Link</a></li>
           <li ><a href="#Link" title="Link">Link</a></li>
           <li ><a href="#Link" title="Link">Link</a></li>
         </ul>
       </li>
-      <li ><a href="#Link" title="Link">Work</a>
+      <li ><a href="#Link" title="Link">food</a>
         <ul >
           <li ><a href="#Link" title="Link">Link</a></li>
           <li ><a href="#Link" title="Link">Link</a></li>
@@ -68,21 +69,27 @@
           <li ><a href="#Link" title=" Link"> Link</a></li>
         </ul>
       </li>
-      <li ><a href="#Link" title="Link">Services</a>
+      <li ><a href="#Link" title="Link">menu</a>
         <ul >
           <li ><a href="#Link" title="Link">Link </a></li>
           <li ><a href="#Link" title="Link">Link</a></li>
           <li ><a href="#Link" title="Link">Link</a></li>
         </ul>
       </li>
-      <li ><a href="#Link" title="Link">Contact</a></li>
+      <li ><a href="#Link" title="Link">Payment</a>
+      <ul>
+          <li ><a href="#Link" title="Link">Link </a></li>
+          <li ><a href="#Link" title="Link">Link</a></li>
+          <li ><a href="#Link" title="Link">Link</a></li>
+        </ul>
+        </li>
     </ul>
   </nav>
-
+<!-- 
   <form class="search_box" id="search_box" action="/search/">
     <input name="search_criteria" id="search" placeholder="Search here">
     <input class="search_icon" value="Search" type="submit">
-  </form>
+  </form> -->
 </div>
 
 

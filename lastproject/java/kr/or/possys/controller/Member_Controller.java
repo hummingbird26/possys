@@ -3,13 +3,11 @@ package kr.or.possys.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
-import java.sql.ResultSet;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import kr.or.possys.Member_sevice.Member;
 import kr.or.possys.Member_sevice.Member_Dao;
 import kr.or.possys.Member_sevice.mVo;
@@ -28,13 +27,14 @@ public class Member_Controller {
 	@Autowired
 	private	Member_Dao	Mdao;
 	private	Member	m;
-	private ResultSet result;
 	
-	//알림창 테스트
-	@RequestMapping(value="al")
+	
+	/*알람창 호출*/
+	@RequestMapping(value="ho")
 	public String alram(){
 		return "alram";
 	}
+
 	//실시간 검색 호출
 	@RequestMapping(value="real_time")
 	public String real_time(){
