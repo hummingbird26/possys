@@ -1,5 +1,7 @@
 package kr.or.possys.Order_service;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Order {
 	
 	private String table_order_id;
@@ -12,8 +14,33 @@ public class Order {
 	private String order_detail_ea;
 	private String order_detail_sum;
 	private String menu_price;
-
 	
+	private String orgname;
+	private String newname;
+	
+	private MultipartFile order_file;
+	
+	
+
+
+	public MultipartFile getOrder_file() {
+		return order_file;
+	}
+	public void setOrder_file(MultipartFile order_file) {
+		this.order_file = order_file;
+	}
+	public String getOrgname() {
+		return orgname;
+	}
+	public void setOrgname(String orgname) {
+		this.orgname = orgname;
+	}
+	public String getNewname() {
+		return newname;
+	}
+	public void setNewname(String newname) {
+		this.newname = newname;
+	}
 	public String getMenu_price() {
 		return menu_price;
 	}

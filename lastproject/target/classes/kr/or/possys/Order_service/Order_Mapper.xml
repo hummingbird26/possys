@@ -78,4 +78,17 @@
 		<delete id = "order_detail_delete" parameterType = "String">
 		delete from order_detail where table_order_id=#{table_order_id}
 		</delete>
+		
+		<select id="menu_list" resultType="kr.or.possys.Menu_service.Menu">
+		select menu_id
+		,menu_name
+		,menu_cate
+		,menu_price
+		,menu_sprice
+		,menu_sale
+		,menu_kcal
+		,newname
+		from menu
+		order by menu_id desc
+		</select>
 </mapper>

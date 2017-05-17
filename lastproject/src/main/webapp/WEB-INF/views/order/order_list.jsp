@@ -11,7 +11,7 @@
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 	<table>
 		<tbody>
-			<c:forEach var="f" items="${list}">
+			<c:forEach var="f" items="${order_list}">
 			<tr>
 				<td><a href="${pageContext.request.contextPath}/order_detail?table_order_id=${f.table_order_id}">${f.table_order_id}</a></td>
 				<td>${f.table_order_num}</td>

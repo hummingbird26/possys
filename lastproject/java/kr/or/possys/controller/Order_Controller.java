@@ -1,14 +1,35 @@
 package kr.or.possys.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.ServletContextAware;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
+import kr.or.possys.Menu_service.Menu;
+import kr.or.possys.Menu_service.Menu_Dao;
 
 import kr.or.possys.Order_service.Order;
 import kr.or.possys.Order_service.Order_Dao;
@@ -16,15 +37,16 @@ import kr.or.possys.Order_service.Order_Dao;
 
 
 @Controller
-public class Order_Controller {
+public class Order_Controller{
 	@Autowired
 	private Order_Dao odao;
+
 
 	@RequestMapping(value="/order_list", method = RequestMethod.GET)
 	public String order_list(Model model){
 		System.out.println("오더리스트 요청");
 		List<Order> list = odao.order_list();
-		model.addAttribute("list", list);
+		model.addAttribute("order_list", list);
 		return "/order/order_list";
 	}
 	
@@ -36,7 +58,7 @@ public class Order_Controller {
 		Order order = odao.order_modify_form(table_order_id);
 		List<Order> list = odao.order_detail(table_order_id);
 		model.addAttribute("order",order);
-		model.addAttribute("list",list);
+		model.addAttribute("order_list",list);
 		return "/order/order_detail";
 	}
 	
@@ -91,8 +113,9 @@ public class Order_Controller {
 		return "redirect:/order_list";
 	}
 	
+	
 	@RequestMapping(value="/order_modify_form", method = RequestMethod.GET)
-	public String order_modify_form(Model model,@RequestParam(value="table_order_id") String table_order_id){
+	public String order_modify_form(Model model,@RequestParam(value="table_order_id") String table_order_id,@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage){
 		System.out.println("주문수정폼 요청");
 		Order order = odao.order_modify_form(table_order_id);
 		List<Order> list = odao.order_detail(table_order_id);
@@ -102,11 +125,41 @@ public class Order_Controller {
 			list.get(i).setMenu_price(menu_price);
 			System.out.println(list.get(i).getMenu_price()+"가격");
 		}
+		//메뉴목록시작
+		List<Menu> menu_list = odao.menu_list();
+
+		model.addAttribute("menu_list", menu_list);
+		//메뉴목록끝
+		
 		model.addAttribute("order",order);
-		model.addAttribute("list",list);
+		model.addAttribute("order_list",list);
 		return "/order/order_modify_form";
 		
 	}
+
+	@RequestMapping(value="/order_file", method = RequestMethod.GET)
+	public String order_file(Model model){
+
+		return "/order/file";
+	}
 	
-	
+	@RequestMapping(value="/order_insert", method = RequestMethod.POST)
+    public String order_file_insert(Order order, HttpServletRequest request, HttpSession session){
+        
+        String path = request.getRealPath("/resources/upload");
+        String path2 = request.getContextPath()+"/resources/upload";
+        System.out.println(path);
+        System.out.println(path2);
+        String filename =order.getOrder_file().getOriginalFilename();
+        order.setNewname(path2+"/"+filename);
+        System.out.println(order.getNewname());
+        
+        try {
+        	order.getOrder_file().transferTo(new File(path+"/"+filename));
+        }catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+		return null;
+	}	
 }

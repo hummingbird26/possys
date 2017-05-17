@@ -1,5 +1,7 @@
 package kr.or.possys.Menu_service;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Menu {
 	private String menu_id;
 	private String menu_name;
@@ -8,10 +10,33 @@ public class Menu {
 	private int menu_sprice;
 	private String menu_sale;
 	private int menu_kcal;
-	private String menu_picture;
-	private String menu_explanation;
 	private String food_id;
 	
+	private String orgname;
+	private String newname;
+	
+	private MultipartFile order_file;
+	
+	
+	
+	public String getOrgname() {
+		return orgname;
+	}
+	public void setOrgname(String orgname) {
+		this.orgname = orgname;
+	}
+	public String getNewname() {
+		return newname;
+	}
+	public void setNewname(String newname) {
+		this.newname = newname;
+	}
+	public MultipartFile getOrder_file() {
+		return order_file;
+	}
+	public void setOrder_file(MultipartFile order_file) {
+		this.order_file = order_file;
+	}
 	public String getFood_id() {
 		return food_id;
 	}
@@ -60,16 +85,5 @@ public class Menu {
 	public void setMenu_kcal(int menu_kcal) {
 		this.menu_kcal = menu_kcal;
 	}
-	public String getMenu_picture() {
-		return menu_picture;
-	}
-	public void setMenu_picture(String menu_picture) {
-		this.menu_picture = menu_picture;
-	}
-	public String getMenu_explanation() {
-		return menu_explanation;
-	}
-	public void setMenu_explanation(String menu_explanation) {
-		this.menu_explanation = menu_explanation;
-	}
+
 }

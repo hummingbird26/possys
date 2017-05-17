@@ -10,20 +10,16 @@
 		 ,menu_cate
 		 ,menu_price
 		 ,menu_sprice
-		 ,menu_sale
 		 ,menu_kcal
-		 ,menu_picture
-		 ,menu_explanation)		
+		 ,newname)
 		select
 		concat('MN',(select date_format(sysdate(),'%y%m%d%s')))
 		,#{menu_name}	
 		,#{menu_cate}
 		,#{menu_price}
 		,#{menu_sprice}
-		,#{menu_sale}
 		,#{menu_kcal}
-		,#{menu_picture}
-		,#{menu_explanation}
+		,#{newname}
 		</insert>
 		<select id="getmenucount" resultType="int">
 		SELECT COUNT(*) FROM menu
@@ -36,12 +32,11 @@
 		,menu_sprice
 		,menu_sale
 		,menu_kcal
-		,menu_picture
-		,menu_explanation	
+		,newname
 		from menu
 		order by menu_id desc
 		limit #{beginRow}, #{pageRow}
-	</select>
+		</select>
 	<select id="menuview" parameterType="string" resultType="kr.or.possys.Menu_service.Menu">
 		select *	
 		from menu where menu_id=#{menu_id}	
@@ -71,8 +66,7 @@
 		,menu_sprice
 		,menu_sale
 		,menu_kcal
-		,menu_picture
-		,menu_explanation
+		,newname
 		from menu
 		where ${selbox} like concat('%',#{keyWord},'%')
 		order by menu_id desc

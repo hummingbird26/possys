@@ -13,10 +13,9 @@
 		<div>테이블 번호 : ${order.table_order_num}</div>
 		<div>주문종결 :${order.table_order_end}</div>
 		<div>주문날짜 :${order.table_order_date}</div>
-				<c:forEach var="f" items="${list}">
+				<c:forEach var="f" items="${order_list}">
 					<div>메뉴코드 : ${f.menu_id}" 메뉴명 : ${f.menu_name}" 수량 : ${f.order_detail_ea}" 소계 :"${f.order_detail_sum}"</div>
-					
-					
+										
 				</c:forEach>
 
 <br>
