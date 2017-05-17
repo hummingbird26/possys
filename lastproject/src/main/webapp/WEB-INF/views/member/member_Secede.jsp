@@ -4,6 +4,44 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+   a, a:hover, a:visited{color:black; text-decoration:none;}
+ 
+   #pop{
+    width:300px; height:100px; background:#3d3d3d; color:#fff; 
+    position:absolute; top:10px; left:500px; text-align:center; 
+    border:2px solid #000;
+   }
+ 
+   #pop_bt{
+    border:1px solid #000;
+    width:100px; margin:auto;
+    margin-top:300px;
+   cursor: pointer;
+    font-weight:bold;
+    text-align:center;
+    padding:5px;
+   }
+ 
+   #close{
+    width:100px; margin:auto; cursor:pointer; font-weight:bold;
+   }
+   #rephone{
+
+   }
+   .bt{
+   color:black;
+   }
+   .text{
+   color:black;
+   style="text-align:center; 
+   width:5px; 
+   height:20px; 
+   letter-spacing: -5px"
+   
+   }
+ </style>
+ 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- bootstrap을 사용하기 위한 CDN주소 -->
 <!-- Latest compiled and minified CSS -->
@@ -19,15 +57,57 @@
 <script>
 $(document).ready(function(){
 	$('#btn').click(function(){
-	alert('탈퇴 승인 처리 되었습니다.');
-		frm.submit();
+	var reCheck = confirm('탈퇴 처리 하시겠습니까?');
+		
+	if(reCheck){
+		//yes 부분
+	    $('#pop').show();
+			 $('#close').click(function() {
+			    $('#pop').hide();
+			    });
+				$('#ok').click(function(){
+		
+					var regExp = /\s/g;
+					var phone = $('#rephone').val();
+					var phone1 = $('#rephone1').val();
+					var phone2 = $('#rephone2').val();
+					if($('#rephone').val()==""||phone.match(regExp)){
+						alert('첫 번째 박스 공백을 확인하세요'); 
+						/* frm.submit(); */	
+					}else if($('#rephone1').val()==""||phone.match(regExp)){
+						alert('두번째 박스 공백을 확인하세요'); 
+						
+					}else if($('#rephone2').val()==""||phone.match(regExp)){
+						alert('마지막 박스 공백을 확인하세요'); 
+					}else{
+						
+						var allphone =phone+"-"+phone1+"-"+phone2;
+						
+						if(allphone == $('#member_phone').val()){
+							alert('탈퇴 처리 완료');
+							frm.submit();
+						}else{
+							alert('다시 입력해 주세요')
+						}
+					}
+				});
+		}else{
+			//no 부분
+		}
+	
+	/* alert('탈퇴 승인 처리 되었습니다.'); */
+		/* frm.submit(); */
 	});
 });
 </script>
 <title>회원 탈퇴 Page</title>
+<%@ include file="../modal/wide_menu.jsp" %>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
+<br/>
+<br/>
+<br/>
+<br/>
 <div class="container">
 <h1>회원 탈퇴 화면</h1>
  
@@ -58,5 +138,18 @@ $(document).ready(function(){
     </form>
     
 </div>
+<div id="pop_bt">
+   팝업띄우기
+  </div>
+ 
+  <div id="pop" style="display:none;">
+    <div style="height:370px;">
+      	전화번호를 입력해 주세요
+     <center><input class="text" id="rephone" type="text" size="3"> - <input class="text" id="rephone1" type="text"  size="3"> - <input class="text" id="rephone2" type="text"  size="3"></center>
+    </br>
+    <center><b><button class="bt" id="ok">submit</button>	</b><button class="bt" id="close" style="width:50px;">close</button></center>
+    </div>
+    
+  </div>
 </body>
 </html>

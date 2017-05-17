@@ -37,12 +37,19 @@
             }
         
         </style>
+ <%@ include file="../modal/wide_menu.jsp" %>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
+
+<%-- <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1> --%>
+
 <div class="container">
+	<br/>
+	<br/>
+	<br/>
+	<br/>
     <h1>MEMBER LIST</h1>
-    <div>전체행의 수 : ${memberCount}</div>
+    <div class="member">전체행의 수 : ${memberCount}</div>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -53,17 +60,18 @@
                 <th>member_join</th>
             </tr>
         </thead>
-        <tbody>
-            <c:forEach var="m" items="${list}">
-                <tr>
-                    <td><a href="${pageContext.request.contextPath}/member_information_view?member_phone=${m.member_phone}">${m.member_phone}</a></td>
+        <tbody id="retd">
+           <c:forEach var="m" items="${list}">
+                <tr class="retd">
+                 <td><a href="${pageContext.request.contextPath}/member_information_view?member_phone=${m.member_phone}">${m.member_phone}</a></td>
                     <td>${m.member_name}</td>
                     <td>${m.member_point}</td>
                     <td>${m.member_sign}</td>
                     <td>${m.member_join}</td>
                 </tr>
-            </c:forEach>
+           </c:forEach>
         </tbody>
+        
     </table>
     <ul class="pager">
         <c:if test="${currentPage < lastpage}">
@@ -83,47 +91,88 @@
         </c:if>
     </ul>
     
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script type="text/javascript"> 
+ <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<script type="text/javascript"> 
 $(document).ready(function(){
-	$('#button').click(function(){
+		  	var jsonString = '${jsonString}';
+		  	var memberList = eval("("+jsonString+")");
+		  /* var pp = memberList.member_name; */
+		 	var member_phone = new Array();
+		  	var member_name = new Array();
+		  	var member_sign = new Array();
+		  	var member_join = new Array();
+		  
+		  for(var i=0; i < memberList.length; i++){
+				var memberObject = memberList[i];
+			
+				console.log(memberObject.member_phone)
 		
-		var va = $("#selBox option:selected").val();
-		 var regExp = /\s/g;
-		if(va != null || va != "" || va !=regExp){
-			/* alert(va); */
-			frm.submit();	
-		}else{
-			 alert('검색조건을 선택하세요');
-		}
-		
-	});
-});
+				member_phone.push(memberObject.member_phone);
+				member_name.push(memberObject.member_name);
+				member_sign.push(memberObject.member_sign);
+				member_join.push(memberObject.member_join);
+		  		}
+		    /* alert(member_phone); */
+		  
+					$('#selBox').change(function(){
+						var selbox = $('#selBox').val();
+						
+						
+						if(selbox == 'member_phone'){
+				    	$( "#search2" ).autocomplete({
+					      source: member_phone
+				    	});
+						
+						}else if(selbox == 'member_name'){
+							$( "#search2" ).autocomplete({
+							 source: member_name
+						    });	
+						}else if(selbox == 'member_sign'){
+							$( "#search2" ).autocomplete({
+								 source: member_sign
+							    });	
+						}else if(selbox == 'member_join'){
+							$( "#search2" ).autocomplete({
+								 source: member_join
+							    });	
+						}else if(selbox ==0){
+						alert('선택하세요');
+					
+						}
+					});
+			});
 </script>
+<script type="text/javascript">
+$(document).ready(function(){
+		$('#button').click(function(){
+			
+			var va = $("#selBox option:selected").val();
+			 var regExp = /\s/g;
+			var search2 =$('#search2').val();
+			
+			if(search2 != null && search2 != "" && search2 != regExp){
+				 /* alert(search); */
+				frm.submit();	
+			}else{
+				 alert('내용을 입력 하세요');
+			}
+		}); 				
+}); 
 
-<!-- <script type="text/javascript"> 
-
-    function change1(obj){
-        obj.style.background = '#FFD8D8';
-        obj.style.color = 'white';
-       /*  $(obj).css("background-color", "#FFD8D8"); 
-        $(obj).siblings().removeClass("selected"); */
-    }
-    
-
-</script> -->
-
+  </script>
 
     <div>
-    <form id="frm" name="frm" action="${pageContext.request.contextPath}/member_select" method="get">
+ <form id="frm" name="frm" action="${pageContext.request.contextPath}/member_select" method="get">
     	<select  id="selBox" name="selBox">
-    	<option>-- 선택하세요--</option>
+    	<option  value="0">-- 선택하세요--</option>
         <option  value="member_phone">핸드폰번호</option>
         <option  value="member_name">이름</option>
         <option  value="member_sign">가입일자</option>
         <option  value="member_join">최근방문일자</option>
         </select>
-        <input type="search" name="search" id="search">
+      <input type="input" name="search2" id="search2">
         <input type="button" name="button" id="button" value="검색">
      </form>
     </div>

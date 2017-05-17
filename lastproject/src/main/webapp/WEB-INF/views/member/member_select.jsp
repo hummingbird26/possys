@@ -41,10 +41,15 @@
             }
         
         </style>
+<%@ include file="../modal/wide_menu.jsp" %>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
+<%-- <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1> --%>
 <div class="container" id="container">
+	<br/>
+	<br/>
+	<br/>
+	<br/>
     <h1>MEMBER LIST</h1>
     <div>전체행의 수 : ${SmemberCount}</div>
     <table class="table table-striped">
@@ -60,14 +65,14 @@
          
         <tbody>
        
-            <c:forEach var="m" items="${Mlist}">
+          <c:forEach var="m" items="${Mlist}">
                 <tr class="sch1">
-                    <td><a href="${pageContext.request.contextPath}/member_information_view?member_phone=${m.member_phone}">${m.member_phone}</a></td>
+                   <td><a href="${pageContext.request.contextPath}/member_information_view?member_phone=${m.member_phone}">${m.member_phone}</a></td>
                     <td>${m.member_name}</td>
                     <td>${m.member_point}</td>
                     <td>${m.member_sign}</td>
                     <td>${m.member_join}</td>
-                </tr>
+                 </tr>
             
             </c:forEach>
             
@@ -95,22 +100,25 @@
 
 <script type="text/javascript" src="/js/jquery-1.8.0.min.js'" charset="utf-8"></script>
 <script type="text/javascript" src="/js/jquery.highlight-4.js"></script>
-<script type="text/javascript"> 
+<script type="text/javascript">
 $(document).ready(function(){
-	$('#button').click(function(){
-		
-		var va = $("#selBox option:selected").val();
-		 var regExp = /\s/g;
-		if(va != null || va != "" || va !=regExp){
-			/* alert(va); */
-			frm.submit();	
-		}else{
-			 alert('검색조건을 선택하세요');
-		}
-		
-	});
-});
+		$('#button').click(function(){
+			
+			var va = $("#selBox option:selected").val();
+			 var regExp = /\s/g;
+			var search =$('#search').val();
+			
+			if(search != null && search != "" && search != regExp){
+				 /* alert(search); */
+				frm.submit();	
+			}else{
+				 alert('내용을 입력 하세요');
+			}
+		}); 				
+}); 
 
+  </script>
+<script type="text/javascript">
 var sKey1 = '${sessionScope.m.search}'; // 해당 검색어
 if(sKey1 != ''){
 $('.sch1').highlight(sKey1); // 하이라이트(여러개의 검색어라면 단순하게 여러번 사용
@@ -129,8 +137,8 @@ $('.sch1').highlight(sKey);
 
 </script>
 
-    <div>
-    <form id="frm" name="frm" action="${pageContext.request.contextPath}/member_select" method="get">
+  <div>
+<%--     <form id="frm" name="frm" action="${pageContext.request.contextPath}/member_select" method="get">
     	<select  id="selBox" name="selBox">
     	<option>-- 선택하세요--</option>
         <option  value="member_phone">핸드폰번호</option>
@@ -138,13 +146,13 @@ $('.sch1').highlight(sKey);
         <option  value="member_sign">가입일자</option>
         <option  value="member_join">최근방문일자</option>
         </select>
-        <input type="search" name="search" id="search">
+        <input type="search" name="search2" id="search2">
         <input type="button" name="button" id="button" value="검색">
      	
-     </form>
+     </form> --%>
      <a href="${pageContext.request.contextPath}/member_list">목록</a>
     
-    </div>
+    </div> 
 </div>
 </body>
 </html>

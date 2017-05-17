@@ -55,7 +55,7 @@
         <beans:property name="mapperLocations">
             <beans:list>
             	<!-- 원빈 -->
-<!--                 <beans:value>classpath:kr/or/possys/food_service/Food_Mapper.xml</beans:value> -->
+                <beans:value>classpath:kr/or/possys/food_service/Food_Mapper.xml</beans:value>
                 <beans:value>classpath:kr/or/possys/drop_food_service/Drop_Mapper.xml</beans:value>
                 <beans:value>classpath:kr/or/possys/ep_order_manage_service/Ep_Manage_Mapper.xml</beans:value>
                 <!-- 원빈 끝 -->
@@ -85,8 +85,7 @@
                 <beans:value>classpath:kr/or/possys/Menu_service/Per_Mapper.xml</beans:value>
 
                	<!-- <beans:value>classpath:kr/or/possys/Menu_service/Per_Mapper.xml</beans:value> -->
-
-</beans:list>
+		</beans:list>
 
         </beans:property>
 	    </beans:bean>
@@ -99,9 +98,16 @@
 <!-- 로그인 인터셉터 테스트 -->
 		<interceptors>
 		<interceptor>
-			<mapping path="/test"/>
-			<mapping path="/logout"/>
-			<mapping path="/home"/>
+		<mapping path="/ho.html"/>
+		<mapping path="/real_time"/>
+		<mapping path="/member_select"/>
+		<mapping path="/member_list"/>
+		<mapping path="/member_information_view"/>
+		<mapping path="/member_Secede"/>
+		<mapping path="/member_update"/>
+		<mapping path="/test"/>
+		<mapping path="/logout"/>
+		<mapping path="/home"/>
 			<beans:bean class="kr.or.possys.Staff_service.Staff_interceptor"></beans:bean>
 		</interceptor>
 		</interceptors>
