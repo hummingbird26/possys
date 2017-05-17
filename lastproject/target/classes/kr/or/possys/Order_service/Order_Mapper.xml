@@ -54,4 +54,28 @@
 		where table_order_id = #{table_order_id} and
 		menu_id = #{menu_id}
 		</update>
+		
+		<insert id="order_detail_insert" parameterType="kr.or.possys.Order_service.Order">
+		insert into order_detail(
+		table_order_id,
+		menu_id,
+		menu_name,
+		order_detail_ea,
+		order_detail_sum)
+		values (
+		#{table_order_id},
+		#{menu_id},
+		#{menu_name},
+		#{order_detail_ea},
+		#{order_detail_sum}
+		)
+		
+		</insert>
+		<delete id = "order_delete" parameterType = "String">
+		delete from table_order where table_order_id=#{table_order_id}
+		</delete>
+		
+		<delete id = "order_detail_delete" parameterType = "String">
+		delete from order_detail where table_order_id=#{table_order_id}
+		</delete>
 </mapper>

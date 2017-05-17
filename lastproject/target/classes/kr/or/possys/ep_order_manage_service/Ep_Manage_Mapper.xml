@@ -2,21 +2,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper">
-	<!-- 업체 입력 -->
+	
+	<!--@@@@@@ 업체 입력 -->
 	<insert id="insertep_m" parameterType="kr.or.possys.ep_order_manage_service.Ep_Manage">
-		insert into ep_order_manage( 
+		insert into ep_order_manage(
 		ep_id
 		,food_id
-		,ep_name
 		,ep_phone
+		,ep_name		
 		,ep_director
 		,ep_address
 		,ep_text)
-		select
-		concat('EPMN',(select date_format(sysdate(),'%y%m%d%s')))
-		,'food_id'
-		,#{ep_name}
+		select concat('EPMN',(select date_format(sysdate(),'%y%m%d%s')))
+		,#{food_id}
 		,#{ep_phone}
+		,#{ep_name}
 		,#{ep_director}
 		,#{ep_address}
 		,#{ep_text}
@@ -32,10 +32,10 @@
 		order by ep_id desc
 		limit #{beginRow}, #{pageRow}
 	</select>
-	<!-- 업체 수정화면 -->
+	<!-- @@@@@@@?@@@ 업체 수정화면 -->
+	<!-- 검색 레코드중 1번째 레코드 출력 -->
 	<select id="ep_mview" parameterType="string" resultType="kr.or.possys.ep_order_manage_service.Ep_Manage">
-		select *
-		from ep_order_manage where ep_id=#{ep_id}	
+		select * from ep_order_manage where ep_id = #{ep_id} limit 1
 	</select>
 	<!-- 업체 수정액션 -->
 	<update id="ep_mmodify" parameterType="kr.or.possys.ep_order_manage_service.Ep_Manage">
@@ -64,10 +64,16 @@
 	<select id="ep_mSRlist" parameterType="java.util.Map" resultType="int">
 		select count(*) from ep_order_manage where ${selbox} like concat('%',#{keyWord},'%')
 	</select>
-	<!-- 업체 등록 폼 요청 -->
+	<!-- @@@@ 업체 등록 폼 요청 -->
 	<select id="ep_chkadd" parameterType="string" resultType="kr.or.possys.food_service.Food">
 		select *
 		from food_manage  where food_id = #{food_id}
 	</select>
-	
+<!-- 	@@@@ 업체 등록 폼 (업체 select 목록 요청) -->
+	<!-- 검색시 중복 데이터 중 하나씩 컬럼 값 가져오기 -->
+	<select id="ep_msel_list" resultType="kr.or.possys.ep_order_manage_service.Ep_Manage">
+		select min(ep_id) as ep_id
+		, ep_name
+		from ep_order_manage group by ep_name
+	</select>
 </mapper>

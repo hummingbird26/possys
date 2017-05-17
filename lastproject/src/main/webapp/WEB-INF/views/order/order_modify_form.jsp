@@ -57,9 +57,6 @@
 <body>
 
 
-
-
-
 <form id="addform" action="${pageContext.request.contextPath}/order_modify_action" method="post">
 		
 		<div>주문 번호 : <input name ="table_order_id" id ="table_order_id" type ="text" value="${order.table_order_id}" readonly="readonly"/></div>

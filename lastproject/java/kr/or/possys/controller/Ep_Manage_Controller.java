@@ -1,6 +1,6 @@
 package kr.or.possys.controller;
 
-import java.lang.annotation.Target;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +28,7 @@ import kr.or.possys.food_service.Food;
 public class Ep_Manage_Controller {
 	@Autowired
 	private Ep_Manage_Dao dao;
-	
+	//######체크박스를 이용한  업체등록 폼
 	@RequestMapping(value="/ep_chkbox", method = RequestMethod.POST)
 	public String ep_chkbox(Model model
 			,@RequestParam(value="food_id") List<String> food_id){
@@ -40,18 +40,20 @@ public class Ep_Manage_Controller {
 			Food food = new Food();
 			food.setFood_id(s);
 			Food fo = dao.ep_mchck(food);
-			System.out.println(food.getFood_id()+"<<<<<<<<<<<<<<??");
-			
+//			System.out.println(food.getFood_id()+"<<<<<<<<<<<<<<??");
 			list.add(fo);
 			model.addAttribute("list",list);
 		}
-		System.out.println(list);
+		List<Ep_Manage> sel_list = new ArrayList<Ep_Manage>();
+		sel_list = dao.ep_msel_list();
+		model.addAttribute("sel_list",sel_list);
+		
 		
 
 		return "/wonbin/ep_order_manage/ep_manage_add_form";
 		
 	}
-	//업체관리 입력폼 요청
+	//(업체관리 입력폼 요청)
 	@RequestMapping(value="/ep_manage_add_form", method = RequestMethod.GET)
 	public String ep_madd(Model model
 			,@RequestParam(value="food_id") List<String> food_id){
@@ -61,9 +63,29 @@ public class Ep_Manage_Controller {
 	}
 	//업체관리 입력액션 요청
 	@RequestMapping(value="/ep_manage_add_form", method = RequestMethod.POST)
-	public String ep_madd(Ep_Manage ep_m){
+	public String ep_madd(Ep_Manage ep_m
+			,@RequestParam(value="food_id") List<String> food_id){
 		System.out.println("02_Ep_Manage_Controller.java ->>ep_madd 액션 요청");
-		dao.insertep_m(ep_m);
+//		System.out.println(food_id);
+		System.out.println(ep_m.getEp_director()+"<<<<담당자");
+		List<Ep_Manage> list = new ArrayList<Ep_Manage>();
+
+			for(String s : food_id){
+				Ep_Manage epm = new Ep_Manage();
+				
+				epm.setEp_address(ep_m.getEp_address());
+				epm.setEp_name(ep_m.getEp_name());
+				epm.setEp_phone(ep_m.getEp_phone());
+				epm.setEp_text(ep_m.getEp_text());				
+				epm.setEp_director(ep_m.getEp_director());
+				epm.setFood_id(s);				
+				list.add(epm);
+			}
+//			Map<String, Object> map = new HashMap<String, Object>();
+//			map.put("list", list);
+			dao.insertep_m(list);
+
+		
 		return "redirect:/ep_manage_list";
 	}
 	//발주업체 목록 요청
@@ -87,7 +109,7 @@ public class Ep_Manage_Controller {
 		model.addAttribute("list", list);
 		return "/wonbin/ep_order_manage/ep_manage_list";
 	}
-	// 발주업체 수정화면 요청
+	// @@@@@@?@@@@@@@ 발주업체 수정화면 요청
 	@RequestMapping(value="/ep_manage_modify_view", method = RequestMethod.GET)
 	public String ep_mview(Model model, @RequestParam(value="ep_id",required=true) String ep_id){
 		System.out.println("04_Ep_Manage_Controller.java ->>ep_mview 요청");
@@ -109,7 +131,7 @@ public class Ep_Manage_Controller {
 		dao.ep_mdelete(ep_id);
 		return "redirect:/ep_manage_list";
 	}
-	//식재료 검색 요청
+	//발주업체 검색 요청
 	@RequestMapping(value="/ep_msearch", method = RequestMethod.GET)
 	public String ep_mSRlist(HttpServletRequest request
 			,Model model, @RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage
