@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.or.possys.Member_sevice.Member;
 import kr.or.possys.Member_sevice.Member_Dao;
 import kr.or.possys.Member_sevice.mVo;
+import kr.or.possys.Order_service.Order;
+import kr.or.possys.Order_service.Order_Dao;
 import net.sf.json.JSONArray;
 
 @Controller
@@ -26,82 +28,90 @@ public class Member_Controller {
 
 	@Autowired
 	private	Member_Dao	Mdao;
-	private	Member	m;
 	
+	@Autowired
+	private	Order_Dao	odao;
 	
+	/*알람창 ajax 테스트*/
+	@RequestMapping(value="/alram_test",method = RequestMethod.GET)
+	@ResponseBody
+	public void am(HttpServletResponse re) throws IOException{
+		System.out.println("am 실행");
+		//한글화
+		re.setCharacterEncoding("UTF-8");
+		//out 객체 사용하기 위해 준비
+		PrintWriter out = re.getWriter();
+		JSONArray OrderListJson = null;
+		
+		List<Order> olist = odao.order_list();
+		System.out.println(olist);
+		
+		OrderListJson = JSONArray.fromObject(olist);
+		System.out.println(OrderListJson);
+		
+		//새로운 화면에서 json방식으로 받아온 값 출력
+		out.write(OrderListJson.toString());
+		
+		out.flush();
+	
+	}
 	/*알람창 호출*/
-	@RequestMapping(value="ho")
+	@RequestMapping(value="/ho.html")
 	public String alram(){
-		return "alram";
+		return "t";
 	}
 
 	//실시간 검색 호출
-	@RequestMapping(value="real_time")
-	public String real_time(){
+	@RequestMapping(value="/real_time")
+	public String real_time(Model model){
+		
+		int memberCount = Mdao.getMemberCount();
+	
+		
+	
+		model.addAttribute("memberCount",memberCount);
+		
+		
 		return "/member/real_time";
 	}
-	//제이손 방식으로 받아오기
+	//회원 리스트 제이손 방식으로 받아오기
 	@RequestMapping(value="/json", method = RequestMethod.GET)
 	@ResponseBody
-	public void jj(@RequestParam(value="insert") String insert
-				,Model model
-				,HttpServletResponse re
-				,@RequestParam(value="currentPage",required=false,defaultValue="1" )int currentPage) throws IOException{
+		public void jj(@RequestParam(value="insert") String insert
+					,Model model
+					,HttpServletResponse re
+					,@RequestParam(value="currentPage",required=false,defaultValue="1" )int currentPage) throws IOException{
 				System.out.println("josn 호출확인");
 				//ajax로 받아온 매개변수 입력값
 				System.out.println(insert+"입력값");
-				
-				URLEncoder.encode(insert , "UTF-8");
 				//한글화
+				URLEncoder.encode(insert , "UTF-8");
 				re.setCharacterEncoding("UTF-8");
 				//out 객체 사용하기 위해 준비
 				PrintWriter out = re.getWriter();
-				
-				
-				int pagePerRow = 10;
+				int pagePerRow = 100;
+		
 				//json방식 사용
 				JSONArray memberListJson = null;
-				
-				
 				//리스트 쿼리 호출
 				List<Member> list = Mdao.AjaxMemberList(currentPage, pagePerRow,insert);
 				//받아온 리스트 값을 제이손 객체에 넣어줌 
 				memberListJson = JSONArray.fromObject(list);
-				System.out.println(memberListJson);
-				
+				System.out.println(memberListJson);	
 				//새로운 화면에서 json방식으로 받아온 값 출력
 				out.write(memberListJson.toString());
-				
-				model.addAttribute("jsonString", memberListJson.toString());
 				//메모리 초기화
 				out.flush();
 	}
 	
 	
-	
+	//팝업창 호출
 	@RequestMapping(value="/popup.html", method = RequestMethod.GET)
 	public String pop(Model model
 					 ,@RequestParam(value="currentPage",required=false,defaultValue="1" )int currentPage) throws IOException{
 		
 		System.out.println("팝업창 실행 확인");
 
-		int pagePerRow = 10;
-		//json방식 사용
-		JSONArray memberListJson = null;
-		//리스트 쿼리 호출
-		List<Member> list = Mdao.getMemberList(currentPage, pagePerRow);		
-		if(list != null){
-			//받아온 리스트 값을 제이손 객체에 넣어줌 
-			memberListJson = JSONArray.fromObject(list);
-		}
-		
-		if(memberListJson != null){			
-			model.addAttribute("jsonString", memberListJson.toString());
-		}else{
-			model.addAttribute("jsonString", "");
-		}
-
-		model.addAttribute("list", list);
 		
 		return "test";
 	}
@@ -181,16 +191,6 @@ public class Member_Controller {
 				JSONArray memberListJson = null;
 				//리스트 쿼리 호출
 				List<Member> list = Mdao.getMemberList(currentPage, pagePerRow);		
-				if(list != null){
-					//받아온 리스트 값을 제이손 객체에 넣어줌 
-					memberListJson = JSONArray.fromObject(list);
-				}
-				
-				if(memberListJson != null){			
-					model.addAttribute("jsonString", memberListJson.toString());
-				}else{
-					model.addAttribute("jsonString", "");
-				}
 	
 		System.out.println(lastpage+"lastpage 리턴값 확인");
 		System.out.println(currentPage+"currentPage 리턴값 확인");

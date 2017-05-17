@@ -5,7 +5,13 @@
 <html>
 <head>
 
+<style>
+.img{
+width:1000px;
+height:200px;
+}
 
+</style>
 <!-- Meta Tags -->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	
@@ -130,7 +136,7 @@
         	
             	<li class="current"><a href="#home-slider">Home</a></li>
                 <li><a href="#work">cateGory</a></li>
-                <li><a href="#about">About Us</a></li>
+                <li><a href="#about">직원소개</a></li>
                 <li><a href="#contact">Contact</a></li>
 				</nav>
 			
@@ -149,7 +155,7 @@
             <div class="span12">
                 <div class="title-page">
                     <h2 class="title">cateGory</h2>
-                    <h3 class="title-description">원하시는 메뉴를 클릭하세요...</h3>
+                    <h3 class="title-description">원하시는 메뉴를 클릭하세요</h3>
                 </div>
             </div>
         </div>
@@ -162,10 +168,10 @@
                 <nav id="options" class="work-nav">
                     <ul id="filters" class="option-set" data-option-key="filter">
                     	<li class="type-work">Type of Work</li>
-                        <li><a href="#filter" data-option-value="*" class="selected">All Projects</a></li>
-                        <li><a href="#filter" data-option-value=".design">Design</a></li>
-                        <li><a href="#filter" data-option-value=".photography">Photography</a></li>
-                        <li><a href="#filter" data-option-value=".video">Video</a></li>
+                        <li><a href="#filter" data-option-value="*" class="selected">전체메뉴</a></li>
+                        <li><a href="#filter" data-option-value=".member">회원관리</a></li>
+                        <li><a href="#filter" data-option-value=".shop">매장관리</a></li>
+                        <li><a href="#filter" data-option-value=".staff">직원관리</a></li>
                     </ul>
                 </nav>
                 <!-- End Filter -->
@@ -177,111 +183,111 @@
                     	<ul id="thumbs">
                         
 							<!-- 회원 리스트 링크 -->
-                        	<li class="item-thumbs span3 design">
+                        	<li class="item-thumbs span3 member">
                             	<!-- Fancybox - Gallery Enabled - Title - Full Image -->
                             	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="member_list" href="${pageContext.request.contextPath}/member_list">
                                 	<span class="overlay-img">member_List</span>
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/member.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
+                                <img class="img" src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/member.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
                             </li>
                         	<!-- End Item Project -->
                             
 							<!-- 메뉴 입력 링크 -->
-                        	<li class="item-thumbs span3 design">
+                        	<li class="item-thumbs span3 shop">
                             	<!-- Fancybox - Gallery Enabled - Title - Full Image -->
                             	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="menu_add_form" href="${pageContext.request.contextPath}/menu_add_form">
                                 	<span class="overlay-img">menu_add</span>
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/bgimg02.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
+                                <img class="img" src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/bgimg02.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
                             </li>
                         	<!-- End Item Project -->
                             
 							<!-- 주문 리스트 링크 -->
-                        	<li class="item-thumbs span3 photography">
+                        	<li class="item-thumbs span3 shop">
                             	<!-- Fancybox - Gallery Enabled - Title - Full Image -->
                             	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="order_list" href="${pageContext.request.contextPath}/order_list"">
                                 	<span class="overlay-img">order_list</span>
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/order.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
+                                <img class="img" src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/order.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
                             </li>
                         	<!-- End Item Project -->
                             
 							<!-- 식자재 품목 링크 -->
-                        	<li class="item-thumbs span3 photography">
+                        	<li class="item-thumbs span3 shop">
                             	<!-- Fancybox Media - Gallery Enabled - Title - Link to Video -->
                             	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="food_list" href="${pageContext.request.contextPath}/food_list">
                                 	<span class="overlay-img">food_list</span>
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/food.jpg" alt="Video">
+                                <img class="img" src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/food.jpg" alt="Video">
                             </li>
                         	<!-- End Item Project -->
                             
 							<!-- 폐기품목 링크 -->
-                        	<li class="item-thumbs span3 photography">
+                        	<li class="item-thumbs span3 shop">
                             	<!-- Fancybox - Gallery Enabled - Title - Full Image -->
                             	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="drop_list" href="${pageContext.request.contextPath}/drop_list">
                                 	<span class="overlay-img">drop_list</span>
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/drop_list.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
+                                <img class="img" src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/drop_list.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
                             </li>
                         	<!-- End Item Project -->
                             
 							<!-- 발주업체 링크 -->
-                        	<li class="item-thumbs span3 photography">
+                        	<li class="item-thumbs span3 shop">
                             	<!-- Fancybox - Gallery Enabled - Title - Full Image -->
                             	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="ep_manage_list" href="${pageContext.request.contextPath}/ep_manage_list">
                                 	<span class="overlay-img">ep_manage_list</span>
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/ep_manage_list.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
+                                <img class="img" src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/ep_manage_list.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
                             </li>
                         	<!-- End Item Project -->
                             
 							<!-- 결제관리업무 -->
-                        	<li class="item-thumbs span3 video">
+                        	<li class="item-thumbs span3 shop">
                             	<!-- Fancybox Media - Gallery Enabled - Title - Link to Video -->
                             	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="payment_add_form" href="${pageContext.request.contextPath}/tori/payment/payment_add_form">
                                 	<span class="overlay-img">payment_add_form</span>
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/payment.jpg" alt="Video">
+                                <img class="img" src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/payment.jpg" alt="Video">
                             </li>
                         	<!-- End Item Project -->
                             
 							<!-- 직원관리업무 -->
-                        	<li class="item-thumbs span3 design">
+                        	<li class="item-thumbs span3 staff">
                             	<!-- Fancybox - Gallery Enabled - Title - Full Image -->
                             	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="staff_add_form" href="${pageContext.request.contextPath}/tori/staff/staff_add_form">
                                 	<span class="overlay-img">staff_add_form</span>
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/images.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
+                                <img class="img" src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/images.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
                             </li>
                         	<!-- End Item Project -->
                             
 							<!-- Item Project and Filter Name -->
-                        	<li class="item-thumbs span3 design">
+                        	<%-- <li class="item-thumbs span3 design">
                             	<!-- Fancybox - Gallery Enabled - Title - Full Image -->
                             	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="The Beach" href="${pageContext.request.contextPath}/resources/_include/img/work/full/image-07-full.jpg">
                                 	<span class="overlay-img"></span>
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>
                                 <!-- Thumb Image and Description -->
-                                <img src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/image-07.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-                            </li>
+                                <img class="img" src="${pageContext.request.contextPath}/resources/_include/img/work/thumbs/image-07.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
+                            </li> --%>
                         	<!-- End Item Project -->
                         </ul>
                     </section>
@@ -301,8 +307,8 @@
     <div class="row">
         <div class="span12">
             <div class="title-page">
-                <h2 class="title">About Us</h2>
-                <h3 class="title-description">Learn About our Team &amp; Culture.</h3>
+                <h2 class="title">Team Name</h2>
+                <h3 class="title-description">Smart Order Management & POS System Based on  Web</h3>
             </div>
         </div>
     </div>
@@ -320,9 +326,11 @@
                 </div>
                 <img src="${pageContext.request.contextPath}/resources/_include/img/profile/profile-01.jpg" alt="John Doe">
             </div>
-            <h3 class="profile-name">John Doe</h3>
-            <p class="profile-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac augue at erat <a href="#">hendrerit dictum</a>. 
-            Praesent porta, purus eget sagittis imperdiet, nulla mi ullamcorper metus, id hendrerit metus diam vitae est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+            <h3 class="profile-name">팀장:홍경인</h3>
+            <p class="profile-description">
+            	담당업무:주문관리 및 매출관리
+            </a>
+            </p>
             	
             <div class="social">
             	<ul class="social-icons">
@@ -343,9 +351,10 @@
                 </div>
                 <img src="${pageContext.request.contextPath}/resources/_include/img/profile/profile-02.jpg" alt="Jane Helf">
             </div>
-            <h3 class="profile-name">Jane Helf</h3>
-            <p class="profile-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac augue at erat <a href="#">hendrerit dictum</a>. 
-            Praesent porta, purus eget sagittis imperdiet, nulla mi ullamcorper metus, id hendrerit metus diam vitae est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+            <h3 class="profile-name">오광진</h3>
+            <p class="profile-description"></a>
+            	담당업무:발주관리 및 재고관리
+            </p>
             	
             <div class="social">
             	<ul class="social-icons">
@@ -365,9 +374,10 @@
                 </div>
                 <img src="${pageContext.request.contextPath}/resources/_include/img/profile/profile-03.jpg" alt="Joshua Insanus">
             </div>
-            <h3 class="profile-name">Joshua Insanus</h3>
-            <p class="profile-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac augue at erat <a href="#">hendrerit dictum</a>. 
-            Praesent porta, purus eget sagittis imperdiet, nulla mi ullamcorper metus, id hendrerit metus diam vitae est. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+            <h3 class="profile-name">배상훈</h3>
+            <p class="profile-description"></a> 
+            	담당업무:로그인 인터셉터 및 회원관리,레이아웃
+            </p>
             	
             <div class="social">
             	<ul class="social-icons">
@@ -380,6 +390,54 @@
         </div>
         <!-- End Profile -->
         
+                <!-- Start Profile -->
+    	<div class="span4 profile">
+        	<div class="image-wrap">
+                <div class="hover-wrap">
+                    <span class="overlay-img"></span>
+                    <span class="overlay-text-thumb">Lead Designer</span>
+                </div>
+                <img src="${pageContext.request.contextPath}/resources/_include/img/profile/profile-03.jpg" alt="Joshua Insanus">
+            </div>
+            <h3 class="profile-name">백승욱</h3>
+            <p class="profile-description"></a>
+            	담당업무:결제관리 및 직원관리
+            </p>
+            	
+            <div class="social">
+            	<ul class="social-icons">
+                	<li><a href="#"><i class="font-icon-social-twitter"></i></a></li>
+                    <li><a href="#"><i class="font-icon-social-linkedin"></i></a></li>
+                    <li><a href="#"><i class="font-icon-social-google-plus"></i></a></li>
+                    <li><a href="#"><i class="font-icon-social-vimeo"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- End Profile -->
+                <!-- Start Profile -->
+    	<div class="span4 profile">
+        	<div class="image-wrap">
+                <div class="hover-wrap">
+                    <span class="overlay-img"></span>
+                    <span class="overlay-text-thumb">Lead Designer</span>
+                </div>
+                <img src="${pageContext.request.contextPath}/resources/_include/img/profile/profile-03.jpg" alt="Joshua Insanus">
+            </div>
+            <h3 class="profile-name">최홍락</h3>
+            <p class="profile-description"></a>
+            	담당업무:메뉴관리 및 메뉴별 식재소비관리
+            </p>
+            	
+            <div class="social">
+            	<ul class="social-icons">
+                	<li><a href="#"><i class="font-icon-social-twitter"></i></a></li>
+                    <li><a href="#"><i class="font-icon-social-linkedin"></i></a></li>
+                    <li><a href="#"><i class="font-icon-social-google-plus"></i></a></li>
+                    <li><a href="#"><i class="font-icon-social-vimeo"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- End Profile -->
     </div>
     <!-- End People -->
 </div>

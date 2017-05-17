@@ -87,9 +87,16 @@
 <!-- 로그인 인터셉터 테스트 -->
 		<interceptors>
 		<interceptor>
-			<mapping path="/test"/>
-			<mapping path="/logout"/>
-			<mapping path="/home"/>
+		<mapping path="/ho.html"/>
+		<mapping path="/real_time"/>
+		<mapping path="/member_select"/>
+		<mapping path="/member_list"/>
+		<mapping path="/member_information_view"/>
+		<mapping path="/member_Secede"/>
+		<mapping path="/member_update"/>
+		<mapping path="/test"/>
+		<mapping path="/logout"/>
+		<mapping path="/home"/>
 			<beans:bean class="kr.or.possys.Staff_service.Staff_interceptor"></beans:bean>
 		</interceptor>
 		</interceptors>

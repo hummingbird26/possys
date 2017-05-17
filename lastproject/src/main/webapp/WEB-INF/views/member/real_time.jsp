@@ -50,7 +50,7 @@
 					url: "${pageContext.request.contextPath}/json",
 	                dataType: "JSON",
 	                data : input,
-	                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+	                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 	                success: function (data) {
 	                	
 	                	decodeURIComponent( data.member_name );
@@ -176,7 +176,7 @@ $(document).ready(function () {
 
 
      <h1>실시간 검색</h1>
-  
+  <div class="member">전체행의 수 : ${memberCount}</div>
     <label for="tags">검색어를 입력하세요: </label>  
   <input type="text" id="tags" />
     <table class="table table-striped">
@@ -196,7 +196,23 @@ $(document).ready(function () {
 
     </table>
     
-  
+   <%-- <ul class="pager">
+        <c:if test="${currentPage < lastpage}">
+            <li class="previous"><a href="${pageContext.request.contextPath}/real_time?currentPage=${currentPage-1}">이전</a></li>
+        </c:if>
+      
+      	<c:forEach var="i" begin="${expage}" end="${lastpage}" step="1">
+             <c:choose>
+                <c:when test="${i eq currentPage}"><li><a href="${pageContext.request.contextPath}/real_time?currentPage=${i}"><button class ="bu">${i}</button></a></li></c:when>
+                <c:otherwise><li><a href="${pageContext.request.contextPath}/real_time?currentPage=${i}" ><button class ="bu">${i}</button></a></li></c:otherwise>
+            </c:choose>
+
+        </c:forEach>
+        
+        <c:if test="${currentPage > 4}">
+            <li class="next"><a href="${pageContext.request.contextPath}/real_time?currentPage=${currentPage+1}">다음</a></li>
+        </c:if>
+    </ul> --%>
      	
   </div>
   

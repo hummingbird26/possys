@@ -37,8 +37,7 @@
             }
         
         </style>
-
-<%@ include file="../modal/wide_menu.jsp" %>
+ <%@ include file="../modal/wide_menu.jsp" %>
 </head>
 <body>
 
