@@ -74,20 +74,7 @@
                 <beans:value>classpath:kr/or/possys/Menu_service/Per_Mapper.xml</beans:value>
 
                	<!-- <beans:value>classpath:kr/or/possys/Menu_service/Per_Mapper.xml</beans:value> -->
-<<<<<<< HEAD
 		</beans:list>
-=======
->>>>>>> branch 'master' of https://github.com/hummingbird26/possys.git
-
-<<<<<<< HEAD
-                
-                
-               
-
-            
-=======
-</beans:list>
->>>>>>> branch 'master' of https://github.com/hummingbird26/possys.git
 
         </beans:property>
 	    </beans:bean>
