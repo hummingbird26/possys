@@ -1,7 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
+ 	<%@ include file="../modal/wide_menu.jsp" %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- bootstrap을 사용하기 위한 CDN주소 -->
 <!-- Latest compiled and minified CSS -->

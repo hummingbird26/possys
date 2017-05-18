@@ -136,8 +136,8 @@ height:200px;
         	
             	<li class="current"><a href="#home-slider">Home</a></li>
                 <li><a href="#work">cateGory</a></li>
-                <li><a href="#about">직원소개</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#about">Team_Profile</a></li>
+                
 				</nav>
 			
             </ul>

@@ -3,9 +3,27 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="kr.or.possys.Menu_service.Per_Mapper">
-	<select id="menuview" parameterType="string" resultType="kr.or.possys.Menu_service.Per">
+	<insert id="menuinsert" parameterType="kr.or.possys.Menu_service.Menu_Food">
+			insert into food_per_menu(
+		 menu_id
+		 ,food_id
+		 ,menu_name
+		 ,fpm_ea
+		 ,food_unit) 
+		 value(
+		#{menu_id}	
+		,#{food_id}
+		,#{menu_name}
+		,#{fpm_ea}
+		,#{food_unit})
+		</insert>
+	<select id="menuview" parameterType="string" resultType="kr.or.possys.Menu_service.Menu">
 		select *	
 		from menu where menu_id=#{menu_id}	
+	</select>
+	<select id="menuview01" parameterType="string" resultType="kr.or.possys.food_service.Food">
+		select *	
+		from food_manage where food_id=#{food_id}	
 	</select>
 <!-- 	식자제 품목 카운트 -->
 	<select id="getmenucount" resultType="int">

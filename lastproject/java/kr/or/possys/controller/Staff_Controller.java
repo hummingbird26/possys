@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.possys.Staff_service.Staff;
 import kr.or.possys.Staff_service.Staff_Dao;
@@ -197,6 +198,7 @@ public class Staff_Controller {
 		}
 		
 	//staff_id 중복체크
+		@ResponseBody
 		@RequestMapping(value="/tori/staff/chkDupStaffId")
 		public String checkStaffId(@RequestParam(value="prmId",required=true)String staff_id) throws Exception{
 			System.out.println("checkStaffId");
@@ -206,10 +208,10 @@ public class Staff_Controller {
 			String duvalue = null;
 			if(checkStaffId == 0){
 				System.out.println("아이디 사용가능");
-				duvalue = "아이디 사용 가능";
+				duvalue = "Y";
 			}else{
 				System.out.println("아이디가 중복되었어요");
-				duvalue = "아이디 사용 불가";
+				duvalue = "N";
 			}
 			
 			return duvalue;

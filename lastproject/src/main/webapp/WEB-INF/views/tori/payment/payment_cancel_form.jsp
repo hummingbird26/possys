@@ -62,20 +62,25 @@ function chkDupCancelId(){
 	$.ajax({
 		type:'POST',
 		data:"prmId=" +$("#payment_cancel_id").val(),
+		contentType:"application/x-www-form-urlencoded; charset=UTF-8",
 		dataType:'text',
 		url:'${pageContext.request.contextPath}/tori/payment/chkDupCancelId',
-		success : function(rData, textStatus, xhr){
+		success : function(data){
 			alert("성공");
-			var chkRst = rData;
-			if(chkRst==0){
+			var chkRst = data;
+			if(chkRst=="Y"){
 				alert("등록이 가능합니다");
+				console.log(data);
 				$("#idcheck").val('Y');
 			}else{
 				alert("중복됩니다");
+				console.log(data);
 				$("#idcheck").val('N');
 			}
 		},
-		error : function(xhr, status, e){
+		error : function(request,status,error){
+			
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			alert("실패");
 		}
 	});
@@ -92,6 +97,7 @@ function insertCancelChk(){
 	}
 }
 </script>
+ <%@ include file="../../modal/wide_menu.jsp" %>
 </head>
 <body>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
@@ -162,7 +168,7 @@ function insertCancelChk(){
 		<input type="submit" class="btn btn-default" id="paymentCancelAdd" name="paymentCancelAdd" value="제출">
 		<input type="reset" class="btn btn-default" id="paymentCancel" name="paymentCancel" value="되돌림">
 		<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_list">글목록</a>
-		<input type="button" value="idcheck" onclick="javascript:chkDupCancelId();"/>
+		<input type="button" class="btn btn-primary" value="idcheck" onclick="javascript:chkDupCancelId();"/>
 		</form>
 		<br><br>
 			<div>
