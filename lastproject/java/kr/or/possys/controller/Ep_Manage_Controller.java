@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.or.possys.ep_order_manage_service.Ep_Manage;
 import kr.or.possys.ep_order_manage_service.Ep_Manage_Dao;
+import kr.or.possys.ep_order_manage_service.Ep_Manage_fo_VO;
 import kr.or.possys.food_service.Food;
 
 
@@ -28,6 +29,16 @@ import kr.or.possys.food_service.Food;
 public class Ep_Manage_Controller {
 	@Autowired
 	private Ep_Manage_Dao dao;
+	
+	@RequestMapping(value="/f_del_bt", method = RequestMethod.GET)
+	public String f_del_bt(@RequestParam(value="food_id") String food_id
+							,@RequestParam(value="ep_id") String ep_id){
+		System.out.println("Ep_Manage_Controller - f_del_bt() 실행");
+		dao.f_del(food_id);
+		return "redirect:/ep_manage_modify_view?ep_id="+ep_id;
+		//redirect : 컨트롤러 value 
+	}
+	
 	//######체크박스를 이용한  업체등록 폼
 	@RequestMapping(value="/ep_chkbox", method = RequestMethod.POST)
 	public String ep_chkbox(Model model
@@ -67,12 +78,12 @@ public class Ep_Manage_Controller {
 			,@RequestParam(value="food_id") List<String> food_id){
 		System.out.println("02_Ep_Manage_Controller.java ->>ep_madd 액션 요청");
 //		System.out.println(food_id);
-		System.out.println(ep_m.getEp_director()+"<<<<담당자");
+//		System.out.println(ep_m.getEp_director()+"<<<<담당자");
 		List<Ep_Manage> list = new ArrayList<Ep_Manage>();
 
 			for(String s : food_id){
 				Ep_Manage epm = new Ep_Manage();
-				
+				epm.setEp_id(ep_m.getEp_id()); //업체 id가 들어있으면 세팅
 				epm.setEp_address(ep_m.getEp_address());
 				epm.setEp_name(ep_m.getEp_name());
 				epm.setEp_phone(ep_m.getEp_phone());
@@ -81,8 +92,8 @@ public class Ep_Manage_Controller {
 				epm.setFood_id(s);				
 				list.add(epm);
 			}
-//			Map<String, Object> map = new HashMap<String, Object>();
-//			map.put("list", list);
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("list", list);
 			dao.insertep_m(list);
 
 		
@@ -95,10 +106,11 @@ public class Ep_Manage_Controller {
 		System.out.println("03_Ep_Manage_Controller.java ->>ep_mlist 요청");
 		
 		
-		int ep_mcount = dao.getep_mcount();
+		int ep_mcount = dao.getep_mcount(); //중첩 없이 갯수
 		int pageRow = 10;
 		int expage = 1;
 		int lastPage = (int)(Math.ceil((double)ep_mcount/(double)pageRow));
+		
 		List<Ep_Manage> list = dao.ep_mlist(currentPage, pageRow);
 		
 		model.addAttribute("expage",expage);
@@ -113,7 +125,14 @@ public class Ep_Manage_Controller {
 	@RequestMapping(value="/ep_manage_modify_view", method = RequestMethod.GET)
 	public String ep_mview(Model model, @RequestParam(value="ep_id",required=true) String ep_id){
 		System.out.println("04_Ep_Manage_Controller.java ->>ep_mview 요청");
-		Ep_Manage ep_m = dao.ep_mview(ep_id);
+		
+		Ep_Manage ep_m = dao.ep_mview(ep_id); //해당 업체 정보
+		List<Ep_Manage_fo_VO> ep_m_fv = dao.ep_mview_fo(ep_id); //업체 관련 식재료 요청
+				
+		//		for(int i=0;i<ep_m_fo.size();i++){
+//		System.out.println(ep_m_fo.get(i)+"담긴값임"); //오류 : 확인해본 결과 주소값이 들어가 있음.
+//		}
+		model.addAttribute("ep_m_fv",ep_m_fv);	
 		model.addAttribute("ep_m",ep_m);
 		return "/wonbin/ep_order_manage/ep_manage_modify_view";
 	}
@@ -131,30 +150,31 @@ public class Ep_Manage_Controller {
 		dao.ep_mdelete(ep_id);
 		return "redirect:/ep_manage_list";
 	}
-	//발주업체 검색 요청
-	@RequestMapping(value="/ep_msearch", method = RequestMethod.GET)
-	public String ep_mSRlist(HttpServletRequest request
-			,Model model, @RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage
-			,@RequestParam(value="selbox") String selbox
-			,@RequestParam(name="keyWord") String keyWord){
-
-		int ep_mSRcount = dao.ep_mSRlist(selbox,keyWord);
-		int pageRow = 10;
-		int lastPage = (int)(Math.ceil((double)ep_mSRcount/(double)pageRow));
-		List<Ep_Manage> list = dao.ep_msearch(selbox, keyWord, currentPage, pageRow);
-		int expage = 1;
-		
-		model.addAttribute("selbox",selbox);
-		model.addAttribute("keyWord",keyWord);
-		model.addAttribute("expage",expage);
-		model.addAttribute("pageRow",pageRow);
-		model.addAttribute("ep_mcount", ep_mSRcount);
-		model.addAttribute("currentPage", currentPage);
-		model.addAttribute("lastPage", lastPage);
-		model.addAttribute("list", list);
-		
-				
-		return "/wonbin/ep_order_manage/ep_manage_list";
 	
-	}
+	//발주업체 검색 요청
+//	@RequestMapping(value="/ep_msearch", method = RequestMethod.GET)
+//	public String ep_mSRlist(HttpServletRequest request
+//			,Model model, @RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage
+//			,@RequestParam(value="selbox") String selbox
+//			,@RequestParam(name="keyWord") String keyWord){
+//
+//		int ep_mSRcount = dao.ep_mSRlist(selbox,keyWord);
+//		int pageRow = 10;
+//		int lastPage = (int)(Math.ceil((double)ep_mSRcount/(double)pageRow));
+//		List<Ep_Manage> list = dao.ep_msearch(selbox, keyWord, currentPage, pageRow);
+//		int expage = 1;
+//		
+//		model.addAttribute("selbox",selbox);
+//		model.addAttribute("keyWord",keyWord);
+//		model.addAttribute("expage",expage);
+//		model.addAttribute("pageRow",pageRow);
+//		model.addAttribute("ep_mcount", ep_mSRcount);
+//		model.addAttribute("currentPage", currentPage);
+//		model.addAttribute("lastPage", lastPage);
+//		model.addAttribute("list", list);
+//		
+//				
+//		return "/wonbin/ep_order_manage/ep_manage_list";
+//	
+//	}
 }
