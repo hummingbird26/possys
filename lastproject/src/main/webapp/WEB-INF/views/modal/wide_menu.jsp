@@ -95,9 +95,14 @@ $(document).ready(function(){
       </li>
       <li ><a href="#Link" title="Link">Payment</a>
       <ul>
-          <li ><a href="#Link" title="Link">Link </a></li>
-          <li ><a href="#Link" title="Link">Link</a></li>
-          <li ><a href="#Link" title="Link">Link</a></li>
+          <li ><a href="${pageContext.request.contextPath}/tori/payment/payment_add_form" title="Link">결제내역추가 </a></li>
+          <li ><a href="${pageContext.request.contextPath}/tori/payment/payment_cancel_form" title="Link">결제취소내역추가</a></li>
+          <li ><a href="${pageContext.request.contextPath}/tori/payment/payment_card_form" title="Link">카드거래내역추가</a></li>
+        </ul>
+        </li>
+       <li ><a href="#Link" title="Link">Staff</a>
+      <ul>
+          <li ><a href="${pageContext.request.contextPath}/tori/staff/staff_add_form" title="Link">직원추가</a></li>
         </ul>
         </li>
     </ul>

@@ -4,6 +4,11 @@
   
   <mapper namespace="kr.or.possys.Card_Payment_service.Card_Payment_Mapper">
   
+  <!-- card_id 중복체크 -->
+  <select parameterType="String" resultType="int" id="check_cpid">
+  SELECT COUNT(*) FROM card WHERE 1=1 AND card_id = #{card_id} <!-- 쿼리 실행 결과값은 1 아니면 0이 출력됨 -->
+  </select>
+  
   <update parameterType="kr.or.possys.Card_Payment_service.Card_Payment" id="updateCardPayment">
   	UPDATE card SET card_id = #{card_id},
   	payment_id = #{payment_id},

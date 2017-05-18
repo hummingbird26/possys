@@ -50,7 +50,54 @@ $(document).ready(function(){
 	});
 });
 
+function chkDupStaffId(){
+	var prmId = $("#staff_id").val();
+	console.log(prmId);
+	if($("#staff_id").val() == '')
+		{	alert('ID를 입력해 주세요!');
+			return;
+		}
+	 $.ajax({
+		type:'POST',
+		data:"prmId="+$("#staff_id").val(),
+		contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+		dataType:'text',
+		url:'${pageContext.request.contextPath}/tori/staff/chkDupStaffId',
+		success : function(data){
+			alert("성공");
+			var chkRst = data;
+			if(chkRst=="Y"){
+				alert("등록 가능 합니다");
+				console.log(data);
+				$("#idcheck").val('Y');
+			}else{
+				alert("중복됩니다");
+				console.log(data);
+				$("#idcheck").val('N');
+			}
+		},
+		error : function(request,status,error){
+			
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			alert("실패");
+		}
+	});
+}
+
+function insertChk(){
+	var frm = document.companyForm;
+	
+	if(!chkVal('staff_id','staff_id'))
+		return false;
+	if($("#idChk").val()=='N'){
+		alert('ID체크를 해주시오');
+		return;
+	}
+}
+
 </script>
+
+<%@ include file="../../modal/wide_menu.jsp" %>
 </head>
 <body>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
@@ -98,6 +145,7 @@ $(document).ready(function(){
 	<input class="btn btn-default" type="submit" id="staffAdd" name="staffAdd" value="제출">
 	<input class="btn btn-default" type="reset" id="staffCancel" name="staffCancel" value="되돌림">
 	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/staff/staff_list">글목록</a>
+	<input type="button" class="btn btn-primary" value="idcheck" onclick="javascript:chkDupStaffId();"/>
 	</form>
 	
 </div>

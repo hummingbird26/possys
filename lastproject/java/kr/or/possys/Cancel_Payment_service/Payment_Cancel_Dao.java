@@ -18,6 +18,14 @@ public class Payment_Cancel_Dao {
 	
 	// update, delete는 필요시에 구현한다.
 	
+	// payment_cancel 결제취소아이디 중복 체크
+	public int check_pcid(String payment_cancel_id){
+		System.out.println("check_pcid");
+		System.out.println(payment_cancel_id);
+		
+		return sqlSessionTemplate.selectOne("kr.or.possys.Cancel_Payment_service.Payment_Cancel_Mapper.check_pcid",payment_cancel_id);
+	}
+	
 	 //payment_cancel_search 검색 수 요청
     public int paymentCSRlist(String select, String keyWord){
     	System.out.println("paymentCSRlist");
