@@ -86,9 +86,11 @@ $(document).ready(function(){
       </li>
       <li ><a href="#Link" title="Link">menu</a>
         <ul >
-          <li ><a href="#Link" title="Link">Link </a></li>
-          <li ><a href="#Link" title="Link">Link</a></li>
-          <li ><a href="#Link" title="Link">Link</a></li>
+          <li ><a href="${pageContext.request.contextPath}/menu_add_form" title="Link">메뉴등록 </a></li>
+          <li ><a href="${pageContext.request.contextPath}/menu_list" title="Link">메뉴목록 화면</a></li>
+          <li ><a href="${pageContext.request.contextPath}/menu_view" title="Link">메뉴 수정화면</a></li>
+          <li ><a href="${pageContext.request.contextPath}/menu_per_view" title="Link">메뉴 식재 보여주는 화면 </a></li>
+          <li ><a href="${pageContext.request.contextPath}/menu_per_modify" title="Link">메뉴 식재 등록 화면</a></li>
         </ul>
       </li>
       <li ><a href="#Link" title="Link">Payment</a>

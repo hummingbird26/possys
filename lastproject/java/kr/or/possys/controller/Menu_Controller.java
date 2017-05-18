@@ -1,6 +1,11 @@
 package kr.or.possys.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +29,23 @@ public class Menu_Controller {
 	}
 	//메뉴 목록
 	@RequestMapping(value="/menu_add_form", method = RequestMethod.POST)
-	public String menuadd(Menu menu){
+	public String menuadd(Menu menu,HttpServletRequest request, HttpSession session){
 		System.out.println("02_menuController.java ->>menuadd 액션 요청");
+        String path = request.getRealPath("/resources/upload");
+        String path2 = request.getContextPath()+"/resources/upload";
+        System.out.println(path);
+        System.out.println(path2);
+        String filename =menu.getOrder_file().getOriginalFilename();
+        menu.setNewname(path2+"/"+filename);
+        System.out.println(menu.getNewname());
+        
+        try {
+        	menu.getOrder_file().transferTo(new File(path+"/"+filename));
+        }catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+		
 		dao.insertmenu(menu);
 		return "redirect:/menu_list";
 	}

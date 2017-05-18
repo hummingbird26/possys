@@ -35,7 +35,8 @@
 		<thead>
 			
 			<th>식재코드</th>
-			<th>상품명</th>	
+			<th>상품명</th>
+			<th>단위</th>
 			<th>상품</th>		
 		</thead>
 		<tbody>
@@ -44,7 +45,8 @@
 						
 				<td>${f.food_id}</td>
 				<td>${f.food_name}</td>
-				<td><a href="${pageContext.request.contextPath}/menu_per_modify?menu_id=${m.menu_id}&food_id=${f.food_id}"><button>추가</button></a></td>
+				<td>${f.food_unit}</td>
+				<td><a href="${pageContext.request.contextPath}/menu_per_modify?menu_id=${param.menu_id}&food_id=${f.food_id}"><button>추가</button></a></td>
 			</tr>
 			</c:forEach>
 		</tbody>
