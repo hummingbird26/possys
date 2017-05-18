@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.possys.Cancel_Payment_service.Payment_Cancel;
 import kr.or.possys.Cancel_Payment_service.Payment_Cancel_Dao;
@@ -37,6 +38,7 @@ public class Payment_Controller {
 		return "tori_home";
 	}*/
 	//카드아이디 중복체크
+	@ResponseBody
 	@RequestMapping(value="/tori/payment/chkDupCardId")
 	public String checkCardId(@RequestParam(value="prmId",required=true) String card_id) throws Exception{
 		System.out.println("checkCardId");
@@ -46,16 +48,17 @@ public class Payment_Controller {
 		String duvalue = null;
 		if(checkCardId==0){
 			System.out.println("아이디 사용가능");
-			duvalue = "아이디 사용 가능";
+			duvalue = "Y";
 		}else{
 			System.out.println("아이디가 중복되었어요");
-			duvalue = "아이디 사용 불가";
+			duvalue = "N";
 		}
 		
 		return duvalue;
 	}
 	
 	//결제취소아이디 중복체크
+	@ResponseBody
 	@RequestMapping(value="/tori/payment/chkDupCancelId")
 	public String checkCancelId(@RequestParam(value="prmId",required=true) String payment_cancel_id) throws Exception{
 		System.out.println("checkCancelId"); 	// 메서드 접근했는지 확인하는 용도로 사용하는 출력문
@@ -65,16 +68,17 @@ public class Payment_Controller {
 		String duvalue = null;					// Ajax에서 텍스트 타입으로 리턴을 받아오므로 텍스트타입에 해당하는 String형의 변수값을 선언하고 null값으로 초기화해준다.
 		if(checkCancelId == 0){
 			System.out.println("아이디 사용가능");	// checkCancelId가 0이라면 아이디가 중복되지 않았으므로 사용가능하다는 출력문과 duvalue라는 변수에 아이디가 사용가능하다는 문자열값을 넣어줌.
-			duvalue = "아이디 사용가능";
+			duvalue = "Y";
 		}else{
 			System.out.println("아이디 중복되었음");	// checkCancelId가 1이라면 아이디가 중복되었으므로 사용가능하지 않다는 출력문과 duvalue라는 변수에 아이디가 사용불가하다는 문자열값을 넣어줌.
-			duvalue = "아이디 사용불가";
+			duvalue = "N";
 		}
 		return duvalue;	// 또한 duvalue라는 값을 리턴값으로 설정해줌으로써 아이디중복체크버튼을 클릭하면 아이디가 사용가능하거나 사용불가하다는 안내문을 띄워주는 역할을 한다
 	}
 	
 	
 	//결제아이디 중복체크
+	@ResponseBody
 	@RequestMapping(value="/tori/payment/chkDupId")
 	public String checkId(@RequestParam(value="prmId",required=true) String payment_id) throws Exception{
 		System.out.println("checkId");
@@ -84,10 +88,10 @@ public class Payment_Controller {
 		String duvalue = null;
 		if(checkId == 0){
 			System.out.println("아이디 사용가능");
-			duvalue = "아이디 사용가능";
+			duvalue = "Y";
 		}else{
 			System.out.println("아이디 중복되었음");
-			duvalue = "아이디 사용불가";
+			duvalue = "N";
 		}
 		return duvalue;
 	}
