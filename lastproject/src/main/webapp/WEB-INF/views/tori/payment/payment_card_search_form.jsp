@@ -26,7 +26,7 @@
 			<option value="card_company">카드회사별검색</option>
 		</select>
 		<input type="text" class="form-inline" name="keyWord" id="keyWord">
-		<input type="submit" class="form-inline" name="search" id="search">
+		<input type="submit" class="form-inline btn btn-primary" name="search" id="search">
 	
 	</form>
 </div>

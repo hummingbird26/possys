@@ -25,7 +25,7 @@
 			<div><input type="text" class="form-control" size="auto" id="staff_id" name="staff_id" value="${staff.staff_id}" readonly></div><br>
 			<div><label for="staff_id">비밀번호 :</label></div>
 			<div><input type="text" class="form-control" size="auto" id="staff_pw" name="staff_pw"></div><br>
-			<div><input class="btn btn-default" type="submit" id="staffUpdate" name="staffUpdate" value="제출"></div>
+			<div><input class="btn btn-primary" type="submit" id="staffUpdate" name="staffUpdate" value="제출"></div>
 		</form>
 	
 	
