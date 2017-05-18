@@ -35,7 +35,7 @@
 </script>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
+<h1><center><a href="${pageContext.request.contextPath}/home">홍락이짱</a></center></h1>
 <h1>메뉴 목록</h1>
 <div>전체 메뉴 목록 ${menucount}</div>
 <button class = "catebutton" id = "all"type = "button">전체</button>
