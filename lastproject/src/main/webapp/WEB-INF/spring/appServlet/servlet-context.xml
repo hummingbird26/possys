@@ -68,28 +68,15 @@
 
                  <beans:value>classpath:kr/or/possys/Staff_service/Staff_Mapper.xml</beans:value>
                 <beans:value>classpath:kr/or/possys/Member_sevice/Member_Mapper.xml</beans:value>
-<<<<<<< HEAD
-                <!-- 메뉴 -->
-=======
-                <!-- 메뉴 -->
-
->>>>>>> branch 'master' of https://github.com/hummingbird26/possys.git
                 <beans:value>classpath:kr/or/possys/Menu_service/Menu_Mapper.xml</beans:value>
                 <beans:value>classpath:kr/or/possys/Menu_service/Per_Mapper.xml</beans:value>
-
-<<<<<<< HEAD
                	<!-- <beans:value>classpath:kr/or/possys/Menu_service/Per_Mapper.xml</beans:value> -->
                 <beans:value>classpath:kr/or/possys/Menu_service/Menu_Mapper.xml</beans:value>
                 
-=======
->>>>>>> branch 'master' of https://github.com/hummingbird26/possys.git
+
                	<!-- <beans:value>classpath:kr/or/possys/Menu_service/Per_Mapper.xml</beans:value> -->
 		</beans:list>
 
-<<<<<<< HEAD
-            </beans:list>
-=======
->>>>>>> branch 'master' of https://github.com/hummingbird26/possys.git
         </beans:property>
 	    </beans:bean>
 	    <!-- mybatis설정 2. SqlSessionTemplate-->
