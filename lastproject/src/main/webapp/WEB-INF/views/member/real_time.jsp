@@ -22,17 +22,17 @@
 <style type="text/css">
 .highlight {
     background-color: #fff34d;
-    -moz-border-radius: 5px; /* FF1+ */
-    -webkit-border-radius: 5px; /* Saf3-4 */
-    border-radius: 5px; /* Opera 10.5, IE 9, Saf5, Chrome */
-    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7); /* FF3.5+ */
-    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7); /* Saf3.0+, Chrome */
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7); /* Opera 10.5+, IE 9.0 */
+    -moz-border-radius: 2px; /* FF1+ */
+    -webkit-border-radius: 2px; /* Saf3-4 */
+    border-radius: 2px; /* Opera 10.5, IE 9, Saf5, Chrome */
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); /* FF3.5+ */
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* Saf3.0+, Chrome */
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); /* Opera 10.5+, IE 9.0 */
 }
 
 .highlight {
-    padding:1px 4px;
-    margin:0 -4px;
+    padding:1px 1px;
+    margin:0 2px;
 }
 </style>
 </head>
@@ -92,19 +92,21 @@ $(document).ready(function () {
 	 $('#tags').keyup(function(){
 			var insert = $('#tags').val();
 			var input ={"insert":insert};
+			/* alert(insert); */
 			/* 검색어 하이라이트 */
-		 $('#tags').bind('keyup change', function(ev) {
-		 
+	$('#tags').bind('keydown change', function(ev) {
+		 var go = $(this).val();
 
 	        // remove any old highlighted terms
-	        $('body').removeHighlight();
+	     	 $('body').removeHighlight();
 
 	        // disable highlighting if empty
-		        if (insert) {
+		        if (go) {
 		            // highlight the new term
-		            $('body').highlight(insert);
-		        }
-			 });
+		            $('table').highlight(go);
+		        }    
+		        
+			});
 	        
 		if($('#tags').val()!=""){
 			$('.test').remove();
@@ -119,7 +121,7 @@ $(document).ready(function () {
 				url: "${pageContext.request.contextPath}/json",
                 dataType: "JSON",
                 data : input,
-                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
                 success: function (data) {
                 	
                 	decodeURIComponent( data.member_name );

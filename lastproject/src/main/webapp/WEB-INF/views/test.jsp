@@ -200,13 +200,19 @@
     padding:1px 4px;
     margin:0 -4px;
 }
+#container {
+    height: 400px; 
+    min-width: 310px; 
+    max-width: 800px;
+    margin: 0 auto;
+}
 </style>
 
 </head>
 
 <body>
 
-<strong>아래 문장에 있는 단어를 검색해보세요.</strong><br/><br/>
+<!-- <strong>아래 문장에 있는 단어를 검색해보세요.</strong><br/><br/>
 
 검색어입력 : <input type="text" id="text-search" />
 
@@ -226,12 +232,111 @@ Oh! 너무 너무 예뻐<br/>
 Gee Gee Gee Gee Baby Baby Baby Baby<br/>
 Gee Gee Gee Gee Baby Baby Baby Baby<br/>
 
+ -->
 
-
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources//modal/jquery-1.5.min.js"></script>
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources//modal/jquery-1.5.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources//modal/highlight.js"></script>
+ --%>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<div id="container" style="width:100%; height:400px;"></div>
+
+<input type="button" id="pbtn" value="클릭">
+
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+
 <script type="text/javascript">
-$(function() {
+$(document).ready(function(){
+	$('#pbtn').click(function(){
+	/* alert('pbtn 실행 확인'); */		
+	var date = new Array();
+	var Ptotal = new Array();
+	alert('pbtn 실행 확인');
+		
+	$.ajax({
+			type:'GET',
+			url:"${pageContext.request.contextPath}/graph",
+			async:false,
+			dataType:"JSON",
+			success:function(data){
+					
+				
+				/* 반복문 시작 */
+				$.each(data, function(){
+				
+				date.push(this.payment_date);
+				Ptotal.push(this.payment_total);
+				/* Ptotal += this.payment_total+",";
+				 */
+				console.log('ajax 내부 each 내부'+date);
+				
+				});	
+				
+				 console.log('ajax 내부 each 외부'+date);
+			}
+		});
+				
+					console.log('ajax 외부 each 외부'+ date)
+					Highcharts.chart('container', {
+					    chart: {
+					        type: 'column',
+					        options3d: {
+					            enabled: true,
+					            alpha: 15,
+					            beta: 15,
+					            viewDistance: 25,
+					            depth: 40
+					        }
+					    },
+					
+					    title: {
+					        text: '매출 현황 조회'
+					    },
+					
+					    xAxis: {
+					    	
+					    	categories:date
+					    	
+					    	/* categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+					         */
+					    },
+					
+					    yAxis: {
+					        allowDecimals: false,
+					        min: 0,
+					        title: {
+					            text: 'Number of fruits'
+					        }
+					    },
+					
+					    tooltip: {
+					        headerFormat: '<b>{point.key}</b><br>',
+					        pointFormat: '<span style="color:{series.color}">\u25CF</span> {series.name}: {point.y} / {point.stackTotal}'
+					    },
+					
+					    plotOptions: {
+					        column: {
+					            stacking: 'normal',
+					            depth: 40
+					        }
+					    },
+					
+					    series: [{
+					        name: 'John',
+					        data: Ptotal,
+					        stack: 'male'
+					    
+					    }]
+					});
+				
+	});
+});
+	
+/* $(function() {
     $('#text-search').bind('keyup change', function(ev) {
         // pull in the new value
         var searchTerm = $(this).val();
@@ -245,7 +350,7 @@ $(function() {
             $('body').highlight( searchTerm );
         }
     });
-});
+}); */
 </script>
 
 </body>
