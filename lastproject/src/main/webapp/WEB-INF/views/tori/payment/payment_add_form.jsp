@@ -10,6 +10,10 @@
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<!-- jQuery UI library -->
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Payment_ADD</title>
@@ -53,7 +57,52 @@ $(document).ready(function(){
 	});
 });
 
+function chkDupId(){
+	var prmId = $("#payment_id").val();
+	console.log(prmId);
+	if($("#payment_id").val() == '')
+		{	alert('ID를 입력해 주세요!');
+			return;
+		}
+	 $.ajax({
+		type:'POST',
+		data:"prmId="+$("#payment_id").val(),
+		contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+		dataType:'text',
+		url:'${pageContext.request.contextPath}/tori/payment/chkDupId',
+		success : function(data){
+			alert("성공");
+			var chkRst = data;
+			if(chkRst=="Y"){
+				alert("등록 가능 합니다");
+				console.log(data);
+				$("#idcheck").val('Y');
+			}else{
+				alert("중복됩니다");
+				console.log(data);
+				$("#idcheck").val('N');
+			}
+		},
+		error : function(request,status,error){
+			
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			alert("실패");
+		}
+	});
+}
+
+function insertChk(){
+	var frm = document.paymentForm;
+	
+	if(!chkVal('payment_id','payment_id'))
+		return false;
+	if($("#idChk").val()=='N'){
+		alert('ID체크를 해주시오');
+		return;
+	}
+}
 </script>
+ <%@ include file="../../modal/wide_menu.jsp" %>
 </head>
 <body>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
@@ -105,8 +154,13 @@ $(document).ready(function(){
 	<input class="btn btn-default" type="submit" id="paymentAdd" name="paymentAdd" value="제출">
 	<input class="btn btn-default" type="reset" id="paymentCancel" name="paymentCancel" value="되돌림">
 	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_list">글목록</a>
+	<input type="button" class="btn btn-primary" value="idcheck" onclick="javascript:chkDupId();"/>
 	</form>
 	<br><br>
+	<div>
+	<!-- ID 체크 확인용 -->
+	<input type="hidden" id="idChk" value="N"/>
+	</div>
 	<div>
 	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_form">결제취소직권입력</a>
 	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_card_form">카드결제직권입력</a>

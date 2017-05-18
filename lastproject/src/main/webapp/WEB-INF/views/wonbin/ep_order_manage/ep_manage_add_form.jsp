@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<%@ include file="../../modal/wide_menu.jsp" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>발주 업체 관리</title>
@@ -18,7 +19,12 @@
 			if($('input[name=food_id]').length < 2){
 				alert('더 이상 삭제 할 수 없습니다.');
 			}else{
-				$(this).parent().remove();
+				var fo1 = $(this).val();
+				alert(fo1);
+				console.log(fo1);
+// 				$(this).parent().parent().remove();
+// 				if($('#food_id').val())
+				
 			}
 		});
 				
@@ -39,10 +45,13 @@
 				//select 가 선택으로 되있으면 ep_id div 태그를 displat:none 시켜라
 				$('#ep_id_div').css("display","none");				
 // 				alert("선택이다");
+				$('.sel_view').val(''); // sel_view 클래스명을 가진 value 값을 공백으로
+				$('input[name=ep_name]').attr('readonly',false); // readonly를 false 로
 			}else{
 				//select 가 다른 업체명으로 선택 되었으면 ep_id div 태그를 displat:block 시켜라
 				$('#ep_id_div').css("display","block");
 // 				alert("선택이아니다")
+				$('input[name=ep_name]').attr('readonly',true); // readonly를 true 로
 				//04_ajax로 비동기식 업체정보호출
 				var sel_id = $("#sel_ep_name option:selected").val(); //셀렉트 된 val 값을 가져옴
 				var sel_name = $("#sel_ep_name option:selected").text(); // 셀렉트 된 text 값을 가져옴
@@ -80,22 +89,55 @@
 		}); // sel_change
 		
 		//@@@@@@@@@@@@@@@@@@@@@@식재료 코드 중복 체크@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@	
-		$(document).on('click','#chk_jungbok',function(){
-			var obj = new Object(); //key, value형태로 저장할 Object
-			var arr = new Array(); //Object를 배열로 저장할 Array
-			//jstl 도 jquery에서 쓸수있다.
-			<c:forEach var="f" items="${list}">
-				arr.push("${f.food_id}");
-			</c:forEach>
-			console.log(arr);
-								
+// 		$(document).on('click','#chk_jungbok',function(){
+// // 			var obj = new Object(); //key, value형태로 저장할 Object
+// 			var arr = new Array(); //Object를 배열로 저장할 Array
+// 			//jstl 도 jquery에서 쓸수있다.
+// 			<c:forEach var="f" items="${list}">
+// 				arr.push("${f.food_id}");
+// 			</c:forEach>		
+// 			jQuery.ajaxSettings.traditional = true;
+		
 // 			$.ajax({
-// 				type:"POST",
-// 				url : "${pageContext.request.contextPath}/ajax/food_chck"
-// 				data : 
-				
-// 			});
-			
+// 				type: "post",
+// 				url : "${pageContext.request.contextPath}/ajax/food_chck",
+// 				data : {arr: arr},
+// 				contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+// 				dataType : "JSON", //string 으로 리턴하기 때문에 
+// 				success : function(data){
+// 					console.log('성공');
+// 					console.log(data);
+// // 					console.log(data[0]); // FN17050845
+// // 					console.log(data.length); // 3
+// 					var count = 0;
+// 					for(var i=0;i<data.length;i++){
+// 						var f_chk = data[i];
+// 						if(f_chk != "N"){
+// 							alert("식재 코드 : "+f_chk+"이(가) 중복되었습니다.");
+// 							count++; //카운트를 주어서 중복된 갯수가 없으면 등록할수 있게 if문에 사용
+// 						}else if(count == 0){
+// 							alert("등록할수 있습니다.");
+// 							//hidden으로 준 체크박스 체크
+// 							$("input[name=chk_jung]").prop("checked",true);
+// 						}						
+// 					}									
+// 				},
+// 				error : function(request,status,error){
+// 					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);			
+// 				}				
+// 			});//ajax 중복체크		
+// 		});//식재료 중복체크
+		
+		// 등록 버튼 클릭스 submit 
+		$(document).on('click','#addsubmit',function(){
+// 			alert("등록버튼");
+			var tmp = $('[name=chk_jung]').is(":checked"); //체크박스 선택여부 확인 하고 true / false 반환
+			if(tmp){
+// 				alert("true면 출력");
+				addform.submit(); // submit();
+			}else{
+				alert("식재 중복체크를 하십시오.")
+			}
 		});
 		
 	}); //jquery Ready
@@ -116,14 +158,33 @@
 			 <input name="ep_id" id="ep_id" type="text" readonly="readonly"/>
 		</div>
 		
-		<div>식재 코드 번호 : 
-		<c:forEach var="f" items="${list}">
+		<div>추가 식재 품목</div> 
+			<table border=1>
+				<thead>
+					<th>식재 코드</th>
+					<th>상품명</th>
+					<th>삭제</th>
+				</thead>
+				<tbody>
+					<c:forEach var="f" items="${list}">
+					<tr id="tr">
+						<td>${f.food_id}</td>
+						<td id="td_n">${f.food_name}</td>
+						<td><button type="button" id="chk_delete" value='${f.food_id}'>X</button></td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		
+					
 		<div>
-			<input class="input_fo_id" name ="food_id" id ="food_id" type ="text" value="${f.food_id}" readonly="readonly"/>(${f.food_name})
-			
-			<button type="button" id="chk_delete">X</button>
+			<c:forEach var="f" items="${list}">
+			<div>
+				<input class="input_fo_id" name ="food_id" id ="food_id" type ="text" value="${f.food_id}" readonly="readonly"/>
+			</div>
+			</c:forEach>
 		</div>
-		</c:forEach>
+<!-- 		<button type="button" id="chk_delete">X</button> -->
 		<br>			
 		<div>
 			<button type="button" id="chk_jungbok">식재 중복체크</button>
@@ -136,9 +197,9 @@
 			</div>
 		</div>
 		</div>
-	
+	<div>
 		<div>
-		업체명 : <input name ="ep_name" id ="ep_name" type ="text"/>
+		업체명 : <input class="sel_view" name ="ep_name" id ="ep_name" type ="text"/>
 		
 		<select name = "sel_ep_name" id = "sel_ep_name">
 			<option>선택</option>
@@ -147,16 +208,16 @@
 			</c:forEach>
 		</select>
 		</div>
-		<div>연락처 : <input name ="ep_phone" id ="ep_phone" type ="text" value="${ep_m.ep_phone}"/></div>
-		<div>업체 담당자 : <input name ="ep_director" id ="ep_director" type ="text"/></div>
-		<div>주소 : <input name ="ep_address" id ="ep_address" type ="text"/></div>
-		<div>비고 : <input name ="ep_text" id ="ep_text" type ="text"/></div>
-		
+		<div>연락처 : <input class="sel_view" name ="ep_phone" id ="ep_phone" type ="text" value="${ep_m.ep_phone}"/></div>
+		<div>업체 담당자 : <input class="sel_view" name ="ep_director" id ="ep_director" type ="text"/></div>
+		<div>주소 : <input class="sel_view" name ="ep_address" id ="ep_address" type ="text"/></div>
+		<div>비고 : <input class="sel_view" name ="ep_text" id ="ep_text" type ="text"/></div>
+	</div>
 		
 
 <br>
 		<div>
-			<input type="submit" id="addsubmit" value="등록">
+			<input type="button" id="addsubmit" value="등록">
 			<input type="reset" id="reset" value="초기화">
 			<a href="${pageContext.request.contextPath}/ep_manage_list">취소</a>
 		</div>

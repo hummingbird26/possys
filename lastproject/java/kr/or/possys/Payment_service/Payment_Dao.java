@@ -25,6 +25,15 @@ public class Payment_Dao {
         return sqlSessionTemplate.delete("kr.or.possys.Payment_service.Payment_Mapper.deletePayment", Payment);
     }*/
 	
+	//payment 결제 아이디 중복 체크
+	public int check_pid(String payment_id) {
+		System.out.println("check_pid");
+		System.out.println(payment_id);
+		
+		return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.check_pid", payment_id);
+		
+	}
+	
     //payment 검색 수 요청
     public int paymentSRlist(String select, String keyWord){
     	System.out.println("paymentSRlist");

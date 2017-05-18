@@ -16,7 +16,15 @@ public class Card_Payment_Dao {
 
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
+	
+	//payment_card card중복여부 확인
+	public int check_cpid(String card_id){
+		System.out.println("check_cpid");
+		System.out.println(card_id);
 		
+		return sqlSessionTemplate.selectOne("kr.or.possys.Card_Payment_service.Card_Payment_Mapper.check_cpid",card_id);
+	}
+	
 	 //payment_cancel_search 검색 수 요청
     public int CPSlist(String select, String keyWord){
     	System.out.println("CPSlist");

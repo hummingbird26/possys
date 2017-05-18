@@ -79,24 +79,28 @@ $(document).ready(function(){
       </li>
       <li ><a href="#Link" title="Link">food</a>
         <ul >
-          <li ><a href="#Link" title="Link">Link</a></li>
-          <li ><a href="#Link" title="Link">Link</a></li>
+          <li ><a href="${pageContext.request.contextPath}/food_list">식재자 관리</a></li>
+          <li ><a href="${pageContext.request.contextPath}/ep_manage_list">발주 업체 관리</a></li>
           <li ><a href="#Link" title="Link">Link</a></li>
           <li ><a href="#Link" title=" Link"> Link</a></li>
         </ul>
       </li>
       <li ><a href="#Link" title="Link">menu</a>
         <ul >
-          <li ><a href="#Link" title="Link">Link </a></li>
-          <li ><a href="#Link" title="Link">Link</a></li>
-          <li ><a href="#Link" title="Link">Link</a></li>
+          <li ><a href="${pageContext.request.contextPath}/menu_add_form" title="Link">메뉴 등록 </a></li>
+          <li ><a href="${pageContext.request.contextPath}/menu_list" title="Link">메뉴 목록 화면</a></li>
         </ul>
       </li>
       <li ><a href="#Link" title="Link">Payment</a>
       <ul>
-          <li ><a href="#Link" title="Link">Link </a></li>
-          <li ><a href="#Link" title="Link">Link</a></li>
-          <li ><a href="#Link" title="Link">Link</a></li>
+          <li ><a href="${pageContext.request.contextPath}/tori/payment/payment_add_form" title="Link">결제내역추가 </a></li>
+          <li ><a href="${pageContext.request.contextPath}/tori/payment/payment_cancel_form" title="Link">결제취소내역추가</a></li>
+          <li ><a href="${pageContext.request.contextPath}/tori/payment/payment_card_form" title="Link">카드거래내역추가</a></li>
+        </ul>
+        </li>
+       <li ><a href="#Link" title="Link">Staff</a>
+      <ul>
+          <li ><a href="${pageContext.request.contextPath}/tori/staff/staff_add_form" title="Link">직원추가</a></li>
         </ul>
         </li>
     </ul>

@@ -1,9 +1,8 @@
-package kr.or.possys.Menu_service;
+package kr.or.possys.ep_order_manage_service;
 
-public class Per {
+public class Ep_Manage_fo_VO {
 	private String food_id;
 	private String food_name;
-	private String food_unit;
 	public String getFood_id() {
 		return food_id;
 	}
@@ -16,10 +15,5 @@ public class Per {
 	public void setFood_name(String food_name) {
 		this.food_name = food_name;
 	}
-	public String getFood_unit() {
-		return food_unit;
-	}
-	public void setFood_unit(String food_unit) {
-		this.food_unit = food_unit;
-	}
+	
 }

@@ -4,6 +4,11 @@
 
 <mapper namespace="kr.or.possys.Payment_service.Payment_Mapper">
 
+<!-- payment 중복 체크 쿼리 만듦 -->
+<select id="check_pid" parameterType = "String" resultType="int">
+SELECT count(*) FROM payment WHERE 1=1 AND payment_id = #{payment_id}
+</select>
+
 <update parameterType="kr.or.possys.Payment_service.Payment" id="updatePayment"> 
 UPDATE payment SET payment_id = #{payment_id} , table_order_id = #{table_order_ID} 
 WHERE payment_id = #{payment_id}</update>

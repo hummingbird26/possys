@@ -1,7 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
+ 	<%@ include file="../modal/wide_menu.jsp" %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- bootstrap을 사용하기 위한 CDN주소 -->
 <!-- Latest compiled and minified CSS -->
@@ -26,10 +28,10 @@
 <title></title>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
+<h1><center><a href="${pageContext.request.contextPath}/home">홍락이짱</a></center></h1>
 <div class="container">
     <h1></h1>
-    <form id="addform" action="${pageContext.request.contextPath}/menu_add_form" method="post">
+    <form id="addform" action="${pageContext.request.contextPath}/menu_add_form" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="menuPw"> 메뉴명:</label>
             <input class="form-control" name="menu_name" id="menu_name" type="text"/>
@@ -43,22 +45,22 @@
             <input class="form-control" name="menu_price" id="menu_price" type="text"/>
         </div>
         <div class="form-group">
-            <label for="menuName">수량:</label>
-            <input class="form-control" name="menu_sale" id="menu_sale" type="text"/>
+            <label for="menuName">할인가격:</label>
+            <input class="form-control" name="menu_sprice" id="menu_sprice" type="text"/>
         </div>
         <div class="form-group">
-            <label for="menuName">단위 :</label>
+            <label for="menuName">칼로리 :</label>
             <input class="form-control" name="menu_kcal" id="menu_kcal" type="text"/>
         </div>
         <div class="form-group">
-            <label for="menuName">설명:</label>
-            <input class="form-control" name="menu_picture" id="menu_picture" type="text"/>
+            <label for="order_file">사진:</label>
+            <input  class="form-control" type="file" id="order_file" name="order_file"> <!-- 이미지 파일 -->
         </div>
         <div>
 			<input type="submit" id="addmenu" value="등록">
 			<input type="reset" id="reset" value="초기화">
-			<a href="${pageContext.request.contextPath}/menu_add_form">새로고침</a>
 		</div>
+
     </form>
 </div>
 </body>

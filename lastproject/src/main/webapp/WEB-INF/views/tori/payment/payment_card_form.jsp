@@ -51,7 +51,54 @@ $(document).ready(function(){
 		}
 	});
 });
+
+function chkDupCardId(){
+	var prmId = $("#card_id").val();
+	console.log(prmId);
+	if($("#card_id").val() == '')
+		{	alert('ID를 입력해 주세요!');
+			return;
+		}
+	 $.ajax({
+		type:'POST',
+		data:"prmId="+$("#card_id").val(),
+		contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+		dataType:'text',
+		url:'${pageContext.request.contextPath}/tori/payment/chkDupCardId',
+		success : function(data){
+			alert("성공");
+			var chkRst = data;
+			if(chkRst=="Y"){
+				alert("등록 가능 합니다");
+				console.log(data);
+				$("#idcheck").val('Y');
+			}else{
+				alert("중복됩니다");
+				console.log(data);
+				$("#idcheck").val('N');
+			}
+		},
+		error : function(request,status,error){
+			
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			alert("실패");
+		}
+	});
+}
+
+function insertChk(){
+	var frm = document.paymentForm;
+	
+	if(!chkVal('card_id','card_id'))
+		return false;
+	if($("#idChk").val()=='N'){
+		alert('ID체크를 해주시오');
+		return;
+	}
+}
+
 </script>
+ <%@ include file="../../modal/wide_menu.jsp" %>
 </head>
 <body>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
@@ -116,8 +163,13 @@ $(document).ready(function(){
 		<input type="submit" class="btn btn-default" id="paymentCardAdd" name="paymentCardAdd" value="제출">
 		<input type="reset" class="btn btn-default" id="paymentCancel" name="paymentCancel" value="되돌림">
 		<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_card_list">글목록</a>
+		<input type="button" class="btn btn-primary" value="idcheck" onclick="javascript:chkDupCardId();"/>
 		</form>
-
+		<br><br>
+			<div>
+			<!-- ID 체크 확인용 -->
+			<input type="hidden" id="idChk" value="N"/>
+			</div>
 	</div>
 </body>
 </html>

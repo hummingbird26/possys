@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.possys.Menu_service.Menu;
 import kr.or.possys.food_service.Food;
 
 @Repository
@@ -55,6 +56,11 @@ public class Order_Dao {
 	public int order_detail_insert(Order order){
 		System.out.println("주문상세입력실행");
 		return sqlSessionTemplate2.update("kr.or.possys.Order_service.Order_Mapper.order_detail_insert",order);
+	}
+	
+	public List<Menu> menu_list(){
+		System.out.println("메뉴목록실행");
+		return sqlSessionTemplate2.selectList("kr.or.possys.Order_service.Order_Mapper.menu_list");
 	}
 
 }

@@ -51,7 +51,53 @@ $(document).ready(function(){
 		}
 	});
 });
+
+function chkDupCancelId(){
+	var prmId = $("#payment_cancel_id").val();
+	console.log(prmId); // prmId값에 payment_cancel_id의 값이 잘 전달되어지는지 확인
+	if($("#payment_cancel_id").val()=='')
+		{ alert('ID를 입력해주세요!');
+			return;
+		}
+	$.ajax({
+		type:'POST',
+		data:"prmId=" +$("#payment_cancel_id").val(),
+		contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+		dataType:'text',
+		url:'${pageContext.request.contextPath}/tori/payment/chkDupCancelId',
+		success : function(data){
+			alert("성공");
+			var chkRst = data;
+			if(chkRst=="Y"){
+				alert("등록이 가능합니다");
+				console.log(data);
+				$("#idcheck").val('Y');
+			}else{
+				alert("중복됩니다");
+				console.log(data);
+				$("#idcheck").val('N');
+			}
+		},
+		error : function(request,status,error){
+			
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			alert("실패");
+		}
+	});
+}
+
+function insertCancelChk(){
+	var frm = document.companyForm;
+	
+	if(!chkVal('payment_cancel_id','payment_cancel_id'))
+		return false;
+	if($("#idChk").val()=='N'){
+		alert('ID체크를 해주시오');
+		return;
+	}
+}
 </script>
+ <%@ include file="../../modal/wide_menu.jsp" %>
 </head>
 <body>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
@@ -119,13 +165,16 @@ $(document).ready(function(){
 					</td>
 				</tr>
 				</table>
-		<input type="submit" id="paymentCancelAdd" name="paymentCancelAdd" value="제출">
-		<input type="reset" id="paymentCancel" name="paymentCancel" value="되돌림">
+		<input type="submit" class="btn btn-default" id="paymentCancelAdd" name="paymentCancelAdd" value="제출">
+		<input type="reset" class="btn btn-default" id="paymentCancel" name="paymentCancel" value="되돌림">
 		<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_list">글목록</a>
+		<input type="button" class="btn btn-primary" value="idcheck" onclick="javascript:chkDupCancelId();"/>
 		</form>
-	
-	
-	
+		<br><br>
+			<div>
+			<!-- ID 체크 확인용 -->
+			<input type="hidden" id="idChk" value="N"/>
+			</div>
 	</div>
 </body>
 </html>

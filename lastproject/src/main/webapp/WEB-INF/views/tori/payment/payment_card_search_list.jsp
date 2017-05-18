@@ -13,10 +13,11 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+<%@ include file="../../modal/wide_menu.jsp" %>
 </head>
 <body>
 	<div class="container">
-    <h1>Payment Cancel Search List</h1>
+    <h1>Payment Card Search List</h1>
     <div>전체행의 수 : ${CPScount}</div>
     <table class="table table-striped table-hover" border="1">
         <thead>
@@ -26,7 +27,6 @@
                 <th>승인구분</th>
                 <th>결제일자</th>
                 <th>카드사</th>
-                <th>카드회사</th>
                 <th>카드공급대가</th>
             </tr>
         </thead>
@@ -34,7 +34,6 @@
             <c:forEach var="cp" items="${CPSlist}">
                 <tr>
                     <td><a href="${pageContext.request.contextPath}/tori/payment/payment_card_view?card_id=${cp.card_id}">${cp.card_id}</a></td>
-                    <td>${cp.card_id}</td>
                     <td>${cp.payment_id}</td>
                     <td>${cp.card_app}</td>
                     <td>${cp.card_date}</td>

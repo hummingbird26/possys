@@ -20,7 +20,18 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
+    <!-- upload -->
+		<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize">
+		<beans:value>102400000</beans:value>
+		</beans:property>
+		<beans:property name="defaultEncoding" value="UTF-8" />
+		</beans:bean>
+
+
+
+
 	
 	<context:component-scan base-package="kr.or.possys" />
 	<!-- 커넥션 풀 설정 -->
@@ -67,13 +78,25 @@
                 <!-- 직원&로그인 -->
 
                  <beans:value>classpath:kr/or/possys/Staff_service/Staff_Mapper.xml</beans:value>
+
                 <beans:value>classpath:kr/or/possys/Member_sevice/Member_Mapper.xml</beans:value>
+
+                <beans:value>classpath:kr/or/possys/Member_sevice/Member_Mapper.xml</beans:value>
+
                 <!-- 메뉴 -->
 
                 <beans:value>classpath:kr/or/possys/Menu_service/Menu_Mapper.xml</beans:value>
+
                 <beans:value>classpath:kr/or/possys/Menu_service/Per_Mapper.xml</beans:value>
+               	<!-- <beans:value>classpath:kr/or/possys/Menu_service/Per_Mapper.xml</beans:value> -->
+                <beans:value>classpath:kr/or/possys/Menu_service/Menu_Mapper.xml</beans:value>
+                
 
                	<!-- <beans:value>classpath:kr/or/possys/Menu_service/Per_Mapper.xml</beans:value> -->
+
+                <beans:value>classpath:kr/or/possys/Menu_service/Per_Mapper.xml</beans:value>
+
+
 		</beans:list>
 
         </beans:property>
