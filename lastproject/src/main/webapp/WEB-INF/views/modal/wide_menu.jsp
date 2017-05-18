@@ -78,8 +78,8 @@ $(document).ready(function(){
       </li>
       <li ><a href="#Link" title="Link">food</a>
         <ul >
-          <li ><a href="#Link" title="Link">Link</a></li>
-          <li ><a href="#Link" title="Link">Link</a></li>
+          <li ><a href="${pageContext.request.contextPath}/food_list"></a>식재자 관리</li>
+          <li ><a href="${pageContext.request.contextPath}/ep_manage_list"></a>발주 업체 관리</li>
           <li ><a href="#Link" title="Link">Link</a></li>
           <li ><a href="#Link" title=" Link"> Link</a></li>
         </ul>
