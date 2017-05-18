@@ -71,7 +71,7 @@ $(document).ready(function(){
       </li>
       <li ><a href="#Link" title="Link">Order</a>
         <ul >
-          <li ><a href="#Link" title="Link">Link</a></li>
+          <li ><a href="${pageContext.request.contextPath}/order_list" title="Link">주문목록</a></li>
           <li ><a href="#Link" title="Link">Link</a></li>
           <li ><a href="#Link" title="Link">Link</a></li>
         </ul>
