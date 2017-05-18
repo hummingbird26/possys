@@ -159,7 +159,7 @@ function insertChk(){
 	<br><br>
 	<div>
 	<!-- ID 체크 확인용 -->
-	<input type="hidden" id="idChk" value="N"/>
+	<input type="hidden" id="idChk" value="N" />
 	</div>
 	<div>
 	<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_form">결제취소직권입력</a>
