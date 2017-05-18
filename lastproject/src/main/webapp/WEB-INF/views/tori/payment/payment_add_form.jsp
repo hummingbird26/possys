@@ -10,6 +10,10 @@
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<!-- jQuery UI library -->
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Payment_ADD</title>
@@ -53,6 +57,45 @@ $(document).ready(function(){
 	});
 });
 
+function chkDupId(){
+	var prmId = $("#payment_id").val();
+	console.log(prmId);
+	if($("#payment_id").val() == '')
+		{	alert('ID를 입력해 주세요!');
+			return;
+		}
+	 $.ajax({
+		type:'POST',
+		data:"prmId="+$("#payment_id").val(),
+		dataType:'text',
+		url:'${pageContext.request.contextPath}/tori/payment/chkDupId',
+		success : function(rData, textStatus, xhr){
+			alert("성공");
+			var chkRst = rData;
+			if(chkRst==0){
+				alert("등록 가능 합니다");
+				$("#idcheck").val('Y');
+			}else{
+				alert("중복됩니다");
+				$("#idcheck").val('N');
+			}
+		},
+		error : function(xhr, status, e){
+			alert("실패");
+		}
+	});
+}
+
+function insertChk(){
+	var frm = document.companyForm;
+	
+	if(!chkVal('payment_id','payment_id'))
+		return false;
+	if($("#idChk").val()=='N'){
+		alert('ID체크를 해주시오');
+		return;
+	}
+}
 </script>
 </head>
 <body>
@@ -105,8 +148,13 @@ $(document).ready(function(){
 	<input class="btn btn-default" type="submit" id="paymentAdd" name="paymentAdd" value="제출">
 	<input class="btn btn-default" type="reset" id="paymentCancel" name="paymentCancel" value="되돌림">
 	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_list">글목록</a>
+	<input type="button" value="idcheck" onclick="javascript:chkDupId();"/>
 	</form>
 	<br><br>
+	<div>
+	<!-- ID 체크 확인용 -->
+	<input type="hidden" id="idChk" value="N"/>
+	</div>
 	<div>
 	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_form">결제취소직권입력</a>
 	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_card_form">카드결제직권입력</a>

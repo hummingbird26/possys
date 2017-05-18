@@ -195,4 +195,23 @@ public class Staff_Controller {
 			sdao.deleteStaff(staff_id, staff_pw);
 			return "redirect:/tori/staff/staff_list";
 		}
+		
+	//staff_id 중복체크
+		@RequestMapping(value="/tori/staff/chkDupStaffId")
+		public String checkStaffId(@RequestParam(value="prmId",required=true)String staff_id) throws Exception{
+			System.out.println("checkStaffId");
+			System.out.println(staff_id);
+			int checkStaffId = sdao.check_sid(staff_id);
+			System.out.println(checkStaffId);
+			String duvalue = null;
+			if(checkStaffId == 0){
+				System.out.println("아이디 사용가능");
+				duvalue = "아이디 사용 가능";
+			}else{
+				System.out.println("아이디가 중복되었어요");
+				duvalue = "아이디 사용 불가";
+			}
+			
+			return duvalue;
+		}
 }

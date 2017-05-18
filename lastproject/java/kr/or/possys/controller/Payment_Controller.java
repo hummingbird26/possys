@@ -2,8 +2,6 @@ package kr.or.possys.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +36,62 @@ public class Payment_Controller {
 		System.out.println("start");
 		return "tori_home";
 	}*/
+	//카드아이디 중복체크
+	@RequestMapping(value="/tori/payment/chkDupCardId")
+	public String checkCardId(@RequestParam(value="prmId",required=true) String card_id) throws Exception{
+		System.out.println("checkCardId");
+		System.out.println(card_id);
+		int checkCardId = cpdao.check_cpid(card_id); // checkCardId에 넣어지는 값은 0 아니면 1.. 이것을 String타입으로 반환하여야 한다. 그래서 아래의 조건분기(1이면 중복, 0이면 사용가능)가 만들어져야 한다.
+		System.out.println(checkCardId);
+		String duvalue = null;
+		if(checkCardId==0){
+			System.out.println("아이디 사용가능");
+			duvalue = "아이디 사용 가능";
+		}else{
+			System.out.println("아이디가 중복되었어요");
+			duvalue = "아이디 사용 불가";
+		}
+		
+		return duvalue;
+	}
+	
+	//결제취소아이디 중복체크
+	@RequestMapping(value="/tori/payment/chkDupCancelId")
+	public String checkCancelId(@RequestParam(value="prmId",required=true) String payment_cancel_id) throws Exception{
+		System.out.println("checkCancelId"); 	// 메서드 접근했는지 확인하는 용도로 사용하는 출력문
+		System.out.println(payment_cancel_id);	// 메서드 접근 확인 후에 name값이 payment_cancel_id인 텍스트박스에 입력된 값을 가져와서 출력하고 확인하는 용도로 사용한다.
+		int checkCancelId = pcdao.check_pcid(payment_cancel_id);	// DAO에서 payment_cancel_id를 매개변수로 하는 check_pcid메서드를 실행한 결과값(반환형은 int)을 checkCancelId 변수에 할당한다.
+		System.out.println(checkCancelId);		// checkCancelId 변수에 잘 할당되었는지를 확인하는 과정.
+		String duvalue = null;					// Ajax에서 텍스트 타입으로 리턴을 받아오므로 텍스트타입에 해당하는 String형의 변수값을 선언하고 null값으로 초기화해준다.
+		if(checkCancelId == 0){
+			System.out.println("아이디 사용가능");	// checkCancelId가 0이라면 아이디가 중복되지 않았으므로 사용가능하다는 출력문과 duvalue라는 변수에 아이디가 사용가능하다는 문자열값을 넣어줌.
+			duvalue = "아이디 사용가능";
+		}else{
+			System.out.println("아이디 중복되었음");	// checkCancelId가 1이라면 아이디가 중복되었으므로 사용가능하지 않다는 출력문과 duvalue라는 변수에 아이디가 사용불가하다는 문자열값을 넣어줌.
+			duvalue = "아이디 사용불가";
+		}
+		return duvalue;	// 또한 duvalue라는 값을 리턴값으로 설정해줌으로써 아이디중복체크버튼을 클릭하면 아이디가 사용가능하거나 사용불가하다는 안내문을 띄워주는 역할을 한다
+	}
+	
+	
+	//결제아이디 중복체크
+	@RequestMapping(value="/tori/payment/chkDupId")
+	public String checkId(@RequestParam(value="prmId",required=true) String payment_id) throws Exception{
+		System.out.println("checkId");
+		System.out.println(payment_id);
+		int checkId = pdao.check_pid(payment_id);
+		System.out.println(checkId);
+		String duvalue = null;
+		if(checkId == 0){
+			System.out.println("아이디 사용가능");
+			duvalue = "아이디 사용가능";
+		}else{
+			System.out.println("아이디 중복되었음");
+			duvalue = "아이디 사용불가";
+		}
+		return duvalue;
+	}
+	
 	
 	//리스트 입력 폼으로 이동한다
 	@RequestMapping(value="/tori/payment/payment_add_form", method = RequestMethod.GET)

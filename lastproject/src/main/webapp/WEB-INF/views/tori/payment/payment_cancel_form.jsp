@@ -51,6 +51,46 @@ $(document).ready(function(){
 		}
 	});
 });
+
+function chkDupCancelId(){
+	var prmId = $("#payment_cancel_id").val();
+	console.log(prmId); // prmId값에 payment_cancel_id의 값이 잘 전달되어지는지 확인
+	if($("#payment_cancel_id").val()=='')
+		{ alert('ID를 입력해주세요!');
+			return;
+		}
+	$.ajax({
+		type:'POST',
+		data:"prmId=" +$("#payment_cancel_id").val(),
+		dataType:'text',
+		url:'${pageContext.request.contextPath}/tori/payment/chkDupCancelId',
+		success : function(rData, textStatus, xhr){
+			alert("성공");
+			var chkRst = rData;
+			if(chkRst==0){
+				alert("등록이 가능합니다");
+				$("#idcheck").val('Y');
+			}else{
+				alert("중복됩니다");
+				$("#idcheck").val('N');
+			}
+		},
+		error : function(xhr, status, e){
+			alert("실패");
+		}
+	});
+}
+
+function insertCancelChk(){
+	var frm = document.companyForm;
+	
+	if(!chkVal('payment_cancel_id','payment_cancel_id'))
+		return false;
+	if($("#idChk").val()=='N'){
+		alert('ID체크를 해주시오');
+		return;
+	}
+}
 </script>
 </head>
 <body>
@@ -119,13 +159,16 @@ $(document).ready(function(){
 					</td>
 				</tr>
 				</table>
-		<input type="submit" id="paymentCancelAdd" name="paymentCancelAdd" value="제출">
-		<input type="reset" id="paymentCancel" name="paymentCancel" value="되돌림">
+		<input type="submit" class="btn btn-default" id="paymentCancelAdd" name="paymentCancelAdd" value="제출">
+		<input type="reset" class="btn btn-default" id="paymentCancel" name="paymentCancel" value="되돌림">
 		<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_list">글목록</a>
+		<input type="button" value="idcheck" onclick="javascript:chkDupCancelId();"/>
 		</form>
-	
-	
-	
+		<br><br>
+			<div>
+			<!-- ID 체크 확인용 -->
+			<input type="hidden" id="idChk" value="N"/>
+			</div>
 	</div>
 </body>
 </html>

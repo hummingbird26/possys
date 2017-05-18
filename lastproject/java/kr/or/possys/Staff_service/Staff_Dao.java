@@ -62,4 +62,11 @@ private SqlSessionTemplate sqlSessionTemplate;
     	System.out.println("insertStaff");
         return sqlSessionTemplate.insert("kr.or.possys.Staff_service.Staff_Mapper.insertStaff", Staff);
     }
+    
+    //직원코드 중복 메서드
+    public int check_sid(String staff_id){
+    	System.out.println("check_sid");
+    	System.out.println(staff_id);
+    	return sqlSessionTemplate.selectOne("kr.or.possys.Staff_service.Staff_Mapper.check_sid", staff_id);
+    }
 }
