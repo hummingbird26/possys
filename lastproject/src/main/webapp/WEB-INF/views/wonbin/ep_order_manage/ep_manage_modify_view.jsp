@@ -4,7 +4,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<%@ include file="../../modal/wide_menu.jsp" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>수정 화면</title>
@@ -14,8 +13,16 @@
 			var re = confirm('정말 삭제 하시겠습니까?');
 			if(re){
 				
-			}else{
+			}else{				
+				return
+			}
+		});
+		$(document).on('click','#all_del',function(){
+			alert('정말 삭제 하시겠습니까?');
+			var re = confirm('업체를 삭제하시면 관련 식재료를 다시 설정해주셔야합니다. 계속 진행하시겠습니까?');
+			if(re){
 				
+			}else{				
 				return
 			}
 		});
@@ -23,6 +30,7 @@
 
 
 </script>
+<%@ include file="../../modal/wide_menu.jsp" %>
 
 </head>
 <body>
@@ -67,7 +75,7 @@
 			<input type="submit" id="addsubmit" value="수정">
 			<input type="reset" id="reset" value="초기화">
 			<a href="${pageContext.request.contextPath}/ep_manage_list"><button type="">취소</button></a>
-			<a href="${pageContext.request.contextPath}/ep_manage_delete?ep_id=${ep_m.ep_id}">삭제</a>
+			<a href="${pageContext.request.contextPath}/ep_manage_delete?ep_id=${ep_m.ep_id}"><button id="all_del" type="button">삭제</button></a>
 		</div>
 	</form>
 

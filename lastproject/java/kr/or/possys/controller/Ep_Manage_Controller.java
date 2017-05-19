@@ -47,7 +47,7 @@ public class Ep_Manage_Controller {
 
 		List<Food> list = new ArrayList<Food>();
 		for(String s : food_id){
-			
+			//입력폼
 			Food food = new Food();
 			food.setFood_id(s);
 			Food fo = dao.ep_mchck(food);
@@ -65,13 +65,13 @@ public class Ep_Manage_Controller {
 		
 	}
 	//(업체관리 입력폼 요청)
-	@RequestMapping(value="/ep_manage_add_form", method = RequestMethod.GET)
-	public String ep_madd(Model model
-			,@RequestParam(value="food_id") List<String> food_id){
-		System.out.println("01_Ep_Manage_Controller.java ->>ep_madd 폼 요청");
-		
-		return null/*"/wonbin/ep_order_manage/ep_manage_add_form"*/;
-	}
+//	@RequestMapping(value="/ep_manage_add_form", method = RequestMethod.GET)
+//	public String ep_madd(Model model
+//			,@RequestParam(value="food_id") List<String> food_id){
+//		System.out.println("01_Ep_Manage_Controller.java ->>ep_madd 폼 요청");
+//		
+//		return null/*"/wonbin/ep_order_manage/ep_manage_add_form"*/;
+//	}
 	//업체관리 입력액션 요청
 	@RequestMapping(value="/ep_manage_add_form", method = RequestMethod.POST)
 	public String ep_madd(Ep_Manage ep_m
@@ -94,8 +94,8 @@ public class Ep_Manage_Controller {
 			}
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("list", list);
-			dao.insertep_m(list);
-
+			dao.insertep_m(list); // 업체 리스트에 insert
+			dao.insertep_o(list); // 발주리스트 에 해당 값 insert
 		
 		return "redirect:/ep_manage_list";
 	}
