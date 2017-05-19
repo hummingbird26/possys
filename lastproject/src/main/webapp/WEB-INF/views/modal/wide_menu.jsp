@@ -68,6 +68,7 @@ $(document).ready(function(){
           <li ><a href="${pageContext.request.contextPath}/member_list" title="Link">회원목록(회원관리)</a></li>
           <li ><a href="#" id="btn" title="Link">주문내역 자동확인</a></li>
           <li ><a href="${pageContext.request.contextPath}/total_payment" title="Link">매출내역조회</a></li>
+          <li ><a href="${pageContext.request.contextPath}/mail/mailForm" title="Link">email_test</a></li>
         </ul>
       </li>
       <li ><a href="#Link" title="Link">Order</a>

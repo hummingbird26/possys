@@ -4,11 +4,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.util.List;
+import java.util.UUID;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +26,8 @@ import kr.or.possys.Member_sevice.mVo;
 import kr.or.possys.Order_service.Order;
 import kr.or.possys.Order_service.Order_Dao;
 import kr.or.possys.Payment_service.Payment;
+import kr.or.possys.Staff_service.Staff;
+import kr.or.possys.Staff_service.Staff_Dao;
 import net.sf.json.JSONArray;
 
 @Controller
@@ -32,6 +38,116 @@ public class Member_Controller {
 	
 	@Autowired
 	private	Order_Dao	odao;
+	
+	@Autowired
+	private Staff_Dao sdao;
+	
+	//e-mail test
+	@Autowired
+	  private JavaMailSender mailSender;
+	// 비밀번호 재발급 화면 이동
+	  @RequestMapping(value = "/repw")
+	  public String repw() {
+	   System.out.println("비밀번호 재발급 화면 이동 메서드 ");
+	    return "/repw";
+	  }  
+	// mailForm
+	  @ResponseBody
+	  @RequestMapping(value = "/idcheck")
+	  public void mailForm(HttpServletRequest request,HttpServletResponse re) throws IOException {
+		  String checkid = request.getParameter("id");
+		  /*System.out.println(checkid);*/
+		 
+		  	re.setCharacterEncoding("UTF-8");
+		  
+			PrintWriter out = re.getWriter();
+			JSONArray CheckStaff = null;
+			
+			Staff staff = sdao.loginSelect(checkid);
+			/*if(staff!=null){*/
+			
+			/*System.out.println(plist);*/
+			
+			CheckStaff = JSONArray.fromObject(staff);
+			System.out.println(CheckStaff);
+			
+			//새로운 화면에서 json방식으로 받아온 값 출력
+			out.write(CheckStaff.toString());
+			
+			out.flush();
+	   
+	  }
+	 
+	  // 비밀번호 찾기 후 신규 pw 재발급 후 db등록 및  이메일 발송 코드 
+	  @ResponseBody
+	  @RequestMapping(value="/mail/mailSending",method = RequestMethod.POST)
+	  public void mailSending(HttpServletRequest request){
+		  System.out.println("메일보내기");
+		  
+		  
+		  			String checkid = request.getParameter("id");
+		  			System.out.println(checkid);
+		  			Staff staff = sdao.loginSelect(checkid);
+		  			System.out.println(staff+"<---mailSending 메서드 아이디 입력후 리턴값 Member_Controller.java");
+				   /* String tomail  = request.getParameter("tomail"); */    // 받는 사람 이메일
+				    /*String title   = request.getParameter("title");*/// 제목
+					String setfrom = "bsh20057@gmail.com";
+					String title = "possys 비밀번호 재발급 안내입니다.";
+				    String content ="";
+				    String newpw = "";
+				    for (int i = 0;i < 5; i++) { 
+				        // UUID uuid = UUID.randomUUID() // UUID 자체는 Object 타입 
+				    	String uuid = UUID.randomUUID().toString().replaceAll("-", ""); // -를 제거해 주었다. 
+				        uuid = uuid.substring(0, 6); //uuid를 앞에서부터 10자리 잘라줌. 
+				        content = "신규 비밀번호 입니다. 로그인 후 수정 해주세요 \n"
+				        		+ "신규 비밀번호 :"+uuid;
+				        newpw = uuid;
+				    }
+				    
+				    
+				    //sdao에서 가져온 회원 정보에 입력된 email을 보내는 이메일에 입력
+				    String tomail = staff.getStaff_email();
+				    
+				    staff.setStaff_pw(newpw);
+				    staff.getStaff_name();
+				    staff.getStaff_level();
+				    staff.getStaff_age();
+				    staff.getStaff_addr();
+				    staff.getStaff_gender();
+				    staff.getStaff_phone();
+				    staff.getStaff_date();
+				    staff.getStaff_id();	    
+			
+				    System.out.println(staff.getStaff_pw()+"<<<<<<<확인");
+				    //신규 비밀번호로 업데이트
+				    sdao.updateStaff(staff);
+				   
+				    /* String content = request.getParameter("content");*/    // 내용
+				    System.out.println("새로운 비밀번호"+newpw);
+				    System.out.println("받는사람 이메일"+tomail);
+				    System.out.println("이메일 제목"+title);
+				    System.out.println("이메일 내용"+content);
+				    try {
+				      MimeMessage message = mailSender.createMimeMessage();
+				      
+				      MimeMessageHelper messageHelper 
+				                        = new MimeMessageHelper(message, true, "UTF-8");
+				 
+				      messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
+				      messageHelper.setTo(tomail);     // 받는사람 이메일
+				      messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+				      messageHelper.setText(content);  // 메일 내용
+				     
+				      mailSender.send(message);
+				    } catch(Exception e){
+				      System.out.println(e);
+				    }
+					
+			}
+
+	  /*}*/
+ 
+	
 	
 	//그래프 출력 화면 호출 메서드
 	@RequestMapping(value="/total_payment")

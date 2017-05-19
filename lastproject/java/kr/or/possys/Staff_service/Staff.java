@@ -10,7 +10,14 @@ public class Staff {
 	private String staff_gender;
 	private String staff_phone;
 	private String staff_date;
+	private String staff_email;
 	
+	public String getStaff_email() {
+		return staff_email;
+	}
+	public void setStaff_email(String staff_email) {
+		this.staff_email = staff_email;
+	}
 	public String getStaff_id() {
 		return staff_id;
 	}

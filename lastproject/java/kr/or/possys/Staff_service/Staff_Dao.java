@@ -25,6 +25,9 @@ private SqlSessionTemplate sqlSessionTemplate;
 		
 	public int updateStaff(Staff Staff) {
 		System.out.println("updateStaff");
+
+		
+		
         return sqlSessionTemplate.update("kr.or.possys.Staff_service.Staff_Mapper.updateStaff", Staff);
     }
     
