@@ -21,6 +21,7 @@ import kr.or.possys.Member_sevice.Member_Dao;
 import kr.or.possys.Member_sevice.mVo;
 import kr.or.possys.Order_service.Order;
 import kr.or.possys.Order_service.Order_Dao;
+import kr.or.possys.Payment_service.Payment;
 import net.sf.json.JSONArray;
 
 @Controller
@@ -32,6 +33,79 @@ public class Member_Controller {
 	@Autowired
 	private	Order_Dao	odao;
 	
+	//그래프 출력 화면 호출 메서드
+	@RequestMapping(value="/total_payment")
+	public String total_payment(){
+		return "/member/total_payment";
+	}
+	//카드결제 메서드
+	@RequestMapping(value="/CDcate",method = RequestMethod.GET)
+	@ResponseBody
+	public void CDcatePayment(HttpServletResponse re
+			,@RequestParam(value="selbox") String selbox) throws IOException{
+		System.out.println("totalPayment 메서드 실행 확인 Member_Controller.java");
+		System.out.println(selbox);
+		re.setCharacterEncoding("UTF-8");
+		PrintWriter out = re.getWriter();
+		JSONArray CDcatePayment = null;
+		
+		List<Payment> CDcate = Mdao.CDcatePayment(selbox);
+		
+		/*System.out.println(plist);*/
+		
+		CDcatePayment = JSONArray.fromObject(CDcate);
+		System.out.println(CDcatePayment);
+		
+		//새로운 화면에서 json방식으로 받아온 값 출력
+		out.write(CDcatePayment.toString());
+		
+		out.flush();
+	}
+	//현금결제 메서드
+	@RequestMapping(value="/Mcate",method = RequestMethod.GET)
+	@ResponseBody
+	public void McatePayment(HttpServletResponse re
+			,@RequestParam(value="selbox") String selbox) throws IOException{
+		System.out.println("totalPayment 메서드 실행 확인 Member_Controller.java");
+		System.out.println(selbox);
+		re.setCharacterEncoding("UTF-8");
+		PrintWriter out = re.getWriter();
+		JSONArray McatePayment = null;
+		
+		List<Payment> Mcate = Mdao.McatePayment(selbox);
+		
+		/*System.out.println(plist);*/
+		
+		McatePayment = JSONArray.fromObject(Mcate);
+		System.out.println(McatePayment);
+		
+		//새로운 화면에서 json방식으로 받아온 값 출력
+		out.write(McatePayment.toString());
+		
+		out.flush();
+	}
+	@RequestMapping(value="/graph",method = RequestMethod.GET)
+	@ResponseBody
+	public void totalPayment(HttpServletResponse re
+			,@RequestParam(value="selbox") String selbox) throws IOException{
+		System.out.println("totalPayment 메서드 실행 확인 Member_Controller.java");
+		System.out.println(selbox);
+		re.setCharacterEncoding("UTF-8");
+		PrintWriter out = re.getWriter();
+		JSONArray PaymentList = null;
+		
+		List<Payment> plist = Mdao.totalPaymentList(selbox);
+		
+		/*System.out.println(plist);*/
+		
+		PaymentList = JSONArray.fromObject(plist);
+		System.out.println(PaymentList);
+		
+		//새로운 화면에서 json방식으로 받아온 값 출력
+		out.write(PaymentList.toString());
+		
+		out.flush();
+	}
 	/*알람창 ajax 테스트*/
 	@RequestMapping(value="/alram_test",method = RequestMethod.GET)
 	@ResponseBody
@@ -63,15 +137,9 @@ public class Member_Controller {
 
 	//실시간 검색 호출
 	@RequestMapping(value="/real_time")
-	public String real_time(Model model){
-		
+	public String real_time(Model model){	
 		int memberCount = Mdao.getMemberCount();
-	
-		
-	
 		model.addAttribute("memberCount",memberCount);
-		
-		
 		return "/member/real_time";
 	}
 	//회원 리스트 제이손 방식으로 받아오기

@@ -16,12 +16,14 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
  
 <title>회원정보 수정화면</title>
+<%@ include file="../modal/wide_menu.jsp" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script type="text/javascript"> 
 		$(document).ready(function(){
-			$('#btn').click(function(){
-				 var regExp = /\s/g;//공백검사 정규식
+			$('#ubtn').click(function(){
+				
+				var regExp = /\s/g;//공백검사 정규식
 				 var phone = $('#member_phone').val();
 				 var name = $('#member_name').val();
 				 var point = $('#member_point').val();
@@ -45,14 +47,11 @@
 			}
 			else{
 				frm.submit();
-			}
-			
-			
+			}			
 			});
 		});
-	
 	</script>	
-<%@ include file="../modal/wide_menu.jsp" %>
+
 </head>
 <body>
 <div class="container">
@@ -60,7 +59,7 @@
 <br/>
 <br/>
 <br/>
-<h1>식자재 입력폼</h1>
+<h1>회원정보 수정화면</h1>
 	<form id="frm" action="${pageContext.request.contextPath}/member_update" method="post">
         <div class="form-group">전화번호 :
             <input class="form-control" name="member_phone" id ="member_phone" value="${Member.member_phone}" type="text" readonly="readonly"/>
@@ -83,7 +82,7 @@
             <label for="member_join">최근방문일자 :</label>
             <input class="form-control" name="member_join" id="member_join" value="${Member.member_join}" type="text"  readonly="readonly"/>
         </div>
-        <input type="button" id="btn" value="등록">
+        <input type="button" id="ubtn" value="등록">
 		<input type="reset" id="reset" value="초기화">
     </form>
     </div>

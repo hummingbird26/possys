@@ -8,11 +8,40 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.possys.Payment_service.Payment;
+
 @Repository
 public class Member_Dao {
 
 	@Autowired
 	private SqlSessionTemplate Msql;
+	//매출현황 카드별 조회 메서드
+			public List<Payment> CDcatePayment(String selbox){
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("selbox", selbox);
+				System.out.println("CDcatePayment 메서드 실행 확인 Member_Dao.java");
+				return Msql.selectList("kr.or.possys.Member_sevice.Member_Mapper.CDcatePayment", map);
+				
+			}
+		
+	//매출현황 현금 별 조회 메서드
+		public List<Payment> McatePayment(String selbox){
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("selbox", selbox);
+			System.out.println("McatePayment 메서드 실행 확인 Member_Dao.java");
+			return Msql.selectList("kr.or.possys.Member_sevice.Member_Mapper.McatePayment", map);
+			
+		}
+	
+	//매출현황 조회 메서드
+	public List<Payment> totalPaymentList(String selbox){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("selbox", selbox);
+		System.out.println("totalPaymentList 메서드 실행 확인 Member_Dao.java");
+		return Msql.selectList("kr.or.possys.Member_sevice.Member_Mapper.totalPaymentList", map);
+		
+	}
+	
 	
 	//실시간 회원 조회 메서드
 	public List<Member> AjaxMemberList(int currentPage, int pagePerRow ,String insert){
