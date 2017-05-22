@@ -64,8 +64,13 @@ public class Order_Controller{
 	
 	@RequestMapping(value="/order_end_t", method = RequestMethod.GET)
 	public String order_end_t(Model model,@RequestParam(value="table_order_id") String table_order_id){
-		System.out.println("林巩贸府");
+		System.out.println("林巩辆搬贸府");
 		odao.order_end_t(table_order_id);
+		List<Order> list = odao.order_detail(table_order_id);
+		for(int i = 0; i < list.size(); i++){
+			System.out.println(list.get(i).getMenu_id()+"//"+list.get(i).getOrder_detail_ea());
+		}
+		
 		return "redirect:/order_list";
 	}
 	
