@@ -25,8 +25,8 @@ $(document).ready(function(){
 			var input ={"id":id};
 			var id = $('#id').val();
 			var name = $('#name').val();
-	     btn = document.getElementById('rebtn');
-		 btn.disabled = false;
+	    
+		 
 		 
 
 		 $('#id').attr('readonly', true);
@@ -61,6 +61,8 @@ $(document).ready(function(){
 							console.log(id+'<-입력한 아이디값');
 							console.log(sub_id+'<-DB 아이디값');
 							
+							namebtn = document.getElementById('checkname');
+							namebtn.disabled = false;	
 						}
 						
 						}else{
@@ -69,7 +71,7 @@ $(document).ready(function(){
 							$('#idre').show();
 						}
 						
-						$('#name').keyup(function(){
+						$('#checkname').click(function(){
 							if(check_name.length>=1){
 							var sub_name = check_name.substr(9,check_name.length);
 								if($('#name').val()== sub_name){
@@ -79,16 +81,9 @@ $(document).ready(function(){
 									$('#namere').show();
 									console.log(sub_name+'<-DB 이름값');
 									console.log('모두 일치');
-								$('#rebtn').click(function(){
-									if($('#name').val()==""||name.match(reExp)){
-										$('#namere').html("<font color=red>입력란에 공백을 확인 해주세요</font>");
-										$('#idre').hied();
-										$('#namere').show();
-									}else{
-									alert('임시 비밀번호가 발급 되었습니다.');
-									$('#frm').submit();
-									}
-								});
+									$('#name').attr('readonly', true);
+									btn = document.getElementById('rebtn');
+									btn.disabled = false;
 								}else{
 									var insert_name = $('#name').val()
 									$('#namere').html("<font color=red>이름이 일치하지 않습니다.</font>");
@@ -100,9 +95,20 @@ $(document).ready(function(){
 								}
 							 }
 						   }); 					
-						 }
-					   });
-					  }
+						 $('#rebtn').click(function(){	
+							 /*if($('#name').val()==""||name.match(reExp)){
+										$('#namere').html("<font color=red>입력란에 공백을 확인 해주세요</font>");
+										$('#idre').hied();
+										$('#namere').show();
+									}else{ */
+									alert('임시 비밀번호가 발급 되었습니다.');
+									$('#frm').submit();
+									/* } */
+						
+							});
+						}
+					});
+				}
 			/* this.reset(); */			
 			
 		 
@@ -120,7 +126,7 @@ $(document).ready(function(){
     </div>
     <div id="idre" style="display:none;"></div>      
     <div align="center"><!--이 름 -->
-      <input type="text" id="name" name="name" size="120" style="width:100%" placeholder="이름을 입력 해주세요" class="form-control" >
+      <input type="text" id="name" name="name" size="120" style="width:100%" placeholder="이름을 입력 해주세요" class="form-control" ><input type="button" id="checkname" value="이름확인" disabled="disabled">
     </div>
     <div id="namere" style="display:none;"></div> 
     <div align="center">

@@ -3,6 +3,79 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.possys.Member_sevice.Member_Mapper">
+<!-- 테이블 상태 확인 -->
+<select id="table_state" resultType="kr.or.possys.Order_service.Order">
+select 
+table_order.table_order_num
+,table_order.table_order_end
+,table_order.table_order_id
+,order_detail.menu_id
+,order_detail.menu_name
+,order_detail.order_detail_ea
+,order_detail.order_detail_sum
+from 
+table_order,order_detail
+where table_order.table_order_end='f' and table_order.table_order_id = order_detail.table_order_id
+</select>
+
+<!-- 테이블 클릭시 상세정보 확인 쿼리 -->
+<select id="table_Order_detail" parameterType = "String" resultType="kr.or.possys.Order_service.Order">
+select 
+table_order.table_order_num
+,table_order.table_order_date
+,table_order.table_order_id
+,table_order.table_order_end
+,order_detail.menu_id
+,order_detail.menu_name
+,order_detail.order_detail_ea
+,order_detail.order_detail_sum
+,order_detail.order_detail_end
+from 
+table_order
+,order_detail 
+where table_order.table_order_end='f' 
+and table_order.table_order_num = #{table_order_num}
+and table_order.table_order_id = order_detail.table_order_id
+</select>
+
+
+<!-- 취소카드 매출 현황 조회 쿼리 -->
+<select id="C_CDcatePayment" parameterType="java.util.HashMap" resultType="kr.or.possys.Cancel_Payment_service.Payment_Cancel">
+select
+    date_format(payment_cancel_date,#{selbox}) AS payment_cancel_date, 
+    sum(payment_cancel_total) AS payment_cancel_total,
+    payment_cate
+from payment_cancel 
+where payment_cancel_total > 0 and payment_cate='카드'
+group by date_format(payment_cancel_date,#{selbox})
+</select> 
+
+
+<!-- 취소현금 매출 현황 조회 쿼리 -->
+<select id="C_McatePayment" parameterType="java.util.HashMap" resultType="kr.or.possys.Cancel_Payment_service.Payment_Cancel">
+select
+    date_format(payment_cancel_date,#{selbox}) AS payment_cancel_date, 
+    sum(payment_cancel_total) AS payment_cancel_total,
+    payment_cate
+from payment_cancel 
+where payment_cancel_total > 0 and payment_cate='현금'
+group by date_format(payment_cancel_date,#{selbox})
+</select>
+
+
+<!-- 취소매출 현황 조회 쿼리 -->
+<select id="C_totalPaymentList" parameterType="java.util.HashMap" resultType="kr.or.possys.Cancel_Payment_service.Payment_Cancel">
+select
+    date_format(payment_cancel_date,#{selbox}) AS payment_cancel_date, 
+    sum(payment_cancel_total) AS payment_cancel_total,
+    payment_cate
+from payment_cancel 
+where payment_cancel_total > 0
+group by date_format(payment_cancel_date,#{selbox})
+</select>
+
+
+
 <!-- 카드 매출 현황 조회 쿼리 -->
 <select id="CDcatePayment" parameterType="java.util.HashMap" resultType="kr.or.possys.Payment_service.Payment">
 select

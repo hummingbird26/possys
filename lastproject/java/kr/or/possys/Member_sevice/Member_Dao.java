@@ -8,13 +8,56 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.possys.Cancel_Payment_service.Payment_Cancel;
+import kr.or.possys.Order_service.Order;
 import kr.or.possys.Payment_service.Payment;
+
 
 @Repository
 public class Member_Dao {
 
 	@Autowired
 	private SqlSessionTemplate Msql;
+	
+	public List<Order> table_state(){
+		System.out.println("table_state 메서드 실행 확인 Member_Dao.java");
+	return Msql.selectList("kr.or.possys.Member_sevice.Member_Mapper.table_state");
+	}
+	//테이블 클릭시 주문내역 확인 메서드
+	public List<Order> table_Order_detail(String table_order_num){
+		System.out.println("table_Order_detail 메서드 실행 확인 Member_dao.java");
+		System.out.println(table_order_num+"<<<<<<<<<<<<");
+		return Msql.selectList("kr.or.possys.Member_sevice.Member_Mapper.table_Order_detail", table_order_num);
+		
+	}
+	
+	//매출현황 카드별 조회 메서드(취소)
+	public List<Payment_Cancel> C_CDcatePayment(String selbox){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("selbox", selbox);
+		System.out.println("C_CDcatePayment 메서드 실행 확인 Member_Dao.java");
+		return Msql.selectList("kr.or.possys.Member_sevice.Member_Mapper.C_CDcatePayment", map);
+		
+	}
+
+	//매출현황 현금 별 조회 메서드(취소)
+	public List<Payment_Cancel> C_McatePayment(String selbox){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("selbox", selbox);
+		System.out.println("C_McatePayment 메서드 실행 확인 Member_Dao.java");
+		return Msql.selectList("kr.or.possys.Member_sevice.Member_Mapper.C_McatePayment", map);
+		
+	}
+	
+	//매출현황 조회 메서드(취소)
+	public List<Payment_Cancel> C_totalPaymentList(String selbox){
+	Map<String, Object> map = new HashMap<String, Object>();
+	map.put("selbox", selbox);
+	System.out.println("C_totalPaymentList 메서드 실행 확인 Member_Dao.java");
+	return Msql.selectList("kr.or.possys.Member_sevice.Member_Mapper.C_totalPaymentList", map);
+	
+	}
+	
 	//매출현황 카드별 조회 메서드
 			public List<Payment> CDcatePayment(String selbox){
 				Map<String, Object> map = new HashMap<String, Object>();

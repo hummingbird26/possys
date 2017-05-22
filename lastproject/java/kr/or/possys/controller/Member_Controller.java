@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.or.possys.Cancel_Payment_service.Payment_Cancel;
 import kr.or.possys.Member_sevice.Member;
 import kr.or.possys.Member_sevice.Member_Dao;
 import kr.or.possys.Member_sevice.mVo;
@@ -45,13 +46,73 @@ public class Member_Controller {
 	//e-mail test
 	@Autowired
 	  private JavaMailSender mailSender;
-	// 비밀번호 재발급 화면 이동
+	
+	//테이블 true,false 확인
+	@ResponseBody
+	@RequestMapping(value="/table_state")
+	public void table_state(HttpServletResponse re) throws IOException{
+		System.out.println("table_state 메서드 실행 확인 Member_Controller.java");
+		   re.setCharacterEncoding("UTF-8");
+		  
+			PrintWriter out = re.getWriter();
+			JSONArray table_state = null;
+			
+			List<Order> state = Mdao.table_state();
+			/*if(staff!=null){*/
+			
+			/*System.out.println(plist);*/
+			
+			table_state = JSONArray.fromObject(state);
+			System.out.println(table_state);
+			
+			//새로운 화면에서 json방식으로 받아온 값 출력
+			out.write(table_state.toString());
+			
+			out.flush();
+	}
+	
+	
+	
+	// 테이블 배치 화면으로 이동
+	  @RequestMapping(value = "/table")
+	  public String table() {
+	   System.out.println("테이블 배치 화면 이동 메서드 ");
+	    return "/main";	    
+	  } 
+	//테이블 주문 내역 확인
+	  @ResponseBody
+	  @RequestMapping(value = "/table_order",method = RequestMethod.GET)
+	  public void table_order(HttpServletResponse re,@RequestParam(value="table_order_num") String table_order_num) throws IOException{
+		  System.out.println("테이블 주문내역 확인 메서드 Member_Controller.java");
+		 
+		 re.setCharacterEncoding("UTF-8");
+		  
+		PrintWriter out = re.getWriter();
+		JSONArray order_detail = null;
+		
+		List<Order> order = Mdao.table_Order_detail(table_order_num);
+		/*if(staff!=null){*/
+		
+		/*System.out.println(plist);*/
+		
+		order_detail = JSONArray.fromObject(order);
+		System.out.println(order_detail);
+		
+		//새로운 화면에서 json방식으로 받아온 값 출력
+		out.write(order_detail.toString());
+		
+		out.flush();
+		  
+	
+	  }
+	  
+	  // 비밀번호 재발급 화면 이동
 	  @RequestMapping(value = "/repw")
 	  public String repw() {
 	   System.out.println("비밀번호 재발급 화면 이동 메서드 ");
 	    return "/repw";
 	  }  
-	// mailForm
+	// 비밀번호 찾기  아이디와  name값 가져오는 ajax통신용
 	  @ResponseBody
 	  @RequestMapping(value = "/idcheck")
 	  public void mailForm(HttpServletRequest request,HttpServletResponse re) throws IOException {
@@ -79,9 +140,9 @@ public class Member_Controller {
 	  }
 	 
 	  // 비밀번호 찾기 후 신규 pw 재발급 후 db등록 및  이메일 발송 코드 
-	  @ResponseBody
+	
 	  @RequestMapping(value="/mail/mailSending",method = RequestMethod.POST)
-	  public void mailSending(HttpServletRequest request){
+	  public String mailSending(HttpServletRequest request){
 		  System.out.println("메일보내기");
 		  
 		  
@@ -142,6 +203,7 @@ public class Member_Controller {
 				    } catch(Exception e){
 				      System.out.println(e);
 				    }
+					return "redirect:/";
 					
 			}
 
@@ -154,6 +216,76 @@ public class Member_Controller {
 	public String total_payment(){
 		return "/member/total_payment";
 	}
+	//카드결제 메서드(취소)
+		@RequestMapping(value="/C_CDcate",method = RequestMethod.GET)
+		@ResponseBody
+		public void C_CDcatePayment(HttpServletResponse re
+				,@RequestParam(value="selbox") String selbox) throws IOException{
+			System.out.println("C_CDcatePayment 메서드 실행 확인 Member_Controller.java");
+			System.out.println(selbox);
+			re.setCharacterEncoding("UTF-8");
+			PrintWriter out = re.getWriter();
+			JSONArray C_CDcatePayment = null;
+			
+			List<Payment_Cancel> CDcate = Mdao.C_CDcatePayment(selbox);
+			
+			/*System.out.println(plist);*/
+			
+			C_CDcatePayment = JSONArray.fromObject(CDcate);
+			System.out.println(C_CDcatePayment);
+			
+			//새로운 화면에서 json방식으로 받아온 값 출력
+			out.write(C_CDcatePayment.toString());
+			
+			out.flush();
+		}
+		//현금결제 메서드(취소)
+		@RequestMapping(value="/C_Mcate",method = RequestMethod.GET)
+		@ResponseBody
+		public void C_McatePayment(HttpServletResponse re
+				,@RequestParam(value="selbox") String selbox) throws IOException{
+			System.out.println("C_McatePayment 메서드 실행 확인 Member_Controller.java");
+			System.out.println(selbox);
+			re.setCharacterEncoding("UTF-8");
+			PrintWriter out = re.getWriter();
+			JSONArray C_McatePayment = null;
+			
+			List<Payment_Cancel> Mcate = Mdao.C_McatePayment(selbox);
+			
+			/*System.out.println(plist);*/
+			
+			C_McatePayment = JSONArray.fromObject(Mcate);
+			System.out.println(C_McatePayment);
+			
+			//새로운 화면에서 json방식으로 받아온 값 출력
+			out.write(C_McatePayment.toString());
+			
+			out.flush();
+		}
+		//통합매출내역(취소)
+		@RequestMapping(value="/C_graph",method = RequestMethod.GET)
+		@ResponseBody
+		public void C_totalPayment(HttpServletResponse re
+				,@RequestParam(value="selbox") String selbox) throws IOException{
+			System.out.println("C_totalPayment 메서드 실행 확인 Member_Controller.java");
+			System.out.println(selbox);
+			re.setCharacterEncoding("UTF-8");
+			PrintWriter out = re.getWriter();
+			JSONArray C_totalPayment = null;
+			
+			List<Payment_Cancel> plist = Mdao.C_totalPaymentList(selbox);
+			
+			/*System.out.println(plist);*/
+			
+			C_totalPayment = JSONArray.fromObject(plist);
+			System.out.println(C_totalPayment);
+			
+			//새로운 화면에서 json방식으로 받아온 값 출력
+			out.write(C_totalPayment.toString());
+			
+			out.flush();
+		}
+	
 	//카드결제 메서드
 	@RequestMapping(value="/CDcate",method = RequestMethod.GET)
 	@ResponseBody
@@ -200,6 +332,7 @@ public class Member_Controller {
 		
 		out.flush();
 	}
+	//통합매출내역
 	@RequestMapping(value="/graph",method = RequestMethod.GET)
 	@ResponseBody
 	public void totalPayment(HttpServletResponse re
