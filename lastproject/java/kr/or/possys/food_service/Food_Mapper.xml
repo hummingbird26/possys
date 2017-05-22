@@ -21,6 +21,42 @@
 		,'staff'
 		,sysdate()
 	</insert>
+	<!-- 업체 등록안된 식재료 목록 -->
+	<select id="foodn_list" parameterType="java.util.Map" resultType="kr.or.possys.food_service.Food">
+		select food_manage.food_id
+		,food_name
+		,food_size
+		,food_unit
+		,food_shelflife
+		,staff_id
+		,food_date
+		from food_manage left outer join
+		ep_order_manage
+		on (food_manage.food_id = ep_order_manage.food_id)
+		where ep_order_manage.food_id is null
+		order by food_date
+		desc limit #{beginRow},#{pageRow}
+	</select> 
+	<!-- 업체 등록된 식재료 목록 -->
+	<select id="foody_list" parameterType="java.util.Map" resultType="kr.or.possys.food_service.Food">
+		select food_manage.food_id
+		,food_name
+		,food_size
+		,food_unit
+		,food_shelflife
+		,staff_id
+		,food_date
+		from food_manage inner join
+		ep_order_manage
+		on
+		food_manage.food_id = ep_order_manage.food_id
+		order by food_date
+		desc limit #{beginRow},#{pageRow}
+	</select> 
+	<!-- 업체 등록된 식재료 카운트 -->
+		<select id="getsel_count" resultType="int">
+			select count(food_id) from ep_order_manage
+		</select> 
 	<!-- 식자제 품목 카운트 -->
 	<select id="getfoodcount" resultType="int">
 		SELECT COUNT(*) FROM food_manage

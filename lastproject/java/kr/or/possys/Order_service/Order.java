@@ -18,6 +18,77 @@ public class Order {
 	private String orgname;
 	private String newname;
 	
+	private String food_id;
+	private String fpm_ea;
+	private String food_unit;
+	
+	private String ep_order_id;
+	private String ep_order_shelflife;
+	private String food_nowquantity;
+	
+	private int total_use;
+	private int food_now;
+	private int food_sum;
+	
+	
+	
+	
+	
+	
+	public int getTotal_use() {
+		return total_use;
+	}
+	public void setTotal_use(int total_use) {
+		this.total_use = total_use;
+	}
+	public int getFood_now() {
+		return food_now;
+	}
+	public void setFood_now(int food_now) {
+		this.food_now = food_now;
+	}
+	public int getFood_sum() {
+		return food_sum;
+	}
+	public void setFood_sum(int food_sum) {
+		this.food_sum = food_sum;
+	}
+	public String getEp_order_id() {
+		return ep_order_id;
+	}
+	public void setEp_order_id(String ep_order_id) {
+		this.ep_order_id = ep_order_id;
+	}
+	public String getEp_order_shelflife() {
+		return ep_order_shelflife;
+	}
+	public void setEp_order_shelflife(String ep_order_shelflife) {
+		this.ep_order_shelflife = ep_order_shelflife;
+	}
+	public String getFood_nowquantity() {
+		return food_nowquantity;
+	}
+	public void setFood_nowquantity(String food_nowquantity) {
+		this.food_nowquantity = food_nowquantity;
+	}
+	public String getFood_id() {
+		return food_id;
+	}
+	public void setFood_id(String food_id) {
+		this.food_id = food_id;
+	}
+	public String getFpm_ea() {
+		return fpm_ea;
+	}
+	public void setFpm_ea(String fpm_ea) {
+		this.fpm_ea = fpm_ea;
+	}
+	public String getFood_unit() {
+		return food_unit;
+	}
+	public void setFood_unit(String food_unit) {
+		this.food_unit = food_unit;
+	}
 	private MultipartFile order_file;
 	
 	

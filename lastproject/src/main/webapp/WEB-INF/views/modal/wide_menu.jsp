@@ -73,7 +73,7 @@ $(document).ready(function(){
       </li>
       <li ><a href="#Link" title="Link">Order</a>
         <ul >
-          <li ><a href="#Link" title="Link">Link</a></li>
+          <li ><a href="${pageContext.request.contextPath}/order_list" title="Link">주문목록</a></li>
           <li ><a href="#Link" title="Link">Link</a></li>
           <li ><a href="#Link" title="Link">Link</a></li>
         </ul>
@@ -94,9 +94,9 @@ $(document).ready(function(){
       </li>
       <li ><a href="#Link" title="Link">Payment</a>
       <ul>
-          <li ><a href="${pageContext.request.contextPath}/tori/payment/payment_add_form" title="Link">결제내역추가 </a></li>
-          <li ><a href="${pageContext.request.contextPath}/tori/payment/payment_cancel_form" title="Link">결제취소내역추가</a></li>
-          <li ><a href="${pageContext.request.contextPath}/tori/payment/payment_card_form" title="Link">카드거래내역추가</a></li>
+          <li ><a href="${pageContext.request.contextPath}/tori/payment/payment_list" title="Link">결제목록 </a></li>
+          <li ><a href="${pageContext.request.contextPath}/tori/payment/payment_cancel_list" title="Link">결제취소목록</a></li>
+          <li ><a href="${pageContext.request.contextPath}/tori/payment/payment_card_list" title="Link">카드거래목록</a></li>
         </ul>
         </li>
        <li ><a href="#Link" title="Link">Staff</a>

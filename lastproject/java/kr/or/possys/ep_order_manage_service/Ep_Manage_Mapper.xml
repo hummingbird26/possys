@@ -41,10 +41,39 @@
 		,#{ep_text}
 		)
 	</insert>
+						<!--@@@@@@ 발주테이블에 업체정보 입력 id값 null -->
+	<insert id="insertep_o" parameterType="kr.or.possys.ep_order_manage_service.Ep_Manage">
+		insert into ep_order_food_details(
+		ep_id
+		,ep_order_id
+		,food_id		
+		,ea_order_statement
+		)
+		select
+		concat('EPMN',(select date_format(sysdate(),'%y%m%d%s')))
+		,'default'
+		,#{food_id}
+		,'미발주 상태'
+	</insert>
+							<!--@@@@ 발주테이블에 업체정보 입력 id값 ok -->
+	<insert id="in_insertep_o" parameterType="kr.or.possys.ep_order_manage_service.Ep_Manage">
+		insert into ep_order_food_details(
+		ep_order_id
+		,food_id
+		,ep_id
+		,ea_order_statement
+		) values (
+		'default'
+		,#{food_id}
+		,#{ep_id}
+		,'미발주 상태'
+		)
+	</insert>
 	<!-- 업체 중복없이 카운트 -->
 		<select id="getep_mcount" resultType="int">
 			select count(distinct ep_name) from ep_order_manage
 		</select>
+	
 	<!-- 업체 카운트 -->
 <!-- 	<select id="getep_mcount" resultType="int"> -->
 <!-- 		SELECT COUNT(*) FROM ep_order_manage -->
@@ -76,8 +105,15 @@
 	</select>
 	<!-- 02_업체 수정화면 관련 식재료 요청 -->
 	<select id="ep_mview_fo" parameterType="string" resultType="kr.or.possys.ep_order_manage_service.Ep_Manage_fo_VO">
-		select ep_order_manage.ep_id,ep_order_manage.food_id,food_manage.food_name
-		from ep_order_manage inner join food_manage on ep_order_manage.food_id = food_manage.food_id
+		select ep_order_manage.ep_id
+		,ep_order_manage.food_id
+		,food_manage.food_name
+		from
+		ep_order_manage
+		inner join
+		food_manage
+		on
+		ep_order_manage.food_id = food_manage.food_id
 		where ep_id = #{ep_id}
 	</select>
 	

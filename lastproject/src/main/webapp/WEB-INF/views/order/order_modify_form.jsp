@@ -5,8 +5,9 @@
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>주문수정</title>
+<%@ include file="../modal/wide_menu.jsp" %>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('.addbutton').click(function(){
@@ -93,8 +94,8 @@
 	});
 </script>
 </head>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <body>
+<br/><br/><br/>
 
 
 <form id="addform" action="${pageContext.request.contextPath}/order_modify_action" method="post">

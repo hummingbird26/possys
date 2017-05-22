@@ -151,19 +151,19 @@ function insertChk(){
 		<td><input class="form-control" size="auto" id="payment_state" name="payment_state" type="text"></td>
 		</tr>
 	</table>
-	<input class="btn btn-default" type="submit" id="paymentAdd" name="paymentAdd" value="제출">
-	<input class="btn btn-default" type="reset" id="paymentCancel" name="paymentCancel" value="되돌림">
-	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_list">글목록</a>
+	<input class="btn btn-primary" type="submit" id="paymentAdd" name="paymentAdd" value="제출">
+	<input class="btn btn-primary" type="reset" id="paymentCancel" name="paymentCancel" value="되돌림">
+	<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_list">글목록</a>
 	<input type="button" class="btn btn-primary" value="idcheck" onclick="javascript:chkDupId();"/>
 	</form>
 	<br><br>
 	<div>
 	<!-- ID 체크 확인용 -->
-	<input type="hidden" id="idChk" value="N"/>
+	<input type="hidden" id="idChk" value="N" />
 	</div>
 	<div>
-	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_form">결제취소직권입력</a>
-	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_card_form">카드결제직권입력</a>
+	<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_form">결제취소직권입력</a>
+	<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_card_form">카드결제직권입력</a>
 	</div>
 </div>
 </body>

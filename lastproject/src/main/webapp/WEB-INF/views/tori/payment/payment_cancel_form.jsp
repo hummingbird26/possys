@@ -165,9 +165,9 @@ function insertCancelChk(){
 					</td>
 				</tr>
 				</table>
-		<input type="submit" class="btn btn-default" id="paymentCancelAdd" name="paymentCancelAdd" value="제출">
-		<input type="reset" class="btn btn-default" id="paymentCancel" name="paymentCancel" value="되돌림">
-		<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_list">글목록</a>
+		<input type="submit" class="btn btn-primary" id="paymentCancelAdd" name="paymentCancelAdd" value="제출">
+		<input type="reset" class="btn btn-primary" id="paymentCancel" name="paymentCancel" value="되돌림">
+		<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_list">글목록</a>
 		<input type="button" class="btn btn-primary" value="idcheck" onclick="javascript:chkDupCancelId();"/>
 		</form>
 		<br><br>

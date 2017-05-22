@@ -62,5 +62,30 @@ public class Order_Dao {
 		System.out.println("메뉴목록실행");
 		return sqlSessionTemplate2.selectList("kr.or.possys.Order_service.Order_Mapper.menu_list");
 	}
+	
+	public List<Order> order_fpm(String menu_id){
+		System.out.println("Order_fpm실행");
+		
+		return sqlSessionTemplate2.selectList("kr.or.possys.Order_service.Order_Mapper.order_fpm",menu_id);	
+	}
+	
+	public List<Order> order_ep_order(String food_id){
+		System.out.println("Order_ep_order실행");
+		
+		return sqlSessionTemplate2.selectList("kr.or.possys.Order_service.Order_Mapper.order_ep_order",food_id);	
+	}
+	
+	public int order_ep_zero(Order order){
+		System.out.println("식재 0개실행");
+		return sqlSessionTemplate2.delete("kr.or.possys.Order_service.Order_Mapper.order_ep_zero",order);
+	}
+	
+	public int order_ep_plus(Order order){
+		System.out.println("식재 소비실행");
+		return sqlSessionTemplate2.delete("kr.or.possys.Order_service.Order_Mapper.order_ep_plus",order);
+	}
+	
+	
+	
 
 }

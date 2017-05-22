@@ -1,29 +1,31 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<%@ include file="../modal/wide_menu.jsp" %>
 </head>
 <body>
+<br/><br/><br/>
 
-		<div>ÁÖ¹® ¹øÈ£ : ${order.table_order_id}</div>
-		<div>Å×ÀÌºí ¹øÈ£ : ${order.table_order_num}</div>
-		<div>ÁÖ¹®Á¾°á :${order.table_order_end}</div>
-		<div>ÁÖ¹®³¯Â¥ :${order.table_order_date}</div>
+		<div>ì£¼ë¬¸ ë²ˆí˜¸ : ${order.table_order_id}</div>
+		<div>í…Œì´ë¸” ë²ˆí˜¸ : ${order.table_order_num}</div>
+		<div>ì£¼ë¬¸ì¢…ê²° :${order.table_order_end}</div>
+		<div>ì£¼ë¬¸ë‚ ì§œ :${order.table_order_date}</div>
 				<c:forEach var="f" items="${order_list}">
-					<div>¸Ş´ºÄÚµå : ${f.menu_id}" ¸Ş´º¸í : ${f.menu_name}" ¼ö·® : ${f.order_detail_ea}" ¼Ò°è :"${f.order_detail_sum}"</div>
+					<div>ë©”ë‰´ì½”ë“œ : ${f.menu_id}" ë©”ë‰´ëª… : ${f.menu_name}" ìˆ˜ëŸ‰ : ${f.order_detail_ea}" ì†Œê³„ :"${f.order_detail_sum}"</div>
 										
 				</c:forEach>
 
 <br>
 		<div>
-			<input type="submit" id="addsubmit" value="¼öÁ¤">
-			<input type="reset" id="reset" value="ÃÊ±âÈ­">
-			<a href="${pageContext.request.contextPath}/order_list">Ãë¼Ò</a>
-			<a href="${pageContext.request.contextPath}/order_delete?table_order_id=${order.table_order_id}">»èÁ¦</a>
+			<input type="submit" id="addsubmit" value="ìˆ˜ì •">
+			<input type="reset" id="reset" value="ì´ˆê¸°í™”">
+			<a href="${pageContext.request.contextPath}/order_list">ì·¨ì†Œ</a>
+			<a href="${pageContext.request.contextPath}/order_delete?table_order_id=${order.table_order_id}">ì‚­ì œ</a>
 		</div>
 
 

@@ -4,10 +4,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<%@ include file="../../modal/wide_menu.jsp" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>식자재 목록</title>
+<%@ include file="../../modal/wide_menu.jsp" %>
 <script type="text/javascript">
 	$(document).ready(function(){
 		//검색 
@@ -23,6 +23,20 @@
 				/* alert('asd'); */
 			}
 		});
+		//전체보기/미등록/등록 목록보기 select
+		$('#sel_list').change(function(){
+			
+			var va = $("#sel_list option:selected").val();
+// 			alert(va);
+			var regexp = /\s/g;
+			if(va !=null || va != "" || va != regexp){
+				
+				sel_list_sub.submit();
+			}else{
+// 				alert('asd');
+			}
+		});
+		
 		//체크박스 전체 선택/해제
 		$("#food_chkall").click(function(){
 			if($("#food_chkall").prop("checked")){
@@ -36,8 +50,53 @@
 			if($("input[name=food_id]").is(":checked") == false){
 				alert("선택된 항목이 없습니다.");
 				return;	
-			}else{ /* alert("선택됐습니다."); */
-				ep_chkbox.submit();
+			}else{ 
+				var arr = Array();
+				var count = 0;
+				var td_chk = $(".td_chk"); 
+				for(var i=0;i<td_chk.length;i++){ // 20length
+					if(td_chk[i].checked == true){
+						arr[count] = td_chk[i].value; // val()안됨
+						count++;
+					}
+				}
+				jQuery.ajaxSettings.traditional = true;
+				
+				$.ajax({
+					type: "post",
+					url : "${pageContext.request.contextPath}/ajax/food_chck",
+					data : {arr: arr},
+					contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+					dataType : "JSON", //string 으로 리턴하기 때문에 
+					success : function(data){
+// 						console.log('성공');
+						console.log(data);
+// 						console.log(data[0]); // FN17050845
+// 						console.log(data.length); // 3
+						var count = 0;
+						for(var i=0;i<data.length;i++){
+							var f_chk = data[i];
+							if(f_chk != "N"){
+								alert("식재 코드 : "+f_chk+"이(가) 이미 업체등록 되있습니다.");
+								count++; //카운트를 주어서 중복된 갯수가 없으면 등록할수 있게 if문에 사용
+							}else{
+								
+								//hidden으로 준 체크박스 체크
+// 								$("input[name=chk_jung]").prop("checked",true);
+							}						
+						}
+						if(count == 0){
+							alert("등록화면으로 넘어갑니다."); // 나중에 주석처리
+							ep_chkbox.submit();
+						}
+					},
+					error : function(request,status,error){
+						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);			
+					}				
+				});//ajax 중복체크		
+			
+				/* alert("선택됐습니다."); */
+				
 				/* $("input[name=food_chk]:checked").each(function() {
 					var test = $(this).val();
 					var food_id = $(this).closest("tr").find(".td_id").text();
@@ -60,6 +119,13 @@
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <h1>식자재 목록</h1>
 <div>전체 식자재 수 : ${foodcount}</div>
+	<form id="sel_list_sub" name="sel_list_sub" action="${pageContext.request.contextPath}/sel_list" method="get">
+		<select id="sel_list" name="sel_list" >
+			<option  value="sel_all" <c:if test="${sel_list eq 'sel_all'}">selected</c:if>>전체보기</option> <!-- 선택된값 select 상태 남기기위한 jstl 적용 -->
+			<option value="sel_y" <c:if test="${sel_list eq 'sel_y'}">selected</c:if>>업체 등록 식재료보기</option>
+			<option value="sel_n" <c:if test="${sel_list eq 'sel_n'}">selected</c:if>>업체 미등록 식재료보기</option>
+		</select>
+	</form>
 	<form id="ep_chkbox" action="${pageContext.request.contextPath}/ep_chkbox" method="post">
 	<input id="ep_submit" type="button" value="발주업체 관리"/>
 	
