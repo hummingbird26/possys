@@ -4,7 +4,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<%@ include file="../../modal/wide_menu.jsp" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>업체 목록</title>
@@ -25,6 +24,7 @@
 		});		
 	});
 </script>
+<%@ include file="../../modal/wide_menu.jsp" %>
 </head>
 <body>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>

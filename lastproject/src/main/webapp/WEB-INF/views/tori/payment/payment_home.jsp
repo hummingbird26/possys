@@ -22,11 +22,11 @@
 	<legend>결제업무_선택</legend>
 	<table class="table table-hover">
 	<tr>
-	<td><a href="#{pageContext.request.contextPath}/tori/payment/payment_add_form"><button class="btn btn-default">결제관리</button></a></td>
-	<td><a href="#{pageContext.request.contextPath}/tori/payment/payment_cancel_add_form"><button class="btn btn-default">결제취소관리</button></a></td>
+	<td><a href="#{pageContext.request.contextPath}/tori/payment/payment_add_form"><button class="btn btn-primary">결제관리</button></a></td>
+	<td><a href="#{pageContext.request.contextPath}/tori/payment/payment_cancel_add_form"><button class="btn btn-primary">결제취소관리</button></a></td>
 	</tr>
 	<tr>
-	<td><a href="#{pageContext.request.contextPath}/tori/payment/payment_add_form"><button class="btn btn-default">카드결제관리</button></a></td>
+	<td><a href="#{pageContext.request.contextPath}/tori/payment/payment_add_form"><button class="btn btn-primary">카드결제관리</button></a></td>
 	<td></td>
 	</tr>
 	</table>

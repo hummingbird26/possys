@@ -3,6 +3,7 @@ package kr.or.possys.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,26 @@ public class FoodController {
 	public String start(){
 		return "index";
 	}*/
+	//식재료 전체/등록/미등록 리스트 select
+	@RequestMapping(value="sel_list",method= RequestMethod.GET)
+	public String sel_list(@RequestParam(value="sel_list") String sel_list){
+		System.out.println("00_FoodController.java ->> sel_list();");
+		System.out.println(sel_list+"<<==sel_list");
+		String re = null;
+		if(sel_list.equals("sel_all")){
+			System.out.println(sel_list+"<== sel_all");
+			re = "redirect:/food_list";
+		}else if(sel_list.equals("sel_y")){
+			System.out.println(sel_list+"<== sel_y");
+			re = "redirect:/food_list?sel_list="+sel_list;
+		}else if(sel_list.equals("sel_n")){
+			System.out.println(sel_list+"<== sel_n");
+			re = "redirect:/food_list?sel_list="+sel_list;
+		}
+		return re;
+	}
+	
+	
 	//식재료 입력폼 요청
 	@RequestMapping(value="/food_add_form", method = RequestMethod.GET)
 	public String foodadd(){
@@ -37,11 +58,44 @@ public class FoodController {
 	}
 	//식재료 목록 요청
 	@RequestMapping(value="/food_list", method = RequestMethod.GET)
-	public String foodlist(Model model, @RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage){
+	public String foodlist(Model model, @RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage
+									,@RequestParam(value="sel_list",required=false,defaultValue="go") String sel_list){
 		System.out.println("FoodController.java ->>foodlist 요청");
-		int foodcount = dao.getfoodcount();
+		System.out.println(sel_list+"<=== sel_list");
+		String re = null;
 		int pageRow = 20;
 		int expage = 1;
+		if(sel_list.equals("sel_y")){
+			int getselcount = dao.getsel_count();
+			System.out.println(getselcount);
+			int y_lastPage = (int)(Math.ceil((double)getselcount/(double)pageRow));
+			List<Food> y_list = dao.foody_list(currentPage, pageRow);
+			model.addAttribute("expage",expage);
+			model.addAttribute("pageRow",pageRow);
+			model.addAttribute("foodcount", getselcount);
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("lastPage", y_lastPage);
+			model.addAttribute("list", y_list);
+			model.addAttribute("sel_list", sel_list);
+			re = "/wonbin/food_manage/food_list";
+		}else if(sel_list.equals("sel_n")){
+			int foodcount = dao.getfoodcount();
+			int getselcount = dao.getsel_count();
+			int get_nselcount = foodcount - getselcount;
+			System.out.println(get_nselcount+"<== 전체 카운터에서 등록된 카운터 빼기 (등록안된 수)");
+			int n_lastPage = (int)(Math.ceil((double)get_nselcount/(double)pageRow));
+			List<Food> n_list = dao.foodn_list(currentPage, pageRow);
+			model.addAttribute("expage",expage);
+			model.addAttribute("pageRow",pageRow);
+			model.addAttribute("foodcount", get_nselcount);
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("lastPage", n_lastPage);
+			model.addAttribute("list", n_list);
+			model.addAttribute("sel_list", sel_list);
+			re = "/wonbin/food_manage/food_list";
+//			
+		}else if(sel_list.equals("go") || sel_list.equals("sel_all")){
+		int foodcount = dao.getfoodcount();		
 		int lastPage = (int)(Math.ceil((double)foodcount/(double)pageRow));
 		List<Food> list = dao.foodlist(currentPage, pageRow);
 		
@@ -51,7 +105,11 @@ public class FoodController {
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPage", lastPage);
 		model.addAttribute("list", list);
-		return "/wonbin/food_manage/food_list";
+		re = "/wonbin/food_manage/food_list";
+		}
+		
+		
+		return re;
 	}
 	//식재료 수정화면 요청
 	@RequestMapping(value="/food_modify_view", method = RequestMethod.GET)

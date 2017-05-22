@@ -4,9 +4,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<%@ include file="../../modal/wide_menu.jsp" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>수정 화면</title>
+<%@ include file="../../modal/wide_menu.jsp" %>
 </head>
 <body>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
@@ -29,7 +29,7 @@
 			<input type="submit" id="addfood" value="수정">
 			<input type="reset" id="reset" value="초기화">
 			<a href="${pageContext.request.contextPath}/food_list">취소</a>
-			<a href="${pageContext.request.contextPath}/food_delete?food_id=${food.food_id}">삭제</a>
+			<a href="${pageContext.request.contextPath}/food_delete?food_id=${food.food_id}"><button id ="all_del" type="button">삭제</button></a>
 		</div>
 	</form>
 

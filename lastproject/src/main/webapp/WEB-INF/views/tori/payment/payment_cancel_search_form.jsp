@@ -12,21 +12,21 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<%@ include file="../../modal/wide_menu.jsp" %>
 </head>
 <body>
+<%@ include file="../../modal/wide_menu.jsp" %>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <br><br>
 <div class="container">
 	<form id="form" name="form" class="form-inline" action="${pageContext.request.contextPath}/tori/payment/payment_cancel_search_action" method="get">
-		<select id="select" name="select" class="form-inline" value="선택하세요">
+		<select id="select" name="select" class="form-control" value="선택하세요">
 			<option value="payment_cancel_id">거래취소코드별검색</option>
 			<option value="payment_id">거래코드별검색</option>
 			<option value="payment_cancel_date">결제취소일자별검색</option>
 			<option value="payment_cancel_cate">결제취소거래유형별검색</option>
 		</select>
-		<input type="text" class="form-inline" name="keyWord" id="keyWord">
-		<input type="submit" class="form-inline" name="search" id="search">
+		<input type="text" class="form-control" name="keyWord" id="keyWord">
+		<input type="submit" class="form-control btn btn-primary" name="search" id="search">
 	
 	</form>
 </div>

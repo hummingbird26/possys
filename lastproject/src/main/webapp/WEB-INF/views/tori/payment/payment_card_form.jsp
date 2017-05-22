@@ -160,8 +160,8 @@ function insertChk(){
 					</td>
 				</tr>
 				</table>
-		<input type="submit" class="btn btn-default" id="paymentCardAdd" name="paymentCardAdd" value="제출">
-		<input type="reset" class="btn btn-default" id="paymentCancel" name="paymentCancel" value="되돌림">
+		<input type="submit" class="btn btn-primary" id="paymentCardAdd" name="paymentCardAdd" value="제출">
+		<input type="reset" class="btn btn-primary" id="paymentCancel" name="paymentCancel" value="되돌림">
 		<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_card_list">글목록</a>
 		<input type="button" class="btn btn-primary" value="idcheck" onclick="javascript:chkDupCardId();"/>
 		</form>

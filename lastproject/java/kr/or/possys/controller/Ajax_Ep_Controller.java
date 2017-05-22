@@ -40,29 +40,29 @@ public class Ajax_Ep_Controller {
 		return ep_m;
 	}
 	// 식재료코드 와 업체코드 중복검사
-//	@ResponseBody
-//	@RequestMapping(value="/food_chck")
-//	public List<String> food_chck(@RequestParam(value="arr", required=true) String[] arr
-//										,HttpServletResponse response) throws Exception {
-//			System.out.println(arr+"<----arr 02_ajax/food_chck - food_chck() 실행");
-//			String re = null; // return 변수 만듦
-//			List<String> ep_list = new ArrayList<String>();
-//			for(String ar : arr){
-////				System.out.println(ar);				
-//				int count = dao.aj_food_chck(ar);
-//				System.out.println(count);
-//					if(count == 0){
-//						System.out.println(count+"<--ep_id 없음");
-//						re = "N";
-//						
-//					}else if(count >= 1){
-//						System.out.println(count+"<--ep_id 있음");
-//						re = ar;
-//						System.out.println(re+"<--ep_id");
-//						
-//					}
-//					ep_list.add(re);
-//				}
-//		return ep_list;
-//	}
+	@ResponseBody
+	@RequestMapping(value="/food_chck")
+	public List<String> food_chck(@RequestParam(value="arr", required=true) String[] arr
+										,HttpServletResponse response) throws Exception {
+			System.out.println(arr+"<----arr 02_ajax/food_chck - food_chck() 실행");
+			String re = null; // return 변수 만듦
+			List<String> ep_list = new ArrayList<String>();
+			for(String ar : arr){
+				System.out.println(ar);				
+				int count = dao.aj_food_chck(ar);
+				System.out.println(count);
+					if(count == 0){
+						System.out.println(count+"<--ep_id 없음");
+						re = "N";
+						
+					}else if(count >= 1){
+						System.out.println(count+"<--ep_id 있음");
+						re = ar;
+						System.out.println(re+"<--ep_id");
+						
+					}
+					ep_list.add(re);
+				}
+		return ep_list;
+	}
 }

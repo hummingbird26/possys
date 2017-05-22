@@ -91,4 +91,40 @@
 		from menu
 		order by menu_id desc
 		</select>
+		
+		<select id="order_fpm" parameterType = "String" resultType="kr.or.possys.Order_service.Order">
+			select menu_id
+			,food_id
+			,menu_name
+			,fpm_ea
+			from food_per_menu 
+			where menu_id = #{menu_id}
+		</select>
+		
+		<select id="order_ep_order" parameterType = "String" resultType="kr.or.possys.Order_service.Order">
+			select ep_order_id
+			,food_id
+			,ep_order_food_shelflife
+			,food_nowquantity
+			from ep_order_food_details
+			where food_id = #{food_id}
+			order by ep_order_food_shelflife asc;
+		</select>
+		
+		<update id="order_ep_zero" parameterType="kr.or.possys.Order_service.Order">
+		update ep_order_food_details
+		set
+		food_nowquantity = 0,
+		ep_order_statement = '소진'
+		where ep_order_id = #{ep_order_id}
+		and food_id = #{food_id}
+		</update>
+		
+		<update id="order_ep_plus" parameterType="kr.or.possys.Order_service.Order">
+		update ep_order_food_details
+		set
+		food_nowquantity = #{food_sum}
+		where ep_order_id = #{ep_order_id}
+		and food_id = #{food_id}
+		</update>
 </mapper>

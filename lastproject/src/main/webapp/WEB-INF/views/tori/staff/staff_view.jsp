@@ -91,9 +91,9 @@
 			</tr>
 	</table>
 	<br><br>
-	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/staff/staff_update_form?staff_id=${staff.staff_id}">수정</a>
-	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/staff/staff_delete_form?staff_id=${staff.staff_id}">삭제</a>
-	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/staff/staff_list">리스트로</a>
+	<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/staff/staff_update_form?staff_id=${staff.staff_id}">수정</a>
+	<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/staff/staff_delete_form?staff_id=${staff.staff_id}">삭제</a>
+	<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/staff/staff_list">리스트로</a>
 </div>
 
 </div>

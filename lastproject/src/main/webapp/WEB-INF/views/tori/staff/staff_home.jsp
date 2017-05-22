@@ -24,11 +24,11 @@
 	<legend>搬力诀公_急琶</legend>
 	<table class="table table-hover">
 	<tr>
-	<td><a href="#{pageContext.request.contextPath}/tori/payment/payment_add_form"><button class="btn btn-default">搬力包府</button></a></td>
-	<td><a href="#{pageContext.request.contextPath}/tori/payment/payment_cancel_add_form"><button class="btn btn-default">搬力秒家包府</button></a></td>
+	<td><a href="#{pageContext.request.contextPath}/tori/payment/payment_add_form"><button class="btn btn-primary">搬力包府</button></a></td>
+	<td><a href="#{pageContext.request.contextPath}/tori/payment/payment_cancel_add_form"><button class="btn btn-primary">搬力秒家包府</button></a></td>
 	</tr>
 	<tr>
-	<td><a href="#{pageContext.request.contextPath}/tori/payment/payment_add_form"><button class="btn btn-default">墨靛搬力包府</button></a></td>
+	<td><a href="#{pageContext.request.contextPath}/tori/payment/payment_add_form"><button class="btn btn-primary">墨靛搬力包府</button></a></td>
 	<td></td>
 	</tr>
 	</table>

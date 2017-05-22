@@ -4,29 +4,37 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<%@ include file="../../modal/wide_menu.jsp" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>발주 업체 관리</title>
+<%@ include file="../../modal/wide_menu.jsp" %>
 <script type="text/javascript">
 	$(document).ready(function(){
 			//실행시키면 ep_id div 태그를 displat:none 시켜라
 		$('#ep_id_div').css("display","none");
 				//식재코드 삭제시 카운트 
-		$(document).on('click','#chk_delete',function(){
+		$(document).on('click','#chk_delete_hi',function(){
 // 			alert($('input[name=food_id]').length);
 // 			input 태그 중 name이 food_id인 갯수 가 2보다 작으면
 			if($('input[name=food_id]').length < 2){
 				alert('더 이상 삭제 할 수 없습니다.');
 			}else{
-				var fo1 = $(this).val();
-				alert(fo1);
-				console.log(fo1);
-// 				$(this).parent().parent().remove();
+				 $(this).parent().remove();
+// 				var fo1 = $(this).val();
+// 				alert(fo1);
+// 				console.log(fo1);
+// 				$('#chk_delete_hi').trigger('click') //trigger - 강제로 수행시키는
+			 
 // 				if($('#food_id').val())
-				
 			}
 		});
+// 		$(document).on('click','#chk_delete_hi',function(){
+// 			var fo2 = $(this).val();
+// 			alert(fo2);
+// // 			console.log(fo2);
+// 			var fo3 = $('#input_fo_id').contents().val();
+// 			console.log(fo3);
+// 		});
 				
 		//@@@@@@@@@@@@@@@@@@@@@@업체 select 값 정보 view 표시@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@	
 		
@@ -47,11 +55,19 @@
 // 				alert("선택이다");
 				$('.sel_view').val(''); // sel_view 클래스명을 가진 value 값을 공백으로
 				$('input[name=ep_name]').attr('readonly',false); // readonly를 false 로
+				$('input[name=ep_phone]').attr('readonly',false);
+				$('input[name=ep_director]').attr('readonly',false);
+				$('input[name=ep_address]').attr('readonly',false);
+				$('input[name=ep_text]').attr('readonly',false);
 			}else{
 				//select 가 다른 업체명으로 선택 되었으면 ep_id div 태그를 displat:block 시켜라
 				$('#ep_id_div').css("display","block");
 // 				alert("선택이아니다")
 				$('input[name=ep_name]').attr('readonly',true); // readonly를 true 로
+				$('input[name=ep_phone]').attr('readonly',true);
+				$('input[name=ep_director]').attr('readonly',true);
+				$('input[name=ep_address]').attr('readonly',true);
+				$('input[name=ep_text]').attr('readonly',true);
 				//04_ajax로 비동기식 업체정보호출
 				var sel_id = $("#sel_ep_name option:selected").val(); //셀렉트 된 val 값을 가져옴
 				var sel_name = $("#sel_ep_name option:selected").text(); // 셀렉트 된 text 값을 가져옴
@@ -88,57 +104,17 @@
 			}
 		}); // sel_change
 		
-		//@@@@@@@@@@@@@@@@@@@@@@식재료 코드 중복 체크@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@	
-// 		$(document).on('click','#chk_jungbok',function(){
-// // 			var obj = new Object(); //key, value형태로 저장할 Object
-// 			var arr = new Array(); //Object를 배열로 저장할 Array
-// 			//jstl 도 jquery에서 쓸수있다.
-// 			<c:forEach var="f" items="${list}">
-// 				arr.push("${f.food_id}");
-// 			</c:forEach>		
-// 			jQuery.ajaxSettings.traditional = true;
-		
-// 			$.ajax({
-// 				type: "post",
-// 				url : "${pageContext.request.contextPath}/ajax/food_chck",
-// 				data : {arr: arr},
-// 				contentType:"application/x-www-form-urlencoded; charset=UTF-8",
-// 				dataType : "JSON", //string 으로 리턴하기 때문에 
-// 				success : function(data){
-// 					console.log('성공');
-// 					console.log(data);
-// // 					console.log(data[0]); // FN17050845
-// // 					console.log(data.length); // 3
-// 					var count = 0;
-// 					for(var i=0;i<data.length;i++){
-// 						var f_chk = data[i];
-// 						if(f_chk != "N"){
-// 							alert("식재 코드 : "+f_chk+"이(가) 중복되었습니다.");
-// 							count++; //카운트를 주어서 중복된 갯수가 없으면 등록할수 있게 if문에 사용
-// 						}else if(count == 0){
-// 							alert("등록할수 있습니다.");
-// 							//hidden으로 준 체크박스 체크
-// 							$("input[name=chk_jung]").prop("checked",true);
-// 						}						
-// 					}									
-// 				},
-// 				error : function(request,status,error){
-// 					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);			
-// 				}				
-// 			});//ajax 중복체크		
-// 		});//식재료 중복체크
-		
 		// 등록 버튼 클릭스 submit 
-		$(document).on('click','#addsubmit',function(){
-// 			alert("등록버튼");
-			var tmp = $('[name=chk_jung]').is(":checked"); //체크박스 선택여부 확인 하고 true / false 반환
-			if(tmp){
-// 				alert("true면 출력");
-				addform.submit(); // submit();
-			}else{
-				alert("식재 중복체크를 하십시오.")
-			}
-		});
+// 		$(document).on('click','#addsubmit',function(){
+// // 			alert("등록버튼");
+// 			var tmp = $('[name=chk_jung]').is(":checked"); //체크박스 선택여부 확인 하고 true / false 반환
+// 			if(tmp){
+// // 				alert("true면 출력");
+// 				addform.submit(); // submit();
+// 			}else{
+// 				alert("식재 중복체크를 하십시오.")
+// 			}
+// 		});
 		
 	}); //jquery Ready
 
@@ -159,41 +135,26 @@
 		</div>
 		
 		<div>추가 식재 품목</div> 
-			<table border=1>
-				<thead>
-					<th>식재 코드</th>
-					<th>상품명</th>
-					<th>삭제</th>
-				</thead>
-				<tbody>
-					<c:forEach var="f" items="${list}">
-					<tr id="tr">
-						<td>${f.food_id}</td>
-						<td id="td_n">${f.food_name}</td>
-						<td><button type="button" id="chk_delete" value='${f.food_id}'>X</button></td>
-					</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		
 					
-		<div>
+		<div id="input_fo_id">
 			<c:forEach var="f" items="${list}">
-			<div>
-				<input class="input_fo_id" name ="food_id" id ="food_id" type ="text" value="${f.food_id}" readonly="readonly"/>
+			<div id="input_fo_id">
+				<input name ="food_id" id ="food_id" type ="text" value="${f.food_id}" readonly="readonly"/>
+				<button id="chk_delete_hi" type="button" value="${f.food_id}">취소</button>
 			</div>
 			</c:forEach>
 		</div>
 <!-- 		<button type="button" id="chk_delete">X</button> -->
 		<br>			
 		<div>
-			<button type="button" id="chk_jungbok">식재 중복체크</button>
+						<!-- 중복체크(나중에 써먹을수도) -->
+<!-- 			<button type="button" id="chk_jungbok">식재 중복체크</button> -->
 			
-			<div style="visibility: hidden">
-			<!-- 중복체크 클릭시 이상이없으면 checked 시킴 -->
-			<!-- hidden type은 checked 속성이 없다
-			checked 는 radio, checkbox에만 있다 그러므로 div속에 숨겨야한다 --> 
-				<input type="checkbox" id="chk_jung" name="chk_jung"/>
+<!-- 			<div style="visibility: hidden"> -->
+<!-- 			<!-- 중복체크 클릭시 이상이없으면 checked 시킴 --> 
+<!-- 			<!-- hidden type은 checked 속성이 없다 -->
+<!-- 			checked 는 radio, checkbox에만 있다 그러므로 div속에 숨겨야한다 -->  
+<!-- 				<input type="checkbox" id="chk_jung" name="chk_jung"/> -->
 			</div>
 		</div>
 		</div>
@@ -217,7 +178,7 @@
 
 <br>
 		<div>
-			<input type="button" id="addsubmit" value="등록">
+			<input type="submit" id="addsubmit" value="등록">
 			<input type="reset" id="reset" value="초기화">
 			<a href="${pageContext.request.contextPath}/ep_manage_list">취소</a>
 		</div>

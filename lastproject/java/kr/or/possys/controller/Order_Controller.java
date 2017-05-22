@@ -64,12 +64,57 @@ public class Order_Controller{
 	
 	@RequestMapping(value="/order_end_t", method = RequestMethod.GET)
 	public String order_end_t(Model model,@RequestParam(value="table_order_id") String table_order_id){
-		System.out.println("주문종결처리");
-		odao.order_end_t(table_order_id);
+
+		System.out.println("주문처리");
 		List<Order> list = odao.order_detail(table_order_id);
+		List<Order> list2;
+		List<Order> list3;
+
+		odao.order_end_t(table_order_id);
 		for(int i = 0; i < list.size(); i++){
 			System.out.println(list.get(i).getMenu_id()+"//"+list.get(i).getOrder_detail_ea());
 		}
+
+		for (int i = 0; i < list.size(); i++){
+			list2 = odao.order_fpm(list.get(i).getMenu_id());
+			if(list2.size() != 0){
+				System.out.println("리스트사이즈가 0이 아닙니다.");
+				for(int j = 0; j< list2.size(); j++){
+					list3 = odao.order_ep_order(list2.get(j).getFood_id());
+					System.out.println(list2.get(j).getFood_id()+"//푸드아이디");
+/*					System.out.println(list2.get(j).getFpm_ea()+"//소비개수"+"//"+list.get(i).getOrder_detail_ea()+"//주문개수");*/
+					int total_use = Integer.parseInt(list.get(i).getOrder_detail_ea()) * Integer.parseInt(list2.get(j).getFpm_ea());
+					System.out.println("총소비갯수 : "+total_use);
+					
+					
+					if(list3.size() != 0){
+						for(int k = 0; k< list3.size(); k++){
+							System.out.println(list3.get(k).getFood_nowquantity()+"//식재현황//"+list3.get(k).getEp_order_id());
+							int food_now = Integer.parseInt(list3.get(k).getFood_nowquantity());
+							int food_sum = food_now - total_use;
+							if(food_now != 0 && food_sum > 0&&total_use > 0){
+								list3.get(k).setFood_sum(food_sum);
+								odao.order_ep_plus(list3.get(k));
+								total_use = 0;
+								System.out.println("총합 - 현황 > 0"+food_sum);
+								
+							}
+							else if (food_now != 0 && food_sum <= 0 &&total_use > 0){
+								System.out.println("총합 - 현황 <= 0");
+								total_use -= food_now; 
+								System.out.println("식재소비량"+total_use);
+								odao.order_ep_zero(list3.get(k));
+							}
+						}
+						
+						if(total_use != 0){
+							System.out.println("식재가 부족하지 않아?");
+						}
+					}
+				}
+			}
+		}
+		
 		
 		return "redirect:/order_list";
 	}

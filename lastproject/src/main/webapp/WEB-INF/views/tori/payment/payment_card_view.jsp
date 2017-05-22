@@ -92,7 +92,7 @@
 	</table>
 	<br><br>
 	
-	<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_card_list">리스트로</a>
+	<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_card_list">리스트로</a>
 </div>
 
 </div>
