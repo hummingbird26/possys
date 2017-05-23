@@ -85,8 +85,21 @@ public class Member_Dao {
 		
 	}
 	
+	//입력값이 한글일 경우 실행되는 실시간 회원 조회 메서드
+		public List<Member> K_AjaxMemberList(int currentPage, int pagePerRow ,String insert){
+			System.out.println("getMemberList 메서드 실행   Member_Dao.java ");
+			Map<String, Object> map = new HashMap<String, Object>();
+	        map.put("beginRow", (currentPage-1)*pagePerRow);
+	        map.put("pagePerRow", pagePerRow);
+	        map.put("insert", insert);
+	        
+	        System.out.println(map.get("insert")+"입력값 AjaxMemberList Member_Dao");
+			return Msql.selectList("kr.or.possys.Member_sevice.Member_Mapper.K_AjaxMemberList", map);
+			
+		}
 	
-	//실시간 회원 조회 메서드
+	
+	//입력값이 영어와 숫자일 경우 실행되는 실시간 회원 조회 메서드
 	public List<Member> AjaxMemberList(int currentPage, int pagePerRow ,String insert){
 		System.out.println("getMemberList 메서드 실행   Member_Dao.java ");
 		Map<String, Object> map = new HashMap<String, Object>();

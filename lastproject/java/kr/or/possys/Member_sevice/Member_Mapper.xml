@@ -108,6 +108,21 @@ where payment_total > 0 and payment_state='정상'
 group by date_format(payment_date, #{selbox})
 </select>
 
+<!-- 숫자형식의 데이터값을 제외하고 조회하는 실시간 리스트 쿼리 -->
+<select id="K_AjaxMemberList" parameterType="java.util.HashMap" resultType="kr.or.possys.Member_sevice.Member">
+SELECT  member_phone
+			,member_name
+			, member_point
+			, member_sign
+			,member_join
+			FROM member
+			where member_phone like concat('%',#{insert},'%')
+			or member_name like concat('%',#{insert},'%')
+			ORDER BY member_sign DESC 
+			LIMIT #{beginRow},#{pagePerRow}
+
+</select>
+
 
 <!-- 실시간 리스트 쿼리 -->
 <select id="AjaxMemberList" parameterType="java.util.HashMap" resultType="kr.or.possys.Member_sevice.Member">

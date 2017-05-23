@@ -173,10 +173,13 @@ $(document).ready(function(){
 	});
 });  
 </script>
-
+<meta charset="utf-8">
+<%@ include file="../modal/wide_menu.jsp" %>
   </head>
-
   <body>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+   
+    
     <div class="demo">
       <div class="bg">
      <c:forEach var="d" begin="1" end="15">

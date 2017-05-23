@@ -77,7 +77,7 @@ public class Member_Controller {
 	  @RequestMapping(value = "/table")
 	  public String table() {
 	   System.out.println("테이블 배치 화면 이동 메서드 ");
-	    return "/main";	    
+	    return "/member/main";	    
 	  } 
 	//테이블 주문 내역 확인
 	  @ResponseBody
@@ -391,10 +391,42 @@ public class Member_Controller {
 		model.addAttribute("memberCount",memberCount);
 		return "/member/real_time";
 	}
-	//회원 리스트 제이손 방식으로 받아오기
-	@RequestMapping(value="/json", method = RequestMethod.GET)
+	
+	//입력값이 한글인 경우 회원 리스트 제이손 방식으로 받아오기
+		@RequestMapping(value="/K_real_time", method = RequestMethod.GET)
+		@ResponseBody
+			public void K_real_time(@RequestParam(value="insert") String insert
+						,Model model
+						,HttpServletResponse re
+						,@RequestParam(value="currentPage",required=false,defaultValue="1" )int currentPage) throws IOException{
+					System.out.println("josn 호출확인");
+					//ajax로 받아온 매개변수 입력값
+					System.out.println(insert+"입력값");
+					//한글화
+					URLEncoder.encode(insert , "UTF-8");
+					re.setCharacterEncoding("UTF-8");
+					//out 객체 사용하기 위해 준비
+					PrintWriter out = re.getWriter();
+					int pagePerRow = 100;
+			
+					//json방식 사용
+					JSONArray memberListJson = null;
+					//리스트 쿼리 호출
+					List<Member> list = Mdao.K_AjaxMemberList(currentPage, pagePerRow, insert);
+					//받아온 리스트 값을 제이손 객체에 넣어줌 
+					memberListJson = JSONArray.fromObject(list);
+					System.out.println(memberListJson);	
+					//새로운 화면에서 json방식으로 받아온 값 출력
+					out.write(memberListJson.toString());
+					//메모리 초기화
+					out.flush();
+		}
+		
+	
+	//영어와 숫자인 입력값일 경우 회원 리스트 제이손 방식으로 받아오기
+	@RequestMapping(value="/E_real_time", method = RequestMethod.GET)
 	@ResponseBody
-		public void jj(@RequestParam(value="insert") String insert
+		public void E_real_time(@RequestParam(value="insert") String insert
 					,Model model
 					,HttpServletResponse re
 					,@RequestParam(value="currentPage",required=false,defaultValue="1" )int currentPage) throws IOException{
