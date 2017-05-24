@@ -144,5 +144,23 @@
 		--> 
     	</beans:bean>
 		</interceptors>
+			<!-- email-test -->
+			<!-- mail bean -->
+	 <beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	  <beans:property name="host" value="smtp.gmail.com"/>
+	  <beans:property name="port" value="587"/>
+	  <beans:property name="username" value="bsh20057@gmail.com"/>
+	  <beans:property name="password" value="tkd625gns"/>
+	  <beans:property name="javaMailProperties">
+	   <beans:props>
+	   	<beans:prop key="mail.transport.protocol">smtp</beans:prop>
+	    <beans:prop key="mail.smtp.auth">true</beans:prop>
+	    <beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+	    <beans:prop key="mail.smtp.timeout">8500</beans:prop> <!-- mail 서버 연결시 timeout 시간 설정 -->
+	    <beans:prop key="mail.debug">true</beans:prop> <!-- log를 보고 싶다면 사용 -->
+	   </beans:props>
+	  </beans:property>
+	 </beans:bean>
+
 
 </beans:beans>

@@ -56,7 +56,8 @@
  
 <script>
 $(document).ready(function(){
-	$('#btn').click(function(){
+	$('#Dbtn').click(function(){
+		
 	var reCheck = confirm('탈퇴 처리 하시겠습니까?');
 		
 	if(reCheck){
@@ -133,7 +134,7 @@ $(document).ready(function(){
             <label for="member_join">최근방문일자 :</label>
             <input class="form-control" name="member_join" id="member_join" value="${Member.member_join}" type="text"  readonly="readonly"/>
         </div>
-        <input class="btn btn-default" type="button" id="btn" value="삭제">
+        <input class="btn btn-default" type="button" id="Dbtn" value="삭제">
         <a class="btn btn-default" href="${pageContext.request.contextPath}/member_list">글목록</a>
     </form>
     
