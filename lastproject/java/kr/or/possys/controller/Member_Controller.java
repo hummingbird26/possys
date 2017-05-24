@@ -4,11 +4,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.util.List;
+import java.util.UUID;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,12 +20,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.or.possys.Cancel_Payment_service.Payment_Cancel;
 import kr.or.possys.Member_sevice.Member;
 import kr.or.possys.Member_sevice.Member_Dao;
 import kr.or.possys.Member_sevice.mVo;
 import kr.or.possys.Order_service.Order;
 import kr.or.possys.Order_service.Order_Dao;
 import kr.or.possys.Payment_service.Payment;
+import kr.or.possys.Staff_service.Staff;
+import kr.or.possys.Staff_service.Staff_Dao;
 import net.sf.json.JSONArray;
 
 @Controller
@@ -33,11 +40,252 @@ public class Member_Controller {
 	@Autowired
 	private	Order_Dao	odao;
 	
+	@Autowired
+	private Staff_Dao sdao;
+	
+	//e-mail test
+	@Autowired
+	  private JavaMailSender mailSender;
+	
+	//테이블 true,false 확인
+	@ResponseBody
+	@RequestMapping(value="/table_state")
+	public void table_state(HttpServletResponse re) throws IOException{
+		System.out.println("table_state 메서드 실행 확인 Member_Controller.java");
+		   re.setCharacterEncoding("UTF-8");
+		  
+			PrintWriter out = re.getWriter();
+			JSONArray table_state = null;
+			
+			List<Order> state = Mdao.table_state();
+			/*if(staff!=null){*/
+			
+			/*System.out.println(plist);*/
+			
+			table_state = JSONArray.fromObject(state);
+			System.out.println(table_state);
+			
+			//새로운 화면에서 json방식으로 받아온 값 출력
+			out.write(table_state.toString());
+			
+			out.flush();
+	}
+	
+	
+	
+	// 테이블 배치 화면으로 이동
+	  @RequestMapping(value = "/table")
+	  public String table() {
+	   System.out.println("테이블 배치 화면 이동 메서드 ");
+	    return "/member/main";	    
+	  } 
+	//테이블 주문 내역 확인
+	  @ResponseBody
+	  @RequestMapping(value = "/table_order",method = RequestMethod.GET)
+	  public void table_order(HttpServletResponse re,@RequestParam(value="table_order_num") String table_order_num) throws IOException{
+		  System.out.println("테이블 주문내역 확인 메서드 Member_Controller.java");
+		 
+		 re.setCharacterEncoding("UTF-8");
+		  
+		PrintWriter out = re.getWriter();
+		JSONArray order_detail = null;
+		
+		List<Order> order = Mdao.table_Order_detail(table_order_num);
+		/*if(staff!=null){*/
+		
+		/*System.out.println(plist);*/
+		
+		order_detail = JSONArray.fromObject(order);
+		System.out.println(order_detail);
+		
+		//새로운 화면에서 json방식으로 받아온 값 출력
+		out.write(order_detail.toString());
+		
+		out.flush();
+		  
+	
+	  }
+	  
+	  // 비밀번호 재발급 화면 이동
+	  @RequestMapping(value = "/repw")
+	  public String repw() {
+	   System.out.println("비밀번호 재발급 화면 이동 메서드 ");
+	    return "/repw";
+	  }  
+	// 비밀번호 찾기  아이디와  name값 가져오는 ajax통신용
+	  @ResponseBody
+	  @RequestMapping(value = "/idcheck")
+	  public void mailForm(HttpServletRequest request,HttpServletResponse re) throws IOException {
+		  String checkid = request.getParameter("id");
+		  /*System.out.println(checkid);*/
+		 
+		  	re.setCharacterEncoding("UTF-8");
+		  
+			PrintWriter out = re.getWriter();
+			JSONArray CheckStaff = null;
+			
+			Staff staff = sdao.loginSelect(checkid);
+			/*if(staff!=null){*/
+			
+			/*System.out.println(plist);*/
+			
+			CheckStaff = JSONArray.fromObject(staff);
+			System.out.println(CheckStaff);
+			
+			//새로운 화면에서 json방식으로 받아온 값 출력
+			out.write(CheckStaff.toString());
+			
+			out.flush();
+	   
+	  }
+	 
+	  // 비밀번호 찾기 후 신규 pw 재발급 후 db등록 및  이메일 발송 코드 
+	
+	  @RequestMapping(value="/mail/mailSending",method = RequestMethod.POST)
+	  public String mailSending(HttpServletRequest request){
+		  System.out.println("메일보내기");
+		  
+		  
+		  			String checkid = request.getParameter("id");
+		  			System.out.println(checkid);
+		  			Staff staff = sdao.loginSelect(checkid);
+		  			System.out.println(staff+"<---mailSending 메서드 아이디 입력후 리턴값 Member_Controller.java");
+				   /* String tomail  = request.getParameter("tomail"); */    // 받는 사람 이메일
+				    /*String title   = request.getParameter("title");*/// 제목
+					String setfrom = "bsh20057@gmail.com";
+					String title = "possys 비밀번호 재발급 안내입니다.";
+				    String content ="";
+				    String newpw = "";
+				    for (int i = 0;i < 5; i++) { 
+				        // UUID uuid = UUID.randomUUID() // UUID 자체는 Object 타입 
+				    	String uuid = UUID.randomUUID().toString().replaceAll("-", ""); // -를 제거해 주었다. 
+				        uuid = uuid.substring(0, 6); //uuid를 앞에서부터 10자리 잘라줌. 
+				        content = "신규 비밀번호 입니다. 로그인 후 수정 해주세요 \n"
+				        		+ "신규 비밀번호 :"+uuid;
+				        newpw = uuid;
+				    }
+				    
+				    
+				    //sdao에서 가져온 회원 정보에 입력된 email을 보내는 이메일에 입력
+				    String tomail = staff.getStaff_email();
+				    
+				    staff.setStaff_pw(newpw);
+				    staff.getStaff_name();
+				    staff.getStaff_level();
+				    staff.getStaff_age();
+				    staff.getStaff_addr();
+				    staff.getStaff_gender();
+				    staff.getStaff_phone();
+				    staff.getStaff_date();
+				    staff.getStaff_id();	    
+			
+				    System.out.println(staff.getStaff_pw()+"<<<<<<<확인");
+				    //신규 비밀번호로 업데이트
+				    sdao.updateStaff(staff);
+				   
+				    /* String content = request.getParameter("content");*/    // 내용
+				    System.out.println("새로운 비밀번호"+newpw);
+				    System.out.println("받는사람 이메일"+tomail);
+				    System.out.println("이메일 제목"+title);
+				    System.out.println("이메일 내용"+content);
+				    try {
+				      MimeMessage message = mailSender.createMimeMessage();
+				      
+				      MimeMessageHelper messageHelper 
+				                        = new MimeMessageHelper(message, true, "UTF-8");
+				 
+				      messageHelper.setFrom(setfrom);  // 보내는사람 생략하거나 하면 정상작동을 안함
+				      messageHelper.setTo(tomail);     // 받는사람 이메일
+				      messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+				      messageHelper.setText(content);  // 메일 내용
+				     
+				      mailSender.send(message);
+				    } catch(Exception e){
+				      System.out.println(e);
+				    }
+					return "redirect:/";
+					
+			}
+
+	  /*}*/
+ 
+	
+	
 	//그래프 출력 화면 호출 메서드
 	@RequestMapping(value="/total_payment")
 	public String total_payment(){
 		return "/member/total_payment";
 	}
+	//카드결제 메서드(취소)
+		@RequestMapping(value="/C_CDcate",method = RequestMethod.GET)
+		@ResponseBody
+		public void C_CDcatePayment(HttpServletResponse re
+				,@RequestParam(value="selbox") String selbox) throws IOException{
+			System.out.println("C_CDcatePayment 메서드 실행 확인 Member_Controller.java");
+			System.out.println(selbox);
+			re.setCharacterEncoding("UTF-8");
+			PrintWriter out = re.getWriter();
+			JSONArray C_CDcatePayment = null;
+			
+			List<Payment_Cancel> CDcate = Mdao.C_CDcatePayment(selbox);
+			
+			/*System.out.println(plist);*/
+			
+			C_CDcatePayment = JSONArray.fromObject(CDcate);
+			System.out.println(C_CDcatePayment);
+			
+			//새로운 화면에서 json방식으로 받아온 값 출력
+			out.write(C_CDcatePayment.toString());
+			
+			out.flush();
+		}
+		//현금결제 메서드(취소)
+		@RequestMapping(value="/C_Mcate",method = RequestMethod.GET)
+		@ResponseBody
+		public void C_McatePayment(HttpServletResponse re
+				,@RequestParam(value="selbox") String selbox) throws IOException{
+			System.out.println("C_McatePayment 메서드 실행 확인 Member_Controller.java");
+			System.out.println(selbox);
+			re.setCharacterEncoding("UTF-8");
+			PrintWriter out = re.getWriter();
+			JSONArray C_McatePayment = null;
+			
+			List<Payment_Cancel> Mcate = Mdao.C_McatePayment(selbox);
+			
+			/*System.out.println(plist);*/
+			
+			C_McatePayment = JSONArray.fromObject(Mcate);
+			System.out.println(C_McatePayment);
+			
+			//새로운 화면에서 json방식으로 받아온 값 출력
+			out.write(C_McatePayment.toString());
+			
+			out.flush();
+		}
+		//통합매출내역(취소)
+		@RequestMapping(value="/C_graph",method = RequestMethod.GET)
+		@ResponseBody
+		public void C_totalPayment(HttpServletResponse re
+				,@RequestParam(value="selbox") String selbox) throws IOException{
+			System.out.println("C_totalPayment 메서드 실행 확인 Member_Controller.java");
+			System.out.println(selbox);
+			re.setCharacterEncoding("UTF-8");
+			PrintWriter out = re.getWriter();
+			JSONArray C_totalPayment = null;
+			
+			List<Payment_Cancel> plist = Mdao.C_totalPaymentList(selbox);
+			
+			/*System.out.println(plist);*/
+			
+			C_totalPayment = JSONArray.fromObject(plist);
+			System.out.println(C_totalPayment);
+			
+			//새로운 화면에서 json방식으로 받아온 값 출력
+			out.write(C_totalPayment.toString());
+			
+			out.flush();
+		}
+	
 	//카드결제 메서드
 	@RequestMapping(value="/CDcate",method = RequestMethod.GET)
 	@ResponseBody
@@ -84,6 +332,7 @@ public class Member_Controller {
 		
 		out.flush();
 	}
+	//통합매출내역
 	@RequestMapping(value="/graph",method = RequestMethod.GET)
 	@ResponseBody
 	public void totalPayment(HttpServletResponse re
@@ -142,10 +391,42 @@ public class Member_Controller {
 		model.addAttribute("memberCount",memberCount);
 		return "/member/real_time";
 	}
-	//회원 리스트 제이손 방식으로 받아오기
-	@RequestMapping(value="/json", method = RequestMethod.GET)
+	
+	//입력값이 한글인 경우 회원 리스트 제이손 방식으로 받아오기
+		@RequestMapping(value="/K_real_time", method = RequestMethod.GET)
+		@ResponseBody
+			public void K_real_time(@RequestParam(value="insert") String insert
+						,Model model
+						,HttpServletResponse re
+						,@RequestParam(value="currentPage",required=false,defaultValue="1" )int currentPage) throws IOException{
+					System.out.println("josn 호출확인");
+					//ajax로 받아온 매개변수 입력값
+					System.out.println(insert+"입력값");
+					//한글화
+					URLEncoder.encode(insert , "UTF-8");
+					re.setCharacterEncoding("UTF-8");
+					//out 객체 사용하기 위해 준비
+					PrintWriter out = re.getWriter();
+					int pagePerRow = 100;
+			
+					//json방식 사용
+					JSONArray memberListJson = null;
+					//리스트 쿼리 호출
+					List<Member> list = Mdao.K_AjaxMemberList(currentPage, pagePerRow, insert);
+					//받아온 리스트 값을 제이손 객체에 넣어줌 
+					memberListJson = JSONArray.fromObject(list);
+					System.out.println(memberListJson);	
+					//새로운 화면에서 json방식으로 받아온 값 출력
+					out.write(memberListJson.toString());
+					//메모리 초기화
+					out.flush();
+		}
+		
+	
+	//영어와 숫자인 입력값일 경우 회원 리스트 제이손 방식으로 받아오기
+	@RequestMapping(value="/E_real_time", method = RequestMethod.GET)
 	@ResponseBody
-		public void jj(@RequestParam(value="insert") String insert
+		public void E_real_time(@RequestParam(value="insert") String insert
 					,Model model
 					,HttpServletResponse re
 					,@RequestParam(value="currentPage",required=false,defaultValue="1" )int currentPage) throws IOException{

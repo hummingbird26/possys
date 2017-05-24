@@ -47,7 +47,7 @@
 				
 			 $.ajax({
 	                type:'GET',
-					url: "${pageContext.request.contextPath}/json",
+					url: "${pageContext.request.contextPath}/E_real_time",
 	                dataType: "JSON",
 	                data : input,
 	                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -89,13 +89,16 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources//modal/highlight.js"></script>
 <script type="text/javascript">
 $(document).ready(function () {
-	 $('#tags').keyup(function(){
+	$('#tags').keyup(function(){
 			var insert = $('#tags').val();
 			var input ={"insert":insert};
 			/* alert(insert); */
 			/* 검색어 하이라이트 */
-	$('#tags').bind('keydown change', function(ev) {
-		 var go = $(this).val();
+			var check = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; 
+			
+			
+			$('#tags').bind('keydown change', function(ev) {
+			 var go = $(this).val();
 
 	        // remove any old highlighted terms
 	     	 $('body').removeHighlight();
@@ -114,11 +117,53 @@ $(document).ready(function () {
 			/* var insert = $('#tags').val();
 			var input ={"insert":insert};
  */			
+ 		//한글체크 if문 시작
+			if(check.test(insert)){
+				console.log('한글이 있습니다.');
+
+				$.ajax({
+	                type:'GET',
+					url: "${pageContext.request.contextPath}/K_real_time",
+	                dataType: "JSON",
+	                data : input,
+	                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	                success: function (data) {
+	                	
+	                	decodeURIComponent( data.member_name );
+	                	console.log(insert);
+	                	console.log(data);
+	                	var member_phone = [];
+	                	
+	                	
+		             for(var i=0; i<data.length; i++){
+		                	member_phone.push(data[i]["member_phone"])		
+		                	var mp = data[i]["member_phone"];
+		             	
+		             }
+	                	
+
+	                	
+	                    $.each(data, function () {
+	                    	
+	                        $('#tb').append("<tr class = 'test'><td>"
+	                        		+ this.member_phone + "</td><td>"
+	                        		+ this.member_name  +"</td><td>"
+	                        		+ this.member_join  +"</td><td>"
+	                        		+ this.member_point +"</td><td>"
+	                        		+ this.member_sign + "</td></tr>");
+	                    });
+	                    $('tr:odd').addClass('table table-striped');
+		                },
+		                error: function () { alert('에러발생'); }
+		        	});
+			
+			}else{
+				console.log('한글이 없습니다');
 			
 			
 			$.ajax({
                 type:'GET',
-				url: "${pageContext.request.contextPath}/json",
+				url: "${pageContext.request.contextPath}/E_real_time",
                 dataType: "JSON",
                 data : input,
                 contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -151,6 +196,11 @@ $(document).ready(function () {
 	                },
 	                error: function () { alert('에러발생'); }
 	        	});
+		//한글체크 if문 끝
+			}
+			
+			
+			
 			 }
 		 });
 	 <!-- 하이라이트 기능 -->

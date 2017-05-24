@@ -77,7 +77,7 @@
 			
 			<button type="button" id="btn">login</button>
 			<br/>
-			<a href="#"><p class="small">Forgot your password?</p></a>
+			<a href="${pageContext.request.contextPath}/repw"><p class="small">Forgot your password?</p></a>
 		</div>
 	</div>
 	</form>
