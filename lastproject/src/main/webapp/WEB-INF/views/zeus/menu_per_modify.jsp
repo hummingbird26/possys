@@ -19,7 +19,7 @@
 		<div>식재코드: <input name ="food_id" id ="food_id" type ="text" value="${food.food_id}" readonly="readonly"/></div>
 		<div>상품명: <input name ="food_name" id ="food_name" type ="text" value="${food.food_name}" readonly="readonly"/></div>
 		<div>단위 : <input name ="food_unit" id ="food_unit" type ="text" value="${food.food_unit}"  readonly="readonly"/></div>
-		<div>수량: <input name ="fpm_ea" id ="fpm_ea" type ="text"  /></div>
+		<div>수량: <input name ="fpm_ea" id ="fpm_ea" type ="text" placeholder="수량을 입력하세요" /></div>
 		
 		
 
