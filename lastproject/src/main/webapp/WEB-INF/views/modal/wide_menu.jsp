@@ -102,6 +102,7 @@ $(document).ready(function(){
        <li ><a href="#Link" title="Link">Staff</a>
       <ul>
           <li ><a href="${pageContext.request.contextPath}/tori/staff/staff_add_form" title="Link">직원추가</a></li>
+          <li ><a href="${pageContext.request.contextPath}/tori/staff/staff_list" title="Link">직원목록</a></li>
         </ul>
         </li>
     </ul>

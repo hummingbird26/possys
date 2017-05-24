@@ -21,10 +21,10 @@
 <script>
 $(document).ready(function(){
 	$('#paymentAdd').click(function(){
-		if($('#payment_id').val().length<4){
+		/* if($('#payment_id').val().length<4){
 			alert('아이디를 4글자 이상 입력하시오.');
-      		$('#payment_id').focus();
-		}else if($('#table_order_id').val().length<4){
+      		$('#payment_id').focus();} */
+		if($('#table_order_id').val().length<4){
 			alert('테이블주문번호를 4자리 이상 입력하시오.');
       		$('#table_order_id').focus();
 		}else if($('#member_phone').val()==''){
@@ -36,13 +36,16 @@ $(document).ready(function(){
 		}else if($('#payment_pay').val()==''){
 			alert('주문금액을 입력해주세요.');
       		$('#payment_pay').focus();
-		}else if($('#payment_addmileage').val()==''){
+		}
+		/* else if($('#payment_addmileage').val()==''){
 			alert('추가된마일리지를 입력해주세요.');
       		$('#payment_addmileage').focus();
-		}else if($('#payment_usemileage').val()==''){
+		} */
+		else if($('#payment_usemileage').val()==''){
 			alert('사용한마일리지는 얼마인지 입력해주세요.');
       		$('#payment_usemileage').focus();
-		}else if($('#payment_date').val()==''){
+		}
+		/* else if($('#payment_date').val()==''){
 			alert('거래날짜는 언제인지 입력해주세요.');
       		$('#payment_date').focus();
 		}else if($('#payment_cate').val()==''){
@@ -51,7 +54,8 @@ $(document).ready(function(){
 		}else if($('#payment_state').val()==''){
 			alert('거래상태는 어떠한지 입력해주세요.');
       		$('#payment_state').focus();
-		}else {
+		} */
+		else {
 			$('#paymentForm').submit();
 		}
 	});
@@ -76,11 +80,11 @@ function chkDupId(){
 			if(chkRst=="Y"){
 				alert("등록 가능 합니다");
 				console.log(data);
-				$("#idcheck").val('Y');
+				$("#IDCheck").val() = "아이디 사용가능";
 			}else{
 				alert("중복됩니다");
 				console.log(data);
-				$("#idcheck").val('N');
+				$("#IDCheck").val() = "아이디 사용불가";
 			}
 		},
 		error : function(request,status,error){
@@ -101,6 +105,89 @@ function insertChk(){
 		return;
 	}
 }
+
+ function ToidCheck(){
+	console.log('ToidCheck');
+	var Toid = $("#table_order_id").val();
+	if($("#table_order_id").val() == ''){
+		alert('현재 일치하는 주문번호가 없습니다');
+		return;
+	}
+	
+	/*  $.ajax({
+			type:'POST',
+			data:"Toid="+$("#table_order_id").val(),
+			contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+			dataType:'text',
+			url:'${pageContext.request.contextPath}/tori/payment/ToidCheck',
+			success : function(data){
+				alert("성공");
+				var chkRst = data;
+				if(chkRst=="Y"){
+					alert("등록 가능 합니다");
+					console.log(data);
+					//$("#IDCheck").val() = "아이디 사용가능";
+				}else{
+					alert("중복됩니다");
+					console.log(data);
+					//$("#IDCheck").val() = "아이디 사용불가";
+				}
+			},
+			error : function(request,status,error){
+				
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				alert("실패");
+			}
+		}); */
+}
+
+/* function ToMPhoneCheck(){
+	console.log('ToMPhoneCheck');
+	var ToMPhone = $("#member_phone").val();
+	if($("#member_phone").val() == ''){
+		alert('현재 해당 회원번호가 존재하지 않습니다');
+		return;
+	}
+	
+	 $.ajax({
+			type:'POST',
+			data:"ToMPhone="+$("#member_phone").val(),
+			contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+			dataType:'text',
+			url:'${pageContext.request.contextPath}/tori/payment/ToMPhoneCheck',
+			success : function(data){
+				alert("성공");
+				var chkRst = data;
+				if(chkRst=="Y"){
+					alert("등록 가능 합니다");
+					console.log(data);
+					//$("#IDCheck").val() = "아이디 사용가능";
+				}else{
+					alert("중복됩니다");
+					console.log(data);
+					//$("#IDCheck").val() = "아이디 사용불가";
+				}
+			},
+			error : function(request,status,error){
+				
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				alert("실패");
+			}
+		});
+} */
+
+//payment_state가 취소인지 정상인지에 따라서 이동경로를 다르게 설정해주는 스크립트
+/* function SubmitYesNo(){
+	console.log('3');
+	alert(11);
+	 var index = $("#payment_state").val();
+	console.log(index); 
+	 if(index=="취소"){
+		paymentForm.action="${pageContext.request.contextPath}/tori/payment/payment_cancel_action";
+	}else{
+		paymentForm.action="${pageContext.request.contextPath}/tori/payment/payment_add_action";
+	} paymentForm.submit();
+} */
 </script>
  <%@ include file="../../modal/wide_menu.jsp" %>
 </head>
@@ -110,57 +197,67 @@ function insertChk(){
 <!-- form action에도 입력폼 및 리스트로 가는 것을 작성하지 않고 다른 경로를 작성해본다. 그리고  컨트롤러, 리스트, 매퍼, DTO, DAO, 및 입력 폼의 name속성의 값들을 전부  DB내의 컬럼명으로 통일해서 작성한다-->
 	<form id="paymentForm" class="form-inline" action="${pageContext.request.contextPath}/tori/payment/payment_add_action" method="post">
 	<table class="table table-stripped table-hover">
-		<tr>
+		<!-- <tr>
 		<td>결제번호</td>
 		<td><input class="form-control" size="auto" id="payment_id" name="payment_id"></td>
-		</tr>
+		<td>
+			ID 체크 확인용
+			<input type="hidden" id="idChk" value="N" />
+			<p id="IDCheck"></p>
+		</td>
+		</tr> -->
 		<tr>
 		<td>테이블사용코드</td>
 		<td><input class="form-control" size="auto" id="table_order_id" name="table_order_id" type="text"></td>
+		<td><input type="button" class="btn btn-primary" name="ToidCheck" value="체크" size="auto" onclick="javascript:ToidCheck();"></td>
 		</tr>
 		<tr>
 		<td>전화번호</td>
 		<td><input class="form-control" size="auto" id="member_phone" name="member_phone" type="tel"></td>
+		<td><input type="button" class="btn btn-primary" name="ToMPhoneCheck" value="체크" size="auto" onclick="javascript:ToMPhoneCheck();"></td>
 		</tr>
 		<tr>
 		<td>총액</td>
-		<td><input class="form-control" size="auto" id="payment_total" name="payment_total" type="text"></td>
+		<td colspan="2"><input class="form-control" size="auto" id="payment_total" name="payment_total" type="text"></td>
 		</tr>
 		<tr>
 		<td>결제금액</td>
-		<td><input class="form-control" size="auto" id="payment_pay" name="payment_pay" type="text"></td>
+		<td colspan="2"><input class="form-control" size="auto" id="payment_pay" name="payment_pay" type="text"></td>
 		</tr>
-		<tr>
+		<!-- <tr>
 		<td>적립마일리지</td>
-		<td><input class="form-control" size="auto" id="payment_addmileage" name="payment_addmileage" type="text"></td>
-		</tr>
+		<td colspan="2"><input class="form-control" size="auto" id="payment_addmileage" name="payment_addmileage" type="text"></td>
+		</tr> -->
 		<tr>
 		<td>사용마일리지</td>
-		<td><input class="form-control" size="auto" id="payment_usemileage" name="payment_usemileage" type="text"></td>
+		<td colspan="2"><input class="form-control" size="auto" id="payment_usemileage" name="payment_usemileage" type="text"></td>
 		</tr>
-		<tr>
+		<!-- <tr>
 		<td>날짜</td>
-		<td><input class="form-control" size="auto" id="payment_date" name="payment_date" type="date"></td>
-		</tr>
+		<td colspan="2"><input class="form-control" size="auto" id="payment_date" name="payment_date" type="date"></td>
+		</tr> -->
 		<tr>
 		<td>구분</td>
-		<td><input class="form-control" size="auto" id="payment_cate" name="payment_cate" type="text"></td>
+		<td colspan="2">
+		<input type="radio" name="payment_cate" id="payment_cate" value="현금">현금
+		<input type="radio" name="payment_cate" id="payment_cate" value="카드">카드
+		<!-- <input class="form-control" size="auto" id="payment_cate" name="payment_cate" type="text"> --></td>
 		</tr>
-		<tr>
+		<!-- <tr>
 		<td>상태</td>
 		<td><input class="form-control" size="auto" id="payment_state" name="payment_state" type="text"></td>
-		</tr>
+		<td><label id="paymentcancelYN"></label></td>
+		</tr> -->
 	</table>
-	<input class="btn btn-primary" type="submit" id="paymentAdd" name="paymentAdd" value="제출">
+	<input class="btn btn-primary" type="button" id="paymentAdd" name="paymentAdd" value="제출">
+	<!-- <input class="btn btn-primary" type="button" id="paymentAdd" name="paymentAdd" onclick="javascript:SubmitYesNo();" value="제출"> -->
 	<input class="btn btn-primary" type="reset" id="paymentCancel" name="paymentCancel" value="되돌림">
 	<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_list">글목록</a>
-	<input type="button" class="btn btn-primary" value="idcheck" onclick="javascript:chkDupId();"/>
+	<input type="button" class="btn btn-primary" id="idcheck" name="idcheck" value="아이디중복체크" onclick="javascript:chkDupId();"/>
 	</form>
 	<br><br>
-	<div>
-	<!-- ID 체크 확인용 -->
-	<input type="hidden" id="idChk" value="N" />
-	</div>
+	
+	<!-- payment_state가 취소라면 payment_cancel_list.jsp로 화면을 이동하게끔 한다. 그리고 실질적인 데이터베이스 반영이 되어져야 한다 -->
 	<div>
 	<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_form">결제취소직권입력</a>
 	<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_card_form">카드결제직권입력</a>

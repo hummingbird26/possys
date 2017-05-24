@@ -23,7 +23,7 @@
 			<option value="payment_cancel_id">거래취소코드별검색</option>
 			<option value="payment_id">거래코드별검색</option>
 			<option value="payment_cancel_date">결제취소일자별검색</option>
-			<option value="payment_cancel_cate">결제취소거래유형별검색</option>
+			<option value="payment_cate">결제취소거래유형별검색</option>
 		</select>
 		<input type="text" class="form-control" name="keyWord" id="keyWord">
 		<input type="submit" class="form-control btn btn-primary" name="search" id="search">

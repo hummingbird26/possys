@@ -10,7 +10,10 @@ public class Payment_Cancel {
 	private int payment_cancel_backmileage;
 	private int payment_cancel_returnmileage;
 	private String payment_cancel_date;
-	private String payment_cancel_cate;
+	private String payment_cate;
+	//payment_state를 쿼리입력의 기준으로 받기 위한 용도
+	private String payment_state;
+	
 	
 	public String getPayment_cancel_id() {
 		return payment_cancel_id;
@@ -66,18 +69,27 @@ public class Payment_Cancel {
 	public void setPayment_cancel_date(String payment_cancel_date) {
 		this.payment_cancel_date = payment_cancel_date;
 	}
-	public String getPayment_cancel_cate() {
-		return payment_cancel_cate;
+	public String getPayment_cate() {
+		return payment_cate;
 	}
-	public void setPayment_cancel_cate(String payment_cancel_cate) {
-		this.payment_cancel_cate = payment_cancel_cate;
+	public void setPayment_cate(String payment_cate) {
+		this.payment_cate = payment_cate;
+	}
+	
+	// payment_state가 취소일 경우 payment테이블에서 payment_state값을 받아오기 위한
+	public String getPayment_state() {
+		return payment_state;
+	}
+	public void setPayment_state(String payment_state) {
+		this.payment_state = payment_state;
 	}
 	@Override
 	public String toString() {
 		
 		return "Payment_Cancel [payment_cancel_id= " + payment_cancel_id + ", payment_id= " + payment_id + ", table_order_id= " + table_order_id +
 				", member_phone= " + member_phone + ", payment_cancel_total= " + payment_cancel_total + ", payment_cancel_backmileage= " + payment_cancel_backmileage + 
-				", payment_cancel_returnmileage= " + payment_cancel_returnmileage + ", payment_cancel_date= " + payment_cancel_date + ", payment_cancel_cate= " + payment_cancel_cate + "]";
+				", payment_cancel_returnmileage= " + payment_cancel_returnmileage + ", payment_cancel_date= " + payment_cancel_date + ", payment_cate= "
+				+ payment_cate + ", payment_state= " + payment_state + "]";
 	}
 	
 	

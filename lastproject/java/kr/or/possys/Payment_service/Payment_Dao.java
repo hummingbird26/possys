@@ -8,6 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.possys.Cancel_Payment_service.Payment_Cancel;
+
 @Repository
 public class Payment_Dao {
 	// Payment테이블에 맞게끔 DAO 새로 설정하기.
@@ -18,12 +20,18 @@ public class Payment_Dao {
         return sqlSessionTemplate.update("kr.or.possys.Payment_service.Payment_Mapper.updatePayment", payment_id);
     }*/
     
-    /*public int deletePayment(String payment_id, String payment_pw) {
+	//결제목록삭제기능
+    public int deletePayment(String payment_id) {
         Payment Payment = new Payment();
         Payment.setPayment_id(payment_id);
-        Payment.setPayment_pw(payment_pw);
         return sqlSessionTemplate.delete("kr.or.possys.Payment_service.Payment_Mapper.deletePayment", Payment);
-    }*/
+    }
+	
+	// payment와 payment_cancel 연결
+		public int PaymentCancel(Payment payment) {
+	    	System.out.println("Payment_Cancel");
+	        return sqlSessionTemplate.insert("kr.or.possys.Payment_service.Payment_Mapper.PaymentCancel", payment);
+	    }
 	
 	//payment 결제 아이디 중복 체크
 	public int check_pid(String payment_id) {
@@ -33,6 +41,22 @@ public class Payment_Dao {
 		return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.check_pid", payment_id);
 		
 	}
+	
+	//Payment 테이블주문아이디 중복체크
+	public int checkToid(String table_order_id){
+		System.out.println("checkToid");
+		System.out.println(table_order_id);
+		
+		return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.checkToid", table_order_id);
+	}
+	
+	//Payment 회원전화번호 중복체크
+		public int checkPMPhone(String member_phone){
+			System.out.println("checkPMPhone");
+			System.out.println(member_phone);
+			
+			return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.checkPMPhone", member_phone);
+		}
 	
     //payment 검색 수 요청
     public int paymentSRlist(String select, String keyWord){

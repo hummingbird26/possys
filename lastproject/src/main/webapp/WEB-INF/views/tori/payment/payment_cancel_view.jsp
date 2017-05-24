@@ -65,7 +65,7 @@
 			<tr>
 			<td>결제취소유형
 			</td>
-			<td>${paymentcancel.payment_cancel_cate}
+			<td>${paymentcancel.payment_cate}
 			</td>
 			</tr>
 		</table>
