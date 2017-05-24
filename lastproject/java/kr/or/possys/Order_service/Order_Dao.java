@@ -43,6 +43,11 @@ public class Order_Dao {
 		return sqlSessionTemplate2.update("kr.or.possys.Order_service.Order_Mapper.order_end_t",table_order_id);
 	}
 	
+	public int order_detail_end_t(Order order){
+		System.out.println("주문종결실행");
+		return sqlSessionTemplate2.update("kr.or.possys.Order_service.Order_Mapper.order_detail_end_t",order);
+	}
+	
 	public int order_detail_modify(Order order){
 		System.out.println("주문상세실행");
 		return sqlSessionTemplate2.update("kr.or.possys.Order_service.Order_Mapper.order_detail_modify",order);
@@ -83,6 +88,11 @@ public class Order_Dao {
 	public int order_ep_plus(Order order){
 		System.out.println("식재 소비실행");
 		return sqlSessionTemplate2.delete("kr.or.possys.Order_service.Order_Mapper.order_ep_plus",order);
+	}
+	
+	public Order order_count(){
+		System.out.println("getcount");
+		return sqlSessionTemplate2.selectOne("kr.or.possys.Order_service.Order_Mapper.order_count");
 	}
 	
 	
