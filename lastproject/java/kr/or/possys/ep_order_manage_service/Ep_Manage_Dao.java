@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.possys.ep_order_food_details_service.Ep_Order;
 import kr.or.possys.food_service.Food;
 
 @Repository
@@ -28,9 +29,22 @@ public class Ep_Manage_Dao {
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@	AJAX DAO
 	
 	//업체리스트 상세보기에서 식재료 삭제 요청
-	public void f_del(String food_id){
+	public void f_del(String food_id, Ep_Order oder){
+		System.out.println(oder);
+		
+//			System.out.println(o.getEp_order_id()+"<--------oder id");
+			String oder_id = oder.getEp_order_id();
+			if(oder_id.equals("default")){
+//				System.out.println("아이디 디폴트"); // 발주리스트도 동시 삭제
+				sqlSessionTemplate.delete("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.f_del",food_id);
+				sqlSessionTemplate.delete("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.f_del_o",food_id);
+			}else{
+				System.out.println("아이디 있음");
+				sqlSessionTemplate.delete("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.f_del",food_id);
+			}
+		
 		System.out.println(food_id+"<----- Ep_Manage_Dao - f_del()실행 food_id ");
-		sqlSessionTemplate.delete("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.f_del",food_id);
+//		sqlSessionTemplate.delete("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.f_del",food_id);
 	}
 	
 	//###### 업체 입력액션
@@ -62,6 +76,15 @@ public class Ep_Manage_Dao {
 					sqlSessionTemplate.insert("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.in_insertep_o",ep_m);
 				}
 			}
+		}
+	// 02_동시에 입력된 발주현황 리스트 목록 요청해서 동시삭제를 위한
+		public Ep_Order chk_del(String food_id){
+			System.out.println(food_id+"<== food_id , in_01_Ep_Manage_Dao.java->> chk_del");
+			return sqlSessionTemplate.selectOne("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.chk_del",food_id);
+		}
+		public List<Ep_Order> chk_alldel(String ep_id){
+			System.out.println(ep_id+"<== ep_id , in_01_Ep_Manage_Dao.java->> chk_alldel");
+			return sqlSessionTemplate.selectList("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.chk_alldel",ep_id);
 		}
 //	##### 업체 중복없는 갯수 카운트
 	public int getep_mcount(){
@@ -118,11 +141,27 @@ public class Ep_Manage_Dao {
 		return sqlSessionTemplate.update("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.ep_mmodify",ep_m);
 		
 	}
-	//업체 삭제 요청
-	public int ep_mdelete(String ep_id){
+	//업체 전체삭제 요청
+	public void ep_mdelete(String ep_id,List<Ep_Order> order){
 		System.out.println("06_Ep_Manage_Dao->>ep_mdelete 실행");
-		return sqlSessionTemplate.delete("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.ep_mdelete",ep_id);
+		for(Ep_Order o : order){
+			String ep_order_id = o.getEp_order_id();
+//			System.out.println(oder_id+"<----oder id");
+			if(ep_order_id.equals("default")){
+				Map<String,Object> map = new HashMap<String,Object>();
+				map.put("ep_id", ep_id);
+				map.put("ep_order_id", ep_order_id);
+				System.out.println(map.get("ep_order_id")+"asdasd");
+				sqlSessionTemplate.delete("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.f_del_oall",map);
+				sqlSessionTemplate.delete("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.ep_mdelete",ep_id);
+			}else{
+				sqlSessionTemplate.delete("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.ep_mdelete",ep_id);
+				System.out.println(ep_order_id+"<==== 디폴트 아님 삭제X");
+			}
+		}		
+//		return sqlSessionTemplate.delete("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.ep_mdelete",ep_id);
 	}
+	//
 	//업체 검색 요청
 //	public List<Ep_Manage> ep_msearch(String selbox, String keyWord, int currentPage, int pageRow){
 //		System.out.println("07_Ep_Manage_Dao->>ep_msearch 실행");
