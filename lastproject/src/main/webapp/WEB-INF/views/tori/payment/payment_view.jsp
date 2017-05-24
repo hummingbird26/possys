@@ -12,6 +12,14 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+<!-- script를 이용해서 결제취소한 후에 결제취소테이블에 등록하는 과정 -->
+<script>
+	function paymentDelete(){
+		alert('결제 취소를 진행하시겠습니까?');
+		console.log('결제취소');
+		/* paymentdelete.href="${pageContext.request.contextPath}/tori/payment/payment_delete?payment_id=${payment.payment_id}"; */
+	}
+</script>
 <%@ include file="../../modal/wide_menu.jsp" %>
 </head>
 <body>
@@ -98,6 +106,8 @@
 	<br><br>
 	
 	<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_list">리스트로</a>
+	<a class="btn btn-primary" onclick="javascript:paymentDelete();" name="paymentdelete" id="paymentdelete"
+	href="${pageContext.request.contextPath}/tori/payment/payment_delete?payment_id=${payment.payment_id}">거래취소</a>
 </div>
 
 </div>

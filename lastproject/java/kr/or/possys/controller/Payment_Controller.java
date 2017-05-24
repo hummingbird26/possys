@@ -14,6 +14,9 @@ import kr.or.possys.Cancel_Payment_service.Payment_Cancel;
 import kr.or.possys.Cancel_Payment_service.Payment_Cancel_Dao;
 import kr.or.possys.Card_Payment_service.Card_Payment;
 import kr.or.possys.Card_Payment_service.Card_Payment_Dao;
+import kr.or.possys.Member_sevice.Member;
+import kr.or.possys.Order_service.Order;
+import kr.or.possys.Order_service.Order_Detail;
 import kr.or.possys.Payment_service.Payment;
 import kr.or.possys.Payment_service.Payment_Dao;
 
@@ -27,7 +30,16 @@ public class Payment_Controller {
 	@Autowired
 	private Card_Payment_Dao cpdao;
 	//cpdao : 카드결제DAO
-	
+	/*@Autowired
+	private Order_Detail oddao;
+	//oddao : 주문상세DAO
+	@Autowired
+	private Member mdao;
+	//mdao : 회원목록DAO
+	@Autowired
+	private Order odao;
+	//odao : 주문목록DAO
+	*/
 	// view 페이지가 제대로 표시되도록 하기 위해서 다른 컨트롤러의 루트(/) 값을 모두 지우거나 주석처리해놓음
 	
 	//Staff 컨트롤러에서 login 페이지를 메인으로 보내기 위해 주석처리 했다 경로 다르게 잡아서 수정바람
@@ -96,6 +108,45 @@ public class Payment_Controller {
 		return duvalue;
 	}
 	
+	//테이블주문번호중복체크
+	@ResponseBody
+	@RequestMapping(value="/tori/payment/ToidCheck")
+	public String checkToid(@RequestParam(value="Toid",required=true) String table_order_id) throws Exception{
+		System.out.println("checkPid");
+		System.out.println(table_order_id);
+		//String Toid = oddao.getTable_order_id();
+		int Toid = pdao.checkToid(table_order_id);
+		String duvalue = null;
+		System.out.println(Toid);
+		if(Toid == 0){
+			System.out.println("주문번호 사용가능");
+			duvalue = "Y";
+		}else{
+			System.out.println("주문번호 중복됨");
+			duvalue = "N";
+		}
+		return duvalue;
+	}
+	
+	//회원전화번호중복체크
+	@ResponseBody
+	@RequestMapping(value="/tori/payment/ToMPhoneCheck")
+	public String checkPMPhone(@RequestParam(value="ToMPhone",required=true) String member_phone) throws Exception{
+		System.out.println("checkPMPhone");
+		System.out.println(member_phone);
+		int ToMPhone = pdao.checkPMPhone(member_phone);
+		String duvalue = null;
+		System.out.println(ToMPhone);
+		if(ToMPhone == 0){
+			System.out.println("회원번호 사용가능");
+			duvalue = "Y";
+		}else{
+			System.out.println("회원번호 중복됨");
+			duvalue = "N";
+		}
+		return duvalue;
+	}
+	
 	
 	//리스트 입력 폼으로 이동한다
 	@RequestMapping(value="/tori/payment/payment_add_form", method = RequestMethod.GET)
@@ -114,11 +165,11 @@ public class Payment_Controller {
 		String id = Payment.getPayment_id();
 		System.out.println(id+"<------ 컨트롤러 값 확인 ");
 		
-		
 		pdao.insertPayment(Payment);
 		return "redirect:/tori/payment/payment_list";
 		
 	}
+	
 	
 	//리스트로 값을 받아온다
 	@RequestMapping(value={"/tori/payment/payment_list"}, method = RequestMethod.GET)
@@ -224,6 +275,35 @@ public class Payment_Controller {
 		
 	}
 	
+	//결제상황을 보고 결제취소버튼을 누를 경우에 실행
+	@RequestMapping(value={"/tori/payment/payment_delete"})
+	public String paymentcanceladd(Payment_Cancel payment_cancel){
+		System.out.println("payment_delete");
+		
+		String id = payment_cancel.getPayment_cancel_id();
+		System.out.println(id+"<------ 컨트롤러 값 확인 ");
+		
+		
+		pcdao.insertPaymentCancel(payment_cancel);
+		return "redirect:/tori/payment/payment_cancel_intro";
+		
+	}
+	
+	//payment_cancel_intro진입
+		@RequestMapping(value={"/tori/payment/payment_cancel_intro"}, method = RequestMethod.GET)
+		public String paymentcancelintro(){
+			System.out.println("payment_cancel_intro");
+			return "/tori/payment/payment_cancel_intro";
+			//tori_home에서 설정한 경로와 매핑경로값 및 리턴값을 일치하게끔 설정한다.
+			
+		}
+	
+	@RequestMapping(value={"/tori/payment/payment_cancel_ACT"},method = RequestMethod.POST)
+	public String paymentdelete(@RequestParam(value="payment_id",required=false) String payment_id){
+		pdao.deletePayment(payment_id);
+		return "redirect:/tori/payment/payment_cancel_list";
+		}
+	
 	// 결제 취소 목록 시작
 	
 	//리스트 입력 폼으로 이동한다
@@ -237,7 +317,7 @@ public class Payment_Controller {
 		
 		//입력 요청 : 액션으로 이동한다
 		@RequestMapping(value="/tori/payment/payment_cancel_action", method = RequestMethod.POST)
-		public String paymentcanceladd(Payment_Cancel payment_cancel){
+		public String paymentcanceladd_1(Payment_Cancel payment_cancel){
 			System.out.println("01_1 Payment_Controller.java -> paymentadd");
 			
 			String id = payment_cancel.getPayment_cancel_id();
@@ -249,8 +329,9 @@ public class Payment_Controller {
 			
 		}
 		
-		//리스트로 값을 받아온다
-		@RequestMapping(value={"/tori/payment/payment_cancel_list"}, method = RequestMethod.GET)
+		
+		//입력 요청 : 액션으로 이동한다(이동하는데 먼젓번의 이동과는 다른 성격을 가지고 있다 : 결제와 결제취소를 연동한다)
+		@RequestMapping(value={"/tori/payment/payment_cancel_list"},method = RequestMethod.GET)
 		public String paymentcancellist(Model model,@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage){
 			System.out.println("02_Payment_Controller.java -> paymentcancellist");
 			int paymentcancelcount = pcdao.getPaymentCancelCount();
@@ -275,6 +356,35 @@ public class Payment_Controller {
 			return "/tori/payment/payment_cancel_list";
 			
 		}
+		
+		
+		
+		//리스트로 값을 받아온다
+		/*@RequestMapping(value={"/tori/payment/payment_cancel_list"}, method = RequestMethod.GET)
+		public String paymentcancellist(Model model,@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage){
+			System.out.println("02_Payment_Controller.java -> paymentcancellist");
+			int paymentcancelcount = pcdao.getPaymentCancelCount();
+			System.out.println(paymentcancelcount);
+			System.out.println("02_1 Payment_Controller.java -> paymentcancellist");
+			int pagePerRow = 10;
+			int expage = 1;
+			int lastPage = (int)(Math.ceil((double)paymentcancelcount/(double)pagePerRow));
+			List<Payment_Cancel> paymentcancellist = pcdao.getPaymentCancelList(currentPage, pagePerRow);
+			System.out.println(paymentcancelcount);
+			System.out.println(Math.ceil(paymentcancelcount/pagePerRow));
+			System.out.println(lastPage);
+			// paymentcount 및 pagePerRpw(구 pageRow -> list페이지에는 pagePerRow로 el식의 이름이 작성되어 있는 것을 확인하고(무분별 복붙의 폐해) 변수명을 해당 이름에 맞게 수정 및 double형 타입 캐스팅)
+			
+			model.addAttribute("expage",expage);
+			model.addAttribute("pagePerRow",pagePerRow);
+			model.addAttribute("paymentcancelcount", paymentcancelcount);
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("lastPage", lastPage);
+			model.addAttribute("paymentcancellist",paymentcancellist);
+			
+			return "/tori/payment/payment_cancel_list";
+			
+		}*/
 		
 		//검색버튼을 클릭한 후 검색화면으로 넘어간다
 		@RequestMapping(value={"/tori/payment/payment_cancel_search_form"}, method = RequestMethod.GET)
