@@ -10,7 +10,6 @@ public class Order {
 	private String table_order_date;
 	private String menu_id;
 	private String menu_name;
-	private String order_detail_end;
 	private String order_detail_ea;
 	private String order_detail_sum;
 	private String menu_price;
@@ -33,17 +32,7 @@ public class Order {
 	private String order_count;
 	private String order_detail_end;
 	
-	
-	
-	
-<<<<<<< HEAD
-	
-	public String getOrder_detail_end() {
-		return order_detail_end;
-	}
-	public void setOrder_detail_end(String order_detail_end) {
-		this.order_detail_end = order_detail_end;
-=======
+
 	public String getOrder_detail_end() {
 		return order_detail_end;
 	}
@@ -55,7 +44,6 @@ public class Order {
 	}
 	public void setOrder_count(String order_count) {
 		this.order_count = order_count;
->>>>>>> branch 'master' of https://github.com/hummingbird26/possys.git
 	}
 	public int getTotal_use() {
 		return total_use;

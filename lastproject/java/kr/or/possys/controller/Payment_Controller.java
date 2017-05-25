@@ -14,9 +14,6 @@ import kr.or.possys.Cancel_Payment_service.Payment_Cancel;
 import kr.or.possys.Cancel_Payment_service.Payment_Cancel_Dao;
 import kr.or.possys.Card_Payment_service.Card_Payment;
 import kr.or.possys.Card_Payment_service.Card_Payment_Dao;
-import kr.or.possys.Member_sevice.Member;
-import kr.or.possys.Order_service.Order;
-import kr.or.possys.Order_service.Order_Detail;
 import kr.or.possys.Payment_service.Payment;
 import kr.or.possys.Payment_service.Payment_Dao;
 
@@ -30,16 +27,7 @@ public class Payment_Controller {
 	@Autowired
 	private Card_Payment_Dao cpdao;
 	//cpdao : 카드결제DAO
-	/*@Autowired
-	private Order_Detail oddao;
-	//oddao : 주문상세DAO
-	@Autowired
-	private Member mdao;
-	//mdao : 회원목록DAO
-	@Autowired
-	private Order odao;
-	//odao : 주문목록DAO
-	*/
+	
 	// view 페이지가 제대로 표시되도록 하기 위해서 다른 컨트롤러의 루트(/) 값을 모두 지우거나 주석처리해놓음
 	
 	//Staff 컨트롤러에서 login 페이지를 메인으로 보내기 위해 주석처리 했다 경로 다르게 잡아서 수정바람
@@ -112,7 +100,7 @@ public class Payment_Controller {
 	@ResponseBody
 	@RequestMapping(value="/tori/payment/ToidCheck")
 	public String checkToid(@RequestParam(value="Toid",required=true) String table_order_id) throws Exception{
-		System.out.println("checkPid");
+		System.out.println("01_0_1 Payment_Controller.java -> checkPid");
 		System.out.println(table_order_id);
 		//String Toid = oddao.getTable_order_id();
 		int Toid = pdao.checkToid(table_order_id);
@@ -132,7 +120,7 @@ public class Payment_Controller {
 	@ResponseBody
 	@RequestMapping(value="/tori/payment/ToMPhoneCheck")
 	public String checkPMPhone(@RequestParam(value="ToMPhone",required=true) String member_phone) throws Exception{
-		System.out.println("checkPMPhone");
+		System.out.println("01_0_2 Payment_Controller.java -> checkPMPhone");
 		System.out.println(member_phone);
 		int ToMPhone = pdao.checkPMPhone(member_phone);
 		String duvalue = null;
@@ -147,6 +135,28 @@ public class Payment_Controller {
 		return duvalue;
 	}
 	
+	//주문가격총합등가져오기
+	@ResponseBody
+	@RequestMapping(value="/tori/payment/bringOrderList")
+	public String bringOrderList(@RequestParam(value="Toid",required=true) String table_order_id) throws Exception{
+		System.out.println("01_0_3 Payment_Controller.java -> bringOrderList");
+		System.out.println(table_order_id);
+		//List<Order> orderList = pdao.bringOrderList(table_order_id);
+		int OrderList = pdao.bringOrderList(table_order_id);
+		//String duvalue = null;
+		System.out.println(OrderList);
+		if(OrderList >= 0){
+			System.out.println("주문별 가격 확인 가능");
+			//duvalue = "Y";
+		}else{
+			System.out.println("주문별 가격 확인 불가");
+			//duvalue = "N";
+		}
+		String temp_OrderList = Integer.toString(OrderList);
+		//정수값을 반환해도 ajax에서 받지 못할 것으로 예상하여 OrderList(결과값이 정수) 변수를 문자열로 형변환시킴
+		
+		return temp_OrderList;
+	}
 	
 	//리스트 입력 폼으로 이동한다
 	@RequestMapping(value="/tori/payment/payment_add_form", method = RequestMethod.GET)
@@ -223,7 +233,7 @@ public class Payment_Controller {
 			@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage,
 			@RequestParam(value="select") String select,
 			@RequestParam(name="keyWord") String keyWord){
-		System.out.println("05 Payment_Controller.java -> paymentSRlist");
+		System.out.println("04_1 Payment_Controller.java -> paymentSRlist");
 		int paymentSRcount = pdao.paymentSRlist(select,keyWord);
 		//int paymentSRcount = pdao.getPaymentCount();
 		int pagePerRow = 10;
@@ -249,7 +259,7 @@ public class Payment_Controller {
 	public String paymentSRlist(Model model,@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage
 			,@RequestParam(value="select") String select
 			,@RequestParam(value="keyWord") String keyWord){
-		System.out.println("06_Payment_Controller.java -> paymentlist");
+		System.out.println("04_2_Payment_Controller.java -> paymentlist");
 		int paymentSRcount = pdao.paymentSRlist(select,keyWord);
 		System.out.println(paymentSRcount);
 		System.out.println("06_1 Payment_Controller.java -> paymentlist");
@@ -278,7 +288,7 @@ public class Payment_Controller {
 	//결제상황을 보고 결제취소버튼을 누를 경우에 실행
 	@RequestMapping(value={"/tori/payment/payment_delete"})
 	public String paymentcanceladd(Payment_Cancel payment_cancel){
-		System.out.println("payment_delete");
+		System.out.println("05 Payment_Controller.java -> payment_delete");
 		
 		String id = payment_cancel.getPayment_cancel_id();
 		System.out.println(id+"<------ 컨트롤러 값 확인 ");
@@ -292,7 +302,7 @@ public class Payment_Controller {
 	//payment_cancel_intro진입
 		@RequestMapping(value={"/tori/payment/payment_cancel_intro"}, method = RequestMethod.GET)
 		public String paymentcancelintro(){
-			System.out.println("payment_cancel_intro");
+			System.out.println("05_1 Payment_Controller.java -> payment_cancel_intro");
 			return "/tori/payment/payment_cancel_intro";
 			//tori_home에서 설정한 경로와 매핑경로값 및 리턴값을 일치하게끔 설정한다.
 			
@@ -300,6 +310,7 @@ public class Payment_Controller {
 	
 	@RequestMapping(value={"/tori/payment/payment_cancel_ACT"},method = RequestMethod.POST)
 	public String paymentdelete(@RequestParam(value="payment_id",required=false) String payment_id){
+		System.out.println("05_2 Payment_Controller.java -> payment_cancel_ACT");
 		pdao.deletePayment(payment_id);
 		return "redirect:/tori/payment/payment_cancel_list";
 		}

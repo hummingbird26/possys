@@ -4,6 +4,11 @@
 
 <mapper namespace="kr.or.possys.Payment_service.Payment_Mapper">
 
+<!-- order_detail테이블의 table_order_id컬럼의 값을 바탕으로 하여 table_order_id별로  order_detail_sum의 그룹별 합계금액을 가져와서 payment_total로 삼는다.-->
+<select parameterType="String" resultType="int" id="bringOrderList">
+SELECT SUM(order_detail_sum) FROM order_detail WHERE table_order_id = #{table_order_id} GROUP BY table_order_id
+</select>
+
 <!-- payment의 member_phone 컬럼의 값에 입력하기 전에 중복검사 -->
 <select parameterType="String" resultType="int" id="checkPMPhone">
 SELECT count(*) FROM member WHERE 1=1 AND member_phone = #{member_phone}
