@@ -6,13 +6,13 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.UUID;
 
-import javax.mail.internet.MimeMessage;
+/*import javax.mail.internet.MimeMessage;*/
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
+/*import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;*/
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,9 +44,9 @@ public class Member_Controller {
 	private Staff_Dao sdao;
 	
 	//e-mail test
-	@Autowired
-	  private JavaMailSender mailSender;
-	
+	/*@Autowired*/
+	  /*private JavaMailSender mailSender;*/
+
 	//테이블 true,false 확인
 	@ResponseBody
 	@RequestMapping(value="/table_state")
@@ -77,7 +77,7 @@ public class Member_Controller {
 	  @RequestMapping(value = "/table")
 	  public String table() {
 	   System.out.println("테이블 배치 화면 이동 메서드 ");
-	    return "/member/main";	    
+	    return "/member/table";	    
 	  } 
 	//테이블 주문 내역 확인
 	  @ResponseBody
@@ -113,11 +113,11 @@ public class Member_Controller {
 	    return "/repw";
 	  }  
 	// 비밀번호 찾기  아이디와  name값 가져오는 ajax통신용
-	  @ResponseBody
+/*	  @ResponseBody
 	  @RequestMapping(value = "/idcheck")
 	  public void mailForm(HttpServletRequest request,HttpServletResponse re) throws IOException {
 		  String checkid = request.getParameter("id");
-		  /*System.out.println(checkid);*/
+		  System.out.println(checkid);
 		 
 		  	re.setCharacterEncoding("UTF-8");
 		  
@@ -125,9 +125,9 @@ public class Member_Controller {
 			JSONArray CheckStaff = null;
 			
 			Staff staff = sdao.loginSelect(checkid);
-			/*if(staff!=null){*/
+			if(staff!=null){
 			
-			/*System.out.println(plist);*/
+			System.out.println(plist);
 			
 			CheckStaff = JSONArray.fromObject(staff);
 			System.out.println(CheckStaff);
@@ -144,14 +144,14 @@ public class Member_Controller {
 	  @RequestMapping(value="/mail/mailSending",method = RequestMethod.POST)
 	  public String mailSending(HttpServletRequest request){
 		  System.out.println("메일보내기");
-		  
-		  
+		  			//입력받은 email 값 id값 각각 변수에 담는다.
+		  			String tomail = request.getParameter("email");
 		  			String checkid = request.getParameter("id");
 		  			System.out.println(checkid);
 		  			Staff staff = sdao.loginSelect(checkid);
 		  			System.out.println(staff+"<---mailSending 메서드 아이디 입력후 리턴값 Member_Controller.java");
-				   /* String tomail  = request.getParameter("tomail"); */    // 받는 사람 이메일
-				    /*String title   = request.getParameter("title");*/// 제목
+				    String tomail  = request.getParameter("tomail");     // 받는 사람 이메일
+				    String title   = request.getParameter("title");// 제목
 					String setfrom = "bsh20057@gmail.com";
 					String title = "possys 비밀번호 재발급 안내입니다.";
 				    String content ="";
@@ -183,7 +183,7 @@ public class Member_Controller {
 				    //신규 비밀번호로 업데이트
 				    sdao.updateStaff(staff);
 				   
-				    /* String content = request.getParameter("content");*/    // 내용
+				     String content = request.getParameter("content");    // 내용
 				    System.out.println("새로운 비밀번호"+newpw);
 				    System.out.println("받는사람 이메일"+tomail);
 				    System.out.println("이메일 제목"+title);
@@ -205,7 +205,7 @@ public class Member_Controller {
 				    }
 					return "redirect:/";
 					
-			}
+			}*/
 
 	  /*}*/
  
@@ -355,7 +355,7 @@ public class Member_Controller {
 		
 		out.flush();
 	}
-	/*알람창 ajax 테스트*/
+/*	알람창 ajax 테스트
 	@RequestMapping(value="/alram_test",method = RequestMethod.GET)
 	@ResponseBody
 	public void am(HttpServletResponse re) throws IOException{
@@ -378,11 +378,11 @@ public class Member_Controller {
 		out.flush();
 	
 	}
-	/*알람창 호출*/
+	알람창 호출
 	@RequestMapping(value="/ho.html")
 	public String alram(){
 		return "t";
-	}
+	}*/
 
 	//실시간 검색 호출
 	@RequestMapping(value="/real_time")

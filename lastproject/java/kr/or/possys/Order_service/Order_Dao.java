@@ -1,15 +1,10 @@
 package kr.or.possys.Order_service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import kr.or.possys.Menu_service.Menu;
-import kr.or.possys.food_service.Food;
 
 @Repository
 public class Order_Dao {

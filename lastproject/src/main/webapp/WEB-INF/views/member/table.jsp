@@ -44,6 +44,7 @@ $(document).ready(function(){
 	var menu_price = new Array();
 	var order_detail_ea = new Array();
 	var order_detail_sum = new Array();
+	var order_detail_end = new Array();
 	var table_order_end = new Array();
 	var table_order_id = new Array();
 	for(var i=1; i<=15; i++){
@@ -130,9 +131,10 @@ $(document).ready(function(){
         		order_detail_sum = [];
         		table_order_end = [];
         		table_order_id = [];
+        		order_detail_end = [];
         		var total = 0;
         	$.each(data,function(){
-        		
+        		order_detail_end.push(this.order_detail_end);
         		menu_name.push(this.menu_name);
         		menu_price.push(this.order_detail_sum/this.order_detail_ea);
         		order_detail_ea.push(this.order_detail_ea)
@@ -150,7 +152,7 @@ $(document).ready(function(){
         			+" * "+order_detail_ea[i]
         			+" \n단품가격 : "+menu_price[i]
         			+" \n수량 합계 : "+order_detail_sum[i]
-        			+" \n주문상태 : "+table_order_end[i]+"\n\n"
+        			+" \n주문상태 : "+order_detail_end[i]+"\n\n"
         			);
         			result2 = result2 + result[i];
         		}
@@ -174,12 +176,10 @@ $(document).ready(function(){
 });  
 </script>
 <meta charset="utf-8">
-<%@ include file="../modal/wide_menu.jsp" %>
+<%-- <%@ include file="../modal/wide_menu.jsp" %> --%>
   </head>
   <body>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
    
-    
     <div class="demo">
       <div class="bg">
      <c:forEach var="d" begin="1" end="15">

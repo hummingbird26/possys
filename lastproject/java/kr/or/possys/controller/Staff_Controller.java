@@ -35,7 +35,8 @@ public class Staff_Controller {
 	public String home2() {
 		System.out.println(" index 화면 실행 확인 Staff_Controller.java");
 		
-		return "index2";
+		/*return "index2";*/
+		return "/test_index/index";
 	}
 	//폼에서 로그인 버튼 눌렀을때 실행
 	//로그인 체크 메서드
