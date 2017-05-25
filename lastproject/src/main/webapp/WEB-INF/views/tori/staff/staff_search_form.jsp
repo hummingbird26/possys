@@ -18,12 +18,12 @@
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <br><br>
 <div class="container">
-	<form id="form" name="form" class="form-inline" action="${pageContext.request.contextPath}/tori/payment/payment_search_list" method="get">
+	<form id="form" name="form" class="form-inline" action="${pageContext.request.contextPath}/tori/staff/staff_search_list" method="get">
 		<select id="select" name="select" class="form-inline" value="선택하세요">
-			<option value="payment_date">날짜별검색</option>
-			<option value="payment_cate">결제유형별검색</option>
-			<option value="payment_id">결제번호별검색</option>
-			<option value="member_phone">회원번호별검색</option>
+			<option value="staff_id">직원아이디</option>
+			<option value="staff_name">직원이름</option>
+			<option value="staff_level">직급</option>
+			<option value="staff_gender">직원성별</option>
 		</select>
 		<input type="text" class="form-inline" name="keyWord" id="keyWord">
 		<input type="submit" class="form-inline btn btn-primary" name="search" id="search">

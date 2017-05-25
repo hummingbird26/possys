@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Spliterator;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -70,12 +71,14 @@ public class Order_Controller{
 		List<Order> list2;
 		List<Order> list3;
 
-		odao.order_end_t(table_order_id);
+		/*odao.order_end_t(table_order_id);*/
 		for(int i = 0; i < list.size(); i++){
-			System.out.println(list.get(i).getMenu_id()+"//"+list.get(i).getOrder_detail_ea());
+			System.out.println(list.get(i).getMenu_id()+"//"+list.get(i).getOrder_detail_ea()+"//"+list.get(i).getOrder_detail_end());
 		}
 
 		for (int i = 0; i < list.size(); i++){
+			if(list.get(i).getOrder_detail_end().equals("F")){
+			odao.order_detail_end_t(list.get(i));
 			list2 = odao.order_fpm(list.get(i).getMenu_id());
 			if(list2.size() != 0){
 				System.out.println("리스트사이즈가 0이 아닙니다.");
@@ -112,6 +115,7 @@ public class Order_Controller{
 						}
 					}
 				}
+			}
 			}
 		}
 		
@@ -155,7 +159,6 @@ public class Order_Controller{
 			order2.setOrder_detail_sum(order_detail_sum[i]);
 			odao.order_detail_modify(order2);
 			System.out.println(order2.getMenu_id()+order2.getTable_order_id());
-
 		}*/
 
 		
@@ -187,10 +190,51 @@ public class Order_Controller{
 		
 	}
 
-	@RequestMapping(value="/order_file", method = RequestMethod.GET)
-	public String order_file(Model model){
+	@RequestMapping(value="/order_form", method = RequestMethod.GET)
+	public String order_form(Model model){
+		System.out.println("카운트실행");
+		Order order_c = odao.order_count();
+		String count = order_c.getOrder_count();
+		int counter = Integer.parseInt(count.substring(1, 5))+1;
+		String result_id = "t"+String.format("%04d", counter);
+		System.out.println(result_id);
+		
+		List<Menu> menu_list = odao.menu_list();
 
-		return "/order/file";
+		model.addAttribute("menu_list", menu_list);
+		
+		
+		
+		
+		
+
+		return "/order/order_form";
+	}
+	
+	@RequestMapping(value="/order_action", method = {RequestMethod.GET,RequestMethod.POST})
+	public String order_action(Order order){
+		
+		if(order.getMenu_id() != null){
+		String [] menu_id = order.getMenu_id().split(",");
+		String [] menu_name = order.getMenu_name().split(",");
+		String [] order_detail_ea = order.getOrder_detail_ea().split(",");
+		String [] order_detail_sum = order.getOrder_detail_sum().split(",");
+		
+		
+		for(int i = 0; i < menu_id.length; i++){
+			Order order2 = new Order();
+			order2.setTable_order_id(order.getTable_order_id());
+			order2.setMenu_id(menu_id[i]);
+			order2.setMenu_name(menu_name[i]);
+			order2.setOrder_detail_ea(order_detail_ea[i]);
+			order2.setOrder_detail_sum(order_detail_sum[i]);
+			odao.order_detail_insert(order2);
+			System.out.println(order2.getMenu_id()+order2.getTable_order_id());
+		}
+		
+		}
+		
+		return "/order/order_action";
 	}
 	
 	@RequestMapping(value="/order_insert", method = RequestMethod.POST)

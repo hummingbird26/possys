@@ -47,7 +47,7 @@
 				<td>${f.food_id}</td>
 				<td>${f.food_name}</td>
 				<td>${f.food_unit}</td>
-				<td><a href="${pageContext.request.contextPath}/menu_per_modify?menu_id=${param.menu_id}&food_id=${f.food_id}"><button>추가</button></a></td>
+				<td><a href="${pageContext.request.contextPath}/menu_per_modify?menu_id=${param.menu_id}&food_id=${f.food_id}"><button>등록</button></a></td>
 			</tr>
 			</c:forEach>
 		</tbody>
@@ -65,8 +65,8 @@
 				<option value="food_id">식재코드</option>
 				<option value="food_name">상품명</option>
 			</select>
-			<input  size="16" name="keyWord" type="text">
-			<input id="fbutton" type="submit" value="검색">
+			<input  size="16" name="keyWord" type="text" placeholder="검색을 해주세요">
+			<input id="fbutton" type="submit" value="검색" >
 		</form>
 			<a href="${pageContext.request.contextPath}/menu_list">메뉴 목록</a>
 			<td><a href="${pageContext.request.contextPath}/food_add_form?menu_id=${m.menu_id}">식자재 입력 </a></td>

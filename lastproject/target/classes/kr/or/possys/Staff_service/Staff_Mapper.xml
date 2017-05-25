@@ -9,6 +9,10 @@
 SELECT COUNT(*) FROM staff WHERE 1=1 AND staff_id = #{staff_id}
 </select>
 
+<select id="staffSRlist" parameterType="java.util.Map" resultType="int">
+	select count(*) from food_manage where ${selbox} like concat('%',#{keyWord},'%')
+</select>
+
 <select id="login" parameterType="String" resultType="kr.or.possys.Staff_service.Staff">
 		select staff_pw
 		,staff_name
@@ -36,9 +40,24 @@ WHERE staff_id= #{staff_id} AND staff_date = #{staff_date}
 DELETE FROM staff WHERE staff_id = #{staff_id} AND staff_pw = #{staff_pw} 
 </delete>
 
-<select id="staffSRlist" parameterType="java.util.Map" resultType="int">
-	select count(*) from food_manage where ${selbox} like concat('%',#{keyWord},'%')
+<!-- 조건별 직원목록 표현 -->
+<select id="staffSRsearch" parameterType="java.util.Map" resultType="kr.or.possys.Staff_service.Staff">
+SELECT
+staff_id,
+staff_name,
+staff_level,
+staff_gender,
+staff_phone,
+staff_date 
+FROM staff 
+WHERE ${select} LIKE CONCAT('%',#{keyWord},'%')
+ORDER BY staff_id DESC 
+LIMIT #{beginRow}, #{pagePerRow}
 </select>
+
+<!-- <select id="staffSRlist" parameterType="java.util.Map" resultType="int">
+	select count(*) from food_manage where ${selbox} like concat('%',#{keyWord},'%')
+</select> -->
 
 
 <select parameterType="String" id="getStaff" resultType="kr.or.possys.Staff_service.Staff"> 

@@ -67,6 +67,7 @@
                 <beans:value>classpath:kr/or/possys/food_service/Food_Mapper.xml</beans:value>
                 <beans:value>classpath:kr/or/possys/drop_food_service/Drop_Mapper.xml</beans:value>
                 <beans:value>classpath:kr/or/possys/ep_order_manage_service/Ep_Manage_Mapper.xml</beans:value>
+                <beans:value>classpath:kr/or/possys/ep_order_food_details_service/Ep_Order_Mapper.xml</beans:value>
                 <!-- 원빈 끝 -->
 
                 <!-- 원빈 끝 -->

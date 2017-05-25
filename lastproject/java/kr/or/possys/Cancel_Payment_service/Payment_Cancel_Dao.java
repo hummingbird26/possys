@@ -18,6 +18,14 @@ public class Payment_Cancel_Dao {
 	
 	// update, delete는 필요시에 구현한다.
 	
+	
+	// payment와 payment_cancel 연결
+			public int PaymentCancel(Payment_Cancel payment_cancel) {
+		    	System.out.println("Payment_Cancel");
+		        return sqlSessionTemplate.insert("kr.or.possys.Cancel_Payment_service.Payment_Cancel_Mapper.PaymentCancel", payment_cancel);
+		    }
+	
+	
 	// payment_cancel 결제취소아이디 중복 체크
 	public int check_pcid(String payment_cancel_id){
 		System.out.println("check_pcid");

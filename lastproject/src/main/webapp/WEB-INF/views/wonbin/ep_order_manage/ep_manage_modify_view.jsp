@@ -9,21 +9,27 @@
 <title>수정 화면</title>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$(document).on('click','#f_del_bt',function(){
-			var re = confirm('정말 삭제 하시겠습니까?');
-			if(re){
-				
-			}else{				
-				return
-			}
-		});
 		$(document).on('click','#all_del',function(){
 			alert('정말 삭제 하시겠습니까?');
 			var re = confirm('업체를 삭제하시면 관련 식재료를 다시 설정해주셔야합니다. 계속 진행하시겠습니까?');
 			if(re){
+// 				alert('true');
+// 				var input = ${'#all_del'}.val();
 				
+				$.ajax({
+					type : "GET",
+					url : "${pageContext.request.contextPath}/ep_manage_delete",
+					data : "ep_id="+$("#all_del").val(),
+					success : function(data){
+						alert('성공');
+						fm_del.submit();
+					},
+					error : function(request,status,error){
+						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);			
+					}						
+				});				
 			}else{				
-				return
+// 				alert("else");
 			}
 		});
 	});//jquery ready
@@ -55,7 +61,7 @@
 					<tr>						
 						<td>${f.food_id}</td>
 						<td>${f.food_name}</td>
-						<td><a href="${pageContext.request.contextPath}/f_del_bt?food_id=${f.food_id}&ep_id=${ep_m.ep_id}"><button type="button" id="f_del_bt">삭제</button></a></td>
+						<td><a href="${pageContext.request.contextPath}/f_del_bt?food_id=${f.food_id}&ep_id=${ep_m.ep_id}"><input type="button" id="f_del_bt" value="삭제"/></a></td>
 					</tr>
 					</c:forEach>
 				</tbody>
@@ -75,10 +81,12 @@
 			<input type="submit" id="addsubmit" value="수정">
 			<input type="reset" id="reset" value="초기화">
 			<a href="${pageContext.request.contextPath}/ep_manage_list"><button type="">취소</button></a>
-			<a href="${pageContext.request.contextPath}/ep_manage_delete?ep_id=${ep_m.ep_id}"><button id="all_del" type="button">삭제</button></a>
 		</div>
 	</form>
-
+	<form id="fm_del" action="${pageContext.request.contextPath}/ep_manage_list"method="GET">
+		<button id="all_del" type="button" name="ep_id" value="${ep_m.ep_id}">전체 삭제</button>
+	</form>
+	<p>?ep_id=${ep_m.ep_id}</p>
 
 
 </body>

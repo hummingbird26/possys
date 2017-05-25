@@ -25,9 +25,6 @@ private SqlSessionTemplate sqlSessionTemplate;
 		
 	public int updateStaff(Staff Staff) {
 		System.out.println("updateStaff");
-
-		
-		
         return sqlSessionTemplate.update("kr.or.possys.Staff_service.Staff_Mapper.updateStaff", Staff);
     }
     
@@ -61,6 +58,40 @@ private SqlSessionTemplate sqlSessionTemplate;
         return sqlSessionTemplate.selectOne("kr.or.possys.Staff_service.Staff_Mapper.getStaffCount");
     }
  
+    //staff 검색수 요청
+    public int staffSRlist(String select, String keyWord){
+    	System.out.println("staffSRlist");
+    	System.out.println(select);
+    	System.out.println(keyWord);
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	map.put("select",select);
+    	map.put("keyWord", keyWord);
+    	return sqlSessionTemplate.selectOne("kr.or.possys.Staff_service.Staff_Mapper.staffSRlist",map);
+    }
+    
+    //staff 검색 요청
+    public List<Staff> staffSRsearch(String select,String keyWord,int currentPage,int pagePerRow){
+    	System.out.println("staffSRsearch");
+    	System.out.println(select);
+    	System.out.println(keyWord);
+    	System.out.println(currentPage);
+    	System.out.println(pagePerRow);
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	
+    	map.put("select", select);
+    	map.put("keyWord", keyWord);
+    	map.put("beginRow", (currentPage-1)*pagePerRow);
+    	map.put("pagePerRow", pagePerRow);
+    	
+    	System.out.println(map.get("select"));
+    	System.out.println(map.get("keyWord"));
+    	System.out.println(map.get("beginRow"));
+    	System.out.println(map.get("pagePerRow"));
+    	
+    	return sqlSessionTemplate.selectList("kr.or.possys.Staff_service.Staff_Mapper.staffSRsearch",map);
+    }
+    
+    //staff 추가
     public int insertStaff(Staff Staff) {
     	System.out.println("insertStaff");
         return sqlSessionTemplate.insert("kr.or.possys.Staff_service.Staff_Mapper.insertStaff", Staff);

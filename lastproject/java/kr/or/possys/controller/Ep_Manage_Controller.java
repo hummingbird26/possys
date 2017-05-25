@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
+import kr.or.possys.ep_order_food_details_service.Ep_Order;
 import kr.or.possys.ep_order_manage_service.Ep_Manage;
 import kr.or.possys.ep_order_manage_service.Ep_Manage_Dao;
 import kr.or.possys.ep_order_manage_service.Ep_Manage_fo_VO;
@@ -30,14 +30,6 @@ public class Ep_Manage_Controller {
 	@Autowired
 	private Ep_Manage_Dao dao;
 	
-	@RequestMapping(value="/f_del_bt", method = RequestMethod.GET)
-	public String f_del_bt(@RequestParam(value="food_id") String food_id
-							,@RequestParam(value="ep_id") String ep_id){
-		System.out.println("Ep_Manage_Controller - f_del_bt() 실행");
-		dao.f_del(food_id);
-		return "redirect:/ep_manage_modify_view?ep_id="+ep_id;
-		//redirect : 컨트롤러 value 
-	}
 	
 	//######체크박스를 이용한  업체등록 폼
 	@RequestMapping(value="/ep_chkbox", method = RequestMethod.POST)
@@ -119,6 +111,7 @@ public class Ep_Manage_Controller {
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPage", lastPage);
 		model.addAttribute("list", list);
+		System.out.println("천재");
 		return "/wonbin/ep_order_manage/ep_manage_list";
 	}
 	// @@@@@@?@@@@@@@ 발주업체 수정화면 요청
@@ -144,12 +137,25 @@ public class Ep_Manage_Controller {
 		return "redirect:/ep_manage_list";
 		
 	}
-	//발주업체 삭제 요청
+	//발주업체 전체 삭제 요청
 	@RequestMapping(value="/ep_manage_delete", method = RequestMethod.GET)
 	public String ep_mdelete(@RequestParam(value="ep_id", required=true) String ep_id){
-		dao.ep_mdelete(ep_id);
+//		System.out.println(ep_id +"<----asd");
+		List<Ep_Order> order = dao.chk_alldel(ep_id);
+		dao.ep_mdelete(ep_id, order);
 		return "redirect:/ep_manage_list";
 	}
+	//업체 상세보기에서 식재료 삭제버튼
+		@RequestMapping(value="/f_del_bt", method = RequestMethod.GET)
+		public String f_del_bt(@RequestParam(value="food_id") String food_id
+								,@RequestParam(value="ep_id") String ep_id){
+			System.out.println("Ep_Manage_Controller - f_del_bt() 실행");
+			Ep_Order oder = dao.chk_del(food_id);
+			dao.f_del(food_id,oder);
+			return "redirect:/ep_manage_modify_view?ep_id="+ep_id;
+			//redirect : 컨트롤러 value 
+		}
+	
 	
 	//발주업체 검색 요청
 //	@RequestMapping(value="/ep_msearch", method = RequestMethod.GET)

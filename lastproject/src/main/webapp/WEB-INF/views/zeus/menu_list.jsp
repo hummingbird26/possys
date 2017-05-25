@@ -24,7 +24,7 @@
 			}
 		});
 		
-		<!-- 카테고리별 버튼 -->
+		
 		$('.catebutton').click(function(){
 			var cls = "."+this.id;
 			alert(cls+"히든");
@@ -45,14 +45,15 @@
 <button class = "catebutton" id = "ham"type = "button">햄버거</button>
 	<table border=1>
 		<thead>
-			<th>메뉴코드</th>
-			<th>메뉴명</th>
-			<th>상품카테고리</th>
-			<th>가격</th>
-			<th>할인여부</th>
-			<th>칼로리</th>
-			<th>수정 </th>
-			<th>식재별 소비 </th>			
+			<th><h3>메뉴코드</h3></th>
+			<th><h3>메뉴명</h3></th>
+			<th><h3>상품카테고리</h3h></th>
+			<th><h3>가격</h3></th>
+			<th><h3>할인여부</h3></th>
+			<th><h3>칼로리</h3></th>
+			<th><h3>수정</h3></th>
+			<th><h3>식재별 소비</h3></th>
+			<th><h3>이미지</h3></th>			
 		</thead>
 		<tbody>
 			<c:forEach varStatus="status" var="m" items="${list}">
@@ -63,8 +64,8 @@
 				<td name = "menu_price" id = "menu_price" class = "${m.menu_id} ${m.menu_cate}">${m.menu_price}</td>
 				<td name = "menu_sprice" id = "menu_sprice" class = "${m.menu_id} ${m.menu_cate}">${m.menu_sprice}</td>
 				<td name = "menu_kcal" id = "menu_kcal" class = "${m.menu_id} ${m.menu_cate}">${m.menu_kcal}</td>
-				<td><a href="${pageContext.request.contextPath}/menu_view?menu_id=${m.menu_id}">수정</a></td>
-				<td><a href="${pageContext.request.contextPath}/menu_per_view?menu_id=${m.menu_id}&menu_name=${m.menu_name}">소비</a></td>
+				<td><a href="${pageContext.request.contextPath}/menu_view?menu_id=${m.menu_id}"><h3>수정</a></td>
+				<td><a href="${pageContext.request.contextPath}/menu_per_view?menu_id=${m.menu_id}&menu_name=${m.menu_name}"><h3>등록</h3></a></td>
 				<!-- 사진 추가부분 -->
 				<td><img src = "${m.newname}" width = "120" height= "120"></td>
 			</tr>
@@ -82,8 +83,8 @@
 	<div>
 		<form id ="frm" name="frm" action="${pageContext.request.contextPath}/menu_search" method="get">
 			<select id="selbox"name="selbox" size="1">
-				<option value="menu_id">메뉴코드</option>
-				<option value="menu_name">메뉴명</option>
+				<option value="menu_id"><h3>메뉴코드</h3></option>
+				<option value="menu_name"><h3>메뉴명</h3></option>
 			</select>
 			<input  size="16" name="keyWord" type="text">
 			<input id="fbutton" type="submit" value="검색">
@@ -91,7 +92,7 @@
 	</div>
 	
 	<div>
-		<a href="${pageContext.request.contextPath}/menu_add_form"><button>메뉴 추가</button></a>
+		<a href="${pageContext.request.contextPath}/menu_add_form"><button><h3>메뉴 추가</h3></button></a>
 	</div>
 	
 </body>
