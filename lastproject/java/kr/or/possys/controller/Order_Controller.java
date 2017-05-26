@@ -135,6 +135,7 @@ public class Order_Controller{
 		String [] menu_name = order.getMenu_name().split(",");
 		String [] order_detail_ea = order.getOrder_detail_ea().split(",");
 		String [] order_detail_sum = order.getOrder_detail_sum().split(",");
+		String [] order_detail_end = order.getOrder_detail_end().split(",");
 		
 		
 		for(int i = 0; i < menu_id.length; i++){
@@ -144,6 +145,7 @@ public class Order_Controller{
 			order2.setMenu_name(menu_name[i]);
 			order2.setOrder_detail_ea(order_detail_ea[i]);
 			order2.setOrder_detail_sum(order_detail_sum[i]);
+			order2.setOrder_detail_end(order_detail_end[i]);
 			odao.order_detail_insert(order2);
 			System.out.println(order2.getMenu_id()+order2.getTable_order_id());
 		}
@@ -200,7 +202,7 @@ public class Order_Controller{
 		System.out.println(result_id);
 		
 		List<Menu> menu_list = odao.menu_list();
-
+		model.addAttribute("result_id",result_id);
 		model.addAttribute("menu_list", menu_list);
 		
 		
@@ -224,12 +226,13 @@ public class Order_Controller{
 		for(int i = 0; i < menu_id.length; i++){
 			Order order2 = new Order();
 			order2.setTable_order_id(order.getTable_order_id());
+			order2.setResult_id(order.getResult_id());
 			order2.setMenu_id(menu_id[i]);
 			order2.setMenu_name(menu_name[i]);
 			order2.setOrder_detail_ea(order_detail_ea[i]);
 			order2.setOrder_detail_sum(order_detail_sum[i]);
-			odao.order_detail_insert(order2);
-			System.out.println(order2.getMenu_id()+order2.getTable_order_id());
+			/*odao.order_detail_insert(order2);*/
+			System.out.println(order2.getMenu_id());
 		}
 		
 		}

@@ -98,8 +98,8 @@
 <br/><br/><br/>
 
 
-<form id="addform" action="${pageContext.request.contextPath}/order_modify_action" method="post">
-
+<form id="addform" action="${pageContext.request.contextPath}/order_action" method="post">
+		<input name = "result_id" id = "result_id" class = "${result_id}" type = "text" value = "${result_id}" hidden="hidden"/>
 		<div id = "menu_frame">
 	<c:forEach var="f" items="${order_list}">
 		<div class = "${f.menu_id}"> 

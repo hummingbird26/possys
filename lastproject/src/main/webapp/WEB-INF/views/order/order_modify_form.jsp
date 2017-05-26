@@ -29,6 +29,8 @@
 					+"class ='"+menu_id+"' type ='text' value='"+menu_price+"'readonly='readonly'/> "
 					+"개별가격 : <input name ='menu_price' id ='menu_price'"
 					+"class ='"+menu_id+"' type ='text' value='"+menu_price+"'readonly='readonly'/> "
+					+"상태 : <input name = 'order_detail_end' id = 'order_detail_end'"
+					+"class = '"+menu_id+"' type = 'text' value = 'F' /> "
 					+"<button  type='button' id = '"+menu_id+"' class = 'delbutton'>삭제</button> "
 					+"<button  type='button' id = '"+menu_id+"' class = 'plusbutton'>+</button> "
 					+"<button  type='button' id = '"+menu_id+"' class = 'minusbutton'>-</button></div> "

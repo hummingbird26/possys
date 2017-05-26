@@ -90,7 +90,7 @@ $(document).ready(function(){
          				 if(t_num[i]==db_num[j]){
          					
 							
-								test1  = test1+ menu_name[j]+"수량"+order_detail_ea[j]+"가격"+order_detail_sum[j]
+								test1  = test1+ menu_name[j]+" * "+order_detail_ea[j]+"<br/>"
              				console.log(cls);
          					$(cls).html("<font><b>사용중인 테이블</b></font>"+"<br/><br/>"+test1)
          					$(cls).attr('style','background-color:red');
