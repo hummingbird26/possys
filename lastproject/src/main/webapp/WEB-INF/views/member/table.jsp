@@ -134,6 +134,7 @@ $(document).ready(function(){
 
          				 if(t_num[i]==db_num[j]){
          					
+<<<<<<< HEAD
 /*          					$('#table_move').click(function(){
          							
          						$(cls).remove();
@@ -144,6 +145,10 @@ $(document).ready(function(){
          					 	var test2 =table_order_id[j]; 
 								test1  = test1+menu_name[j]+" "+"*"+" "+order_detail_ea[j]+"<br>"
 								
+=======
+							
+								test1  = test1+ menu_name[j]+" * "+order_detail_ea[j]+"<br/>"
+>>>>>>> branch 'master' of https://github.com/hummingbird26/possys.git
              				console.log(cls);
          					$(cls).html("<font><b>사용중인 테이블</b></font>"+"<br/><br/>"+test1+"<br/><button class='table_move' value='"+test2+"'>자리이동</button>")
          					$(cls).attr('style','background-color:red');

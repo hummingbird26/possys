@@ -69,13 +69,15 @@
 		menu_id,
 		menu_name,
 		order_detail_ea,
-		order_detail_sum)
+		order_detail_sum,
+		order_detail_end)
 		values (
 		#{table_order_id},
 		#{menu_id},
 		#{menu_name},
 		#{order_detail_ea},
-		#{order_detail_sum}
+		#{order_detail_sum},
+		#{order_detail_end}
 		)
 		
 		</insert>
@@ -138,6 +140,6 @@
 		
 		<select id="order_count" resultType="kr.or.possys.Order_service.Order">
 			select max(table_order_id) as order_count
-			from order_detail
+			from table_order
 		</select>
 </mapper>

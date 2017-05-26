@@ -8,7 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kr.or.possys.Cancel_Payment_service.Payment_Cancel;
+import kr.or.possys.Order_service.Order;
 
 @Repository
 public class Payment_Dao {
@@ -20,6 +20,18 @@ public class Payment_Dao {
         return sqlSessionTemplate.update("kr.or.possys.Payment_service.Payment_Mapper.updatePayment", payment_id);
     }*/
     
+	public int bringOrderList(String table_order_id){
+		System.out.println("bringOrderList");
+		System.out.println(table_order_id);
+		Map<String, Object> map = new HashMap<String, Object>();
+		Order order = new Order();
+		System.out.println(map);
+		System.out.println(order);
+    	map.put("table_order_id", table_order_id);
+    	System.out.println(map);
+		return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.bringOrderList",table_order_id);
+	}
+	
 	//결제목록삭제기능
     public int deletePayment(String payment_id) {
         Payment Payment = new Payment();
