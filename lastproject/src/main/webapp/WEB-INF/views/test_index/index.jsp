@@ -47,7 +47,7 @@
                         <p class="animated fadeInDown"><span class="fa  fa-map-marker"></span> Batavia,Indonesia</p>
 
                         <ul class="nav navbar-nav">
-                            <li><a href="" >홍경인</a></li>
+                            <li><a href="${pageContext.request.contextPath}/test_index/table_state" >테이블 현황</a></li>
                             <li><a href="" class="active">오광진</a></li>
                             <li><a href="">배상훈</a></li>
                             <li><a href="">최홍락</a></li>
