@@ -38,13 +38,13 @@
 	 <beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         
-   		<beans:property name="url" value="jdbc:mysql://umj64-005.cafe24.com:3306/art9000?useUnicode=true&amp;characterEncoding=euckr"/>
+   		 <beans:property name="url" value="jdbc:mysql://umj64-005.cafe24.com:3306/art9000?useUnicode=true&amp;characterEncoding=euckr"/>
         <beans:property name="username" value="art9000"/>
-        <beans:property name="password" value="tkdgns12"/> 
+        <beans:property name="password" value="tkdgns12"/>
         <!-- 배포할때  사용 -->
-       <!--  <beans:property name="url" value="jdbc:mysql://localhost:3306/art9000?useUnicode=true&amp;characterEncoding=euckr"/>
+      <!--  <beans:property name="url" value="jdbc:mysql://localhost:3306/art9000?useUnicode=true&amp;characterEncoding=euckr"/>
         <beans:property name="username" value="art9000"/>
-        <beans:property name="password" value="tkdgns12"/> -->
+        <beans:property name="password" value="tkdgns12"/> --> 
     
         
                 <!-- <beans:property name="url" value="jdbc:mysql://umj64-006.cafe24.com:3306/hummingbird26?useUnicode=true&amp;characterEncoding=euckr"/>
@@ -153,7 +153,7 @@
 		</interceptors>
 			<!-- email-test -->
 			<!-- mail bean -->
-	<!--  <beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	 <beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 	  <beans:property name="host" value="smtp.gmail.com"/>
 	  <beans:property name="port" value="587"/>
 	  <beans:property name="username" value="bsh20057@gmail.com"/>
@@ -163,11 +163,11 @@
 	   	<beans:prop key="mail.transport.protocol">smtp</beans:prop>
 	    <beans:prop key="mail.smtp.auth">true</beans:prop>
 	    <beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
-	    <beans:prop key="mail.smtp.timeout">8500</beans:prop> mail 서버 연결시 timeout 시간 설정
-	    <beans:prop key="mail.debug">true</beans:prop> log를 보고 싶다면 사용
+	    <beans:prop key="mail.smtp.timeout">8500</beans:prop> <!-- mail 서버 연결시 timeout 시간 설정 -->
+	    <beans:prop key="mail.debug">true</beans:prop> <!-- log를 보고 싶다면 사용 -->
 	   </beans:props>
 	  </beans:property>
 	 </beans:bean>
- -->
+
 
 </beans:beans>

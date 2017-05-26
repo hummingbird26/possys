@@ -10,7 +10,7 @@
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Miminium</title>
+  <title>종합 매출현황</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/bootstrap.min.css">
@@ -348,13 +348,8 @@ $(document).ready(function(){
                  <div class="col-md-6">
                     <div class="col-md-12">
                       <div class="panel chart-title">
-                        <h3><span class="fa fa-pie-chart"></span> Morris Js</h3>
-                      	<select id="pbtn">
-						<option value="null">선택하세요</option>
-						<option value="%Y-%m-%d">일자별 조회</option>
-						<option value="%Y-%m">월별 조회</option>
-						<option value="%Y">연도별 조회</option>
-						</select>
+                        <h3><span class="fa fa-pie-chart"></span> 종합 매출현황</h3>
+                     
                       </div>
                      <!--   <div class="panel">
                            <div class="panel-heading panel-heading-white text-center">
@@ -363,23 +358,52 @@ $(document).ready(function(){
                             <div class="panel-body">
                                <div id="doughnut-chart"></div>
                             </div>
+					        </div>   -->
+
+                 
+                    </div>
+                     
+                     <!--   <div class="panel">
+                           <div class="panel-heading panel-heading-white text-center">
+                             <h4>Doughnut Chart</h4>
+                            </div>
+                            <div class="panel-body">
+                               <div id="doughnut-chart"></div>
+                            </div>
                       </div>   -->
+                       <div class="col-md-12">
+	                      <div class="col-md-12">
+	                        <div class="panel">
+	                             <div class="panel-heading panel-heading-white text-center">
+	                                <h4>Line Chart</h4>
+	                              </div>
+	                              <div class="panel-body">                              
+	                                  <div id="container" style="width:100%; height:100%;"></div>
+	                                  <!-- <div id="line-chart"></div> -->
+	                              </div>
+	                        </div>
+	                    </div>
+	                    
                     </div>
                     <div class="col-md-12">
-                          <div class="panel">
+<!--                           <div class="panel">
                              <div class="panel-heading panel-heading-white text-center">
                               <h4>Area Chart</h4>
                               </div>
                               <div class="panel-body">
-                                  <!-- <div id="area-chart"></div> -->
+                                  <div id="area-chart"></div>
                                   <div id="C_container" style="width:100%; height:100%;"></div>
                                   
                                   
                               </div>
-                        </div>
+                        </div> -->
+                    
+                    
                     </div>
                  </div>
                  <div class="col-md-6">
+         
+         
           <!--  <div class="col-md-12">
                         <div class="panel" style="padding:15px;">
                              <div class="panel-heading panel-heading-white text-center">
@@ -390,17 +414,36 @@ $(document).ready(function(){
                               </div>
                         </div> 
                     </div> -->
-                    <div class="col-md-12">
+                    
+<!--                     <div class="col-md-12">
                         <div class="panel">
                              <div class="panel-heading panel-heading-white text-center">
                                 <h4>Line Chart</h4>
                               </div>
                               <div class="panel-body">                              
                                   <div id="container" style="width:100%; height:100%;"></div>
-                                  <!-- <div id="line-chart"></div> -->
+                                  <div id="line-chart"></div>
                               </div>
                         </div>
-                    </div>
+                    </div> -->
+                 <div class="panel chart-title">
+                        
+                      	<select id="pbtn">
+						<option value="null">선택하세요</option>
+						<option value="%Y-%m-%d">일자별 조회</option>
+						<option value="%Y-%m">월별 조회</option>
+						<option value="%Y">연도별 조회</option>
+						</select>
+                      </div>
+                                         <div class="panel">
+                             <div class="panel-heading panel-heading-white text-center">
+                              <h4>Area Chart</h4>
+                              </div>
+                              <div class="panel-body">
+                                  <!-- <div id="area-chart"></div> -->
+                                  <div id="C_container" style="width:100%; height:100%;"></div>           
+                              </div>
+                        </div>
                  </div>
               </div>
             </div>
