@@ -43,9 +43,9 @@ $(document).ready(function(){
 		}else if($('#payment_cancel_date').val()==''){
 			alert('거래취소날짜는 언제인지 입력해주세요.');
       $('#payment_cancel_date').focus();
-		}else if($('#payment_cancel_cate').val()==''){
+		}else if($('#payment_cate').val()==''){
 			alert('거래취소구분은 어떠한지 입력해주세요.');
-      $('#payment_cancel_cate').focus();
+      $('#payment_cate').focus();
 		}else {
 			$('#paymentCancelForm').submit();
 		}
@@ -161,7 +161,7 @@ function insertCancelChk(){
 				<tr>
 					<td>구분 : 
 					</td>
-					<td><input type="text" class="form-control" name="payment_cancel_cate" id="payment_cancel_cate" size="auto">
+					<td><input type="text" class="form-control" name="payment_cate" id="payment_cate" size="auto">
 					</td>
 				</tr>
 				</table>

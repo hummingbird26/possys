@@ -10,7 +10,6 @@ public class Order {
 	private String table_order_date;
 	private String menu_id;
 	private String menu_name;
-	
 	private String order_detail_ea;
 	private String order_detail_sum;
 	private String menu_price;
@@ -31,11 +30,20 @@ public class Order {
 	private int food_sum;
 	
 	private String order_count;
+
+	private String result_id;
 	private String order_detail_end;
 	
 	
-	
-	
+
+	public String getResult_id() {
+		return result_id;
+	}
+	public void setResult_id(String result_id) {
+		this.result_id = result_id;
+	}
+
+
 	public String getOrder_detail_end() {
 		return order_detail_end;
 	}
@@ -46,7 +54,9 @@ public class Order {
 		return order_count;
 	}
 	public void setOrder_count(String order_count) {
+
 		this.order_count = order_count;
+
 	}
 	public int getTotal_use() {
 		return total_use;

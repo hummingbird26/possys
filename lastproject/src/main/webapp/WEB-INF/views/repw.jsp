@@ -116,23 +116,214 @@ $(document).ready(function(){
  });					
 
 </script>
+<style>
+* { box-sizing:border-box; }
+
+/* basic stylings ------------------------------------------ */
+body 		
+.container 		{ 
+  font-family:'Roboto';
+  width:600px; 
+  margin:30px auto 0; 
+  display:block; 
+  background:#FFF;
+  padding:10px 50px 50px;
+}
+h2 		 { 
+  text-align:center; 
+  margin-bottom:50px; 
+}
+h2 small { 
+  font-weight:normal; 
+  color:#888; 
+  display:block; 
+}
+.footer 	{ text-align:center; }
+.footer a  { color:#53B2C8; }
+
+/* form starting stylings ------------------------------- */
+.group 			  { 
+  position:relative; 
+  margin-bottom:45px; 
+}
+input 				{
+  font-size:18px;
+  padding:10px 10px 10px 5px;
+  display:block;
+  width:300px;
+  border:none;
+  border-bottom:1px solid #757575;
+}
+input:focus 		{ outline:none; }
+
+/* LABEL ======================================= */
+label 				 {
+  color:#999; 
+  font-size:18px;
+  font-weight:normal;
+  position:absolute;
+  pointer-events:none;
+  left:5px;
+  top:0px;
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
+}
+
+/* active state */
+input:focus ~ label, input:valid ~ label 		{
+  top:-20px;
+  font-size:14px;
+  color:#5264AE;
+}
+
+/* BOTTOM BARS ================================= */
+.bar 	{ position:relative; display:block; width:300px; }
+.bar:before, .bar:after 	{
+  content:'';
+  height:2px; 
+  width:0;
+  bottom:1px; 
+  position:absolute;
+  background:#5264AE; 
+  transition:0.2s ease all; 
+  -moz-transition:0.2s ease all; 
+  -webkit-transition:0.2s ease all;
+}
+.bar:before {
+  left:50%;
+}
+.bar:after {
+  right:50%; 
+}
+
+/* active state */
+input:focus ~ .bar:before, input:focus ~ .bar:after {
+  width:50%;
+}
+
+/* HIGHLIGHTER ================================== */
+.highlight {
+  position:absolute;
+  height:60%; 
+  width:100px; 
+  top:25%; 
+  left:0;
+  pointer-events:none;
+  opacity:0.5;
+}
+
+/* active state */
+input:focus ~ .highlight {
+  -webkit-animation:inputHighlighter 0.3s ease;
+  -moz-animation:inputHighlighter 0.3s ease;
+  animation:inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+@-moz-keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+@keyframes inputHighlighter {
+	from { background:#5264AE; }
+  to 	{ width:0; background:transparent; }
+}
+body {
+    background-image: url(http://p1.pichost.me/i/11/1344899.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+   font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -86px;
+    margin-left: -89px;
+    text-align: center;
+}
+
+a {
+    -webkit-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    -moz-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    -ms-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    -o-transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    transition: all 200ms cubic-bezier(0.390, 0.500, 0.150, 1.360);
+    display: block;
+    margin: 20px auto;
+    max-width: 180px;
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 20px 30px;
+}
+
+.repw_btn {
+    color: rgba(30, 22, 54, 0.6);
+    box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
+}
+
+.repw_btn:hover {
+    color: rgba(255, 255, 255, 0.85);
+    box-shadow: rgba(30, 22, 54, 0.7) 0 0px 0px 40px inset;
+}
+
+.repw_btn2 {
+    color: rgba(30, 22, 54, 0.6);
+    box-shadow: rgba(30, 22, 54, 0.4) 0 0px 0px 2px inset;
+}
+
+.repw_btn2:hover {
+    color: rgba(255, 255, 255, 0.85);
+    box-shadow: rgba(30, 22, 54, 0.7) 0 80px 0px 2px inset;
+}
+</style>
 </head>
 <body>
 <div class="container">
 <form action="${pageContext.request.contextPath}/mail/mailSending" id="frm"  method="post">
-<div align="center"><!-- 기존 아이디 -->
-
-      <input type="text" id="id" name="id" size="120" style="width:100%" placeholder="아이디를 입력 해주세요" class="form-control" ><input type="button" id="checkbtn" value="아이디확인" >
+	 <div class="group" id="idre" style="display:none;"></div>
+	<div class="group" align="center"><!-- 기존 아이디 -->	
+     <input type="text" id="id" name="id" size="40" style="width:auto" placeholder="아이디를 입력 해주세요" class="form-control" >
+      <span class="highlight"></span>
+      <span class="bar"></span>
     </div>
-    <div id="idre" style="display:none;"></div>      
-    <div align="center"><!--이 름 -->
-      <input type="text" id="name" name="name" size="120" style="width:100%" placeholder="이름을 입력 해주세요" class="form-control" ><input type="button" id="checkname" value="이름확인" disabled="disabled">
+    <div class="group" align="center">
+    <!--  <input type="button" id="checkbtn" class="repw_btn" value="아이디확인" > -->
+  <a id="checkbtn" class="repw_btn">아이디확인</a>
     </div>
-    <div id="namere" style="display:none;"></div> 
-    <div align="center">
-      <input type="button" id ="rebtn" value="비밀번호 재발급 신청"  disabled="disabled" class="btn btn-warning">
+    <div class="group" id="idre" style="display:none;"></div>      
+    <div class="group" align="center"><!--이 름 -->
+      <input type="text" id="name" name="name" size="40" style="width:auto" placeholder="이름을 입력 해주세요" class="form-control" > 
+      <span class="highlight"></span>
+      <span class="bar"></span>
+   </div>
+    <div class="group" align="center">
+    <a  id="checkname" class="repw_btn" disabled="disabled">이름확인 </a>
+      <!-- <input type="button" id="checkname" class="repw_btn" value="이름확인" disabled="disabled"> -->
+	</div>
+    
+    <div class="group" id="namere" style="display:none;"></div> 
+    
+   	<div class="group" align="center"><!--email -->
+      <input type="text" id="email" name="email" size="40" style="width:auto" placeholder="비밀번호를 발급 받으실 email을 입력 해주세요" class="form-control" >
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      
+      
     </div>
-   
+    
+    <div class="group" align="center">
+      <a class="repw_btn2" disabled="disabled" id ="rebtn" >비밀번호 재발급 신청</a>
+      <!-- <input type="button" id ="rebtn" value="비밀번호 재발급 신청"  disabled="disabled" class="repw_btn2"> -->
+    </div>
 </form>
 </div>
 </body>

@@ -38,9 +38,15 @@
 	 <beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         
-        <beans:property name="url" value="jdbc:mysql://umj64-005.cafe24.com:3306/art9000?useUnicode=true&amp;characterEncoding=euckr"/>
+   		 <beans:property name="url" value="jdbc:mysql://umj64-005.cafe24.com:3306/art9000?useUnicode=true&amp;characterEncoding=euckr"/>
         <beans:property name="username" value="art9000"/>
         <beans:property name="password" value="tkdgns12"/>
+        <!-- 배포할때  사용 -->
+      <!--  <beans:property name="url" value="jdbc:mysql://localhost:3306/art9000?useUnicode=true&amp;characterEncoding=euckr"/>
+        <beans:property name="username" value="art9000"/>
+        <beans:property name="password" value="tkdgns12"/> --> 
+    
+        
                 <!-- <beans:property name="url" value="jdbc:mysql://umj64-006.cafe24.com:3306/hummingbird26?useUnicode=true&amp;characterEncoding=euckr"/>
         <beans:property name="username" value="hummingbird26"/>
         <beans:property name="password" value="ruddls12!@"/> -->

@@ -3,6 +3,26 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.possys.Member_sevice.Member_Mapper">
+<update id="table_move" parameterType="java.util.HashMap">
+update table_order set table_order.table_order_num=#{table_num} 
+where table_order.table_order_id=#{table_order_id}
+</update>
+
+
+<select id="today_total" resultType="int">
+select sum(payment_pay) as payment_pay 
+from payment 
+where payment.payment_state='정상' 
+and payment.payment_date=curdate();
+</select>
+
+<!-- 사용중인 테이블수 확인 하는 쿼리 -->
+<select id="f_table_count" resultType="int">
+select count(*)as count 
+from table_order 
+where table_order.table_order_end='f'
+
+</select>
 <!-- 테이블 상태 확인 -->
 <select id="table_state" resultType="kr.or.possys.Order_service.Order">
 select 

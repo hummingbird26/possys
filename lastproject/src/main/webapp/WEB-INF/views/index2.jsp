@@ -185,7 +185,8 @@ height:200px;
 							<!-- 회원 리스트 링크 -->
                         	<li class="item-thumbs span3 member">
                             	<!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                            	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="member_list" href="${pageContext.request.contextPath}/member_list">
+                            	<%-- <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="member_list" href="${pageContext.request.contextPath}/member_list"> --%>
+                            	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="member_list" href="${pageContext.request.contextPath}/test_index/index">
                                 	<span class="overlay-img">member_List</span>
                                     <span class="overlay-img-thumb font-icon-plus"></span>
                                 </a>

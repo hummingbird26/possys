@@ -4,6 +4,53 @@
 
 <mapper namespace="kr.or.possys.Payment_service.Payment_Mapper">
 
+<!-- order_detail테이블의 table_order_id컬럼의 값을 바탕으로 하여 table_order_id별로  order_detail_sum의 그룹별 합계금액을 가져와서 payment_total로 삼는다.-->
+<select parameterType="String" resultType="int" id="bringOrderList">
+SELECT SUM(order_detail_sum) FROM order_detail WHERE table_order_id = #{table_order_id} GROUP BY table_order_id
+</select>
+
+<!-- payment의 member_phone 컬럼의 값에 입력하기 전에 중복검사 -->
+<select parameterType="String" resultType="int" id="checkPMPhone">
+SELECT count(*) FROM member WHERE 1=1 AND member_phone = #{member_phone}
+</select>
+
+<!-- payment의 table_order_id 컬럼의 값에 입력하기 전에 중복검사 -->
+<select parameterType="String" resultType="int" id="checkToid">
+SELECT count(*) FROM order_detail WHERE 1=1 AND table_order_id = #{table_order_id}
+</select>
+
+<!-- 결제취소테이블에 결제취소로 분류된 결제내역을 추가해주고, 기존의 결제내역은 지운다 -->
+<delete parameterType="kr.or.possys.Payment_service.Payment" id="deletePayment"> 
+DELETE FROM payment WHERE payment_id = #{payment_id} 
+</delete>
+
+ <!--  payment와 payment_check를 연결한다(payment의 결제상태가 결제취소이면 payment_cancel에 한 행씩 입력되도록 하는 내용 -->
+<insert parameterType="kr.or.possys.Payment_service.Payment" id="PaymentCancel">
+INSERT INTO payment_cancel(payment_cancel_id
+, payment_id
+  , table_order_id
+  , member_phone
+  , payment_cancel_total
+  , payment_cancel_pay
+  , payment_cancel_backmileage
+  , payment_cancel_returnmileage
+  , payment_cancel_date
+  , payment_cancel_cate)
+  
+  SELECT
+ concat('ABS',(select date_format(sysdate(),'%y%m%d%s')))
+  , payment_id
+  , table_order_id
+  , member_phone
+  , payment_total
+  , payment_pay
+  , payment_addmileage
+  , payment_usemileage
+  , payment_date
+  , payment_cate
+  FROM payment WHERE #{payment_state}='취소' AND payment_id=#{payment_id};
+</insert>
+
 <!-- payment 중복 체크 쿼리 만듦 -->
 <select id="check_pid" parameterType = "String" resultType="int">
 SELECT count(*) FROM payment WHERE 1=1 AND payment_id = #{payment_id}
@@ -12,9 +59,6 @@ SELECT count(*) FROM payment WHERE 1=1 AND payment_id = #{payment_id}
 <update parameterType="kr.or.possys.Payment_service.Payment" id="updatePayment"> 
 UPDATE payment SET payment_id = #{payment_id} , table_order_id = #{table_order_ID} 
 WHERE payment_id = #{payment_id}</update>
-
-<delete parameterType="kr.or.possys.Payment_service.Payment" id="deletePayment"> 
-DELETE FROM payment WHERE payment_id = #{payment_id} </delete>
 
 <select id="paymentSRsearch" parameterType="java.util.Map" resultType="kr.or.possys.Payment_service.Payment">
 SELECT
@@ -62,7 +106,7 @@ SELECT COUNT(*) FROM payment
 <!-- 결제목록 입력 -->
  <insert parameterType="kr.or.possys.Payment_service.Payment" id="insertPayment">
 <!-- <insert id="kr.or.possys.Payment_service.Payment" parameterType="insertPayment">  -->
- INSERT INTO payment(payment_id
+INSERT IGNORE INTO payment(payment_id
  , table_order_id 
  , member_phone
  , payment_total
@@ -73,16 +117,65 @@ SELECT COUNT(*) FROM payment
  , payment_cate
  , payment_state) 
  
- VALUES( #{payment_id} 
- , #{table_order_id} 
- , #{member_phone} 
- , #{payment_total} 
- , #{payment_pay} 
+ SELECT 
+ concat('bo',(select date_format(sysdate(),'%y%m%d%s')))
+ , order_detail.table_order_id
+ , member.member_phone
+ , order_detail.order_detail_sum
+ , #{payment_pay}
+ , order_detail.order_detail_sum*0.1
+ , #{payment_usemileage}
+ , sysdate()
+ , #{payment_cate}
+ , '정상'
+ FROM table_order, member, order_detail
+ 
+ <!-- INSERT INTO payment(payment_id
+ , table_order_id 
+ , member_phone
+ , payment_total
+ , payment_pay
+ , payment_addmileage
+ , payment_usemileage
+ , payment_date
+ , payment_cate
+ , payment_state) 
+ 
+ VALUES(#{payment_id}
+ , #{table_order_id}
+ , #{member_phone}
+ , #{payment_total}
+ , #{payment_pay}
  , #{payment_addmileage}
  , #{payment_usemileage}
  , #{payment_date}
  , #{payment_cate}
- , #{payment_state}) 
+ , #{payment_state}) -->
+ 
+ 
+<!--  INSERT IGNORE INTO payment(payment_id
+ , table_order_id 
+ , member_phone
+ , payment_total
+ , payment_pay
+ , payment_addmileage
+ , payment_usemileage
+ , payment_date
+ , payment_cate
+ , payment_state) 
+ 
+ SELECT payment_id
+ , table_order_id
+ , member_phone 
+ , payment_total
+ , payment_pay 
+ , payment_addmileage
+ , payment_usemileage
+ , payment_date
+ , payment_cate
+ , payment_state
+ FROM payment WHERE NOT EXISTS(SELECT payment_state FROM payment WHERE #{payment_state} = '취소')
+ --> 
  </insert>
 
 </mapper>
