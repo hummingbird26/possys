@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>수정 화면</title>
-<%@ include file="../../modal/wide_menu.jsp" %>
+<%-- <%@ include file="../../modal/wide_menu.jsp" %> --%>
 </head>
 
 <body>

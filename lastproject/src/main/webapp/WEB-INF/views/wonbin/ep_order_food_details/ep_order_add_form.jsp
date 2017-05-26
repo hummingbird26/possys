@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
+<html>    				<!-- 미사용 -->
+<head> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>발주 현황 및 식재현황 상세 관리</title>
 </head>
-<%@ include file="../../modal/wide_menu.jsp" %>
+<%-- <%@ include file="../../modal/wide_menu.jsp" %> --%>
 <body>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <h1>발주 현황 및 식재현황 상세 관리</h1>

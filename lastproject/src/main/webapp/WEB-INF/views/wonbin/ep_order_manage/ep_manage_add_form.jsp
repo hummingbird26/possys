@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>발주 업체 관리</title>
-<%@ include file="../../modal/wide_menu.jsp" %>
+<%-- <%@ include file="../../modal/wide_menu.jsp" %> --%>
 <script type="text/javascript">
 	$(document).ready(function(){
 			//실행시키면 ep_id div 태그를 displat:none 시켜라
@@ -51,9 +51,9 @@
 // 			alert(sel2);				
 			if(chg_data == "선택"){
 				//select 가 선택으로 되있으면 ep_id div 태그를 displat:none 시켜라
-				$('#ep_id_div').css("display","none");				
-// 				alert("선택이다");
-				$('.sel_view').val(''); // sel_view 클래스명을 가진 value 값을 공백으로
+				$('#ep_id_div').css("display","none");
+				// 				alert("선택이다");
+				$('.sel_view').val(''); // sel_view 클래스명을 가진 value 값을 공백으로 // 선택시 업체코드 value ""; 로 만듬
 				$('input[name=ep_name]').attr('readonly',false); // readonly를 false 로
 				$('input[name=ep_phone]').attr('readonly',false);
 				$('input[name=ep_director]').attr('readonly',false);
@@ -62,7 +62,7 @@
 			}else{
 				//select 가 다른 업체명으로 선택 되었으면 ep_id div 태그를 displat:block 시켜라
 				$('#ep_id_div').css("display","block");
-// 				alert("선택이아니다")
+				// 				alert("선택이아니다")
 				$('input[name=ep_name]').attr('readonly',true); // readonly를 true 로
 				$('input[name=ep_phone]').attr('readonly',true);
 				$('input[name=ep_director]').attr('readonly',true);
@@ -131,7 +131,7 @@
 	<form id="addform" action="${pageContext.request.contextPath}/ep_manage_add_form" method="post">
 		
 		<div id="ep_id_div">업체코드 :
-			 <input name="ep_id" id="ep_id" type="text" readonly="readonly"/>
+			 <input class="sel_view" name="ep_id" id="ep_id" type="text" readonly="readonly"/>
 		</div>
 		
 		<div>추가 식재 품목</div> 
@@ -166,7 +166,7 @@
 			<option>선택</option>
 			<c:forEach var="sel" items="${sel_list}">
 			<option value="${sel.ep_id}">${sel.ep_name}</option>
-			</c:forEach>
+			</c:forEach>			
 		</select>
 		</div>
 		<div>연락처 : <input class="sel_view" name ="ep_phone" id ="ep_phone" type ="text" value="${ep_m.ep_phone}"/></div>

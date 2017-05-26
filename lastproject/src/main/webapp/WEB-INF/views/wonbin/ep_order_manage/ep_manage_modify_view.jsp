@@ -36,7 +36,7 @@
 
 
 </script>
-<%@ include file="../../modal/wide_menu.jsp" %>
+<%-- <%@ include file="../../modal/wide_menu.jsp" %> --%>
 
 </head>
 <body>
@@ -86,7 +86,7 @@
 	<form id="fm_del" action="${pageContext.request.contextPath}/ep_manage_list"method="GET">
 		<button id="all_del" type="button" name="ep_id" value="${ep_m.ep_id}">전체 삭제</button>
 	</form>
-	<p>?ep_id=${ep_m.ep_id}</p>
+	
 
 
 </body>
