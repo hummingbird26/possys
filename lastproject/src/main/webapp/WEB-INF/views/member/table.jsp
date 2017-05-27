@@ -32,7 +32,7 @@ $(document).ready(function(){
 		
 		var table_order_id =  $(this).val();
 		
-		alert(table_order_id);
+		/* alert(table_order_id); */
  		 
 		
 		
@@ -45,7 +45,7 @@ $(document).ready(function(){
 	
 		$('.t1').click(function(){
 			var table_num = $(this).attr("value");
-			alert(table_num);
+			/* alert(table_num); */
 			
 				var result = confirm('테이블을 변경 하시겠습니까?');
 				if(result){
