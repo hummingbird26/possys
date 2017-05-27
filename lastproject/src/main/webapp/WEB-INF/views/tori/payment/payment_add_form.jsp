@@ -231,6 +231,15 @@ function insertChk(){
  <%@ include file="../../modal/wide_menu.jsp" %>
 </head>
 <body>
+
+
+<!-- 부모창에서 보내온 값을 받아서 table_order_id 아이디에 vlaue 값으로 사용한다. --> 
+<script>
+window.onload = function(){
+var x = opener.document.getElementById('table_order_id').value;
+document.getElementById('table_order_id').value = x;
+};
+</script>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <div class="container">
 <!-- form action에도 입력폼 및 리스트로 가는 것을 작성하지 않고 다른 경로를 작성해본다. 그리고  컨트롤러, 리스트, 매퍼, DTO, DAO, 및 입력 폼의 name속성의 값들을 전부  DB내의 컬럼명으로 통일해서 작성한다-->

@@ -155,7 +155,7 @@ $(document).ready(function(){
 
                             <div class="col-md-12 padding-0">
                               <div class="panel box-v3">
-  
+  								<p>하단</p>
                                 <div class="panel-body">
                                     
                                   

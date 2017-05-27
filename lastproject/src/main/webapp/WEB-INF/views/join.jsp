@@ -43,11 +43,11 @@
 		});
 	
 		/* 팝업창이나 띄우자 */
-		
+		/* 
 		function open_win(){
 			window.open('popup.html','popup','width=300,height=200,left=0,top=0,toolbar=no,locaton=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no');
 			
-		}
+		} */
 	</script>	
 
 </head>
