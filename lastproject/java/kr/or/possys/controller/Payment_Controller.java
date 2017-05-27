@@ -158,6 +158,29 @@ public class Payment_Controller {
 		return temp_OrderList;
 	}
 	
+	//마일리지총합가져오기
+		@ResponseBody
+		@RequestMapping(value="/tori/payment/bringMemberList")
+		public String bringMemberList(@RequestParam(value="Toid",required=true) String member_phone) throws Exception{
+			System.out.println("01_0_4 Payment_Controller.java -> bringMemberList");
+			System.out.println(member_phone);
+			//List<Order> orderList = pdao.bringOrderList(table_order_id);
+			int MemberList = pdao.bringMemberList(member_phone);
+			//String duvalue = null;
+			System.out.println(MemberList);
+			if(MemberList >= 0){
+				System.out.println("마일리지 가져오기 가능");
+				//duvalue = "Y";
+			}else{
+				System.out.println("마일리지 가져오기 불가");
+				//duvalue = "N";
+			}
+			String temp_MemberList = Integer.toString(MemberList);
+			//정수값을 반환해도 ajax에서 받지 못할 것으로 예상하여 OrderList(결과값이 정수) 변수를 문자열로 형변환시킴
+			
+			return temp_MemberList;
+		}
+	
 	//리스트 입력 폼으로 이동한다
 	@RequestMapping(value="/tori/payment/payment_add_form", method = RequestMethod.GET)
 	public String paymentadd(){
@@ -285,33 +308,64 @@ public class Payment_Controller {
 		
 	}
 	
-	//결제상황을 보고 결제취소버튼을 누를 경우에 실행
+	/*//결제상황을 보고 결제취소버튼을 누른 경우에 실행1
 	@RequestMapping(value={"/tori/payment/payment_delete"})
-	public String paymentcanceladd(Payment_Cancel payment_cancel){
+	public String getpayment(Model model , @RequestParam(value="payment_id",required=true) String payment_id){
+		System.out.println("05_pre Payment_Controller.java -> getpayment");
+		Payment payment = pdao.getPayment(payment_id);
+		System.out.println(payment);
+		model.addAttribute("payment",payment);
+		return "/tori/payment/payment_delete";
+		
+	}*/
+	
+	
+	//결제상황을 보고 결제취소버튼을 누를 경우에 실행2
+	@RequestMapping(value={"/tori/payment/payment_delete"})
+	public String paymentcanceladd(Model model,@RequestParam(value="payment_id",required=true) String payment_id){
 		System.out.println("05 Payment_Controller.java -> payment_delete");
-		
-		String id = payment_cancel.getPayment_cancel_id();
-		System.out.println(id+"<------ 컨트롤러 값 확인 ");
-		
-		
-		pcdao.insertPaymentCancel(payment_cancel);
-		return "redirect:/tori/payment/payment_cancel_intro";
+		System.out.println(payment_id);
+		//String id = payment.getPayment_id();
+		Payment payment = pdao.getPayment(payment_id);
+		//System.out.println(id+"<------ 컨트롤러 값 확인 ");
+		//pcdao.insertPaymentCancel(payment_cancel);
+		model.addAttribute("payment",payment);
+		System.out.println(payment);
+		//pdao.insertPaymentCancel(payment);
+		return "/tori/payment/payment_cancel_intro";
 		
 	}
 	
 	//payment_cancel_intro진입
-		@RequestMapping(value={"/tori/payment/payment_cancel_intro"}, method = RequestMethod.GET)
-		public String paymentcancelintro(){
+		@RequestMapping(value={"/tori/payment/payment_cancel_intro"},method = RequestMethod.GET)
+		public String paymentcancelintro(Model model,@RequestParam(value="payment_id") String payment_id){
 			System.out.println("05_1 Payment_Controller.java -> payment_cancel_intro");
+			System.out.println(payment_id);
+			System.out.println(model);
+			Payment payment = pdao.getPayment(payment_id);
+			model.addAttribute("payment",payment);
+			model.addAttribute("payment_id",payment_id);
+			//pdao.insertPaymentCancel(payment_id);
+			System.out.println(payment);
+			System.out.println(model);
+			
 			return "/tori/payment/payment_cancel_intro";
 			//tori_home에서 설정한 경로와 매핑경로값 및 리턴값을 일치하게끔 설정한다.
 			
 		}
 	
 	@RequestMapping(value={"/tori/payment/payment_cancel_ACT"},method = RequestMethod.POST)
-	public String paymentdelete(@RequestParam(value="payment_id",required=false) String payment_id){
+	public String paymentdelete(Model model,@RequestParam(value="payment_id") String payment_id){
 		System.out.println("05_2 Payment_Controller.java -> payment_cancel_ACT");
+		System.out.println(payment_id);
+		System.out.println(model);
+		Payment payment = pdao.getPayment(payment_id);
+		model.addAttribute("payment",payment);
+		model.addAttribute("payment_id",payment_id);
+		pdao.insertPaymentCancel(payment_id);
 		pdao.deletePayment(payment_id);
+		System.out.println(payment);
+		System.out.println(model);
 		return "redirect:/tori/payment/payment_cancel_list";
 		}
 	
