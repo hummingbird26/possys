@@ -40,6 +40,8 @@
 <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+	//지정한 시간마다 실행시킨다.
+playAlert = setInterval(function() {
 	var table_count = new Array();
 	console.log(table_count+"<<ajax 외부 table_count값");
 	$.ajax({
@@ -83,6 +85,7 @@ $(document).ready(function(){
 		}
 	});
 	console.log(table_count+"<<ajax 외부 table_count값");
+}, 600); 	
 });
 
 </script>

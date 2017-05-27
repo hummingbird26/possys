@@ -166,8 +166,8 @@ $(document).ready(function(){
          					});
 						
          					 	var test2 =table_order_id[j]; 
-								test1  = test1+menu_name[j]+" "+"*"+" "+order_detail_ea[j]+"<br>"
-								
+								/* test1  = test1+menu_name[j]+" "+"*"+" "+order_detail_ea[j]+"<br>"
+								 */
 					
 								test1  = test1+ menu_name[j]+" * "+order_detail_ea[j]+"<br/>"
 
