@@ -62,7 +62,7 @@ public class Staff_Controller {
 							request.getSession().setAttribute("admin", map);
 							
 							System.out.println(" 로그인 정보 일치 관리자화면 이동 Staff_Controller.java");
-							returnURL = "redirect:/test_index/index"; // 일치하면 관리자 화면으로 이동
+							returnURL = "redirect:/home"; // 일치하면 관리자 화면으로 이동
 						//권한별 화면 출력 권한이 매니저일때
 							}
 							
@@ -74,7 +74,7 @@ public class Staff_Controller {
 							request.getSession().setAttribute("Staff", map);
 							
 							System.out.println(" 로그인 정보 일치 스탭화면 이동 Staff_Controller.java");
-							returnURL = "redirect:/home"; // 일치하면 스탭 화면으로 이동
+							returnURL = "redirect:/Staff"; // 일치하면 스탭 화면으로 이동
 				
 						}
 				}else{
@@ -114,12 +114,14 @@ public class Staff_Controller {
 		return "home";
 	}*/
 	
+	// 직원추가 폼으로 진입
 	@RequestMapping(value="/tori/staff/staff_add_form", method = RequestMethod.GET)
 	public String staffadd(){
 		System.out.println("01 Staff_Controller.java -> staffadd");
 		return "/tori/staff/staff_add_form";
 	}
 	
+	// 직원추가 액션 진입
 	@RequestMapping(value="/tori/staff/staff_add_action", method = RequestMethod.POST)
 	public String staffadd(Staff Staff){
 		System.out.println("01_1 Staff_Controller.java -> paymentadd");
@@ -131,6 +133,7 @@ public class Staff_Controller {
 		return "redirect:/tori/staff/staff_list";
 	}
 	
+	// 직원 목록 보기 페이지 진입
 	@RequestMapping(value={"/tori/staff/staff_list"}, method = RequestMethod.GET)
 	public String stafflist(Model model, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage){
 		System.out.println("02_Staff_Controller.java -> stafflist");

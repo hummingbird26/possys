@@ -33,7 +33,7 @@ INSERT IGNORE INTO payment_cancel(payment_cancel_id
   
   SELECT
  concat('ABS',(select date_format(sysdate(),'%y%m%d%s')))
-  , payment_id
+  ,payment_id
   , table_order_id
   , member_phone
   , payment_total
@@ -67,7 +67,7 @@ INSERT IGNORE INTO payment_cancel(payment_cancel_id
  	, payment_cancel_pay
  	, payment_cancel_total
  	, payment_cancel_date
- 	, payment_cancel_cate
+ 	, payment_cate
 	FROM payment_cancel
 	WHERE ${select} LIKE CONCAT('%',#{keyWord},'%')
 	ORDER BY payment_cancel_id DESC 
@@ -81,7 +81,7 @@ INSERT IGNORE INTO payment_cancel(payment_cancel_id
  	, payment_cancel_pay
  	, payment_cancel_total
  	, payment_cancel_date
- 	, payment_cancel_cate
+ 	, payment_cate
  	 FROM payment_cancel ORDER BY payment_cancel_id DESC LIMIT #{beginRow} , #{pagePerRow}; 
   </select>
   

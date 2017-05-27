@@ -91,6 +91,7 @@ public class Payment_Cancel_Dao {
     }
  
     public int insertPaymentCancel(Payment_Cancel payment_cancel) {
+    	System.out.println(payment_cancel);
     	System.out.println("insertPaymentCancel");
         return sqlSessionTemplate.insert("kr.or.possys.Cancel_Payment_service.Payment_Cancel_Mapper.insertPaymentCancel", payment_cancel);
     }
