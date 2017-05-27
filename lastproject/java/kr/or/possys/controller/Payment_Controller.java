@@ -337,14 +337,14 @@ public class Payment_Controller {
 	}
 	
 	//payment_cancel_introÁøÀÔ
-		@RequestMapping(value={"/tori/payment/payment_cancel_intro"},method = RequestMethod.GET)
-		public String paymentcancelintro(Model model,@RequestParam(value="payment_id") String payment_id){
+		@RequestMapping(value={"/tori/payment/payment_cancel_intro"})
+		public String paymentcancelintro(Model model,@RequestParam(value="payment_id", required=true) String payment_id){
 			System.out.println("05_1 Payment_Controller.java -> payment_cancel_intro");
 			System.out.println(payment_id);
 			System.out.println(model);
 			Payment payment = pdao.getPayment(payment_id);
 			model.addAttribute("payment",payment);
-			model.addAttribute("payment_id",payment_id);
+			//model.addAttribute("payment_id",payment_id);
 			//pdao.insertPaymentCancel(payment_id);
 			System.out.println(payment);
 			System.out.println(model);
@@ -355,17 +355,21 @@ public class Payment_Controller {
 		}
 	
 	@RequestMapping(value={"/tori/payment/payment_cancel_ACT"},method = RequestMethod.POST)
-	public String paymentdelete(Model model,@RequestParam(value="payment_id") String payment_id){
+	public String paymentdelete(@RequestParam(value="payment_id") String payment_id){
 		System.out.println("05_2 Payment_Controller.java -> payment_cancel_ACT");
-		System.out.println(payment_id);
-		System.out.println(model);
-		Payment payment = pdao.getPayment(payment_id);
-		model.addAttribute("payment",payment);
-		model.addAttribute("payment_id",payment_id);
+		/*System.out.println(payment_id);
+		System.out.println(model);*/
+		
+		//Payment payment = new Payment();
+		
+		/*String payment_id = payment.getPayment_id();*/
+		System.out.println(payment_id+"<<<<<<<");
+		/*model.addAttribute("payment_cancel",payment_cancel);
+		model.addAttribute("payment_id",payment_id);*/
 		pdao.insertPaymentCancel(payment_id);
 		pdao.deletePayment(payment_id);
-		System.out.println(payment);
-		System.out.println(model);
+		
+		/*System.out.println(model);*/
 		return "redirect:/tori/payment/payment_cancel_list";
 		}
 	

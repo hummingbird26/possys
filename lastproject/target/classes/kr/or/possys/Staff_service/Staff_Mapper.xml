@@ -19,6 +19,7 @@ SELECT COUNT(*) FROM staff WHERE 1=1 AND staff_id = #{staff_id}
 		,staff_level
 		,staff_id 
 		,staff_date
+		,staff_email
 		from staff 
 		where staff_id=#{staff_id}
 </select>

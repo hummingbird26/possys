@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.possys.Cancel_Payment_service.Payment_Cancel;
 import kr.or.possys.Member_sevice.Member;
 import kr.or.possys.Order_service.Order;
 
@@ -25,8 +26,12 @@ public class Payment_Dao {
 	public int insertPaymentCancel(String payment_id){
 		System.out.println("insertPaymentCancel");
 		System.out.println(payment_id);
-		return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.insertPaymentCancel",payment_id);
+		Map<String, Object> map = new HashMap<String, Object>();
 		
+		map.put("payment_id", payment_id);
+		System.out.println(map);
+		
+		return sqlSessionTemplate.insert("kr.or.possys.Payment_service.Payment_Mapper.insertPaymentCancel",map);		
 	}
 	
 	//총결제금액정보 가져오기
