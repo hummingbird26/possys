@@ -4,6 +4,34 @@
 
 <mapper namespace="kr.or.possys.Payment_service.Payment_Mapper">
 
+<!-- <select parameterType="String" resultType="int" id="getToid">
+SELECT table_order_id FROM order_detail WHERE table_order_id = #{table_order_id}
+</select> -->
+
+<!-- 주문목로페이지에서 주문번호를 클릭하는 경우 주문번호 결과를 내장한 채로 결제입력페이지로 이동하는 역할을 하는 쿼리 -->
+<select parameterType="String" resultType="String" id="bringToid">
+SELECT table_order_id FROM order_detail WHERE table_order_id = #{table_order_id} limit 1
+</select>
+
+<!-- 결제처리가 진행된 후에 회원정보테이블의 회원이 보유하고 있는 포인트를 비교하여 결제중에 적립예정? 마일리지가 확인되는 경우 해당분만큼 회원포인트에 가산해주는 내용 -->
+<update parameterType="java.util.Map" id="addMileage">
+<!-- UPDATE member,payment SET member.member_point = member.member_point + payment.payment_addmileage WHERE payment.member_phone = #{member_phone} AND member.member_phone = #{member_phone} AND payment.payment_id = #{payment_id} -->
+UPDATE member,payment SET member.member_point = member.member_point + payment.payment_addmileage WHERE payment.member_phone = #{member_phone} AND member.member_phone = #{member_phone} AND payment.table_order_id = #{table_order_id}
+</update>
+
+<!-- 결제처리가 진행된 후에 회원정보테이블의 회원이 보유하고 있는 포인트를 비교하여 결제중에 사용한 마일리지가 확인되는 경우 사용한 만큼 회원포인트에서 차감한다 -->
+<update parameterType="java.util.Map" id="subtractMileage">
+<!-- UPDATE member SET member_point = member_point - #{payment_usemileage} WHERE member_phone = #{member_phone} -->
+<!-- UPDATE member,payment SET member.member_point = member.member_point - payment.payment_usemileage WHERE payment.member_phone = #{member_phone} AND member.member_phone = #{member_phone} AND payment.payment_id = #{payment_id} -->
+UPDATE member,payment SET member.member_point = member.member_point - payment.payment_usemileage WHERE payment.member_phone = #{member_phone} AND member.member_phone = #{member_phone} AND payment.table_order_id = #{table_order_id}
+</update>
+
+<!-- 결제처리가 진행된 후에 주문상세테이블과 결제테이블의 테이블주문번호컬럼을 서로 비교해서 같은 값이 있으면 주문상세테이블의 order_detail_end테이블의 결과상태를 결제완료(T)로 바꿔주는 것 -->
+<update parameterType="String" id="updatePayment">
+UPDATE order_detail SET order_detail_end = 'T' WHERE table_order_id = #{table_order_id}
+<!-- UPDATE order_detail, table_order SET order_detail.order_detail_end = 'T' AND table_order.table_order_end = 'T' WHERE table_order_id = #{table_order_id} -->
+</update>
+
 <!-- member테이블의 member_phone컬럼의 값을 바탕으로 하여 member_phone별로  member_point그룹별 합계값을 가져와서 payment_maxusemileage로삼는다.-->
 <select parameterType="String" resultType="int" id="bringMemberList">
 SELECT SUM(member_point) FROM member WHERE member_phone = #{member_phone} GROUP BY member_phone
@@ -55,7 +83,7 @@ INSERT INTO payment_cancel(payment_cancel_id
   , payment_usemileage
   , payment_date
   , payment_cate
-  FROM payment WHERE payment_id = #{payment_id} AND payment_state = '취소'
+  FROM payment WHERE payment_id = #{payment_id}
   
  <!--  INSERT INTO payment_cancel(payment_cancel_id
 , payment_id
@@ -87,9 +115,9 @@ INSERT INTO payment_cancel(payment_cancel_id
 SELECT count(*) FROM payment WHERE 1=1 AND payment_id = #{payment_id}
 </select>
 
-<update parameterType="kr.or.possys.Payment_service.Payment" id="updatePayment"> 
+<!-- <update parameterType="kr.or.possys.Payment_service.Payment" id="updatePayment"> 
 UPDATE payment SET payment_id = #{payment_id} , table_order_id = #{table_order_ID} 
-WHERE payment_id = #{payment_id}</update>
+WHERE payment_id = #{payment_id}</update> -->
 
 <select id="paymentSRsearch" parameterType="java.util.Map" resultType="kr.or.possys.Payment_service.Payment">
 SELECT

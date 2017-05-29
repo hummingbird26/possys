@@ -22,6 +22,21 @@ public class Payment_Dao {
         return sqlSessionTemplate.update("kr.or.possys.Payment_service.Payment_Mapper.updatePayment", payment_id);
     }*/
     
+	public int getToid(String table_order_id){
+		System.out.println("insertPayment_bringToid");
+		System.out.println(table_order_id);
+		
+		return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.checkToid", table_order_id);
+	}
+	
+	//주문상세목록페이지에서 결제페이지로 테이블주문번호의 값을 가지고 넘어오게 하는 역할을 한다.
+	public String getTableorderid(String table_order_id){
+		System.out.println("Payment_getTableorderid");
+		System.out.println(table_order_id);
+		
+		return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.bringToid", table_order_id);
+	}
+	
 	//payment_cancel테이블과 payment테이블 연결
 	public int insertPaymentCancel(String payment_id){
 		System.out.println("insertPaymentCancel");
@@ -99,6 +114,61 @@ public class Payment_Dao {
 			
 			return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.checkPMPhone", member_phone);
 		}
+	
+	//Payment 업데이트(결제완료처리진행중에 결제확인여부(order_detail_end) F->T 교대
+	public int updatePayment(String table_order_id){
+		System.out.println("updatePayment");
+		System.out.println(table_order_id);
+		return sqlSessionTemplate.update("kr.or.possys.Payment_service.Payment_Mapper.updatePayment",table_order_id);
+	}
+	
+	//결제완료처리후에 회원보유마일리지를 마일리지 사용한 만큼 차감해주는 역할
+	/*public int subtractMileage(String member_phone){
+		System.out.println("subtractMileage");
+		System.out.println(member_phone);
+		Payment payment = new Payment();
+		String payment_id = payment.getPayment_id();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("member_phone", member_phone);
+		map.put("payment_id", payment_id);
+		System.out.println(map);
+		return sqlSessionTemplate.update("kr.or.possys.Payment_service.Payment_Mapper.subtractMileage",map);
+	}*/
+	
+	public int subtractMileage(Payment payment){
+		System.out.println("subtractMileage");
+		System.out.println(payment);
+		String table_order_id = payment.getTable_order_id();
+		String member_phone = payment.getMember_phone();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("table_order_id", table_order_id);
+		map.put("member_phone", member_phone);
+		System.out.println(map);
+		return sqlSessionTemplate.update("kr.or.possys.Payment_service.Payment_Mapper.subtractMileage",map);
+	}
+	
+	//결제완료처리후에 적립한마일리지를 적립분만큼 가산해주는 역할
+	/*public int addMileage(String member_phone){
+		System.out.println("addMileage");
+		System.out.println(member_phone);
+		
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("member_phone", member_phone);
+		System.out.println(map);
+		return sqlSessionTemplate.update("kr.or.possys.Payment_service.Payment_Mapper.subtractMileage",map);
+	}*/
+	
+	public int addMileage(Payment payment){
+		System.out.println("addMileage");
+		System.out.println(payment);
+		String table_order_id = payment.getTable_order_id();
+		String member_phone = payment.getMember_phone();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("table_order_id", table_order_id);
+		map.put("member_phone", member_phone);
+		System.out.println(map);
+		return sqlSessionTemplate.update("kr.or.possys.Payment_service.Payment_Mapper.addMileage",map);
+	}
 	
     //payment 검색 수 요청
     public int paymentSRlist(String select, String keyWord){
