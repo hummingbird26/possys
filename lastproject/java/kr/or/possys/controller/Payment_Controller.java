@@ -14,8 +14,6 @@ import kr.or.possys.Cancel_Payment_service.Payment_Cancel;
 import kr.or.possys.Cancel_Payment_service.Payment_Cancel_Dao;
 import kr.or.possys.Card_Payment_service.Card_Payment;
 import kr.or.possys.Card_Payment_service.Card_Payment_Dao;
-import kr.or.possys.Order_service.Order;
-import kr.or.possys.Order_service.Order_Dao;
 import kr.or.possys.Payment_service.Payment;
 import kr.or.possys.Payment_service.Payment_Dao;
 
@@ -29,9 +27,6 @@ public class Payment_Controller {
 	@Autowired
 	private Card_Payment_Dao cpdao;
 	//cpdao : 카드결제DAO
-	@Autowired
-	private Order_Dao odao;
-	//odao : 결제DAO
 	
 	// view 페이지가 제대로 표시되도록 하기 위해서 다른 컨트롤러의 루트(/) 값을 모두 지우거나 주석처리해놓음
 	
@@ -187,50 +182,34 @@ public class Payment_Controller {
 		}
 	
 	//리스트 입력 폼으로 이동한다
-	/*@RequestMapping(value="/tori/payment/payment_add_form", method = RequestMethod.GET)
+	@RequestMapping(value="/tori/payment/payment_add_form", method = RequestMethod.GET)
 	public String paymentadd(){
 		System.out.println("01 Payment_Controller.java -> paymentadd");
 		return "/tori/payment/payment_add_form";
 		//tori_home에서 설정한 경로와 매핑경로값 및 리턴값을 일치하게끔 설정한다.
 		
-	}*/
+	}
 	
-		@RequestMapping(value="/tori/payment/payment_add_form", method = RequestMethod.GET)
-		public String paymentadd(Model model,@RequestParam(value="table_order_id",required=true) String table_order_id) throws Exception{
-			System.out.println("01 Payment_Controller.java -> paymentadd");
-			System.out.println(table_order_id);
-			//Order order = new Order();
-			//order.getTable_order_id();
-			String Toid = pdao.getTableorderid(table_order_id);
-			System.out.println(Toid);
-			model.addAttribute("table_order_id", table_order_id);
-			//model.addAttribute("order",order);
-			System.out.println(model);
-			return "/tori/payment/payment_add_form";
-			//tori_home에서 설정한 경로와 매핑경로값 및 리턴값을 일치하게끔 설정한다.
-			
-		}	
-		
-		
+
+	
 	//입력 요청 : 액션으로 이동한다
 	@RequestMapping(value="/tori/payment/payment_add_action", method = RequestMethod.POST)
-	public String paymentadd(Payment Payment){
+	public String paymentadd(Payment Payment
+			,@RequestParam(value="table_order_id")String table_order_id
+			,@RequestParam(value="member_phone")String member_phone){
 		System.out.println("01_1 Payment_Controller.java -> paymentadd");
 		
-		String id = Payment.getPayment_id(); //이 단계에서부터 id값이 null이 아니라 실제 생성된 아이디가 받아와져야 한다. 대안을 생각해본다
-		String Toid = Payment.getTable_order_id();
-		String MPhone = Payment.getMember_phone();
+		System.out.println(table_order_id +"table_order_id 값 payment_add_action 메서드 실행 Payment_Controller.java");
+		System.out.println(member_phone +"member_phone 값 payment_add_action 메서드 실행 Payment_Controller.java");
+		
+		
+		String id = Payment.getPayment_id();
 		System.out.println(id+"<------ 컨트롤러 값 확인 ");
-		System.out.println(Toid + "<---- 테이블주문번호 값 확인");
-		System.out.println(MPhone + "<---- 회원전화번호 값 확인");
 		
 		pdao.insertPayment(Payment);
-		pdao.updatePayment(Toid);
-		//pdao.subtractMileage(MPhone);
-		//pdao.addMileage(MPhone);
-		pdao.subtractMileage(Payment);
-		pdao.addMileage(Payment);
-		return "redirect:/tori/payment/payment_list";
+		/*return "redirect:/tori/payment/payment_list";*/
+		return "redirect:/receipt?member_phone="+member_phone+"&table_order_id="+table_order_id;
+		
 		
 	}
 	
