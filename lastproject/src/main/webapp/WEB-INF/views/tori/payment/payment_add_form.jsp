@@ -19,7 +19,94 @@
 <title>Payment_ADD</title>
 
 <script>
+
+/* window.onload(){
+	
+	 // 테이블주문번호를 통해서 총결제금액 값을 가져오고, 마일리지를 산출하여 텍스트박스에 그 결과값을 표시해주는 스크립트
+	 function bringOrderList(){
+		 console.log("bringOrderList");
+		 var OrderList = $("#table_order_id").val();
+		 var values;
+		 
+		 $.ajax({
+				type:'POST',
+				data:"Toid="+$("#table_order_id").val(),
+				contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+				dataType:'text',
+				url:'${pageContext.request.contextPath}/tori/payment/bringOrderList',
+				success : function(data){
+					alert("성공");
+					var chkRst = data;
+					//values = data.OrderList;
+					if(chkRst>="0"){
+						alert("가격 산정 완료");
+						console.log(data);			// data값이 잘 받아와졌는지 확인테스트
+						//console.log(values);
+						data = Number(data);		// data타입은 문자열인데 이것을 정수로 형변환
+						var mileage = data*0.01;	
+						console.log(data);			// 형변환 잘 되었는지 출력
+						console.log(mileage);
+						document.getElementById('payment_total').value = data;			// 자바스크립트 코드를 이용하여 id값이 payment_total인 요소의 값을 data변수의 값으로 설정해준다.
+						document.getElementById('payment_maxaddmileage').value = mileage;
+						//document.getElementById('payment_maxusemileage').value = usemileage;
+					}else{
+						alert("가격 산정 불가");
+						console.log(data);
+						//console.log(values);
+					}
+				},
+				error : function(request,status,error){
+					
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					alert("실패 : 해당 주문번호가 존재하지 아니함");
+					//document.getElementById('notexistid').value="주문번호가 존재하지 않네요!";
+				}
+			});
+	 }
+	 
+	// 회원전화번호를 통해서 회원전화번호 탐색 및 회원의 총 가용 마일리지를 구해준 후에, 그것을 해당 아이디값을 가지는 텍스트박스에 넣어준다.
+	function bringMemberList(){
+		console.log("bringMemberList");
+		var MemberList = $("#member_phone").val();
+		
+		 $.ajax({
+				type:'POST',
+				data:"Toid="+$("#member_phone").val(),
+				contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+				dataType:'text',
+				url:'${pageContext.request.contextPath}/tori/payment/bringMemberList',
+				success : function(data){
+					alert("성공");
+					var chkRst = data;
+					
+					if(chkRst>="0"){
+						alert("마일리지 가져오기 완료");
+						console.log(data);			// data값이 잘 받아와졌는지 확인테스트
+					
+						data = Number(data);		// data타입은 문자열인데 이것을 정수로 형변환
+						
+						console.log(data);			// 형변환 잘 되었는지 출력
+					
+						document.getElementById('payment_maxusemileage').value = data;	// 자바스크립트 코드를 이용하여 id값이 payment_maxusemileage인 요소의 값을 data변수의 값으로 설정해준다.
+					}else{
+						alert("마일리지 가져오기 불가");
+						console.log(data);
+						//console.log(values);
+					}
+				},
+				error : function(request,status,error){
+					
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					alert("실패 : 폰번호 존재하지 않음");
+					//document.getElementById('notexistphone').value = "폰번호가 존재하지 않습니다!";
+				}
+			});
+	}
+	
+} */
+
 $(document).ready(function(){
+	
 	$('#paymentAdd').click(function(){
 		/* if($('#payment_id').val().length<4){
 			alert('아이디를 4글자 이상 입력하시오.');
@@ -59,8 +146,6 @@ $(document).ready(function(){
 			$('#paymentForm').submit();
 		}
 	});
-
-
 });
 
 /* function chkDupId(){
@@ -178,7 +263,7 @@ function insertChk(){
 		});
 }  */
  
- // 테이블주문번호를 통해서 총결제금액 값을 가져오고, 마일리지를 산출하여 텍스트박스에 그 결과값을 표시해주는 스크립트
+  // 테이블주문번호를 통해서 총결제금액 값을 가져오고, 마일리지를 산출하여 텍스트박스에 그 결과값을 표시해주는 스크립트
  function bringOrderList(){
 	 console.log("bringOrderList");
 	 var OrderList = $("#table_order_id").val();
@@ -271,15 +356,6 @@ function bringMemberList(){
 		paymentForm.action="${pageContext.request.contextPath}/tori/payment/payment_add_action";
 	} paymentForm.submit();
 } */
-
-//팝업창에서 값 받아오기
-window.onload = function(){
-	
-	 var x = opener.document.getElementById('table_order_id').value;
-	
-	document.getElementById('table_order_id').value = x;
-	};
-
 </script>
  <%@ include file="../../modal/wide_menu.jsp" %>
 </head>
@@ -300,21 +376,21 @@ window.onload = function(){
 		</tr> -->
 		<tr>
 		<td>테이블사용코드</td>
-		<td><input class="form-control" size="auto" id="table_order_id" name="table_order_id" type="text"></td>
+		<td><input class="form-control" size="auto" id="table_order_id" name="table_order_id" type="text" value="${table_order_id}" onclick="javascript:bringOrderList();"></td>
 		<td>
 		<!-- <p id="notexistid"></p> -->
 		<!-- <input type="button" class="btn btn-primary form-control" name="ToidCheck" value="체크" size="auto" onclick="javascript:toidCheck();"> -->
-		<input type="button" class="btn btn-primary form-control" name="BringOrderList" value="가져오기" size="auto" onclick="javascript:bringOrderList();">
+		<!-- <input type="button" class="btn btn-primary form-control" name="BringOrderList" value="가져오기" size="auto" onclick="javascript:bringOrderList();"> -->
 		</td>
 		<!-- JAVASCRIPT 함수의 처음 글자를 대문자로 해도 함수로 인식하지 않을 수 있음 -->
 		</tr>
 		<tr>
 		<td>전화번호</td>
-		<td><input class="form-control" size="auto" id="member_phone" name="member_phone" type="tel"></td>
+		<td><input class="form-control" size="auto" id="member_phone" name="member_phone" type="tel" onclick="javascript:bringMemberList();"></td>
 		<td>
 		<!-- <p id="notexistphone"></p> -->
 		<!-- <input type="button" class="btn btn-primary form-control" name="ToMPhoneCheck" value="체크" size="auto" onclick="javascript:toMPhoneCheck();"> -->
-		<input type="button" class="btn btn-primary form-control" name="BringMemberList" value="가져오기" size="auto" onclick="javascript:bringMemberList();">
+		<!-- <input type="button" class="btn btn-primary form-control" name="BringMemberList" value="가져오기" size="auto" onclick="javascript:bringMemberList();"> -->
 		</td>
 		</tr>
 		<tr>
@@ -355,7 +431,7 @@ window.onload = function(){
 		<td><label id="paymentcancelYN"></label></td>
 		</tr> -->
 	</table>
-	<input class="btn btn-primary" type="button" id="paymentAdd" name="paymentAdd" value="제출">
+	<input class="btn btn-primary" type="button" id="paymentAdd" name="paymentAdd" value="결제완료">
 	<!-- <input class="btn btn-primary" type="button" id="paymentAdd" name="paymentAdd" onclick="javascript:SubmitYesNo();" value="제출"> -->
 	<input class="btn btn-primary" type="reset" id="paymentCancel" name="paymentCancel" value="되돌림">
 	<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_list">글목록</a>
