@@ -59,6 +59,8 @@ $(document).ready(function(){
 			$('#paymentForm').submit();
 		}
 	});
+
+
 });
 
 /* function chkDupId(){
@@ -269,6 +271,15 @@ function bringMemberList(){
 		paymentForm.action="${pageContext.request.contextPath}/tori/payment/payment_add_action";
 	} paymentForm.submit();
 } */
+
+//팝업창에서 값 받아오기
+window.onload = function(){
+	
+	 var x = opener.document.getElementById('table_order_id').value;
+	
+	document.getElementById('table_order_id').value = x;
+	};
+
 </script>
  <%@ include file="../../modal/wide_menu.jsp" %>
 </head>
