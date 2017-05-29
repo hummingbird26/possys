@@ -72,10 +72,14 @@
 	<table class="table table-stripped table-hover">
 	<caption>추가정보</caption>
 			<tr>
-			<td>회원비밀번호
+			<td>직원비밀번호
 			</td>
 			<td>${staff.staff_pw}
 			</td>
+			</tr>
+			<tr>
+			<td>직원이메일</td>
+			<td>${staff.staff_email}</td>
 			</tr>
 			<tr>
 			<td>직원연령

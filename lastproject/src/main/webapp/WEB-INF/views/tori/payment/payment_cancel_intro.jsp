@@ -20,7 +20,8 @@
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 	<div class="container">
 		<form class="form-inline" action="${pageContext.request.contextPath}/tori/payment/payment_cancel_ACT" method="POST">
-			<div><input type="submit" class="btn btn-primary" name="paymentCancelAdd" id="paymentCancelAdd">결제취소목록보기</div>
+			<div><input type="hidden" class="form-inline" name="payment_id" id="payment_id" value="${payment.payment_id}">${payment.payment_id}</div>
+			<div><input type="submit" class="btn btn-primary" name="paymentCancelAdd" id="paymentCancelAdd">결제취소목록</div>
 		</form>
 	
 	

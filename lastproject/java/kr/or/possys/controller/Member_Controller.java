@@ -6,13 +6,12 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.UUID;
 
-import javax.mail.internet.MimeMessage;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,14 +43,12 @@ public class Member_Controller {
 	private Staff_Dao sdao;
 	
 	//e-mail test
-	@Autowired
-	  private JavaMailSender mailSender;
 
 	
 	
 	
 	//테이블 자리 이동
-	@RequestMapping(value="table_move", method=RequestMethod.POST)
+	@RequestMapping(value="/table_move_D", method=RequestMethod.POST)
 	@ResponseBody
 	public void table_move(@RequestParam(value="table_order_id")String table_order_id
 			,@RequestParam(value="table_num")int table_num){
@@ -72,7 +69,6 @@ public class Member_Controller {
 			JSONArray table_state = null;
 			
 			List<Order> state = Mdao.table_state();
-			/*if(staff!=null){*/
 			
 			/*System.out.println(plist);*/
 			
@@ -154,7 +150,7 @@ public class Member_Controller {
 	  }
 	  // 비밀번호 찾기 후 신규 pw 재발급 후 db등록 및  이메일 발송 코드 
 	
-	  @RequestMapping(value="/mail/mailSending",method = RequestMethod.POST)
+	/*  @RequestMapping(value="/mail/mailSending",method = RequestMethod.POST)
 	  public String mailSending(HttpServletRequest request){
 		  System.out.println("메일보내기");
 		  			//입력받은 email 값 id값 각각 변수에 담는다.
@@ -214,7 +210,7 @@ public class Member_Controller {
 					return "redirect:/";
 					
 			}
-
+*/
 	  
  
 	

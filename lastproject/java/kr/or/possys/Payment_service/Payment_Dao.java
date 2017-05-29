@@ -8,6 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.possys.Cancel_Payment_service.Payment_Cancel;
+import kr.or.possys.Member_sevice.Member;
 import kr.or.possys.Order_service.Order;
 
 @Repository
@@ -20,6 +22,19 @@ public class Payment_Dao {
         return sqlSessionTemplate.update("kr.or.possys.Payment_service.Payment_Mapper.updatePayment", payment_id);
     }*/
     
+	//payment_cancel테이블과 payment테이블 연결
+	public int insertPaymentCancel(String payment_id){
+		System.out.println("insertPaymentCancel");
+		System.out.println(payment_id);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("payment_id", payment_id);
+		System.out.println(map);
+		
+		return sqlSessionTemplate.insert("kr.or.possys.Payment_service.Payment_Mapper.insertPaymentCancel",map);		
+	}
+	
+	//총결제금액정보 가져오기
 	public int bringOrderList(String table_order_id){
 		System.out.println("bringOrderList");
 		System.out.println(table_order_id);
@@ -32,18 +47,33 @@ public class Payment_Dao {
 		return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.bringOrderList",table_order_id);
 	}
 	
+	//총마일리지 가져오기
+		public int bringMemberList(String member_phone){
+			System.out.println("bringMemberList");
+			System.out.println(member_phone);
+			Map<String, Object> map = new HashMap<String, Object>();
+			Member member = new Member();
+			System.out.println(map);
+			System.out.println(member);
+	    	map.put("member_phone", member_phone);
+	    	System.out.println(map);
+			return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.bringMemberList",member_phone);
+		}
+	
 	//결제목록삭제기능
     public int deletePayment(String payment_id) {
+    	System.out.println("deletePayment");
+    	System.out.println(payment_id);
         Payment Payment = new Payment();
         Payment.setPayment_id(payment_id);
         return sqlSessionTemplate.delete("kr.or.possys.Payment_service.Payment_Mapper.deletePayment", Payment);
     }
 	
 	// payment와 payment_cancel 연결
-		public int PaymentCancel(Payment payment) {
+	/*	public int PaymentCancel(Payment payment) {
 	    	System.out.println("Payment_Cancel");
 	        return sqlSessionTemplate.insert("kr.or.possys.Payment_service.Payment_Mapper.PaymentCancel", payment);
-	    }
+	    }*/
 	
 	//payment 결제 아이디 중복 체크
 	public int check_pid(String payment_id) {
