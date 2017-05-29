@@ -55,7 +55,7 @@ public class Order_Dao {
 	
 	public int order_detail_insert(Order order){
 		System.out.println("주문상세입력실행");
-		return sqlSessionTemplate2.update("kr.or.possys.Order_service.Order_Mapper.order_detail_insert",order);
+		return sqlSessionTemplate2.insert("kr.or.possys.Order_service.Order_Mapper.order_detail_insert",order);
 	}
 	
 	public List<Menu> menu_list(){
@@ -88,6 +88,11 @@ public class Order_Dao {
 	public Order order_count(){
 		System.out.println("getcount");
 		return sqlSessionTemplate2.selectOne("kr.or.possys.Order_service.Order_Mapper.order_count");
+	}
+	
+	public int order_insert(Order order){
+		System.out.println("order_insert");
+		return sqlSessionTemplate2.insert("kr.or.possys.Order_service.Order_Mapper.order_insert",order);
 	}
 	
 	

@@ -95,12 +95,14 @@
 </script>
 </head>
 <body>
+
 <br/><br/><br/>
 
 
 <form id="addform" action="${pageContext.request.contextPath}/order_action" method="post">
-		<input name = "result_id" id = "result_id" class = "${result_id}" type = "text" value = "${result_id}" hidden="hidden"/>
-		<div id = "menu_frame">
+		<input name = "table_order_id" id = "table_order_id" class = "${result_id}" type = "text" value = "${result_id}" hidden="hidden"/>
+		<input name = "table_order_num" id = "table_order_num" type = "text"/>
+		<div id = "menu_frame">	
 	<c:forEach var="f" items="${order_list}">
 		<div class = "${f.menu_id}"> 
 		메뉴코드 : <input name ="menu_id" id ="menu_id" class = "${f.menu_id}" type ="text" value="${f.menu_id}"readonly="readonly"/>
