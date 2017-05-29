@@ -65,7 +65,7 @@ public class Staff_Controller {
 							request.getSession().setAttribute("admin", map);
 							
 							System.out.println(" 로그인 정보 일치 관리자화면 이동 Staff_Controller.java");
-							returnURL = "redirect:/home"; // 일치하면 관리자 화면으로 이동
+							returnURL = "redirect:/test_index/index"; // 일치하면 관리자 화면으로 이동
 						//권한별 화면 출력 권한이 매니저일때
 							}
 							
@@ -77,7 +77,7 @@ public class Staff_Controller {
 							request.getSession().setAttribute("Staff", map);
 							
 							System.out.println(" 로그인 정보 일치 스탭화면 이동 Staff_Controller.java");
-							returnURL = "redirect:/Staff"; // 일치하면 스탭 화면으로 이동
+							returnURL = "redirect:/home"; // 일치하면 스탭 화면으로 이동
 				
 							}
 							

@@ -22,6 +22,7 @@
 				
 				<td><a href="${pageContext.request.contextPath}/order_modify_form?table_order_id=${f.table_order_id}">주문수정</a></td>
 				<td><a href="${pageContext.request.contextPath}/order_end_t?table_order_id=${f.table_order_id}">종결처리</a></td>
+				<td><a href="${pageContext.request.contextPath}/tori/payment/payment_add_form?table_order_id=${f.table_order_id}">주문처리</a>
 				
 			</tr>
 			</c:forEach>

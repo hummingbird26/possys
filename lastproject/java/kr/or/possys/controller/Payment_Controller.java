@@ -190,16 +190,26 @@ public class Payment_Controller {
 		
 	}
 	
+
+	
 	//입력 요청 : 액션으로 이동한다
 	@RequestMapping(value="/tori/payment/payment_add_action", method = RequestMethod.POST)
-	public String paymentadd(Payment Payment){
+	public String paymentadd(Payment Payment
+			,@RequestParam(value="table_order_id")String table_order_id
+			,@RequestParam(value="member_phone")String member_phone){
 		System.out.println("01_1 Payment_Controller.java -> paymentadd");
+		
+		System.out.println(table_order_id +"table_order_id 값 payment_add_action 메서드 실행 Payment_Controller.java");
+		System.out.println(member_phone +"member_phone 값 payment_add_action 메서드 실행 Payment_Controller.java");
+		
 		
 		String id = Payment.getPayment_id();
 		System.out.println(id+"<------ 컨트롤러 값 확인 ");
 		
 		pdao.insertPayment(Payment);
-		return "redirect:/tori/payment/payment_list";
+		/*return "redirect:/tori/payment/payment_list";*/
+		return "redirect:/receipt?member_phone="+member_phone+"&table_order_id="+table_order_id;
+		
 		
 	}
 	
