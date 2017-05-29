@@ -6,13 +6,12 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.UUID;
 
-/*import javax.mail.internet.MimeMessage;*/
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-/*import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;*/
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,26 +43,37 @@ public class Member_Controller {
 	private Staff_Dao sdao;
 	
 	//e-mail test
-	/*@Autowired*/
-	  /*private JavaMailSender mailSender;*/
 
+	
+	
+	
+	//테이블 자리 이동
+	@RequestMapping(value="/table_move_D", method=RequestMethod.POST)
+	@ResponseBody
+	public void table_move(@RequestParam(value="table_order_id")String table_order_id
+			,@RequestParam(value="table_num")int table_num){
+		System.out.println("table_move 메서드 실행"+table_order_id+"<<<<<<<<<<<<<<<table_order_id");
+		System.out.println("table_move 메서드 실행"+table_num+"<<<<<<<<<<<<<<<table_num");
+		
+		Mdao.table_move(table_order_id, table_num);
+		
+	}
 	//테이블 true,false 확인
 	@ResponseBody
 	@RequestMapping(value="/table_state")
 	public void table_state(HttpServletResponse re) throws IOException{
-		System.out.println("table_state 메서드 실행 확인 Member_Controller.java");
+		/*System.out.println("table_state 메서드 실행 확인 Member_Controller.java");*/
 		   re.setCharacterEncoding("UTF-8");
 		  
 			PrintWriter out = re.getWriter();
 			JSONArray table_state = null;
 			
 			List<Order> state = Mdao.table_state();
-			/*if(staff!=null){*/
 			
 			/*System.out.println(plist);*/
 			
 			table_state = JSONArray.fromObject(state);
-			System.out.println(table_state);
+			/*System.out.println(table_state);*/
 			
 			//새로운 화면에서 json방식으로 받아온 값 출력
 			out.write(table_state.toString());
@@ -96,7 +106,7 @@ public class Member_Controller {
 		/*System.out.println(plist);*/
 		
 		order_detail = JSONArray.fromObject(order);
-		System.out.println(order_detail);
+		/*System.out.println(order_detail);*/
 		
 		//새로운 화면에서 json방식으로 받아온 값 출력
 		out.write(order_detail.toString());
@@ -113,7 +123,7 @@ public class Member_Controller {
 	    return "/repw";
 	  }  
 	// 비밀번호 찾기  아이디와  name값 가져오는 ajax통신용
-/*	  @ResponseBody
+	  @ResponseBody
 	  @RequestMapping(value = "/idcheck")
 	  public void mailForm(HttpServletRequest request,HttpServletResponse re) throws IOException {
 		  String checkid = request.getParameter("id");
@@ -127,7 +137,6 @@ public class Member_Controller {
 			Staff staff = sdao.loginSelect(checkid);
 			if(staff!=null){
 			
-			System.out.println(plist);
 			
 			CheckStaff = JSONArray.fromObject(staff);
 			System.out.println(CheckStaff);
@@ -138,10 +147,10 @@ public class Member_Controller {
 			out.flush();
 	   
 	  }
-	 
+	  }
 	  // 비밀번호 찾기 후 신규 pw 재발급 후 db등록 및  이메일 발송 코드 
 	
-	  @RequestMapping(value="/mail/mailSending",method = RequestMethod.POST)
+	/*  @RequestMapping(value="/mail/mailSending",method = RequestMethod.POST)
 	  public String mailSending(HttpServletRequest request){
 		  System.out.println("메일보내기");
 		  			//입력받은 email 값 id값 각각 변수에 담는다.
@@ -150,8 +159,6 @@ public class Member_Controller {
 		  			System.out.println(checkid);
 		  			Staff staff = sdao.loginSelect(checkid);
 		  			System.out.println(staff+"<---mailSending 메서드 아이디 입력후 리턴값 Member_Controller.java");
-				    String tomail  = request.getParameter("tomail");     // 받는 사람 이메일
-				    String title   = request.getParameter("title");// 제목
 					String setfrom = "bsh20057@gmail.com";
 					String title = "possys 비밀번호 재발급 안내입니다.";
 				    String content ="";
@@ -166,8 +173,6 @@ public class Member_Controller {
 				    }
 				    
 				    
-				    //sdao에서 가져온 회원 정보에 입력된 email을 보내는 이메일에 입력
-				    String tomail = staff.getStaff_email();
 				    
 				    staff.setStaff_pw(newpw);
 				    staff.getStaff_name();
@@ -182,8 +187,7 @@ public class Member_Controller {
 				    System.out.println(staff.getStaff_pw()+"<<<<<<<확인");
 				    //신규 비밀번호로 업데이트
 				    sdao.updateStaff(staff);
-				   
-				     String content = request.getParameter("content");    // 내용
+				  
 				    System.out.println("새로운 비밀번호"+newpw);
 				    System.out.println("받는사람 이메일"+tomail);
 				    System.out.println("이메일 제목"+title);
@@ -205,9 +209,9 @@ public class Member_Controller {
 				    }
 					return "redirect:/";
 					
-			}*/
-
-	  /*}*/
+			}
+*/
+	  
  
 	
 	
@@ -355,7 +359,7 @@ public class Member_Controller {
 		
 		out.flush();
 	}
-/*	알람창 ajax 테스트
+	//알람창 ajax 테스트
 	@RequestMapping(value="/alram_test",method = RequestMethod.GET)
 	@ResponseBody
 	public void am(HttpServletResponse re) throws IOException{
@@ -378,11 +382,11 @@ public class Member_Controller {
 		out.flush();
 	
 	}
-	알람창 호출
+	//알람창 호출
 	@RequestMapping(value="/ho.html")
 	public String alram(){
 		return "t";
-	}*/
+	}
 
 	//실시간 검색 호출
 	@RequestMapping(value="/real_time")

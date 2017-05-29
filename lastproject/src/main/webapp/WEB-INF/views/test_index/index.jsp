@@ -32,6 +32,8 @@
   </head>
 
  <body id="mimin" class="dashboard">
+
+
    <%@ include file="../modal/header.jsp" %>
 
       <div class="container-fluid mimin-wrapper">
@@ -45,7 +47,7 @@
                         <p class="animated fadeInDown"><span class="fa  fa-map-marker"></span> Batavia,Indonesia</p>
 
                         <ul class="nav navbar-nav">
-                            <li><a href="" >홍경인</a></li>
+                            <li><a href="${pageContext.request.contextPath}/test_index/table_state" >테이블 현황</a></li>
                             <li><a href="" class="active">오광진</a></li>
                             <li><a href="">배상훈</a></li>
                             <li><a href="">최홍락</a></li>
@@ -85,18 +87,18 @@
                 </div>
 				
 				
-				<div>
+			<%-- 	<div>
 				<%@ include file="../member/table.jsp" %>
-                </div>
+                </div> --%>
                 <div class="col-md-12" style="padding:20px;">
                     <div class="col-md-12 padding-0">
                         <div class="col-md-8 padding-0">
                             <div class="col-md-12 padding-0">
                                 <div class="col-md-6">
-                                    <div class="panel box-v1">
+                                <!--     <div class="panel box-v1">
                                       <div class="panel-heading bg-white border-none">
                                         <div class="col-md-6 col-sm-6 col-xs-6 text-left padding-0">
-                                          <h4 class="text-left">오늘 방문자수</h4>
+                                          <h4 class="text-left">오늘 총 판매액</h4>
                                         </div>
                                         <div class="col-md-6 col-sm-6 col-xs-6 text-right">
                                            <h4>
@@ -105,17 +107,17 @@
                                         </div>
                                       </div>
                                       <div class="panel-body text-center">
-                                        <h1>방문자수 카운트되게</h1>
-                                        <p>User active</p>
+                                        <h1><p id="today_total">User active</p></h1>
+                                        
                                         <hr/>
                                       </div>
-                                    </div>
+                                    </div> -->
                                 </div>
-                                <div class="col-md-6">
+<!--                                 <div class="col-md-6">
                                     <div class="panel box-v1">
                                       <div class="panel-heading bg-white border-none">
                                         <div class="col-md-6 col-sm-6 col-xs-6 text-left padding-0">
-                                          <h4 class="text-left">신규 주문수</h4>
+                                          <h4 class="text-left">사용중인 테이블</h4>
                                         </div>
                                         <div class="col-md-6 col-sm-6 col-xs-6 text-right">
                                            <h4>
@@ -124,12 +126,12 @@
                                         </div>
                                       </div>
                                       <div class="panel-body text-center">
-                                        <h1>주문수 카운트 되게</h1>
-                                        <p>New Orders</p>
+                                        <h1><p id="total">New Orders</p></h1>
+                                        
                                         <hr/>
                                       </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="col-md-12">
                                 <div class="panel box-v4">

@@ -10,7 +10,7 @@
   <meta name="author" content="Isna Nur Azis">
   <meta name="keyword" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>매출현황</title>
+  <title>메뉴 판매 현황</title>
 
   <!-- start: Css -->
   <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/bootstrap.min.css">
@@ -44,7 +44,7 @@
                    <div class="col-md-12 padding-0">
                       <div class="col-md-12">
                         <div class="panel chart-title">
-                          <h3><span class="fa fa-area-chart"></span>   Chart Js</h3>
+                          <h3><span class="fa fa-area-chart"></span>   메뉴 판매 현황</h3>
                         </div>
                       </div>
                       <div class="col-md-6">

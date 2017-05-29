@@ -17,7 +17,15 @@ public class Ep_Order {
 					
 	//식재현황 리스트를 위해서 food name을 가져옴. 쿼리문에서 
 	private String food_name;
+	//입고등록 폼을 위한 ep_name 가져옴
+	private String ep_name;
 	
+	public String getEp_name() {
+		return ep_name;
+	}
+	public void setEp_name(String ep_name) {
+		this.ep_name = ep_name;
+	}
 	public String getFood_name() {
 		return food_name;
 	}

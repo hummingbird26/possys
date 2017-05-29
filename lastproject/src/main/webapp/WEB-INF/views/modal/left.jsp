@@ -8,8 +8,8 @@
 </head>
 <body>
   <!-- start:Left Menu -->
-       <div id="left-menu">
-             
+ 		
+ 		 <div id="left-menu">   
               <div class="sub-left-menu scroll">
                 <ul class="nav nav-list">
                     <li><div class="left-bg"></div></li>
@@ -46,8 +46,8 @@
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
                       <ul class="nav nav-list tree">
-                        <li><a href="${pageContext.request.contextPath}/chartjs">매출현황</a></li>
                         <li><a href="${pageContext.request.contextPath}/menu_chart">메뉴판매현황</a></li>
+                        <li><a href="${pageContext.request.contextPath}/chartjs">매출현황</a></li>
                         <li><a href="${pageContext.request.contextPath}/staff_chart">직원통계</a></li>
                       </ul>
                     </li>

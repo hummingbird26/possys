@@ -107,7 +107,7 @@
 	
 	<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_list">리스트로</a>
 	<a class="btn btn-primary" onclick="javascript:paymentDelete();" name="paymentdelete" id="paymentdelete"
-	href="${pageContext.request.contextPath}/tori/payment/payment_delete?payment_id=${payment.payment_id}">거래취소</a>
+	href="${pageContext.request.contextPath}/tori/payment/payment_delete?payment_id=${payment.payment_id}">거래취소추가</a>
 </div>
 
 </div>

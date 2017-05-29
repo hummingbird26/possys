@@ -61,7 +61,7 @@ $(document).ready(function(){
 	});
 });
 
-function chkDupId(){
+/* function chkDupId(){
 	var prmId = $("#payment_id").val();
 	console.log(prmId);
 	if($("#payment_id").val() == '')
@@ -80,11 +80,11 @@ function chkDupId(){
 			if(chkRst=="Y"){
 				alert("등록 가능 합니다");
 				console.log(data);
-				$("#IDCheck").val() = "아이디 사용가능";
+				//$("#IDCheck").val() = "아이디 사용가능";
 			}else{
 				alert("중복됩니다");
 				console.log(data);
-				$("#IDCheck").val() = "아이디 사용불가";
+				//$("#IDCheck").val() = "아이디 사용불가";
 			}
 		},
 		error : function(request,status,error){
@@ -94,7 +94,7 @@ function chkDupId(){
 		}
 	});
 }
-
+--
 function insertChk(){
 	var frm = document.paymentForm;
 	
@@ -104,9 +104,9 @@ function insertChk(){
 		alert('ID체크를 해주시오');
 		return;
 	}
-}
+} */
 
- function toidCheck(){
+/*  function toidCheck(){
 	console.log('ToidCheck');
 	var Toid = $("#table_order_id").val();
 	if($("#table_order_id").val() == ''){
@@ -139,9 +139,9 @@ function insertChk(){
 				alert("실패");
 			}
 		});
-}
+} */
 
- function toMPhoneCheck(){
+ /* function toMPhoneCheck(){
 	console.log('ToMPhoneCheck');
 	var ToMPhone = $("#member_phone").val();
 	if($("#member_phone").val() == ''){
@@ -174,8 +174,9 @@ function insertChk(){
 				alert("실패");
 			}
 		});
-} 
+}  */
  
+ // 테이블주문번호를 통해서 총결제금액 값을 가져오고, 마일리지를 산출하여 텍스트박스에 그 결과값을 표시해주는 스크립트
  function bringOrderList(){
 	 console.log("bringOrderList");
 	 var OrderList = $("#table_order_id").val();
@@ -200,7 +201,8 @@ function insertChk(){
 					console.log(data);			// 형변환 잘 되었는지 출력
 					console.log(mileage);
 					document.getElementById('payment_total').value = data;			// 자바스크립트 코드를 이용하여 id값이 payment_total인 요소의 값을 data변수의 값으로 설정해준다.
-					document.getElementById('payment_addmileage').value = mileage;
+					document.getElementById('payment_maxaddmileage').value = mileage;
+					//document.getElementById('payment_maxusemileage').value = usemileage;
 				}else{
 					alert("가격 산정 불가");
 					console.log(data);
@@ -210,10 +212,50 @@ function insertChk(){
 			error : function(request,status,error){
 				
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-				alert("실패");
+				alert("실패 : 해당 주문번호가 존재하지 아니함");
+				//document.getElementById('notexistid').value="주문번호가 존재하지 않네요!";
 			}
 		});
  }
+ 
+// 회원전화번호를 통해서 회원전화번호 탐색 및 회원의 총 가용 마일리지를 구해준 후에, 그것을 해당 아이디값을 가지는 텍스트박스에 넣어준다.
+function bringMemberList(){
+	console.log("bringMemberList");
+	var MemberList = $("#member_phone").val();
+	
+	 $.ajax({
+			type:'POST',
+			data:"Toid="+$("#member_phone").val(),
+			contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+			dataType:'text',
+			url:'${pageContext.request.contextPath}/tori/payment/bringMemberList',
+			success : function(data){
+				alert("성공");
+				var chkRst = data;
+				
+				if(chkRst>="0"){
+					alert("마일리지 가져오기 완료");
+					console.log(data);			// data값이 잘 받아와졌는지 확인테스트
+				
+					data = Number(data);		// data타입은 문자열인데 이것을 정수로 형변환
+					
+					console.log(data);			// 형변환 잘 되었는지 출력
+				
+					document.getElementById('payment_maxusemileage').value = data;	// 자바스크립트 코드를 이용하여 id값이 payment_maxusemileage인 요소의 값을 data변수의 값으로 설정해준다.
+				}else{
+					alert("마일리지 가져오기 불가");
+					console.log(data);
+					//console.log(values);
+				}
+			},
+			error : function(request,status,error){
+				
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				alert("실패 : 폰번호 존재하지 않음");
+				//document.getElementById('notexistphone').value = "폰번호가 존재하지 않습니다!";
+			}
+		});
+}
 
 //payment_state가 취소인지 정상인지에 따라서 이동경로를 다르게 설정해주는 스크립트
 /* function SubmitYesNo(){
@@ -249,7 +291,8 @@ function insertChk(){
 		<td>테이블사용코드</td>
 		<td><input class="form-control" size="auto" id="table_order_id" name="table_order_id" type="text"></td>
 		<td>
-		<input type="button" class="btn btn-primary form-control" name="ToidCheck" value="체크" size="auto" onclick="javascript:toidCheck();">
+		<!-- <p id="notexistid"></p> -->
+		<!-- <input type="button" class="btn btn-primary form-control" name="ToidCheck" value="체크" size="auto" onclick="javascript:toidCheck();"> -->
 		<input type="button" class="btn btn-primary form-control" name="BringOrderList" value="가져오기" size="auto" onclick="javascript:bringOrderList();">
 		</td>
 		<!-- JAVASCRIPT 함수의 처음 글자를 대문자로 해도 함수로 인식하지 않을 수 있음 -->
@@ -257,7 +300,11 @@ function insertChk(){
 		<tr>
 		<td>전화번호</td>
 		<td><input class="form-control" size="auto" id="member_phone" name="member_phone" type="tel"></td>
-		<td><input type="button" class="btn btn-primary form-control" name="ToMPhoneCheck" value="체크" size="auto" onclick="javascript:toMPhoneCheck();"></td>
+		<td>
+		<!-- <p id="notexistphone"></p> -->
+		<!-- <input type="button" class="btn btn-primary form-control" name="ToMPhoneCheck" value="체크" size="auto" onclick="javascript:toMPhoneCheck();"> -->
+		<input type="button" class="btn btn-primary form-control" name="BringMemberList" value="가져오기" size="auto" onclick="javascript:bringMemberList();">
+		</td>
 		</tr>
 		<tr>
 		<td>총액</td>
@@ -268,12 +315,16 @@ function insertChk(){
 		<td colspan="2"><input class="form-control" size="auto" id="payment_pay" name="payment_pay" type="text"></td>
 		</tr>
 		<tr>
-		<td>적립마일리지</td>
-		<td colspan="2"><input class="form-control" size="auto" id="payment_addmileage" name="payment_addmileage" type="text" readonly></td>
+		<td>적립할마일리지 / 최대적립마일리지</td>
+		<td colspan="2"><input class="form-control" size="auto" id="payment_addmileage" name="payment_addmileage" type="text">
+		<input class="form-control" size="auto" id="payment_maxaddmileage" name="payment_maxaddmileage" type="text" readonly>
+		</td>
 		</tr>
 		<tr>
-		<td>사용마일리지</td>
-		<td colspan="2"><input class="form-control" size="auto" id="payment_usemileage" name="payment_usemileage" type="text"></td>
+		<td>사용마일리지 / 회원총마일리지</td>
+		<td colspan="2"><input class="form-control" size="auto" id="payment_usemileage" name="payment_usemileage" type="text">
+		<input class="form-control" size="auto" id="payment_maxusemileage" name="payment_maxusemileage" type="text" readonly>
+		</td>
 		</tr>
 		<!-- <tr>
 		<td>날짜</td>
@@ -283,6 +334,7 @@ function insertChk(){
 		<td>구분</td>
 		<td colspan="2">
 		<input type="radio" class="form-control" name="payment_cate" id="payment_cate" value="현금">현금
+		&nbsp;&nbsp;
 		<input type="radio" class="form-control" name="payment_cate" id="payment_cate" value="카드">카드
 		<!-- <input class="form-control" size="auto" id="payment_cate" name="payment_cate" type="text"> --></td>
 		</tr>
@@ -301,10 +353,10 @@ function insertChk(){
 	<br><br>
 	
 	<!-- payment_state가 취소라면 payment_cancel_list.jsp로 화면을 이동하게끔 한다. 그리고 실질적인 데이터베이스 반영이 되어져야 한다 -->
-	<div>
+<%-- 	<div>
 	<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_form">결제취소직권입력</a>
 	<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_card_form">카드결제직권입력</a>
-	</div>
+	</div> --%>
 </div>
 </body>
 </html>
