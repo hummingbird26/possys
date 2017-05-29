@@ -19,6 +19,19 @@ public class Member_Dao {
 	@Autowired
 	private SqlSessionTemplate Msql;
 	
+	
+	//영수증 출력 메서드
+	public List<receipt> receipt(String member_phone,String table_order_id){
+		System.out.println("receipt 메서드 실행 확인 Member_Dao.java");
+		System.out.println(table_order_id+"<--table_order_id receipt 메서드 실행 확인 Member_Dao.java");
+		System.out.println(member_phone+"<--member_phone receipt 메서드 실행 확인 Member_Dao.java");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("table_order_id",table_order_id);
+		map.put("member_phone",member_phone);
+		
+		return Msql.selectList("kr.or.possys.Member_sevice.Member_Mapper.receipt",map);
+	}
 	//테이블 자리이동 메서드
 	public int table_move(String table_order_id,int table_num){
 		System.out.println("table_move 메서드 실행 확인 Member_Dao.java");
@@ -29,13 +42,13 @@ public class Member_Dao {
 	}
 	//오늘 총액 구하는 메서드
 	public int today_total(){
-		System.out.println("today_total 메서드 실행 Member_Dao.java");
+		/*System.out.println("today_total 메서드 실행 Member_Dao.java");*/
 		return Msql.selectOne("kr.or.possys.Member_sevice.Member_Mapper.today_total");
 	}
 	
 	//현재 사용중인 테이블 구하는 메서드 
 	public int f_table_count(){
-		System.out.println("f_table_count 메서드 실행 Member_Dao.java");	
+		/*System.out.println("f_table_count 메서드 실행 Member_Dao.java");	*/
 		return Msql.selectOne("kr.or.possys.Member_sevice.Member_Mapper.f_table_count");
 	}
 	
