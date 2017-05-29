@@ -29,7 +29,7 @@
 	 var rephone2 = phone.substr(8,phone.length);
 	 	$('#phone').text(rephone1+'***'+rephone2);	
 	 
-	 	alert('test');
+	 	/* alert('test'); */
 		
 		
 		/* alert(name);
@@ -40,7 +40,7 @@
 		
 	
 		<p>--------주문 내역-------</p>	
-		<c:forEach  var="Nre" items="${receiptList}" end="${Nre.menu_name}">
+		<c:forEach  var="Nre" items="${receiptList}" begin="0" end="3">
 		<p>메뉴명 : ${Nre.menu_name}</p>
 		<p>주문 수량  * ${Nre.order_detail_ea}</p>
 		</c:forEach>

@@ -56,7 +56,7 @@ public class Member_Controller {
 		List<receipt> receiptList = Mdao.receipt(member_phone, table_order_id);
 		
 		model.addAttribute("receiptList", receiptList);
-		System.out.println(receiptList+"<<<<<<<<<<<receiptList 리턴 값");
+		System.out.println(receiptList.size()+"<<<<<<<<<<<receiptList 리턴 값");
 		
 		return "/member/receipt";
 	}
