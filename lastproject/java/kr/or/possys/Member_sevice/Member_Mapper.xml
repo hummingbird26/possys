@@ -27,6 +27,7 @@ and table_order.table_order_id=order_detail.table_order_id
 and table_order.table_order_end='t'
 and payment.member_phone=member.member_phone
 and payment.table_order_id=order_detail.table_order_id
+and payment.payment_date=curdate()
 </select>
 <!-- 테이블 자리 이동 쿼리 -->
 <update id="table_move" parameterType="java.util.HashMap">
