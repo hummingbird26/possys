@@ -542,7 +542,10 @@ public class Member_Controller {
 			}
 	//리스트
 	@RequestMapping(value="/member_list", method = RequestMethod.GET)
-	public String MemberList(Model model,@RequestParam(value="currentPage",required=false,defaultValue="1" )int currentPage){
+	
+	public String MemberList(
+			Model model
+			,@RequestParam(value="currentPage",required=false,defaultValue="1" )int currentPage){
 		System.out.println("MemberList 메서드 실행 확인  Member_Controller.java ");
 		int memberCount = Mdao.getMemberCount();
 		System.out.println(memberCount+"<-----memberCount 값 확인");
@@ -560,18 +563,21 @@ public class Member_Controller {
 				JSONArray memberListJson = null;
 				//리스트 쿼리 호출
 				List<Member> list = Mdao.getMemberList(currentPage, pagePerRow);		
-	
-		System.out.println(lastpage+"lastpage 리턴값 확인");
-		System.out.println(currentPage+"currentPage 리턴값 확인");
-		
-		
-		model.addAttribute("currentPage", currentPage);
-		model.addAttribute("memberCount",memberCount);
-		model.addAttribute("pagePerRow",pagePerRow);
-		model.addAttribute("lastpage",lastpage);
-		model.addAttribute("list",list);
-		model.addAttribute("expage",expage);
-	
+				
+				System.out.println(lastpage+"lastpage 리턴값 확인");
+				System.out.println(currentPage+"currentPage 리턴값 확인");
+				
+				memberListJson = JSONArray.fromObject(list);
+				
+				model.addAttribute("jsonString", memberListJson);
+				
+				model.addAttribute("currentPage", currentPage);
+				model.addAttribute("memberCount",memberCount);
+				model.addAttribute("pagePerRow",pagePerRow);
+				model.addAttribute("lastpage",lastpage);
+				model.addAttribute("list",list);
+				model.addAttribute("expage",expage);
+			
 		
 		return "/member/member_list";
 		
