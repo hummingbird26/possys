@@ -196,10 +196,12 @@ public class Order_Controller{
 	public String order_form(Model model){
 		System.out.println("카운트실행");
 		Order order_c = odao.order_count();
+		/* 일련번호 자동증가 부분*/
 		String count = order_c.getOrder_count();
 		int counter = Integer.parseInt(count.substring(1, 5))+1;
 		String result_id = "t"+String.format("%04d", counter);
 		System.out.println(result_id);
+		/*일련번호 자동증가부분 종료 과값은 result_id*/
 		
 		List<Menu> menu_list = odao.menu_list();
 		model.addAttribute("result_id",result_id);
