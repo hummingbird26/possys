@@ -280,6 +280,14 @@ window.onload = function(){
 	document.getElementById('table_order_id').value = x;
 	};
 
+
+// 라디오버튼의 값이 카드일때 카드결제폼으로 이동한다.
+function gotoCardAddForm(){
+	var card = document.getElementById('payment_cate').value;
+	console.log(card);
+	if(card == '카드')
+	location.href = "${pageContext.request.contextPath}/tori/payment/payment_card_form";
+}
 </script>
  <%@ include file="../../modal/wide_menu.jsp" %>
 </head>
@@ -300,21 +308,21 @@ window.onload = function(){
 		</tr> -->
 		<tr>
 		<td>테이블사용코드</td>
-		<td><input class="form-control" size="auto" id="table_order_id" name="table_order_id" type="text"></td>
+		<td><input class="form-control" size="auto" id="table_order_id" name="table_order_id" type="text" onclick="javascript:bringOrderList();"></td>
 		<td>
 		<!-- <p id="notexistid"></p> -->
 		<!-- <input type="button" class="btn btn-primary form-control" name="ToidCheck" value="체크" size="auto" onclick="javascript:toidCheck();"> -->
-		<input type="button" class="btn btn-primary form-control" name="BringOrderList" value="가져오기" size="auto" onclick="javascript:bringOrderList();">
+		<!-- <input type="button" class="btn btn-primary form-control" name="BringOrderList" value="가져오기" size="auto" onclick="javascript:bringOrderList();"> -->
 		</td>
 		<!-- JAVASCRIPT 함수의 처음 글자를 대문자로 해도 함수로 인식하지 않을 수 있음 -->
 		</tr>
 		<tr>
 		<td>전화번호</td>
-		<td><input class="form-control" size="auto" id="member_phone" name="member_phone" type="tel"></td>
+		<td><input class="form-control" size="auto" id="member_phone" name="member_phone" type="tel" onclick="javascript:bringMemberList();"></td>
 		<td>
 		<!-- <p id="notexistphone"></p> -->
 		<!-- <input type="button" class="btn btn-primary form-control" name="ToMPhoneCheck" value="체크" size="auto" onclick="javascript:toMPhoneCheck();"> -->
-		<input type="button" class="btn btn-primary form-control" name="BringMemberList" value="가져오기" size="auto" onclick="javascript:bringMemberList();">
+	<!-- 	<input type="button" class="btn btn-primary form-control" name="BringMemberList" value="가져오기" size="auto" onclick="javascript:bringMemberList();"> -->
 		</td>
 		</tr>
 		<tr>
@@ -355,7 +363,7 @@ window.onload = function(){
 		<td><label id="paymentcancelYN"></label></td>
 		</tr> -->
 	</table>
-	<input class="btn btn-primary" type="button" id="paymentAdd" name="paymentAdd" value="제출">
+	<input class="btn btn-primary" type="button" id="paymentAdd" name="paymentAdd" value="결제완료" onclick="javascript:gotoCardAddForm();">
 	<!-- <input class="btn btn-primary" type="button" id="paymentAdd" name="paymentAdd" onclick="javascript:SubmitYesNo();" value="제출"> -->
 	<input class="btn btn-primary" type="reset" id="paymentCancel" name="paymentCancel" value="되돌림">
 	<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_list">글목록</a>
