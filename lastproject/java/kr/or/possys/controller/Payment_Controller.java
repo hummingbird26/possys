@@ -206,10 +206,21 @@ public class Payment_Controller {
 		String id = Payment.getPayment_id();
 		System.out.println(id+"<------ 컨트롤러 값 확인 ");
 		
+		String card = Payment.getPayment_cate();
+		System.out.println(card+"<-- 결제유형값이 받아와지는지?");
 		pdao.insertPayment(Payment);
 		pdao.updatePayment(table_order_id);
 		pdao.subtractMileage(Payment);
 		pdao.addMileage(Payment);
+		if(card == "카드")
+		{
+			return "/tori/payment/payment_card_form";
+		//Card_Payment card_payment = new Card_Payment();
+		//System.out.println(card_payment);
+		//this.paymentcardadd(card);
+		//cpdao.insertCardPayment(card_payment);
+		//cpdao.insertCardPayment(card);
+		}
 		/*return "redirect:/tori/payment/payment_list";*/
 		return "redirect:/receipt?member_phone="+member_phone+"&table_order_id="+table_order_id;
 		
@@ -560,7 +571,18 @@ public class Payment_Controller {
 			
 		}*/
 		
-		@RequestMapping(value="/tori/payment/payment_card_form", method = RequestMethod.GET)
+		@RequestMapping(value="/tori/payment/payment_card_form")
+		public String paymentcardform(){
+			System.out.println("01 Payment_Controller.java -> paymentcardform");
+		/*	System.out.println(payment_cate);
+			if(payment_cate == "카드"){
+				return "/tori/payment/payment_card_form";
+			}*/
+			return "/tori/payment/payment_card_form";
+		}
+		
+		
+		/*@RequestMapping(value="/tori/payment/payment_card_form", method = RequestMethod.GET)
 		public String paymentcardadd(@RequestParam(value="payment_cate", required=true) String payment_cate){
 			System.out.println("01 Payment_Controller.java -> paymentcardadd");
 			System.out.println(payment_cate);
@@ -571,7 +593,7 @@ public class Payment_Controller {
 			return "/tori/payment/payment_list";
 			//tori_home에서 설정한 경로와 매핑경로값 및 리턴값을 일치하게끔 설정한다.
 			
-		}
+		}*/
 		
 		//입력 요청 : 액션으로 이동한다
 		@RequestMapping(value="/tori/payment/payment_card_action", method = RequestMethod.POST)
