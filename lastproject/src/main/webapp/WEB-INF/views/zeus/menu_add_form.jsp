@@ -67,15 +67,15 @@
         </div>
         <div class="form-group">
             <label for="menuName">가격:</label>
-            <input class="form-control" name="menu_price" id="menu_price" type="text" placeholder="가격을 입력해주세요 (숫자)"/>
+            <input class="form-control" name="menu_price" id="menu_price" type="text" placeholder="가격을 입력해주세요 (숫자 3자 이상)"/>
         </div>
         <div class="form-group">
             <label for="menuName">할인가격:</label>
-            <input class="form-control" name="menu_sprice" id="menu_sprice" type="text" placeholder="할인가격을 입력해주세요 (숫자)"/>
+            <input class="form-control" name="menu_sprice" id="menu_sprice" type="text" placeholder="할인가격을 입력해주세요 (숫자 3자 이상)"/>
         </div>
         <div class="form-group">
             <label for="menuName">칼로리 :</label>
-            <input class="form-control" name="menu_kcal" id="menu_kcal" type="text" placeholder="칼로리를 입력해주세요(숫자)"/>
+            <input class="form-control" name="menu_kcal" id="menu_kcal" type="text" placeholder="칼로리를 입력해주세요(숫자 3자 이상)"/>
         </div>
         <div class="form-group">
             <label for="order_file">사진:</label>

@@ -81,16 +81,7 @@
 		</c:if>
 	</ul>
 	<div>
-		<form id ="frm" name="frm" action="${pageContext.request.contextPath}/menu_search" method="get">
-			<select id="selbox"name="selbox" size="1">
-				<option value="menu_id"><h3>메뉴코드</h3></option>
-				<option value="menu_name"><h3>메뉴명</h3></option>
-			</select>
-			<input  size="16" name="keyWord" type="text">
-			<input id="fbutton" type="submit" value="검색">
-		</form>
 	</div>
-	
 	<div>
 		<a href="${pageContext.request.contextPath}/menu_add_form"><button><h3>메뉴 추가</h3></button></a>
 	</div>
