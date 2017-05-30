@@ -130,6 +130,10 @@ function insertChk(){
 		<td><input class="form-control" size="auto" id="staff_addr" name="staff_addr" type="text"></td>
 		</tr>
 		<tr>
+		<td>이메일</td>
+		<td><input class="form-control" size="auto" id="staff_email" name="staff_email" type="text"></td>
+		</tr>
+		<tr>
 		<td>성별</td>
 		<td><input class="form-control" size="auto" id="staff_gender" name="staff_gender" type="text"></td>
 		</tr>

@@ -1,0 +1,165 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper">
+	
+	<!-- AJAX 발주주문목록에서 입고등록폼 요청 // 다중조인문 사용 food_id 중복 제거-->
+	<select id="js_ep_wh_list" parameterType="string" resultType="kr.or.possys.ep_order_food_details_service.Ep_Order">
+		select ep_order_food_details.food_id         
+		, ep_order_id                          
+		, ep_order_food_details.ep_id                                
+		, ep_order_date                        
+		, ep_order_wh_date                     
+		, ep_order_food_shelflife              
+		, ep_order_ea                          
+		, ep_order_wh_ea                       
+		, ep_order_unit_price                  
+		, ep_order_total_price                 
+		, ep_order_payment_option              
+		, food_nowquantity                     
+		, ea_order_statement                   
+		, food_manage.food_name
+		, ep_order_manage.ep_name             
+		from ep_order_food_details             
+		inner join food_manage                
+		on                                     
+		ep_order_food_details.food_id = food_manage.food_id
+		inner join ep_order_manage
+		on
+		ep_order_food_details.ep_id = ep_order_manage.ep_id
+		where ep_order_id = #{ep_order_id}
+		group by food_id 	
+	</select>	
+	<!-- 발주주문목록 요청 시 중복없이 리스트 -->
+	<select id="ep_o_list" resultType="kr.or.possys.ep_order_food_details_service.Ep_Order">
+		select ep_order_food_details.food_id         
+		, ep_order_id                          
+		, ep_id                                
+		, ep_order_date                        
+		, ep_order_wh_date                     
+		, ep_order_food_shelflife              
+		, ep_order_ea                          
+		, ep_order_wh_ea                       
+		, ep_order_unit_price                  
+		, ep_order_total_price                 
+		, ep_order_payment_option              
+		, food_nowquantity                     
+		, ea_order_statement                   
+		, food_manage.food_name                
+		from ep_order_food_details             
+		inner join food_manage                 
+		on                                     
+		ep_order_food_details.food_id = food_manage.food_id
+		 group by ep_order_id                      
+		 order by ep_order_date desc
+	</select>
+	<!-- 발주주문목록 요청 시 중복없이 count  -->
+	<select id="ep_o_count" resultType="int">
+		select count(distinct ep_order_id) from ep_order_food_details
+	</select>
+	<!-- default 값 확인위해 select -->
+	<select id="_ep_oinsert" parameterType="java.util.Map" resultType="kr.or.possys.ep_order_food_details_service.Ep_Order">
+		select * from ep_order_food_details
+		where food_id = #{food_id} and ep_id = #{ep_id}
+	</select>
+	<!-- default인 발주테이블 update로 발주등록 -->
+	<update id="default_up" parameterType="kr.or.possys.ep_order_food_details_service.Ep_Order">
+		update ep_order_food_details set ep_order_id = concat('EPON',(select date_format(sysdate(),'%y%m%d%i%s')))
+		,ep_order_date = sysdate()
+		,ep_order_ea = #{ep_order_ea}
+		,ea_order_statement = '발주신청'
+		where food_id = #{food_id} and ep_id = #{ep_id}
+	</update>
+	<!-- default가 아닌  발주등록  -->
+	<insert id="ep_oinsert" parameterType="kr.or.possys.ep_order_food_details_service.Ep_Order">
+		insert into ep_order_food_details(
+		ep_order_id
+		,food_id
+		,ep_id
+		,ep_order_date
+		,ep_order_ea
+		,ea_order_statement)
+		select concat('EPON',(select date_format(sysdate(),'%y%m%d%i%s')))
+		,#{food_id}
+		,#{ep_id}
+		,sysdate()
+		,#{ep_order_ea}
+		,'발주신청'
+	</insert>
+	<!--중복없이 식재현황 리스트 갯수 count  -->
+	<select id="ep_ocount" resultType="int">
+		select count(distinct food_id) from ep_order_food_details
+	</select>
+	<!-- 식재현황 리스트 inner join으로 food_name 가져오고 food_id 중복없이 select 리스트를 뽑아옴 -->
+	<select id="ep_olist" resultType="kr.or.possys.ep_order_food_details_service.Ep_Order">
+		select ep_order_food_details.food_id         
+		, ep_order_id                          
+		, ep_id                                
+		, ep_order_date                        
+		, ep_order_wh_date                     
+		, ep_order_food_shelflife              
+		, ep_order_ea                          
+		, ep_order_wh_ea                       
+		, ep_order_unit_price                  
+		, ep_order_total_price                 
+		, ep_order_payment_option              
+		, food_nowquantity                     
+		, ea_order_statement                   
+		, food_manage.food_name                
+		from ep_order_food_details             
+		inner join food_manage                 
+		on                                     
+		ep_order_food_details.food_id = food_manage.food_id
+		 group by food_id                      
+		 order by ep_order_wh_date desc
+	</select>
+	<!-- 검색한 갯수  -->
+	<select id="food_DT_SRcount" parameterType="java.util.Map" resultType="int">
+		select count(c.${selbox}) from (select ep_order_food_details.food_id         
+		, ep_order_id                          
+		, ep_id                                
+		, ep_order_date                        
+		, ep_order_wh_date                     
+		, ep_order_food_shelflife              
+		, ep_order_ea                          
+		, ep_order_wh_ea                       
+		, ep_order_unit_price                  
+		, ep_order_total_price                 
+		, ep_order_payment_option              
+		, food_nowquantity                     
+		, ea_order_statement                   
+		, food_manage.food_name                
+		from ep_order_food_details
+		inner join food_manage                 
+		on                                     
+		ep_order_food_details.food_id = food_manage.food_id
+		where ${plus}.${selbox} like concat('%',#{keyWord},'%')  
+		group by food_id) as c
+	</select>
+	<!-- 검색한 목록요청 -->
+	<select id="food_DT_SRlist" parameterType="java.util.Map" resultType="kr.or.possys.ep_order_food_details_service.Ep_Order">
+		select ep_order_food_details.food_id         
+        , ep_order_id                          
+        , ep_id                                
+        , ep_order_date                        
+        , ep_order_wh_date                     
+        , ep_order_food_shelflife              
+        , ep_order_ea                          
+        , ep_order_wh_ea                       
+        , ep_order_unit_price                  
+        , ep_order_total_price                 
+        , ep_order_payment_option              
+        , food_nowquantity                     
+        , ea_order_statement                   
+        , food_manage.food_name                
+        from ep_order_food_details
+        inner join food_manage                 
+        on                                
+        ep_order_food_details.food_id = food_manage.food_id
+        where ${plus}.${selbox} like concat('%',#{keyWord},'%') 
+        group by food_id
+        order by ep_order_wh_date desc
+	</select>
+
+
+</mapper>

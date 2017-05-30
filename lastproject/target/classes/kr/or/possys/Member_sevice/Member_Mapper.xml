@@ -3,6 +3,52 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.possys.Member_sevice.Member_Mapper">
+<!-- 영수증 화면 출력 쿼리 -->
+<select id="receipt" parameterType="java.util.HashMap" resultType="kr.or.possys.Member_sevice.receipt">
+select 
+member.member_phone as member_phone
+,member.member_name as member_name
+,member.member_point as member_point
+,order_detail.menu_name as menu_name
+,order_detail.order_detail_ea as order_detail_ea
+,order_detail.order_detail_sum as order_detail_sum
+,payment.payment_id  as payment_id
+,payment.payment_total as payment_total
+,payment.payment_pay as payment_pay
+,payment.payment_addmileage as payment_addmileage
+,payment.payment_usemileage as payment_usemileage
+,payment.payment_date as payment_date
+,payment.payment_cate as payment_cate
+,payment.payment_state as payment_state
+from member,order_detail,table_order,payment
+where member.member_phone=#{member_phone}
+and order_detail.table_order_id=#{table_order_id} 
+and table_order.table_order_id=order_detail.table_order_id
+and table_order.table_order_end='t'
+and payment.member_phone=member.member_phone
+and payment.table_order_id=order_detail.table_order_id
+</select>
+<!-- 테이블 자리 이동 쿼리 -->
+<update id="table_move" parameterType="java.util.HashMap">
+update table_order set table_order.table_order_num=#{table_num} 
+where table_order.table_order_id=#{table_order_id}
+</update>
+
+<!-- 오늘 총 판매액 -->
+<select id="today_total" resultType="int">
+select sum(payment_pay) as payment_pay 
+from payment 
+where payment.payment_state='정상' 
+and payment.payment_date=curdate();
+</select>
+
+<!-- 사용중인 테이블수 확인 하는 쿼리 -->
+<select id="f_table_count" resultType="int">
+select count(*)as count 
+from table_order 
+where table_order.table_order_end='f'
+
+</select>
 <!-- 테이블 상태 확인 -->
 <select id="table_state" resultType="kr.or.possys.Order_service.Order">
 select 

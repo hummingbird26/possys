@@ -23,7 +23,8 @@
 		menu_id,
 		menu_name,
 		order_detail_ea,
-		order_detail_sum 
+		order_detail_sum,
+		order_detail_end
 		from order_detail where table_order_id= #{table_order_id}
 		</select>
 		
@@ -35,8 +36,15 @@
 		
 	<update id="order_end_t" parameterType="String">
 		update table_order
-		set table_order_end = 't'
+		set table_order_end = 'T'
 		where table_order_id = #{table_order_id}
+	</update>
+	
+	<update id="order_detail_end_t" parameterType="kr.or.possys.Order_service.Order">
+		update order_detail
+		set order_detail_end = 'T'
+		where table_order_id = #{table_order_id}
+		and menu_id = #{menu_id}
 	</update>
 	
 	<update id="order_modify_action" parameterType="kr.or.possys.Order_service.Order">
@@ -61,13 +69,15 @@
 		menu_id,
 		menu_name,
 		order_detail_ea,
-		order_detail_sum)
+		order_detail_sum,
+		order_detail_end)
 		values (
 		#{table_order_id},
 		#{menu_id},
 		#{menu_name},
 		#{order_detail_ea},
-		#{order_detail_sum}
+		#{order_detail_sum},
+		#{order_detail_end}
 		)
 		
 		</insert>
@@ -115,7 +125,7 @@
 		update ep_order_food_details
 		set
 		food_nowquantity = 0,
-		ep_order_statement = '소진'
+		ea_order_statement = '소진'
 		where ep_order_id = #{ep_order_id}
 		and food_id = #{food_id}
 		</update>
@@ -127,4 +137,9 @@
 		where ep_order_id = #{ep_order_id}
 		and food_id = #{food_id}
 		</update>
+		
+		<select id="order_count" resultType="kr.or.possys.Order_service.Order">
+			select max(table_order_id) as order_count
+			from table_order
+		</select>
 </mapper>

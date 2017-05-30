@@ -69,6 +69,14 @@
 		,'미발주 상태'
 		)
 	</insert>
+					<!-- @@@@@ 업체 삭제시 발주테이블에 발주id값이 있나 확인할려고 하는 발주리스트 목록 불러오기 -->
+	<select id="chk_del" parameterType="string" resultType="kr.or.possys.ep_order_food_details_service.Ep_Order">
+		select * from ep_order_food_details where food_id = #{food_id}		
+	</select>
+	<select id="chk_alldel" parameterType="string" resultType="kr.or.possys.ep_order_food_details_service.Ep_Order">
+		select * from ep_order_food_details where ep_id = #{ep_id}		
+	</select>
+	
 	<!-- 업체 중복없이 카운트 -->
 		<select id="getep_mcount" resultType="int">
 			select count(distinct ep_name) from ep_order_manage
@@ -134,6 +142,14 @@
 	<delete id="f_del" parameterType="string">
 		delete from ep_order_manage where food_id=#{food_id}
 	</delete>
+	<!-- 발주업체 디폴트id 삭제 -->
+	<delete id="f_del_o" parameterType="string">
+		delete from ep_order_food_details where food_id=#{food_id}
+	</delete>
+	<delete id="f_del_oall" parameterType="java.util.Map">
+		delete from ep_order_food_details where ep_id=#{ep_id} and ep_order_id=#{ep_order_id}
+	</delete>
+	
 	<!-- 업체 검색 -->
 <!-- 	<select id="ep_msearch" parameterType="java.util.Map"  resultType="kr.or.possys.ep_order_manage_service.Ep_Manage"> -->
 <!-- 		select * -->

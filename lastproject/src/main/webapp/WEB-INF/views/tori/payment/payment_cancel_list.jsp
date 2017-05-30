@@ -41,7 +41,7 @@
                     <td>${pc.payment_cancel_pay}</td>
                     <td>${pc.payment_cancel_total}</td>
                     <td>${pc.payment_cancel_date}</td>
-                    <td>${pc.payment_cancel_cate}</td>
+                    <td>${pc.payment_cate}</td>
                 </tr>
             </c:forEach>
         </tbody>

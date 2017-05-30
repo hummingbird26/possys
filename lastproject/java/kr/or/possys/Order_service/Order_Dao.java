@@ -1,15 +1,10 @@
 package kr.or.possys.Order_service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import kr.or.possys.Menu_service.Menu;
-import kr.or.possys.food_service.Food;
 
 @Repository
 public class Order_Dao {
@@ -41,6 +36,11 @@ public class Order_Dao {
 	public int order_end_t(String table_order_id){
 		System.out.println("주문종결실행");
 		return sqlSessionTemplate2.update("kr.or.possys.Order_service.Order_Mapper.order_end_t",table_order_id);
+	}
+	
+	public int order_detail_end_t(Order order){
+		System.out.println("주문종결실행");
+		return sqlSessionTemplate2.update("kr.or.possys.Order_service.Order_Mapper.order_detail_end_t",order);
 	}
 	
 	public int order_detail_modify(Order order){
@@ -83,6 +83,11 @@ public class Order_Dao {
 	public int order_ep_plus(Order order){
 		System.out.println("식재 소비실행");
 		return sqlSessionTemplate2.delete("kr.or.possys.Order_service.Order_Mapper.order_ep_plus",order);
+	}
+	
+	public Order order_count(){
+		System.out.println("getcount");
+		return sqlSessionTemplate2.selectOne("kr.or.possys.Order_service.Order_Mapper.order_count");
 	}
 	
 	

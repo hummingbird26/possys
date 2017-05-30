@@ -8,6 +8,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.possys.Cancel_Payment_service.Payment_Cancel;
+import kr.or.possys.Member_sevice.Member;
+import kr.or.possys.Order_service.Order;
+
 @Repository
 public class Payment_Dao {
 	// Payment테이블에 맞게끔 DAO 새로 설정하기.
@@ -17,13 +21,74 @@ public class Payment_Dao {
 	/*public int updatePayment(Payment Payment) {
         return sqlSessionTemplate.update("kr.or.possys.Payment_service.Payment_Mapper.updatePayment", payment_id);
     }*/
+	
+	public int getToid(String table_order_id){
+		System.out.println("insertPayment_bringToid");
+		System.out.println(table_order_id);
+		
+		return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.checkToid", table_order_id);
+	}
+	
+	//주문상세목록페이지에서 결제페이지로 테이블주문번호의 값을 가지고 넘어오게 하는 역할을 한다.
+	public String getTableorderid(String table_order_id){
+		System.out.println("Payment_getTableorderid");
+		System.out.println(table_order_id);
+		
+		return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.bringToid", table_order_id);
+	}
     
-    /*public int deletePayment(String payment_id, String payment_pw) {
+	//payment_cancel테이블과 payment테이블 연결
+	public int insertPaymentCancel(String payment_id){
+		System.out.println("insertPaymentCancel");
+		System.out.println(payment_id);
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("payment_id", payment_id);
+		System.out.println(map);
+		
+		return sqlSessionTemplate.insert("kr.or.possys.Payment_service.Payment_Mapper.insertPaymentCancel",map);		
+	}
+	
+	//총결제금액정보 가져오기
+	public int bringOrderList(String table_order_id){
+		System.out.println("bringOrderList");
+		System.out.println(table_order_id);
+		Map<String, Object> map = new HashMap<String, Object>();
+		Order order = new Order();
+		System.out.println(map);
+		System.out.println(order);
+    	map.put("table_order_id", table_order_id);
+    	System.out.println(map);
+		return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.bringOrderList",table_order_id);
+	}
+	
+	//총마일리지 가져오기
+		public int bringMemberList(String member_phone){
+			System.out.println("bringMemberList");
+			System.out.println(member_phone);
+			Map<String, Object> map = new HashMap<String, Object>();
+			Member member = new Member();
+			System.out.println(map);
+			System.out.println(member);
+	    	map.put("member_phone", member_phone);
+	    	System.out.println(map);
+			return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.bringMemberList",member_phone);
+		}
+	
+	//결제목록삭제기능
+    public int deletePayment(String payment_id) {
+    	System.out.println("deletePayment");
+    	System.out.println(payment_id);
         Payment Payment = new Payment();
         Payment.setPayment_id(payment_id);
-        Payment.setPayment_pw(payment_pw);
         return sqlSessionTemplate.delete("kr.or.possys.Payment_service.Payment_Mapper.deletePayment", Payment);
-    }*/
+    }
+	
+	// payment와 payment_cancel 연결
+	/*	public int PaymentCancel(Payment payment) {
+	    	System.out.println("Payment_Cancel");
+	        return sqlSessionTemplate.insert("kr.or.possys.Payment_service.Payment_Mapper.PaymentCancel", payment);
+	    }*/
 	
 	//payment 결제 아이디 중복 체크
 	public int check_pid(String payment_id) {
@@ -34,6 +99,55 @@ public class Payment_Dao {
 		
 	}
 	
+	//Payment 테이블주문아이디 중복체크
+	public int checkToid(String table_order_id){
+		System.out.println("checkToid");
+		System.out.println(table_order_id);
+		
+		return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.checkToid", table_order_id);
+	}
+	
+	//Payment 회원전화번호 중복체크
+		public int checkPMPhone(String member_phone){
+			System.out.println("checkPMPhone");
+			System.out.println(member_phone);
+			
+			return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.checkPMPhone", member_phone);
+		}
+	
+	//Payment 업데이트(결제완료처리진행중에 결제확인여부(order_detail_end) F->T 교대
+		public int updatePayment(String table_order_id){
+			System.out.println("updatePayment");
+			System.out.println(table_order_id);
+			return sqlSessionTemplate.update("kr.or.possys.Payment_service.Payment_Mapper.updatePayment",table_order_id);
+		}
+		
+	//결제완료처리후에 회원보유마일리지를 마일리지 사용한 만큼 차감해주는 역할
+		public int subtractMileage(Payment payment){
+			System.out.println("subtractMileage");
+			System.out.println(payment);
+			String table_order_id = payment.getTable_order_id();
+			String member_phone = payment.getMember_phone();
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("table_order_id", table_order_id);
+			map.put("member_phone", member_phone);
+			System.out.println(map);
+			return sqlSessionTemplate.update("kr.or.possys.Payment_service.Payment_Mapper.subtractMileage",map);
+		}
+		
+	//결제완료처리후에 적립한마일리지를 적립분만큼 가산해주는 역할
+		public int addMileage(Payment payment){
+			System.out.println("addMileage");
+			System.out.println(payment);
+			String table_order_id = payment.getTable_order_id();
+			String member_phone = payment.getMember_phone();
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("table_order_id", table_order_id);
+			map.put("member_phone", member_phone);
+			System.out.println(map);
+			return sqlSessionTemplate.update("kr.or.possys.Payment_service.Payment_Mapper.addMileage",map);
+		}
+		
     //payment 검색 수 요청
     public int paymentSRlist(String select, String keyWord){
     	System.out.println("paymentSRlist");

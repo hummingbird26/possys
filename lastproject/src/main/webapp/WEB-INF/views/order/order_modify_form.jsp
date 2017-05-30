@@ -29,10 +29,12 @@
 					+"class ='"+menu_id+"' type ='text' value='"+menu_price+"'readonly='readonly'/> "
 					+"개별가격 : <input name ='menu_price' id ='menu_price'"
 					+"class ='"+menu_id+"' type ='text' value='"+menu_price+"'readonly='readonly'/> "
+					+"상태 : <input name = 'order_detail_end' id = 'order_detail_end'"
+					+"class = '"+menu_id+"' type = 'text' value = 'F' /> "
 					+"<button  type='button' id = '"+menu_id+"' class = 'delbutton'>삭제</button> "
 					+"<button  type='button' id = '"+menu_id+"' class = 'plusbutton'>+</button> "
 					+"<button  type='button' id = '"+menu_id+"' class = 'minusbutton'>-</button></div> "
-					
+					 
 					)
 			}
 
@@ -112,7 +114,7 @@
 		수량 : <input name ="order_detail_ea" id ="order_detail_ea" class = "${f.menu_id}" type ="text" value="${f.order_detail_ea}"readonly="readonly"/>
 		소계 : <input name ="order_detail_sum" id ="order_detail_sum" class = "${f.menu_id}" type ="text" value="${f.order_detail_sum}"readonly="readonly"/>
 		개별가격 : <input name ="menu_price" id ="menu_price" class = "${f.menu_id}" type ="text" value="${f.menu_price}"readonly="readonly"/>
-		
+		상태 : <input name = "order_detail_end" id = "order_detail_end" class = "${f.order_detail_end}" type = "text" value = "${f.order_detail_end}" />
 		<button  type="button" id = "${f.menu_id}" class = "delbutton">삭제</button>
 		<button  type="button" id = "${f.menu_id}" class = "plusbutton">+</button>
 		<button  type="button" id = "${f.menu_id}" class = "minusbutton">-</button>

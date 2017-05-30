@@ -125,9 +125,9 @@ height:200px;
         </div>
          -->
          <div class="session" style="float:left;">	
-        		<b>아이디:${sessionScope.admin.admin_id}</b>
-        		<b>이름:${sessionScope.admin.admin_name}</b>
-        		<b>직책:${sessionScope.admin.admin_level}</b>
+        		<b>아이디:${sessionScope.Staff.Staff_id}</b>
+        		<b>이름:${sessionScope.Staff.Staff_name}</b>
+        		<b>직책:${sessionScope.Staff.Staff_level}</b>
         		</br>
         		<a href="${pageContext.request.contextPath}/logout">로그아웃</a>
             </div>	
@@ -185,6 +185,7 @@ height:200px;
 							<!-- 회원 리스트 링크 -->
                         	<li class="item-thumbs span3 member">
                             	<!-- Fancybox - Gallery Enabled - Title - Full Image -->
+                            	<%-- <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="member_list" href="${pageContext.request.contextPath}/member_list"> --%>
                             	<a class="hover-wrap fancybox" data-fancybox-group="gallery" title="member_list" href="${pageContext.request.contextPath}/member_list">
                                 	<span class="overlay-img">member_List</span>
                                     <span class="overlay-img-thumb font-icon-plus"></span>
