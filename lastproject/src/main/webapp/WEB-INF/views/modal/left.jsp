@@ -41,7 +41,7 @@
                       </ul>
                     </li> -->
                     <li class="ripple">
-                      <a class="tree-toggle nav-header">
+                      <a class="tree-toggle nav-header" href="${pageContext.request.contextPath}/menu_chart">
                         <span class="fa-area-chart fa">매장내 종합현황</span>
                         <span class="fa-angle-right fa right-arrow text-right"></span>
                       </a>
@@ -79,7 +79,7 @@
                     </li> -->
                     <li class="ripple"><a class="tree-toggle nav-header"><span class="fa fa-table"></span> 종합 리스트  <span class="fa-angle-right fa right-arrow text-right"></span> </a>
                       <ul class="nav nav-list tree">            
-                        <li><a href="${pageContext.request.contextPath}/new_member_list">회원 목록</a></li>
+                        <li><a href="123">회원 목록</a></li>
                         <li><a href="${pageContext.request.contextPath}/tablestatic.html">직원 목록</a></li>
                         <li><a href="${pageContext.request.contextPath}/tablestatic.html">주문 목록</a></li>
                         <li><a href="${pageContext.request.contextPath}/tablestatic.html">식재 목록</a></li>
