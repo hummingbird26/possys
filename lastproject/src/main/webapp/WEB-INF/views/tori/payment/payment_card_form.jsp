@@ -16,13 +16,13 @@
 <script>
 $(document).ready(function(){
 	$('#paymentCardAdd').click(function(){
-		if($('#card_id').val().length<4){
+		/* if($('#card_id').val().length<4){
 			alert('아이디를 4글자 이상 입력하시오.');
       $('#card_id').focus();
 		}else if($('#payment_id').val().length<4){
 			alert('결제아이디를 4자리 이상 입력하시오.');
       $('#payment_id').focus();
-		}else if($('#card_app').val()==''){
+		}else */ if($('#card_app').val()==''){
 			alert('신용구븐를 입력해주십시오.');
       $('#card_app').focus();
 		}else if($('#card_detail').val()==''){
@@ -108,25 +108,25 @@ function insertChk(){
 				<tr>
 					<td>승인번호 :
 					</td>
-					<td><input type="text" class="form-control" name="card_id" id="card_id" size="auto">
+					<td><input type="text" class="form-control" name="card_id" id="card_id" size="auto" placeholder="승인번호를 입력해주세요">
 					</td>
 				</tr>
 				<tr>
 					<td>결제번호 : 
 					</td>
-					<td><input type="text" class="form-control" name="payment_id" id="payment_id" size="auto">
+					<td><input type="text" class="form-control" name="payment_id" id="payment_id" size="auto" placeholder="결제아이디를 입력해주세요">
 					</td>
 				</tr>
 				<tr>
 					<td>승인구분 : 
 					</td>
-					<td><input type="text" class="form-control" name="card_app" id="card_app" size="auto">
+					<td><input type="text" class="form-control" name="card_app" id="card_app" size="auto" placeholder="승인구분을 입력해 주세요">
 					</td>
 				</tr>
 				<tr>
 					<td>상세내역 : 
 					</td>
-					<td><input type="text" class="form-control" name="card_detail" id="card_detail" size="auto">
+					<td><input type="text" class="form-control" name="card_detail" id="card_detail" size="auto" placeholder="결제상세내역을 입력해 주세요">
 					</td>
 				</tr>
 				<tr>
@@ -138,31 +138,31 @@ function insertChk(){
 				<tr>
 					<td>카드사 : 
 					</td>
-					<td><input type="text" class="form-control" name="card_company" id="card_company" size="auto">
+					<td><input type="text" class="form-control" name="card_company" id="card_company" size="auto" placeholder="카드사를 입력해 주세요">
 					</td>
 				</tr>
 				<tr>
 					<td>카드결제금액 :
 					</td>
-					<td><input type="text" class="form-control" name="card_total" id="card_total" size="auto">
+					<td><input type="text" class="form-control" name="card_total" id="card_total" size="auto" placeholder="결제금액을 입력해 주세요">
 					</td>
 				</tr>
 				<tr>
 					<td>공급가액: 
 					</td>
-					<td><input type="text" class="form-control" name="card_price" id="card_price" size="auto">
+					<td><input type="text" class="form-control" name="card_price" id="card_price" size="auto" placeholder="공급가액을 입력해 주세요">
 					</td>
 				</tr>
 				<tr>
 					<td>부가세 : 
 					</td>
-					<td><input type="text" class="form-control" name="card_tax" id="card_tax" size="auto">
+					<td><input type="text" class="form-control" name="card_tax" id="card_tax" size="auto" placeholder="부가세를 입력해 주세요">
 					</td>
 				</tr>
 				</table>
-		<input type="submit" class="btn btn-primary" id="paymentCardAdd" name="paymentCardAdd" value="제출">
+		<input type="submit" class="btn btn-primary" id="paymentCardAdd" name="paymentCardAdd" value="카드거래입력">
 		<input type="reset" class="btn btn-primary" id="paymentCancel" name="paymentCancel" value="되돌림">
-		<a class="btn btn-default" href="${pageContext.request.contextPath}/tori/payment/payment_card_list">글목록</a>
+		<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_card_list">글목록</a>
 		<input type="button" class="btn btn-primary" value="idcheck" onclick="javascript:chkDupCardId();"/>
 		</form>
 		<br><br>

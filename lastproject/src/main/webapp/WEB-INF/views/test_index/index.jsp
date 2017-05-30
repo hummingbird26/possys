@@ -24,11 +24,7 @@
 	<!-- end: Css -->
 
 	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/asset/img/logomi.png">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+   
   </head>
 
  <body id="mimin" class="dashboard">
@@ -47,7 +43,7 @@
                         <p class="animated fadeInDown"><span class="fa  fa-map-marker"></span> Batavia,Indonesia</p>
 
                         <ul class="nav navbar-nav">
-                            <li><a href="${pageContext.request.contextPath}/test_index/table_state" >테이블 현황</a></li>
+                            <li><a href="" >홍경인</a></li>
                             <li><a href="" class="active">오광진</a></li>
                             <li><a href="">배상훈</a></li>
                             <li><a href="">최홍락</a></li>

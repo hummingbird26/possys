@@ -107,43 +107,43 @@ function insertChk(){
 	<table class="table table-stripped table-hover">
 		<tr>
 		<td>스태프ID</td>
-		<td><input class="form-control" size="auto" id="staff_id" name="staff_id" type="text"></td>
+		<td><input class="form-control" size="auto" id="staff_id" name="staff_id" type="text" placeholder="스태프아이디를 입력해주세요(4자이상)"></td>
 		</tr>
 		<tr>
 		<td>비밀번호</td>
-		<td><input class="form-control" size="auto" id="staff_pw" name="staff_pw" type="password"></td>
+		<td><input class="form-control" size="auto" id="staff_pw" name="staff_pw" type="password" placeholder="비밀번호를 입력해주세요"></td>
 		</tr>
 		<tr>
 		<td>성명</td>
-		<td><input class="form-control" size="auto" id="staff_name" name="staff_name" type="text"></td>
+		<td><input class="form-control" size="auto" id="staff_name" name="staff_name" type="text" placeholder="직원의 이름을 입력해 주세요"></td>
 		</tr>
 		<tr>
 		<td>직급</td>
-		<td><input class="form-control" size="auto" id="staff_level" name="staff_level" type="text"></td>
+		<td><input class="form-control" size="auto" id="staff_level" name="staff_level" type="text" placeholder="직급을 입력해 주세요"></td>
 		</tr>
 		<tr>
 		<td>나이</td>
-		<td><input class="form-control" size="auto" id="staff_age" name="staff_age" type="text"></td>
+		<td><input class="form-control" size="auto" id="staff_age" name="staff_age" type="text" placeholder="나이를 입력해 주세요"></td>
 		</tr>
 		<tr>
 		<td>주소</td>
-		<td><input class="form-control" size="auto" id="staff_addr" name="staff_addr" type="text"></td>
+		<td><input class="form-control" size="auto" id="staff_addr" name="staff_addr" type="text" placeholder="주소를 입력해 주세요"></td>
 		</tr>
 		<tr>
 		<td>이메일</td>
-		<td><input class="form-control" size="auto" id="staff_email" name="staff_email" type="text"></td>
+		<td><input class="form-control" size="auto" id="staff_email" name="staff_email" type="text" placeholder="이메일 주소를 입력해 주세요"></td>
 		</tr>
 		<tr>
 		<td>성별</td>
-		<td><input class="form-control" size="auto" id="staff_gender" name="staff_gender" type="text"></td>
+		<td><input class="form-control" size="auto" id="staff_gender" name="staff_gender" type="text" placeholder="성별을 입력해 주세요"></td>
 		</tr>
 		<tr>
 		<td>핸드폰</td>
-		<td><input class="form-control" size="auto" id="staff_phone" name="staff_phone" type="tel"></td>
+		<td><input class="form-control" size="auto" id="staff_phone" name="staff_phone" type="tel" placeholder="휴대폰번호를 입력해 주세요"></td>
 		</tr>
 		<tr>
 		<td>가입일자</td>
-		<td><input class="form-control" size="auto" id="staff_date" name="staff_date" type="date"></td>
+		<td><input class="form-control" size="auto" id="staff_date" name="staff_date" type="date" placeholder="가입일자를 입력해 주세요"></td>
 		</tr>
 	</table>
 	<input class="btn btn-primary" type="submit" id="staffAdd" name="staffAdd" value="제출">
