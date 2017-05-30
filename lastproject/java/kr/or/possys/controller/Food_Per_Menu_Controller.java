@@ -45,7 +45,10 @@ public class Food_Per_Menu_Controller {
 	@RequestMapping(value="/menu_searchz", method = RequestMethod.GET)
 	public String menuSRlist(Model model, @RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage
 			,@RequestParam(value="selbox") String selbox
-			,@RequestParam(name="keyWord") String keyWord){
+			,@RequestParam(name="keyWord") String keyWord
+			,@RequestParam(name="menu_id") String menu_id
+			,@RequestParam(name="menu_name") String menu_name
+			){
 			
 		int menuSRcount = dao.foodSRlist(selbox,keyWord);
 		int pageRow = 10;
@@ -57,6 +60,8 @@ public class Food_Per_Menu_Controller {
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPage", lastPage);
 		model.addAttribute("list", list);
+		model.addAttribute("menu_id", menu_id);
+		model.addAttribute("menu_name", menu_name);
 		
 				
 		return "/zeus/menu_per_view";
@@ -67,6 +72,7 @@ public class Food_Per_Menu_Controller {
 										@RequestParam(value="food_id",required=true) String food_id){
 		System.out.println(menu_id);
 		System.out.println(food_id);
+		System.out.println("인식 완료");
 		Menu menu = dao.menuview(menu_id);
 		Food food = dao.menuview01(food_id);
 		model.addAttribute("menu",menu);
