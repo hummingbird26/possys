@@ -207,6 +207,9 @@ public class Payment_Controller {
 		System.out.println(id+"<------ 컨트롤러 값 확인 ");
 		
 		pdao.insertPayment(Payment);
+		pdao.updatePayment(table_order_id);
+		pdao.subtractMileage(Payment);
+		pdao.addMileage(Payment);
 		/*return "redirect:/tori/payment/payment_list";*/
 		return "redirect:/receipt?member_phone="+member_phone+"&table_order_id="+table_order_id;
 		
@@ -549,10 +552,23 @@ public class Payment_Controller {
 	// 카드 결제 목록 시작
 		
 		//리스트 입력 폼으로 이동한다
-		@RequestMapping(value="/tori/payment/payment_card_form", method = RequestMethod.GET)
+		/*@RequestMapping(value="/tori/payment/payment_card_form", method = RequestMethod.GET)
 		public String paymentcardadd(){
 			System.out.println("01 Payment_Controller.java -> paymentcardadd");
 			return "/tori/payment/payment_card_form";
+			//tori_home에서 설정한 경로와 매핑경로값 및 리턴값을 일치하게끔 설정한다.
+			
+		}*/
+		
+		@RequestMapping(value="/tori/payment/payment_card_form", method = RequestMethod.GET)
+		public String paymentcardadd(@RequestParam(value="payment_cate", required=true) String payment_cate){
+			System.out.println("01 Payment_Controller.java -> paymentcardadd");
+			System.out.println(payment_cate);
+			if(payment_cate == "카드")
+			{
+			return "/tori/payment/payment_card_form";
+			}
+			return "/tori/payment/payment_list";
 			//tori_home에서 설정한 경로와 매핑경로값 및 리턴값을 일치하게끔 설정한다.
 			
 		}
