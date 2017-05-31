@@ -6,13 +6,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원 리스트</title>
-<!-- bootstrap을 사용하기 위한 CDN주소 -->
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+ <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+ <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
  <style>
             .bu{
                /*  display: inline-block; */
@@ -37,11 +37,24 @@
             }
         
         </style>
- <%@ include file="../modal/wide_menu.jsp" %>
+ <%-- <%@ include file="../modal/wide_menu.jsp" %> --%>
+
+  <!-- start: Css -->
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/bootstrap.min.css">
+
+      <!-- plugins -->
+      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/plugins/font-awesome.min.css"/>
+      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/plugins/simple-line-icons.css"/>
+      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/plugins/animate.min.css"/>
+      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/plugins/fullcalendar.min.css"/>
+	<link href="${pageContext.request.contextPath}/resources/asset/css/style.css" rel="stylesheet">
+	<!-- end: Css -->
+
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/asset/img/logomi.png">
+   
 </head>
 <body>
-
-<%-- <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1> --%>
+ <%@ include file="../modal/header.jsp" %>
 
 <div class="container">
 	<br/>
@@ -91,40 +104,63 @@
         </c:if>
     </ul>
     
- <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+
+<!-- 오토 컴플리트 사용하기 위한 라이브러리 (삭제금지) -->
+<link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+<script src='https://cdn.rawgit.com/pguso/jquery-plugin-circliful/master/js/jquery.circliful.min.js'></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
 <script type="text/javascript"> 
 $(document).ready(function(){
-		  	var jsonString = '${jsonString}';
-		  	var memberList = eval("("+jsonString+")");
-		  /* var pp = memberList.member_name; */
-		 	var member_phone = new Array();
+	
+	/* 		$.ajax({
+				type:'GET',
+				url:"${pageContext.request.contextPath}/member_list",
+				success:function(data){
+					console.log(data);
+				}
+			}) */
+		  //컨트롤러에서 json방식으로 넣은 회원 정보를 model에 담아서 보내줌
+		  //jsonString 변수에 담아줌
+			var jsonString = '${jsonString}';
+		 	var memberList = eval("("+jsonString+")"); 
+		/*  alert(jsonString); */
+		  	/* console.log(jsonString); */
+			
+			//전역변수로 배열 선언
+			var member_phone = new Array();
 		  	var member_name = new Array();
 		  	var member_sign = new Array();
 		  	var member_join = new Array();
-		  
+		  //반복문으로 배열의 길이만큼 돌려서 값을 꺼내서 
+		  //위에서 선언한 전역변수에 담아준다.
 		  for(var i=0; i < memberList.length; i++){
 				var memberObject = memberList[i];
 			
-				console.log(memberObject.member_phone)
-		
+				
+				
 				member_phone.push(memberObject.member_phone);
 				member_name.push(memberObject.member_name);
 				member_sign.push(memberObject.member_sign);
 				member_join.push(memberObject.member_join);
-		  		}
-		    /* alert(member_phone); */
+		  		
+		  		//콘솔로 값 출력 확인
+				
+		  		/* console.log(member_phone+"<<<<member_phone")
+				console.log(member_name+"<<<<member_name")				
+				console.log(member_sign+"<<<<member_sign")
+				console.log(member_join+"<<<<member_join") */
+		  }
+		   
 		  
 					$('#selBox').change(function(){
 						var selbox = $('#selBox').val();
 						
 						
 						if(selbox == 'member_phone'){
-				    	$( "#search2" ).autocomplete({
+				    	$('#search2').autocomplete({
 					      source: member_phone
 				    	});
-						
+					
 						}else if(selbox == 'member_name'){
 							$( "#search2" ).autocomplete({
 							 source: member_name
@@ -142,12 +178,14 @@ $(document).ready(function(){
 					
 						}
 					});
-			});
-</script>
-<script type="text/javascript">
-$(document).ready(function(){
-		$('#button').click(function(){
+		   
 			
+			});
+</script> 
+ <script type="text/javascript">
+$(document).ready(function(){
+		$('#ml_button').click(function(){
+			/* alert('test'); */
 			var va = $("#selBox option:selected").val();
 			 var regExp = /\s/g;
 			var search2 =$('#search2').val();
@@ -161,7 +199,7 @@ $(document).ready(function(){
 		}); 				
 }); 
 
-  </script>
+ </script>
 
     <div>
  <form id="frm" name="frm" action="${pageContext.request.contextPath}/member_select" method="get">
@@ -172,8 +210,8 @@ $(document).ready(function(){
         <option  value="member_sign">가입일자</option>
         <option  value="member_join">최근방문일자</option>
         </select>
-      <input type="input" name="search2" id="search2">
-        <input type="button" name="button" id="button" value="검색">
+      	<input type="text" name="search2" id="search2">
+        <input type="button" name="ml_button" id="ml_button" value="검색">
      </form>
     </div>
 </div>

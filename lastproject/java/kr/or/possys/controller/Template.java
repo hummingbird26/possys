@@ -28,15 +28,15 @@ public class Template {
 		@RequestMapping(value="/today_total")
 		@ResponseBody
 		public void today_total(HttpServletResponse re) throws IOException{
-			System.out.println("today_total 메서드 실행 Template.java");
+			/*System.out.println("today_total 메서드 실행 Template.java");*/
 			 re.setCharacterEncoding("UTF-8");
 			 
 			 PrintWriter out = re.getWriter();
 			JSONArray today_total = null;
 			int total = Mdao.today_total();
-			System.out.println(total+"<<<<<today_total");
+			/*System.out.println(total+"<<<<<today_total");*/
 			today_total = JSONArray.fromObject(total);
-			System.out.println(today_total);
+			/*System.out.println(today_total);*/
 			
 			//새로운 화면에서 json방식으로 받아온 값 출력
 			out.write(today_total.toString());
@@ -49,15 +49,15 @@ public class Template {
 	@RequestMapping(value="/f_table_count")
 	@ResponseBody
 	public void f_table_count(HttpServletResponse re) throws IOException{
-		System.out.println("f_table_count 메서드 실행 Template.java");
+		/*System.out.println("f_table_count 메서드 실행 Template.java");*/
 		 re.setCharacterEncoding("UTF-8");
 		 
 		 PrintWriter out = re.getWriter();
 		JSONArray f_table_count = null;
 		int count = Mdao.f_table_count();
-		System.out.println(count+"<<<<<f_table_count");
+		/*System.out.println(count+"<<<<<f_table_count Template.java");*/
 		f_table_count = JSONArray.fromObject(count);
-		System.out.println(f_table_count);
+		/*System.out.println(f_table_count);*/
 		
 		//새로운 화면에서 json방식으로 받아온 값 출력
 		out.write(f_table_count.toString());

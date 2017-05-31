@@ -29,7 +29,7 @@ import kr.or.possys.Payment_service.Payment;
 import kr.or.possys.Staff_service.Staff;
 import kr.or.possys.Staff_service.Staff_Dao;
 import net.sf.json.JSONArray;
-
+import kr.or.possys.Member_sevice.receipt;
 @Controller
 public class Member_Controller {
 
@@ -42,8 +42,24 @@ public class Member_Controller {
 	@Autowired
 	private Staff_Dao sdao;
 	
-	//e-mail test
 
+	//영수증 화면 출력 메서드
+	@RequestMapping(value="/receipt")
+	public String receipt(Model model
+			,@RequestParam(value="table_order_id")String table_order_id
+			,@RequestParam(value="member_phone")String member_phone
+			){
+		System.out.println("receipt 메서드 실행 Member_Controller.java");
+		System.out.println(table_order_id +"table_order_id 값 receipt 메서드 실행 Member_Controller.java");
+		System.out.println(member_phone +"member_phone 값 receipt 메서드 실행 Member_Controller.java");
+		
+		List<receipt> receiptList = Mdao.receipt(member_phone, table_order_id);
+		
+		model.addAttribute("receiptList", receiptList);
+		System.out.println(receiptList.size()+"<<<<<<<<<<<receiptList 리턴 값");
+		
+		return "/member/receipt";
+	}
 	
 	
 	
@@ -526,7 +542,10 @@ public class Member_Controller {
 			}
 	//리스트
 	@RequestMapping(value="/member_list", method = RequestMethod.GET)
-	public String MemberList(Model model,@RequestParam(value="currentPage",required=false,defaultValue="1" )int currentPage){
+	
+	public String MemberList(
+			Model model
+			,@RequestParam(value="currentPage",required=false,defaultValue="1" )int currentPage){
 		System.out.println("MemberList 메서드 실행 확인  Member_Controller.java ");
 		int memberCount = Mdao.getMemberCount();
 		System.out.println(memberCount+"<-----memberCount 값 확인");
@@ -544,18 +563,21 @@ public class Member_Controller {
 				JSONArray memberListJson = null;
 				//리스트 쿼리 호출
 				List<Member> list = Mdao.getMemberList(currentPage, pagePerRow);		
-	
-		System.out.println(lastpage+"lastpage 리턴값 확인");
-		System.out.println(currentPage+"currentPage 리턴값 확인");
-		
-		
-		model.addAttribute("currentPage", currentPage);
-		model.addAttribute("memberCount",memberCount);
-		model.addAttribute("pagePerRow",pagePerRow);
-		model.addAttribute("lastpage",lastpage);
-		model.addAttribute("list",list);
-		model.addAttribute("expage",expage);
-	
+				
+				System.out.println(lastpage+"lastpage 리턴값 확인");
+				System.out.println(currentPage+"currentPage 리턴값 확인");
+				
+				memberListJson = JSONArray.fromObject(list);
+				
+				model.addAttribute("jsonString", memberListJson);
+				
+				model.addAttribute("currentPage", currentPage);
+				model.addAttribute("memberCount",memberCount);
+				model.addAttribute("pagePerRow",pagePerRow);
+				model.addAttribute("lastpage",lastpage);
+				model.addAttribute("list",list);
+				model.addAttribute("expage",expage);
+			
 		
 		return "/member/member_list";
 		
