@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>식자재 목록</title>
-<%@ include file="../../modal/wide_menu.jsp" %>
+<%-- <%@ include file="../../modal/wide_menu.jsp" %> --%>
 <script type="text/javascript">
 	$(document).ready(function(){
 		//검색 
@@ -51,6 +51,7 @@
 				alert("선택된 항목이 없습니다.");
 				return;	
 			}else{ 
+				//중복 체크
 				var arr = Array();
 				var count = 0;
 				var td_chk = $(".td_chk"); 
