@@ -9,14 +9,15 @@
  
    #pop{
     width:300px; height:100px; background:#3d3d3d; color:#fff; 
-    position:absolute; top:10px; left:500px; text-align:center; 
-    border:2px solid #000;
+    position:absolute; top:0px; left:500px; text-align:center; 
+    border:2px solid #000; 
+    margin-top:200px;
    }
  
    #pop_bt{
     border:1px solid #000;
     width:100px; margin:auto;
-    margin-top:300px;
+    margin-top:30px;
    cursor: pointer;
     font-weight:bold;
     text-align:center;
@@ -143,15 +144,15 @@ $(document).ready(function(){
             <label for="member_join">최근방문일자 :</label>
             <input class="form-control" name="member_join" id="member_join" value="${Member.member_join}" type="text"  readonly="readonly"/>
         </div>
-        <input class="btn btn-default" type="button" id="Dbtn" value="삭제">
+        <input class="btn btn-default" type="button" id="Dbtn" value="탈퇴">
         <a class="btn btn-default" href="${pageContext.request.contextPath}/member_list">글목록</a>
     </form>
     
 </div>
-<div id="pop_bt">
+<!-- <div id="pop_bt">
    팝업띄우기
-  </div>
- 
+  </div> -->
+ </br></br></br></br>
   <div id="pop" style="display:none;">
     <div style="height:370px;">
       	전화번호를 입력해 주세요

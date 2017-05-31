@@ -19,6 +19,10 @@ public class Member_Dao {
 	@Autowired
 	private SqlSessionTemplate Msql;
 	
+	public int sign_up_action(Member m){
+		System.out.println("sign_up_action 실행 Member_Dao.java");
+		return Msql.insert("kr.or.possys.Member_sevice.Member_Mapper.sign_up_action", m);
+	}
 	
 	//영수증 출력 메서드
 	public List<receipt> receipt(String member_phone,String table_order_id){
