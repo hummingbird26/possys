@@ -4,13 +4,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-	
+	<style>
+	/* .panel-body{
+	position:fixed;
+	top:30px;
+	width:100%;
+	height:100%;
+	} */
+	</style>
 	<meta charset="utf-8">
 	<meta name="description" content="Miminium Admin Template v.1">
 	<meta name="author" content="Isna Nur Azis">
 	<meta name="keyword" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Miminium</title>
+    <title>테이블 현황</title>
  
     <!-- start: Css -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/bootstrap.min.css">
@@ -92,7 +99,7 @@ playAlert = setInterval(function() {
       <div class="container-fluid mimin-wrapper">
   	<%@ include file="../modal/left.jsp" %>
      <!-- start: content -->
-            <div id="content">
+            <div id="content" style="top:30px;">
                 <div class="panel">
                   <div class="panel-body">
                       <div class="col-md-6 col-sm-12">

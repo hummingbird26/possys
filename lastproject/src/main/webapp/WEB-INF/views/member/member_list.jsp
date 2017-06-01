@@ -36,6 +36,12 @@
             	background-color:#FFD8D8;
             }
         
+	        .adelet:link{color:#000000;}
+		    .adelet:hover{color:#ffff00;}
+		  /*   .adelet:active{color:#00ff00;} */
+		    .adelet:visited{color:#000000;}   
+				
+	        
         </style>
  <%-- <%@ include file="../modal/wide_menu.jsp" %> --%>
 
@@ -62,8 +68,52 @@
 	<br/>
 	<br/>
     <h1>MEMBER LIST</h1>
-    <div class="member">전체행의 수 : ${memberCount}</div>
-    <table class="table table-striped">
+    <div class="member">전체회원 수 : ${memberCount}</div>
+    
+  
+	    <!-- 회원 상세정보 들어가는 div -->
+	    <div id="member_view" style="display:none">
+	   		<div id="member_name">
+	   		
+	   		</div>
+	   	</br>
+	   	<input type="button" id="member_list_btn" class ="bu" value="목록">
+	   	<input type="hidden" id="hidden_receipt_list" class="bu" value="">
+	   	<input type="button" id="receipt_list" class="bu" value="이용내역">
+	    <input type="button" id="member_list_up_btn" class ="bu" value="회원정보 수정">
+	   	<input type="button" id="member_update_btn" class ="bu" value="수정완료">
+	   	</div>
+	    
+	    <!-- 회원 정보 수정 입력폼 -->
+	    <div id="member_update_view" style="display:none; position:fixed; right: 400px;">
+	   	<input type="button" id="member_update_btn" class ="bu" value="수정완료">
+	   	</div>
+    	<!-- 회원 이용내역 나오는 폼 -->
+    	<div id="hidden_receipt">
+    		<table>
+				<thead>
+				 <tr>
+                <th>결제번호</th>
+                <th>총 결제 금액</th>
+                <th>결제 금액</th>
+                <th>적립 마일리지</th>
+                <th>사용 마일리지</th>
+                <th>결제 날짜</th>
+                <th>결제 방법</th>
+                <th>결제 처리 상태</th>
+                <th>메 뉴 명</th>
+                <th>주문 개수</th>
+                <th>단품 가격</th>
+            </tr>
+				
+				</thead>    		
+    		<tbody id="member_receipt_list">
+    		
+    		</tbody>
+    		</table>
+    	</div>
+    
+    <table class="table table-striped" id="member_list">
         <thead>
             <tr>
                 <th>member_phone</th>
@@ -71,22 +121,32 @@
                 <th>member_point</th>
                 <th>member_sign</th>
                 <th>member_join</th>
+                <th>회원정보 상세보기</th>
+                <th>회원정보 삭제</th>
             </tr>
         </thead>
         <tbody id="retd">
-           <c:forEach var="m" items="${list}">
+        
+          <c:forEach var="m" items="${list}">
                 <tr class="retd">
                  <td><a href="${pageContext.request.contextPath}/member_information_view?member_phone=${m.member_phone}">${m.member_phone}</a></td>
                     <td>${m.member_name}</td>
                     <td>${m.member_point}</td>
                     <td>${m.member_sign}</td>
                     <td>${m.member_join}</td>
+                    <td><button class="list_up_btn bu" value="${m.member_phone}">상세보기</button></td>
+                     
+                    <td>
+                   
+                    <a class="adelet" href="${pageContext.request.contextPath}/member_Secede?member_phone=${m.member_phone}"> 삭  제</a>
+                   
+                	</td>
                 </tr>
-           </c:forEach>
+           </c:forEach> 
         </tbody>
         
     </table>
-    <ul class="pager">
+    <ul class="pager" id="ml_pager">
         <c:if test="${currentPage < lastpage}">
             <li class="previous"><a href="${pageContext.request.contextPath}/member_list?currentPage=${currentPage-1}">이전</a></li>
         </c:if>
@@ -104,7 +164,7 @@
         </c:if>
     </ul>
     
-
+	
 <!-- 오토 컴플리트 사용하기 위한 라이브러리 (삭제금지) -->
 <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
 <script src='https://cdn.rawgit.com/pguso/jquery-plugin-circliful/master/js/jquery.circliful.min.js'></script>
@@ -112,13 +172,6 @@
 <script type="text/javascript"> 
 $(document).ready(function(){
 	
-	/* 		$.ajax({
-				type:'GET',
-				url:"${pageContext.request.contextPath}/member_list",
-				success:function(data){
-					console.log(data);
-				}
-			}) */
 		  //컨트롤러에서 json방식으로 넣은 회원 정보를 model에 담아서 보내줌
 		  //jsonString 변수에 담아줌
 			var jsonString = '${jsonString}';
@@ -131,13 +184,17 @@ $(document).ready(function(){
 		  	var member_name = new Array();
 		  	var member_sign = new Array();
 		  	var member_join = new Array();
+		  	var member_point = new Array();
+		  	
+		  	
+		  					
+		  	console.log(member_point);
 		  //반복문으로 배열의 길이만큼 돌려서 값을 꺼내서 
 		  //위에서 선언한 전역변수에 담아준다.
 		  for(var i=0; i < memberList.length; i++){
 				var memberObject = memberList[i];
 			
-				
-				
+				member_point.push(memberObject.member_point);
 				member_phone.push(memberObject.member_phone);
 				member_name.push(memberObject.member_name);
 				member_sign.push(memberObject.member_sign);
@@ -150,8 +207,11 @@ $(document).ready(function(){
 				console.log(member_sign+"<<<<member_sign")
 				console.log(member_join+"<<<<member_join") */
 		  }
-		   
+		 
 		  
+		
+					
+		
 					$('#selBox').change(function(){
 						var selbox = $('#selBox').val();
 						
@@ -177,8 +237,10 @@ $(document).ready(function(){
 						alert('선택하세요');
 					
 						}
-					});
-		   
+					});//for문 끝
+					
+			 
+	
 			
 			});
 </script> 
@@ -197,10 +259,193 @@ $(document).ready(function(){
 				 alert('내용을 입력 하세요');
 			}
 		}); 				
+
+		
+		//상세정보 버튼 클릭할 경우 작동
+		$('.list_up_btn').click(function(){
+			/* var member_join;
+			var member_name;
+			var member_phone;
+			var member_point;
+			var member_sign; */
+			$('#hidden_receipt').hide(1500);
+			$('#member_list_up_btn').show(1500);
+			$('#member_list').hide(1500);
+			$('#ml_pager').hide(1500);
+			$('#frm').hide(1500);
+			//클릭한 자기의 밸류값을 up_btn에 담아준다.
+
+			var up_btn = $(this).val();
+			//히든타입인 input에 회원 전화번호를 밸류값으로 담아준다
+			$('#hidden_receipt_list').val(up_btn);
+			
+			
+			/* alert(up_btn); */
+			//ajax통신으로 보낼 데이터 변수에 담아줌. ""<-에 들어간 건 받을때 사용할 이름
+			//뒤에는 값.
+			var member_phone = {"member_phone":up_btn}
+			
+			
+			$.ajax({
+			type:'GET',
+			url: "${pageContext.request.contextPath}/ajax_member_update",
+			dataType: "JSON",
+		    data : member_phone,
+		    
+			success:function(data){
+				/* alert('통신성공'); */
+				/* console.log(data); */
+				var member_join = data[0].member_join
+				var member_name = data[0].member_name
+				var member_phone = data[0].member_phone
+				var member_point = data[0].member_point
+				var member_sign = data[0].member_sign
+				
+				console.log(member_join+"<<<");
+				console.log(member_name+"<<<");
+				console.log(member_phone+"<<<");
+				console.log(member_point+"<<<");
+				console.log(member_sign+"<<<");
+				
+				$('#member_name').html("<br><p><b>회원 가입 날짜</b> : "+" "+member_join+"</p>"
+										+"</br><p><b>회원 이름</b> : "+" "+member_name+"</p>"
+										+"</br><p><b>회원 연락처</b>: "+" "+member_phone+"</p>"
+										+"</br><p><b>보유 마일리지</b>: "+" "+member_point+"</p>"
+										+"</br><p><b>최근 방문일자</b>: "+" "+member_sign+"</p>");
+				
+				
+				//회원 정보 화면이 나타난다.
+				$('#member_view').show(1800);
+				$('#member_update_btn').hide();
+				
+				$('#member_update_view').html("<p><b>회원 가입 날짜</b> : "+" "+'<input type="text" id="member_update_member_join" style="cursor:not-allowed;" readonly value="'+member_join+'">'+"</p>"
+											+"<p><b>회원 이름</b> : "+" "+'<input type="text" id="member_update_member_name"  value="'+member_name+'">'+"</p>"
+											+"<p><b>회원 연락처</b> : "+" "+'<input type="text" id="member_update_member_phone" value="'+member_phone+'">'+"</p>"
+											+"<p><b>보유 마일리지</b> : "+" "+'<input type="text" id="member_update_member_point" style="cursor:not-allowed" readonly value="'+member_point+'">'+"</p>"
+											+"<p><b>최근 방문일자</b> : "+" "+'<input type="text" id="member_update_member_sign" style="cursor:not-allowed" readonly  value="'+member_sign+'">'+"</p>"
+											)
+			
+											
+				//목록 버튼을 클릭할때 회원 정보 화면이 사라지고 회원 목록이 나타난다.							
+				$('#member_list_btn').click(function(){
+														$('#member_update_view').hide(1500);
+														$('#member_view').hide(1500);
+														$('#member_list').show(1800);
+														$('#ml_pager').show(1800);
+														$('#frm').show(1800);
+													  	$('#hidden_receipt').hide(1500);
+													  	$('.receipt_tr').remove();
+														});
+					
+			
+				//회원정보 수정 버튼을 클릭했을때 실행된다.
+				$('#member_list_up_btn').click(function(){
+					//회원 정보 수정 화면 출력
+					$('#member_update_view').show(1500);
+					//회원정보 수정 완료 버튼
+					$('#member_update_btn').show(1800);
+					//회원정보 수정 버튼
+					$('#member_list_up_btn').hide(1500);
+					//이용내역 조회 숨김
+					$('#hidden_receipt').hide(1500);
+				});
+						
+			}//ajax success
+		
+		});//ajax 끝
+		
+		
+		
+		});
 }); 
 
  </script>
+<script>
+$('#member_update_btn').click(function(){
+	/* alert('test'); */
+	//회원정보 수정 처리 ajax
+	var member_update_member_join = $('#member_update_member_join').val();
+	var member_update_member_name = $('#member_update_member_name').val();
+	var member_update_member_phone = $('#member_update_member_phone').val();
+	var member_update_member_point = $('#member_update_member_point').val();
+	var member_update_member_sign = $('#member_update_member_sign').val();
+	
+	
+	var member_update = {"member_join":member_update_member_join
+						,"member_name":member_update_member_name
+						,"member_phone":member_update_member_phone
+						,"member_point":member_update_member_point
+						,"member_sign":member_update_member_sign}
 
+	console.log(member_update)
+	$.ajax({
+		type:'POST',
+		url: "${pageContext.request.contextPath}/ajax_member_update_action",
+		dataType: "JSON",
+	    data : member_update,
+	    success:function(data){
+	    	/* alert('입력 성공'); */
+	    	
+	    	
+	    
+	    }
+	});//회원정보 수정처리 ajax끝
+	
+
+	
+		 location.reload(); 
+});
+
+</script>
+<script>
+$('#receipt_list').click(function(){
+	
+	$('#hidden_receipt').show(1500);
+	$('#member_update_view').hide(1500);
+	//회원정보 수정 완료 버튼
+	$('#member_update_btn').hide(1800);
+	//회원정보 수정 버튼
+	$('#member_list_up_btn').show(1500);
+	
+	
+	var hidden_val = $('#hidden_receipt_list').val();
+	var hidden_phone = {"member_phone":hidden_val}
+	
+	
+	
+	
+	$.ajax({
+		type:'GET',
+		url: "${pageContext.request.contextPath}/ajax_receipt_list",
+		dataType: "JSON",
+	    data : hidden_phone,
+	    success:function(data){
+	    	
+	    	
+	     	$.each(data,function(){
+	    		
+	    	
+	    		
+	    	$('#member_receipt_list').append("<tr class='receipt_tr'><td>"+this.payment_id+"</td>"
+	    									+"<td>"+this.payment_total+"</td>"
+									    	+"<td>"+this.payment_pay+"</td>"
+									    	+"<td>"+this.payment_addmileage+"</td>"
+									    	+"<td>"+this.payment_usemileage+"</td>"
+									    	+"<td>"+this.payment_date+"</td>"
+									    	+"<td>"+this.payment_cate+"</td>"
+									    	+"<td>"+this.payment_state+"</td>"
+									    	+"<td>"+this.menu_name+"</td>"
+									    	+"<td>"+this.order_detail_ea+"</td>"
+									    	+"<td>"+this.order_detail_sum+"</td></tr>");
+	    	
+	    		
+	    	});
+	    	
+	    }
+	
+	 }); 
+});
+</script>
     <div>
  <form id="frm" name="frm" action="${pageContext.request.contextPath}/member_select" method="get">
     	<select  id="selBox" name="selBox">
@@ -211,9 +456,11 @@ $(document).ready(function(){
         <option  value="member_join">최근방문일자</option>
         </select>
       	<input type="text" name="search2" id="search2">
-        <input type="button" name="ml_button" id="ml_button" value="검색">
+        <input type="button" name="ml_button" id="ml_button" class ="bu" value="검색">
      </form>
     </div>
+    
+   	
 </div>
 </body>
 </html>

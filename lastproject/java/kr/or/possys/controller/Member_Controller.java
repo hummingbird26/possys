@@ -42,7 +42,59 @@ public class Member_Controller {
 	@Autowired
 	private Staff_Dao sdao;
 	
-
+	
+	
+	//회원 리스트에서 상세보기 클릭시 회원별 이용내역 확인
+	@RequestMapping(value="/ajax_receipt_list", method=RequestMethod.GET)
+	@ResponseBody
+	public void receipt_list(HttpServletResponse re
+					,@RequestParam(value="member_phone")String member_phone) throws IOException{
+		
+		
+		System.out.println("receipt_list 메서드 실행 확인 Member_Controller.java");
+		System.out.println(member_phone+"<<--member_phone의 값 receipt_list 메서드 실행 확인 Member_Controller.java");
+		 
+			re.setCharacterEncoding("UTF-8");
+		  
+			PrintWriter out = re.getWriter();
+			
+			JSONArray receipt_list = null;
+			
+			List<receipt> receipt = Mdao.receipt_list(member_phone);
+			
+			System.out.println(receipt);
+			
+			receipt_list = JSONArray.fromObject(receipt);
+			System.out.println(receipt_list);
+				
+			//새로운 화면에서 json방식으로 받아온 값 출력
+			out.write(receipt_list.toString());
+			
+			out.flush();
+		
+		
+	}
+	
+	//회원가입 화면 출력 메서드
+	@RequestMapping(value="/sign_up")
+	public String sign_up(){
+		System.out.println("sign_up 회원가입 화면 출력 메서드 Member_Controller");
+		
+		
+		return "/member/sign_up";
+	}
+	//회원가입 처리 메서드
+	@RequestMapping(value="/sign_up_action")
+	public String sign_up_action(Member m){
+		System.out.println("sign_up_action 회원가입 화면 출력 메서드 Member_Controller");
+/*		System.out.println(m.getMember_phone()+"getMember_phone");
+		System.out.println(m.getMember_name()+"getMember_name");
+		System.out.println(m.getMember_email()+"getMember_email");*/
+		Mdao.sign_up_action(m);
+		return "/member/sign_up";
+	}
+	
+	
 	//영수증 화면 출력 메서드
 	@RequestMapping(value="/receipt")
 	public String receipt(Model model
@@ -56,7 +108,7 @@ public class Member_Controller {
 		List<receipt> receiptList = Mdao.receipt(member_phone, table_order_id);
 		
 		model.addAttribute("receiptList", receiptList);
-		System.out.println(receiptList.size()+"<<<<<<<<<<<receiptList 리턴 값");
+		System.out.println(receiptList+"<<<<<<<<<<<receiptList 리턴 값");
 		
 		return "/member/receipt";
 	}
@@ -592,6 +644,62 @@ public class Member_Controller {
 		return "/member/member_information_view";
 		
 	}
+	
+	//동적 수정화면 연습
+	@RequestMapping(value ="/ajax_member_update", method = RequestMethod.GET)
+	@ResponseBody
+	public void ajax_update(
+			 HttpServletResponse re
+			,@RequestParam(value="member_phone")String member_phone) throws IOException{
+		System.out.println("동적 수정처리 update 메서드 호출    Member_Controller.java");
+		
+		/*model.addAttribute("Member",m);*/
+		URLEncoder.encode(member_phone , "UTF-8");
+		re.setCharacterEncoding("UTF-8");
+		//out 객체 사용하기 위해 준비
+		PrintWriter out = re.getWriter();
+		//json방식 사용
+		JSONArray J_member_update = null;
+		//한명의 회원정보 출력 쿼리 호출
+		Member member_update = Mdao.getMember(member_phone);
+		//받아온 회원정보를 제이손 객체에 넣어줌 
+		J_member_update = JSONArray.fromObject(member_update);
+		System.out.println(J_member_update);	
+		//새로운 화면에서 json방식으로 받아온 값 출력
+		out.write(J_member_update.toString());
+		//메모리 초기화
+		out.flush();
+	}
+	
+	
+	//동적 수정처리 메서드 연습
+		@RequestMapping(value ="/ajax_member_update_action", method = RequestMethod.POST)
+		@ResponseBody
+		public void ajax_update_Action(
+					@RequestParam(value="member_join")String member_join
+					,@RequestParam(value="member_name")String member_name
+					,@RequestParam(value="member_phone")String member_phone
+					,@RequestParam(value="member_point")int member_point
+					,@RequestParam(value="member_sign")String member_sign){
+			System.out.println("ajax_update_Action 메서드 실행");
+		/*	System.out.println(member_join+"member_join Member_Controller.java");
+			System.out.println(member_name+"member_name Member_Controller.java");
+			System.out.println(member_phone+"Member_Controller.java");
+			System.out.println(member_point+"Member_Controller.java");
+			System.out.println(member_sign+"Member_Controller.java");*/
+			
+			Member m = new Member();
+			m.setMember_join(member_join);
+			m.setMember_name(member_name);
+			m.setMember_phone(member_phone);
+			m.setMember_point(member_point);
+			m.setMember_sign(member_sign);
+			
+			
+			System.out.println(m.getMember_phone()+"<=-----------");
+			Mdao.Mupdate(m);
+		
+		}
 	
 	//수정처리 화면 출력 메서드 
 	@RequestMapping(value ="/member_update", method = RequestMethod.GET)

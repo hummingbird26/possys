@@ -20,17 +20,39 @@ public class Member_Dao {
 	private SqlSessionTemplate Msql;
 	
 	
+	public List<receipt> receipt_list(String member_phone){
+		System.out.println("receipt_list 메서드 실행 Member_Dao.java");
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("member_phone", member_phone);
+		
+		return Msql.selectList("kr.or.possys.Member_sevice.Member_Mapper.receipt_list",map );
+	}
+	//회원가입 처리 메서드
+	public int sign_up_action(Member m){
+		System.out.println("sign_up_action 실행 Member_Dao.java");
+		return Msql.insert("kr.or.possys.Member_sevice.Member_Mapper.sign_up_action", m);
+	}
+	
 	//영수증 출력 메서드
 	public List<receipt> receipt(String member_phone,String table_order_id){
 		System.out.println("receipt 메서드 실행 확인 Member_Dao.java");
 		System.out.println(table_order_id+"<--table_order_id receipt 메서드 실행 확인 Member_Dao.java");
 		System.out.println(member_phone+"<--member_phone receipt 메서드 실행 확인 Member_Dao.java");
+		if(member_phone==""||member_phone==null){
+			System.out.println("회원 핸드폰 번호가 없다.  receipt메서드 Member_Dao.java");
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("table_order_id",table_order_id);
+			
+			return Msql.selectList("kr.or.possys.Member_sevice.Member_Mapper.no_member_receipt",map);
+		}else{
+			System.out.println("회원 핸드폰 번호가 있다. receipt메서드 Member_Dao.java ");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("table_order_id",table_order_id);
 		map.put("member_phone",member_phone);
-		
 		return Msql.selectList("kr.or.possys.Member_sevice.Member_Mapper.receipt",map);
+		}
+		/*return Msql.selectList("kr.or.possys.Member_sevice.Member_Mapper.receipt",map);*/
 	}
 	//테이블 자리이동 메서드
 	public int table_move(String table_order_id,int table_num){

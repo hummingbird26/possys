@@ -6,6 +6,13 @@ public class Member {
 	int member_point;
 	String member_sign;
 	String member_join;
+	String member_email;
+	public String getMember_email() {
+		return member_email;
+	}
+	public void setMember_email(String member_email) {
+		this.member_email = member_email;
+	}
 	public String getMember_phone() {
 		return member_phone;
 	}
