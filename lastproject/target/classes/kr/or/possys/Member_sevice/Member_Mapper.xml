@@ -3,6 +3,30 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.possys.Member_sevice.Member_Mapper">
+
+<!-- 회원 리스트에서 상세보기 클릭시 회원별 결제내역 확인 쿼리 -->
+<select id="receipt_list" parameterType="java.util.HashMap" resultType="kr.or.possys.Member_sevice.receipt">
+select 
+payment.table_order_id
+,payment.payment_id  as payment_id
+,payment.payment_total as payment_total
+,payment.payment_pay as payment_pay
+,payment.payment_addmileage as payment_addmileage
+,payment.payment_usemileage as payment_usemileage
+,payment.payment_date as payment_date
+,payment.payment_cate as payment_cate
+,payment.payment_state as payment_state
+,order_detail.menu_name as menu_name
+,order_detail.order_detail_ea as order_detail_ea
+,order_detail.order_detail_sum as order_detail_sum
+
+from order_detail,payment,table_order
+where order_detail.table_order_id = payment.table_order_id
+and payment.member_phone=#{member_phone}
+and table_order.table_order_end='t'
+and table_order.table_order_id=payment.table_order_id
+</select>
+
 <!-- 회원가입 처리 쿼리 -->
 <insert id="sign_up_action" parameterType="kr.or.possys.Member_sevice.Member">
 insert into member(

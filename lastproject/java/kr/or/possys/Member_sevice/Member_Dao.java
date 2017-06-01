@@ -19,6 +19,15 @@ public class Member_Dao {
 	@Autowired
 	private SqlSessionTemplate Msql;
 	
+	
+	public List<receipt> receipt_list(String member_phone){
+		System.out.println("receipt_list 메서드 실행 Member_Dao.java");
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("member_phone", member_phone);
+		
+		return Msql.selectList("kr.or.possys.Member_sevice.Member_Mapper.receipt_list",map );
+	}
+	//회원가입 처리 메서드
 	public int sign_up_action(Member m){
 		System.out.println("sign_up_action 실행 Member_Dao.java");
 		return Msql.insert("kr.or.possys.Member_sevice.Member_Mapper.sign_up_action", m);

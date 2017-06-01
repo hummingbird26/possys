@@ -78,7 +78,9 @@
 	   		</div>
 	   	</br>
 	   	<input type="button" id="member_list_btn" class ="bu" value="목록">
-	   	<input type="button" id="member_list_up_btn" class ="bu" value="회원정보 수정">
+	   	<input type="hidden" id="hidden_receipt_list" class="bu" value="">
+	   	<input type="button" id="receipt_list" class="bu" value="이용내역">
+	    <input type="button" id="member_list_up_btn" class ="bu" value="회원정보 수정">
 	   	<input type="button" id="member_update_btn" class ="bu" value="수정완료">
 	   	</div>
 	    
@@ -86,7 +88,30 @@
 	    <div id="member_update_view" style="display:none; position:fixed; right: 400px;">
 	   	<input type="button" id="member_update_btn" class ="bu" value="수정완료">
 	   	</div>
-    
+    	<!-- 회원 이용내역 나오는 폼 -->
+    	<div id="hidden_receipt">
+    		<table>
+				<thead>
+				 <tr>
+                <th>결제번호</th>
+                <th>총 결제 금액</th>
+                <th>결제 금액</th>
+                <th>적립 마일리지</th>
+                <th>사용 마일리지</th>
+                <th>결제 날짜</th>
+                <th>결제 방법</th>
+                <th>결제 처리 상태</th>
+                <th>메 뉴 명</th>
+                <th>주문 개수</th>
+                <th>단품 가격</th>
+            </tr>
+				
+				</thead>    		
+    		<tbody id="member_receipt_list">
+    		
+    		</tbody>
+    		</table>
+    	</div>
     
     <table class="table table-striped" id="member_list">
         <thead>
@@ -184,24 +209,7 @@ $(document).ready(function(){
 		  }
 		 
 		  
-		 /* 
-				$.ajax({
-						type:'GET',
-						url:"${pageContext.request.contextPath}/member_list",
-						success:function(){
-							 //리스트 뿌리기
-							  $.each(memberList,function(){
-							  		
-							  		$('#retd').append("<tr><td>"
-							  					+this.member_phone+"</td><td>"
-							  					+this.member_name+"</td><td>"
-							  					+this.member_point+"</td><td>"
-							  					+this.member_sign+"</td><td>"
-							  					+this.member_point+"</td><td>"
-							  					+'<button class="list_up_btn bu" value="'+this.member_phone+'">상세보기</button></td><tr>')
-							  	});//each문 끝
-						}//success 끝
-					})//ajax 끝 */
+		
 					
 		
 					$('#selBox').change(function(){
@@ -253,13 +261,14 @@ $(document).ready(function(){
 		}); 				
 
 		
-		//페이지 전환 없이 동적으로 회원정보 출력 하기
+		//상세정보 버튼 클릭할 경우 작동
 		$('.list_up_btn').click(function(){
 			/* var member_join;
 			var member_name;
 			var member_phone;
 			var member_point;
 			var member_sign; */
+			$('#hidden_receipt').hide(1500);
 			$('#member_list_up_btn').show(1500);
 			$('#member_list').hide(1500);
 			$('#ml_pager').hide(1500);
@@ -267,7 +276,10 @@ $(document).ready(function(){
 			//클릭한 자기의 밸류값을 up_btn에 담아준다.
 
 			var up_btn = $(this).val();
-	
+			//히든타입인 input에 회원 전화번호를 밸류값으로 담아준다
+			$('#hidden_receipt_list').val(up_btn);
+			
+			
 			/* alert(up_btn); */
 			//ajax통신으로 보낼 데이터 변수에 담아줌. ""<-에 들어간 건 받을때 사용할 이름
 			//뒤에는 값.
@@ -321,7 +333,8 @@ $(document).ready(function(){
 														$('#member_list').show(1800);
 														$('#ml_pager').show(1800);
 														$('#frm').show(1800);
-													  
+													  	$('#hidden_receipt').hide(1500);
+													  	$('.receipt_tr').remove();
 														});
 					
 			
@@ -333,7 +346,8 @@ $(document).ready(function(){
 					$('#member_update_btn').show(1800);
 					//회원정보 수정 버튼
 					$('#member_list_up_btn').hide(1500);
-					
+					//이용내역 조회 숨김
+					$('#hidden_receipt').hide(1500);
 				});
 						
 			}//ajax success
@@ -382,6 +396,55 @@ $('#member_update_btn').click(function(){
 		 location.reload(); 
 });
 
+</script>
+<script>
+$('#receipt_list').click(function(){
+	
+	$('#hidden_receipt').show(1500);
+	$('#member_update_view').hide(1500);
+	//회원정보 수정 완료 버튼
+	$('#member_update_btn').hide(1800);
+	//회원정보 수정 버튼
+	$('#member_list_up_btn').show(1500);
+	
+	
+	var hidden_val = $('#hidden_receipt_list').val();
+	var hidden_phone = {"member_phone":hidden_val}
+	
+	
+	
+	
+	$.ajax({
+		type:'GET',
+		url: "${pageContext.request.contextPath}/ajax_receipt_list",
+		dataType: "JSON",
+	    data : hidden_phone,
+	    success:function(data){
+	    	
+	    	
+	     	$.each(data,function(){
+	    		
+	    	
+	    		
+	    	$('#member_receipt_list').append("<tr class='receipt_tr'><td>"+this.payment_id+"</td>"
+	    									+"<td>"+this.payment_total+"</td>"
+									    	+"<td>"+this.payment_pay+"</td>"
+									    	+"<td>"+this.payment_addmileage+"</td>"
+									    	+"<td>"+this.payment_usemileage+"</td>"
+									    	+"<td>"+this.payment_date+"</td>"
+									    	+"<td>"+this.payment_cate+"</td>"
+									    	+"<td>"+this.payment_state+"</td>"
+									    	+"<td>"+this.menu_name+"</td>"
+									    	+"<td>"+this.order_detail_ea+"</td>"
+									    	+"<td>"+this.order_detail_sum+"</td></tr>");
+	    	
+	    		
+	    	});
+	    	
+	    }
+	
+	 }); 
+});
 </script>
     <div>
  <form id="frm" name="frm" action="${pageContext.request.contextPath}/member_select" method="get">

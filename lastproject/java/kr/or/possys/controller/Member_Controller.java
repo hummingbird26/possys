@@ -42,6 +42,39 @@ public class Member_Controller {
 	@Autowired
 	private Staff_Dao sdao;
 	
+	
+	
+	//회원 리스트에서 상세보기 클릭시 회원별 이용내역 확인
+	@RequestMapping(value="/ajax_receipt_list", method=RequestMethod.GET)
+	@ResponseBody
+	public void receipt_list(HttpServletResponse re
+					,@RequestParam(value="member_phone")String member_phone) throws IOException{
+		
+		
+		System.out.println("receipt_list 메서드 실행 확인 Member_Controller.java");
+		System.out.println(member_phone+"<<--member_phone의 값 receipt_list 메서드 실행 확인 Member_Controller.java");
+		 
+			re.setCharacterEncoding("UTF-8");
+		  
+			PrintWriter out = re.getWriter();
+			
+			JSONArray receipt_list = null;
+			
+			List<receipt> receipt = Mdao.receipt_list(member_phone);
+			
+			System.out.println(receipt);
+			
+			receipt_list = JSONArray.fromObject(receipt);
+			System.out.println(receipt_list);
+				
+			//새로운 화면에서 json방식으로 받아온 값 출력
+			out.write(receipt_list.toString());
+			
+			out.flush();
+		
+		
+	}
+	
 	//회원가입 화면 출력 메서드
 	@RequestMapping(value="/sign_up")
 	public String sign_up(){
