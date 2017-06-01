@@ -18,9 +18,11 @@ public class Ep_Manage_Dao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-	//AJAX DAO@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	
+	
+	//AJAX DAO 식재료 업체 등록시 중복체크		
 	public int aj_food_chck(String food_id){
-		System.out.println(food_id+"<------AJAX DAO - food_chck()실행");
+		System.out.println(food_id+"<------AJAX Ep_Manage_Dao - aj_food_chck()실행");
 		//중복체크 카운트
 		return sqlSessionTemplate.selectOne("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.aj_food_chck",food_id);		
 	}

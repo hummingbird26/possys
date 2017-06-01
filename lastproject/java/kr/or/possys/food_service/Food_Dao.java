@@ -21,8 +21,14 @@ public class Food_Dao {
 	
 	//food 입력요청
 	public int insertfood(Food food){
-		System.out.println("01_Food_dao.java->>insertfood 실행 ");	
-		return sqlSessionTemplate.insert("kr.or.possys.food_service.Food_Mapper.insertfood",food);
+		System.out.println("01_Food_dao.java->>insertfood 실행 ");
+		//일련번호 관련 쿼리
+		String s_num =  sqlSessionTemplate.selectOne("kr.or.possys.food_service.Food_Mapper.s_Fnum");
+		if(s_num.equals("")){
+			System.out.println("초기값 없음");
+		}
+		return 0;
+//		return sqlSessionTemplate.insert("kr.or.possys.food_service.Food_Mapper.insertfood",food);
 	}
 	//food 목록 갯수 카운트
 	public int getfoodcount(){

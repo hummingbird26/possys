@@ -3,9 +3,10 @@ package kr.or.possys.controller;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import kr.or.possys.ep_order_food_details_service.Ep_Order;
 import kr.or.possys.ep_order_food_details_service.Ep_Order_Dao;
@@ -25,19 +26,81 @@ public class Ep_OF_Details_Controller {
 	@Autowired
 	Ep_Order_Dao dao = new Ep_Order_Dao();
 	
-	//발주 주문리스트 입고등록 폼 요청 AJAX
-		@RequestMapping(value="/ep_wh_add_form")
-		@ResponseBody
-		public List<Ep_Order> ep_wh_add_form(@RequestParam(value="ep_order_id", required=true) String ep_order_id
-											,HttpServletResponse response) throws Exception {
-			System.out.println("05_ep_wh_add_form실행 -Ep_OF_Details_Controller.java" );
-//			System.out.println(ep_order_id+"<=== 발주코드!");
-			List<Ep_Order> ep_wh_list =dao.js_ep_wh_list(ep_order_id);	
-//			System.out.println(ep_wh_list+"<<<< ep_wh_list");
-//			model.addAttribute("ep_wh_list",ep_wh_list);
-			// jstl 로 뿌리고 싶다면 model 객체에 담아야한다.
-			return ep_wh_list;
+	// 발주주문 목록에서 상세보기 - 발주 재등록시 update
+	@RequestMapping(value="ep_order_update",method=RequestMethod.POST)
+	public String ep_order_update(Ep_Order ep_o
+								,@RequestParam(value="ep_order_ea") int[] ep_order_ea){ //ep_order_ea는 자동으로 dto에 안담김
+		System.out.println("07_ep_order_update 실행 - Ep_OF_Details_Controller.java");
+//		System.out.println(ep_o.getEp_order_id());
+//		System.out.println(ep_o.getFood_id());
+		String _ep_order_id = ep_o.getEp_order_id();
+		String _food_id = ep_o.getFood_id();
+		String[] ep_order_id = _ep_order_id.split(",");
+		String[] food_id = _food_id.split(",");
+		for(int i=0; i<ep_order_id.length; i++){
+			Ep_Order _ep_o = new Ep_Order();
+			_ep_o.setEp_order_id(ep_order_id[i]);
+			_ep_o.setFood_id(food_id[i]);
+			_ep_o.setEp_order_ea(ep_order_ea[i]);
+			System.out.println(_ep_o.getEp_order_id()+"<<<ep_order_id");
+			System.out.println(_ep_o.getFood_id()+"<<<food_id");
+			System.out.println(_ep_o.getEp_order_ea()+"<<<ep_order_ea");
+			dao.ep_order_update(_ep_o);
+			
 		}
+
+		return "redirect://ep_order_list";
+	}
+	
+	//입고 목록 요청
+	@RequestMapping(value="ep_wh_list",method=RequestMethod.GET)
+	public String ep_wh_list(Model model
+							, @RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage){
+		System.out.println("06_ep_wh_list 실행 - Ep_OF_Details_Controller.java");
+		int pageRow = 50;
+		int expage = 1;
+		int wh_count = dao.ep_wh_conunt();
+		int lastPage = (int)(Math.ceil((double)wh_count/(double)pageRow)); 
+		List<Ep_Order> list = dao.ep_wh_list(currentPage, pageRow);
+		model.addAttribute("list",list);
+		model.addAttribute("expage",expage);
+		model.addAttribute("lastPage",lastPage);
+		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("wh_count",wh_count);
+		return "/wonbin/ep_order_food_details/ep_wh_list";		
+	}
+	
+	//입고등록 액션 처리
+	@RequestMapping(value="ep_order_add",method=RequestMethod.GET) // 배열방식 or 입력방식이 아니라 그런지 get으로 받음
+	public String ep_o_add(@RequestParam(value="ep_order_id") String[] ep_order_id
+							,@RequestParam(value="food_id") String[] food_id
+							,@RequestParam(value="ep_order_wh_ea") int[] ep_order_wh_ea
+							,@RequestParam(value="ep_order_food_shelflife") String[] ep_order_food_shelflife
+							,@RequestParam(value="ep_order_unit_price") int[] ep_order_unit_price
+							,@RequestParam(value="ep_order_total_price") int[] ep_order_total_price
+							){
+		System.out.println("05_ep_o_add 실행 - Ep_OF_Details_Controller.java");
+		List<Ep_Order> list = new ArrayList<Ep_Order>();		
+		for(int i=0; i<ep_order_id.length; i++){
+			Ep_Order ep_o = new Ep_Order(); // 반복문으로 list.add에 세팅후 다시 생성자메서드로 Dto 생성
+			ep_o.setEp_order_id(ep_order_id[i]);
+			ep_o.setFood_id(food_id[i]);
+			ep_o.setEp_order_wh_ea(ep_order_wh_ea[i]);
+			ep_o.setEp_order_food_shelflife(ep_order_food_shelflife[i]);
+			ep_o.setEp_order_unit_price(ep_order_unit_price[i]);
+			ep_o.setEp_order_total_price(ep_order_total_price[i]);
+//			System.out.println(ep_order_total_price[i]+"<<"+i+"번째 합계");
+			list.add(ep_o);	
+//			System.out.println(list.get(i)+"<<< list 담긴값");
+		// 이방식으로 해도 되지만 일일이 dao로 보내야한다. 
+//		for(String ep_o_id : ep_order_id){
+//			System.out.println(ep_o_id+"<<ep_order_id");
+//			ep_o.setEp_order_id(ep_o_id);			
+		}
+		dao.ep_o_wh_update(list);
+		return "redirect:ep_order_list";
+	}
+	
 	
 	//발주 주문 리스트 요청
 	@RequestMapping(value="ep_order_list",method=RequestMethod.GET)
@@ -63,11 +126,9 @@ public class Ep_OF_Details_Controller {
 				}else{
 					_ep_o_count = ep_o_count;
 				}
-			}
-		
+			}		
 		model.addAttribute("_ep_o_count", _ep_o_count);
-		model.addAttribute("list", list);
-		
+		model.addAttribute("list", list);		
 		return "/wonbin/ep_order_food_details/ep_order_list";
 	}
 	

@@ -35,6 +35,7 @@ public class Food {
 		return food_name;
 	}
 	public void setFood_name(String food_name) {
+//		System.out.println(food_name);
 		this.food_name = food_name;
 	}
 	public String getFood_size() {

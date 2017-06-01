@@ -10,9 +10,46 @@
     <script src="${pageContext.request.contextPath}/resources/src/jquery-fsortable.js"></script>
     <script src="${pageContext.request.contextPath}/resources/demo/demo.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/demo/demo.css">
+
+
+<!-- 얼럿창 스타일 -->
 <script src="${pageContext.request.contextPath}/resources/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/dist/sweetalert.css">
 <style>
+/* body{
+color:#000000;
+} */
+.demo{
+color:#F690C3;
+background-color : transparent;
+}
+.table_move:hover{
+                background-color: #FFFFE4;
+            }
+.table_move  {
+	background-color :transparent;
+	box-shadow : transparent;
+	border-color:transparent;
+	padding : 1em 0.5em;
+	border-radius : 1.6em;
+	text-align : center;
+	text-decoration : none;
+	
+}
+.table_payment:hover{
+                background-color: #FFFFE4;
+            }
+.table_payment {
+	background-color :transparent;
+	box-shadow : transparent;
+	border-color:transparent;
+	padding : 1em 0.5em;
+	border-radius : 1.6em;
+	text-align : center;
+	text-decoration : none;
+	
+}
+
 swal({
   title: "An input!",
   text: "Write something interesting:",
@@ -152,7 +189,9 @@ $(document).ready(function(){
      				var cls = '.'+k
      				var test1 = " ";
      				$(cls).html(i+1+"<br/>미사용")
-     				$(cls).attr('style','background-color:#FFFFF0');
+     				
+     				
+     				 $(cls).attr('style','background-color:#FFFFF0');
          			for(var j = 0; j< db_num.length; j++){
 
          				 if(t_num[i]==db_num[j]){
@@ -173,7 +212,7 @@ $(document).ready(function(){
 
              				console.log(cls);
          					$(cls).html("<font><b>사용중인 테이블</b></font>"+"<br/><br/>"+test1+"<br/><button class='table_move' value='"+test2+"'>자리이동</button></br><button class='table_payment' value='"+test2+"'>결제</button>")
-         					$(cls).attr('style','background-color:red');
+         					$(cls).attr('style','background-color:#FAE0D4');
          					
          				 
          				 }

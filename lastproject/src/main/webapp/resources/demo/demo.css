@@ -3,68 +3,29 @@
 	padding: 0;
 }
 
-/* .demo {
-	position: relative;
-	width: 1000px;
-	height: 500px;
-	float: center;
-	margin-right: 15px;
-} */
-
-/* .bg {
-	position: absolute;
-	left: 20px;
-	top: 20px;
-	width: 1000px;
-	height: 500px;
-	z-index: -1;
-} */
+/* div Ω∫≈∏¿œ */
 .bg div {
 	float: left;
 	height: 200px;
 	width: 200px;
-	border: 5px solid #aaa;
-	padding: 10px;
-	margin: 10px;
+	
+	border-style:outset;
+	
+	border-left-width: 5px; 
+	border-top-width:4px;
+	border-right-width:5px;
+	
+	border-color:transparent;
+	/*  padding: 10px; */
+	 margin: 10px;  
 	text-align: center;
-	opacity: 0.4;
+	/* opacity: 0.4; */
 }
-.fs {
-	position: absolute;
-	left: 20px;
-	top: 20px;
-	height: 20px;
-	width: 500px;
-	height: 100px;
-	border: 1px solid #aaa;
-}
-.fsortable-empty {
-	float: left;
-	height: 20px;
-	width: 20px;
-	padding: 20px;
-	margin: 10px;
-	border: 1px solid #999;
-}
+
 #content {
 	position: absolute;
 	top: 150px;
 	left: 20px;
 }
-.item {
-	height: 20px;
-	width: 20px;
-	padding: 20px;
-	margin: 10px;
-	border: 1px solid #000;
-	text-align: center;
-	float: left;
-	background-color: #fff;
-}
-/*
-.ui-sortable-placeholder {
-	visibility: visible !important;
-	border: 1px solid #999;
-}
-*/
+
 

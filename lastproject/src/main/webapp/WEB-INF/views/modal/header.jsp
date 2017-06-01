@@ -48,15 +48,28 @@
 			<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 			<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>	
 			<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/modal/style.css" />
+			<!-- 주문알림 팝업창 호출 -->
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+			<script type="text/javascript"> 
+			$(document).ready(function(){
+				$('#btn').click(function(){
+					
+					window.open("ho.html",'popup','width=500,height=300,left=0,top=0,toolbar=no,locaton=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no');
+						
+					
+				});
+			});
+			</script>
+			
 			<nav id="menu" class="menu">
 			 	<ul class="dropdown">
 			<li ><a href="#" title="Link">member</a>
 			        <ul >
-			          <li ><a href="${pageContext.request.contextPath}/real_time" title="link ">실시간검색</a></li>
+			          <li ><a href="${pageContext.request.contextPath}/real_time" title="link ">검색</a></li>
 			          <li ><a href="${pageContext.request.contextPath}/member_list" title="Link">회원목록(회원관리)</a></li>
 			          <li ><a href="#" id="btn" title="Link">주문내역 자동확인</a></li>
-			          <li ><a href="${pageContext.request.contextPath}/total_payment" title="Link">매출내역조회</a></li>
-			          <li ><a href="${pageContext.request.contextPath}/table" title="Link">테이블 목록</a></li>
+			         <%--  <li ><a href="${pageContext.request.contextPath}/total_payment" title="Link">매출내역조회</a></li>
+			          <li ><a href="${pageContext.request.contextPath}/table" title="Link">테이블 목록</a></li> --%>
 			        </ul>
 			      </li>
 			      <li ><a href="#Link" title="Link">Order</a>
@@ -66,9 +79,17 @@
 			          <li ><a href="#Link" title="Link">Link</a></li>
 			        </ul>
 			      </li>
-			      <li ><a href="#Link" title="Link">food</a>
+			      <li ><a href="#Link" title="Link">발주 관리</a>
 			        <ul >
-			          <li ><a href="${pageContext.request.contextPath}/food_list">식재자 관리</a></li>
+			          <li ><a href="${pageContext.request.contextPath}/food_list">발주 식품 관리</a>
+			          	<ul>
+			          		<li><a href="#">발주 식품 추가</a></li>
+			          		<li><a href="#">2</a></li>
+			          		<li><a href="#">3</a></li>
+			          	</ul>
+			          </li>
+			          
+			          
 			          <li ><a href="${pageContext.request.contextPath}/ep_manage_list">발주 업체 관리</a></li>
 			          <li ><a href="#Link" title="Link">Link</a></li>
 			          <li ><a href="#Link" title=" Link"> Link</a></li>

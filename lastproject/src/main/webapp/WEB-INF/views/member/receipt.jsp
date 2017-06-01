@@ -38,29 +38,35 @@
 	});
 	</script>
 		
-	
-		<p>--------주문 내역-------</p>	
-		<c:forEach  var="Nre" items="${receiptList}" begin="0" end="3">
+		<p>------------- 한 국 관 -------------</p>
+		<p>------------ 주문 내역 ------------</p>	
+		<c:forEach  var="Nre" items="${receiptList}">
 		<p>메뉴명 : ${Nre.menu_name}</p>
 		<p>주문 수량  * ${Nre.order_detail_ea}</p>
 		</c:forEach>
-		 <c:forEach var="re" items="${receiptList}" begin="1" end="1">
-				<p>--------결제 내역-------</p>	
-				<font>전화번호 : <font id="phone">${re.member_phone}</font></font>
-				</br>
-				</br>
-				<font>이름 :<font id="name"> ${re.member_name}</font></font>
-				<p>잔여 마일리지 : ${re.member_point}</p>	
-				<p>소계 : ${re.order_detail_sum}</p>
-				<p>결제 번호 : ${re.payment_id}</p>
-				<p>총 금액 : ${re.payment_total}</p>
-				<p>결제 금액 : ${re.payment_pay}</p>
-				<p>적립 마일리지 : ${re.payment_addmileage}</p>
-				<p>사용 마일리지 : ${re.payment_usemileage}</p>
-				<p>결제 날짜 : ${re.payment_date}</p>
-				<p>결제 방법 : ${re.payment_cate}</p>
-				<p>결제 상태 : ${re.payment_state}</p>		
+		
+			<c:forEach var="Ore" items="${receiptList}" end="0">	
+				<p>------------ 결제 내역----------------</p>
+				<p>소계 : ${Ore.order_detail_sum} 원</p>	
+				<p>결제 번호 : ${Ore.payment_id}</p>
+				<p>총 금액 : ${Ore.payment_total} 원</p>
+				<p>결제 금액 : ${Ore.payment_pay} 원</p>
+				<p>적립 마일리지 : ${Ore.payment_addmileage} point</p>
+				<p>사용 마일리지 : ${Ore.payment_usemileage} point</p>
+				<p>---------------------------------------</p>
+				<p>결제 날짜 : ${Ore.payment_date}</p>
+				<p>결제 방법 : ${Ore.payment_cate} 결제</p>
+				<p>결제 상태 : ${Ore.payment_state} 처리</p>		
 			 </c:forEach> 
+		 
+		 <c:forEach var="Mre" items="${receiptList}" end="0">
+				<p>------------ 회원 정보 ----------------</p>	
+				<font>전화번호 : <font id="phone">${Mre.member_phone}</font></font>
+				</br>
+				</br>
+				<font>이름 :<font id="name"> ${Mre.member_name}</font></font>
+				<p>잔여 마일리지 : ${Mre.member_point}</p>	
+			</c:forEach>
 		
 </body>
 </html>
