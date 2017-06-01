@@ -79,9 +79,17 @@
 			          <li ><a href="#Link" title="Link">Link</a></li>
 			        </ul>
 			      </li>
-			      <li ><a href="#Link" title="Link">food</a>
+			      <li ><a href="#Link" title="Link">발주 관리</a>
 			        <ul >
-			          <li ><a href="${pageContext.request.contextPath}/food_list">식재자 관리</a></li>
+			          <li ><a href="${pageContext.request.contextPath}/food_list">발주 식품 관리</a>
+			          	<ul>
+			          		<li><a href="#">발주 식품 추가</a></li>
+			          		<li><a href="#">2</a></li>
+			          		<li><a href="#">3</a></li>
+			          	</ul>
+			          </li>
+			          
+			          
 			          <li ><a href="${pageContext.request.contextPath}/ep_manage_list">발주 업체 관리</a></li>
 			          <li ><a href="#Link" title="Link">Link</a></li>
 			          <li ><a href="#Link" title=" Link"> Link</a></li>
