@@ -27,10 +27,10 @@ $(document).ready(function(){
 		if($('#table_order_id').val().length<4){
 			alert('테이블주문번호를 4자리 이상 입력하시오.');
       		$('#table_order_id').focus();
-		}else if($('#member_phone').val()==''){
+		}/* else if($('#member_phone').val()==''){
 			alert('고객의 핸드폰번호를 입력해주세요.');
       		$('#member_phone').focus();
-		}else if($('#payment_total').val()==''){
+		} */else if($('#payment_total').val()==''){
 			alert('주문총액을 입력해주세요.');
       		$('#payment_total').focus();
 		}else if($('#payment_pay').val()==''){

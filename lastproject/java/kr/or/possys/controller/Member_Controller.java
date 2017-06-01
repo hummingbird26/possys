@@ -50,6 +50,7 @@ public class Member_Controller {
 		
 		return "/member/sign_up";
 	}
+	//회원가입 처리 메서드
 	@RequestMapping(value="/sign_up_action")
 	public String sign_up_action(Member m){
 		System.out.println("sign_up_action 회원가입 화면 출력 메서드 Member_Controller");
@@ -74,7 +75,7 @@ public class Member_Controller {
 		List<receipt> receiptList = Mdao.receipt(member_phone, table_order_id);
 		
 		model.addAttribute("receiptList", receiptList);
-		System.out.println(receiptList.size()+"<<<<<<<<<<<receiptList 리턴 값");
+		System.out.println(receiptList+"<<<<<<<<<<<receiptList 리턴 값");
 		
 		return "/member/receipt";
 	}
