@@ -9,11 +9,25 @@ public class Food_Present_Sangse_VO {
 	private String B4_or_wh_date;
 	private int B4_or_wh_ea;
 	private String B4_food_shelflife;
+	private String B4_ep_order_id;
 	private String recent_or_date;
 	private String recent_or_wh_date;
 	private int recent_or_wh_ea;
 	private String recent_food_shelflife;
+	private String recent_ep_order_id;
 		
+	public String getB4_ep_order_id() {
+		return B4_ep_order_id;
+	}
+	public void setB4_ep_order_id(String b4_ep_order_id) {
+		B4_ep_order_id = b4_ep_order_id;
+	}
+	public String getRecent_ep_order_id() {
+		return recent_ep_order_id;
+	}
+	public void setRecent_ep_order_id(String recent_ep_order_id) {
+		this.recent_ep_order_id = recent_ep_order_id;
+	}
 	public String getB4_food_shelflife() {
 		return B4_food_shelflife;
 	}

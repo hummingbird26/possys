@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
-
+import kr.or.possys.drop_food_service.Drop;
+import kr.or.possys.drop_food_service.Drop_Dao;
 import kr.or.possys.ep_order_food_details_service.Ep_Order;
 import kr.or.possys.ep_order_food_details_service.Ep_Order_Dao;
 import kr.or.possys.ep_order_food_details_service.Food_Present_Sangse_VO;
@@ -27,11 +27,101 @@ import kr.or.possys.ep_order_manage_service.Ep_Manage_Dao;
 
 @Controller
 @RequestMapping("/ajax")
-public class Ajax_Ep_Controller {
+public class Ajax_Controller {
 	@Autowired
 	private Ep_Manage_Dao ep_mdao;
 	@Autowired
 	private Ep_Order_Dao ep_odao; //dao를 추가할라면 @Autowired를 선언해야한다.
+	@Autowired
+	private Drop_Dao drop_dao;
+	
+	// 상세보기 폐기삭제 액션
+		@RequestMapping(value="/aj_sangse_del")
+		@ResponseBody
+			public void aj_sangse_del(@RequestParam(value="drop_id", required=true) String drop_id
+											,@RequestParam(value="food_id", required=true) String food_id
+											,@RequestParam(value="re_dorder_wh_ea", required=true) int re_dorder_wh_ea
+											,@RequestParam(value="ep_order_id", required=true) String ep_order_id
+											,HttpServletResponse response) throws Exception {
+			System.out.println(drop_id+"<== drop_id - 10_aj_drop_form실행 -Ep_OF_Details_Controller.java");
+//			System.out.println(food_id);
+//			System.out.println(re_dorder_wh_ea);
+			drop_dao.aj_dropdelete(drop_id, ep_order_id, food_id, re_dorder_wh_ea);
+		}
+	// 상세보기 수정 액션
+		@RequestMapping(value="/aj_drop_sangse_up")
+		@ResponseBody
+			public void aj_drop_sangse_up(@RequestParam(value="drop_id", required=true) String drop_id
+											,@RequestParam(value="food_id", required=true) String food_id
+											,@RequestParam(value="drop_reason", required=true) String drop_reason
+											,@RequestParam(value="drop_ea", required=true) int drop_ea
+											,@RequestParam(value="ep_order_wh_ea", required=true) int ep_order_wh_ea
+											,@RequestParam(value="ep_order_id", required=true) String ep_order_id
+											,HttpServletResponse response) throws Exception {
+			System.out.println(drop_id+"<== drop_id - 10_aj_drop_form실행 -Ep_OF_Details_Controller.java");
+//			System.out.println(drop_reason);
+//			System.out.println(drop_ea);
+//			System.out.println(ep_order_wh_ea); // 남은수령 가져와서 ep_order_food_details 테이블에 수정 수령을 업데이트
+			Drop drop = new Drop();
+			drop.setDrop_id(drop_id);
+			drop.setDrop_reason(drop_reason);
+			drop.setDrop_ea(drop_ea);
+			drop.setEp_order_wh_ea(ep_order_wh_ea);
+			drop.setEp_order_id(ep_order_id);
+			drop.setFood_id(food_id);
+			drop_dao.aj_dropmodify(drop);
+					
+		}
+	
+	// 상세보기 폼 요청
+	@RequestMapping(value="/aj_drop_sangse")
+	@ResponseBody
+		public Drop aj_drop_sangse(@RequestParam(value="drop_id", required=true) String drop_id
+										,HttpServletResponse response) throws Exception {
+		System.out.println(drop_id+"<== drop_id - 10_aj_drop_form실행 -Ep_OF_Details_Controller.java");
+		Drop drop = drop_dao.aj_drop_sangse(drop_id);
+		return drop;		
+	}
+	
+	
+	// 폐기 등록 insert
+	@RequestMapping(value="/aj_drop_add") //serialize() 로 쿼리스트링으로 넘겼음.
+	@ResponseBody
+		public void aj_drop_add(@RequestParam(value="food_id", required=true) String food_id
+									,@RequestParam(value="ep_order_id", required=true) String ep_order_id
+									,@RequestParam(value="drop_ea", required=true) int drop_ea
+									,@RequestParam(value="drop_reason", required=true) String drop_reason
+									,@RequestParam(value="staff_id", required=true) String staff_id
+									,@RequestParam(value="ep_order_wh_ea", required=true) int ep_order_wh_ea
+									,HttpServletResponse response) throws Exception {
+		System.out.println(food_id+"<== food_id - 10_aj_drop_form실행 -Ep_OF_Details_Controller.java");
+//		System.out.println(ep_order_id+"<== ep_order_id - 10_aj_drop_form실행 -Ep_OF_Details_Controller.java");
+//		System.out.println(drop_ea);
+//		System.out.println(drop_reason);
+//		System.out.println(staff_id);
+//		System.out.println(ep_order_wh_ea);
+		Drop drop = new Drop();
+		drop.setFood_id(food_id);
+		drop.setEp_order_id(ep_order_id);
+		drop.setDrop_ea(drop_ea);
+		drop.setDrop_reason(drop_reason);
+		drop.setStaff_id(staff_id);
+		drop.setEp_order_wh_ea(ep_order_wh_ea);
+		drop_dao.aj_insertdrop(drop);
+				
+	}
+	
+	// 폐기 폼  관련
+		@RequestMapping(value="/aj_drop_form")
+		@ResponseBody
+			public Ep_Order aj_drop_form(@RequestParam(value="food_id", required=true) String food_id
+													,@RequestParam(value="ep_order_id", required=true) String ep_order_id
+													,HttpServletResponse response) throws Exception {
+			System.out.println(food_id+"<== food_id - 10_aj_drop_form실행 -Ep_OF_Details_Controller.java");
+			System.out.println(ep_order_id+"<== ep_order_id - 10_aj_drop_form실행 -Ep_OF_Details_Controller.java");
+			Ep_Order ep_o = drop_dao.aj_drop_form(food_id, ep_order_id);
+			return ep_o;		
+		}	
 	
 	// 상세보기 폼 화면 table 관련
 	@RequestMapping(value="/aj_sangse_table")

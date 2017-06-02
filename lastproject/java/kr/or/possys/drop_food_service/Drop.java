@@ -4,13 +4,30 @@ public class Drop {
 	private String drop_id;
 	private String food_id;
 	private String drop_date;
+	// 폐기 수량
 	private int drop_ea;
 	private String drop_reason;
 	private String staff_id;
+	private String ep_order_id;
+	//남은수량 총수
+	private int ep_order_wh_ea;
+	//상품명
+	private String food_name;
 	
-	
+	public String getFood_name() {
+		return food_name;
+	}
+	public void setFood_name(String food_name) {
+		this.food_name = food_name;
+	}
+	public int getEp_order_wh_ea() {
+		return ep_order_wh_ea;
+	}
+	public void setEp_order_wh_ea(int ep_order_wh_ea) {
+		this.ep_order_wh_ea = ep_order_wh_ea;
+	}
 	public String getDrop_id() {
-	return drop_id;
+		return drop_id;
 	}
 	public void setDrop_id(String drop_id) {
 		this.drop_id = drop_id;
@@ -45,5 +62,14 @@ public class Drop {
 	public void setStaff_id(String staff_id) {
 		this.staff_id = staff_id;
 	}
-		
+	public String getEp_order_id() {
+		return ep_order_id;
+	}
+	public void setEp_order_id(String ep_order_id) {
+		this.ep_order_id = ep_order_id;
+	}
+	
 }
+	
+	
+	

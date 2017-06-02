@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>식자재 현황 목록</title>
 <%-- <%@ include file="../../modal/wide_menu.jsp" %> --%>
 <style type="text/css">
@@ -30,6 +31,7 @@
 // 		}
 // }
 	$(document).ready(function(){
+		$('[data-toggle="tooltip"]').tooltip(); 
 		$('#div_displ').css("display","none");
 		$('#div_displ_snangse').hide();
 		//검색 
@@ -61,6 +63,9 @@
 		
 		//체크박스 전체 선택/해제
 		$("#food_chkall").click(function(){
+			$('.snagse_re').remove();
+			$('.div_span').remove();
+			$('#div_displ_snangse').hide();
 			if($("#food_chkall").prop("checked")){
 				if($("input[name=food_id]").prop("checked",true)){
 					// 전체 선택시 전체 선택한 val()를 반복문으로 가져오기
@@ -123,7 +128,10 @@
 
 		});		
 		//체크박스 체크시 동적으로 등록화면에 표시
-		$('.td_chk').click(function(){			
+		$('.td_chk').click(function(){
+				$('.snagse_re').remove(); // 상세보기 append,html - 삭제 , hide() 시키기 
+				$('.div_span').remove();
+				$('#div_displ_snangse').hide();
 				$('#div_displ').css("display","block");
 				//클릭한 대상이 체크 되있으면 아래 조건문을 실행
 				if($(this).is(':checked') == true){
@@ -194,7 +202,7 @@
 		})
 		//"전체 삭제" 버튼 클릭시체크박스도 해제
 		$(document).on('click','#order_alldel',function(){
-			$('._all').remove();
+			$('._all').remove();			
 			$(".td_chk").prop("checked",false); //체크박스 전체 false
 			$("#food_chkall").prop("checked",false);
 			$('#div_displ').css("display","none");
@@ -238,6 +246,10 @@
 								// 식재자 상세보기 관련 jquery
 		$(document).on('click','#bt_sangse',function(){
 // 			$('#div_displ_snangse').css("display","block");
+			$('#div_displ').css("display","none"); //등록 div 안보이게 함
+			$('#food_chkall').prop("checked",false); // 체크 다 해제
+			$(".td_chk").prop("checked",false); // 상단 체크박스 해제
+			$('._all').remove(); //추가되었던 append삭제
 			$('#div_displ_snangse').show(500);
 			$('.snagse_re').remove();
 			var food_id = $(this).val();
@@ -254,11 +266,12 @@
 				success : function(data){
 // 						alert('성공');
 // 						console.log(data);
+						
 						food_name = data.food_name;
 						ep_id = data.ep_id;
 						ep_name = data.ep_name;
 // 						console.log(food_id+'[식재코드]'+food_name+'[식재이름]'+ep_id+'[업체코드]'+ep_name+'[업체이름]');
-						var span = '<span>식재코드 : '+food_id+' / 상품명 : '+food_name+'</span><br><span>업체코드 : '+ep_id+' / 업체명 : '+ep_name+'</span>';
+						var span = '<div class="div_span"><span>식재코드 : '+food_id+' / 상품명 : '+food_name+'</span><br><span>업체코드 : '+ep_id+' / 업체명 : '+ep_name+'</span></div>';
 						$('#sangse_span').html(span);
 				
 				},
@@ -275,33 +288,37 @@
 				dataType : "JSON", //string 으로 리턴하기 때문에 
 				success : function(data){
 // 						alert('성공');
-// 						console.log(data);
+						console.log(data);
+						var b4_ep_order_id = data.b4_ep_order_id;
 						var b4_or_date = data.b4_or_date;
 						var b4_or_wh_date = data.b4_or_wh_date;
 						var b4_or_wh_ea = data.b4_or_wh_ea;
 						var b4_food_shelflife = data.b4_food_shelflife;
+						var recent_ep_order_id = data.recent_ep_order_id;
 						var recent_or_date = data.recent_or_date;
 						var recent_or_wh_date = data.recent_or_wh_date;
 						var recent_or_wh_ea = data.recent_or_wh_ea;
 						var recent_food_shelflife = data.recent_food_shelflife;
 						var sangse_table_one = "<tr class='snagse_re'>" // var 변수명 앞 숫자 넣으면 오류
+											+"<td>"+b4_ep_order_id+"</td>"
 											+"<td>"+b4_or_date+"</td>"
 											+"<td>"+b4_or_wh_date+"</td>"
 											+"<td>"+b4_food_shelflife+"</td>"
 											+'<td style="width:86px; border-right:2px solid rgb(196, 193, 198); padding-right:8px; text-align:justify">'+b4_or_wh_ea+'</td>'
 											+"</tr>"
 											+'<tr class="snagse_re">'
-											+'<td colspan="4" style="width:86px; border-bottom:2px solid rgb(196, 193, 198); border-right:2px solid rgb(196, 193, 198); padding-right:8px; text-align:center;"><button class="btn btn-default" type="button" id="bt_drop" value="'+food_id+'/'+b4_or_wh_date+'">폐기등록</button></td>'
+											+'<td colspan="5" style="width:86px; border-bottom:2px solid rgb(196, 193, 198); border-right:2px solid rgb(196, 193, 198); padding-right:8px; text-align:center;"><button class="btn btn-default" type="button" id="bt_drop" value="'+food_id+'/'+b4_ep_order_id+'">폐기등록</button></td>'
 											+"</tr>"
 											
 						var sangse_table_two = '<tr class="snagse_re">'
+											+"<td>"+recent_ep_order_id+"</td>"
 											+'<td>'+recent_or_date+'</td>'
 											+"<td>"+recent_or_wh_date+"</td>"
 											+"<td>"+recent_food_shelflife+"</td>"
 											+'<td style="width:86px; border-right:2px solid rgb(196, 193, 198); padding-right:8px; text-align:justify">'+recent_or_wh_ea+'</td>'
 											+"</tr>"
 											+"<tr class='snagse_re'>"
-											+'<td colspan="4" style="width:86px; border-bottom:2px solid rgb(196, 193, 198); border-right:2px solid rgb(196, 193, 198); padding-right:8px; text-align:center;"><button class="btn btn-default" type="button" id="bt_drop" value="'+food_id+'/'+recent_or_wh_date+'">폐기등록</button></td>'
+											+'<td colspan="5" style="width:86px; border-bottom:2px solid rgb(196, 193, 198); border-right:2px solid rgb(196, 193, 198); padding-right:8px; text-align:center;"><button class="btn btn-default" type="button" id="bt_drop" value="'+food_id+'/'+recent_ep_order_id+'">폐기등록</button></td>'
 											+'</tr>'
 						$('#sangse_table_one').append(sangse_table_one);
 						$('#sangse_table_two').append(sangse_table_two);
@@ -319,14 +336,17 @@
 			var arr = Array();
 			arr = bt_drop.split('/');
 			var food_id = arr[0];
-			var ep_order_wh_date = arr[1];
-			alert(food_id+'<<< food_id');
+			var ep_order_id = arr[1];
+			$('#drop_bt_f_id').val(food_id);
+			$('#drop_bt_o_id').val(ep_order_id);
+// 			alert(food_i+'<<< food_id');
 // 			alert(ep_order_wh_date+'<<< ep_order_wh_date')
 // 			팝업창을 활용하여 폐기등록
 			var drop_add;
 			// drop_add 변수에 팝업창을 생성하여 담아줌.
 			drop_add = window.open('${pageContext.request.contextPath}/drop_add_form','popup','width=770,height=800,left=0,top=0,toolbar=no,locaton=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no');
-			drop_add.document.getElementById("food_id").value = food_id;
+			drop_add.document.getElementById("drop_bt_f_id").value = $('#drop_bt_f_id').val();
+			drop_add.document.getElementById("drop_bt_o_id").value = $('#drop_bt_o_id').val();
 		})//폐기등록 End
 								
 								// 식재자 상세보기 관련 End
@@ -388,7 +408,7 @@
 </head>
 <body>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
-<h1>식자재 현황</h1>
+<h3>발주등록 및 식자재 현황</h3>
 <div>전체 식자재 현황 수 : ${ep_ocount}</div>
 <%-- 	<form id="sel_list_sub" name="sel_list_sub" action="${pageContext.request.contextPath}/sel_list" method="get"> --%>
 <!-- 		<select id="sel_list" name="sel_list" > -->
@@ -400,8 +420,10 @@
 	<div class="col-sm-4">
 	<form id="ep_chkbox" action="${pageContext.request.contextPath}/ep_chkbox" method="post">
 <!-- 	<input id="ep_submit" type="button" value="발주업체 관리"/> -->
-		<br>
+		<i class="fa fa-cloud" style="font-size:24px;color:lightblue;" data-placement="right" data-toggle="tooltip" title="발주등록은 체크박스로 이용하실수 있습니다."></i>
+		<br>		
 		<div style="overflow:auto;height:500px;">
+		
 		<table class="chkclass" border=1>
 			<thead>
 				<tr style='position:relative;top:expression(this.offsetParent.scrollTop);background:black;color:white;" align="left"'>
@@ -435,7 +457,10 @@
 		</table>
 		</div>
 	</form>
-		
+		<div class="alert alert-success alert-dismissable">
+		  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		  <strong>알림 - </strong> 발주등록은 체크박스를 통해 이용할수 있습니다.
+		</div>
 	<div>
 		<form id ="frm" name="frm" action="${pageContext.request.contextPath}/food_DT_search" method="get">
 			<select id="selbox"name="selbox" size="1">
@@ -482,6 +507,7 @@
 				<thead>
 					<tr>
 						<!-- 이전 -->
+						<th>이전 발주코드</th>
 						<th>이전 발주일자</th>
 						<th>이전 입고일자</th>
 						<th>유통 기한</th>
@@ -496,6 +522,7 @@
 				<thead>
 					<tr>
 						<!-- 최근 -->
+						<th>최근 발주코드</th>
 						<th>최근 발주일자</th>
 						<th>최근 입고일자</th>
 						<th>유통 기한</th>
@@ -508,6 +535,8 @@
 			</table>
 			<center><button class="btn btn-success btn-md" style="margin-right: 5px;">확인</button><button class="btn btn-md">폐기목록</button></center>		
 		</div>
+		<input type="hidden" id="drop_bt_f_id"/>
+		<input type="hidden" id="drop_bt_o_id"/>
 	</div>
 		
 </body>

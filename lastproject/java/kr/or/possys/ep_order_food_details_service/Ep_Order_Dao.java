@@ -28,6 +28,7 @@ public class Ep_Order_Dao {
 				wh.setRecent_or_wh_ea(0); // 입고된 입고수량 
 				wh.setRecent_food_shelflife("-"); // 입고된 입고 유통기한
 			}else{
+					wh.setRecent_ep_order_id(ep_o.getEp_order_id()); //최근 발주id
 					wh.setRecent_or_date(ep_o.getEp_order_date()); // 최근발주일자
 					wh.setRecent_or_wh_date(ep_o.getEp_order_wh_date()); // 최근입고일자
 					wh.setRecent_or_wh_ea(ep_o.getEp_order_wh_ea()); // 최근입고수량
@@ -37,11 +38,13 @@ public class Ep_Order_Dao {
 			ep_o = sqlSessionTemplate.selectOne("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.aj_sangse_b4table",food_id);
 			if(ep_o == null){ // 이전값 없으면 null로 json 못받음.
 //				System.out.println("이전값 없음");
+				wh.setB4_ep_order_id("-"); //이전 발주 id
 				wh.setB4_or_date("-"); // 이전발주일자
 				wh.setB4_or_wh_date("-"); // 이전입고일자
 				wh.setB4_or_wh_ea(0); // 이전입고수량 
 				wh.setB4_food_shelflife("-"); // 이전 입고 유통기한				
 			}else{
+					wh.setB4_ep_order_id(ep_o.getEp_order_id()); //이전 발주 id
 					wh.setB4_or_date(ep_o.getEp_order_date()); // 이전발주일자
 					wh.setB4_or_wh_date(ep_o.getEp_order_wh_date()); // 이전입고일자
 					wh.setB4_or_wh_ea(ep_o.getEp_order_wh_ea()); // 이전입고수량
