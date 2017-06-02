@@ -5,8 +5,13 @@
 <mapper namespace="kr.or.possys.Staff_service.Staff_Mapper">
 
 <!-- staff 직원 아이디 중복체크 쿼리문 -->
-<select id="check_sid" parameterType="String" resultType="int">
+<select id="check_staffid" parameterType="String" resultType="int">
 SELECT COUNT(*) FROM staff WHERE 1=1 AND staff_id = #{staff_id}
+</select>
+
+<!-- staff 직원 핸드폰번호 중복체크 쿼리문 -->
+<select id="check_staffphone" parameterType="String" resultType="int">
+SELECT COUNT(*) FROM staff WHERE 1=1 AND staff_phone = #{staff_phone}
 </select>
 
 <select id="staffSRlist" parameterType="java.util.Map" resultType="int">
@@ -81,10 +86,24 @@ SELECT COUNT(*) FROM staff
 </select>
 
 <insert parameterType="kr.or.possys.Staff_service.Staff" id="insertStaff"> 
-INSERT INTO staff( staff_id , staff_pw , staff_name , staff_level , 
-staff_age , staff_addr , staff_gender , staff_phone , staff_date ) 
-VALUES( #{staff_id} , #{staff_pw} , #{staff_name} , #{staff_level} , 
-#{staff_age} , #{staff_addr} , #{staff_gender} , #{staff_phone} , #{staff_date} ) 
+INSERT INTO staff( staff_id 
+, staff_pw 
+, staff_name 
+, staff_level 
+, staff_age 
+, staff_addr 
+, staff_gender 
+, staff_phone 
+, staff_date ) 
+VALUES( #{staff_id} 
+, #{staff_pw} 
+, #{staff_name} 
+, #{staff_level} 
+, #{staff_age} 
+, #{staff_addr} 
+, #{staff_gender} 
+, #{staff_phone} 
+, sysdate() ) 
 </insert>
 
 </mapper>

@@ -16,37 +16,40 @@
 <script>
 $(document).ready(function(){
 	$('#paymentCancelAdd').click(function(){
-		if($('#payment_cancel_id').val().length<4){
+		/* if($('#payment_cancel_id').val().length<4){
 			alert('아이디를 4글자 이상 입력하시오.');
       $('#payment_cancel_id').focus();
-		}else if($('#payment_id').val().length<4){
+		}else */
+		if($('#payment_id').val().length<4){
 			alert('결제아이디를 4자리 이상 입력하시오.');
-      $('#payment_id').focus();
+      		$('#payment_id').focus();
 		}else if($('#table_order_id').val()==''){
 			alert('테이블주문코드를 입력해주세요.');
-      $('#table_order_id').focus();
+      		$('#table_order_id').focus();
 		}else if($('#member_phone').val()==''){
 			alert('전화번호를 입력해주세요.');
-      $('#member_phone').focus();
+      		$('#member_phone').focus();
 		}else if($('#payment_cancel_total').val()==''){
 			alert('주문취소금액을 입력해주세요.');
-      $('#payment_cancel_total').focus();
+      		$('#payment_cancel_total').focus();
 		}else if($('#payment_cancel_pay').val()==''){
 			alert('결제금액을 입력해주세요.');
-      $('#payment_cancel_pay').focus();
+      		$('#payment_cancel_pay').focus();
 		}else if($('#payment_cancel_backmileage').val()==''){
 			alert('회수한 마일리지는 얼마인지 입력해주세요.');
-      $('#payment_cancel_backmileage').focus();
+      		$('#payment_cancel_backmileage').focus();
 		}else if($('#payment_cancel_returnmileage').val()==''){
 			alert('환불한 마일리지는 얼마인지 입력해주세요.');
-      $('#payment_cancel_returnmileage').focus();
-		}else if($('#payment_cancel_date').val()==''){
+      		$('#payment_cancel_returnmileage').focus();
+		}/* else 
+			if($('#payment_cancel_date').val()==''){
 			alert('거래취소날짜는 언제인지 입력해주세요.');
-      $('#payment_cancel_date').focus();
+      		$('#payment_cancel_date').focus();
 		}else if($('#payment_cate').val()==''){
 			alert('거래취소구분은 어떠한지 입력해주세요.');
-      $('#payment_cate').focus();
-		}else {
+      		$('#payment_cate').focus();
+		} */
+		else {
 			$('#paymentCancelForm').submit();
 		}
 	});
@@ -107,7 +110,7 @@ function insertCancelChk(){
 				<tr>
 					<td>결제취소코드 :
 					</td>
-					<td><input type="text" class="form-control" name="payment_cancel_id" id="payment_cancel_id" size="auto">
+					<td><input type="text" class="form-control" name="payment_cancel_id" id="payment_cancel_id" size="auto" ondblclick="javascript:chkDupCancelId();">
 					</td>
 				</tr>
 				<tr>
@@ -168,7 +171,7 @@ function insertCancelChk(){
 		<input type="submit" class="btn btn-primary" id="paymentCancelAdd" name="paymentCancelAdd" value="제출">
 		<input type="reset" class="btn btn-primary" id="paymentCancel" name="paymentCancel" value="되돌림">
 		<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_list">글목록</a>
-		<input type="button" class="btn btn-primary" value="idcheck" onclick="javascript:chkDupCancelId();"/>
+		<!-- <input type="button" class="btn btn-primary" value="idcheck" onclick="javascript:chkDupCancelId();"/> -->
 		</form>
 		<br><br>
 			<div>

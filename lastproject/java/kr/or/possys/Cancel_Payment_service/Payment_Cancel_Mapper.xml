@@ -43,6 +43,7 @@ INSERT IGNORE INTO payment_cancel(payment_cancel_id
   , payment_date
   , payment_cate
   FROM payment WHERE payment_state='취소' AND payment_id=payment.payment_id;
+  
 </insert>
   
   

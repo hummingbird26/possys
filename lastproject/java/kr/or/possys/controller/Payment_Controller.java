@@ -139,18 +139,14 @@ public class Payment_Controller {
 	@ResponseBody
 	@RequestMapping(value="/tori/payment/bringOrderList")
 	public String bringOrderList(@RequestParam(value="Toid",required=true) String table_order_id) throws Exception{
-	/*	System.out.println("01_0_3 Payment_Controller.java -> bringOrderList");
-		System.out.println(table_order_id);*/
-		
-		
+		System.out.println("01_0_3 Payment_Controller.java -> bringOrderList");
+		System.out.println(table_order_id);
 		//List<Order> orderList = pdao.bringOrderList(table_order_id);
 		int OrderList = pdao.bringOrderList(table_order_id);
-		
-		
 		//String duvalue = null;
-		/*System.out.println(OrderList);*/
+		System.out.println(OrderList);
 		if(OrderList >= 0){
-			/*System.out.println("주문별 가격 확인 가능");*/
+			System.out.println("주문별 가격 확인 가능");
 			//duvalue = "Y";
 		}else{
 			System.out.println("주문별 가격 확인 불가");
