@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!doctype html>
 <html>
@@ -15,7 +15,7 @@
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/modal/style.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/modal/style_order.css" />
 </head>
 
 <body>
