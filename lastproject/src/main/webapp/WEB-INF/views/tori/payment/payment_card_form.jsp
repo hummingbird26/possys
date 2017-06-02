@@ -16,13 +16,13 @@
 <script>
 $(document).ready(function(){
 	$('#paymentCardAdd').click(function(){
-		/* if($('#card_id').val().length<4){
+		if($('#card_id').val().length<4){
 			alert('아이디를 4글자 이상 입력하시오.');
       $('#card_id').focus();
 		}else if($('#payment_id').val().length<4){
 			alert('결제아이디를 4자리 이상 입력하시오.');
       $('#payment_id').focus();
-		}else */ if($('#card_app').val()==''){
+		}else  if($('#card_app').val()==''){
 			alert('신용구븐를 입력해주십시오.');
       $('#card_app').focus();
 		}else if($('#card_detail').val()==''){
@@ -37,7 +37,8 @@ $(document).ready(function(){
 		}else if($('#card_company').val()==''){
 			alert('신용카드사를 입력해주세요.');
       $('#card_company').focus();
-		}else if($('#card_total').val()==''){
+		}
+		/* else if($('#card_total').val()==''){
 			alert('카드총결제금액은 얼마인지 입력해주세요!');
       $('#card_total').focus();
 		}else if($('#card_price').val()==''){
@@ -46,7 +47,9 @@ $(document).ready(function(){
 		}else if($('#card_tax').val()==''){
 			alert('카드 부가세는 얼마인가요?');
       $('#card_tax').focus();
-		}else {
+		}
+		 */
+		else {
 			$('#paymentCardForm').submit();
 		}
 	});
@@ -86,6 +89,7 @@ function chkDupCardId(){
 	});
 }
 
+/*
 function insertChk(){
 	var frm = document.paymentForm;
 	
@@ -95,8 +99,79 @@ function insertChk(){
 		alert('ID체크를 해주시오');
 		return;
 	}
+} */
+
+//카드결제폼에서 결제내역폼으로 이동해주는 역할
+function returnform(){
+	
+	if($('#card_app').val()==''){
+		alert('신용구분를 입력해주십시오.');
+  		$('#card_app').focus();
+	}else if($('#card_detail').val()==''){
+		alert('카드사상세정보를 입력해주세요.');
+  		$('#card_detail').focus();
+	}else if($('#card_date').val()==''){
+		alert('카드결제기일을 입력해주세요.');
+  		$('#card_date').focus();
+	}else if($('#card_company').val()==''){
+		alert('신용카드사를 입력해주세요.');
+  		$('#card_company').focus();
+	}else if($('#card_company').val()==''){
+		alert('신용카드사를 입력해주세요.');
+  		$('#card_company').focus();
+	}else if($('#card_total').val()==''){
+		alert('카드총결제금액은 얼마인지 입력해주세요!');
+  		$('#card_total').focus();
+	}else if($('#card_price').val()==''){
+		alert('공급가액은 얼마인지 입력해주세요.');
+  		$('#card_price').focus();
+	}else if($('#card_tax').val()==''){
+		alert('카드 부가세는 얼마인가요?');
+  		$('#card_tax').focus();
+	}else {
+		$('#paymentCardForm').submit();
+	}
+	
+	location.href='${pageContext.request.contextPath}/tori/payment/payment_add_form';
+	//var payment_cate = location.href.$("#payment_cate").val();
+	alert(location.href.$("#payment_cate").val());
+	//$("#payment_cate").val() = '카드';
+	//alert($("#payment_cate").val());
+	location.href.$('input:radio[name="payment_cate"]:radio[value="현금"]').attr('checked',true);
 }
 
+//카드결제폼에 날짜형식을 빌려서 자바스크립트로 난수아이디를 생성한다
+function addCardId(){
+	
+	var cardId = "cd"+getTimeStamp();
+	
+	function getTimeStamp() {
+		  var d = new Date();
+
+		  var s =
+		    leadingZeros(d.getFullYear(), 1) +
+		    leadingZeros(d.getMonth() + 1, 1) +
+		    leadingZeros(d.getDate(), 1) +
+		    leadingZeros(d.getSeconds(), 1);
+
+		  return s;
+		}
+
+
+
+		function leadingZeros(n, digits) {
+		  var zero = '';
+		  n = n.toString();
+
+		  if (n.length < digits) {
+		    for (i = 0; i < digits - n.length; i++)
+		      zero += '0';
+		  }
+		  return zero + n;
+		}
+		
+		document.getElementById('card_id').value = cardId;
+}
 </script>
  <%@ include file="../../modal/wide_menu.jsp" %>
 </head>
@@ -108,7 +183,7 @@ function insertChk(){
 				<tr>
 					<td>승인번호 :
 					</td>
-					<td><input type="text" class="form-control" name="card_id" id="card_id" size="auto" placeholder="승인번호를 입력해주세요">
+					<td><input type="text" class="form-control" name="card_id" id="card_id" size="auto" placeholder="승인번호를 입력해주세요" ondblclick="javascript:addCardId();">
 					</td>
 				</tr>
 				<tr>
@@ -120,7 +195,9 @@ function insertChk(){
 				<tr>
 					<td>승인구분 : 
 					</td>
-					<td><input type="text" class="form-control" name="card_app" id="card_app" size="auto" placeholder="승인구분을 입력해 주세요">
+					<td>
+					<input type="radio" name="card_app" id="card_app" value="정상(승인)" size="auto">정상
+					<input type="radio" name="card_app" id="card_app" value="취소" size="auto">승인
 					</td>
 				</tr>
 				<tr>
@@ -160,10 +237,11 @@ function insertChk(){
 					</td>
 				</tr>
 				</table>
-		<input type="submit" class="btn btn-primary" id="paymentCardAdd" name="paymentCardAdd" value="카드거래입력">
-		<input type="reset" class="btn btn-primary" id="paymentCancel" name="paymentCancel" value="되돌림">
+		<input type="submit" class="btn btn-primary btn-sm" id="paymentCardAdd" name="paymentCardAdd" value="카드거래입력">
+		<input type="reset" class="btn btn-primary btn-sm" id="paymentCancel" name="paymentCancel" value="되돌림">
 		<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_card_list">글목록</a>
-		<input type="button" class="btn btn-primary" value="idcheck" onclick="javascript:chkDupCardId();"/>
+		<input type="button" class="btn btn-primary btn-sm" value="리턴하기" onclick="javascript:returnform();"/>
+		<input type="button" class="btn btn-primary btn-sm" value="승인번호중복체크" onclick="javascript:chkDupCardId();"/>
 		</form>
 		<br><br>
 			<div>

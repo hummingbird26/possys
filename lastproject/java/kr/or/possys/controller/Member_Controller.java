@@ -76,7 +76,7 @@ public class Member_Controller {
 	}
 	
 	//회원가입 화면 출력 메서드
-	@RequestMapping(value="/sign_up")
+	@RequestMapping(value="/member/sign_up")
 	public String sign_up(){
 		System.out.println("sign_up 회원가입 화면 출력 메서드 Member_Controller");
 		

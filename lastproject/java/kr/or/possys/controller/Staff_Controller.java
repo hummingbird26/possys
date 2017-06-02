@@ -124,6 +124,47 @@ public class Staff_Controller {
 		return "home";
 	}*/
 	
+	//직원아이디 중복체크
+		@ResponseBody
+		@RequestMapping(value="/tori/staff/chkDupStaffId")
+		public String checkCardId(@RequestParam(value="prmId",required=true) String staff_id) throws Exception{
+			System.out.println("checkStaffId");
+			System.out.println(staff_id);
+			int checkStaffId = sdao.check_staffid(staff_id); // checkCardId에 넣어지는 값은 0 아니면 1.. 이것을 String타입으로 반환하여야 한다. 그래서 아래의 조건분기(1이면 중복, 0이면 사용가능)가 만들어져야 한다.
+			System.out.println(checkStaffId);
+			String duvalue = null;
+			if(checkStaffId==0){
+				System.out.println("아이디 사용가능");
+				duvalue = "Y";
+			}else{
+				System.out.println("아이디가 중복되었어요");
+				duvalue = "N";
+			}
+			
+			return duvalue;
+		}
+		
+	//직원폰번호 중복체크
+			@ResponseBody
+			@RequestMapping(value="/tori/staff/chkDupStaffPhone")
+			public String checkStaffPhone(@RequestParam(value="prmId",required=true) String staff_phone) throws Exception{
+				System.out.println("checkStaffPhone");
+				System.out.println(staff_phone);
+				int checkStaffPhone = sdao.check_staffphone(staff_phone); // checkCardId에 넣어지는 값은 0 아니면 1.. 이것을 String타입으로 반환하여야 한다. 그래서 아래의 조건분기(1이면 중복, 0이면 사용가능)가 만들어져야 한다.
+				System.out.println(checkStaffPhone);
+				String duvalue = null;
+				if(checkStaffPhone==0){
+					System.out.println("아이디 사용가능");
+					duvalue = "Y";
+				}else{
+					System.out.println("아이디가 중복되었어요");
+					duvalue = "N";
+				}
+					
+				return duvalue;
+			}
+	
+	
 	// 직원추가 폼으로 진입
 	@RequestMapping(value="/tori/staff/staff_add_form", method = RequestMethod.GET)
 	public String staffadd(){
@@ -275,7 +316,7 @@ public class Staff_Controller {
 			return "redirect:/tori/staff/staff_list";
 		}
 		
-	//staff_id 중복체크
+	/*//staff_id 중복체크
 		@ResponseBody
 		@RequestMapping(value="/tori/staff/chkDupStaffId")
 		public String checkStaffId(@RequestParam(value="prmId",required=true)String staff_id) throws Exception{
@@ -293,5 +334,5 @@ public class Staff_Controller {
 			}
 			
 			return duvalue;
-		}
+		}*/
 }

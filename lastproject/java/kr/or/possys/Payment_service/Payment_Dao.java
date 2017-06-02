@@ -51,14 +51,14 @@ public class Payment_Dao {
 	
 	//총결제금액정보 가져오기
 	public int bringOrderList(String table_order_id){
-	/*	System.out.println("bringOrderList");
-		System.out.println(table_order_id);*/
+		System.out.println("bringOrderList");
+		System.out.println(table_order_id);
 		Map<String, Object> map = new HashMap<String, Object>();
 		Order order = new Order();
-		/*System.out.println(map);
-		System.out.println(order);*/
+		System.out.println(map);
+		System.out.println(order);
     	map.put("table_order_id", table_order_id);
-    	/*System.out.println(map);*/
+    	System.out.println(map);
 		return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.bringOrderList",table_order_id);
 	}
 	

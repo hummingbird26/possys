@@ -22,7 +22,23 @@ private SqlSessionTemplate sqlSessionTemplate;
 		
 			return sqlSessionTemplate.selectOne("kr.or.possys.Staff_service.Staff_Mapper.login", s);
 		}
-		
+
+	//직원코드 중복 메서드
+	public int check_staffid(String staff_id){
+		System.out.println("check_staffid");
+		System.out.println(staff_id);
+			
+		return sqlSessionTemplate.selectOne("kr.or.possys.Staff_service.Staff_Mapper.check_staffid",staff_id);
+	}	
+	
+	//직원핸드폰 중복 메서드
+	public int check_staffphone(String staff_phone){
+		System.out.println("check_staffphone");
+		System.out.println(staff_phone);
+				
+		return sqlSessionTemplate.selectOne("kr.or.possys.Staff_service.Staff_Mapper.check_staffphone",staff_phone);
+	}	
+	
 	public int updateStaff(Staff Staff) {
 		System.out.println("updateStaff");
         return sqlSessionTemplate.update("kr.or.possys.Staff_service.Staff_Mapper.updateStaff", Staff);
@@ -97,10 +113,10 @@ private SqlSessionTemplate sqlSessionTemplate;
         return sqlSessionTemplate.insert("kr.or.possys.Staff_service.Staff_Mapper.insertStaff", Staff);
     }
     
-    //직원코드 중복 메서드
-    public int check_sid(String staff_id){
+   
+   /* public int check_sid(String staff_id){
     	System.out.println("check_sid");
     	System.out.println(staff_id);
     	return sqlSessionTemplate.selectOne("kr.or.possys.Staff_service.Staff_Mapper.check_sid", staff_id);
-    }
+    }*/
 }

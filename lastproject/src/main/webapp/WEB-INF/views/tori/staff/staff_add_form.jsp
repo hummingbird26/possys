@@ -16,9 +16,25 @@
 
 <script>
 $(document).ready(function(){
+//직원가입페이지 처음에는 아이디 및 폰번호중복체크버튼을 숨긴다.
+	$('#checkStaffId').hide();
+	$('#checkStaffPhone').hide();
+	
+	//직원아이디를 난수생성된 값으로 입력받거나 직접 입력하고 마우스클릭 한번하면 아이디중복체크버튼이 나타나게 한다
+	$('#staff_id').click(function(){
+		if($('#staff_id').val()!='')
+			$('#checkStaffId').show();
+	});
+	
+	//직원폰번호를 입력하고 마우스클릭 한번하면 아이디중복체크버튼이 나타나게 한다
+	$('#staff_phone').click(function(){
+		if($('#staff_phone').val()!='')
+			$('#checkStaffPhone').show();
+	});
+	
 	$('#staffAdd').click(function(){
-		if($('#staff_id').val().length<4){
-			alert('직원아이디를 4글자 이상 입력하시오.');
+		if($('#staff_id').val()==''){
+			alert('직원아이디를 입력하시오.');
       		$('#staff_id').focus();
 		}else if($('#staff_pw').val().length<4){
 			alert('직원비번를 4자리 이상 입력하시오.');
@@ -29,27 +45,36 @@ $(document).ready(function(){
 		}else if($('#staff_level').val()==''){
 			alert('직급을 입력해주세요.');
       		$('#staff_level').focus();
-		}else if($('#staff_age').val()==''){
+		} /*else 
+			if($('#staff_age').val()==''){
 			alert('나이을 입력해주세요.');
       		$('#staff_age').focus();
-		}else if($('#staff_addr').val()==''){
+		} else 
+			if($('#staff_addr').val()==''){
 			alert('주소를 입력해주세요.');
       		$('#staff_addr').focus();
-		}else if($('#staff_gender').val()==''){
+		}else 
+			 if($('#staff_gender').val()==''){
 			alert('성별구분을 입력해주세요.');
       		$('#staff_gender').focus();
-		}else if($('#staff_phone').val()==''){
+		}
+			else 
+			if($('#staff_phone').val()==''){
 			alert('직원의 핸드폰번호를 입력해주세요.');
       		$('#staff_phone').focus();
-		}else if($('#staff_date').val()==''){
+		} 
+			else 
+			 if($('#staff_date').val()==''){
 			alert('직원가입일자는 언제인가요.');
       		$('#staff_date').focus();
-		}else {
+		} */
+			else {
 			$('#staffForm').submit();
 		}
 	});
 });
 
+//직원아이디 중복여부를 체크하는 기능을 한다.
 function chkDupStaffId(){
 	var prmId = $("#staff_id").val();
 	console.log(prmId);
@@ -69,16 +94,16 @@ function chkDupStaffId(){
 			if(chkRst=="Y"){
 				alert("등록 가능 합니다");
 				console.log(data);
-				$("#idcheck").val('Y');
+				//$("#idcheck").val('Y');
 			}else{
 				alert("중복됩니다");
 				console.log(data);
-				$("#idcheck").val('N');
+				//$("#idcheck").val('N');
 			}
 		},
 		error : function(request,status,error){
 			
-			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			alert("실패");
 		}
 	});
@@ -95,6 +120,93 @@ function insertChk(){
 	}
 }
 
+//직원전화번호를 통해서 직원전화번호 탐색기능을 구현하여 중복여부를 판단한다
+function chkDupStaffPhone(){
+	alert('핸드폰번호 중복 체크기능 실행');
+	var prmId = $("#staff_phone").val();
+	console.log(prmId);
+	if($("#staff_phone").val() == '')
+		{	alert('폰번호를 입력해 주세요!');
+			return;
+		}
+	 $.ajax({
+		type:'POST',
+		data:"prmId="+$("#staff_phone").val(),
+		contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+		dataType:'text',
+		url:'${pageContext.request.contextPath}/tori/staff/chkDupStaffPhone',
+		success : function(data){
+			alert("성공");
+			var chkRst = data;
+			if(chkRst=="Y"){
+				alert("등록 가능 합니다");
+				console.log(data);
+				//$("#idcheck").val('Y');
+			}else{
+				alert("중복됩니다");
+				console.log(data);
+				//$("#idcheck").val('N');
+			}
+		},
+		error : function(request,status,error){
+			
+			//alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			alert("실패");
+		}
+	});
+}
+
+//카드결제폼에 날짜형식을 빌려서 자바스크립트로 난수아이디를 생성한다
+function addStaffId(){
+	
+	var staffId = "id"+getTimeStamp();
+	
+	function getTimeStamp() {
+		  var d = new Date();
+
+		  var s =
+		    leadingZeros(d.getFullYear(), 2) +
+		    leadingZeros(d.getMonth() + 1, 2) +
+		    leadingZeros(d.getDate(), 2) +
+		    leadingZeros(d.getSeconds(), 2);
+
+		  return s;
+		}
+
+
+
+		function leadingZeros(n, digits) {
+		  var zero = '';
+		  n = n.toString();
+
+		  if (n.length < digits) {
+		    for (i = 0; i < digits - n.length; i++)
+		      zero += '0';
+		  }
+		  return zero + n;
+		}
+		
+		document.getElementById('staff_id').value = staffId;
+}
+
+function phonecheck(){
+	//휴대폰번호를 결제목록에 입력시에 일반적인 휴대폰번호 작성 및 표기법에 맞게 유효성검사 실시(시작)
+	//var regExp = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
+	var regExp = /\b\d{3}[-]?\d{4}[-]?\d{4}\b/;
+	var StaffList = $("#staff_phone").val();
+	alert(StaffList);
+
+	if(StaffList != ''){
+		if(!regExp.test(StaffList)){
+			alert("올바른 형식의 번호를 입력하세요");
+			$('#staff_phone').focus();
+			return false;
+		}	
+		return false;
+	}
+	
+}
+
 </script>
 
 <%@ include file="../../modal/wide_menu.jsp" %>
@@ -106,8 +218,9 @@ function insertChk(){
 	<form id="staffForm" class="form-inline" action="${pageContext.request.contextPath}/tori/staff/staff_add_action" method="post">
 	<table class="table table-stripped table-hover">
 		<tr>
+		<!-- 더블클릭으로 난수아이디를 생성할 수 있고, 혹은 직접 입력할 수도 있다 -->
 		<td>스태프ID</td>
-		<td><input class="form-control" size="auto" id="staff_id" name="staff_id" type="text" placeholder="스태프아이디를 입력해주세요(4자이상)"></td>
+		<td><input class="form-control" size="auto" id="staff_id" name="staff_id" type="text" placeholder="스태프아이디를 입력해주세요(4자이상)" ondblclick="javascript:addStaffId();"></td>
 		</tr>
 		<tr>
 		<td>비밀번호</td>
@@ -135,21 +248,25 @@ function insertChk(){
 		</tr>
 		<tr>
 		<td>성별</td>
-		<td><input class="form-control" size="auto" id="staff_gender" name="staff_gender" type="text" placeholder="성별을 입력해 주세요"></td>
+		<td>
+		<input class="form-control" size="auto" id="staff_gender" name="staff_gender" value="남" type="radio">남자
+		<input class="form-control" size="auto" id="staff_gender" name="staff_gender" value="여" type="radio">여자
+		</td>
 		</tr>
 		<tr>
 		<td>핸드폰</td>
-		<td><input class="form-control" size="auto" id="staff_phone" name="staff_phone" type="tel" placeholder="휴대폰번호를 입력해 주세요"></td>
+		<td><input class="form-control" size="auto" id="staff_phone" name="staff_phone" type="tel" placeholder="휴대폰번호를 입력해 주세요" ondblclick="javascript:phonecheck();"></td>
 		</tr>
-		<tr>
+		<!-- <tr>
 		<td>가입일자</td>
 		<td><input class="form-control" size="auto" id="staff_date" name="staff_date" type="date" placeholder="가입일자를 입력해 주세요"></td>
-		</tr>
+		</tr> -->
 	</table>
-	<input class="btn btn-primary" type="submit" id="staffAdd" name="staffAdd" value="제출">
-	<input class="btn btn-primary" type="reset" id="staffCancel" name="staffCancel" value="되돌림">
-	<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/staff/staff_list">글목록</a>
-	<input type="button" class="btn btn-primary" value="idcheck" onclick="javascript:chkDupStaffId();"/>
+	<input class="btn btn-primary btn-sm" type="submit" id="staffAdd" name="staffAdd" value="제출">
+	<input class="btn btn-primary btn-sm" type="reset" id="staffCancel" name="staffCancel" value="되돌림">
+	<a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/tori/staff/staff_list">글목록</a>
+	<input type="button" class="btn btn-primary btn-sm" id="checkStaffId" value="아이디중복확인" onclick="javascript:chkDupStaffId();"/>
+	<input type="button" class="btn btn-primary btn-sm" id="checkStaffPhone" value="폰번호중복체크" onclick="javascript:chkDupStaffPhone();"/>
 	</form>
 	
 </div>

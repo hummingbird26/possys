@@ -51,7 +51,7 @@
  <script>
 
 	 $(document).ready(function () {
-		 if($('#tags').val()==""){
+		 if($('#tags').val()==""||$('#tags').val()==null){
 			 var insert = $('#tags').val();
 			 var input ={"insert":insert};
 				
@@ -100,13 +100,15 @@
 <script type="text/javascript">
 $(document).ready(function () {
 	$('#tags').keyup(function(){
-			var insert = $('#tags').val();
-			var input ={"insert":insert};
+			
+		var insert = $('#tags').val();
+			
+		var input ={"insert":insert};
 			/* alert(insert); */
 			/* 검색어 하이라이트 */
 			var check = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; 
 			
-			
+			//하이라이트 주는 부분
 			$('#tags').bind('keydown change', function(ev) {
 			 var go = $(this).val();
 
@@ -207,12 +209,70 @@ $(document).ready(function () {
 	                error: function () { alert('에러발생'); }
 	        	});
 		//한글체크 if문 끝
-			}
+				}
 			
 			
 			
 			 }
-		 });
+		//길이가 0이면 작동함
+		if(insert.length == 0){
+			
+			//길이가 0일때 리스트가 계속 생기는걸 방지하기 위하여 remove시킨다.
+			$('.test').remove();
+			
+			//tags의 밸류값이 없으면 기존 리스트를 보여준다.
+			 if($('#tags').val()==""||$('#tags').val()==null ){
+				
+				console.log(insert.length+"<<");
+			 var insert = $('#tags').val();
+			 var input ={"insert":insert};
+				
+			 $.ajax({
+	                type:'GET',
+					url: "${pageContext.request.contextPath}/E_real_time",
+	                dataType: "JSON",
+	                data : input,
+	                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	                success: function (data) {
+	                	
+	                	decodeURIComponent( data.member_name );
+	                	console.log(insert);
+	                	console.log(data);
+	                	var member_phone = [];
+	                	
+	                	
+		             for(var i=0; i<data.length; i++){
+		                	member_phone.push(data[i]["member_phone"])		
+		                	var mp = data[i]["member_phone"];
+		             	
+		             }
+	                	
+
+	                	
+	                    $.each(data, function () {
+	                    	
+	                        $('#tb').append("<tr class = 'test'><td>"
+	                        		+ this.member_phone + "</td><td>"
+	                        		+ this.member_name  +"</td><td>"
+	                        		+ this.member_join  +"</td><td>"
+	                        		+ this.member_point +"</td><td>"
+	                        		+ this.member_sign + "</td></tr>");
+	                   
+	                    });
+	                    $('tr:odd').addClass('table table-striped');
+		                },
+		                error: function () { alert('에러발생'); }
+		        	}); // 값이 없을때 실행되는 ajax 끝
+		 		}else{
+		 			
+		 		}//값이 있나 없나 판단하는 if문 끝
+		 		
+		}//길이 판단하는 if문
+		
+	
+	
+	
+	});
 	 <!-- 하이라이트 기능 -->
 	/*  $('#tags').bind('keyup change', function(ev) {
 	        // pull in the new value
@@ -241,7 +301,8 @@ $(document).ready(function () {
   <div class="member">전체행의 수 : ${memberCount}</div>
     <label for="tags">검색어를 입력하세요: </label>  
   <input type="text" id="tags" />
-    <table class="table table-striped">
+  <div style="overflow:scroll; width:100%; height:550px; background-color:#D9E5FF;">
+    <table class="table table-striped"  >
         <thead>
             <tr>
                 <th>member_phone</th>
@@ -257,7 +318,7 @@ $(document).ready(function () {
         </tbody>
 
     </table>
-    
+    </div>
    <%-- <ul class="pager">
         <c:if test="${currentPage < lastpage}">
             <li class="previous"><a href="${pageContext.request.contextPath}/real_time?currentPage=${currentPage-1}">이전</a></li>

@@ -89,26 +89,27 @@
 	   	<input type="button" id="member_update_btn" class ="bu" value="수정완료">
 	   	</div>
     	<!-- 회원 이용내역 나오는 폼 -->
-    	<div id="hidden_receipt">
-    		<table>
-				<thead>
-				 <tr>
-                <th>결제번호</th>
-                <th>총 결제 금액</th>
-                <th>결제 금액</th>
-                <th>적립 마일리지</th>
-                <th>사용 마일리지</th>
-                <th>결제 날짜</th>
-                <th>결제 방법</th>
-                <th>결제 처리 상태</th>
-                <th>메 뉴 명</th>
-                <th>주문 개수</th>
-                <th>단품 가격</th>
-            </tr>
+    	<div id="hidden_receipt" style="overflow:scroll; width:100%; height:200px; background-color:#D9E5FF;">
+    		<table>    		
 				
-				</thead>    		
+
+				
+				    		
     		<tbody id="member_receipt_list">
-    		
+    			<tr>
+                <td>결제번호</td>
+                <td>총 결제 금액</td>
+                <td>결제 금액</td>
+                <td>적립 마일리지</td>
+                <td>사용 마일리지</td>
+                <td>결제 날짜</td>
+                <td>결제 방법</td>
+                <td>결제 처리 상태</td>
+                <td>메 뉴 명</td>
+                <td>주문 개수</td>
+                <td>단품 가격</td>
+            	</tr>
+    			<h3 id="ptag">검색 결과가 없습니다.</h3>
     		</tbody>
     		</table>
     	</div>
@@ -246,6 +247,7 @@ $(document).ready(function(){
 </script> 
  <script type="text/javascript">
 $(document).ready(function(){
+	$('#hidden_receipt').hide();
 		$('#ml_button').click(function(){
 			/* alert('test'); */
 			var va = $("#selBox option:selected").val();
@@ -422,28 +424,36 @@ $('#receipt_list').click(function(){
 	    success:function(data){
 	    	
 	    	
+	    	if(data!=""){
+	    		$('#ptag').hide();
+	    	
 	     	$.each(data,function(){
 	    		
 	    	
 	    		
-	    	$('#member_receipt_list').append("<tr class='receipt_tr'><td>"+this.payment_id+"</td>"
-	    									+"<td>"+this.payment_total+"</td>"
-									    	+"<td>"+this.payment_pay+"</td>"
-									    	+"<td>"+this.payment_addmileage+"</td>"
-									    	+"<td>"+this.payment_usemileage+"</td>"
-									    	+"<td>"+this.payment_date+"</td>"
-									    	+"<td>"+this.payment_cate+"</td>"
-									    	+"<td>"+this.payment_state+"</td>"
-									    	+"<td>"+this.menu_name+"</td>"
-									    	+"<td>"+this.order_detail_ea+"</td>"
-									    	+"<td>"+this.order_detail_sum+"</td></tr>");
+			    	$('#member_receipt_list').append("<tr class='receipt_tr'><td>"+this.payment_id+"</td>"
+			    									+"<td>"+this.payment_total+"</td>"
+											    	+"<td>"+this.payment_pay+"</td>"
+											    	+"<td>"+this.payment_addmileage+"</td>"
+											    	+"<td>"+this.payment_usemileage+"</td>"
+											    	+"<td>"+this.payment_date+"</td>"
+											    	+"<td>"+this.payment_cate+"</td>"
+											    	+"<td>"+this.payment_state+"</td>"
+											    	+"<td>"+this.menu_name+"</td>"
+											    	+"<td>"+this.order_detail_ea+"</td>"
+											    	+"<td>"+this.order_detail_sum+"</td></tr>");
+			    	
+			    		
+			    	});//each
+			    	
+	    		}else{
+	    				
+	    			$('#ptag').show();
+	    		}//if
 	    	
-	    		
-	    	});
-	    	
-	    }
+	    	}//success
 	
-	 }); 
+	 }); //ajax
 });
 </script>
     <div>
