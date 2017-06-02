@@ -14,7 +14,7 @@ nav { width: 100%; }
   top: 0;
   width: 100%;
   transition: top .5s ease-out;
-  background: #2196F3;
+  background: #2f3b3f;
 }
 
 .scroll { top: -90px; }
@@ -111,7 +111,7 @@ main p {  1.2em;
 .menu {
   width: 100%;
   height: auto;
-  background: #2196F3;
+  background: #2f3b3f;
   transition: all 0.3s ease;
 }
 
@@ -158,7 +158,7 @@ main p {  1.2em;
   position: absolute;
   top: 100%;
   min-width: 160px;
-  background: #2196F3;
+  background: #39484d;
 }
 
 .menu ul li:hover > ul { display: block; }
@@ -168,7 +168,7 @@ main p {  1.2em;
 .menu ul ul > li a {
   padding: 10px 15px;
   height: auto;
-  background: #2196F3;
+  background: #39484d;
 }
 
 .menu ul ul > li a:hover {
@@ -206,11 +206,11 @@ footer a {
   color: #fff;
   text-decoration: none;
 }
- @media all and (max-width: 768px) {
+/*  @media all and (max-width: 768px) {
 
 .example-header .container { width: 100%; }
 
-#search { padding: 10px; }
+ #search { padding: 10px; }
 
 .spinner-master * {
   transition: all 0.3s;
@@ -373,5 +373,5 @@ a.menu-link.active:after { content: "\2715"; }
 .search_box input { width: 70%; }
 .search_box input.search_icon { width: 17%; }
 #hero { height: 200px; }
-
+ */
 }

@@ -196,10 +196,12 @@ public class Order_Controller{
 	public String order_form(Model model){
 		System.out.println("카운트실행");
 		Order order_c = odao.order_count();
+		/* 일련번호 자동증가 부분*/
 		String count = order_c.getOrder_count();
 		int counter = Integer.parseInt(count.substring(1, 5))+1;
 		String result_id = "t"+String.format("%04d", counter);
 		System.out.println(result_id);
+		/*일련번호 자동증가부분 종료 과값은 result_id*/
 		
 		List<Menu> menu_list = odao.menu_list();
 		model.addAttribute("result_id",result_id);
@@ -221,7 +223,7 @@ public class Order_Controller{
 		String [] menu_name = order.getMenu_name().split(",");
 		String [] order_detail_ea = order.getOrder_detail_ea().split(",");
 		String [] order_detail_sum = order.getOrder_detail_sum().split(",");
-		
+		odao.order_insert(order);
 		
 		for(int i = 0; i < menu_id.length; i++){
 			Order order2 = new Order();
@@ -231,13 +233,15 @@ public class Order_Controller{
 			order2.setMenu_name(menu_name[i]);
 			order2.setOrder_detail_ea(order_detail_ea[i]);
 			order2.setOrder_detail_sum(order_detail_sum[i]);
-			/*odao.order_detail_insert(order2);*/
+			order2.setOrder_detail_end("F");
+			odao.order_detail_insert(order2);
+			
 			System.out.println(order2.getMenu_id());
 		}
 		
 		}
 		
-		return "/order/order_action";
+		return "redirect:/order_list";
 	}
 	
 	@RequestMapping(value="/order_insert", method = RequestMethod.POST)
@@ -245,7 +249,7 @@ public class Order_Controller{
         
         String path = request.getRealPath("/resources/upload");
         String path2 = request.getContextPath()+"/resources/upload";
-        System.out.println(path);
+        System.out.println(path);	
         System.out.println(path2);
         String filename =order.getOrder_file().getOriginalFilename();
         order.setNewname(path2+"/"+filename);

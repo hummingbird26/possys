@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.sun.java.swing.plaf.windows.resources.windows;
+
 import kr.or.possys.drop_food_service.Drop;
 import kr.or.possys.drop_food_service.Drop_Dao;
 
@@ -28,13 +30,6 @@ public class Drop_Food_Controller {
 	public String dropadd(){
 		System.out.println("01_Drop_Food_Controller.java ->>dropadd 폼 요청");
 		return "/wonbin/drop_food/drop_add_form";
-	}
-	//식재료 입력액션 요청
-	@RequestMapping(value="/drop_add_form", method = RequestMethod.POST)
-	public String dropadd(Drop drop){
-		System.out.println("02_Drop_Food_Controller.java ->>dropadd 액션 요청");
-		dao.insertdrop(drop);
-		return "redirect:/drop_list";
 	}
 	//식재료 목록 요청
 	@RequestMapping(value="/drop_list", method = RequestMethod.GET)
@@ -54,28 +49,7 @@ public class Drop_Food_Controller {
 		model.addAttribute("list", list);
 		return "/wonbin/drop_food/drop_list";
 	}
-	//폐기 수정화면 요청
-	@RequestMapping(value="/drop_modify_view", method = RequestMethod.GET)
-	public String dropview(Model model, @RequestParam(value="drop_id",required=true) String drop_id){
-		System.out.println("Drop_Food_Controller.java ->>dropview 요청");
-		Drop drop = dao.dropview(drop_id);
-		model.addAttribute("drop",drop);
-		return "/wonbin/drop_food/drop_modify_view";
-	}
-	//식재료 수정액션 요청
-	@RequestMapping(value="/drop_modify", method = RequestMethod.POST)
-	public String dropmodify(Drop drop){
-		System.out.println("Drop_Food_Controller.java ->>dropmodify 요청");
-		dao.dropmodify(drop);
-		return "redirect:/drop_list";
-		/*return "redirect:/drop_listmodify_view?food_id="+food.getFood_id();*/
-	}
-	//식재료 삭제 요청
-	@RequestMapping(value="/drop_delete", method = RequestMethod.GET)
-	public String dropdelete(@RequestParam(value="drop_id", required=true) String drop_id){
-		dao.dropdelete(drop_id);
-		return "redirect:/drop_list";
-	}
+
 	//폐기 검색 요청
 		@RequestMapping(value="/drop_search", method = RequestMethod.GET)
 		public String foodSRlist(HttpServletRequest request

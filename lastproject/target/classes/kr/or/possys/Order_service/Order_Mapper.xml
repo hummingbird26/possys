@@ -79,7 +79,19 @@
 		#{order_detail_sum},
 		#{order_detail_end}
 		)
+		</insert>
 		
+		<insert id="order_insert" parameterType="kr.or.possys.Order_service.Order">
+		insert into table_order(
+		table_order_id,
+		table_order_num,
+		table_order_date
+		)
+		values (
+		#{table_order_id},
+		#{table_order_num},
+		sysdate()
+		)
 		</insert>
 		<delete id = "order_delete" parameterType = "String">
 		delete from table_order where table_order_id=#{table_order_id}

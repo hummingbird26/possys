@@ -10,14 +10,8 @@
  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 
-<!-- bootstrap을 사용하기 위한 CDN주소 -->
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<%@ include file="../modal/wide_menu.jsp" %>
 
 <style type="text/css">
 .highlight {
@@ -35,13 +29,29 @@
     margin:0 2px;
 }
 </style>
+
+ <!-- start: Css -->
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/bootstrap.min.css">
+
+      <!-- plugins -->
+      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/plugins/font-awesome.min.css"/>
+      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/plugins/simple-line-icons.css"/>
+      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/plugins/animate.min.css"/>
+      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/plugins/fullcalendar.min.css"/>
+	<link href="${pageContext.request.contextPath}/resources/asset/css/style.css" rel="stylesheet">
+	<!-- end: Css -->
+
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/asset/img/logomi.png">
+   
 </head>
 
 <body>
+
+<%@ include file="../modal/header.jsp" %>
  <script>
 
 	 $(document).ready(function () {
-		 if($('#tags').val()==""){
+		 if($('#tags').val()==""||$('#tags').val()==null){
 			 var insert = $('#tags').val();
 			 var input ={"insert":insert};
 				
@@ -90,13 +100,15 @@
 <script type="text/javascript">
 $(document).ready(function () {
 	$('#tags').keyup(function(){
-			var insert = $('#tags').val();
-			var input ={"insert":insert};
+			
+		var insert = $('#tags').val();
+			
+		var input ={"insert":insert};
 			/* alert(insert); */
 			/* 검색어 하이라이트 */
 			var check = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; 
 			
-			
+			//하이라이트 주는 부분
 			$('#tags').bind('keydown change', function(ev) {
 			 var go = $(this).val();
 
@@ -197,12 +209,70 @@ $(document).ready(function () {
 	                error: function () { alert('에러발생'); }
 	        	});
 		//한글체크 if문 끝
-			}
+				}
 			
 			
 			
 			 }
-		 });
+		//길이가 0이면 작동함
+		if(insert.length == 0){
+			
+			//길이가 0일때 리스트가 계속 생기는걸 방지하기 위하여 remove시킨다.
+			$('.test').remove();
+			
+			//tags의 밸류값이 없으면 기존 리스트를 보여준다.
+			 if($('#tags').val()==""||$('#tags').val()==null ){
+				
+				console.log(insert.length+"<<");
+			 var insert = $('#tags').val();
+			 var input ={"insert":insert};
+				
+			 $.ajax({
+	                type:'GET',
+					url: "${pageContext.request.contextPath}/E_real_time",
+	                dataType: "JSON",
+	                data : input,
+	                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	                success: function (data) {
+	                	
+	                	decodeURIComponent( data.member_name );
+	                	console.log(insert);
+	                	console.log(data);
+	                	var member_phone = [];
+	                	
+	                	
+		             for(var i=0; i<data.length; i++){
+		                	member_phone.push(data[i]["member_phone"])		
+		                	var mp = data[i]["member_phone"];
+		             	
+		             }
+	                	
+
+	                	
+	                    $.each(data, function () {
+	                    	
+	                        $('#tb').append("<tr class = 'test'><td>"
+	                        		+ this.member_phone + "</td><td>"
+	                        		+ this.member_name  +"</td><td>"
+	                        		+ this.member_join  +"</td><td>"
+	                        		+ this.member_point +"</td><td>"
+	                        		+ this.member_sign + "</td></tr>");
+	                   
+	                    });
+	                    $('tr:odd').addClass('table table-striped');
+		                },
+		                error: function () { alert('에러발생'); }
+		        	}); // 값이 없을때 실행되는 ajax 끝
+		 		}else{
+		 			
+		 		}//값이 있나 없나 판단하는 if문 끝
+		 		
+		}//길이 판단하는 if문
+		
+	
+	
+	
+	});
 	 <!-- 하이라이트 기능 -->
 	/*  $('#tags').bind('keyup change', function(ev) {
 	        // pull in the new value
@@ -231,7 +301,8 @@ $(document).ready(function () {
   <div class="member">전체행의 수 : ${memberCount}</div>
     <label for="tags">검색어를 입력하세요: </label>  
   <input type="text" id="tags" />
-    <table class="table table-striped">
+  <div style="overflow:scroll; width:100%; height:550px; background-color:#D9E5FF;">
+    <table class="table table-striped"  >
         <thead>
             <tr>
                 <th>member_phone</th>
@@ -247,7 +318,7 @@ $(document).ready(function () {
         </tbody>
 
     </table>
-    
+    </div>
    <%-- <ul class="pager">
         <c:if test="${currentPage < lastpage}">
             <li class="previous"><a href="${pageContext.request.contextPath}/real_time?currentPage=${currentPage-1}">이전</a></li>

@@ -9,14 +9,15 @@
  
    #pop{
     width:300px; height:100px; background:#3d3d3d; color:#fff; 
-    position:absolute; top:10px; left:500px; text-align:center; 
-    border:2px solid #000;
+    position:absolute; top:0px; left:500px; text-align:center; 
+    border:2px solid #000; 
+    margin-top:200px;
    }
  
    #pop_bt{
     border:1px solid #000;
     width:100px; margin:auto;
-    margin-top:300px;
+    margin-top:30px;
    cursor: pointer;
     font-weight:bold;
     text-align:center;
@@ -43,17 +44,25 @@
  </style>
  
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- bootstrap을 사용하기 위한 CDN주소 -->
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
- 
-<!-- jquery를 사용하기위한 CDN주소 -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+ <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+ <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
- 
+<!-- start: Css -->
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/bootstrap.min.css">
+
+      <!-- plugins -->
+      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/plugins/font-awesome.min.css"/>
+      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/plugins/simple-line-icons.css"/>
+      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/plugins/animate.min.css"/>
+      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/plugins/fullcalendar.min.css"/>
+	<link href="${pageContext.request.contextPath}/resources/asset/css/style.css" rel="stylesheet">
+	<!-- end: Css -->
+
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/asset/img/logomi.png">
+   
 <script>
 $(document).ready(function(){
 	$('#Dbtn').click(function(){
@@ -102,9 +111,10 @@ $(document).ready(function(){
 });
 </script>
 <title>회원 탈퇴 Page</title>
-<%@ include file="../modal/wide_menu.jsp" %>
+
 </head>
 <body>
+<%@ include file="../modal/header.jsp" %>
 <br/>
 <br/>
 <br/>
@@ -134,15 +144,15 @@ $(document).ready(function(){
             <label for="member_join">최근방문일자 :</label>
             <input class="form-control" name="member_join" id="member_join" value="${Member.member_join}" type="text"  readonly="readonly"/>
         </div>
-        <input class="btn btn-default" type="button" id="Dbtn" value="삭제">
+        <input class="btn btn-default" type="button" id="Dbtn" value="탈퇴">
         <a class="btn btn-default" href="${pageContext.request.contextPath}/member_list">글목록</a>
     </form>
     
 </div>
-<div id="pop_bt">
+<!-- <div id="pop_bt">
    팝업띄우기
-  </div>
- 
+  </div> -->
+ </br></br></br></br>
   <div id="pop" style="display:none;">
     <div style="height:370px;">
       	전화번호를 입력해 주세요
