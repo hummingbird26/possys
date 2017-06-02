@@ -353,6 +353,26 @@ body {font-family: Verdana,sans-serif;margin:0}
 @media only screen and (max-width: 300px) {
   .prev, .next,.text {font-size: 11px}
 }
+
+<!-- 버튼-->
+.btn {
+  display: inline-block;
+  min-width: 110px;
+  margin: 15px 5px;
+  padding: 10px 15px 12px;
+  font: 700 12px/1 'Open Sans', sans-serif;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 1px rgba(0,0,0,.1), inset 0 -10px 20px rgba(0,0,0,.1);
+  cursor: pointer;
+}
+
+.btn.sec {
+  color: #777;
+  text-shadow: 0 1px 0 rgba(255,255,255,.8);
+  background: #fff;
+}
+
+.btn.sec:hover { background: #f5f5f5 }
 </style>
   
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -364,7 +384,7 @@ body {font-family: Verdana,sans-serif;margin:0}
 		$('.addbutton').click(function(){
 			
 			var cls = "."+this.id;
-			
+
 			var menu_price = $(cls).children('#menu_price').text();
 			var menu_id = $(cls).children('#menu_id').text();
 			var menu_name = $(cls).children('#menu_name').text();
@@ -385,12 +405,12 @@ body {font-family: Verdana,sans-serif;margin:0}
 					+"<input name ='order_detail_sum' id ='order_detail_sum'"
 					+"class ='"+menu_id+"' type ='text' value='"+menu_price+"'readonly='readonly'/> "
 					+"</div>"
-					+"<input name ='menu_price' id ='menu_price'"
+					+"<input name ='menu_price' id ='menu_prices'"
 					+"class ='"+menu_id+"' type ='text' value='"+menu_price+"'readonly='readonly'/ hidden = 'hidden'> "
 					+"<div class= '"+menu_id+" submit'>"
-					+"<button  type='button' id = '"+menu_id+"' class = 'delbutton'>삭제</button> "
-					+"<button  type='button' id = '"+menu_id+"' class = 'plusbutton'>+</button> "
-					+"<button  type='button' id = '"+menu_id+"' class = 'minusbutton'>-</button></div>"
+					+"<button  type='button' id = '"+menu_id+"' class = 'delbutton btn sec'>삭제</button> "
+					+"<button  type='button' id = '"+menu_id+"' class = 'plusbutton btn sec'>+</button> "
+					+"<button  type='button' id = '"+menu_id+"' class = 'minusbutton btn sec'>-</button></div>"
 					+"</div><br/>"
 					 
 					)
@@ -425,10 +445,12 @@ body {font-family: Verdana,sans-serif;margin:0}
 		$(document).on("click",".plusbutton",function(){
 			
 			var cls = "."+this.id;
+			
 			var now = $(cls).children('#order_detail_ea').val();
 			now = parseInt(now)+1;
-			var price = $(cls).children('#menu_price').val();
-			var total = now*price
+			var price = $(cls).children('#menu_prices').val();
+			var total = now*price			
+			
 			$(cls).children('#order_detail_ea').val(now);
 			$(cls).children('#order_detail_sum').val(total);
 			
@@ -441,7 +463,7 @@ body {font-family: Verdana,sans-serif;margin:0}
 			var cls = "."+this.id;
 			var now = $(cls).children('#order_detail_ea').val();
 			now = parseInt(now)-1;
-			var price = $(cls).children('#menu_price').val();
+			var price = $(cls).children('#menu_prices').val();
 			var total = now*price
 			$(cls).children('#order_detail_ea').val(now);
 			$(cls).children('#order_detail_sum').val(total);
@@ -466,16 +488,6 @@ body {font-family: Verdana,sans-serif;margin:0}
 
 <br/><br/><br/>
 
-
-<form id="addform" action="${pageContext.request.contextPath}/order_action" method="post">
-		<div>
-			<input type="submit" id="addsubmit" value="주문">
-		</div>
-		<input name = "table_order_id" id = "table_order_id" class = "${result_id}" type = "text" value = "${result_id}" hidden="hidden"/>
-		<input name = "table_order_num" id = "table_order_num" type = "text"/>
-		<div id = "menu_frame"  style = "overflow:scroll; height : 200px;">	
-		</div>
-	</form>
 <input id = "catego" type = "text" value ="all" hidden = "hidden"/>
 <div class = "slideshow-container">
 			<c:forEach varStatus="status" var="m" items="${menu_list}">
@@ -517,31 +529,17 @@ body {font-family: Verdana,sans-serif;margin:0}
 				<span class="dot" onclick="currentSlides(${status.index}+1)"></span> 
 			</c:forEach>
 		</div>
-<!-- 슬라이더 쇼 -->
-<!-- <div class="slideshow-container">
 
-<div class="mySlides fade">
-  <div class="numbertext">1 / 3</div>
-  <img src="/possys/resources/upload/Tulips.jpg" style="width:100%">
-  <div class="text">Caption Text</div>
-</div>
-
-<div class="mySlides fade">
-  <div class="numbertext">2 / 3</div>
-  <img src="/possys/resources/upload/Tulips.jpg" style="width:100%">
-  <div class="text">Caption Two</div>
-</div>
-
-<div class="mySlides fade">
-  <div class="numbertext">3 / 3</div>
-  <img src="/possys/resources/upload/Tulips.jpg" style="width:100%">
-  <div class="text">Caption Three</div>
-</div>
-
-<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-<a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-</div> -->
+<form id="addform" action="${pageContext.request.contextPath}/order_action" method="post">
+		<input name = "table_order_id" id = "table_order_id" class = "${result_id}" type = "text" value = "${result_id}" hidden="hidden"/>
+		<!-- <input name = "table_order_num" id = "table_order_num" type = "text"/> -->
+		<div id = "menu_frame"  style = "overflow:scroll; height : 200px;">	
+		</div>
+		<br/>
+		<div>
+			<input class = "btn sec" type="submit" id="addsubmit" value="주문">
+		</div>
+</form>
 
 
 <script>
