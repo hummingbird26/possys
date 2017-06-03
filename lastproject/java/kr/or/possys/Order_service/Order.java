@@ -34,8 +34,42 @@ public class Order {
 	private String result_id;
 	private String order_detail_end;
 	
+	private String order_now;//주문가능한 재고
+	private String order_now_per;
+	private String order_max_per;
+	private int order_detail_end_ea;
+	
+	
+	
+	
+	
+	
 	
 
+	public int getOrder_detail_end_ea() {
+		return order_detail_end_ea;
+	}
+	public void setOrder_detail_end_ea(int order_detail_end_ea) {
+		this.order_detail_end_ea = order_detail_end_ea;
+	}
+	public String getOrder_max_per() {
+		return order_max_per;
+	}
+	public void setOrder_max_per(String order_max_per) {
+		this.order_max_per = order_max_per;
+	}
+	public String getOrder_now_per() {
+		return order_now_per;
+	}
+	public void setOrder_now_per(String order_now_per) {
+		this.order_now_per = order_now_per;
+	}
+	public String getOrder_now() {
+		return order_now;
+	}
+	public void setOrder_now(String order_now) {
+		this.order_now = order_now;
+	}
 	public String getResult_id() {
 		return result_id;
 	} 
@@ -112,6 +146,7 @@ public class Order {
 	public void setFood_unit(String food_unit) {
 		this.food_unit = food_unit;
 	}
+	
 	private MultipartFile order_file;
 	
 	

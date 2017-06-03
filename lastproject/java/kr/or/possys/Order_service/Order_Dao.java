@@ -95,7 +95,20 @@ public class Order_Dao {
 		return sqlSessionTemplate2.insert("kr.or.possys.Order_service.Order_Mapper.order_insert",order);
 	}
 	
+	public List<Order> order_fpm_all(){
+		System.out.println("Order_fpm_all실행");
+		
+		return sqlSessionTemplate2.selectList("kr.or.possys.Order_service.Order_Mapper.order_fpm_all");	
+	}
 	
+	public Order order_nowquantity(String food_id){
+		System.out.println("get_order_nowquantity"+food_id);
+		return sqlSessionTemplate2.selectOne("kr.or.possys.Order_service.Order_Mapper.order_nowquantity",food_id);
+	}
 	
+	public Order get_end_ea(Order order){
+		System.out.println("소비한 갯수 가져오기");
+		return sqlSessionTemplate2.selectOne("kr.or.possys.Order_service.Order_Mapper.order_detail_end_ea",order);
+	}
 
 }

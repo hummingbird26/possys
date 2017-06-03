@@ -55,7 +55,7 @@
 <div>
 	<div class="col-sm-6">
 		</br></br>
-		<img src="${pageContext.request.contextPath}/resources/asset/img/test2.jpg" height="300px" width="500px" alt="결제회사정보">
+		<img src="${pageContext.request.contextPath}/resources/asset/img/pos-systems.jpg" height="300px" width="500px" alt="결제회사정보">
 	
 	</div>
 	<div class="col-sm-6">
