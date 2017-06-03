@@ -23,9 +23,22 @@ public class Food_Dao {
 	public int insertfood(Food food){
 		System.out.println("01_Food_dao.java->>insertfood 실행 ");
 		//일련번호 관련 쿼리
-		String s_num =  sqlSessionTemplate.selectOne("kr.or.possys.food_service.Food_Mapper.s_Fnum");
-		if(s_num.equals("")){
+		Food f_num = new Food();
+		//테이블 row 갯수 를 구해서 0이면 초기값이 없음.
+		int f_count =  sqlSessionTemplate.selectOne("kr.or.possys.food_service.Food_Mapper.getfoodcount");
+		if(f_count == 0){
 			System.out.println("초기값 없음");
+			food.setFood_id("f0001");
+			sqlSessionTemplate.insert("kr.or.possys.food_service.Food_Mapper.insertfood",food);
+		}else{
+			System.out.println("초기값 있음");
+			String s_Fnum = sqlSessionTemplate.selectOne("kr.or.possys.food_service.Food_Mapper.s_Fnum");
+			int s_Fnum_count = Integer.parseInt(s_Fnum.substring(1,5))+1;
+//			System.out.println(s_Fnum_count+"<--일련번호 카운트");
+			String result_id = "f"+String.format("%04d", s_Fnum_count);
+			System.out.println(result_id+"<-- 일련번호");
+			food.setFood_id(result_id);
+			sqlSessionTemplate.insert("kr.or.possys.food_service.Food_Mapper.insertfood",food);
 		}
 		return 0;
 //		return sqlSessionTemplate.insert("kr.or.possys.food_service.Food_Mapper.insertfood",food);
