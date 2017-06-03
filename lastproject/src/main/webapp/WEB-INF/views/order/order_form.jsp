@@ -229,7 +229,7 @@ textarea {
   }
 }
 	
-	.addbutton{
+	/* .addbutton{
 	    background-color: #4CAF50;
 	    border: 1;
 	    color: white;
@@ -241,7 +241,27 @@ textarea {
 	    margin: 4px 2px;
 	    cursor: pointer;
 	    
+	} */
+	
+		.buttons{
+		  background: #3498db;
+		  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+		  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+		  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+		  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+		  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+		  -webkit-border-radius: 28;
+		  -moz-border-radius: 28;
+		  border-radius: 28px;
+		  font-family: Arial;
+		  color: #ffffff;
+		  font-size: 12px;
+		  padding: 5px 7px 5px 7px;
+		  text-decoration: none;
+	    
 	}
+	
+	
 /* 		.catebutton{
 	    background-color: #4CAF50;
 	    border: none;
@@ -355,24 +375,7 @@ body {font-family: Verdana,sans-serif;margin:0}
 }
 
 <!-- 버튼-->
-.btn {
-  display: inline-block;
-  min-width: 110px;
-  margin: 15px 5px;
-  padding: 10px 15px 12px;
-  font: 700 12px/1 'Open Sans', sans-serif;
-  border-radius: 3px;
-  box-shadow: inset 0 -1px 0 1px rgba(0,0,0,.1), inset 0 -10px 20px rgba(0,0,0,.1);
-  cursor: pointer;
-}
 
-.btn.sec {
-  color: #777;
-  text-shadow: 0 1px 0 rgba(255,255,255,.8);
-  background: #fff;
-}
-
-.btn.sec:hover { background: #f5f5f5 }
 </style>
   
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -381,15 +384,28 @@ body {font-family: Verdana,sans-serif;margin:0}
 <script type="text/javascript">
 
 	$(document).ready(function(){
+		
+		
+		
 		$('.addbutton').click(function(){
+			
 			
 			var cls = "."+this.id;
 
 			var menu_price = $(cls).children('#menu_price').text();
 			var menu_id = $(cls).children('#menu_id').text();
 			var menu_name = $(cls).children('#menu_name').text();
-			if($('#menu_frame').children(cls).text()==""){
+			var order_max_per = $(cls).children('#order_max_per').text();
+			var menu_check = $('#menu_check').val();
+			
+			if(parseInt(order_max_per) <= 0){
+				$('#'+this.id).text("매진");
+				
+			}
 
+			else if($('#menu_frame').children(cls).text()==""){
+			menu_check = parseInt(menu_check)+1;	
+			$('#menu_check').val(menu_check);
 			$('#menu_frame').append
 			("<div class = '"+menu_id+"'><input name ='menu_id' id ='menu_id'"
 					+"class ='"+menu_id+"' type ='text' value='"+menu_id+"' readonly='readonly' hidden = 'hidden'/> "
@@ -404,13 +420,15 @@ body {font-family: Verdana,sans-serif;margin:0}
 					+"<div class= '"+menu_id+" telephone'>"
 					+"<input name ='order_detail_sum' id ='order_detail_sum'"
 					+"class ='"+menu_id+"' type ='text' value='"+menu_price+"'readonly='readonly'/> "
+					+"<input name ='order_max_pers' id ='order_max_pers'"
+					+"class ='"+menu_id+"' type ='text' value='"+order_max_per+"'readonly='readonly'/ hidden = 'hidden'> "
 					+"</div>"
 					+"<input name ='menu_price' id ='menu_prices'"
 					+"class ='"+menu_id+"' type ='text' value='"+menu_price+"'readonly='readonly'/ hidden = 'hidden'> "
 					+"<div class= '"+menu_id+" submit'>"
-					+"<button  type='button' id = '"+menu_id+"' class = 'delbutton btn sec'>삭제</button> "
-					+"<button  type='button' id = '"+menu_id+"' class = 'plusbutton btn sec'>+</button> "
-					+"<button  type='button' id = '"+menu_id+"' class = 'minusbutton btn sec'>-</button></div>"
+					+"<button  type='button' id = '"+menu_id+"' class = 'delbutton buttons'>X</button> "
+					+"<button  type='button' id = '"+menu_id+"' class = 'plusbutton buttons'>▲</button> "
+					+"<button  type='button' id = '"+menu_id+"' class = 'minusbutton buttons'>▼</button></div>"
 					+"</div><br/>"
 					 
 					)
@@ -421,6 +439,20 @@ body {font-family: Verdana,sans-serif;margin:0}
 			
 		});
 		
+		
+		$('#addsubmit').click(function(){
+			var menu_check = $('#menu_check').val();
+			
+			if(menu_check == 0){
+				
+				return false;	
+			}
+			else{
+				return true;
+			}
+			
+			
+		})
 		
 		$('.catebutton').click(function(){
 			var cls = "."+this.id;
@@ -437,6 +469,10 @@ body {font-family: Verdana,sans-serif;margin:0}
 		
 		$(document).on("click",".delbutton",function(){
 			
+			var menu_check = $('#menu_check').val();
+			menu_check = parseInt(menu_check)-1;	
+			$('#menu_check').val(menu_check);
+			
 			var cls = "."+this.id;
 			alert(cls);
 			$('#menu_frame').children(cls).remove();
@@ -445,15 +481,27 @@ body {font-family: Verdana,sans-serif;margin:0}
 		$(document).on("click",".plusbutton",function(){
 			
 			var cls = "."+this.id;
+			var max = $(cls).children('#order_max_pers').val();;
+			
 			
 			var now = $(cls).children('#order_detail_ea').val();
 			now = parseInt(now)+1;
 			var price = $(cls).children('#menu_prices').val();
 			var total = now*price			
 			
+			
+			if(now <= 0){
+				alert("뭐하는 짓이여");
+			}
+			else if(now > max){
+				alert("그리 많이먹게?");
+				now = parseInt(now)-1;
+			}
+			else{
+			
 			$(cls).children('#order_detail_ea').val(now);
 			$(cls).children('#order_detail_sum').val(total);
-			
+			}
 			/* alert(total); */
 			
 		});
@@ -465,9 +513,14 @@ body {font-family: Verdana,sans-serif;margin:0}
 			now = parseInt(now)-1;
 			var price = $(cls).children('#menu_prices').val();
 			var total = now*price
+			if(now <= 0){
+				now = parseInt(now)+1;
+				alert("뭐하는 짓이여");
+			}
+			else{
 			$(cls).children('#order_detail_ea').val(now);
 			$(cls).children('#order_detail_sum').val(total);
-			
+			}
 			/* alert(total); */
 			
 			
@@ -499,7 +552,8 @@ body {font-family: Verdana,sans-serif;margin:0}
 				<div class="text">
 				메뉴명 : ${m.menu_name}<br/>
 				가격 : ${m.menu_price} 열량 : ${m.menu_kcal}kcal<br/>
-				<button class = "addbutton" id = "${m.menu_id}"type = "button"  >추가</button>
+				재고 : ${m.order_max_per}<br/><!-- 삭제예정 -->
+				<button class = "addbutton buttons" id = "${m.menu_id}"type = "button" >추가</button>
 				</div>
 				
 				
@@ -511,6 +565,7 @@ body {font-family: Verdana,sans-serif;margin:0}
 				<td name = "menu_price" id = "menu_price" class = "${m.menu_id}" style="display:none">${m.menu_price}</td>
 				<td name = "menu_sprice" id = "menu_sprice" class = "${m.menu_id} hid" style = "display:none">${m.menu_sprice}</td>
 				<td name = "menu_kcal" id = "menu_kcal" class = "${m.menu_id}" style="display:none">${m.menu_kcal}kcal</td>
+				<td name = "order_max_per" id = "order_max_per" class = "${m.menu_id} hid" style = "display:none">${m.order_max_per}</td>
 				
 				<%-- <td style="width:20%"><button class = "addbutton" id = "${m.menu_id}"type = "button" >추가</button></td> --%>
 				</tr>
@@ -532,12 +587,13 @@ body {font-family: Verdana,sans-serif;margin:0}
 
 <form id="addform" action="${pageContext.request.contextPath}/order_action" method="post">
 		<input name = "table_order_id" id = "table_order_id" class = "${result_id}" type = "text" value = "${result_id}" hidden="hidden"/>
+		<input name = "menu_check" id = "menu_check" type = "text" value = "0" hidden = "hidden"/>
 		<!-- <input name = "table_order_num" id = "table_order_num" type = "text"/> -->
 		<div id = "menu_frame"  style = "overflow:scroll; height : 200px;">	
 		</div>
 		<br/>
 		<div>
-			<input class = "btn sec" type="submit" id="addsubmit" value="주문">
+		<input class = "buttons" type="submit" id="addsubmit" value="주문">
 		</div>
 </form>
 

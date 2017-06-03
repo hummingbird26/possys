@@ -23,7 +23,7 @@
 		,#{food_size}
 		,#{food_unit}
 		,#{food_shelflife}
-		,'staff'
+		,#{staff_id}
 		,sysdate()
 		)
 	</insert>
