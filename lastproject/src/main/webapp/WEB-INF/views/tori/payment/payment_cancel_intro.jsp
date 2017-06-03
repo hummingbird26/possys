@@ -15,6 +15,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <%@ include file="../../modal/wide_menu.jsp" %>
+  <%-- <%@ include file="../../modal/header.jsp" %> --%>
 </head>
 <body>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>

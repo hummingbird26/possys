@@ -15,6 +15,7 @@
 </head>
 <body>
 <%@ include file="../../modal/wide_menu.jsp" %>
+<%--   <%@ include file="../../modal/header.jsp" %> --%>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <br><br>
 <div class="container">

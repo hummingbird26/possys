@@ -32,6 +32,7 @@ and table_order.table_order_id=payment.table_order_id
 insert into member(
 member_phone,
 member_name,
+member_point,
 member_sign,
 member_join,
 member_email)
@@ -39,6 +40,7 @@ values
 (
 #{member_phone}
 ,#{member_name}
+,0
 ,curdate()
 ,curdate()
 ,#{member_email}

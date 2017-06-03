@@ -91,7 +91,8 @@ INSERT INTO staff( staff_id
 , staff_name 
 , staff_level 
 , staff_age 
-, staff_addr 
+, staff_addr
+, staff_email 
 , staff_gender 
 , staff_phone 
 , staff_date ) 
@@ -100,7 +101,8 @@ VALUES( #{staff_id}
 , #{staff_name} 
 , #{staff_level} 
 , #{staff_age} 
-, #{staff_addr} 
+, #{staff_addr}
+, #{staff_email} 
 , #{staff_gender} 
 , #{staff_phone} 
 , sysdate() ) 

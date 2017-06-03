@@ -390,6 +390,7 @@ public class Payment_Controller {
 		System.out.println(payment_id+"<<<<<<<");
 		/*model.addAttribute("payment_cancel",payment_cancel);
 		model.addAttribute("payment_id",payment_id);*/
+		pdao.PaymentUpdate(payment_id);
 		pdao.insertPaymentCancel(payment_id);
 		pdao.deletePayment(payment_id);
 		
