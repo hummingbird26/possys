@@ -155,7 +155,7 @@ public class Ep_Order_Dao {
 //		System.out.println(ep_o.getFood_id());
 		String ep_Onum = sqlSessionTemplate.selectOne("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.ep_Onum");
 		System.out.println(ep_Onum+"<=====ep_Onum");
-		if(ep_Onum.equals("default")){
+		if(ep_Onum.equals("default")){ // 테이블 row 중 default보다 큰값이 있으면 else문으로 이동
 			ep_o.setEp_order_id("eo0001");
 			sqlSessionTemplate.update("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.default_up",ep_o);
 		}else{
