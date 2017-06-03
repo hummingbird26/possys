@@ -50,6 +50,9 @@ public class Staff_Controller {
 		System.out.println(pw+"pw값");
 		Staff s = sdao.loginSelect(id);
 		
+		System.out.println(s.getStaff_date()+"<< 입사날짜");
+		
+		String Staff_date = s.getStaff_date().substring(0, 10);
 		System.out.println(s+"<<<리턴값 확인");
 		String returnURL = "";
 		
@@ -62,6 +65,7 @@ public class Staff_Controller {
 							map.put("admin_id",s.getStaff_id());
 							map.put("admin_name",s.getStaff_name());
 							map.put("admin_level", s.getStaff_level());
+							map.put("admin_date", Staff_date);
 							request.getSession().setAttribute("admin", map);
 							
 							System.out.println(" 로그인 정보 일치 관리자화면 이동 Staff_Controller.java");
@@ -74,6 +78,7 @@ public class Staff_Controller {
 							map.put("Staff_id",s.getStaff_id());
 							map.put("Staff_name",s.getStaff_name());
 							map.put("Staff_level", s.getStaff_level());
+							map.put("Staff_date", Staff_date);
 							request.getSession().setAttribute("Staff", map);
 							
 							System.out.println(" 로그인 정보 일치 스탭화면 이동 Staff_Controller.java");
