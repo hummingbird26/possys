@@ -47,6 +47,7 @@ $(document).ready(function(){
 </script>
 
 <%@ include file="../../modal/wide_menu.jsp" %>
+<%-- <%@ include file="../../modal/header.jsp" %> --%>
 </head>
 <body>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
@@ -80,7 +81,11 @@ $(document).ready(function(){
 		</tr>
 		<tr>
 		<td>성별</td>
-		<td><input class="form-control" size="auto" id="staff_gender" name="staff_gender" type="text" value="${staff.staff_gender}"></td>
+		<td>
+		<!-- value="${staff.staff_gender}" -->
+		<input class="form-control" size="auto" id="staff_gender" name="staff_gender" type="radio" value="남">남자
+		<input class="form-control" size="auto" id="staff_gender" name="staff_gender" type="radio" value="여">여자
+		</td>
 		</tr>
 		<tr>
 		<td>핸드폰</td>

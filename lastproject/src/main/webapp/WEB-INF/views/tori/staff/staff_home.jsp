@@ -15,6 +15,7 @@
 <title>staff_home</title>
 
 <%@ include file="../../modal/wide_menu.jsp" %>
+<%-- <%@ include file="../../modal/header.jsp" %> --%>
 </head>
 <body>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
