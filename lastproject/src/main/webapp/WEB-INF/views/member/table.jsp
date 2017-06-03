@@ -23,9 +23,24 @@ color:#000000;
 color:#F690C3;
 background-color : transparent;
 }
+.order_update:hover{
+	                background-color: #FFFFE4;
+	            	}
+
+.order_update {
+	background-color :transparent;
+	box-shadow : transparent;
+	border-color:transparent;
+	padding : 1em 0.5em;
+	border-radius : 1.6em;
+	text-align : center;
+	text-decoration : none;
+	
+}  
+
 .table_move:hover{
                 background-color: #FFFFE4;
-            }
+            }         
 .table_move  {
 	background-color :transparent;
 	box-shadow : transparent;
@@ -126,7 +141,27 @@ $(document).ready(function(){
 		
 	
 	});
+	
+	//결제 버튼 클릭시 실행되는 메서드 팝업창에 해당 table_order_id 값을 넘겨준다.
+	//on메서드를 사용해서 동적으로 이벤트를 처리한다.
+	$(document).on("click",".order_update",function(){
+		//팝업창으로 값을 전달하기 위해 변수 선언
+		var payment_add;
+		// 클릭한 div의 값을 table_order_id값을 변수에 담아준다.
+		var  table_order_id =  $(this).val();
+		//아이디가 table_order_id 인것의 벨류값을 table_order_id변수에 담겨있는 값으로 지정해준다.
+		$('#table_order_id').val(table_order_id);
 		
+		/* alert(table_order_id+'결제창 테스트'); */
+ 		 
+			//window.open함수를 사용하여 팝업창을 생성하고 payment_add 변수에 담아준다.
+			payment_add = window.open('${pageContext.request.contextPath}/order_modify_form?table_order_id='+$(this).val()+'','popup','width=550,height=800,left=0,top=0,toolbar=no,locaton=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no');
+			
+			//클릭한 table_order_id의 값을 팝업창에 있는  input박스에 담아준다.
+			payment_add.document.getElementById("table_order_id").value = table_order_id;
+		
+	
+	});
 	
 });
 </script>
@@ -211,7 +246,9 @@ $(document).ready(function(){
 								test1  = test1+ menu_name[j]+" * "+order_detail_ea[j]+"<br/>"
 
              				console.log(cls);
-         					$(cls).html("<font><b>사용중인 테이블</b></font>"+"<br/><br/>"+test1+"<br/><button class='table_move' value='"+test2+"'>자리이동</button></br><button class='table_payment' value='"+test2+"'>결제</button>")
+         					$(cls).html("<font><b>사용중인 테이블</b></font>"+"<br/><br/>"+test1+"<br/><button class='table_move' value='"+test2+"'>자리이동</button>"
+         																+"</br><button class='table_payment' value='"+test2+"'>결제</button>"
+         																+"</br><button class='order_update' value='"+test2+"'>주문수정</button>")
          					$(cls).attr('style','background-color:#FAE0D4');
          					
          				 

@@ -167,7 +167,9 @@ playAlert = setInterval(function() {
                               <div class="panel box-v3">
   								<p>하단</p>
                                 <div class="panel-body">
-                                    
+               
+                
+                </script>                    
                                   
 
                                   <div class="media">
