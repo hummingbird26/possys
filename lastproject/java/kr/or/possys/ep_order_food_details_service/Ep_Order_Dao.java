@@ -153,6 +153,10 @@ public class Ep_Order_Dao {
 //		System.out.println(ep_o.getEp_id());
 //		System.out.println(ep_o.getEp_order_ea());
 //		System.out.println(ep_o.getFood_id());
+		String ep_Onum = sqlSessionTemplate.selectOne("kr.or.possys.ep_order_food_details_service.ep_Onum");
+		if(ep_Onum.equals("default")){
+			ep_o.setEp_order_id("o0001");
+		}
 		sqlSessionTemplate.update("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.default_up",ep_o);
 	}
 	

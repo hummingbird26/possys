@@ -5,7 +5,7 @@
 	<!-- 일련번호 관련 -->
 	<select	id="s_Dnum" resultType="String">
 		select max(drop_id)
-				from food_manage
+				from drop_food
 	</select>
 	<!-- 폐기시 ep_order_food_details테이블에 빼고남은수 업데이트 // 폐기수정시-->
 	<update id="sub_ep_o_up" parameterType="java.util.Map">
@@ -22,6 +22,7 @@
 		,ep_order_wh_ea
 		,ep_order_wh_date
 		,ep_order_food_shelflife
+		,food_nowquantity
 		 from ep_order_food_details
 		 inner join food_manage
 		 on ep_order_food_details.food_id = food_manage.food_id

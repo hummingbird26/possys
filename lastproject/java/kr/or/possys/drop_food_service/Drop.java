@@ -13,7 +13,15 @@ public class Drop {
 	private int ep_order_wh_ea;
 	//ªÛ«∞∏Ì
 	private String food_name;
+	private int cha_drop_ea;
 	
+	
+	public int getCha_drop_ea() {
+		return cha_drop_ea;
+	}
+	public void setCha_drop_ea(int cha_drop_ea) {
+		this.cha_drop_ea = cha_drop_ea;
+	}
 	public String getFood_name() {
 		return food_name;
 	}

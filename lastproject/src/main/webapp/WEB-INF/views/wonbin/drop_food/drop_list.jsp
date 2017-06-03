@@ -46,9 +46,11 @@
 				$('#food_name').val(data.food_name);
 				$('#drop_reason').val(data.drop_reason);
 				$('#drop_ea').val(data.drop_ea);
+				$('#in_drop_ea').val(data.drop_ea); // 폐기수량을 히든으로 하나 더 주어 수정시 계산식을 만듬
 				$('#staff_id').val(data.staff_id);
 				$('#ep_order_wh_ea').val(data.ep_order_wh_ea);
 				$('#ep_order_id').val(data.ep_order_id);
+				
 			},
 			error : function(request,status,error){
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);			
@@ -58,14 +60,23 @@
 	
 	// 상세보기 화면 - 수정 액션 요청
 	$(document).on('click','#sangse_up',function(){
-		var up_form_lize = $('#up_form').serialize(); // Form 태그내의 항목들을 자동으로 읽어와 queryString 형식으로 변환시켜 준다
+		
 		var ep_order_wh_ea = $('#ep_order_wh_ea').val();
 		var _ep_order_wh_ea = parseInt(ep_order_wh_ea);
+		//상세보기 초기 수정괎과 입력된 수정값의 차를 구함. 
+		var in_drop_ea = $('#in_drop_ea').val();
 		var drop_ea = $('#drop_ea').val();
-		var _drop_ra = parseInt(drop_ea);
+		var on_drop_ea = parseInt(drop_ea);
+		var _drop_ea = parseInt(in_drop_ea - drop_ea);
+		$('#cha_drop_ea').val(_drop_ea);	
+		var up_form_lize = $('#up_form').serialize(); // Form 태그내의 항목들을 자동으로 읽어와 queryString 형식으로 변환시켜 준다
 // 		alert(_ep_order_wh_ea);
-		if(_drop_ra > _ep_order_wh_ea){
+		if(on_drop_ea > _ep_order_wh_ea){
 			alert('폐기수량이 남은 수량보다 많습니다. [남은 수량 : '+_ep_order_wh_ea+']');
+		}else if(on_drop_ea == 0){
+			alert('입력된 수량이 0입니다.')
+			$('#sangse_del').trigger('click');
+			return false;
 		}else{
 			$.ajax({
 				type: "get",
@@ -86,7 +97,7 @@
 		}
 		
 	}) // 수정 버튼 End
-	sangse_del
+	
 	// 상세보기 - 폐기 삭제
 	$(document).on('click','#sangse_del',function(){
 // 		alert('폐기삭제');
@@ -246,7 +257,8 @@
 			</div>
 			<input type="hidden" name="ep_order_id" id="ep_order_id"/>
 			<input type="hidden" name="ep_order_wh_ea" id="ep_order_wh_ea"/>
-			
+			<input type="hidden" name="cha_drop_ea" id="cha_drop_ea">
+			<input type="hidden" id="in_drop_ea"/>
 		</form>
 		
 	</div>

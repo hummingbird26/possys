@@ -157,7 +157,12 @@
 		select * from ep_order_food_details
 		where food_id = #{food_id} and ep_id = #{ep_id}
 	</select>
-	<!-- default인 발주테이블 update로 발주등록 -->
+	
+	<select	id="ep_Onum" resultType="String">
+		select max(ep_order_id)
+				from ep_order_food_details
+	</select>
+	<!-- default인 발주테이블 update로 발주등록 (초기)-->
 	<update id="default_up" parameterType="kr.or.possys.ep_order_food_details_service.Ep_Order">
 		update ep_order_food_details set ep_order_id = concat('EPON',(select date_format(sysdate(),'%y%m%d%i%s')))
 		,ep_order_date = sysdate()
@@ -165,7 +170,7 @@
 		,ea_order_statement = '발주신청'
 		where food_id = #{food_id} and ep_id = #{ep_id}
 	</update>
-	<!-- default가 아닌  발주등록  -->
+	<!-- default가 아닌  발주등록 (추가) -->
 	<insert id="ep_oinsert" parameterType="kr.or.possys.ep_order_food_details_service.Ep_Order">
 		insert into ep_order_food_details(
 		ep_order_id

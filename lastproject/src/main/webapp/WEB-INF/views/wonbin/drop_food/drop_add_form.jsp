@@ -39,8 +39,7 @@ $(document).ready(function(){
 				$('#food_name').val(data.food_name);
 				$('#ep_order_wh_ea').val(data.ep_order_wh_ea);
 				$('#drop_ea').attr('placeholder','남은 수량 :'+data.ep_order_wh_ea); // placeholder에 받아온 수량 표시
-				
-				
+							
 			},
 			error : function(request,status,error){
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);			

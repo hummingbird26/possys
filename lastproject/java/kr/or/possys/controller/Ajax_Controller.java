@@ -57,8 +57,10 @@ public class Ajax_Controller {
 											,@RequestParam(value="drop_ea", required=true) int drop_ea
 											,@RequestParam(value="ep_order_wh_ea", required=true) int ep_order_wh_ea
 											,@RequestParam(value="ep_order_id", required=true) String ep_order_id
+											,@RequestParam(value="cha_drop_ea", required=true) int cha_drop_ea
 											,HttpServletResponse response) throws Exception {
 			System.out.println(drop_id+"<== drop_id - 10_aj_drop_form실행 -Ep_OF_Details_Controller.java");
+			System.out.println(cha_drop_ea+"<===수정 수량 초기값 - 수정한 수량 값");
 //			System.out.println(drop_reason);
 //			System.out.println(drop_ea);
 //			System.out.println(ep_order_wh_ea); // 남은수령 가져와서 ep_order_food_details 테이블에 수정 수령을 업데이트
@@ -69,6 +71,7 @@ public class Ajax_Controller {
 			drop.setEp_order_wh_ea(ep_order_wh_ea);
 			drop.setEp_order_id(ep_order_id);
 			drop.setFood_id(food_id);
+			drop.setCha_drop_ea(cha_drop_ea);
 			drop_dao.aj_dropmodify(drop);
 					
 		}
