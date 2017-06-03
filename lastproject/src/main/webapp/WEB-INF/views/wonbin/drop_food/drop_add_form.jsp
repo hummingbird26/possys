@@ -146,7 +146,7 @@ $(document).ready(function(){
 			<div class="form-group">
 				<label class="control-label col-sm-2">담당자</label>
 				<div class="col-xs-7">
-					<input  class="form-control" name ="staff_id" id ="staff_id" type ="text" value="<%-- ${sessionScope.admin.admin_id} --%>"readonly="readonly"/>
+					<input  class="form-control" name ="staff_id" id ="staff_id" type ="text" value="${sessionScope.admin.admin_id}"readonly="readonly"/>
 				</div>
 			</div>
 			<br>

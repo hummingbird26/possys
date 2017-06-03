@@ -33,9 +33,20 @@ public class Drop_Dao {
 		int wh_ea = drop.getEp_order_wh_ea();
 		int d_ea = drop.getDrop_ea();
 		int sub_ea = wh_ea - d_ea;
+		int d_count = sqlSessionTemplate.selectOne("kr.or.possys.drop_food_service.Drop_Mapper.getdropcount");
+		if(d_count == 0){
+			System.out.println("초기값 없음");
+			drop.setDrop_id("d0001");
+			sqlSessionTemplate.insert("kr.or.possys.drop_food_service.Drop_Mapper.aj_insertdrop",drop);
+		}else{
+			System.out.println("초기값 있음");
+			String s_Dnum = sqlSessionTemplate.selectOne("kr.or.possys.food_service.Food_Mapper.s_Dnum");
+			
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("drop", drop);
 		map.put("sub_ea", sub_ea);
+		
 //		System.out.println(sub_ea+"<< 남은수량 - 폐기수량");
 		sqlSessionTemplate.update("kr.or.possys.drop_food_service.Drop_Mapper.sub_ep_o_up",map);
 		sqlSessionTemplate.insert("kr.or.possys.drop_food_service.Drop_Mapper.aj_insertdrop",drop);
