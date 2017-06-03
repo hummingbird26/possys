@@ -95,7 +95,16 @@ public class Order_Dao {
 		return sqlSessionTemplate2.insert("kr.or.possys.Order_service.Order_Mapper.order_insert",order);
 	}
 	
+	public List<Order> order_fpm_all(){
+		System.out.println("Order_fpm_all½ÇÇà");
+		
+		return sqlSessionTemplate2.selectList("kr.or.possys.Order_service.Order_Mapper.order_fpm_all");	
+	}
 	
+	public Order order_nowquantity(String food_id){
+		System.out.println("get_order_nowquantity"+food_id);
+		return sqlSessionTemplate2.selectOne("kr.or.possys.Order_service.Order_Mapper.order_nowquantity",food_id);
+	}
 	
 
 }
