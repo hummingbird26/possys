@@ -153,12 +153,19 @@ public class Ep_Order_Dao {
 //		System.out.println(ep_o.getEp_id());
 //		System.out.println(ep_o.getEp_order_ea());
 //		System.out.println(ep_o.getFood_id());
-		String ep_Onum = sqlSessionTemplate.selectOne("kr.or.possys.ep_order_food_details_service.ep_Onum");
+		String ep_Onum = sqlSessionTemplate.selectOne("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.ep_Onum");
+		System.out.println(ep_Onum+"<=====ep_Onum");
 		if(ep_Onum.equals("default")){
-			ep_o.setEp_order_id("o0001");
+			ep_o.setEp_order_id("eo0001");
+			sqlSessionTemplate.update("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.default_up",ep_o);
+		}else{
+			int s_ep_Onem = Integer.parseInt(ep_Onum.substring(2,6))+1;
+			String result_id = "eo"+String.format("%04d", s_ep_Onem);
+			System.out.println(result_id+"<<==result_id");
+			ep_o.setEp_order_id(result_id);
+			sqlSessionTemplate.update("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.default_up",ep_o);
 		}
-		sqlSessionTemplate.update("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.default_up",ep_o);
-	}
+		}
 	
 	// 발주등록시 default 확인하기 위한 select one
 	public Ep_Order _ep_oinsert(Ep_Order _ep_o){
@@ -171,6 +178,10 @@ public class Ep_Order_Dao {
 	// 발주등록 insert 
 	public void ep_oinsert(Ep_Order ep_o){
 		System.out.println("05_ep_oinsert실행 - Ep_Order_Dao.java");
+		String ep_Onum = sqlSessionTemplate.selectOne("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.ep_Onum");
+		int s_ep_Onem = Integer.parseInt(ep_Onum.substring(2,6))+1;
+		String result_id = "eo"+String.format("%04d", s_ep_Onem);
+		ep_o.setEp_order_id(result_id);
 		sqlSessionTemplate.insert("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.ep_oinsert",ep_o);
 //		String ep_id = ep_o.getEp_id();
 //		String food_id = ep_o.getFood_id();

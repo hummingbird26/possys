@@ -164,7 +164,7 @@
 	</select>
 	<!-- default인 발주테이블 update로 발주등록 (초기)-->
 	<update id="default_up" parameterType="kr.or.possys.ep_order_food_details_service.Ep_Order">
-		update ep_order_food_details set ep_order_id = concat('EPON',(select date_format(sysdate(),'%y%m%d%i%s')))
+		update ep_order_food_details set ep_order_id = #{ep_order_id}
 		,ep_order_date = sysdate()
 		,ep_order_ea = #{ep_order_ea}
 		,ea_order_statement = '발주신청'
@@ -179,12 +179,14 @@
 		,ep_order_date
 		,ep_order_ea
 		,ea_order_statement)
-		select concat('EPON',(select date_format(sysdate(),'%y%m%d%i%s')))
+		value(
+		#{ep_order_id}
 		,#{food_id}
 		,#{ep_id}
 		,sysdate()
 		,#{ep_order_ea}
 		,'발주신청'
+		)
 	</insert>
 	<!--중복없이 식재현황 리스트 갯수 count  -->
 	<select id="ep_ocount" resultType="int">
