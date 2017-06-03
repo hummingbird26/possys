@@ -173,18 +173,17 @@ function addCardId(){
 		document.getElementById('card_id').value = cardId;
 }
 </script>
- <%@ include file="../../modal/wide_menu.jsp" %>
-<%-- <%@ include file="../../modal/header.jsp" %> --%>
+ 
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
+<h1><center>카드 결제</center></h1>
 	<div class="container">
 		<form id="paymentCardForm" action="${pageContext.request.contextPath}/tori/payment/payment_card_action" method="post" class="form-inline">
 			<table class="table table-hover table-stripped">
 				<tr>
 					<td>승인번호 :
 					</td>
-					<td><input type="text" class="form-control" name="card_id" id="card_id" size="auto" placeholder="승인번호를 입력해주세요" ondblclick="javascript:addCardId();">
+					<td><input type="text" class="form-control" name="card_id" id="card_id" size="auto" placeholder="승인번호를 입력해주세요" onclick="javascript:addCardId();">
 					</td>
 				</tr>
 				<tr>
@@ -239,8 +238,8 @@ function addCardId(){
 				</tr>
 				</table>
 		<input type="submit" class="btn btn-primary btn-sm" id="paymentCardAdd" name="paymentCardAdd" value="카드거래입력">
-		<input type="reset" class="btn btn-primary btn-sm" id="paymentCancel" name="paymentCancel" value="되돌림">
-		<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_card_list">글목록</a>
+		<input type="reset" class="btn btn-primary btn-sm" id="paymentCancel" name="paymentCancel" value="다시입력">
+		<%-- <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_card_list">글목록</a> --%>
 		<input type="button" class="btn btn-primary btn-sm" value="리턴하기" onclick="javascript:returnform();"/>
 		<input type="button" class="btn btn-primary btn-sm" value="승인번호중복체크" onclick="javascript:chkDupCardId();"/>
 		</form>
