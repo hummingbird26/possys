@@ -8,18 +8,7 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<!-- start: Css -->
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/bootstrap.min.css">
 
-      <!-- plugins -->
-      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/plugins/font-awesome.min.css"/>
-      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/plugins/simple-line-icons.css"/>
-      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/plugins/animate.min.css"/>
-      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/plugins/fullcalendar.min.css"/>
-	<link href="${pageContext.request.contextPath}/resources/asset/css/style.css" rel="stylesheet">
-	<!-- end: Css -->
-
-	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/asset/img/logomi.png">
    
 <%@ include file="../../modal/header.jsp" %>
 
@@ -32,6 +21,32 @@
 	}
 </script>
 
+<style type="text/css">
+
+.mono_table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 3px;
+    border: outset;
+    color: black;
+}
+
+.td {
+   padding: 15px;
+    border: outset;
+    border-left: 5px solid #C03;
+    border-bottom: 1px solid #DDD;
+    background: #FCF0F3;
+    font-weight: normal;
+    text-align:center;
+    text-shadow: 0 1px #FFF;
+    vertical-align: middle;
+
+
+	}
+ 
+
+</style>
 </head>
 <body>
 </br></br></br></br></br>
@@ -39,50 +54,51 @@
 <br><br>
 <div>
 	<div class="col-sm-6">
-		<img src="" height="auto" width="auto" alt="결제회사정보">
+		</br></br>
+		<img src="${pageContext.request.contextPath}/resources/asset/img/test2.jpg" height="300px" width="500px" alt="결제회사정보">
 	
 	</div>
 	<div class="col-sm-6">
-		<table class="table table-hover table-stripped">
+		<table class="table table-hover table-stripped mono_table">
 		<caption>결제관리기본정보</caption>
 			<tr>
-			<td>결제ID
+			<td class="td">결제ID
 			</td>
 			<td>${payment.payment_id}
 			</td>
 			</tr>
 			<tr>
-			<td>테이블주문번호
+			<td class="td">테이블주문번호
 			</td>
 			<td>${payment.table_order_id}
 			</td>
 			</tr>
 			<tr>
-			<td>결제총액
+			<td class="td">결제총액
 			</td>
 			<td>${payment.payment_total}
 			</td>
 			</tr>
 			<tr>
-			<td>결제금액
+			<td class="td">결제금액
 			</td>
 			<td>${payment.payment_pay}
 			</td>
 			</tr>
 			<tr>
-			<td>결제일자
+			<td class="td">결제일자
 			</td>
 			<td>${payment.payment_date}
 			</td>
 			</tr>
 			<tr>
-			<td>결제유형
+			<td class="td">결제유형
 			</td>
 			<td>${payment.payment_cate}
 			</td>
 			</tr>
 			<tr>
-			<td>결제상태
+			<td class="td">결제상태
 			</td>
 			<td>${payment.payment_state}
 			</td>
@@ -93,22 +109,22 @@
 </div>
 <br><br>
 <div class="container">
-	<table class="table table-stripped table-hover">
+	<table class="table table-stripped table-hover mono_table">
 	<caption>추가정보</caption>
 			<tr>
-			<td>회원전화번호
+			<td class="td">회원전화번호
 			</td>
 			<td>${payment.member_phone}
 			</td>
 			</tr>
 			<tr>
-			<td>적립마일리지
+			<td class="td">적립마일리지
 			</td>
 			<td>${payment.payment_addmileage}
 			</td>
 			</tr>
 			<tr>
-			<td>사용마일리지
+			<td class="td">사용마일리지
 			</td>
 			<td>${payment.payment_usemileage}
 			</td>
