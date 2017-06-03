@@ -33,6 +33,36 @@
     padding:1px 1px;
     margin:0 2px;
 }
+
+.table4_1 table {
+	width:100%;
+	margin:15px 0;
+	border:0;
+	line-height: 1.5;
+}
+.table4_1 th {
+	background-color:#F56E6E;
+	color:#FFFFFF
+}
+.table4_1,.table4_1 th,.table4_1 td {
+	font-size:0.95em;
+	text-align:center;
+	padding:4px;
+	border-collapse:collapse;
+}
+.table4_1 th,.table4_1 td {
+	border: 1px solid #f9acac;
+	border-width:1px 0 1px 0
+}
+.table4_1 tr {
+	border: 1px solid #f9acac;
+}
+.table4_1 tr:nth-child(odd){
+	background-color:#fbcece;
+}
+.table4_1 tr:nth-child(even){
+	background-color:#fdfdfd;
+}		
 </style>
 
  <!-- start: Css -->
@@ -307,7 +337,7 @@ $(document).ready(function () {
     <label for="tags">검색어를 입력하세요: </label>  
   <input type="text" id="tags" />
   <div style="overflow:scroll; width:100%; height:550px; background-color:#D9E5FF;">
-    <table class="table table-striped"  >
+    <table class="table table-striped table4_1"  >
         <thead>
             <tr>
                 <th>member_phone</th>
