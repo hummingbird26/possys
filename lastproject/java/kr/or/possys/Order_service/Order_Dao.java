@@ -106,5 +106,9 @@ public class Order_Dao {
 		return sqlSessionTemplate2.selectOne("kr.or.possys.Order_service.Order_Mapper.order_nowquantity",food_id);
 	}
 	
+	public Order get_end_ea(Order order){
+		System.out.println("소비한 갯수 가져오기");
+		return sqlSessionTemplate2.selectOne("kr.or.possys.Order_service.Order_Mapper.order_detail_end_ea",order);
+	}
 
 }

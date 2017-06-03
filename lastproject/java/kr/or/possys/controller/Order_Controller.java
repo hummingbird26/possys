@@ -77,7 +77,7 @@ public class Order_Controller{
 		}
 
 		for (int i = 0; i < list.size(); i++){
-			if(list.get(i).getOrder_detail_end().equals("F")){
+			if(list.get(i).getOrder_detail_end().equals("f")){
 			odao.order_detail_end_t(list.get(i));
 			list2 = odao.order_fpm(list.get(i).getMenu_id());
 			if(list2.size() != 0){

@@ -36,16 +36,23 @@
 		
 	<update id="order_end_t" parameterType="String">
 		update table_order
-		set table_order_end = 'T'
+		set table_order_end = 't'
 		where table_order_id = #{table_order_id}
 	</update>
 	
 	<update id="order_detail_end_t" parameterType="kr.or.possys.Order_service.Order">
 		update order_detail
-		set order_detail_end = 'T'
+		set order_detail_end = 't'
 		where table_order_id = #{table_order_id}
 		and menu_id = #{menu_id}
 	</update>
+	
+	<select id="order_detail_end_ea" parameterType="kr.or.possys.Order_service.Order">
+		select order_detail_end_ea
+		from order_detail
+		where table_order_id = #{table_order_id}
+		and menu_id = #{menu_id}
+	</select>
 	
 	<update id="order_modify_action" parameterType="kr.or.possys.Order_service.Order">
 		update order_detail
