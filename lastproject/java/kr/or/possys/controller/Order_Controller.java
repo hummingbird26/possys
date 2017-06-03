@@ -192,10 +192,12 @@ public class Order_Controller{
 		
 	}
 
-	@RequestMapping(value="/order_form", method = RequestMethod.GET)
-	public String order_form(Model model){
+	@RequestMapping(value="/order_form", method = {RequestMethod.GET,RequestMethod.POST})
+	public String order_form(Model model,Order order){
 		System.out.println("카운트실행");
+		int table_order_num = order.getTable_order_num();
 		Order order_c = odao.order_count();
+		
 		/* 일련번호 자동증가 부분*/
 		String count = order_c.getOrder_count();
 		int counter = Integer.parseInt(count.substring(1, 5))+1;
@@ -265,6 +267,7 @@ public class Order_Controller{
 		
 		model.addAttribute("result_id",result_id);
 		model.addAttribute("menu_list", menu_list);
+		model.addAttribute("table_order_num",table_order_num);
 
 		return "/order/order_form";
 	}
@@ -317,4 +320,9 @@ public class Order_Controller{
         }
 		return null;
 	}	
+	
+	@RequestMapping(value="/order_table_input", method = RequestMethod.GET)
+	public String order_table_input(){
+		return "/order/order_table_input";
+	}
 }

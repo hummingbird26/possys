@@ -588,7 +588,7 @@ body {font-family: Verdana,sans-serif;margin:0}
 <form id="addform" action="${pageContext.request.contextPath}/order_action" method="post">
 		<input name = "table_order_id" id = "table_order_id" class = "${result_id}" type = "text" value = "${result_id}" hidden="hidden"/>
 		<input name = "menu_check" id = "menu_check" type = "text" value = "0" hidden = "hidden"/>
-		<!-- <input name = "table_order_num" id = "table_order_num" type = "text"/> -->
+		<input name = "table_order_num" id = "table_order_num" type = "text" value = "${table_order_num}" hidden="hidden"/>
 		<div id = "menu_frame"  style = "overflow:scroll; height : 200px;">	
 		</div>
 		<br/>
