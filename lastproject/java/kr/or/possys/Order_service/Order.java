@@ -37,12 +37,21 @@ public class Order {
 	private String order_now;//주문가능한 재고
 	private String order_now_per;
 	private String order_max_per;
+	private int order_detail_end_ea;
+	
+	
 	
 	
 	
 	
 	
 
+	public int getOrder_detail_end_ea() {
+		return order_detail_end_ea;
+	}
+	public void setOrder_detail_end_ea(int order_detail_end_ea) {
+		this.order_detail_end_ea = order_detail_end_ea;
+	}
 	public String getOrder_max_per() {
 		return order_max_per;
 	}
