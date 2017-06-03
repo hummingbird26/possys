@@ -5,9 +5,11 @@
 body {
   font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 13px;
-  background-color:#f0f3f4;
+  background-color:#FFFFFF;
   line-height: 1.42857143 !important;
   color: #58666e !important;
+  background-repeat:repeat-x;
+  background-image: url('${pageContext.request.contextPath}/resources/asset/img/image.jpg');
 }
 
 a,

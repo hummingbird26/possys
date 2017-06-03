@@ -21,10 +21,22 @@
 <script>
 $(document).ready(function(){
 
+	
 	$("#ToMemberJoin").hide();
 	$("#paymentSave").hide();
 	$("#paymentLoad").hide();
 	$('#payment_cate_cd').attr('checked',true);
+	
+	
+	$('#member_phone').focus();
+	
+	 /* $('#member_phone').focusout($('#member_phone').trigger("click")); */
+	
+	/* if($("#payment_pay").val() != ""||$("#payment_pay").val() != null){
+		console.log($("#payment_pay").val()+"<<<<<<<<<");
+		$('#payment_change').trigger("click");
+	}
+	 */
 	document.getElementById('payment_usemileage').value = 0;
 	
 	
@@ -69,18 +81,18 @@ playAlert = setInterval(function() {
 				//values = data.OrderList;
 				if(chkRst>="0"){
 					/* alert("가격 산정 완료"); */
-					console.log(data);			// data값이 잘 받아와졌는지 확인테스트
+					/* console.log(data); */			// data값이 잘 받아와졌는지 확인테스트
 					//console.log(values);
 					data = Number(data);		// data타입은 문자열인데 이것을 정수로 형변환
 					var mileage = data*0.01;	
-					console.log(data);			// 형변환 잘 되었는지 출력
-					console.log(mileage);
+					/* console.log(data); */			// 형변환 잘 되었는지 출력
+					/* console.log(mileage); */
 					document.getElementById('payment_total').value = data;			// 자바스크립트 코드를 이용하여 id값이 payment_total인 요소의 값을 data변수의 값으로 설정해준다.
 					document.getElementById('payment_addmileage').value = mileage;
 					//document.getElementById('payment_maxusemileage').value = usemileage;
 				}else{
 					//alert("가격 산정 불가");
-					console.log(data);
+					/* console.log(data); */
 					//console.log(values);
 				}
 			},
@@ -97,7 +109,7 @@ playAlert = setInterval(function() {
 
 // 회원전화번호를 통해서 회원전화번호 탐색 및 회원의 총 가용 마일리지를 구해준 후에, 그것을 해당 아이디값을 가지는 텍스트박스에 넣어준다.
 function bringMemberList(){
-	console.log("bringMemberList");
+	/* console.log("bringMemberList"); */
 
 	 $.ajax({
 			type:'POST',
@@ -111,17 +123,17 @@ function bringMemberList(){
 				
 				if(chkRst>="0"){
 					alert("마일리지 가져오기 완료");
-					console.log(data);			// data값이 잘 받아와졌는지 확인테스트
+					/* console.log(data); */			// data값이 잘 받아와졌는지 확인테스트
 				
 					data = Number(data);		// data타입은 문자열인데 이것을 정수로 형변환
 					
-					console.log(data);			// 형변환 잘 되었는지 출력
+					/* console.log(data);	 */		// 형변환 잘 되었는지 출력
 				
 					document.getElementById('payment_maxusemileage').value = data;	// 자바스크립트 코드를 이용하여 id값이 payment_maxusemileage인 요소의 값을 data변수의 값으로 설정해준다.
 					
 				}else{
 					alert("마일리지 가져오기 불가");
-					console.log(data);
+					/* console.log(data); */
 					alert('폰번호 없음');
 					//console.log(values);
 				}
@@ -165,6 +177,7 @@ function paymentsave(){
 	//alert(reservePhone  + reserveUseMileage + reservePay + reserveChange);
 	
 }
+
 
 function paymentload(){
 	//카드폼에서 정보를 작성한 후 다시 결제폼으로 돌아올때 이전에 작성해놓았던 데이터값을 불러온다.
@@ -221,10 +234,9 @@ window.onload = function(){
 
 </script>
 
- <%@ include file="../../modal/wide_menu.jsp" %>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
+<center><h2>결 제</h2></center>
 <div class="container">
 <!-- form action에도 입력폼 및 리스트로 가는 것을 작성하지 않고 다른 경로를 작성해본다. 그리고  컨트롤러, 리스트, 매퍼, DTO, DAO, 및 입력 폼의 name속성의 값들을 전부  DB내의 컬럼명으로 통일해서 작성한다-->
 	<form id="paymentForm" class="form-inline" action="${pageContext.request.contextPath}/tori/payment/payment_add_action" method="post">
@@ -240,7 +252,7 @@ window.onload = function(){
 		</tr> -->
 		<tr>
 		<td>테이블사용코드</td>
-		<td><input class="form-control" size="auto" id="table_order_id" name="table_order_id" type="text" placeholder="테이블주문번호를 입력해 주세요"></td>
+		<td><input class="form-control" size="auto" id="table_order_id" name="table_order_id" type="text" placeholder="테이블주문번호를 입력해 주세요" readonly></td>
 		<td>
 		<!-- <p id="notexistid"></p> -->
 		<!-- <input type="button" class="btn btn-primary form-control" name="ToidCheck" value="체크" size="auto" onclick="javascript:toidCheck();"> -->
@@ -249,7 +261,7 @@ window.onload = function(){
 		</tr>
 		<tr>
 		<td>전화번호</td>
-		<td><input class="form-control" size="auto" id="member_phone" name="member_phone" type="tel" ondblclick="javascript:bringMemberList();" placeholder="회원전화번호를 입력해 주세요"></td>
+		<td><input class="form-control" size="auto" id="member_phone" name="member_phone" type="tel" onclick="javascript:bringMemberList();" placeholder="회원전화번호를 입력해 주세요"></td>
 		<td>
 		<!-- <p id="notexistphone"></p> -->
 		<input type="button" class="btn btn-primary form-control btn-sm" name="ToMemberJoin" id="ToMemberJoin"value="회원가입" size="auto" onclick="javascript:toMemberJoin();">
@@ -266,7 +278,7 @@ window.onload = function(){
 		</tr>
 		<tr>
 		<td>거스름돈</td>
-		<td colspan="2"><input class="form-control" size="auto" id="payment_change" name="payment_change" type="text" onclick="javascript:paymentChange();"></td>
+		<td colspan="2"><input class="form-control" size="auto" id="payment_change" name="payment_change" type="text" onclick="javascript:paymentChange();" readonly></td>
 		</tr>
 		<tr>
 		<td>적립할마일리지 </td>
@@ -299,11 +311,14 @@ window.onload = function(){
 		<td><label id="paymentcancelYN"></label></td>
 		</tr> -->
 	</table>
-	<input class="btn btn-primary btn-sm" type="button" id="paymentAdd" name="paymentAdd" value="결제완료">
+	
 	<!-- <input class="btn btn-primary" type="button" id="paymentAdd" name="paymentAdd" onclick="javascript:SubmitYesNo();" value="제출"> -->
-	<input class="btn btn-primary btn-sm" type="reset" id="paymentCancel" name="paymentCancel" value="되돌림">
-	<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_list">글목록</a>
+	<!-- <input class="btn btn-primary btn-sm" type="reset" id="paymentCancel" name="paymentCancel" value="되돌림"> -->
+	<%-- <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_list">글목록</a> --%>
+	<center>
+	<input class="btn btn-primary btn-sm" type="button" id="paymentAdd" name="paymentAdd" value="결제완료">
 	<input type="button" class="btn btn-primary btn-sm" id="idcheck" name="idcheck" value="휴대폰중복체크" onclick="javascript:phonecheck();"/>
+	</center>
 	<input type="button" class="btn btn-primary btn-sm" id="paymentSave" name="paymentSave" value="SAVE" onclick="javascript:paymentsave();"/>
 	<input type="button" class="btn btn-primary btn-sm" id="paymentLoad" name="paymentLoad" value="LOAD" onclick="javascript:paymentload();"/>
 	</form>

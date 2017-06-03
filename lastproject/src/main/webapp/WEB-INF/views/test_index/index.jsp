@@ -54,7 +54,7 @@
 
   </head>
 
- <body id="mimin" class="dashboard">
+ <body id="mimin" class="dashboard" >
 
 
    <%@ include file="../modal/header.jsp" %>
