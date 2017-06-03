@@ -51,6 +51,7 @@
 				<p>결제 번호 : ${Ore.payment_id}</p>
 				<p>총 금액 : ${Ore.payment_total} 원</p>
 				<p>결제 금액 : ${Ore.payment_pay} 원</p>
+				<p>거스름돈 : ${Ore.payment_total - Ore.payment_pay} 원</p>
 				<p>적립 마일리지 : ${Ore.payment_addmileage} point</p>
 				<p>사용 마일리지 : ${Ore.payment_usemileage} point</p>
 				<p>---------------------------------------</p>

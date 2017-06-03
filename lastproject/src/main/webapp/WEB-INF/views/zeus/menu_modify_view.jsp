@@ -4,7 +4,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<%@ include file="../modal/wide_menu.jsp" %>
+
+<%@ include file="../modal/header.jsp" %>
+<!-- jquery를 사용하기위한 CDN주소 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>메뉴 화면</title>
 </head>

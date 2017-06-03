@@ -19,9 +19,7 @@
 		<div>규격 : <input name ="food_size" id ="food_size" type ="text"/></div>
 		<div>단위 : <input name ="food_unit" id ="food_unit" type ="text"/></div>
 		<div>유통기한 : <input name ="food_shelflife" id ="food_shelflife" type ="text"/></div>
-		<div>담당자 : <input name ="staff_id" id ="staff_id" type ="text"/></div>
-		
-		
+		<div>담당자 : <input name ="staff_id" id ="staff_id" type ="text" value="${sessionScope.admin.admin_id}" readonly="readonly"/></div>	
 
 <br>
 		<div>

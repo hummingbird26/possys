@@ -298,13 +298,32 @@ $(document).ready(function(){
 </script>
 <meta charset="utf-8">
 <%-- <%@ include file="../modal/wide_menu.jsp" %> --%>
+  <style>
+/* wdbkit 이용하여 스크롤바 사라지게 만들기 */
+::-webkit-scrollbar {width: 8px; height: 8px; border: 3px solid #fff; display:none;}
+::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {display: block; height: 10px; background: url(`./images/bg.png`) #efefef}
+::-webkit-scrollbar-track {background: #efefef; -webkit-border-radius: 10px; border-radius:10px; -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.2)}
+::-webkit-scrollbar-thumb {height: 50px; width: 50px; background: rgba(0,0,0,.2); -webkit-border-radius: 8px; border-radius: 8px; -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.1)}
+
+  .table{
+    overflow-y:auto;
+    
+scrollbar-face-color: #000000;
+scrollbar-shadow-color: #999999;
+scrollbar-highlight-color: #999999;
+scrollbar-3dlight-color: #000000;
+scrollbar-darkshadow-color: #000000;
+scrollbar-track-color: #000000;
+scrollbar-arrow-color: #999999;
+  }
+  </style>
   </head>
   <body onLoad="javascript:open_win();">
  
     <div class="demo">
       <div class="bg">
      <c:forEach var="d" begin="1" end="15">
-     <div  style="height:300; background-color: #FFFFF0" class="t1 ${d}" id="${d}" value="${d}" style="cursor: pointer;">${d}</div>
+     <div  style="height:300; background-color: #FFFFF0" class="t1 ${d} table" id="${d}" value="${d}" style="cursor: pointer;">${d}</div>
      </c:forEach>
    
 	

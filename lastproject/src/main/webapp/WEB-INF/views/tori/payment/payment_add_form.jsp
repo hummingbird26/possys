@@ -196,7 +196,7 @@ function paymentChange(){
 	var mileage = $("#payment_usemileage").val();
 	var payment_usemileage = Number(mileage);
 	//alert(payment_usemileage);
-	var payment_change = $("#payment_pay").val() - $("#payment_total").val() + payment_usemileage;
+	var payment_change = $("#payment_total").val() - $("#payment_pay").val() + payment_usemileage;
 	
 	if($('#payment_pay').val() != ''){
 		
