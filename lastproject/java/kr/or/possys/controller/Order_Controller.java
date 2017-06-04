@@ -256,8 +256,13 @@ public class Order_Controller{
 			System.out.println(menu_list.get(i).getOrder_max_per()+"//"+menu_list.get(i).getMenu_id());
 			
 		}
-		for(int i =0; i< order_per_list.size(); i++){
-			System.out.println(order_per_list.get(i).getOrder_max_per()+"////");
+		/*for(int i =0; i< list.size(); i++){
+			System.out.println(list.get(i).getMenu_id()+"////");
+			
+		}*/
+		for(int i =0; i< menu_list.size(); i++){
+			System.out.println(menu_list.get(i).getMenu_id()+"////"+menu_list.get(i).getOrder_max_per());
+			
 		}
 		
 		model.addAttribute("menu_list", menu_list);
