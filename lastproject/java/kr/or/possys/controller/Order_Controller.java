@@ -252,11 +252,16 @@ public class Order_Controller{
 		
 		for(int i = 0; i< menu_list.size(); i++){
 			 menu_list.get(i).setOrder_max_per(order_per_list.get(i).getOrder_max_per());
+
 			System.out.println(menu_list.get(i).getOrder_max_per()+"//"+menu_list.get(i).getMenu_id());
 			
 		}
+		for(int i =0; i< order_per_list.size(); i++){
+			System.out.println(order_per_list.get(i).getOrder_max_per()+"////");
+		}
 		
 		model.addAttribute("menu_list", menu_list);
+		
 		//메뉴목록끝
 		
 		model.addAttribute("order",order);
