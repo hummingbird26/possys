@@ -79,14 +79,16 @@
 		menu_name,
 		order_detail_ea,
 		order_detail_sum,
-		order_detail_end)
+		order_detail_end,
+		order_detail_end_ea)
 		values (
 		#{table_order_id},
 		#{menu_id},
 		#{menu_name},
 		#{order_detail_ea},
 		#{order_detail_sum},
-		#{order_detail_end}
+		#{order_detail_end},
+		#{order_detail_end_ea}
 		)
 		</insert>
 		

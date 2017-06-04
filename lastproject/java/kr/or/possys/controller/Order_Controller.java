@@ -90,7 +90,7 @@ public class Order_Controller{
 					int fpm = Integer.parseInt(list2.get(j).getFpm_ea());
 					int total_ea = Integer.parseInt(list.get(i).getOrder_detail_ea());
 					int total_use = (fpm * total_ea);
-					int order_detail_end_ea = list.get(i).getOrder_detail_end_ea();
+					int order_detail_end_ea = Integer.parseInt(list.get(i).getOrder_detail_end_ea());
 					int end_use = (order_detail_end_ea * fpm);
 					
 					int final_used = (total_use - end_use); //½ÄÀç°¹¼ö
@@ -145,6 +145,7 @@ public class Order_Controller{
 		String [] order_detail_ea = order.getOrder_detail_ea().split(",");
 		String [] order_detail_sum = order.getOrder_detail_sum().split(",");
 		String [] order_detail_end = order.getOrder_detail_end().split(",");
+		String [] order_detail_end_ea = order.getOrder_detail_end_ea().split(",");
 		
 		
 		for(int i = 0; i < menu_id.length; i++){
@@ -155,6 +156,8 @@ public class Order_Controller{
 			order2.setOrder_detail_ea(order_detail_ea[i]);
 			order2.setOrder_detail_sum(order_detail_sum[i]);
 			order2.setOrder_detail_end(order_detail_end[i]);
+			order2.setOrder_detail_end_ea(order_detail_end_ea[i]);
+			
 			odao.order_detail_insert(order2);
 			System.out.println(order2.getMenu_id()+order2.getTable_order_id());
 		}
