@@ -50,6 +50,7 @@ public class Order {
 		return order_detail_end_ea;
 	}
 	public void setOrder_detail_end_ea(int order_detail_end_ea) {
+		System.out.println("eaÀÔ·Â"+order_detail_end_ea);
 		this.order_detail_end_ea = order_detail_end_ea;
 	}
 	public String getOrder_max_per() {
