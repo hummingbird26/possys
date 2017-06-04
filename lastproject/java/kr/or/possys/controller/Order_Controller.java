@@ -155,7 +155,8 @@ public class Order_Controller{
 			order2.setMenu_name(menu_name[i]);
 			order2.setOrder_detail_ea(order_detail_ea[i]);
 			order2.setOrder_detail_sum(order_detail_sum[i]);
-			order2.setOrder_detail_end(order_detail_end[i]);
+			/*order2.setOrder_detail_end(order_detail_end[i]);*/
+			order2.setOrder_detail_end("f");
 			order2.setOrder_detail_end_ea(order_detail_end_ea[i]);
 			
 			odao.order_detail_insert(order2);
