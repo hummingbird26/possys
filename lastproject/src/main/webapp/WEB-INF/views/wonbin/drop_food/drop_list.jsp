@@ -89,7 +89,7 @@
 			$('#drop_ea').val(in_drop_ea);
 // 			alert(in_drop_ea);
 			return false;
-// 		}else{
+		}else{
 			$.ajax({
 				type: "get",
 				url : "${pageContext.request.contextPath}/ajax/aj_drop_sangse_up",

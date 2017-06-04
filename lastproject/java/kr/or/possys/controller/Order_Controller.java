@@ -68,17 +68,18 @@ public class Order_Controller{
 
 		System.out.println("주문처리");
 		List<Order> list = odao.order_detail(table_order_id);
+		/*System.out.println("주문처리2"+list.get(0).getOrder_detail_end_ea());*/
 		List<Order> list2;
 		List<Order> list3;
 
 		/*odao.order_end_t(table_order_id);*/
 		for(int i = 0; i < list.size(); i++){
-			System.out.println(list.get(i).getMenu_id()+"//"+list.get(i).getOrder_detail_ea()+"//"+list.get(i).getOrder_detail_end());
+			System.out.println(list.get(i).getMenu_id()+"//"+list.get(i).getOrder_detail_ea()+"//"+list.get(i).getOrder_detail_end_ea());
 		}
 
 		for (int i = 0; i < list.size(); i++){
 			if(list.get(i).getOrder_detail_end().equals("f")){
-			odao.order_detail_end_t(list.get(i));
+			
 			list2 = odao.order_fpm(list.get(i).getMenu_id());
 			if(list2.size() != 0){
 				System.out.println("리스트사이즈가 0이 아닙니다.");
@@ -86,31 +87,39 @@ public class Order_Controller{
 					list3 = odao.order_ep_order(list2.get(j).getFood_id());
 					System.out.println(list2.get(j).getFood_id()+"//푸드아이디");
 /*					System.out.println(list2.get(j).getFpm_ea()+"//소비개수"+"//"+list.get(i).getOrder_detail_ea()+"//주문개수");*/
-					int total_use = Integer.parseInt(list.get(i).getOrder_detail_ea()) * Integer.parseInt(list2.get(j).getFpm_ea());
-					System.out.println("총소비갯수 : "+total_use);
+					int fpm = Integer.parseInt(list2.get(j).getFpm_ea());
+					int total_ea = Integer.parseInt(list.get(i).getOrder_detail_ea());
+					int total_use = (fpm * total_ea);
+					int order_detail_end_ea = Integer.parseInt(list.get(i).getOrder_detail_end_ea());
+					int end_use = (order_detail_end_ea * fpm);
 					
+					int final_used = (total_use - end_use); //식재갯수
+					int final_ea = (total_ea - order_detail_end_ea); //주문갯수
+					
+					System.out.println("총소비갯수 : "+total_use+"/종결갯수 : "+order_detail_end_ea+"//total_used"+final_used);
+					odao.order_detail_end_t(list.get(i));
 					
 					if(list3.size() != 0){
 						for(int k = 0; k< list3.size(); k++){
 							System.out.println(list3.get(k).getFood_nowquantity()+"//식재현황//"+list3.get(k).getEp_order_id());
 							int food_now = Integer.parseInt(list3.get(k).getFood_nowquantity());
-							int food_sum = food_now - total_use;
-							if(food_now != 0 && food_sum > 0&&total_use > 0){
+							int food_sum = food_now - final_used;
+							if(food_now != 0 && food_sum > 0&&final_used > 0){
 								list3.get(k).setFood_sum(food_sum);
 								odao.order_ep_plus(list3.get(k));
-								total_use = 0;
+								final_used = 0;
 								System.out.println("총합 - 현황 > 0"+food_sum);
 								
 							}
-							else if (food_now != 0 && food_sum <= 0 &&total_use > 0){
+							else if (food_now != 0 && food_sum <= 0 &&final_used > 0){
 								System.out.println("총합 - 현황 <= 0");
-								total_use -= food_now; 
-								System.out.println("식재소비량"+total_use);
+								final_used -= food_now; 
+								System.out.println("식재소비량"+final_used);
 								odao.order_ep_zero(list3.get(k));
 							}
 						}
 						
-						if(total_use != 0){
+						if(final_used != 0){
 							System.out.println("식재가 부족하지 않아?");
 						}
 					}
@@ -136,6 +145,7 @@ public class Order_Controller{
 		String [] order_detail_ea = order.getOrder_detail_ea().split(",");
 		String [] order_detail_sum = order.getOrder_detail_sum().split(",");
 		String [] order_detail_end = order.getOrder_detail_end().split(",");
+		String [] order_detail_end_ea = order.getOrder_detail_end_ea().split(",");
 		
 		
 		for(int i = 0; i < menu_id.length; i++){
@@ -145,7 +155,10 @@ public class Order_Controller{
 			order2.setMenu_name(menu_name[i]);
 			order2.setOrder_detail_ea(order_detail_ea[i]);
 			order2.setOrder_detail_sum(order_detail_sum[i]);
-			order2.setOrder_detail_end(order_detail_end[i]);
+			/*order2.setOrder_detail_end(order_detail_end[i]);*/
+			order2.setOrder_detail_end("f");
+			order2.setOrder_detail_end_ea(order_detail_end_ea[i]);
+			
 			odao.order_detail_insert(order2);
 			System.out.println(order2.getMenu_id()+order2.getTable_order_id());
 		}
@@ -174,6 +187,7 @@ public class Order_Controller{
 		System.out.println("주문수정폼 요청");
 		Order order = odao.order_modify_form(table_order_id);
 		List<Order> list = odao.order_detail(table_order_id);
+		
 		for(int i = 0; i< list.size(); i++){
 			String menu_id = list.get(i).getMenu_id();
 			String menu_price =odao.get_price(menu_id);
@@ -183,7 +197,76 @@ public class Order_Controller{
 		//메뉴목록시작
 		List<Menu> menu_list = odao.menu_list();
 		
+		List<Order> order_list = odao.order_fpm_all();
+		
+		List<Order> order_per_list = new ArrayList();
+		
+		Order order_per = new Order();
+		order_per.setMenu_id("first");
+		
+
+		
+		for(int i = 0; i< order_list.size(); i++){
+			
+			System.out.println(order_per.getMenu_id()+"확인");
+			Order order_now = odao.order_nowquantity(order_list.get(i).getFood_id());
+			
+			order_list.get(i).setFood_nowquantity(order_now.getFood_nowquantity());
+			
+			order_list.get(i).setOrder_now_per(Integer.toString(Integer.parseInt(order_list.get(i).getFood_nowquantity())/Integer.parseInt(order_list.get(i).getFpm_ea())));
+			
+			System.out.println(order_list.get(i).getMenu_id()+"//"+order_list.get(i).getFood_id()+
+					"//"+order_list.get(i).getFpm_ea()+"//"+order_list.get(i).getFood_nowquantity()+"//"+order_list.get(i).getOrder_now_per());
+			
+			if(order_per.getMenu_id().equals(order_list.get(i).getMenu_id())){
+				int max_per = Integer.parseInt(order_per.getOrder_max_per());
+				int in_per = Integer.parseInt(order_list.get(i).getOrder_now_per());
+				if(max_per > in_per){
+					order_per.setOrder_max_per(order_list.get(i).getOrder_now_per());
+				}
+				
+			}
+			else if(order_per.getMenu_id().equals("first")){
+				System.out.println("첫번째");
+				order_per.setMenu_id(order_list.get(i).getMenu_id());
+				order_per.setOrder_max_per(order_list.get(i).getOrder_now_per());
+				System.out.println(order_per.getMenu_id()+"엘스실행"+order_per.getOrder_max_per());
+				
+			}
+			else if(order_per.getMenu_id() != order_list.get(i).getMenu_id()){
+				order_per_list.add(order_per);
+				order_per = new Order();
+				
+				order_per.setMenu_id(order_list.get(i).getMenu_id());
+				order_per.setOrder_max_per(order_list.get(i).getOrder_now_per());
+				System.out.println(order_per.getMenu_id()+"엘스실행"+order_per.getOrder_max_per());
+				
+			}
+			
+			if(i+1 == order_list.size()){
+				System.out.println("마지막번째");
+				order_per_list.add(order_per);
+			}
+			
+		}
+		
+		for(int i = 0; i< menu_list.size(); i++){
+			 menu_list.get(i).setOrder_max_per(order_per_list.get(i).getOrder_max_per());
+
+			System.out.println(menu_list.get(i).getOrder_max_per()+"//"+menu_list.get(i).getMenu_id());
+			
+		}
+		/*for(int i =0; i< list.size(); i++){
+			System.out.println(list.get(i).getMenu_id()+"////");
+			
+		}*/
+		for(int i =0; i< menu_list.size(); i++){
+			System.out.println(menu_list.get(i).getMenu_id()+"////"+menu_list.get(i).getOrder_max_per());
+			
+		}
+		
 		model.addAttribute("menu_list", menu_list);
+		
 		//메뉴목록끝
 		
 		model.addAttribute("order",order);
@@ -260,7 +343,7 @@ public class Order_Controller{
 		}
 		
 		for(int i = 0; i< menu_list.size(); i++){
-			menu_list.get(i).setOrder_max_per(order_per_list.get(i).getOrder_max_per());
+			 menu_list.get(i).setOrder_max_per(order_per_list.get(i).getOrder_max_per());
 			System.out.println(menu_list.get(i).getOrder_max_per()+"//"+menu_list.get(i).getMenu_id());
 			
 		}

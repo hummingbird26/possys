@@ -39,6 +39,7 @@ public class Drop_Dao {
 		if(d_count == 0){
 			System.out.println("초기값 없음");
 			drop.setDrop_id("d0001");
+//			System.out.println(drop.getFood_id());
 			sqlSessionTemplate.insert("kr.or.possys.drop_food_service.Drop_Mapper.aj_insertdrop",drop);
 		}else{
 			System.out.println("초기값 있음");
