@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>발주 업체 관리</title>
-<%-- <%@ include file="../../modal/wide_menu.jsp" %> --%>
+<%@ include file="../../modal/header.jsp" %>
 <script type="text/javascript">
 	$(document).ready(function(){
 			//실행시키면 ep_id div 태그를 displat:none 시켜라
@@ -121,7 +121,7 @@
 </script>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
+
 <h1>발주 업체 관리</h1>
 
 

@@ -9,7 +9,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>폐기식자재 품목관리</title>
-<%-- <%@ include file="../../modal/wide_menu.jsp" %> --%>
+
 <script type="text/javascript">
 
 	window.onload = function(){	
@@ -93,21 +93,18 @@ $(document).ready(function(){
 	
 	
 	}) //ready End
-	
+
 </script>
+<style type="text/css">
+
+</style>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
-<div>
-
-</div>
 <br>
 <br>
 	<div class="container">
 	<h2 class="col-sm-3">폐기등록</h2>
-	<br>
-	<br>
-	<br>
+	
 	<br>	
 	<br>
 <%-- 	<form id="addform" action="${pageContext.request.contextPath}/drop_add_form" method="post"> --%>
