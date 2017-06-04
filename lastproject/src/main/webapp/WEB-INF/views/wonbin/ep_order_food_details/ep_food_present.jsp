@@ -11,7 +11,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>식자재 현황 목록</title>
-<%-- <%@ include file="../../modal/wide_menu.jsp" %> --%>
+<%@ include file="../../modal/header.jsp" %>
 <style type="text/css">
   [class*="col-"] {
   padding: 8px;
@@ -22,7 +22,7 @@
 <script type="text/javascript">
 		
 	$(document).ready(function(){
-		$('[data-toggle="tooltip"]').tooltip(); 
+		 
 		$('#div_displ').css("display","none");
 		$('#div_displ_snangse').hide();
 		//검색 
@@ -335,7 +335,7 @@
 // 			팝업창을 활용하여 폐기등록
 			var drop_add;
 			// drop_add 변수에 팝업창을 생성하여 담아줌.
-			drop_add = window.open('${pageContext.request.contextPath}/drop_add_form','popup','width=770,height=800,left=0,top=0,toolbar=no,locaton=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no');
+			drop_add = window.open('${pageContext.request.contextPath}/drop_add_form','popup','width=770,height=700,left=0,top=0,toolbar=no,locaton=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no');
 			drop_add.document.getElementById("drop_bt_f_id").value = $('#drop_bt_f_id').val();
 			drop_add.document.getElementById("drop_bt_o_id").value = $('#drop_bt_o_id').val();
 		})//폐기등록 End

@@ -11,6 +11,12 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
+		//식자재 추가시 새창
+		$(document).on('click','#add_food',function(){
+			window.open('${pageContext.request.contextPath}/food_add_form','popup','width=770,height=700,left=0,top=0,toolbar=no,locaton=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no');
+		});
+		
+// 		$('[data-toggle="tooltip"]').tooltip(); 
 		//검색 
 		$('#fbutton').click(function(){
 			
@@ -136,8 +142,8 @@
 <h3>식자재 목록</h3>
 <div class="col-md-offset-11"><span style="font-size: 16px;">전체 식자재 수 : ${foodcount}</span></div>
 	<div>
-	<input class="btn btn-primary" id="ep_submit" type="button" value="발주업체 관리"/>
-		<a href="${pageContext.request.contextPath}/food_add_form"><button class="btn btn-primary">식자재 추가</button></a>
+	<input class="btn btn-primary" id="ep_submit" type="button" value="발주업체 등록" data-toggle="tooltip" data-placement="bottom" title="발주업체 등록을 위해서는 아래 체크박스를 체크하시고 등록하셔야합니다."/>
+		<%-- <a href="${pageContext.request.contextPath}/food_add_form"> --%><button type="button" class="btn btn-primary" id="add_food">식자재 추가</button><!-- </a> -->
 	</div>
 	<br>
 	<form class="col-md-offset-10"id="sel_list_sub" name="sel_list_sub" action="${pageContext.request.contextPath}/sel_list" method="get">
@@ -161,8 +167,7 @@
 		        	</th>
 					<th>번호</th>
 					<th>식재코드번호</th>
-					<th>상품명</th>
-					<th>규격</th>
+					<th>상품명</th>					
 					<th>단위</th>
 					<th>유통기한</th>
 					<th>담당자</th>
@@ -179,7 +184,6 @@
 					<td>${(foodcount-status.index)-((currentPage-1)*pageRow)}</td>
 					<td>${f.food_id}</td>
 					<td>${f.food_name}</td>
-					<td>${f.food_size}</td>
 					<td>${f.food_unit}</td>
 					<td>제조일로 부터 ${f.food_shelflife}일 까지</td>
 					<td>${f.staff_id}</td>
@@ -221,15 +225,15 @@
 	</ul>
 	</center>
 	</div>
-	<div>
-		<form id ="frm" name="frm" action="${pageContext.request.contextPath}/food_search" method="get">
-			<select id="selbox"name="selbox" size="1" style="width: 172px; height: 30px; padding-bottom: 0px; padding-top: 0px;">
+	<div class="in-line">
+		<form class="col-sm-3"id ="frm" name="frm" action="${pageContext.request.contextPath}/food_search" method="get" style="padding-right: 1px;width: 354px;">
+			<select id="selbox"name="selbox" size="1" style="width: 172px;height: 30.22222px;padding-bottom: 0px;padding-top: 0px;">
 				<option value="food_id">식재코드번호</option>
 				<option value="food_name">상품명</option>
 			</select>
-			<input  size="16" name="keyWord" type="text" style="padding-bottom: 4px; padding-top: 6px; height: 31px;">
-			<input id="fbutton" type="button" value="검색">
+			<input  size="16" name="keyWord" type="text" style="padding-bottom: 4px; padding-top: 6px; height: 31px;">			
 		</form>
+		<input id="fbutton" type="button" value="검색" style="padding-top: 4.5;padding-bottom: 4.5;padding-top: 4px;padding-bottom: 4px;">
 	</div>
 	
 	
