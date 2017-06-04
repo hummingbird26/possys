@@ -44,7 +44,7 @@
 <title></title>
 </head>
 <body>
-</br></br></br></br></br>
+</br></br></br></br></br></br></br></br></br>
 <div class="container">
     <h1></h1>
     <form id="addform" action="${pageContext.request.contextPath}/menu_add_form" method="post" enctype="multipart/form-data">
@@ -52,22 +52,27 @@
             <label for="menuPw"> 메뉴명:</label>
             <input class="form-control" name="menu_name" id="menu_name" type="text" placeholder="메뉴명을 입력해주세요"/>
         </div>
+        </br></br>
         <div class="form-group">
             <label for="menuPw">상품카테고리:</label>
             <input class="form-control" name="menu_cate" id="menu_cate" type="text" placeholder="상품 카테고리를 입력해주세요"/>
         </div>
+        </br></br>
         <div class="form-group">
             <label for="menuName">가격:</label>
             <input class="form-control" name="menu_price" id="menu_price" type="text" placeholder="가격을 입력해주세요 (숫자 3자 이상)"/>
         </div>
+        </br></br>
         <div class="form-group">
             <label for="menuName">할인가격:</label>
             <input class="form-control" name="menu_sprice" id="menu_sprice" type="text" placeholder="할인가격을 입력해주세요 (숫자 3자 이상)"/>
         </div>
+        </br></br>
         <div class="form-group">
             <label for="menuName">칼로리 :</label>
             <input class="form-control" name="menu_kcal" id="menu_kcal" type="text" placeholder="칼로리를 입력해주세요(숫자 3자 이상)"/>
         </div>
+        </br></br>
         <div class="form-group">
             <label for="order_file">사진:</label>
             <input  class="form-control" type="file" id="order_file" name="order_file"> <!-- 이미지 파일 -->

@@ -13,18 +13,20 @@
 <title>메뉴 화면</title>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">홍락이짱</a></center></h1>
-<h1>메뉴 - ${menu.menu_id} 수정 화면</h1>
 <br>
-
+<br>
+<br>
+<h1><center>메뉴  수정 화면</center></h1>
+<br>
+<center>
 <form id="addform" action="${pageContext.request.contextPath}/menu_modify" method="post">
 		
-		<div>메뉴코드 : <input name ="menu_id" id ="menu_id" type ="text" value="${menu.menu_id}" readonly="readonly"/></div>
-		<div>메뉴명: <input name ="menu_name" id ="menu_name" type ="text" value="${menu.menu_name}"/></div>
-		<div>상품카테고리: <input name ="menu_cate" id ="menu_cate" type ="text" value="${menu.menu_cate}"/></div>
-		<div>가격: <input name ="menu_price" id ="menu_price" type ="text" value="${menu.menu_price}"/></div>
-		<div>할인여부 : <input name ="menu_sprice" id ="menu_sprice" type ="text" value="${menu.menu_sprice}"/></div>
-		<div>칼로리: <input name ="menu_kcal" id ="menu_kcal" type ="text" value="${menu.menu_kcal}" readonly="readonly"/></div>
+		<div>메뉴코드 : <input name ="menu_id" id ="menu_id" type ="text" value="${menu.menu_id}" readonly="readonly"/></div><br>
+		<div>메뉴명: <input name ="menu_name" id ="menu_name" type ="text" value="${menu.menu_name}"/></div><br>
+		<div>상품카테고리: <input name ="menu_cate" id ="menu_cate" type ="text" value="${menu.menu_cate}"/></div><br>
+		<div>가격: <input name ="menu_price" id ="menu_price" type ="text" value="${menu.menu_price}"/></div><br>
+		<div>할인여부 : <input name ="menu_sprice" id ="menu_sprice" type ="text" value="${menu.menu_sprice}"/></div><br>
+		<div>칼로리: <input name ="menu_kcal" id ="menu_kcal" type ="text" value="${menu.menu_kcal}" readonly="readonly"/></div><br>
 		
 		
 
@@ -36,6 +38,6 @@
 			<a href="${pageContext.request.contextPath}/menu_delete?menu_id=${menu.menu_id}">삭제</a>
 		</div>
 	</form>
-
+<center>
 </body>
 </html>
