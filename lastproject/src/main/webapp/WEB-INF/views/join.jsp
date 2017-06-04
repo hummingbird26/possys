@@ -103,7 +103,7 @@
 				<h2>LogIn</h2>
 				<div class="tab">
 				  <button class="tablinks" onclick="openCity(event, 'London')">관리자</button>
-				  <button class="tablinks" onclick="openCity(event, 'Paris')">매니저</button>
+				  <!-- <button class="tablinks" onclick="openCity(event, 'Paris')">매니저</button> -->
 				</div>
 			</div>
 			
@@ -126,7 +126,7 @@
 				</div>
 				</form>
 			<!-- 직원 탭 내용 -->
-			<form action="${pageContext.request.contextPath}/loginAction" name="frm2" method="POST">
+<%-- 			<form action="${pageContext.request.contextPath}/loginAction" name="frm2" method="POST">
 				<div id="Paris" class="tabcontent">
 					<label for="usercode2">Usercode</label>
 					<br/>
@@ -143,7 +143,7 @@
 					<br/>
 					<a href="${pageContext.request.contextPath}/repw"><p class="small">비밀번호 찾기(click)</p></a>
 				</div>
-			</form>
+			</form> --%>
 		</div>
 	</div>
 

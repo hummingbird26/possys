@@ -161,11 +161,13 @@ playAlert = setInterval(function() {
 
                             <div class="col-md-12 padding-0">
                               <div class="panel box-v3">
-  								<p>하단</p>
+  								<input type="button" id="order" value="주문신청">
                                 <div class="panel-body">
-               
-                
-                </script>                    
+               			<script>
+                			$('#order').click(function(){
+                				window.open('${pageContext.request.contextPath}/order_table_input','popup','width=550,height=800,left=0,top=0,toolbar=no,locaton=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no');
+                			});
+               			 </script>                    
                                   
 
                                   <div class="media">
