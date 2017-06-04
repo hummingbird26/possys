@@ -476,8 +476,14 @@ body {font-family: Verdana,sans-serif;margin:0}
 			$('#menu_check').val(menu_check);
 			
 			var cls = "."+this.id;
-			alert(cls);
-			$('#menu_frame').children(cls).remove();
+			var del_check = parseInt($(cls).children('#order_detail_end_ea').val());
+
+			if(del_check > 0){
+				/* alert("취소 불가"); */
+			}
+			else{
+				$('#menu_frame').children(cls).remove();
+			}
 		});
 		
 		$(document).on("click",".plusbutton",function(){
@@ -493,10 +499,10 @@ body {font-family: Verdana,sans-serif;margin:0}
 			
 			
 			if(now <= 0){
-				alert("뭐하는 짓이여");
+				/* alert("뭐하는 짓이여"); */
 			}
 			else if(now > max){
-				alert("그리 많이먹게?");
+				/* alert("그리 많이먹게?"); */
 				now = parseInt(now)-1;
 			}
 			else{
@@ -511,13 +517,16 @@ body {font-family: Verdana,sans-serif;margin:0}
 		$(document).on("click",".minusbutton",function(){
 			
 			var cls = "."+this.id;
+			var min = parseInt($(cls).children('#order_detail_end_ea').val());
+
 			var now = $(cls).children('#order_detail_ea').val();
+			
 			now = parseInt(now)-1;
 			var price = $(cls).children('#menu_prices').val();
 			var total = now*price
-			if(now <= 0){
+			if(now <= 0 || now < min){
 				now = parseInt(now)+1;
-				alert("뭐하는 짓이여");
+				
 			}
 			else{
 			$(cls).children('#order_detail_ea').val(now);
@@ -606,27 +615,32 @@ body {font-family: Verdana,sans-serif;margin:0}
 	<c:forEach var="f" items="${order_list}">
 		<div class = "${f.menu_id}"> 
 		<input name ="menu_id" id ="menu_id" class = "${f.menu_id}" type ="text" value="${f.menu_id}"readonly="readonly" hidden = "hidden"/>
+		<div class= "${f.menu_id} name">
 		<input name ="menu_name" id ="menu_name" class = "${f.menu_id}" type ="text" value="${f.menu_name}"readonly="readonly"/>
+		</div>
+		<div class= "${f.menu_id} email">
 		<input name ="order_detail_ea" id ="order_detail_ea" class = "${f.menu_id}" type ="text" value="${f.order_detail_ea}"readonly="readonly"/>
+		</div>
+		<div class= "${f.menu_id} telephone">
 		<input name ="order_detail_sum" id ="order_detail_sum" class = "${f.menu_id}" type ="text" value="${f.order_detail_sum}"readonly="readonly"/>
+		</div>
 		<input name ="menu_price" id ="menu_prices" class = "${f.menu_id}" type ="text" value="${f.menu_price}"readonly="readonly"/ hidden = "hidden">
 		<input name = "order_detail_end" id = "order_detail_end" class = "${f.order_detail_end}" type = "text" value = "${f.order_detail_end}" hidden = "hidden"/>
-		<input name = "order_detail_end_ea" id = "order_detail_end_ea" class = "${f.order_detail_end_ea}" type = "text" value = "${f.order_detail_end_ea}" hidden = "hidden"/>
-		<input name = "order_max_pers" id = "order_max_pers" class = "${f.order_max_per}" type = "text" value = "${f.order_max_per}"/>
+		<input name = "order_detail_end_ea" id = "order_detail_end_ea" class = "${f.menu_id}" type = "text" value = "${f.order_detail_end_ea}" hidden = "hidden"/>
+		<input name = "order_max_pers" id = "order_max_pers" class = "${f.order_max_per}" type = "text" value = "${f.order_max_per}" hidden = "hidden"/>
 		
-		<button  type="button" id = "${f.menu_id}" class = "delbutton">삭제</button>
-		<button  type="button" id = "${f.menu_id}" class = "plusbutton">+</button>
-		<button  type="button" id = "${f.menu_id}" class = "minusbutton">-</button>
+		<button  type="button" id = "${f.menu_id}" class = "delbutton buttons">X</button>
+		<button  type="button" id = "${f.menu_id}" class = "plusbutton buttons">▲</button>
+		<button  type="button" id = "${f.menu_id}" class = "minusbutton buttons">▼</button>
 		</div>
+		<br/>
 	</c:forEach>
 		</div>
 
 <br>
 		<div>
-			<input type="submit" id="addsubmit" value="수정">
-			<input type="reset" id="reset" value="초기화">
-			<a href="${pageContext.request.contextPath}/order_list">취소</a>
-			<a href="${pageContext.request.contextPath}/order_delete?table_order_id=${order.table_order_id}">삭제</a>
+			<input type="submit" id="addsubmit" class = "buttons" value="수정">
+			<button type = "button" class = "buttons" onclick="location.href = '${pageContext.request.contextPath}/order_list'">취소</button>
 		</div>
 </form>
 	
