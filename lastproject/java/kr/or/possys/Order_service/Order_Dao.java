@@ -1,6 +1,9 @@
 package kr.or.possys.Order_service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,6 +20,17 @@ public class Order_Dao {
 		
 		return sqlSessionTemplate2.selectList("kr.or.possys.Order_service.Order_Mapper.order_list");	
 	}
+	
+    public List<Order> get_order_list(int currentPage, int pagePerRow) {
+    	System.out.println("get_order_list");
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("beginRow", (currentPage-1)*pagePerRow);
+        map.put("pagePerRow", pagePerRow);
+        System.out.println(map.get("beginRow"));
+        System.out.println(map.get("pagePerRow"));
+        
+        return sqlSessionTemplate2.selectList("kr.or.possys.Order_service.Order_Mapper.get_order_list", map);
+    }
 	
 	public Order order_modify_form(String table_order_id){
 		System.out.println("주문수정폼실행");
@@ -117,5 +131,11 @@ public class Order_Dao {
 		System.out.println("소비한 갯수 가져오기");
 		return sqlSessionTemplate2.selectOne("kr.or.possys.Order_service.Order_Mapper.order_detail_end_ea",order);
 	}
+	
+    public int get_order_count(){
+    	System.out.println("order_count");
+    	// 경로가 잘못 입력된 것을 미처 확인하지 못함
+        return sqlSessionTemplate2.selectOne("kr.or.possys.Order_service.Order_Mapper.get_order_count");
+    }
 
 }

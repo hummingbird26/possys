@@ -44,10 +44,24 @@ public class Order_Controller{
 
 
 	@RequestMapping(value="/order_list", method = RequestMethod.GET)
-	public String order_list(Model model){
+	public String order_list(Model model,@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage){
 		System.out.println("오더리스트 요청");
-		List<Order> list = odao.order_list();
+		int order_count = odao.get_order_count();
+		System.out.println(order_count);
+		int pagePerRow = 10;
+		int expage = 1;
+		int lastPage = (int)(Math.ceil((double)order_count/(double)pagePerRow));
+		
+		
+		
+		List<Order> list = odao.get_order_list(currentPage, pagePerRow);
 		model.addAttribute("order_list", list);
+		model.addAttribute("expage",expage);
+		model.addAttribute("pagePerRow",pagePerRow);
+		model.addAttribute("order_count",order_count);
+		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("lastPage",lastPage);
+		
 		return "/order/order_list";
 	}
 	
@@ -389,7 +403,7 @@ public class Order_Controller{
 			System.out.println(order2.getMenu_id());
 		}
 		
-		}
+		} 
 		
 		return "redirect:/order_list";
 	}
