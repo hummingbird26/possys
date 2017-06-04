@@ -612,7 +612,7 @@ body {font-family: Verdana,sans-serif;margin:0}
 		<input name ="menu_price" id ="menu_prices" class = "${f.menu_id}" type ="text" value="${f.menu_price}"readonly="readonly"/ hidden = "hidden">
 		<input name = "order_detail_end" id = "order_detail_end" class = "${f.order_detail_end}" type = "text" value = "${f.order_detail_end}" hidden = "hidden"/>
 		<input name = "order_detail_end_ea" id = "order_detail_end_ea" class = "${f.order_detail_end_ea}" type = "text" value = "${f.order_detail_end_ea}" hidden = "hidden"/>
-		<input name = "order_max_pers" id = "order_max_pers" class = "10" type = "text" value = "10"/>
+		<input name = "order_max_pers" id = "order_max_pers" class = "${f.order_max_per}" type = "text" value = "${f.order_max_per}"/>
 		
 		<button  type="button" id = "${f.menu_id}" class = "delbutton">삭제</button>
 		<button  type="button" id = "${f.menu_id}" class = "plusbutton">+</button>
