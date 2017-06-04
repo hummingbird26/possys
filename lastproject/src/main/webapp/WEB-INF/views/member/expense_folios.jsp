@@ -10,8 +10,6 @@
  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- start: Css -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/bootstrap.min.css">
@@ -27,35 +25,75 @@
 	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/asset/img/logomi.png">
 <title>지출 내역</title>
 <%@ include file="../modal/header.jsp" %>
+ <style>
+ ::-webkit-scrollbar {width: 8px; height: 8px; border: 3px solid #fff; display:none;}
+::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {display: block; height: 10px; background: url(`./images/bg.png`) #efefef}
+::-webkit-scrollbar-track {background: #efefef; -webkit-border-radius: 10px; border-radius:10px; -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.2)}
+::-webkit-scrollbar-thumb {height: 50px; width: 50px; background: rgba(0,0,0,.2); -webkit-border-radius: 8px; border-radius: 8px; -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.1)}
  
+ 
+ .table4_1 table {
+	width:100%;
+	margin:15px 0;
+	border:0;
+	line-height: 1.5;
+}
+.table4_1 th {
+	background-color:#F56E6E;
+	color:#FFFFFF
+}
+.table4_1,.table4_1 th,.table4_1 td {
+	font-size:0.95em;
+	text-align:center;
+	padding:4px;
+	border-collapse:collapse;
+}
+.table4_1 th,.table4_1 td {
+	border: 1px solid #f9acac;
+	border-width:1px 0 1px 0
+}
+.table4_1 tr {
+	border: 1px solid #f9acac;
+}
+.table4_1 tr:nth-child(odd){
+	background-color:#fbcece;
+}
+.table4_1 tr:nth-child(even){
+	background-color:#fdfdfd;
+}		
+ </style>
 </head>
 
 <body>
-<br/></br><br/></br>
-<h1>월별 순이익</h1>
-<br/></br>
-<table>
-<tbody>
-<tr>
-<td>매출 일자</td>
-<td>총 판매 금액</td>
-<td>발주 입고 일자</td>
-<td>발주 가격</td>
-<td>순 이 익</td>
-</tr>
-
-<c:forEach var="m" items="${expense_folios}">
-<tr id="t_tr">
-<td>${m.payment_date}</td>
-<td id="payment_total">${m.payment_total}원</td>
-<td>${m.ep_order_wh_date}</td>
-<td id="ep_order_total_price">${m.ep_order_total_price}원</td>
-<td >${m.total_result}원</td>
-</tr>
-</c:forEach>
-
-</tbody>
-
-</table>
+<div class="container">
+	<br/></br><br/></br>
+	<h1>월별 순이익</h1>
+	<br/></br>
+	<div style="overflow:scroll; width:100%; height:550px;">
+		<table class="table table-striped table4_1">
+			<thead>
+				<tr>
+				<th>매출 일자</th>
+				<th>총 판매 금액</th>
+				<th>발주 입고 일자</th>
+				<th>발주 가격</th>
+				<th>순 이 익</th>
+				</tr>
+			</thead>
+		
+			<tbody>
+				<c:forEach var="m" items="${expense_folios}">
+				<tr id="t_tr">
+				<td>${m.payment_date}</td>
+				<td id="payment_total">${m.payment_total}원</td>
+				<td>${m.ep_order_wh_date}</td>
+				<td id="ep_order_total_price">${m.ep_order_total_price}원</td>
+				<td >${m.total_result}원</td>
+				</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+</div>
 </body>
 </html>

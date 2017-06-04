@@ -10,7 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>폐기 목록</title>
-
+<%@ include file="../../modal/header.jsp" %>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#sangse_diply').css("display","none");
@@ -149,7 +149,7 @@
 <%-- <%@ include file="../../modal/wide_menu.jsp" %> --%>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
+
 <h3>폐기 목록</h3>
 <div>전체 식자재 수 : ${dropcount}</div>
 	<br>

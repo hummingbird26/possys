@@ -12,7 +12,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>발주·주문 목록</title>
-<%-- <%@ include file="../../modal/wide_menu.jsp" %> --%>
+<%@ include file="../../modal/header.jsp" %>
 <style type="text/css">
   [class*="col-"] {
   padding: 8px;
@@ -373,7 +373,7 @@
 <body>
 <%-- <jsp:useBean id="today" class="java.util.Date"/> <!-- 현재 날짜 --> --%>
 
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
+
 <h1>발주·주문 목록</h1>
 
 	<div class="col-sm-4">
