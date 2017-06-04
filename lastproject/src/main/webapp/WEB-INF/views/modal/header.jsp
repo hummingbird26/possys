@@ -86,6 +86,8 @@
 			          <li ><a href="${pageContext.request.contextPath}/real_time" title="link ">검색</a></li>
 			          <li ><a href="${pageContext.request.contextPath}/member_list" title="Link">회원목록(회원관리)</a></li>
 			          <li ><a href="#" id="btn" title="Link">주문내역 자동확인</a></li>
+			         <li><a href="${pageContext.request.contextPath}/expense_folios">월별 지출내역</a></li>
+			         
 			         <%--  <li ><a href="${pageContext.request.contextPath}/total_payment" title="Link">매출내역조회</a></li>
 			          <li ><a href="${pageContext.request.contextPath}/table" title="Link">테이블 목록</a></li> --%>
 			        </ul>
