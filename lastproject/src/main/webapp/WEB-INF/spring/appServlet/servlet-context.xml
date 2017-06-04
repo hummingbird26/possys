@@ -55,12 +55,12 @@
     	
     
         
-        <beans:property name="url" value="jdbc:mysql://umj64-006.cafe24.com:3306/hummingbird26?useUnicode=true&amp;characterEncoding=euckr"/>
-        <beans:property name="username" value="hummingbird26"/>
-        <beans:property name="password" value="ruddls12!@"/>
-<!-- 		 <beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/lastproject?useUnicode=true&amp;characterEncoding=euckr"/> 
-         <beans:property name="username" value="okjid"/> 
-         <beans:property name="password" value="okjpw"/>  -->
+<!--         <beans:property name="url" value="jdbc:mysql://umj64-006.cafe24.com:3306/hummingbird26?useUnicode=true&amp;characterEncoding=euckr"/> -->
+<!--         <beans:property name="username" value="hummingbird26"/> -->
+<!--         <beans:property name="password" value="ruddls12!@"/> -->
+ 		 <beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/chr123?useUnicode=true&amp;characterEncoding=euckr"/> 
+         <beans:property name="username" value="chr123"/> 
+         <beans:property name="password" value="ghdfkr227"/> 
  
 
         <!--  <beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/dade?useUnicode=true&amp;characterEncoding=euckr"/> 
