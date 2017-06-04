@@ -382,6 +382,8 @@ public class Order_Controller{
 			order2.setOrder_detail_ea(order_detail_ea[i]);
 			order2.setOrder_detail_sum(order_detail_sum[i]);
 			order2.setOrder_detail_end("f");
+			order2.setOrder_detail_end_ea("0");
+			
 			odao.order_detail_insert(order2);
 			
 			System.out.println(order2.getMenu_id());
