@@ -9,20 +9,20 @@
 <%@ include file="../modal/header.jsp" %>
 </head>
 <body>
+
 <br/><br/><br/><br/><br/>
+<div class="container">
 	<table>
-		<thead>
-            <tr>
-                <th>주문 코드</th>
-                <th>테이블 번호</th>
-                <th>상태</th>
-                <th>주문일시</th>
-                <th>주문수정</th>
-                <th>종결처리</th>
-                <th>결제처리</th>
-            </tr>
-        </thead>
 		<tbody>
+		     <tr>
+                <td>주문 코드</td>
+                <td>테이블 번호</td>
+                <td>상태</td>
+                <td>주문일시</td>
+                <td>주문수정</td>
+                <td>종결처리</td>
+                <td>결제처리</td>
+            </tr>
 			<c:forEach var="f" items="${order_list}">
 			
 			<tr>
@@ -40,6 +40,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<br/>
 	
 	    <ul class="pager">
         <c:if test="${currentPage > 1}">
@@ -65,5 +66,6 @@
         <li class="next"><a href="${pageContext.request.contextPath}/order_list?currentPage=${currentPage+1}">다음</a></li>
         </c:if>
     </ul>
+ </div>
 </body>
 </html>
