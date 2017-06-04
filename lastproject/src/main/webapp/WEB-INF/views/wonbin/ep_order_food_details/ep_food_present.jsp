@@ -20,16 +20,7 @@
 }
 </style>
 <script type="text/javascript">
-// function add(){
-// 	hm = document.form_add.ep_order_ea;
-// 	hm.value ++ ;
-// }
-// function del () {
-// 	hm = document.form_add.amount;
-// 		if (hm.value > 1) {
-// 			hm.value -- ;
-// 		}
-// }
+		
 	$(document).ready(function(){
 		$('[data-toggle="tooltip"]').tooltip(); 
 		$('#div_displ').css("display","none");

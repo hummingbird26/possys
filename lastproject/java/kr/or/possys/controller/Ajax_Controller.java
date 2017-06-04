@@ -55,7 +55,7 @@ public class Ajax_Controller {
 											,@RequestParam(value="food_id", required=true) String food_id
 											,@RequestParam(value="drop_reason", required=true) String drop_reason
 											,@RequestParam(value="drop_ea", required=true) int drop_ea
-											,@RequestParam(value="ep_order_wh_ea", required=true) int ep_order_wh_ea
+											,@RequestParam(value="food_nowquantity", required=true) int food_nowquantity
 											,@RequestParam(value="ep_order_id", required=true) String ep_order_id
 											,@RequestParam(value="cha_drop_ea", required=true) int cha_drop_ea
 											,HttpServletResponse response) throws Exception {
@@ -68,7 +68,7 @@ public class Ajax_Controller {
 			drop.setDrop_id(drop_id);
 			drop.setDrop_reason(drop_reason);
 			drop.setDrop_ea(drop_ea);
-			drop.setEp_order_wh_ea(ep_order_wh_ea);
+			drop.setFood_nowquantity(food_nowquantity);
 			drop.setEp_order_id(ep_order_id);
 			drop.setFood_id(food_id);
 			drop.setCha_drop_ea(cha_drop_ea);
@@ -95,7 +95,7 @@ public class Ajax_Controller {
 									,@RequestParam(value="drop_ea", required=true) int drop_ea
 									,@RequestParam(value="drop_reason", required=true) String drop_reason
 									,@RequestParam(value="staff_id", required=true) String staff_id
-									,@RequestParam(value="ep_order_wh_ea", required=true) int ep_order_wh_ea
+									,@RequestParam(value="food_nowquantity", required=true) int food_nowquantity
 									,HttpServletResponse response) throws Exception {
 		System.out.println(food_id+"<== food_id - 10_aj_drop_form실행 -Ep_OF_Details_Controller.java");
 //		System.out.println(ep_order_id+"<== ep_order_id - 10_aj_drop_form실행 -Ep_OF_Details_Controller.java");
@@ -109,7 +109,7 @@ public class Ajax_Controller {
 		drop.setDrop_ea(drop_ea);
 		drop.setDrop_reason(drop_reason);
 		drop.setStaff_id(staff_id);
-		drop.setEp_order_wh_ea(ep_order_wh_ea);
+		drop.setFood_nowquantity(food_nowquantity);
 		drop_dao.aj_insertdrop(drop);
 				
 	}

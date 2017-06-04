@@ -29,8 +29,10 @@ public class Drop_Dao {
 	}
 	//drop 입력요청
 	public void aj_insertdrop(Drop drop){
-		System.out.println("01_Drop_dao.java->>insertfood 실행 ");
-		int wh_ea = drop.getEp_order_wh_ea();
+		System.out.println("01_Drop_dao.java->>aj_insertdrop 실행 ");
+		System.out.println(drop.getFood_id()+"<<== food_id");
+		
+		int wh_ea = drop.getFood_nowquantity();
 		int d_ea = drop.getDrop_ea();
 		int sub_ea = wh_ea - d_ea;
 		int d_count = sqlSessionTemplate.selectOne("kr.or.possys.drop_food_service.Drop_Mapper.getdropcount");
@@ -46,10 +48,11 @@ public class Drop_Dao {
 			drop.setDrop_id(result_id);
 			sqlSessionTemplate.insert("kr.or.possys.drop_food_service.Drop_Mapper.aj_insertdrop",drop);
 		}
+		// 식재자현황 리스트 현재수량 없데이트
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("drop", drop);
 		map.put("sub_ea", sub_ea);		
-//		System.out.println(sub_ea+"<< 남은수량 - 폐기수량");
+//		System.out.println(sub_ea+"<< 남은현재수량 - 폐기수량");
 		sqlSessionTemplate.update("kr.or.possys.drop_food_service.Drop_Mapper.sub_ep_o_up",map);
 	}
 	//drop 목록 갯수 카운트
@@ -73,7 +76,7 @@ public class Drop_Dao {
 	//02.drop 수정액션 요청
 	public void aj_dropmodify(Drop drop){
 		System.out.println("05_drop_dao.java->>dropmodify 실행");
-		int wh_ea = drop.getEp_order_wh_ea();
+		int wh_ea = drop.getFood_nowquantity();
 		
 		int cha_ea = drop.getCha_drop_ea();
 		int sub_ea = wh_ea + cha_ea;

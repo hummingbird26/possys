@@ -10,7 +10,7 @@
 	<!-- 폐기시 ep_order_food_details테이블에 빼고남은수 업데이트 // 폐기수정시-->
 	<update id="sub_ep_o_up" parameterType="java.util.Map">
 		update ep_order_food_details
-		set ep_order_wh_ea = #{sub_ea}
+		set food_nowquantity = #{sub_ea}
 		where food_id = #{drop.food_id} and ep_order_id=#{drop.ep_order_id}
 	</update>
 	
@@ -71,7 +71,7 @@
 		,drop_food.staff_id
 		,drop_food.ep_order_id
 		,food_manage.food_name
-		,ep_order_food_details.ep_order_wh_ea
+		,ep_order_food_details.food_nowquantity
 		from drop_food
 		inner join food_manage
 		on drop_food.food_id = food_manage.food_id
@@ -101,7 +101,7 @@
 	</delete>
 	<update id="aj_drop_del_up" parameterType="java.util.Map">
 		update ep_order_food_details 
-		set ep_order_wh_ea = #{re_dorder_wh_ea}
+		set food_nowquantity = #{re_dorder_wh_ea}
 		where ep_order_id = #{ep_order_id} and food_id=#{food_id}
 	</update>
 	

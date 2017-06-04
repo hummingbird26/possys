@@ -11,6 +11,7 @@
 		,ep_order_wh_date
 		,ep_order_food_shelflife
 		,ep_order_wh_ea
+		,food_nowquantity
 		from ep_order_food_details
 		where food_id=#{food_id} and ea_order_statement='입고완료'
 		order by ep_order_wh_date desc limit 1	<!-- 내림차순에서 첫번째 row -->
@@ -22,6 +23,7 @@
 		,ep_order_wh_date
 		,ep_order_food_shelflife
 		,ep_order_wh_ea
+		,food_nowquantity
 		from ep_order_food_details
 		where food_id=#{food_id} and ea_order_statement='입고완료'
 		order by ep_order_wh_date desc limit 1,1	<!-- 내림차순에서 두번째번째 row -->
@@ -215,6 +217,12 @@
 		 group by food_id                      
 		 order by ep_order_wh_date desc
 	</select>
+	<!-- 식재자현황 현재수량 list 구하기 위한 food_id 셀렉트 -->
+	<select id="ep_now" parameterType="string" resultType="kr.or.possys.ep_order_food_details_service.Ep_Order">
+		select ep_order_id,food_id,food_nowquantity
+		from ep_order_food_details where food_id = #{food_id}
+	</select>
+	
 	<!-- 검색한 갯수  -->
 	<select id="food_DT_SRcount" parameterType="java.util.Map" resultType="int">
 		select count(c.${selbox}) from (select ep_order_food_details.food_id         

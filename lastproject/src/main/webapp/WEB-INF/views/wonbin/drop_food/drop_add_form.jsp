@@ -37,8 +37,8 @@ $(document).ready(function(){
 // 				alert('성공');
 // 				console.log(data);				
 				$('#food_name').val(data.food_name);
-				$('#ep_order_wh_ea').val(data.ep_order_wh_ea);
-				$('#drop_ea').attr('placeholder','남은 수량 :'+data.ep_order_wh_ea); // placeholder에 받아온 수량 표시
+				$('#food_nowquantity').val(data.food_nowquantity);
+				$('#drop_ea').attr('placeholder','남은 수량 :'+data.food_nowquantity); // placeholder에 받아온 수량 표시
 							
 			},
 			error : function(request,status,error){
@@ -50,12 +50,12 @@ $(document).ready(function(){
 		
 	$(document).on('click','#addsubmit', function(){
 // 		alert('click');
-		var ep_order_wh_ea = $('#ep_order_wh_ea').val();
+		var food_nowquantity = $('#food_nowquantity').val();
 		var drop_ea = $('#drop_ea').val();
 		var _drop_ea = parseInt(drop_ea);
-		var _ep_order_wh_ea = parseInt(ep_order_wh_ea);
+		var _food_nowquantity = parseInt(food_nowquantity);
 // 		alert(ep_order_wh_ea);
-		if(_drop_ea <= _ep_order_wh_ea){
+		if(_drop_ea <= _food_nowquantity){
 			var re = confirm('폐기등록을 계속 진행하시겠습니까?');
 			if(re){
 // 			alert('보낼수있음');
@@ -155,7 +155,7 @@ $(document).ready(function(){
 				<button class="btn" type="button">취소</button>
 				</center>
 			</div>
-			<input type="hidden" name="ep_order_wh_ea" id="ep_order_wh_ea"/>
+			<input type="hidden" name="food_nowquantity" id="food_nowquantity"/>
 		</form>
 		
 		

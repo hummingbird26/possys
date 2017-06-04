@@ -9,13 +9,19 @@ public class Drop {
 	private String drop_reason;
 	private String staff_id;
 	private String ep_order_id;
-	//남은수량 총수
-	private int ep_order_wh_ea;
+	//남은 현재수량 총수
+	private int food_nowquantity;
 	//상품명
 	private String food_name;
 	private int cha_drop_ea;
 	
 	
+	public int getFood_nowquantity() {
+		return food_nowquantity;
+	}
+	public void setFood_nowquantity(int food_nowquantity) {
+		this.food_nowquantity = food_nowquantity;
+	}
 	public int getCha_drop_ea() {
 		return cha_drop_ea;
 	}
@@ -28,12 +34,7 @@ public class Drop {
 	public void setFood_name(String food_name) {
 		this.food_name = food_name;
 	}
-	public int getEp_order_wh_ea() {
-		return ep_order_wh_ea;
-	}
-	public void setEp_order_wh_ea(int ep_order_wh_ea) {
-		this.ep_order_wh_ea = ep_order_wh_ea;
-	}
+	
 	public String getDrop_id() {
 		return drop_id;
 	}
