@@ -7,7 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>식자재 목록</title>
-<%-- <%@ include file="../../modal/wide_menu.jsp" %> --%>
+<%@ include file="../../modal/header.jsp" %>
+
 <script type="text/javascript">
 	$(document).ready(function(){
 		//검색 
@@ -114,35 +115,60 @@
 		});
 		
 	});
+
 </script>
+<style type="text/css">
+.table th{
+	text-align:center;
+}
+.td_chk{	
+    width: 15px;
+    height: 15px;	
+}
+</style>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
-<h1>식자재 목록</h1>
-<div>전체 식자재 수 : ${foodcount}</div>
-	<form id="sel_list_sub" name="sel_list_sub" action="${pageContext.request.contextPath}/sel_list" method="get">
-		<select id="sel_list" name="sel_list" >
+<br>
+<br>
+<br>
+<br>
+<br>
+<h3>식자재 목록</h3>
+<div class="col-md-offset-11"><span style="font-size: 16px;">전체 식자재 수 : ${foodcount}</span></div>
+	<div>
+	<input class="btn btn-primary" id="ep_submit" type="button" value="발주업체 관리"/>
+		<a href="${pageContext.request.contextPath}/food_add_form"><button class="btn btn-primary">식자재 추가</button></a>
+	</div>
+	<br>
+	<form class="col-md-offset-10"id="sel_list_sub" name="sel_list_sub" action="${pageContext.request.contextPath}/sel_list" method="get">
+		<select class="form-control"id="sel_list" name="sel_list" style="padding-top: 0px; padding-bottom: 0px; height: 30px; width: 230px;">
 			<option  value="sel_all" <c:if test="${sel_list eq 'sel_all'}">selected</c:if>>전체보기</option> <!-- 선택된값 select 상태 남기기위한 jstl 적용 -->
 			<option value="sel_y" <c:if test="${sel_list eq 'sel_y'}">selected</c:if>>업체 등록 식재료보기</option>
 			<option value="sel_n" <c:if test="${sel_list eq 'sel_n'}">selected</c:if>>업체 미등록 식재료보기</option>
-		</select>
-	</form>
-	<form id="ep_chkbox" action="${pageContext.request.contextPath}/ep_chkbox" method="post">
-	<input id="ep_submit" type="button" value="발주업체 관리"/>
+		</select>		
+	</form>	
 	
-		<table class="chkclass" border=1>
+	<form id="ep_chkbox" action="${pageContext.request.contextPath}/ep_chkbox" method="post">
+	
+	
+		<table class="table table-hover" style="text-align:center">
 			<thead>
-				<th><input type="checkbox" id="food_chkall"/> ▼</th>
-				<th>번호</th>
-				<th>식재코드번호</th>
-				<th>상품명</th>
-				<th>규격</th>
-				<th>단위</th>
-				<th>유통기한</th>
-				<th>담당자</th>
-				<th>등록일자</th>
-				<th>수정</th>
-							
+				<tr>
+					<th><input type="checkbox" id="food_chkall" style=" width: 15px; height: 15px;"/>
+						<a href="#">
+		         			<span class="glyphicon glyphicon-chevron-down"></span>
+		        		</a>
+		        	</th>
+					<th>번호</th>
+					<th>식재코드번호</th>
+					<th>상품명</th>
+					<th>규격</th>
+					<th>단위</th>
+					<th>유통기한</th>
+					<th>담당자</th>
+					<th>등록일자</th>
+					<th>수정</th>
+				</tr>		
 			</thead>
 			<tbody>
 			
@@ -164,8 +190,9 @@
 			</tbody>
 		</table>
 	</form>
-	
-	<ul>
+	<div>
+	<center>
+	<ul class="pagination pagination-sm" style="text-align: center; width: 300px; margin-left: auto; margin-right: auto;">
 		<c:if test="${currentPage > 1}">
 			<li><a href="${pageContext.request.contextPath}/food_list?currentPage=${currentPage-1}">이전</a></li>
 		</c:if>
@@ -192,20 +219,20 @@
 			<li><a href="${pageContext.request.contextPath}/food_list?currentPage=${currentPage+1}">다음</a></li>
 		</c:if>
 	</ul>
+	</center>
+	</div>
 	<div>
 		<form id ="frm" name="frm" action="${pageContext.request.contextPath}/food_search" method="get">
-			<select id="selbox"name="selbox" size="1">
+			<select id="selbox"name="selbox" size="1" style="width: 172px; height: 30px; padding-bottom: 0px; padding-top: 0px;">
 				<option value="food_id">식재코드번호</option>
 				<option value="food_name">상품명</option>
 			</select>
-			<input  size="16" name="keyWord" type="text">
+			<input  size="16" name="keyWord" type="text" style="padding-bottom: 4px; padding-top: 6px; height: 31px;">
 			<input id="fbutton" type="button" value="검색">
 		</form>
 	</div>
 	
-	<div>
-		<a href="${pageContext.request.contextPath}/food_add_form"><button>식자재 추가</button></a>
-	</div>
+	
 	
 </body>
 </html>

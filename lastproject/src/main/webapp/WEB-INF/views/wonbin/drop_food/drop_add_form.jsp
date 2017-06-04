@@ -93,11 +93,14 @@ $(document).ready(function(){
 	
 	
 	}) //ready End
-	
+
 </script>
+<style type="text/css">
+
+</style>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
+
 <div>
 
 </div>

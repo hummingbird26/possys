@@ -398,7 +398,7 @@
 </script>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
+
 <h3>발주등록 및 식자재 현황</h3>
 <div>전체 식자재 현황 수 : ${ep_ocount}</div>
 <%-- 	<form id="sel_list_sub" name="sel_list_sub" action="${pageContext.request.contextPath}/sel_list" method="get"> --%>

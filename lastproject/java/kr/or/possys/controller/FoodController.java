@@ -63,7 +63,7 @@ public class FoodController {
 		System.out.println("FoodController.java ->>foodlist ฟไรป");
 		System.out.println(sel_list+"<=== sel_list");
 		String re = null;
-		int pageRow = 20;
+		int pageRow = 50;
 		int expage = 1;
 		if(sel_list.equals("sel_y")){
 			int getselcount = dao.getsel_count();
