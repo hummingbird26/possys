@@ -31,11 +31,7 @@
 	<!-- end: Css -->
 
 	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/asset/img/logomi.png">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+   
   </head>
 
  <body id="mimin" class="dashboard">
@@ -165,11 +161,13 @@ playAlert = setInterval(function() {
 
                             <div class="col-md-12 padding-0">
                               <div class="panel box-v3">
-  								<p>하단</p>
+  								<input type="button" id="order" value="주문신청">
                                 <div class="panel-body">
-               
-                
-                </script>                    
+               			<script>
+                			$('#order').click(function(){
+                				window.open('${pageContext.request.contextPath}/order_table_input','popup','width=550,height=800,left=0,top=0,toolbar=no,locaton=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no');
+                			});
+               			 </script>                    
                                   
 
                                   <div class="media">

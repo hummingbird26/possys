@@ -261,8 +261,16 @@ public class Order_Controller{
 			
 		}*/
 		for(int i =0; i< menu_list.size(); i++){
-			System.out.println(menu_list.get(i).getMenu_id()+"////"+menu_list.get(i).getOrder_max_per());
 			
+			for(int j = 0; j < list.size(); j++){
+				
+				if(list.get(j).getMenu_id().equals(menu_list.get(i).getMenu_id())){
+					list.get(j).setOrder_max_per(menu_list.get(i).getOrder_max_per());
+					
+					System.out.println("실행"+menu_list.get(i).getOrder_max_per()+"입력"+list.get(j).getOrder_max_per());
+				}
+				
+			}
 		}
 		
 		model.addAttribute("menu_list", menu_list);
@@ -374,6 +382,8 @@ public class Order_Controller{
 			order2.setOrder_detail_ea(order_detail_ea[i]);
 			order2.setOrder_detail_sum(order_detail_sum[i]);
 			order2.setOrder_detail_end("f");
+			order2.setOrder_detail_end_ea("0");
+			
 			odao.order_detail_insert(order2);
 			
 			System.out.println(order2.getMenu_id());

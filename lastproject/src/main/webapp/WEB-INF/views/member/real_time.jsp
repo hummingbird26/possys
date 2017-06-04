@@ -10,8 +10,6 @@
  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <style type="text/css">
 ::-webkit-scrollbar {width: 8px; height: 8px; border: 3px solid #fff; display:none;}
@@ -336,7 +334,7 @@ $(document).ready(function () {
   <div class="member">전체행의 수 : ${memberCount}</div>
     <label for="tags">검색어를 입력하세요: </label>  
   <input type="text" id="tags" />
-  <div style="overflow:scroll; width:100%; height:550px; background-color:#D9E5FF;">
+  <div style="overflow:scroll; width:100%; height:550px;">
     <table class="table table-striped table4_1"  >
         <thead>
             <tr>
