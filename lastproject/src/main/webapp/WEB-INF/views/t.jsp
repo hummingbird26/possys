@@ -103,7 +103,7 @@ requestPermissionButton.on("click", function () {
 				        setTimeout(function () {
 				            //얼람 메시지 닫기
 				            notification.close();
-				        }, 50000);
+				        }, 5000);
 				    }
 				}else{
 					/* alert('주문종결처리'); */

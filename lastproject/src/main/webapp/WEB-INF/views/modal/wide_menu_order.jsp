@@ -47,9 +47,10 @@ $(document).ready(function(){
   <nav id="menu" class="menu">
     <ul class="dropdown">
       <li ><a class = "catebutton " id = "all" title="Link">전체</a></li>
-      <li ><a class = "catebutton " id = "bab" title="Link">밥류</a></li>
-      <li ><a class = "catebutton " id = "chi">치킨류</a></li>
-      <li ><a class = "catebutton " id = "ham">햄버거류</a></li>
+      <li ><a class = "catebutton " id = "drinkmenu" title="Link">음료류</a></li>
+      <li ><a class = "catebutton " id = "sidemenu">사이드메뉴</a></li>
+      <li ><a class = "catebutton " id = "hambuger">햄버거류</a></li>
+      <li ><a class = "catebutton " id = "setmenu">세트메뉴</a></li>
   </nav>
 <!-- 
   <form class="search_box" id="search_box" action="/search/">

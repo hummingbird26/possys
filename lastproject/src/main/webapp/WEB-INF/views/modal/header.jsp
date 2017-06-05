@@ -72,7 +72,7 @@
 			$(document).ready(function(){
 				$('#btn').click(function(){
 					
-					window.open("ho.html",'popup','width=500,height=300,left=0,top=0,toolbar=no,locaton=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no');
+					window.open("${pageContext.request.contextPath}/ho.html",'popup','width=500,height=300,left=0,top=0,toolbar=no,locaton=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no');
 						
 					
 				});
@@ -95,7 +95,7 @@
 			      <li ><a href="#Link" title="Link">Order</a>
 			        <ul >
 			          <li ><a href="${pageContext.request.contextPath}/order_list" title="Link">주문목록</a></li>
-			          <li ><a href="${pageContext.request.contextPath}/order_list">주문현황</a></li>
+			          <li ><a href="${pageContext.request.contextPath}/order_table_input">주문신청</a></li>
 			          <li ><a href="#Link" title="Link">Link</a></li>
 			        </ul>
 			      </li>

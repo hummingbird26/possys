@@ -523,7 +523,8 @@ public class Member_Controller {
 	//알람창 호출
 	@RequestMapping(value="/ho.html")
 	public String alram(){
-		return "t";
+		System.out.println("알람창 호출");
+		return "/member/alram";
 	}
 
 	//실시간 검색 호출
