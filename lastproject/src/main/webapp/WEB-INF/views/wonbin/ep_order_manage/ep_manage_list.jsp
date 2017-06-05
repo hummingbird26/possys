@@ -26,13 +26,23 @@
 	});
 </script>
 <%-- <%@ include file="../../modal/wide_menu.jsp" %> --%>
+<style type="text/css">
+	.table th{
+	text-align:center;
+</style>
 </head>
 <body>
-
-<h1>업체 목록</h1>
-<div>전체 업체 수 : ${ep_mcount}</div>
-	<table border=1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h3>업체 목록</h3>
+<div class="col-md-offset-11"><span style="font-size: 16px;">전체 업체 수 : ${ep_mcount}</span></div>
+<a href="${pageContext.request.contextPath}/food_list"><button type="button" class="btn btn-primary">식재료 목록</button></a>
+	<table class="table table-hover" style="text-align:center">
 		<thead>
+			<tr>
 			<th>번호</th>
 			<th>업체 코드 번호</th>
 			<th>업체명</th>
@@ -41,9 +51,10 @@
 			<th>업체 주소</th>
 			<th>비고</th>
 			<th>수정</th>
-						
+			</tr>			
 		</thead>
 		<tbody>
+			
 			<c:forEach varStatus="status" var="e" items="${list}">
 			<tr>
 				<td>${(ep_mcount-status.index)-((currentPage-1)*pageRow)}</td>
@@ -56,9 +67,12 @@
 				<td><a href="${pageContext.request.contextPath}/ep_manage_modify_view?ep_id=${e.ep_id}"><button>상세보기</button></a></td>
 			</tr>
 			</c:forEach>
+			
 		</tbody>
 	</table>
-	<ul>
+	<c:if test="${empty list}"><div><h4>등록된 업체가 없습니다.</h4></div></c:if>
+	<center>
+	<ul class="pagination pagination-sm" style="text-align: center; width: 300px; margin-left: auto; margin-right: auto;">
 		<c:if test="${currentPage > 1}">
 			<li><a href="${pageContext.request.contextPath}/ep_manage_list?currentPage=${currentPage-1}">이전</a></li>
 		</c:if>
@@ -85,6 +99,7 @@
 			<li><a href="${pageContext.request.contextPath}/ep_manage_list?currentPage=${currentPage+1}">다음</a></li>
 		</c:if>
 	</ul>
+	</center>
 <!-- 	<div> -->
 <%-- 		<form id ="frm" name="frm" action="${pageContext.request.contextPath}/ep_msearch" method="get"> --%>
 <!-- 			<select id="selbox"name="selbox" size="1"> -->
@@ -95,10 +110,6 @@
 <!-- 			<input id="ebutton" type="button" value="검색"> -->
 <!-- 		</form> -->
 <!-- 	</div> -->
-	
-	<div>
-		<a href="${pageContext.request.contextPath}/food_list"><button>업체 추가</button></a>
-	</div>
 	
 </body>
 </html>

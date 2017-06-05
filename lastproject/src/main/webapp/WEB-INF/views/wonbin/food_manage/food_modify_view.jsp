@@ -9,30 +9,57 @@
 <%@ include file="../../modal/header.jsp" %>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
-<h1>식자재 - ${food.food_id} 수정 화면</h1>
 <br>
-
-<form id="addform" action="${pageContext.request.contextPath}/food_modify" method="post">
-		
-		<div>상품번호 : <input name ="food_id" id ="food_id" type ="text" value="${food.food_id}" readonly="readonly"/></div>
-		<div>상품명 : <input name ="food_name" id ="food_name" type ="text" value="${food.food_name}"/></div>
-		<div>규격 : <input name ="food_size" id ="food_size" type ="text" value="${food.food_size}"/></div>
-		<div>단위 : <input name ="food_unit" id ="food_unit" type ="text" value="${food.food_unit}"/></div>
-		<div>유통기한 : <input name ="food_shelflife" id ="food_shelflife" type ="text" value="${food.food_shelflife}"/></div>
-		<div>담당자 : <input name ="staff_id" id ="staff_id" type ="text" value="${food.staff_id}" readonly="readonly"/></div>
-		
-		
-
 <br>
-		<div>
-			<input type="submit" id="addfood" value="수정">
-			<input type="reset" id="reset" value="초기화">
-			<a href="${pageContext.request.contextPath}/food_list">취소</a>
-			<a href="${pageContext.request.contextPath}/food_delete?food_id=${food.food_id}"><button id ="all_del" type="button">삭제</button></a>
+<br>
+<br>
+<br>
+<div class="container">
+<h3>식재료 - ${food.food_id} 수정 화면</h3>
+<br>
+<br>
+<br>
+<form class="form-horizontal col-sm-12" id="addform" action="${pageContext.request.contextPath}/food_modify" method="post">
+		<div class="form-group">
+			<label class="control-label col-sm-2">식재료 코드</label>
+			<div class="col-xs-7">
+				<input  class="sel_view form-control" name ="food_id" id ="food_id" type ="text" value="${food.food_id}" readonly="readonly"/>
+			</div>
 		</div>
-	</form>
-
+		<div class="form-group">
+			<label class="control-label col-sm-2">상품명</label>
+			<div class="col-xs-7">
+				<input  class="sel_view form-control" name ="food_name" id ="food_name" type ="text" value="${food.food_name}" readonly="readonly"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2">단위</label>
+			<div class="col-xs-7">
+				<input  class="sel_view form-control" name ="food_unit" id ="food_unit" type ="text" value="${food.food_unit}"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2">유통기한</label>
+			<div class="col-xs-7">
+				<input  class="sel_view form-control" name ="food_shelflife" id ="food_shelflife" type ="text" value="${food.food_shelflife}"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2">담당자</label>
+			<div class="col-xs-7">
+				<input  class="sel_view form-control" name ="staff_id" id ="staff_id" type ="text" value="${food.staff_id}" readonly="readonly"/>
+			</div>
+		</div>		
+<br>
+		<div class="form-group col-sm-10">
+				<center>
+				<input class="btn btn-primary" type="submit" id="addfood" value="수정">
+				<a href="${pageContext.request.contextPath}/food_list"><button class="btn btn-default" type="button" id="censel">취소</button></a>
+				<a href="${pageContext.request.contextPath}/food_delete?food_id=${food.food_id}"><button class="btn btn-default" type="button" id="all_del">삭제</button></a>
+				</center>
+			</div>
+		</form>
+</div>
 
 
 </body>

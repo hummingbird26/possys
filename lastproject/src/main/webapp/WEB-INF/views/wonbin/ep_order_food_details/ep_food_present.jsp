@@ -13,11 +13,7 @@
 <title>식자재 현황 목록</title>
 <%@ include file="../../modal/header.jsp" %>
 <style type="text/css">
-  [class*="col-"] {
-  padding: 8px;
-  border: 1px solid gray;
   
-}
 </style>
 <script type="text/javascript">
 		
@@ -398,9 +394,14 @@
 </script>
 </head>
 <body>
-
+<br>
+<br>
+<br>
+<br>
+<br>
 <h3>발주등록 및 식자재 현황</h3>
-<div>전체 식자재 현황 수 : ${ep_ocount}</div>
+<div class="col-md-offset-10"><span style="font-size: 16px;">전체 식재료 현황 수 : ${ep_ocount}</span></div>
+
 <%-- 	<form id="sel_list_sub" name="sel_list_sub" action="${pageContext.request.contextPath}/sel_list" method="get"> --%>
 <!-- 		<select id="sel_list" name="sel_list" > -->
 <%-- 			<option  value="sel_all" <c:if test="${sel_list eq 'sel_all'}">selected</c:if>>전체보기</option> <!-- 선택된값 select 상태 남기기위한 jstl 적용 --> --%>
