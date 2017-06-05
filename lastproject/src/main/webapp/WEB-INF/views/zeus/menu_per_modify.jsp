@@ -29,6 +29,5 @@
 			<a href="${pageContext.request.contextPath}/menu_list">취소</a>
 		</div>
 	</form>
-
 </body>
 </html>

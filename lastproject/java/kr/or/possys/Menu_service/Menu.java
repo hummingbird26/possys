@@ -22,19 +22,19 @@ public class Menu {
 	
 
 	
-<<<<<<< HEAD
+
 	public String getMenu_count() {
 		return menu_count;
 	}
 	public void setMneu_count(String menu_count) {
 		this.menu_count = menu_count;
-=======
+	}
 	public String getOrder_max_per() {
 		return order_max_per;
 	}
 	public void setOrder_max_per(String order_max_per) {
 		this.order_max_per = order_max_per;
->>>>>>> branch 'master' of https://github.com/hummingbird26/possys.git
+
 	}
 	public String getOrgname() {
 		return orgname;

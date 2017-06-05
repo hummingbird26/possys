@@ -79,4 +79,8 @@ public class Per_Dao {
 		return sqlSessionTemplate.selectOne("kr.or.possys.Menu_service.Per_Mapper.foodSRlist",map);
 		
 	}
+	public int aj_ep_chck(String food_id, String menu_id){
+		System.out.println(food_id+menu_id+"<Dao 확인요청");
+		return sqlSessionTemplate.selectOne("kr.or.possys.Menu_service.Per_Mapper.aj_ep_chck");		
+	}
 }

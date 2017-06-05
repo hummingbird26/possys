@@ -13,29 +13,31 @@
 
    	$(document).ready(function (){
    		var reg_id = /^[a-z0-9_-]{3,12}$/; 
-   		var ckeck = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; 	
-   	$('#addmenu').click(function(){
+   		var ckeck = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+   		var go = /^[A-Za-z]*$/; 
+   	$('#addmenu').click(function()
+   			{
    		if(ckeck.test($('#menu_name').val())){ 
    			$('#menu_cate').focus();
    		}else{
    			$('#menu_name').focus();
    		}
-   		if(ckeck.test($('#menu_cate').val())){
+   		if(go.test($('#menu_cate').val())){
    			$('#menu_price').focus();
    	    if(!reg_id.test($('#menu_price').val())){
-	   		alert("가격은 3자 이상이여야 하며 \n"+"마침표, '-', '_'를 제외한 문자는 사용하실수 없습니다.");
+	   		alert("가격은 3자 이상이여야 하며 숫자로 입력해주세요");
 	   		$('#menu_price').focus();
 	   	}else if(!reg_id.test($('#menu_sprice').val())){
-	   		alert("할인가격은 3자 이상이여야 하며 \n"+"마침표, '-', '_'를 제외한 문자는 사용하실수 없습니다.");
+	   		alert("할인은 3자 이상이여야 하며 숫자로 입력해주세요");
 	   		$('#menu_sprice').focus();
 	   	}else if(!reg_id.test($('#menu_kcal').val())){
-	   		alert("칼로리는 3자 이상이여야 하며 \n"+"마침표, '-', '_'를 제외한 문자는 사용하실수 없습니다.");
+	   		alert("칼로리은 3자 이상이여야 하며 숫자로 입력해주세요");
 	   		$('#menu_kcal').focus();
 	   	}else {
 	   		addform.submit();
 	   		}
    		}else{
-   			alert('상품카테고리 3자 이상 입력해주세요');
+   			alert('영어로 입력해주세요');
    		$('#menu_cate').focus();		
    		}
    		}); 		

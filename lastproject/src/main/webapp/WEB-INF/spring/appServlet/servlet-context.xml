@@ -54,9 +54,9 @@
         <beans:property name="username" value="art9000"/>
         <beans:property name="password" value="tkdgns12"/> --> 
         
-<!--         <beans:property name="url" value="jdbc:mysql://umj64-006.cafe24.com:3306/hummingbird26?useUnicode=true&amp;characterEncoding=euckr"/> -->
-<!--         <beans:property name="username" value="hummingbird26"/> -->
-<!--         <beans:property name="password" value="ruddls12!@"/> -->
+        <beans:property name="url" value="jdbc:mysql://umj64-006.cafe24.com:3306/hummingbird26?useUnicode=true&amp;characterEncoding=euckr"/>
+        <beans:property name="username" value="hummingbird26"/>
+        <beans:property name="password" value="ruddls12!@"/>
  		<!--  <beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/chr123?useUnicode=true&amp;characterEncoding=euckr"/> 
          <beans:property name="username" value="chr123"/> 
          <beans:property name="password" value="ghdfkr227"/>  -->
@@ -69,9 +69,9 @@
         <beans:property name="password" value="ruddls12!@"/> -->
 
 
-         <beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/dade?useUnicode=true&amp;characterEncoding=euckr"/> 
-         <beans:property name="username" value="dadeid"/> 
-         <beans:property name="password" value="dadepw"/> 
+<!--          <beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/dade?useUnicode=true&amp;characterEncoding=euckr"/>  -->
+<!--          <beans:property name="username" value="dadeid"/>  -->
+<!--          <beans:property name="password" value="dadepw"/>  -->
          
 
 
@@ -101,7 +101,7 @@
                 <beans:value>classpath:kr/or/possys/Order_service/Order_Mapper.xml</beans:value>
 
 
-                <beans:value>classpath:kr/or/possys/Menu_service/Menu_Mapper.xml</beans:value>
+                
 
                 <!-- 결제 -->
                 <beans:value>classpath:kr/or/possys/Payment_service/Payment_Mapper.xml</beans:value>
@@ -117,7 +117,7 @@
 
                 <!-- 메뉴 -->
 
-                <beans:value>classpath:kr/or/possys/Menu_service/Menu_Mapper.xml</beans:value>
+                
 
                 <beans:value>classpath:kr/or/possys/Menu_service/Per_Mapper.xml</beans:value>
                	<!-- <beans:value>classpath:kr/or/possys/Menu_service/Per_Mapper.xml</beans:value> -->
@@ -126,7 +126,7 @@
 
                	<!-- <beans:value>classpath:kr/or/possys/Menu_service/Per_Mapper.xml</beans:value> -->
 
-                <beans:value>classpath:kr/or/possys/Menu_service/Per_Mapper.xml</beans:value>
+            
 
 
 		</beans:list>
