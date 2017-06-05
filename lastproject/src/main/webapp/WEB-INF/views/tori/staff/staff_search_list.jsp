@@ -25,11 +25,12 @@
 <%@ include file="../../modal/header.jsp" %>
 </head>
 <body>
-</br></br></br></br></br>
+<br><br><br>
 	<div class="container">
     <h1>Staff Search List</h1>
     <div>전체행의 수 : ${staffSRcount}</div>
-    <table class="table table-striped table-hover" border="1">
+    <br><br>
+    <table class="table table-striped table-hover">
         <thead>
             <tr>
                 <th>직원아이디</th>

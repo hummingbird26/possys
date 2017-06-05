@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
@@ -26,20 +26,20 @@ Optional theme
 	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/asset/img/logomi.png">
 
 <%-- <%@ include file="../../modal/wide_menu.jsp" %> --%>
-<%@ include file="../../modal/header.jsp" %>
+<%-- <%@ include file="../../modal/header.jsp" %> --%>
 </head>
 <body>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <br><br>
 <div class="container">
 	<form id="form" name="form" class="form-inline" action="${pageContext.request.contextPath}/tori/payment/payment_search_list" method="get">
-		<div><select id="select" name="select" class="form-inline" value="선택하세요">
+		<select id="select" name="select" class="form-inline" value="선택하세요">
 			<option value="payment_date">날짜별검색</option>
 			<option value="payment_cate">결제유형별검색</option>
 			<option value="payment_id">결제번호별검색</option>
 			<option value="member_phone">회원번호별검색</option>
 		</select>
-		<input type="text" class="form-inline" name="keyWord" id="keyWord"></div><br><br>
+		<input type="text" class="form-inline" name="keyWord" id="keyWord">
 		<input type="submit" class="btn btn-primary" name="search" id="search" value="조건별검색">
 		<!-- <div><input type="submit" class="form-control" name="search" id="search" value="조건별검색"></div> -->
 	</form>

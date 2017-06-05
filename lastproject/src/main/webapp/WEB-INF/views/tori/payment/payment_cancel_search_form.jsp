@@ -25,20 +25,21 @@ Optional theme
 
 	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/asset/img/logomi.png">
 
-<%@ include file="../../modal/header.jsp" %>
+<%-- <%@ include file="../../modal/wide_menu.jsp" %> --%>
+<%-- <%@ include file="../../modal/header.jsp" %> --%>
 </head>
 <body>
 <h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <br><br>
 <div class="container">
 	<form id="form" name="form" class="form-inline" action="${pageContext.request.contextPath}/tori/payment/payment_cancel_search_list" method="get">
-		<div><select id="select" name="select" class="form-control" value="선택하세요">
+		<select id="select" name="select" class="form-control" value="선택하세요">
 			<option value="payment_cancel_id">거래취소코드별검색</option>
 			<option value="payment_id">거래코드별검색</option>
 			<option value="payment_cancel_date">결제취소일자별검색</option>
 			<option value="payment_cate">결제취소거래유형별검색</option>
 		</select>
-		<input type="text" class="form-control" name="keyWord" id="keyWord"></div>
+		<input type="text" class="form-control" name="keyWord" id="keyWord">
 		<input type="submit" class="btn btn-primary" name="search" id="search" value="조건별검색">
 		<!-- <div><input type="submit" class="form-control" name="search" id="search" value="조건별검색"></div> -->
 	</form>
