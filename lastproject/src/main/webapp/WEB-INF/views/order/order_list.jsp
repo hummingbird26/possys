@@ -6,13 +6,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>OrderList</title>
-<%@ include file="../modal/wide_menu.jsp" %>
+<%@ include file="../modal/header.jsp" %>
 </head>
 <body>
-<br/><br/><br/>
+
+<br/><br/><br/><br/><br/>
+<div class="container">
 	<table>
 		<tbody>
+		     <tr>
+                <td>주문 코드</td>
+                <td>테이블 번호</td>
+                <td>상태</td>
+                <td>주문일시</td>
+                <td>주문수정</td>
+                <td>종결처리</td>
+                <td>결제처리</td>
+            </tr>
 			<c:forEach var="f" items="${order_list}">
+			
 			<tr>
 				<td><a href="${pageContext.request.contextPath}/order_detail?table_order_id=${f.table_order_id}">${f.table_order_id}</a></td>
 				<td>${f.table_order_num}</td>
@@ -22,11 +34,38 @@
 				
 				<td><a href="${pageContext.request.contextPath}/order_modify_form?table_order_id=${f.table_order_id}">주문수정</a></td>
 				<td><a href="${pageContext.request.contextPath}/order_end_t?table_order_id=${f.table_order_id}">종결처리</a></td>
-				<td><a href="${pageContext.request.contextPath}/tori/payment/payment_add_form?table_order_id=${f.table_order_id}">주문처리</a>
+				<td><a href="${pageContext.request.contextPath}/tori/payment/payment_add_form?table_order_id=${f.table_order_id}">결제처리</a>
 				
 			</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	<br/>
+	
+	    <ul class="pager">
+        <c:if test="${currentPage > 1}">
+        <li class="previous"><a href="${pageContext.request.contextPath}/order_list?currentPage=${currentPage-1}">이전</a></li>
+        </c:if>
+        <c:if test="${selbox != null && keyWord != null}">
+        <c:forEach var="i" begin="${expage}" end="${lastPage}" step="1">
+        	<c:choose>
+        		<c:when test="${i eq currentPage}"><li><a href="${pageContext.request.contextPath}/order_list?currentPage=${i}">[${i}]</a></li></c:when>
+        		<c:otherwise><li><a href="${pageContext.request.contextPath}/order_list?currentPage=${i}">[${i}]</a></li>></c:otherwise>
+        	</c:choose>
+        </c:forEach>
+        </c:if>
+        <c:if test="${selbox == null && keyWord == null}">
+        <c:forEach var="i" begin="${expage}" end="${lastPage}" step="1">
+        	<c:choose>
+        		<c:when test="${i eq currentPage}"><li><a href="${pageContext.request.contextPath}/order_list?currentPage=${1}">[${i}]</a></li></c:when>
+        		<c:otherwise><li><a href="${pageContext.request.contextPath}/order_list?currentPage=${i}">[${i}]</a></li></c:otherwise>
+        		</c:choose>
+        	</c:forEach>
+        </c:if>
+        <c:if test="${currentPage < lastPage}">
+        <li class="next"><a href="${pageContext.request.contextPath}/order_list?currentPage=${currentPage+1}">다음</a></li>
+        </c:if>
+    </ul>
+ </div>
 </body>
 </html>

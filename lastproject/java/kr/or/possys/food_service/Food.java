@@ -5,7 +5,6 @@ import java.util.List;
 public class Food {
 	private String food_id;
 	private String food_name;
-	private String food_size;
 	private String food_unit;
 	private int food_shelflife;
 	private String food_date;
@@ -38,12 +37,7 @@ public class Food {
 //		System.out.println(food_name);
 		this.food_name = food_name;
 	}
-	public String getFood_size() {
-		return food_size;
-	}
-	public void setFood_size(String food_size) {
-		this.food_size = food_size;
-	}
+	
 	public String getFood_unit() {
 		return food_unit;
 	}

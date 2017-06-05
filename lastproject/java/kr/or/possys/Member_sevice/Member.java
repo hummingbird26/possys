@@ -7,6 +7,15 @@ public class Member {
 	String member_sign;
 	String member_join;
 	String member_email;
+	
+	int sum_total;
+	
+	public int getSum_total() {
+		return sum_total;
+	}
+	public void setSum_total(int sum_total) {
+		this.sum_total = sum_total;
+	}
 	public String getMember_email() {
 		return member_email;
 	}

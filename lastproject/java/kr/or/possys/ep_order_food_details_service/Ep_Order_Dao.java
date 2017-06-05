@@ -1,5 +1,6 @@
 package kr.or.possys.ep_order_food_details_service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,13 +26,13 @@ public class Ep_Order_Dao {
 //				System.out.println("입고된값 없음");
 				wh.setRecent_or_date("-"); // 입고된 발주일자
 				wh.setRecent_or_wh_date("-"); // 입고된 입고일자
-				wh.setRecent_or_wh_ea(0); // 입고된 입고수량 
+				wh.setRecent_or_wh_ea(0); // 현재 입고수량 
 				wh.setRecent_food_shelflife("-"); // 입고된 입고 유통기한
 			}else{
 					wh.setRecent_ep_order_id(ep_o.getEp_order_id()); //최근 발주id
 					wh.setRecent_or_date(ep_o.getEp_order_date()); // 최근발주일자
 					wh.setRecent_or_wh_date(ep_o.getEp_order_wh_date()); // 최근입고일자
-					wh.setRecent_or_wh_ea(ep_o.getEp_order_wh_ea()); // 최근입고수량
+					wh.setRecent_or_wh_ea(ep_o.getFood_nowquantity()); // 현재 최근입고수량
 					wh.setRecent_food_shelflife(ep_o.getEp_order_food_shelflife()); // 최근 입고 유통기한
 				}
 			// 이전 정보
@@ -41,13 +42,13 @@ public class Ep_Order_Dao {
 				wh.setB4_ep_order_id("-"); //이전 발주 id
 				wh.setB4_or_date("-"); // 이전발주일자
 				wh.setB4_or_wh_date("-"); // 이전입고일자
-				wh.setB4_or_wh_ea(0); // 이전입고수량 
+				wh.setB4_or_wh_ea(0); // 현재이전입고수량 
 				wh.setB4_food_shelflife("-"); // 이전 입고 유통기한				
 			}else{
 					wh.setB4_ep_order_id(ep_o.getEp_order_id()); //이전 발주 id
 					wh.setB4_or_date(ep_o.getEp_order_date()); // 이전발주일자
 					wh.setB4_or_wh_date(ep_o.getEp_order_wh_date()); // 이전입고일자
-					wh.setB4_or_wh_ea(ep_o.getEp_order_wh_ea()); // 이전입고수량
+					wh.setB4_or_wh_ea(ep_o.getFood_nowquantity()); // 현재이전입고수량
 					wh.setB4_food_shelflife(ep_o.getEp_order_food_shelflife()); // 이전 입고 유통기한
 				}
 			return wh;
@@ -153,8 +154,19 @@ public class Ep_Order_Dao {
 //		System.out.println(ep_o.getEp_id());
 //		System.out.println(ep_o.getEp_order_ea());
 //		System.out.println(ep_o.getFood_id());
-		sqlSessionTemplate.update("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.default_up",ep_o);
-	}
+		String ep_Onum = sqlSessionTemplate.selectOne("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.ep_Onum");
+		System.out.println(ep_Onum+"<=====ep_Onum");
+		if(ep_Onum.equals("default")){ // 테이블 row 중 default보다 큰값이 있으면 else문으로 이동
+			ep_o.setEp_order_id("eo0001");
+			sqlSessionTemplate.update("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.default_up",ep_o);
+		}else{
+			int s_ep_Onem = Integer.parseInt(ep_Onum.substring(2,6))+1;
+			String result_id = "eo"+String.format("%04d", s_ep_Onem);
+			System.out.println(result_id+"<<==result_id");
+			ep_o.setEp_order_id(result_id);
+			sqlSessionTemplate.update("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.default_up",ep_o);
+		}
+		}
 	
 	// 발주등록시 default 확인하기 위한 select one
 	public Ep_Order _ep_oinsert(Ep_Order _ep_o){
@@ -167,6 +179,10 @@ public class Ep_Order_Dao {
 	// 발주등록 insert 
 	public void ep_oinsert(Ep_Order ep_o){
 		System.out.println("05_ep_oinsert실행 - Ep_Order_Dao.java");
+		String ep_Onum = sqlSessionTemplate.selectOne("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.ep_Onum");
+		int s_ep_Onem = Integer.parseInt(ep_Onum.substring(2,6))+1;
+		String result_id = "eo"+String.format("%04d", s_ep_Onem);
+		ep_o.setEp_order_id(result_id);
 		sqlSessionTemplate.insert("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.ep_oinsert",ep_o);
 //		String ep_id = ep_o.getEp_id();
 //		String food_id = ep_o.getFood_id();
@@ -190,6 +206,14 @@ public class Ep_Order_Dao {
 //		map.put("pageRow", pageRow);
 		return sqlSessionTemplate.selectList("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.ep_olist");
 	}
+	//식재자현황 현재수량 List 구하는 요청
+	public List<Ep_Order> ep_now(String food_id){
+		System.out.println("02_01_ep_now 실행 ->> Ep_Oder_Dao.java");
+		List<Ep_Order> now_list = new ArrayList<Ep_Order>();
+		now_list = sqlSessionTemplate.selectList("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.ep_now",food_id);
+		return now_list;
+	}
+	
 	//식자재현황 검색 목록 요청
 	public List<Ep_Order> food_DT_SRlist(String selbox, String keyWord, int currentPage, int pageRow){
 		System.out.println("03_Ep_Order_Dao.java->>food_DT_search 실행");

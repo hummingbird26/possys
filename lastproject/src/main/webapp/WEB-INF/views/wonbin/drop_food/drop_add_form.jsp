@@ -9,7 +9,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>폐기식자재 품목관리</title>
-<%-- <%@ include file="../../modal/wide_menu.jsp" %> --%>
+
 <script type="text/javascript">
 
 	window.onload = function(){	
@@ -37,10 +37,9 @@ $(document).ready(function(){
 // 				alert('성공');
 // 				console.log(data);				
 				$('#food_name').val(data.food_name);
-				$('#ep_order_wh_ea').val(data.ep_order_wh_ea);
-				$('#drop_ea').attr('placeholder','남은 수량 :'+data.ep_order_wh_ea); // placeholder에 받아온 수량 표시
-				
-				
+				$('#food_nowquantity').val(data.food_nowquantity);
+				$('#drop_ea').attr('placeholder','남은 수량 :'+data.food_nowquantity); // placeholder에 받아온 수량 표시
+							
 			},
 			error : function(request,status,error){
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);			
@@ -51,12 +50,12 @@ $(document).ready(function(){
 		
 	$(document).on('click','#addsubmit', function(){
 // 		alert('click');
-		var ep_order_wh_ea = $('#ep_order_wh_ea').val();
+		var food_nowquantity = $('#food_nowquantity').val();
 		var drop_ea = $('#drop_ea').val();
 		var _drop_ea = parseInt(drop_ea);
-		var _ep_order_wh_ea = parseInt(ep_order_wh_ea);
+		var _food_nowquantity = parseInt(food_nowquantity);
 // 		alert(ep_order_wh_ea);
-		if(_drop_ea <= _ep_order_wh_ea){
+		if(_drop_ea <= _food_nowquantity){
 			var re = confirm('폐기등록을 계속 진행하시겠습니까?');
 			if(re){
 // 			alert('보낼수있음');
@@ -94,21 +93,18 @@ $(document).ready(function(){
 	
 	
 	}) //ready End
-	
+
 </script>
+<style type="text/css">
+
+</style>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
-<div>
-
-</div>
 <br>
 <br>
 	<div class="container">
 	<h2 class="col-sm-3">폐기등록</h2>
-	<br>
-	<br>
-	<br>
+	
 	<br>	
 	<br>
 <%-- 	<form id="addform" action="${pageContext.request.contextPath}/drop_add_form" method="post"> --%>
@@ -146,7 +142,7 @@ $(document).ready(function(){
 			<div class="form-group">
 				<label class="control-label col-sm-2">담당자</label>
 				<div class="col-xs-7">
-					<input  class="form-control" name ="staff_id" id ="staff_id" type ="text" value="<%-- ${sessionScope.admin.admin_id} --%>"readonly="readonly"/>
+					<input  class="form-control" name ="staff_id" id ="staff_id" type ="text" value="${sessionScope.admin.admin_id}"readonly="readonly"/>
 				</div>
 			</div>
 			<br>
@@ -156,7 +152,7 @@ $(document).ready(function(){
 				<button class="btn" type="button">취소</button>
 				</center>
 			</div>
-			<input type="hidden" name="ep_order_wh_ea" id="ep_order_wh_ea"/>
+			<input type="hidden" name="food_nowquantity" id="food_nowquantity"/>
 		</form>
 		
 		

@@ -25,9 +25,36 @@
 
 	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/asset/img/logomi.png">
    
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+ <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+
+ <script type="text/javascript">
+ $(document).ready(function(){
+	 //배상훈 블로그 주소
+	 $('#bsh').click(function(){
+		 window.open('http://blog.naver.com/art9000','newWindow');
+	 });
+	 //오광진 블로그 주소
+	 $('#ogj').click(function(){
+		 window.open('http://blog.naver.com/madmark1','newWindow');
+	 });
+	//백승욱 블로그 주소	 
+	 $('#bsw').click(function(){	
+	 window.open('http://blog.daum.net/vcuraris3197','newWindow');
+	 });
+	
+	//홍경인   git 주소 
+	 $('#hki').click(function(){
+	 window.open('https://github.com/hummingbird26/possys','newWindow');
+	 });
+	
+	});
+ 
+ </script>
+
   </head>
 
- <body id="mimin" class="dashboard">
+ <body id="mimin" class="dashboard" >
 
 
    <%@ include file="../modal/header.jsp" %>
@@ -39,21 +66,21 @@
                 <div class="panel">
                   <div class="panel-body">
                       <div class="col-md-6 col-sm-12">
-                        <h3 class="animated fadeInLeft">개인 페이지 넣읍시다.</h3>
-                        <p class="animated fadeInDown"><span class="fa  fa-map-marker"></span> Batavia,Indonesia</p>
+                        <h3 class="animated fadeInLeft">개인 블로그 주소</h3>
+                        <p class="animated fadeInDown"><span class="fa  fa-map-marker"></span>서울</p>
 
                         <ul class="nav navbar-nav">
-                            <li><a href="" >홍경인</a></li>
-                            <li><a href="" class="active">오광진</a></li>
-                            <li><a href="">배상훈</a></li>
+                            <li><a id="hki" href="" >홍경인</a></li>
+                            <li><a id="ogj" href="" class="active">오광진</a></li>
+                            <li><a id="bsh" href="">배상훈</a></li>
                             <li><a href="">최홍락</a></li>
-                            <li><a href="">백승욱</a></li>
+                            <li><a id="bsw" href="">백승욱</a></li>
                         </ul>
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <div class="col-md-6 col-sm-6 text-right" style="padding-left:10px;">
                           <h3 style="color:#DDDDDE;"><span class="fa  fa-map-marker"></span> 서울</h3>
-                          <h1 style="margin-top: -10px;color: #ddd;">300<sup>o</sup></h1>
+                          <h1 style="margin-top: -10px;color: #ddd;">30<sup>o</sup></h1>
                         </div>
                         <div class="col-md-6 col-sm-6">
                            <div class="wheather">
@@ -132,7 +159,7 @@
                             <div class="col-md-12">
                                 <div class="panel box-v4">
                                     <div class="panel-heading bg-white border-none">
-                                      <h4><span class="icon-notebook icons"></span> Agenda</h4>
+                                      <h4><span class="icon-notebook icons"></span>근무 일정</h4>
                                     </div>
                                     <div class="panel-body padding-0">
                                         <div class="col-md-12 col-xs-12 col-md-12 padding-0 box-v4-alert">
@@ -151,7 +178,7 @@
                             <div class="col-md-12 padding-0">
                               <div class="panel box-v2">
                                   <div class="panel-heading padding-0">
-                                    <img src="${pageContext.request.contextPath}/resources/asset/img/bg2.jpg" class="box-v2-cover img-responsive"/>
+                                    <img src="${pageContext.request.contextPath}/resources/asset/img/sample.jpg" class="box-v2-cover img-responsive"/>
                                     <div class="box-v2-detail">
                                       <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-responsive"/>
                                       <h4>${sessionScope.admin.admin_name}</h4>
@@ -160,16 +187,16 @@
                                   <div class="panel-body">
                                     <div class="col-md-12 padding-0 text-center">
                                       <div class="col-md-4 col-sm-4 col-xs-6 padding-0">
-                                          <h3>2.000</h3>
-                                          <p>Post</p>
+                                          <h3>연봉</h3>
+                                          <p>10.000</p>
                                       </div>
                                       <div class="col-md-4 col-sm-4 col-xs-6 padding-0">
-                                          <h3>2.232</h3>
-                                          <p>share</p>
+                                          <h3>직급</h3>
+                                          <p>${sessionScope.admin.admin_level}</p>
                                       </div>
                                       <div class="col-md-4 col-sm-4 col-xs-12 padding-0">
-                                          <h3>4.320</h3>
-                                          <p>photos</p>
+                                          <h3>입사 날짜</h3>
+                                          <p>${sessionScope.admin.admin_date}</p>
                                       </div>
                                     </div>
                                   </div>
@@ -177,7 +204,7 @@
                             </div>
 
                             <div class="col-md-12 padding-0">
-                              <div class="panel box-v3">
+<%--                               <div class="panel box-v3">
                                 <div class="panel-heading bg-white border-none">
                                   <h4>Report</h4>
                                 </div>
@@ -258,10 +285,10 @@
                                       <input type="button" value="download as pdf" class="btn btn-danger box-shadow-none"/>
                                     </center>
                                 </div>
-                              </div>
+                              </div> --%>
                             </div>
 
-                            <div class="col-md-12 padding-0">
+                            <!-- <div class="col-md-12 padding-0">
                               <div class="panel bg-light-blue">
                                 <div class="panel-body text-white">
                                    <p class="animated fadeInUp quote">Lorem ipsum dolor sit amet, consectetuer adipiscing elit Ut wisi..."</p>
@@ -277,7 +304,7 @@
                                     </div>
                                 </div>
                               </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
 

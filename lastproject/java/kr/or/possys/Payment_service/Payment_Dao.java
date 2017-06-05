@@ -51,14 +51,14 @@ public class Payment_Dao {
 	
 	//총결제금액정보 가져오기
 	public int bringOrderList(String table_order_id){
-	/*	System.out.println("bringOrderList");
-		System.out.println(table_order_id);*/
+		System.out.println("bringOrderList");
+		System.out.println(table_order_id);
 		Map<String, Object> map = new HashMap<String, Object>();
 		Order order = new Order();
-		/*System.out.println(map);
-		System.out.println(order);*/
+		System.out.println(map);
+		System.out.println(order);
     	map.put("table_order_id", table_order_id);
-    	/*System.out.println(map);*/
+    	System.out.println(map);
 		return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.bringOrderList",table_order_id);
 	}
 	
@@ -74,7 +74,19 @@ public class Payment_Dao {
 	    	System.out.println(map);
 			return sqlSessionTemplate.selectOne("kr.or.possys.Payment_service.Payment_Mapper.bringMemberList",member_phone);
 		}
-	
+	//또한 결제단위당의 마일리지를 가져와서 회원 적립 마일리지에서 해당 마일리지만큼을 차감해서 원복시켜놓기
+	//주문테이블에서 주문상태가 t인 것을 f로 원복시켜놓기
+		
+		
+	//결제목록삭제에 앞서서 먼저 결제상태값을 취소로 변경해주는 기능
+	public int PaymentUpdate(String payment_id){
+		System.out.println("PaymentUpdate");
+		System.out.println(payment_id);
+		Payment payment = new Payment();
+		payment.setPayment_id(payment_id);
+		return sqlSessionTemplate.update("kr.or.possys.Payment_service.Payment_Mapper.paymentUpdate", payment);
+	}
+		
 	//결제목록삭제기능
     public int deletePayment(String payment_id) {
     	System.out.println("deletePayment");
