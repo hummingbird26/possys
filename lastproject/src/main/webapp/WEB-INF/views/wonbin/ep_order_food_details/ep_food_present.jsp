@@ -47,7 +47,12 @@
 // // 				alert('asd');
 // 			}
 // 		});
-		
+
+		//상세보기 확인 버튼 클릭시
+		$(document).on('click','#success',function(){
+			$('.snagse_re').remove();
+			$('#div_displ_snangse').hide();
+		})
 		//체크박스 전체 선택/해제
 		$("#food_chkall").click(function(){
 			$('.snagse_re').remove();
@@ -459,8 +464,8 @@
 				<option value="food_id">식재코드번호</option>
 				<option value="food_name">상품명</option>
 			</select>
-			<input  size="16" name="keyWord" type="text">
-			<input id="fbutton" type="button" value="검색">
+			<input  size="16" name="keyWord" type="text" style="padding-bottom: 4px; padding-top: 6px; height: 31px;">
+			<input id="fbutton" type="button" value="검색" style="padding-top: 4.5;padding-bottom: 4.5;padding-top: 4px;padding-bottom: 4px;">
 		</form>
 	</div>
 	</div>	
@@ -525,7 +530,7 @@
 					<!-- append table -->
 				</tbody>
 			</table>
-			<center><button class="btn btn-success btn-md" style="margin-right: 5px;">확인</button><button class="btn btn-md">폐기목록</button></center>		
+			<center><button id="success" class="btn btn-success btn-md" style="margin-right: 5px;">확인</button><a href="${pageContext.request.contextPath}/drop_list"><button class="btn btn-default">폐기목록</button></a></center>		
 		</div>
 		<input type="hidden" id="drop_bt_f_id"/>
 		<input type="hidden" id="drop_bt_o_id"/>

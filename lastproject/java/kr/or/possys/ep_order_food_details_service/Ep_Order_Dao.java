@@ -24,6 +24,7 @@ public class Ep_Order_Dao {
 			ep_o = sqlSessionTemplate.selectOne("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.aj_sangse_rctable",food_id);
 			if(ep_o == null){ // 입고된 값 없으면 null로 json 못받음.
 //				System.out.println("입고된값 없음");
+				wh.setRecent_ep_order_id("-");
 				wh.setRecent_or_date("-"); // 입고된 발주일자
 				wh.setRecent_or_wh_date("-"); // 입고된 입고일자
 				wh.setRecent_or_wh_ea(0); // 현재 입고수량 

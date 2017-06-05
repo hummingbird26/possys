@@ -76,7 +76,7 @@ public class Ajax_Controller {
 					
 		}
 	
-	// 상세보기 폼 요청
+	// drop 상세보기 폼 요청
 	@RequestMapping(value="/aj_drop_sangse")
 	@ResponseBody
 		public Drop aj_drop_sangse(@RequestParam(value="drop_id", required=true) String drop_id
