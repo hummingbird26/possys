@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
@@ -13,7 +13,7 @@
       <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/plugins/simple-line-icons.css"/>
       <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/plugins/animate.min.css"/>
       <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/plugins/fullcalendar.min.css"/>
-	<link href="${pageContext.request.contextPath}/resources/asset/css/style.css" rel="stylesheet">
+      <link href="${pageContext.request.contextPath}/resources/asset/css/style.css" rel="stylesheet">
 	<!-- end: Css -->
 
 	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/asset/img/logomi.png">
@@ -21,10 +21,10 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<%@ include file="../../modal/header.jsp" %>
+<%-- <%@ include file="../../modal/header.jsp" %> --%>
 </head>
 <body>
-</br></br></br></br></br>
+<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
 <br><br>
 <div class="container">
 	<form id="form" name="form" class="form-inline" action="${pageContext.request.contextPath}/tori/staff/staff_search_list" method="get">
