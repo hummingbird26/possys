@@ -409,14 +409,14 @@
 <%-- 			<option value="sel_n" <c:if test="${sel_list eq 'sel_n'}">selected</c:if>>업체 미등록 식재료보기</option> --%>
 <!-- 		</select> -->
 <!-- 	</form> -->
-	<div class="col-sm-4">
+	<div class="col-sm-5">
 	<form id="ep_chkbox" action="${pageContext.request.contextPath}/ep_chkbox" method="post">
 <!-- 	<input id="ep_submit" type="button" value="발주업체 관리"/> -->
 		<i class="fa fa-cloud" style="font-size:24px;color:lightblue;" data-placement="right" data-toggle="tooltip" title="발주등록은 체크박스로 이용하실수 있습니다."></i>
 		<br>		
 		<div style="overflow:auto;height:500px;">
 		
-		<table class="chkclass" border=1>
+		<table class="chkclass table table-hover" style="text-align:center">
 			<thead>
 				<tr style='position:relative;top:expression(this.offsetParent.scrollTop);background:black;color:white;" align="left"'>
 					<th><input type="checkbox" id="food_chkall"/> ▼</th>
@@ -455,7 +455,7 @@
 		</div>
 	<div>
 		<form id ="frm" name="frm" action="${pageContext.request.contextPath}/food_DT_search" method="get">
-			<select id="selbox"name="selbox" size="1">
+			<select id="selbox"name="selbox" style="width: 172px;height: 30.22222px;padding-bottom: 0px;padding-top: 0px;">
 				<option value="food_id">식재코드번호</option>
 				<option value="food_name">상품명</option>
 			</select>
@@ -467,7 +467,7 @@
 	<!-- 발주 등록 폼 ajax --> 
 	
 	<div id="div_displ">
-		<div class="col-sm-8">		
+		<div class="col-sm-7">		
 		<h4>발주 등록</h4>
 		<br>				
 					<div>
@@ -490,7 +490,7 @@
 	
 	<!-- 상세보기 폼 ajax -->
 	<div id="div_displ_snangse">
-		<div class="col-sm-8">
+		<div class="col-sm-7">
 			<h4>상세보기</h4>
 			<div id="sangse_span">
 <!-- 				<span>식재코드/식재이름</span><br><span>업체코드/업체이름</span> -->

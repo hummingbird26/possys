@@ -126,7 +126,7 @@ public class FoodController {
 	public String foodmodify(Food food){
 		System.out.println("FoodController.java ->>foodmodify 요청");
 		dao.foodmodify(food);
-		return "redirect:/food_modify_view?food_id="+food.getFood_id();
+		return "redirect:/food_list";
 		
 	}
 	//식재료 삭제 요청
