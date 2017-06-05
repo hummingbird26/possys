@@ -31,6 +31,21 @@ public class Order_Dao {
         
         return sqlSessionTemplate2.selectList("kr.or.possys.Order_service.Order_Mapper.get_order_list", map);
     }
+    
+    public List<Order> get_order_search_list(String selbox, String keyWord,int currentPage, int pagePerRow) {
+    	System.out.println("get_order_list");
+    	System.out.println(selbox+"/"+keyWord+"/"+currentPage+"/"+pagePerRow+"////");
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("beginRow", (currentPage-1)*pagePerRow);
+        map.put("pagePerRow", pagePerRow);
+		map.put("selbox", selbox);
+		map.put("keyWord", keyWord);
+		
+        System.out.println(map.get("beginRow"));
+        System.out.println(map.get("pagePerRow"));
+        
+        return sqlSessionTemplate2.selectList("kr.or.possys.Order_service.Order_Mapper.get_order_search_list", map);
+    }
 	
 	public Order order_modify_form(String table_order_id){
 		System.out.println("주문수정폼실행");
@@ -50,6 +65,11 @@ public class Order_Dao {
 	public int order_end_t(String table_order_id){
 		System.out.println("주문종결실행");
 		return sqlSessionTemplate2.update("kr.or.possys.Order_service.Order_Mapper.order_end_t",table_order_id);
+	}
+	
+	public int order_cancel(String table_order_id){
+		System.out.println("주문취소실행");
+		return sqlSessionTemplate2.update("kr.or.possys.Order_service.Order_Mapper.order_cancel",table_order_id);
 	}
 	
 
@@ -136,6 +156,22 @@ public class Order_Dao {
     	System.out.println("order_count");
     	// 경로가 잘못 입력된 것을 미처 확인하지 못함
         return sqlSessionTemplate2.selectOne("kr.or.possys.Order_service.Order_Mapper.get_order_count");
+    }
+    
+    public int table_num_count(int table_order_num){
+    	System.out.println("table_num_count");
+
+        return sqlSessionTemplate2.selectOne("kr.or.possys.Order_service.Order_Mapper.table_num_count",table_order_num);
+    }
+    
+    public int get_order_search_count(String selbox,String keyWord){
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("selbox", selbox);
+		map.put("keyWord", keyWord);
+    	System.out.println("order_count");
+    	// 경로가 잘못 입력된 것을 미처 확인하지 못함
+        return sqlSessionTemplate2.selectOne("kr.or.possys.Order_service.Order_Mapper.get_order_search_count",map);
     }
 
 }

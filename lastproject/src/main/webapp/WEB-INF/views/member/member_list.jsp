@@ -146,7 +146,7 @@ body:before{
     <h1>MEMBER LIST</h1>
 	 <br/>
     <div class="member">전체회원 수 : ${memberCount}</div>
-    <br/><br/><br/>
+    <br/>
   
 	    <!-- 회원 상세정보 들어가는 div -->
 	    <div id="member_view" style="display:none">
@@ -347,6 +347,7 @@ $(document).ready(function(){
 			var member_phone;
 			var member_point;
 			var member_sign; */
+			$('#receipt_list').show(1500);
 			$('#hidden_receipt').hide(1500);
 			$('#member_list_up_btn').show(1500);
 			$('#member_list').hide(1500);

@@ -7,9 +7,15 @@
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   
-	<style>
+<style>
+
+::-webkit-scrollbar {width: 8px; height: 8px; border: 3px solid #fff; display:none;}
+::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {display: block; height: 10px; background: url(`./images/bg.png`) #efefef}
+::-webkit-scrollbar-track {background: #efefef; -webkit-border-radius: 10px; border-radius:10px; -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.2)}
+::-webkit-scrollbar-thumb {height: 50px; width: 50px; background: rgba(0,0,0,.2); -webkit-border-radius: 8px; border-radius: 8px; -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.1)}
+     
 	
-	@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 html {
   font-family: 'Montserrat', Arial, sans-serif;
@@ -474,7 +480,7 @@ body {font-family: Verdana,sans-serif;margin:0}
 			$('#menu_check').val(menu_check);
 			
 			var cls = "."+this.id;
-			alert(cls);
+			
 			$('#menu_frame').children(cls).remove();
 		});
 		
@@ -491,10 +497,10 @@ body {font-family: Verdana,sans-serif;margin:0}
 			
 			
 			if(now <= 0){
-				alert("뭐하는 짓이여");
+				
 			}
 			else if(now > max){
-				alert("그리 많이먹게?");
+				alert("재고가 부족합니다.");
 				now = parseInt(now)-1;
 			}
 			else{
@@ -515,7 +521,7 @@ body {font-family: Verdana,sans-serif;margin:0}
 			var total = now*price
 			if(now <= 0){
 				now = parseInt(now)+1;
-				alert("뭐하는 짓이여");
+				
 			}
 			else{
 			$(cls).children('#order_detail_ea').val(now);
@@ -552,7 +558,7 @@ body {font-family: Verdana,sans-serif;margin:0}
 				<div class="text">
 				메뉴명 : ${m.menu_name}<br/>
 				가격 : ${m.menu_price} 열량 : ${m.menu_kcal}kcal<br/>
-				재고 : ${m.order_max_per}<br/><!-- 삭제예정 -->
+				<%-- 재고 : ${m.order_max_per}<br/> --%><!-- 삭제예정 -->
 				<button class = "addbutton buttons" id = "${m.menu_id}"type = "button" >추가</button>
 				</div>
 				
