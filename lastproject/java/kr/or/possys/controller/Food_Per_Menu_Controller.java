@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.possys.Menu_service.Menu;
 import kr.or.possys.Menu_service.Menu_Dao;
@@ -87,5 +89,15 @@ public class Food_Per_Menu_Controller {
         return "redirect:/menu_list";
     }
 	
+	@RequestMapping(value="/ep_chck")
+	@ResponseBody
+		public int ep_chck(@RequestParam(value="food_id", required=true) String food_id ,
+						   @RequestParam(value="menu_id", required=true) String menu_id
+												,HttpServletResponse response) throws Exception{ 
+		System.out.println("06_ep_chck실행 -Ep_OF_Details_Controller.java" );
+		System.out.println(food_id+"<=== 식재코드!");
+		int chk_count = dao.aj_ep_chck(food_id,menu_id);			
+		return chk_count;	
+	}
 	
 }

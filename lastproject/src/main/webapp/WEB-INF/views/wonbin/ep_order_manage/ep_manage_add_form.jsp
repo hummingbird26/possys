@@ -119,28 +119,38 @@
 	}); //jquery Ready
 
 </script>
+<style>
+ .cen{ 	
+    margin-top: 0px;
+    margin-left: 0px;
+    width: 155px;
+    padding-top: 5px;
+    padding-bottom: 5px;    
+ }
+</style>
 </head>
 <body>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+<h3>발주 업체 관리</h3>
 
-<h1>발주 업체 관리</h1>
-
-
-
-
-
-	<form id="addform" action="${pageContext.request.contextPath}/ep_manage_add_form" method="post">
+	<form class="form-horizontal col-sm-12" id="addform" action="${pageContext.request.contextPath}/ep_manage_add_form" method="post">
 		
 		<div id="ep_id_div">업체코드 :
 			 <input class="sel_view" name="ep_id" id="ep_id" type="text" readonly="readonly"/>
 		</div>
 		
-		<div>추가 식재 품목</div> 
+		<h4>식재료 품목</h4>
 					
 		<div id="input_fo_id">
 			<c:forEach var="f" items="${list}">
-			<div id="input_fo_id">
-				<input name ="food_id" id ="food_id" type ="text" value="${f.food_id}" readonly="readonly"/>
-				<button id="chk_delete_hi" type="button" value="${f.food_id}">취소</button>
+			<div class="col-xs-2" id="input_fo_id">
+				<input class="form-control" name ="food_id" id ="food_id" type ="text" value="${f.food_id}" readonly="readonly"/>
+				<button class="cen btn btn-default" id="chk_delete_hi" type="button" value="${f.food_id}">취소</button>
 			</div>
 			</c:forEach>
 		</div>
@@ -156,12 +166,23 @@
 <!-- 			checked 는 radio, checkbox에만 있다 그러므로 div속에 숨겨야한다 -->  
 <!-- 				<input type="checkbox" id="chk_jung" name="chk_jung"/> -->
 			</div>
-		</div>
-		</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>	
 	<div>
-		<div>
-		업체명 : <input class="sel_view" name ="ep_name" id ="ep_name" type ="text"/>
-		
+	
+		<div class="form-group">
+			<label class="control-label col-sm-2">업체명</label>
+			<div class="col-xs-7">
+				<input  class="sel_view form-control" name ="ep_name" id ="ep_name" type ="text"/>
+			</div>		
 		<select name = "sel_ep_name" id = "sel_ep_name">
 			<option>선택</option>
 			<c:forEach var="sel" items="${sel_list}">
@@ -169,19 +190,42 @@
 			</c:forEach>			
 		</select>
 		</div>
-		<div>연락처 : <input class="sel_view" name ="ep_phone" id ="ep_phone" type ="text" value="${ep_m.ep_phone}"/></div>
-		<div>업체 담당자 : <input class="sel_view" name ="ep_director" id ="ep_director" type ="text"/></div>
-		<div>주소 : <input class="sel_view" name ="ep_address" id ="ep_address" type ="text"/></div>
-		<div>비고 : <input class="sel_view" name ="ep_text" id ="ep_text" type ="text"/></div>
+		<div class="form-group">
+			<label class="control-label col-sm-2">연락처</label>
+			<div class="col-xs-7">
+				<input  class="sel_view form-control" name ="ep_phone" id ="ep_phone" type ="text" value="${ep_m.ep_phone}"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2">업체 담당자</label>
+			<div class="col-xs-7">
+				<input  class="sel_view form-control" name ="ep_director" id ="ep_director" type ="text"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-2">주소</label>
+			<div class="col-xs-7">
+				<input  class="sel_view form-control" name ="ep_address" id ="ep_address" type ="text"/>
+			</div>
+		</div>		
+		<div class="form-group">
+			<label class="control-label col-sm-2">비고</label>
+			<div class="col-xs-7">
+				<input  class="sel_view form-control" name ="ep_text" id ="ep_text" type ="text"/>
+			</div>
+		</div>		
 	</div>
 		
 
 <br>
-		<div>
-			<input type="submit" id="addsubmit" value="등록">
-			<input type="reset" id="reset" value="초기화">
-			<a href="${pageContext.request.contextPath}/ep_manage_list">취소</a>
-		</div>
+		<div class="form-group col-sm-10">
+				<center>
+				<input class="btn btn-primary" type="submit" id="addsubmit" value="등록">
+				<input class="btn btn-default" type="reset" id="reset" value="초기화">
+				<a href="${pageContext.request.contextPath}/ep_manage_list"><button class="btn btn-default" type="button" id="censel">취소</button></a>
+				</center>
+		</div>		
 	</form>
+</div>
 </body>
 </html>

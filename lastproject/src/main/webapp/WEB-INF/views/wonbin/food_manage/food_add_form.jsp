@@ -49,8 +49,7 @@
 <br>
 <br>
 <div class="container">
-<h2>식자재 입력폼</h2>
-
+<h2>식재료 입력폼</h2>
 	<br>
 	<br>	
 	<br>

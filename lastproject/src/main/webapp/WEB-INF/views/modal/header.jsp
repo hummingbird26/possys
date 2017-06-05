@@ -72,7 +72,7 @@
 			$(document).ready(function(){
 				$('#btn').click(function(){
 					
-					window.open("ho.html",'popup','width=500,height=300,left=0,top=0,toolbar=no,locaton=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no');
+					window.open("${pageContext.request.contextPath}/ho.html",'popup','width=500,height=300,left=0,top=0,toolbar=no,locaton=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no');
 						
 					
 				});

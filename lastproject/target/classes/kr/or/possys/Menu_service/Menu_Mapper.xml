@@ -4,7 +4,7 @@
 <mapper namespace="kr.or.possys.Menu_service.Menu_Mapper">
 	<!-- 식자재 품목 입력 -->
 	<insert id="insertmenu" parameterType="kr.or.possys.Menu_service.Menu">
-			insert into menu(
+		insert into menu(
 		 menu_id
 		 ,menu_name
 		 ,menu_cate
@@ -12,14 +12,15 @@
 		 ,menu_sprice
 		 ,menu_kcal
 		 ,newname)
-		select
-		concat('MN',(select date_format(sysdate(),'%y%m%d%s')))
+		values (
+		#{menu_id}
 		,#{menu_name}	
 		,#{menu_cate}
 		,#{menu_price}
 		,#{menu_sprice}
 		,#{menu_kcal}
 		,#{newname}
+		)
 		</insert>
 		<select id="getmenucount" resultType="int">
 		SELECT COUNT(*) FROM menu
@@ -75,6 +76,22 @@
 	<!-- 메뉴 검색 수 -->
 	<select id="menuSRlist" parameterType="java.util.Map" resultType="int">
 		select count(*) from menu where ${selbox} like concat('%',#{keyWord},'%')
+	</select>
+	<!-- menu 테이블에 menu_id 의 제일 큰값을 조회하는 쿼리문 -->
+	<select id="menu_count" resultType="kr.or.possys.Menu_service.Menu">
+			select max(menu_id) as menu_count
+			from menu
+	</select>
+	<select id="menu_list" resultType="kr.or.possys.Menu_service.Menu">
+		select menu_id,
+		menu_name,
+		menu_cate,
+		menu_price,
+		menu_sprice,
+		menu_sale,
+		menu_kcal,
+		newname
+		from menu
 	</select>
 	
 	

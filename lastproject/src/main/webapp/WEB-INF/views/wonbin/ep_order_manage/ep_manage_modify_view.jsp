@@ -36,25 +36,42 @@
 
 
 </script>
-<%@ include file="../../modal/header.jsp" %>
 
+<%@ include file="../../modal/header.jsp" %>
+<style type="text/css">
+.table th{
+	text-align:center;
+}
+</style>
 </head>
 <body>
-
-
-<h1>업체코드 - ${ep_m.ep_id} 상세보기</h1>
+<br>
+<br>
+<br>
+<br>
 <br>
 
+<h3>업체코드 - ${ep_m.ep_id} 상세보기</h3>
+<br>
+<div class="container">
 <form id="addform" action="${pageContext.request.contextPath}/ep_manage_modify" method="post">
-		
-		<div>업체 번호 : <input name ="ep_id" id ="ep_id" type ="text" value="${ep_m.ep_id}" readonly="readonly"/></div>
+		<div class="form-group">
+			<label class="control-label col-sm-2">업체 번호</label>
+			<div class="col-xs-7">
+				<input  class="sel_view form-control" name ="ep_id" id ="ep_id" type ="text" value="${ep_m.ep_id}" readonly="readonly"/>
+			</div>
+		</div>
+		<br>
+		<br>
 		<div>
-			<p>발주 품목</p>
-			<table border=1>
+			<label class="control-label col-sm-2">발주 품목</label>
+			<table class="table table-hover" style="text-align:center">
 				<thead>
+				<tr>
 					<th>식재 코드번호</th>
 					<th>상품명</th>
 					<th>삭제</th>
+				</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="f" items="${ep_m_fv}">
@@ -66,26 +83,60 @@
 					</c:forEach>
 				</tbody>
 			</table>
-		</div>			 
-			
-		<div>업체명 : <input name ="ep_name" id ="ep_name" type ="text" value="${ep_m.ep_name}" readonly="readonly"/></div>
-		<div>연락처 : <input name ="ep_phone" id ="ep_phone" type ="text" value="${ep_m.ep_phone}"/></div>
-		<div>업체 담당자 : <input name ="ep_director" id ="ep_director" type ="text" value="${ep_m.ep_director}"/></div>
-		<div>주소 : <input name ="ep_address" id ="ep_address" type ="text" value="${ep_m.ep_address}"/></div>
-		<div>비고 : <input name ="ep_text" id ="ep_text" type ="text" value="${ep_m.ep_text}"/></div>
-		
-		
-
-<br>
-		<div>
-			<input type="submit" id="addsubmit" value="수정">
-			<input type="reset" id="reset" value="초기화">
-			<a href="${pageContext.request.contextPath}/ep_manage_list"><button type="">취소</button></a>
 		</div>
+		<br>		
+	
+		<div class="form-group">
+			<label class="control-label col-sm-2">업체명</label>
+			<div class="col-xs-7">
+				<input  class="sel_view form-control" name ="ep_name" id ="ep_name" type ="text" value="${ep_m.ep_name}" readonly="readonly"/>
+			</div>
+		</div>
+		<br>
+		<br>
+		<div class="form-group">
+			<label class="control-label col-sm-2">연락처</label>
+			<div class="col-xs-7">
+				<input  class="sel_view form-control" name ="ep_phone" id ="ep_phone" type ="text" value="${ep_m.ep_phone}"/>
+			</div>
+		</div>
+		<br>
+		<br>
+		<div class="form-group">
+			<label class="control-label col-sm-2">업체 담당자</label>
+			<div class="col-xs-7">
+				<input  class="sel_view form-control" name ="ep_director" id ="ep_director" type ="text" value="${ep_m.ep_director}"/>
+			</div>
+		</div>
+		<br>
+		<br>
+		<div class="form-group">
+			<label class="control-label col-sm-2">주소</label>
+			<div class="col-xs-7">
+				<input  class="sel_view form-control" name ="ep_address" id ="ep_address" type ="text" value="${ep_m.ep_address}"/>
+			</div>
+		</div>
+		<br>
+		<br>
+		<div class="form-group">
+			<label class="control-label col-sm-2">비고</label>
+			<div class="col-xs-7">
+				<input  class="sel_view form-control" name ="ep_text" id ="ep_text" type ="text" value="${ep_m.ep_text}"/>
+			</div>
+		</div>
+		<br>
+		<br>
+		<div class="form-group col-sm-10">
+				<center>
+				<input class="btn btn-primary" type="submit" id="addsubmit" value="수정">
+				<a href="${pageContext.request.contextPath}/ep_manage_list"><button class="btn btn-default" type="button" id="censel">취소</button></a>
+				</center>
+		</div>			
 	</form>
 	<form id="fm_del" action="${pageContext.request.contextPath}/ep_manage_list"method="GET">
-		<button id="all_del" type="button" name="ep_id" value="${ep_m.ep_id}">전체 삭제</button>
+		<button class="btn btn-danger" id="all_del" type="button" name="ep_id" value="${ep_m.ep_id}">전체 삭제</button>
 	</form>
+	</div>
 	
 
 

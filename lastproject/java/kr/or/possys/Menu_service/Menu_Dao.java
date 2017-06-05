@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.possys.Order_service.Order;
 import kr.or.possys.food_service.Food;
 
 
@@ -20,7 +21,6 @@ public class Menu_Dao {
 	
 	//menu 입력요청
 	public int insertmenu(Menu menu){
-		System.out.println("menu_Controll.java <-- 실행확인 ");	
 		return sqlSessionTemplate.insert("kr.or.possys.Menu_service.Menu_Mapper.insertmenu",menu);
 	}
 	//menu 리스트 요청
@@ -76,7 +76,12 @@ public class Menu_Dao {
 				
 			return sqlSessionTemplate.selectList("kr.or.possys.Menu_service.Menu_Mapper.menusearch", map);
 		}
-	//menu 검색 수 요청
+	//menu 자동 등록 Dao//	
+	public Menu menu_count(){
+		System.out.println("getcount");
+		return sqlSessionTemplate.selectOne("kr.or.possys.Menu_service.Menu_Mapper.menu_count");
+	}
+	//menu 검색 수 요청//
 		public int menuSRlist(String selbox,String keyWord){
 			Map<String, Object> map = new HashMap<String, Object>();
 			
@@ -86,6 +91,10 @@ public class Menu_Dao {
 			System.out.println(map.get("keyWord"));
 			return sqlSessionTemplate.selectOne("kr.or.possys.Menu_service.Menu_Mapper.menuSRlist",map);
 			
-		}
+	}
+	public List<Menu> menu_list(){
+		System.out.println("메뉴목록실행");
+		return sqlSessionTemplate.selectList("kr.or.possys.Menu_service.Menu_Mapper.menu_list");
+	}
 	
 }

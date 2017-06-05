@@ -11,6 +11,7 @@ public class Menu {
 	private String menu_sale;
 	private int menu_kcal;
 	private String food_id;
+	private String menu_count;
 	
 	private String orgname;
 	private String newname;
@@ -21,11 +22,19 @@ public class Menu {
 	
 
 	
+
+	public String getMenu_count() {
+		return menu_count;
+	}
+	public void setMneu_count(String menu_count) {
+		this.menu_count = menu_count;
+	}
 	public String getOrder_max_per() {
 		return order_max_per;
 	}
 	public void setOrder_max_per(String order_max_per) {
 		this.order_max_per = order_max_per;
+
 	}
 	public String getOrgname() {
 		return orgname;

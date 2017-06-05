@@ -214,10 +214,10 @@ $(document).ready(function(){
          			/* table_state.push(this.table_order_end);
          			this.table_order_num */
          		});
-         		console.log(db_num+"ajax내부"+"each외부"+"db_num값");
+         		/* console.log(db_num+"ajax내부"+"each외부"+"db_num값");
          		console.log(menu_name+"ajax내부"+"each외부"+"menu_name값");
      			console.log(order_detail_sum+"ajax내부"+"each외부"+"order_detail_sum값");
-     			console.log(table_order_id+"ajax내부"+"each외부"+"table_order_id값");
+     			console.log(table_order_id+"ajax내부"+"each외부"+"table_order_id값"); */
      			for(var i = 0; i < 15 ; i++){
 
       				var k = parseInt(i) +1;
@@ -245,7 +245,7 @@ $(document).ready(function(){
 					
 								test1  = test1+ menu_name[j]+" * "+order_detail_ea[j]+"<br/>"
 
-             				console.log(cls);
+             				/* console.log(cls); */
          					$(cls).html("<font><b>사용중인 테이블</b></font>"+"<br/><br/>"+test1+"<br/><button class='table_move' value='"+test2+"'>자리이동</button>"
          																+"</br><button class='table_payment' value='"+test2+"'>결제</button>"
          																+"</br><button class='order_update' value='"+test2+"'>주문수정</button>")
