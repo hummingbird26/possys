@@ -26,11 +26,12 @@
 
 </head>
 <body>
-</br></br></br></br></br>
+</br></br></br>
 	<div class="container">
     <h1>Payment Cancel List</h1>
     <div>전체행의 수 : ${paymentcancelcount}</div>
-    <table class="table table-striped table-hover" border="1">
+     <br><br>
+    <table class="table table-striped table-hover">
         <thead>
             <tr>
                 <th>결제취소아이디</th>

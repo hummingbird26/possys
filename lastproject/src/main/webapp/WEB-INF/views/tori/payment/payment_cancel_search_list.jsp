@@ -26,10 +26,12 @@
 
 </head>
 <body>
+	<br><br><br>
 	<div class="container">
     <h1>Payment Cancel Search List</h1>
     <div>전체행의 수 : ${paymentCSRcount}</div>
-    <table class="table table-striped table-hover" border="1">
+     <br><br>
+    <table class="table table-striped table-hover">
         <thead>
             <tr>
                 <th>결제취소아이디</th>
@@ -42,7 +44,7 @@
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="pc" items="${paymentCSRlist}">
+            <c:forEach var="pc" items="${paymentCSRsearch}">
                 <tr>
                     <td><a href="${pageContext.request.contextPath}/tori/payment/payment_cancel_view?payment_cancel_id=${pc.payment_cancel_id}">${pc.payment_cancel_id}</a></td>
                     <td>${pc.payment_id}</td>
@@ -50,7 +52,7 @@
                     <td>${pc.payment_cancel_pay}</td>
                     <td>${pc.payment_cancel_total}</td>
                     <td>${pc.payment_cancel_date}</td>
-                    <td>${pc.payment_cancel_cate}</td>
+                    <td>${pc.payment_cate}</td>
                 </tr>
             </c:forEach>
         </tbody>
