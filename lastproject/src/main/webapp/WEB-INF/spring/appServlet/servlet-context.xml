@@ -54,25 +54,15 @@
       <!--  <beans:property name="url" value="jdbc:mysql://localhost:3306/art9000?useUnicode=true&amp;characterEncoding=euckr"/>
         <beans:property name="username" value="art9000"/>
         <beans:property name="password" value="tkdgns12"/> --> 
-    	
-<<<<<<< HEAD
-=======
-    
-<<<<<<< HEAD
         
-<!--         <beans:property name="url" value="jdbc:mysql://umj64-006.cafe24.com:3306/hummingbird26?useUnicode=true&amp;characterEncoding=euckr"/> -->
-<!--         <beans:property name="username" value="hummingbird26"/> -->
-<!--         <beans:property name="password" value="ruddls12!@"/> -->
-<<<<<<< HEAD
- 		 <beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/chr123?useUnicode=true&amp;characterEncoding=euckr"/> 
+<!--  		 <beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/chr123?useUnicode=true&amp;characterEncoding=euckr"/> 
          <beans:property name="username" value="chr123"/> 
-         <beans:property name="password" value="ghdfkr227"/> 
-=======
-		 <beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/lastproject?useUnicode=true&amp;characterEncoding=euckr"/> 
+         <beans:property name="password" value="ghdfkr227"/>  -->
+
+<!-- 		 <beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/lastproject?useUnicode=true&amp;characterEncoding=euckr"/> 
          <beans:property name="username" value="okjid"/> 
          <beans:property name="password" value="okjpw"/>
->>>>>>> branch 'master' of https://github.com/hummingbird26/possys.git
->>>>>>> branch 'master' of https://github.com/hummingbird26/possys
+ -->
  
         <beans:property name="url" value="jdbc:mysql://umj64-006.cafe24.com:3306/hummingbird26?useUnicode=true&amp;characterEncoding=euckr"/>
         <beans:property name="username" value="hummingbird26"/>

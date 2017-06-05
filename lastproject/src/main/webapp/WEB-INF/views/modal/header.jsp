@@ -95,7 +95,7 @@
 			      <li ><a href="#Link" title="Link">Order</a>
 			        <ul >
 			          <li ><a href="${pageContext.request.contextPath}/order_list" title="Link">주문목록</a></li>
-			          <li ><a href="${pageContext.request.contextPath}/order_list">주문현황</a></li>
+			          <li ><a href="${pageContext.request.contextPath}/order_table_input">주문신청</a></li>
 			          <li ><a href="#Link" title="Link">Link</a></li>
 			        </ul>
 			      </li>

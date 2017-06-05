@@ -4,6 +4,20 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		var table_num_count = $('#table_num_count').val();
+		
+		 if(table_num_count != 0){
+			
+			$('#tbox').append('<h1>테이블이 사용중입니다.<h1/>');
+		}
+		else{
+			
+		}
+});
+</script>
 <style>
 body {
 
@@ -126,11 +140,14 @@ a {
 <title>Insert title here</title>
 </head>
 <body>
-
-
+<input type = text id = "table_num_count" value = '${table_num_count}' hidden = 'hidden'/>
+<div id = 'tbox'>
+</div>
 <form class = "form-wrapper" method="post" action="${pageContext.request.contextPath}/order_form">
     <input type="text" name="table_order_num" id="table_order_num" placeholder="Input TableNumber" required>
+    
     <input type="submit" value="Join" id="submit">
+    
 </form>
 
 </body>
