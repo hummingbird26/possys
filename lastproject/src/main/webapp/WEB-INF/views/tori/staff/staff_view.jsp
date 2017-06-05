@@ -30,7 +30,7 @@
 <br><br>
 <div>
 	<div class="col-sm-6">
-		<img src="" height="auto" width="auto" alt="결제회사정보">
+		<img src="${pageContext.request.contextPath}/resources/staff/STAFF.png" height="250px" width="500px" alt="결제회사정보">
 	
 	</div>
 	<div class="col-sm-6">

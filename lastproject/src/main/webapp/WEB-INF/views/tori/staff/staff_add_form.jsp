@@ -270,9 +270,9 @@ function phonecheck(){
 		<td><input class="form-control" size="auto" id="staff_date" name="staff_date" type="date" placeholder="가입일자를 입력해 주세요"></td>
 		</tr> -->
 	</table>
-	<input class="btn btn-primary btn-sm" type="submit" id="staffAdd" name="staffAdd" value="제출">
-	<input class="btn btn-primary btn-sm" type="reset" id="staffCancel" name="staffCancel" value="되돌림">
-	<a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/tori/staff/staff_list">글목록</a>
+	<input class="btn btn-primary btn-sm" type="submit" id="staffAdd" name="staffAdd" value="가입완료">
+	<input class="btn btn-primary btn-sm" type="reset" id="staffCancel" name="staffCancel" value="다시입력">
+	<a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/tori/staff/staff_list">직원목록</a>
 	<input type="button" class="btn btn-primary btn-sm" id="checkStaffId" value="아이디중복확인" onclick="javascript:chkDupStaffId();"/>
 	<input type="button" class="btn btn-primary btn-sm" id="checkStaffPhone" value="폰번호중복체크" onclick="javascript:chkDupStaffPhone();"/>
 	</form>

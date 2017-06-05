@@ -81,7 +81,7 @@
         </c:if>
     </ul>
     <div>
-        <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_add_form">게시글 입력</a>
+        <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_add_form">결제정보입력</a>
         <a href="${pageContext.request.contextPath}/tori/payment/payment_search_form" class="btn btn-primary">조건검색</a>
     </div>
     <br><br>

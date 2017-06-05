@@ -18,7 +18,7 @@
   </delete> -->
   
   
-  <!--  payment와 payment_check를 연결한다(payment의 결제상태가 결제취소이면 payment_cancel에 한 행씩 입력되도록 하는 내용 -->
+ <!--  payment와 payment_check를 연결한다(payment의 결제상태가 결제취소이면 payment_cancel에 한 행씩 입력되도록 하는 내용 -->
 <insert parameterType="kr.or.possys.Cancel_Payment_service.Payment_Cancel" id="insertPaymentCancel">
 INSERT IGNORE INTO payment_cancel(payment_cancel_id
 , payment_id

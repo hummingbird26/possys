@@ -57,8 +57,13 @@ DELETE FROM payment WHERE payment_id = #{payment_id}
 
 <!-- 결제취소테이블에 해당 결제정보를 이관하는 것에 앞서서 우선적으로 해당 레코드의 결제상태값을 취소로 변경해준다 -->
 <update parameterType="kr.or.possys.Payment_service.Payment" id="paymentUpdate">
-UPDATE payment SET payment_state = '취소'
-WHERE payment_id = #{payment_id}
+<!-- UPDATE payment SET payment_state = '취소'
+WHERE payment_id = #{payment_id} -->
+UPDATE payment, table_order, member 
+SET payment.payment_state = '취소'
+, member.member_point = member.member_point - payment.payment_addmileage 
+, table_order.table_order_end = 'f' 
+WHERE payment_id =  #{payment_id}
 </update>
 
 

@@ -30,13 +30,6 @@ $(document).ready(function(){
 	
 	$('#member_phone').focus();
 	
-	$('#member_phone').change(function(){
-		$('#member_phone').trigger("click");
-	});
-	
-	$('#payment_pay').change(function(){
-		$('#payment_change').trigger("click");
-	});
 	 /* $('#member_phone').focusout($('#member_phone').trigger("click")); */
 	
 	/* if($("#payment_pay").val() != ""||$("#payment_pay").val() != null){

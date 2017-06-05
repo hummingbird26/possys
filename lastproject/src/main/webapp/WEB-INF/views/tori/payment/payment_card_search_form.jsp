@@ -20,15 +20,15 @@
 <br><br>
 <div class="container">
 	<form id="form" name="form" class="form-inline" action="${pageContext.request.contextPath}/tori/payment/payment_card_search_action" method="get">
-		<select id="select" name="select" class="form-inline" value="선택하세요">
+		<div><select id="select" name="select" class="form-inline" value="선택하세요">
 			<option value="card_id">카드승인번호별검색</option>
 			<option value="payment_id">거래코드별검색</option>
 			<option value="card_date">카드결제일자별검색</option>
 			<option value="card_company">카드회사별검색</option>
 		</select>
-		<input type="text" class="form-inline" name="keyWord" id="keyWord">
-		<input type="submit" class="form-inline btn btn-primary" name="search" id="search">
-	
+		<input type="text" class="form-control" name="keyWord" id="keyWord"></div>
+		<input type="submit" class="form-inline btn btn-primary" name="search" id="search" value="조건별검색">
+		<!-- <div><input type="submit" class="form-control" name="search" id="search" value="조건별검색"></div> -->
 	</form>
 </div>
 </body>

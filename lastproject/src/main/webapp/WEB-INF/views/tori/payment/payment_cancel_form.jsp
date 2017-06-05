@@ -110,49 +110,49 @@ function insertCancelChk(){
 				<tr>
 					<td>결제취소코드 :
 					</td>
-					<td><input type="text" class="form-control" name="payment_cancel_id" id="payment_cancel_id" size="auto" ondblclick="javascript:chkDupCancelId();">
+					<td><input type="text" class="form-control" name="payment_cancel_id" id="payment_cancel_id" size="auto" ondblclick="javascript:chkDupCancelId();" placeholder="결제취소코드를 입력해주세요">
 					</td>
 				</tr>
 				<tr>
 					<td>결제번호 : 
 					</td>
-					<td><input type="text" class="form-control" name="payment_id" id="payment_id" size="auto">
+					<td><input type="text" class="form-control" name="payment_id" id="payment_id" size="auto" placeholder="결제아이디를 입력해주세요">
 					</td>
 				</tr>
 				<tr>
 					<td>테이블사용코드 : 
 					</td>
-					<td><input type="text" class="form-control" name="table_order_id" id="table_order_id" size="auto">
+					<td><input type="text" class="form-control" name="table_order_id" id="table_order_id" size="auto" placeholder="테이블주문번호를 입력해주세요">
 					</td>
 				</tr>
 				<tr>
 					<td>전화번호 : 
 					</td>
-					<td><input type="text" class="form-control" name="member_phone" id="member_phone" size="auto">
+					<td><input type="text" class="form-control" name="member_phone" id="member_phone" size="auto" placeholder="회원전화번호를 입력해주세요">
 					</td>
 				</tr>
 				<tr>
 					<td>총액 : 
 					</td>
-					<td><input type="text" class="form-control" name="payment_cancel_total" id="payment_cancel_total" size="auto">
+					<td><input type="text" class="form-control" name="payment_cancel_total" id="payment_cancel_total" size="auto" placeholder="결제취소할 총 금액을 입력해주세요">
 					</td>
 				</tr>
 				<tr>
 					<td>결제금액 :
 					</td>
-					<td><input type="text" class="form-control" name="payment_cancel_pay" id="payment_cancel_pay" size="auto">
+					<td><input type="text" class="form-control" name="payment_cancel_pay" id="payment_cancel_pay" size="auto" placeholder="돌려받고자 하는 금액을 입력해주세요">
 					</td>
 				</tr>
 				<tr>
 					<td>회수마일리지 : 
 					</td>
-					<td><input type="text" class="form-control" name="payment_cancel_backmileage" id="payment_cancel_backmileage" size="auto">
+					<td><input type="text" class="form-control" name="payment_cancel_backmileage" id="payment_cancel_backmileage" size="auto" placeholder="돌려받을 마일리지는 얼마인지 기입해주세요">
 					</td>
 				</tr>
 				<tr>
 					<td>환불마일리지 : 
 					</td>
-					<td><input type="text" class="form-control" name="payment_cancel_returnmileage" id="payment_cancel_returnmileage" size="auto">
+					<td><input type="text" class="form-control" name="payment_cancel_returnmileage" id="payment_cancel_returnmileage" size="auto" placeholder="환급받을 마일리지는 얼마인지 기입해주세요">
 					</td>
 				</tr>
 				<tr>
@@ -164,13 +164,17 @@ function insertCancelChk(){
 				<tr>
 					<td>구분 : 
 					</td>
-					<td><input type="text" class="form-control" name="payment_cate" id="payment_cate" size="auto">
-					</td>
+					<td>
+		<input type="radio" name="payment_cate" id="payment_cate" value="현금">현금
+		&nbsp;&nbsp;
+		<input type="radio" name="payment_cate" id="payment_cate_cd" value="카드">카드
+		<!-- <input class="form-control" size="auto" id="payment_cate" name="payment_cate" type="text"> -->
+		</td>
 				</tr>
 				</table>
-		<input type="submit" class="btn btn-primary" id="paymentCancelAdd" name="paymentCancelAdd" value="제출">
-		<input type="reset" class="btn btn-primary" id="paymentCancel" name="paymentCancel" value="되돌림">
-		<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_list">글목록</a>
+		<input type="submit" class="btn btn-primary" id="paymentCancelAdd" name="paymentCancelAdd" value="결제취소">
+		<input type="reset" class="btn btn-primary" id="paymentCancel" name="paymentCancel" value="다시입력">
+		<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_list">결제취소목록</a>
 		<!-- <input type="button" class="btn btn-primary" value="idcheck" onclick="javascript:chkDupCancelId();"/> -->
 		</form>
 		<br><br>
