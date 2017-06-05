@@ -60,4 +60,7 @@
 	<select id="foodSRlist" parameterType="java.util.Map" resultType="int">
 		select count(*) from food_manage where ${selbox} like concat('%',#{keyWord},'%')
 	</select>
+	<select id="aj_ep_chck" parameterType="string" resultType="int">
+		select count(*) from food_per_menu where food_id = #{food_id} and menu_id = #{menu_id}
+	</select>
 </mapper>

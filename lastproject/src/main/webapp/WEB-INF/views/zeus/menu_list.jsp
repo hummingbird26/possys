@@ -11,6 +11,25 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>메뉴 목록</title>
+<style>
+		.buttons{
+		  background: #3498db;
+		  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+		  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+		  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+		  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+		  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+		  -webkit-border-radius: 28;
+		  -moz-border-radius: 28;
+		  border-radius: 28px;
+		  font-family: Arial;
+		  color: #ffffff;
+		  font-size: 12px;
+		  padding: 5px 7px 5px 7px;
+		  text-decoration: none;
+	    
+	}
+</style>
 
 
 <script type="text/javascript">
@@ -49,10 +68,12 @@
 <h1>메뉴 목록</h1>
 <br>
 <br>
-<button class = "catebutton" id = "all"type = "button">전체</button>
-<button class = "catebutton" id = "bab"type = "button">밥</button>
-<button class = "catebutton" id = "chi"type = "button">치킨</button>
-<button class = "catebutton" id = "ham"type = "button">햄버거</button>
+<button class = "catebutton buttons" id = "all"type = "button">전체</button>
+<button class = "catebutton buttons" id = "drinkmenu"type = "button">음료</button>
+<button class = "catebutton buttons" id = "sidemenu"type = "button">사이드</button>
+<button class = "catebutton buttons" id = "hambuger"type = "button">햄버거</button>
+<button class = "catebutton buttons" id = "setmenu"type = "button">세트</button>
+
 <br>
 <br>
 	<table border=1>
@@ -96,7 +117,7 @@
 	<div>
 	</div>
 	<div class="col-sm-1 col-sm-offset-3">
-		<a href="${pageContext.request.contextPath}/menu_add_form"><button><h5>메뉴 추가</h5></button></a>
+		<a href="${pageContext.request.contextPath}/menu_add_form"><button class = "buttons"><h5>메뉴 추가</h5></button></a>
 	</div>
 </center>
 </body>

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.or.possys.Menu_service.Menu;
 import kr.or.possys.Menu_service.Menu_Dao;
+import kr.or.possys.Order_service.Order;
+import kr.or.possys.Order_service.Order_Dao;
 
 
 @Controller
@@ -29,7 +31,7 @@ public class Menu_Controller {
 	}
 	//메뉴 목록
 	@RequestMapping(value="/menu_add_form", method = RequestMethod.POST)
-	public String menuadd(Menu menu,HttpServletRequest request, HttpSession session){
+	public String menuadd(Menu menu,HttpServletRequest request, HttpSession session, Model model){
 		System.out.println("02_menuController.java ->>menuadd 액션 요청");
         String path = request.getRealPath("/resources/upload");
         String path2 = request.getContextPath()+"/resources/upload";
@@ -39,6 +41,23 @@ public class Menu_Controller {
         menu.setNewname(path2+"/"+filename);
         System.out.println(menu.getNewname());
         
+        Menu menu1 = dao.menu_count();
+        System.out.println("카운트 확인 완료");;
+		String count = menu1.getMenu_count();
+		int counter = Integer.parseInt(count.substring(1, 5))+1;
+		String result_id = "m"+String.format("%04d", counter);
+		System.out.println("확인요청"+result_id);
+		
+		
+		
+		menu.setMenu_id(result_id);
+		dao.insertmenu(menu);
+		
+		List<Menu> menu_list = dao.menu_list();
+		System.out.println(menu_list+"<<<<<Menu_controller.java menu_list 리턴값");
+		
+		/*model.addAttribute("result_id",result_id);*/
+		model.addAttribute("menu_list", menu_list);
         try {
         	menu.getOrder_file().transferTo(new File(path+"/"+filename));
         }catch (IOException e) {
@@ -46,7 +65,7 @@ public class Menu_Controller {
             e.printStackTrace();
         }
 		
-		dao.insertmenu(menu);
+		
 		return "redirect:/menu_list";
 	}
 	@RequestMapping(value="/menu_list", method = RequestMethod.GET)
