@@ -27,11 +27,12 @@
 
 </head>
 <body>
-</br></br></br></br></br>
+</br></br></br>
 	<div class="container">
     <h1>Payment Card List</h1>
     <div>전체행의 수 : ${paymentcardcount}</div>
-    <table class="table table-striped table-hover" border="1">
+     <br><br>
+    <table class="table table-striped table-hover">
         <thead>
             <tr>
                 <th>승인번호</th>
@@ -82,7 +83,7 @@
         </c:if>
     </ul>
     <div>
-        <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_card_form">게시글 입력</a>
+        <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_card_form">카드거래입력</a>
         <a href="${pageContext.request.contextPath}/tori/payment/payment_card_search_form" class="btn btn-primary">조건검색</a>
     </div>
     <br><br>

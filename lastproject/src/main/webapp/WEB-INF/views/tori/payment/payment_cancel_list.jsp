@@ -26,11 +26,12 @@
 
 </head>
 <body>
-</br></br></br></br></br>
+</br></br></br>
 	<div class="container">
     <h1>Payment Cancel List</h1>
     <div>전체행의 수 : ${paymentcancelcount}</div>
-    <table class="table table-striped table-hover" border="1">
+     <br><br>
+    <table class="table table-striped table-hover">
         <thead>
             <tr>
                 <th>결제취소아이디</th>
@@ -81,7 +82,7 @@
         </c:if>
     </ul>
     <div>
-        <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_form">게시글 입력</a>
+        <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_form">결제취소정보입력</a>
         <a href="${pageContext.request.contextPath}/tori/payment/payment_cancel_search_form" class="btn btn-primary">조건검색</a>
     </div>
     <br><br>

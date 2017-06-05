@@ -103,9 +103,9 @@ $(document).ready(function(){
 		<td><input class="form-control" size="auto" id="staff_date" name="staff_date" type="date" value="${staff.staff_date}" readonly></td>
 		</tr>
 	</table>
-	<input class="btn btn-primary" type="submit" id="staffUpdate" name="staffUpdate" value="제출">
-	<input class="btn btn-primary" type="reset" id="staffReset" name="staffReset" value="되돌림">
-	<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/staff/staff_list">글목록</a>
+	<input class="btn btn-primary" type="submit" id="staffUpdate" name="staffUpdate" value="수정하기">
+	<input class="btn btn-primary" type="reset" id="staffReset" name="staffReset" value="다시입력">
+	<a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/staff/staff_list">직원목록</a>
 	</form>
 	
 </div>

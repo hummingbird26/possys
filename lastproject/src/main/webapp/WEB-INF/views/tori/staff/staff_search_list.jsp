@@ -25,11 +25,12 @@
 <%@ include file="../../modal/header.jsp" %>
 </head>
 <body>
-</br></br></br></br></br>
+<br><br><br>
 	<div class="container">
     <h1>Staff Search List</h1>
     <div>전체행의 수 : ${staffSRcount}</div>
-    <table class="table table-striped table-hover" border="1">
+    <br><br>
+    <table class="table table-striped table-hover">
         <thead>
             <tr>
                 <th>직원아이디</th>
@@ -78,7 +79,7 @@
         </c:if>
     </ul>
    <div>
-        <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/staff/staff_add_form">게시글 입력</a>
+        <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/staff/staff_add_form">직원가입화면</a>
         <a href="${pageContext.request.contextPath}/tori/staff/staff_search_form" class="btn btn-primary">조건검색</a>
     </div>
     <br><br>

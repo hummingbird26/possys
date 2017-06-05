@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>결제목록</title>
+<title>결제취소검색결과</title>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
@@ -26,10 +26,12 @@
 
 </head>
 <body>
+	<br><br><br>
 	<div class="container">
     <h1>Payment Cancel Search List</h1>
     <div>전체행의 수 : ${paymentCSRcount}</div>
-    <table class="table table-striped table-hover" border="1">
+     <br><br>
+    <table class="table table-striped table-hover">
         <thead>
             <tr>
                 <th>결제취소아이디</th>
@@ -42,7 +44,7 @@
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="pc" items="${paymentCSRlist}">
+            <c:forEach var="pc" items="${paymentCSRsearch}">
                 <tr>
                     <td><a href="${pageContext.request.contextPath}/tori/payment/payment_cancel_view?payment_cancel_id=${pc.payment_cancel_id}">${pc.payment_cancel_id}</a></td>
                     <td>${pc.payment_id}</td>
@@ -50,7 +52,7 @@
                     <td>${pc.payment_cancel_pay}</td>
                     <td>${pc.payment_cancel_total}</td>
                     <td>${pc.payment_cancel_date}</td>
-                    <td>${pc.payment_cancel_cate}</td>
+                    <td>${pc.payment_cate}</td>
                 </tr>
             </c:forEach>
         </tbody>
@@ -80,7 +82,7 @@
         </c:if>
     </ul>
     <div>
-        <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_add_form">게시글 입력</a>
+        <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_form">결제취소정보입력</a>
         <a href="${pageContext.request.contextPath}/tori/payment/payment_cancel_search_form" class="btn btn-primary">조건검색</a>
     </div>
     <br><br>
