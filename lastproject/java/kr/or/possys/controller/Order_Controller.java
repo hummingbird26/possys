@@ -65,6 +65,32 @@ public class Order_Controller{
 		return "/order/order_list";
 	}
 	
+	@RequestMapping(value="/order_search_list", method = RequestMethod.GET)
+	public String order_search_list(Model model,@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage
+			,@RequestParam(value="selbox") String selbox
+			,@RequestParam(name="keyWord") String keyWord){
+		
+		System.out.println("오더리스트 요청");
+		int order_count = odao.get_order_search_count(selbox,keyWord);
+		System.out.println(order_count);
+		int pagePerRow = 10;
+		int expage = 1;
+		int lastPage = (int)(Math.ceil((double)order_count/(double)pagePerRow));
+		
+		System.out.println(selbox+"/"+keyWord+"/"+currentPage+"/"+pagePerRow+"////");		
+		
+		
+		List<Order> list = odao.get_order_search_list(selbox, keyWord,currentPage, pagePerRow);
+		model.addAttribute("order_list", list);
+		model.addAttribute("expage",expage);
+		model.addAttribute("pagePerRow",pagePerRow);
+		model.addAttribute("order_count",order_count);
+		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("lastPage",lastPage);
+		
+		return "/order/order_list";
+	}
+	
 
 	
 	@RequestMapping(value="/order_detail", method = RequestMethod.GET)
@@ -301,6 +327,14 @@ public class Order_Controller{
 	public String order_form(Model model,Order order){
 		System.out.println("카운트실행");
 		int table_order_num = order.getTable_order_num();
+		int table_num_count = odao.table_num_count(table_order_num);
+		System.out.println(table_num_count+"이것을 찾는다.");
+		model.addAttribute("table_num_count",table_num_count);
+		
+		if(table_num_count != 0){
+			return "/order/order_table_input";
+		}
+		else{
 		Order order_c = odao.order_count();
 		
 		/* 일련번호 자동증가 부분*/
@@ -373,8 +407,9 @@ public class Order_Controller{
 		model.addAttribute("result_id",result_id);
 		model.addAttribute("menu_list", menu_list);
 		model.addAttribute("table_order_num",table_order_num);
-
 		return "/order/order_form";
+		}
+		
 	}
 	
 	@RequestMapping(value="/order_action", method = {RequestMethod.GET,RequestMethod.POST})
@@ -431,5 +466,11 @@ public class Order_Controller{
 	@RequestMapping(value="/order_table_input", method = RequestMethod.GET)
 	public String order_table_input(){
 		return "/order/order_table_input";
+	}
+	
+	@RequestMapping(value="/order_cancel", method = RequestMethod.GET)
+	public String order_cancel(Model model,@RequestParam(value="table_order_id") String table_order_id){
+		odao.order_cancel(table_order_id);
+		return "redirect:/order_list";
 	}
 }

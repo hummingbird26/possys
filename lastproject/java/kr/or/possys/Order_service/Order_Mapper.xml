@@ -9,6 +9,13 @@
 		table_order_date 
 		from table_order
 	</select>
+	
+	 <select id="table_num_count" parameterType = "int" resultType="int">
+		select count(table_order_num)
+		from table_order
+		where table_order_num = #{table_order_num}
+		and table_order_end = 'f'
+	</select>
 
  	<select parameterType="java.util.Map" id="get_order_list" resultType="kr.or.possys.Order_service.Order"> 
 		select table_order_id,
@@ -16,6 +23,16 @@
 		table_order_end,
 		table_order_date 
 		from table_order
+		ORDER BY table_order_id DESC LIMIT #{beginRow}, #{pagePerRow} 
+	</select>
+	
+	 	<select parameterType="java.util.Map" id="get_order_search_list" resultType="kr.or.possys.Order_service.Order"> 
+		select table_order_id,
+		table_order_num,
+		table_order_end,
+		table_order_date 
+		from table_order
+		where ${selbox} like concat('%',#{keyWord},'%')
 		ORDER BY table_order_id DESC LIMIT #{beginRow}, #{pagePerRow} 
 	</select>
 	
@@ -30,6 +47,10 @@
 	
 		<select id="get_order_count" resultType="int"> 
 		SELECT COUNT(*) FROM table_order 
+		</select>
+		
+		<select id="get_order_search_count" resultType="int"> 
+		SELECT COUNT(*) FROM table_order where ${selbox} like concat('%',#{keyWord},'%')
 		</select>
 	
 	 	<select id="order_detail" parameterType = "String" resultType="kr.or.possys.Order_service.Order">
@@ -195,4 +216,11 @@
 		from ep_order_food_details
 		where food_id = #{food_id};
 		</select>
+		
+		<update id="order_cancel" parameterType="String">
+		update table_order
+		set table_order_end = 'c'
+		where table_order_id = #{table_order_id}
+		</update>
+		
 </mapper>
