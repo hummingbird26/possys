@@ -5,10 +5,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+
+<style>
+.l_menu{
+/* background-image:url('${pageContext.request.contextPath}/resources/asset/img/test2.jpg') */
+opacity: 0.5;
+}
+
+</style>
 </head>
 <body>
   <!-- start:Left Menu -->
- 		
  		 <div id="left-menu">   
               <div class="sub-left-menu scroll">
                 <ul class="nav nav-list">
@@ -19,7 +27,11 @@
                     </li>
                
                 </div>
+                
           </div>
-          <!-- end: Left Menu -->
+        <!-- end: Left Menu -->
+          
+	
+
 </body>
 </html>

@@ -12,7 +12,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>발주·주문 목록</title>
-<%-- <%@ include file="../../modal/wide_menu.jsp" %> --%>
+<%@ include file="../../modal/header.jsp" %>
 <style type="text/css">
   [class*="col-"] {
   padding: 8px;
@@ -373,7 +373,7 @@
 <body>
 <%-- <jsp:useBean id="today" class="java.util.Date"/> <!-- 현재 날짜 --> --%>
 
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
+
 <h1>발주·주문 목록</h1>
 
 	<div class="col-sm-4">
@@ -427,11 +427,11 @@
 				<!-- ajax append 들어감 -->				
 			</tbody>
 		</table>
-			<form id="wh_form" action="${pageContext.request.contextPath}/ep_order_update" method="get"> <!-- 배열이라서 그런지 get방식으로 보낸다 -->
+			<form id="wh_form" action="${pageContext.request.contextPath}/ep_order_add" method="get"> <!-- 배열이라서 그런지 get방식으로 보낸다 -->
 <!-- 				hidden 처리 하고 값 보냄 // 업체코드,식재코드 등등 -->
 							
 			</form>
-			<button type="button" id="wh_submit" name="wh_sub" value="등록">등록</button>
+			<button type="button" id="wh_submit" name="wh_submit" value="등록">등록</button>
 			<button type="button" id="wh_cancel" name="wh_cancel" value="취소">취소</button>
 		</div>		
 	</div> <!-- 입고등록 폼 end -->

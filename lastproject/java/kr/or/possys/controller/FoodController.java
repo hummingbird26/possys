@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.possys.food_service.Food;
@@ -50,11 +51,12 @@ public class FoodController {
 		return "/wonbin/food_manage/food_add_form";
 	}
 	//식재료 입력액션 요청
+	@ResponseBody
 	@RequestMapping(value="/food_add_form", method = RequestMethod.POST)
-	public String foodadd(Food food){
+	public void foodadd(Food food){
 		System.out.println("02_FoodController.java ->>foodadd 액션 요청");
 		dao.insertfood(food);
-		return "redirect:/food_list";
+//		return "redirect:/food_list";
 	}
 	//식재료 목록 요청
 	@RequestMapping(value="/food_list", method = RequestMethod.GET)
@@ -63,7 +65,7 @@ public class FoodController {
 		System.out.println("FoodController.java ->>foodlist 요청");
 		System.out.println(sel_list+"<=== sel_list");
 		String re = null;
-		int pageRow = 20;
+		int pageRow = 50;
 		int expage = 1;
 		if(sel_list.equals("sel_y")){
 			int getselcount = dao.getsel_count();

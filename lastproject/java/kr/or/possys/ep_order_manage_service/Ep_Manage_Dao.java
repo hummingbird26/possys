@@ -56,9 +56,19 @@ public class Ep_Manage_Dao {
 		for(Ep_Manage ep_m : list){
 			System.out.println(ep_m+" <<<=======epm 단일");
 			if(ep_m.getEp_id() == ""){
-				System.out.println("ep_id는 null"); //새로운업체 등록시
-				sqlSessionTemplate.insert("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.insertep_m",ep_m);
-			}else{
+//				System.out.println("ep_id는 null"); //새로운업체 등록시
+				int ep_mcount = sqlSessionTemplate.selectOne("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.ep_mcount");
+				if(ep_mcount == 0){
+					ep_m.setEp_id("e0001");
+					sqlSessionTemplate.insert("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.insertep_m",ep_m);
+					}else{
+					String ep_Mnum = sqlSessionTemplate.selectOne("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.ep_Mnum");
+					int s_Enum_count = Integer.parseInt(ep_Mnum.substring(1,5))+1;
+					String result_id = "e"+String.format("%04d", s_Enum_count);
+					ep_m.setEp_id(result_id);
+					sqlSessionTemplate.insert("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.insertep_m",ep_m);
+					}
+				}else{
 				System.out.println("ep_id는 있다."); // 기존 업체 등록시
 				sqlSessionTemplate.insert("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.in_insertep_m",ep_m);
 			}
@@ -70,13 +80,13 @@ public class Ep_Manage_Dao {
 //			System.out.println(map.get("list")+"<<<< map dao");
 			for(Ep_Manage ep_m : list){
 				System.out.println(ep_m+" <<<=======epm 단일");
-				if(ep_m.getEp_id() == ""){
-					System.out.println("ep_id는 null"); //새로운업체 등록시
-					sqlSessionTemplate.insert("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.insertep_o",ep_m);
-				}else{
+//				if(ep_m.getEp_id() == ""){
+//					System.out.println("ep_id는 null"); // 일련번호 부여하여 입력받아서 필요없어짐.
+//					sqlSessionTemplate.insert("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.insertep_o",ep_m);
+//				}else{
 					System.out.println("ep_id는 있다."); // 기존 업체 등록시
 					sqlSessionTemplate.insert("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.in_insertep_o",ep_m);
-				}
+//				}
 			}
 		}
 	// 02_동시에 입력된 발주현황 리스트 목록 요청해서 동시삭제를 위한

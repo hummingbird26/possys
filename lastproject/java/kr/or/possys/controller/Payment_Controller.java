@@ -139,18 +139,14 @@ public class Payment_Controller {
 	@ResponseBody
 	@RequestMapping(value="/tori/payment/bringOrderList")
 	public String bringOrderList(@RequestParam(value="Toid",required=true) String table_order_id) throws Exception{
-	/*	System.out.println("01_0_3 Payment_Controller.java -> bringOrderList");
-		System.out.println(table_order_id);*/
-		
-		
+		System.out.println("01_0_3 Payment_Controller.java -> bringOrderList");
+		System.out.println(table_order_id);
 		//List<Order> orderList = pdao.bringOrderList(table_order_id);
 		int OrderList = pdao.bringOrderList(table_order_id);
-		
-		
 		//String duvalue = null;
-		/*System.out.println(OrderList);*/
+		System.out.println(OrderList);
 		if(OrderList >= 0){
-			/*System.out.println("주문별 가격 확인 가능");*/
+			System.out.println("주문별 가격 확인 가능");
 			//duvalue = "Y";
 		}else{
 			System.out.println("주문별 가격 확인 불가");
@@ -310,10 +306,10 @@ public class Payment_Controller {
 	public String paymentSRlist(Model model,@RequestParam(value="currentPage",required=false,defaultValue="1") int currentPage
 			,@RequestParam(value="select") String select
 			,@RequestParam(value="keyWord") String keyWord){
-		System.out.println("04_2_Payment_Controller.java -> paymentlist");
+		System.out.println("04_2_Payment_Controller.java -> paymentSRlist");
 		int paymentSRcount = pdao.paymentSRlist(select,keyWord);
 		System.out.println(paymentSRcount);
-		System.out.println("06_1 Payment_Controller.java -> paymentlist");
+		System.out.println("06_1 Payment_Controller.java -> paymentSRlist");
 		int pagePerRow = 10;
 		int expage = 1;
 		int lastPage = (int)(Math.ceil((double)paymentSRcount/(double)pagePerRow));
@@ -394,6 +390,7 @@ public class Payment_Controller {
 		System.out.println(payment_id+"<<<<<<<");
 		/*model.addAttribute("payment_cancel",payment_cancel);
 		model.addAttribute("payment_id",payment_id);*/
+		pdao.PaymentUpdate(payment_id);
 		pdao.insertPaymentCancel(payment_id);
 		pdao.deletePayment(payment_id);
 		
@@ -531,7 +528,7 @@ public class Payment_Controller {
 			int pagePerRow = 10;
 			int expage = 1;
 			int lastPage = (int)(Math.ceil((double)paymentCSRcount/(double)pagePerRow));
-			List<Payment_Cancel> paymentCSRsearch = pcdao.paymentCSRsearch(select,keyWord,currentPage, pagePerRow);
+			List<Payment_Cancel> paymentCSRsearch = pcdao.paymentCSRsearch(select,keyWord,currentPage,pagePerRow);
 			System.out.println(paymentCSRcount);
 			System.out.println(Math.ceil(paymentCSRcount/pagePerRow));
 			System.out.println(lastPage);

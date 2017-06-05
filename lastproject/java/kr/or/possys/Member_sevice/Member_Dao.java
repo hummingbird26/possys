@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.possys.Cancel_Payment_service.Payment_Cancel;
 import kr.or.possys.Order_service.Order;
 import kr.or.possys.Payment_service.Payment;
+import kr.or.possys.ep_order_food_details_service.Ep_Order;
 
 
 @Repository
@@ -19,7 +20,22 @@ public class Member_Dao {
 	@Autowired
 	private SqlSessionTemplate Msql;
 	
+	//월 총 지출금액(발주신청금액)
+	public List<Ep_Order> expense_folios(){
+		System.out.println("expense_folios 메서드 실행  Member_Dao.java");
+		
+		return Msql.selectList("kr.or.possys.Member_sevice.Member_Mapper.expense_folios");
+	}
 	
+	
+	//월 총 판매금액
+	public List<Payment> sum_payment(){
+		System.out.println("sum_payment 메서드 실행  Member_Dao.java");
+		
+		return Msql.selectList("kr.or.possys.Member_sevice.Member_Mapper.sum_payment");
+	}
+	
+	//개인별 이용 내역
 	public List<receipt> receipt_list(String member_phone){
 		System.out.println("receipt_list 메서드 실행 Member_Dao.java");
 		Map<String,Object> map = new HashMap<String,Object>();

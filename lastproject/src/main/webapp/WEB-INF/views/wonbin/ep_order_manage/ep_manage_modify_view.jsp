@@ -36,11 +36,11 @@
 
 
 </script>
-<%-- <%@ include file="../../modal/wide_menu.jsp" %> --%>
+<%@ include file="../../modal/header.jsp" %>
 
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
+
 
 <h1>업체코드 - ${ep_m.ep_id} 상세보기</h1>
 <br>

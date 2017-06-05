@@ -65,6 +65,22 @@ FROM card ORDER BY card_id DESC LIMIT #{beginRow}, #{pagePerRow} </select>
 
  <insert parameterType="kr.or.possys.Card_Payment_service.Card_Payment" id="insertCardPayment">
 <!-- <insert id="kr.or.possys.Payment_service.Payment" parameterType="insertPayment">  -->
+ <!-- INSERT IGNORE INTO card(
+ card_id,
+ , payment_id
+ , card_date
+ , card_total
+ , card_price
+ , card_tax) 
+ SELECT 
+ concat('cd',(select date_format(sysdate(),'%y%m%d%s')))
+ , payment_id
+ , payment_date
+ , payment_pay
+ , payment_pay*10/11
+ , payment_pay*1/11
+ FROM payment WHERE payment.payment_cate='카드' AND payment_id = payment.payment_id -->
+ 
  INSERT INTO card(card_id
  , payment_id
  , card_app

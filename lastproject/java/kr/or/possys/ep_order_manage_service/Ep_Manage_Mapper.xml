@@ -2,7 +2,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper">
-		
+	<!-- 일련번호 관련 셋팅 -->
+	<select id="ep_mcount" resultType="int">
+		select count(*) from ep_order_manage
+	</select>
+	<select id="ep_Mnum" resultType="string">
+		select max(ep_id)
+			from ep_order_manage
+	</select>	
 	<!--@@@@@@ 업체 입력 id값 null -->
 	<insert id="insertep_m" parameterType="kr.or.possys.ep_order_manage_service.Ep_Manage">
 		insert into ep_order_manage(
@@ -13,13 +20,15 @@
 		,ep_director
 		,ep_address
 		,ep_text)
-		select concat('EPMN',(select date_format(sysdate(),'%y%m%d%s')))
+		value(
+		#{ep_id}
 		,#{food_id}
 		,#{ep_phone}
 		,#{ep_name}
 		,#{ep_director}
 		,#{ep_address}
 		,#{ep_text}
+		)
 	</insert>
 							<!--@@@@@@ 업체 입력 id값 ok -->
 	<insert id="in_insertep_m" parameterType="kr.or.possys.ep_order_manage_service.Ep_Manage">
@@ -41,20 +50,20 @@
 		,#{ep_text}
 		)
 	</insert>
-						<!--@@@@@@ 발주테이블에 업체정보 입력 id값 null -->
-	<insert id="insertep_o" parameterType="kr.or.possys.ep_order_manage_service.Ep_Manage">
-		insert into ep_order_food_details(
-		ep_id
-		,ep_order_id
-		,food_id		
-		,ea_order_statement
-		)
-		select
-		concat('EPMN',(select date_format(sysdate(),'%y%m%d%s')))
-		,'default'
-		,#{food_id}
-		,'미발주 상태'
-	</insert>
+						<!--@@@@@@ 발주테이블에 업체정보 입력 id값 null [일련번호 입력받아 넘겨서 필요없어짐] --> 
+<!-- 	<insert id="insertep_o" parameterType="kr.or.possys.ep_order_manage_service.Ep_Manage"> -->
+<!-- 		insert into ep_order_food_details( -->
+<!-- 		ep_id -->
+<!-- 		,ep_order_id -->
+<!-- 		,food_id		 -->
+<!-- 		,ea_order_statement -->
+<!-- 		) -->
+<!-- 		select -->
+<!-- 		concat('EPMN',(select date_format(sysdate(),'%y%m%d%s'))) -->
+<!-- 		,'default' -->
+<!-- 		,#{food_id} -->
+<!-- 		,'미발주 상태' -->
+<!-- 	</insert> -->
 							<!--@@@@ 발주테이블에 업체정보 입력 id값 ok -->
 	<insert id="in_insertep_o" parameterType="kr.or.possys.ep_order_manage_service.Ep_Manage">
 		insert into ep_order_food_details(

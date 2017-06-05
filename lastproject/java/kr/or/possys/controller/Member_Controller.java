@@ -3,6 +3,7 @@ package kr.or.possys.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,12 +23,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.or.possys.Cancel_Payment_service.Payment_Cancel;
 import kr.or.possys.Member_sevice.Member;
 import kr.or.possys.Member_sevice.Member_Dao;
+import kr.or.possys.Member_sevice.expense_folios;
 import kr.or.possys.Member_sevice.mVo;
 import kr.or.possys.Order_service.Order;
 import kr.or.possys.Order_service.Order_Dao;
 import kr.or.possys.Payment_service.Payment;
 import kr.or.possys.Staff_service.Staff;
 import kr.or.possys.Staff_service.Staff_Dao;
+import kr.or.possys.ep_order_food_details_service.Ep_Order;
 import net.sf.json.JSONArray;
 import kr.or.possys.Member_sevice.receipt;
 @Controller
@@ -43,6 +46,73 @@ public class Member_Controller {
 	private Staff_Dao sdao;
 	
 	
+/*	@RequestMapping(value="/expense_folios")
+	public String expense_folios(){
+		System.out.println("expense_folios_¸Þ¼­µå ½ÇÇà È®ÀÎ Member_Controller.java");
+		return "/member/expense_folios";
+	}*/
+	
+	//¸ÅÀå ¿ù ÆÇ¸Å±Ý¾× & Áö­x¹Ç¾× ±¸ÇÏ´Â ¸Þ¼­µå
+	@RequestMapping(value="/expense_folios")
+	
+	public String expense_folios_action(Model model){
+		System.out.println("expense_folios_action ¸Þ¼­µå ½ÇÇà È®ÀÎ  Member_Controller.java");
+		
+		
+		//¾î·¹ÀÌ ¸®½ºÆ®·Î expense_folios ¹è¿­ »ý¼º 
+		ArrayList<expense_folios> arr = new ArrayList<expense_folios>();
+		
+		//¿ùº° ÃÑ ÆÇ¸Å¾×°ú ¹ßÁÖ ½ÅÃ»±Ý¾× ±¸ÇØ¼­ °¢°¢ º¯¼ö¿¡ ´ã¾ÆÁØ´Ù. 
+		List<Ep_Order> o_list = Mdao.expense_folios();
+		List<Payment> sum_payment = Mdao.sum_payment();
+		
+		//for¹®À» »ç¿ëÇÏ¿© expense_folios dto·Î ¼±¾ðÇÑ °´Ã¼¸¦ ¸¸µé¸é¼­ 
+		//º¯¼ö¿¡ ´ã°ÜÀÖ´ø °ªÀ» ´ã¾ÆÁØ´Ù.
+		for (int i = 0; i < o_list.size(); i++){
+			
+			int p_total = sum_payment.get(i).getPayment_total();
+			int o_total = o_list.get(i).getEp_order_total_price();
+			//µÎ ±Ý¾×ÀÇ Â÷¸¦ ±¸ÇÏ¿© °á°ú°ªÀ» º¯¼ö¿¡ ´ã¾ÆÁØ´Ù.
+			int total_result = (p_total-o_total);
+			//¹Ýº¹ ÇÒ¶§¸¶´Ù »õ·Î¿î °´Ã¼ »ý¼º(°ªÀÌ Áßº¹ ¾ÈµÇ°Ô ÇØÁØ´Ù.)
+			expense_folios expense_folios = new expense_folios();
+			
+			expense_folios.setPayment_date(sum_payment.get(i).getPayment_date());
+			expense_folios.setPayment_total(p_total);
+			
+			
+			expense_folios.setEp_order_wh_date(o_list.get(i).getEp_order_wh_date());
+			expense_folios.setEp_order_total_price(o_total);
+			//dto¿¡ º¯¼ö»ý¼ºÇÏ°í °Å±â¿¡ À§¿¡¼­ º¯¼ö¿¡ ´ãÀº °ªÀ» ¼ÂÆÃ  ÇØÁØ´Ù.
+			expense_folios.setTotal_result(total_result);
+			
+			
+			arr.add(expense_folios);
+			System.out.println("olist"+i+"¹ø ¹Ýº¹ expense_folios_action ¸Þ¼­µå Member_Controller.java");
+		}
+		
+		model.addAttribute("expense_folios", arr);
+		
+		/*±¤ÁøÀÌÇü
+		for(Ep_Order _o_list : o_list){
+			expense_folios.setEp_order_total_price(_o_list.getEp_order_total_price());
+			expense_folios.setEp_order_wh_date(_o_list.getEp_order_wh_date());			
+			arr.add(expense_folios);
+		}
+		
+		for(Payment pay : sum_payment){
+			expense_folios.setPayment_date(pay.getPayment_date());
+			expense_folios.setPayment_total(pay.getPayment_total());
+			arr.add(expense_folios);
+		}
+		System.out.println(arr.size()+"///»çÀÌÁî");
+		model.addAttribute("expense_folios", arr);*/
+	
+		
+		
+
+		return "/member/expense_folios";
+	}
 	
 	//È¸¿ø ¸®½ºÆ®¿¡¼­ »ó¼¼º¸±â Å¬¸¯½Ã È¸¿øº° ÀÌ¿ë³»¿ª È®ÀÎ
 	@RequestMapping(value="/ajax_receipt_list", method=RequestMethod.GET)
@@ -76,7 +146,7 @@ public class Member_Controller {
 	}
 	
 	//È¸¿ø°¡ÀÔ È­¸é Ãâ·Â ¸Þ¼­µå
-	@RequestMapping(value="/sign_up")
+	@RequestMapping(value="/member/sign_up")
 	public String sign_up(){
 		System.out.println("sign_up È¸¿ø°¡ÀÔ È­¸é Ãâ·Â ¸Þ¼­µå Member_Controller");
 		

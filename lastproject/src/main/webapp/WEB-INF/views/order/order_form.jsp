@@ -229,7 +229,7 @@ textarea {
   }
 }
 	
-	.addbutton{
+	/* .addbutton{
 	    background-color: #4CAF50;
 	    border: 1;
 	    color: white;
@@ -241,7 +241,27 @@ textarea {
 	    margin: 4px 2px;
 	    cursor: pointer;
 	    
+	} */
+	
+		.buttons{
+		  background: #3498db;
+		  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+		  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+		  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+		  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+		  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+		  -webkit-border-radius: 28;
+		  -moz-border-radius: 28;
+		  border-radius: 28px;
+		  font-family: Arial;
+		  color: #ffffff;
+		  font-size: 12px;
+		  padding: 5px 7px 5px 7px;
+		  text-decoration: none;
+	    
 	}
+	
+	
 /* 		.catebutton{
 	    background-color: #4CAF50;
 	    border: none;
@@ -353,6 +373,9 @@ body {font-family: Verdana,sans-serif;margin:0}
 @media only screen and (max-width: 300px) {
   .prev, .next,.text {font-size: 11px}
 }
+
+<!-- 버튼-->
+
 </style>
   
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -361,15 +384,28 @@ body {font-family: Verdana,sans-serif;margin:0}
 <script type="text/javascript">
 
 	$(document).ready(function(){
+		
+		
+		
 		$('.addbutton').click(function(){
 			
-			var cls = "."+this.id;
 			
+			var cls = "."+this.id;
+
 			var menu_price = $(cls).children('#menu_price').text();
 			var menu_id = $(cls).children('#menu_id').text();
 			var menu_name = $(cls).children('#menu_name').text();
-			if($('#menu_frame').children(cls).text()==""){
+			var order_max_per = $(cls).children('#order_max_per').text();
+			var menu_check = $('#menu_check').val();
+			
+			if(parseInt(order_max_per) <= 0){
+				$('#'+this.id).text("매진");
+				
+			}
 
+			else if($('#menu_frame').children(cls).text()==""){
+			menu_check = parseInt(menu_check)+1;	
+			$('#menu_check').val(menu_check);
 			$('#menu_frame').append
 			("<div class = '"+menu_id+"'><input name ='menu_id' id ='menu_id'"
 					+"class ='"+menu_id+"' type ='text' value='"+menu_id+"' readonly='readonly' hidden = 'hidden'/> "
@@ -384,13 +420,15 @@ body {font-family: Verdana,sans-serif;margin:0}
 					+"<div class= '"+menu_id+" telephone'>"
 					+"<input name ='order_detail_sum' id ='order_detail_sum'"
 					+"class ='"+menu_id+"' type ='text' value='"+menu_price+"'readonly='readonly'/> "
+					+"<input name ='order_max_pers' id ='order_max_pers'"
+					+"class ='"+menu_id+"' type ='text' value='"+order_max_per+"'readonly='readonly'/ hidden = 'hidden'> "
 					+"</div>"
-					+"<input name ='menu_price' id ='menu_price'"
+					+"<input name ='menu_price' id ='menu_prices'"
 					+"class ='"+menu_id+"' type ='text' value='"+menu_price+"'readonly='readonly'/ hidden = 'hidden'> "
 					+"<div class= '"+menu_id+" submit'>"
-					+"<button  type='button' id = '"+menu_id+"' class = 'delbutton'>삭제</button> "
-					+"<button  type='button' id = '"+menu_id+"' class = 'plusbutton'>+</button> "
-					+"<button  type='button' id = '"+menu_id+"' class = 'minusbutton'>-</button></div>"
+					+"<button  type='button' id = '"+menu_id+"' class = 'delbutton buttons'>X</button> "
+					+"<button  type='button' id = '"+menu_id+"' class = 'plusbutton buttons'>▲</button> "
+					+"<button  type='button' id = '"+menu_id+"' class = 'minusbutton buttons'>▼</button></div>"
 					+"</div><br/>"
 					 
 					)
@@ -401,6 +439,20 @@ body {font-family: Verdana,sans-serif;margin:0}
 			
 		});
 		
+		
+		$('#addsubmit').click(function(){
+			var menu_check = $('#menu_check').val();
+			
+			if(menu_check == 0){
+				
+				return false;	
+			}
+			else{
+				return true;
+			}
+			
+			
+		})
 		
 		$('.catebutton').click(function(){
 			var cls = "."+this.id;
@@ -417,6 +469,10 @@ body {font-family: Verdana,sans-serif;margin:0}
 		
 		$(document).on("click",".delbutton",function(){
 			
+			var menu_check = $('#menu_check').val();
+			menu_check = parseInt(menu_check)-1;	
+			$('#menu_check').val(menu_check);
+			
 			var cls = "."+this.id;
 			alert(cls);
 			$('#menu_frame').children(cls).remove();
@@ -425,13 +481,27 @@ body {font-family: Verdana,sans-serif;margin:0}
 		$(document).on("click",".plusbutton",function(){
 			
 			var cls = "."+this.id;
+			var max = $(cls).children('#order_max_pers').val();;
+			
+			
 			var now = $(cls).children('#order_detail_ea').val();
 			now = parseInt(now)+1;
-			var price = $(cls).children('#menu_price').val();
-			var total = now*price
+			var price = $(cls).children('#menu_prices').val();
+			var total = now*price			
+			
+			
+			if(now <= 0){
+				alert("뭐하는 짓이여");
+			}
+			else if(now > max){
+				alert("그리 많이먹게?");
+				now = parseInt(now)-1;
+			}
+			else{
+			
 			$(cls).children('#order_detail_ea').val(now);
 			$(cls).children('#order_detail_sum').val(total);
-			
+			}
 			/* alert(total); */
 			
 		});
@@ -441,11 +511,16 @@ body {font-family: Verdana,sans-serif;margin:0}
 			var cls = "."+this.id;
 			var now = $(cls).children('#order_detail_ea').val();
 			now = parseInt(now)-1;
-			var price = $(cls).children('#menu_price').val();
+			var price = $(cls).children('#menu_prices').val();
 			var total = now*price
+			if(now <= 0){
+				now = parseInt(now)+1;
+				alert("뭐하는 짓이여");
+			}
+			else{
 			$(cls).children('#order_detail_ea').val(now);
 			$(cls).children('#order_detail_sum').val(total);
-			
+			}
 			/* alert(total); */
 			
 			
@@ -466,16 +541,6 @@ body {font-family: Verdana,sans-serif;margin:0}
 
 <br/><br/><br/>
 
-
-<form id="addform" action="${pageContext.request.contextPath}/order_action" method="post">
-		<div>
-			<input type="submit" id="addsubmit" value="주문">
-		</div>
-		<input name = "table_order_id" id = "table_order_id" class = "${result_id}" type = "text" value = "${result_id}" hidden="hidden"/>
-		<input name = "table_order_num" id = "table_order_num" type = "text"/>
-		<div id = "menu_frame"  style = "overflow:scroll; height : 200px;">	
-		</div>
-	</form>
 <input id = "catego" type = "text" value ="all" hidden = "hidden"/>
 <div class = "slideshow-container">
 			<c:forEach varStatus="status" var="m" items="${menu_list}">
@@ -487,7 +552,8 @@ body {font-family: Verdana,sans-serif;margin:0}
 				<div class="text">
 				메뉴명 : ${m.menu_name}<br/>
 				가격 : ${m.menu_price} 열량 : ${m.menu_kcal}kcal<br/>
-				<button class = "addbutton" id = "${m.menu_id}"type = "button"  >추가</button>
+				재고 : ${m.order_max_per}<br/><!-- 삭제예정 -->
+				<button class = "addbutton buttons" id = "${m.menu_id}"type = "button" >추가</button>
 				</div>
 				
 				
@@ -499,6 +565,7 @@ body {font-family: Verdana,sans-serif;margin:0}
 				<td name = "menu_price" id = "menu_price" class = "${m.menu_id}" style="display:none">${m.menu_price}</td>
 				<td name = "menu_sprice" id = "menu_sprice" class = "${m.menu_id} hid" style = "display:none">${m.menu_sprice}</td>
 				<td name = "menu_kcal" id = "menu_kcal" class = "${m.menu_id}" style="display:none">${m.menu_kcal}kcal</td>
+				<td name = "order_max_per" id = "order_max_per" class = "${m.menu_id} hid" style = "display:none">${m.order_max_per}</td>
 				
 				<%-- <td style="width:20%"><button class = "addbutton" id = "${m.menu_id}"type = "button" >추가</button></td> --%>
 				</tr>
@@ -517,31 +584,18 @@ body {font-family: Verdana,sans-serif;margin:0}
 				<span class="dot" onclick="currentSlides(${status.index}+1)"></span> 
 			</c:forEach>
 		</div>
-<!-- 슬라이더 쇼 -->
-<!-- <div class="slideshow-container">
 
-<div class="mySlides fade">
-  <div class="numbertext">1 / 3</div>
-  <img src="/possys/resources/upload/Tulips.jpg" style="width:100%">
-  <div class="text">Caption Text</div>
-</div>
-
-<div class="mySlides fade">
-  <div class="numbertext">2 / 3</div>
-  <img src="/possys/resources/upload/Tulips.jpg" style="width:100%">
-  <div class="text">Caption Two</div>
-</div>
-
-<div class="mySlides fade">
-  <div class="numbertext">3 / 3</div>
-  <img src="/possys/resources/upload/Tulips.jpg" style="width:100%">
-  <div class="text">Caption Three</div>
-</div>
-
-<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-<a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-</div> -->
+<form id="addform" action="${pageContext.request.contextPath}/order_action" method="post">
+		<input name = "table_order_id" id = "table_order_id" class = "${result_id}" type = "text" value = "${result_id}" hidden="hidden"/>
+		<input name = "menu_check" id = "menu_check" type = "text" value = "0" hidden = "hidden"/>
+		<input name = "table_order_num" id = "table_order_num" type = "text" value = "${table_order_num}" hidden="hidden"/>
+		<div id = "menu_frame"  style = "overflow:scroll; height : 200px;">	
+		</div>
+		<br/>
+		<div>
+		<input class = "buttons" type="submit" id="addsubmit" value="주문">
+		</div>
+</form>
 
 
 <script>

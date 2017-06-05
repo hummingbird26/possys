@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>업체 목록</title>
+<%@ include file="../../modal/header.jsp" %>
 <script type="text/javascript">
 	$(document).ready(function(){
 			
@@ -27,7 +28,7 @@
 <%-- <%@ include file="../../modal/wide_menu.jsp" %> --%>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
+
 <h1>업체 목록</h1>
 <div>전체 업체 수 : ${ep_mcount}</div>
 	<table border=1>

@@ -2,11 +2,15 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.possys.drop_food_service.Drop_Mapper">
-	
+	<!-- 일련번호 관련 -->
+	<select	id="s_Dnum" resultType="String">
+		select max(drop_id)
+				from drop_food
+	</select>
 	<!-- 폐기시 ep_order_food_details테이블에 빼고남은수 업데이트 // 폐기수정시-->
 	<update id="sub_ep_o_up" parameterType="java.util.Map">
 		update ep_order_food_details
-		set ep_order_wh_ea = #{sub_ea}
+		set food_nowquantity = #{sub_ea}
 		where food_id = #{drop.food_id} and ep_order_id=#{drop.ep_order_id}
 	</update>
 	
@@ -18,6 +22,7 @@
 		,ep_order_wh_ea
 		,ep_order_wh_date
 		,ep_order_food_shelflife
+		,food_nowquantity
 		 from ep_order_food_details
 		 inner join food_manage
 		 on ep_order_food_details.food_id = food_manage.food_id
@@ -35,14 +40,15 @@
 		,drop_reason
 		,staff_id
 		,ep_order_id)
-		select
-		concat('DN',(select date_format(sysdate(),'%y%m%d%s')))
+		value(
+		#{drop_id}
 		,#{food_id}
 		,sysdate()
 		,#{drop_ea}
 		,#{drop_reason}
-		,'staff'<!-- #{staff_id} -->
+		,#{staff_id}
 		,#{ep_order_id}
+		)
 	</insert>
 	<!-- 폐기 품목 카운트 -->
 	<select id="getdropcount" resultType="int">
@@ -65,7 +71,7 @@
 		,drop_food.staff_id
 		,drop_food.ep_order_id
 		,food_manage.food_name
-		,ep_order_food_details.ep_order_wh_ea
+		,ep_order_food_details.food_nowquantity
 		from drop_food
 		inner join food_manage
 		on drop_food.food_id = food_manage.food_id
@@ -95,7 +101,7 @@
 	</delete>
 	<update id="aj_drop_del_up" parameterType="java.util.Map">
 		update ep_order_food_details 
-		set ep_order_wh_ea = #{re_dorder_wh_ea}
+		set food_nowquantity = #{re_dorder_wh_ea}
 		where ep_order_id = #{ep_order_id} and food_id=#{food_id}
 	</update>
 	

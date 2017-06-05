@@ -143,7 +143,20 @@ public class Ep_OF_Details_Controller {
 //		int lastPage = (int)(Math.ceil((double)ep_ocount/(double)pageRow));
 		
 		List<Ep_Order> list = dao.ep_olist();
-		
+		//리스로 가져온 값중에 food_id를 추출하여 현재수량을 구하는 for 문
+		for(Ep_Order n : list){
+			List<Ep_Order> now_list = new ArrayList<Ep_Order>(); // food_id로 검색한 list를 담을 생성자 메서드
+			System.out.println(n.getFood_id()+"<== 가져온 food_id");
+			int add = 0;
+			String food_id = n.getFood_id();
+			now_list = dao.ep_now(food_id);
+			for(Ep_Order e : now_list){
+				System.out.println(e.getFood_nowquantity());
+				add += e.getFood_nowquantity(); //변수 add에 각각의 현재수량을 더한값을 담는다.
+			}
+			System.out.println(add+"<== 현재수량 더한값");
+			n.setFood_nowquantity(add); // i번째 Ep_order List 현재수량에 더한값을 셋팅한다. 
+		}
 //		model.addAttribute("expage",expage);
 //		model.addAttribute("pageRow",pageRow);
 		model.addAttribute("ep_ocount", ep_ocount);
