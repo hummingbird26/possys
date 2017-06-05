@@ -110,6 +110,7 @@ playAlert = setInterval(function() {
 // 회원전화번호를 통해서 회원전화번호 탐색 및 회원의 총 가용 마일리지를 구해준 후에, 그것을 해당 아이디값을 가지는 텍스트박스에 넣어준다.
 function bringMemberList(){
 	/* console.log("bringMemberList"); */
+	alert('휴대폰 중복여부를 확인하고 마일리지 정보를 가져옵니다.');
 
 	 $.ajax({
 			type:'POST',
@@ -152,16 +153,19 @@ function bringMemberList(){
 function phonecheck(){
 	//휴대폰번호를 결제목록에 입력시에 일반적인 휴대폰번호 작성 및 표기법에 맞게 유효성검사 실시(시작)
 	//var regExp = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
-	var regExp = /\b\d{3}[-]?\d{4}[-]?\d{4}\b/;
+	var regExp = /^\d{3}-\d{3,4}-\d{4}$/;
 	var MemberList = $("#member_phone").val();
-	alert(MemberList);
 
 	if(MemberList != ''){
 		if(!regExp.test(MemberList)){
 			alert("올바른 형식의 번호를 입력하세요");
 			$('#member_phone').focus();
 			return false;
-		}	
+		}
+		alert(MemberList);
+		return false;
+	}else{
+		alert('폰번호를 입력해주십시요');
 		return false;
 	}
 	
@@ -261,7 +265,7 @@ window.onload = function(){
 		</tr>
 		<tr>
 		<td>전화번호</td>
-		<td><input class="form-control" size="auto" id="member_phone" name="member_phone" type="tel" onclick="javascript:bringMemberList();" placeholder="회원전화번호를 입력해 주세요"></td>
+		<td><input class="form-control" size="auto" id="member_phone" name="member_phone" type="tel" onclick="javascript:phonecheck();" placeholder="회원전화번호를 입력해 주세요"></td>
 		<td>
 		<!-- <p id="notexistphone"></p> -->
 		<input type="button" class="btn btn-primary form-control btn-sm" name="ToMemberJoin" id="ToMemberJoin"value="회원가입" size="auto" onclick="javascript:toMemberJoin();">
@@ -317,7 +321,7 @@ window.onload = function(){
 	<%-- <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_list">글목록</a> --%>
 	<center>
 	<input class="btn btn-primary btn-sm" type="button" id="paymentAdd" name="paymentAdd" value="결제완료">
-	<input type="button" class="btn btn-primary btn-sm" id="idcheck" name="idcheck" value="휴대폰중복체크" onclick="javascript:phonecheck();"/>
+	<input type="button" class="btn btn-primary btn-sm" id="idcheck" name="idcheck" value="휴대폰중복체크" onclick="javascript:bringMemberList();"/>
 	</center>
 	<input type="button" class="btn btn-primary btn-sm" id="paymentSave" name="paymentSave" value="SAVE" onclick="javascript:paymentsave();"/>
 	<input type="button" class="btn btn-primary btn-sm" id="paymentLoad" name="paymentLoad" value="LOAD" onclick="javascript:paymentload();"/>

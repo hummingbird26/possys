@@ -15,7 +15,7 @@ SELECT COUNT(*) FROM staff WHERE 1=1 AND staff_phone = #{staff_phone}
 </select>
 
 <select id="staffSRlist" parameterType="java.util.Map" resultType="int">
-	select count(*) from food_manage where ${selbox} like concat('%',#{keyWord},'%')
+	select count(*) from food_manage where ${select} like CONCAT('%',#{keyWord},'%')
 </select>
 
 <select id="login" parameterType="String" resultType="kr.or.possys.Staff_service.Staff">

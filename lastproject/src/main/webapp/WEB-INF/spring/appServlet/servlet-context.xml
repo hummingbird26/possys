@@ -45,9 +45,9 @@
 
 
 
-   	<beans:property name="url" value="jdbc:mysql://umj64-005.cafe24.com:3306/art9000?useUnicode=true&amp;characterEncoding=euckr"/>
+   	<!-- <beans:property name="url" value="jdbc:mysql://umj64-005.cafe24.com:3306/art9000?useUnicode=true&amp;characterEncoding=euckr"/>
         <beans:property name="username" value="art9000"/>
-        <beans:property name="password" value="tkdgns12"/>
+        <beans:property name="password" value="tkdgns12"/> -->
 
         <!-- 배포할때  사용 -->
       <!--  <beans:property name="url" value="jdbc:mysql://localhost:3306/art9000?useUnicode=true&amp;characterEncoding=euckr"/>
@@ -69,9 +69,9 @@
         <beans:property name="password" value="ruddls12!@"/> -->
 
 
-        <!--  <beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/dade?useUnicode=true&amp;characterEncoding=euckr"/> 
+         <beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/dade?useUnicode=true&amp;characterEncoding=euckr"/> 
          <beans:property name="username" value="dadeid"/> 
-         <beans:property name="password" value="dadepw"/>  -->
+         <beans:property name="password" value="dadepw"/> 
          
 
 
