@@ -46,7 +46,7 @@ $(document).ready(function(){
 	//지정한 시간마다 실행시킨다.
 playAlert = setInterval(function() {
 	var table_count = new Array();
-	console.log(table_count+"<<ajax 외부 table_count값");
+	/* console.log(table_count+"<<ajax 외부 table_count값"); */
 	$.ajax({
 		type:'GET',
 		url:"${pageContext.request.contextPath}/f_table_count",
@@ -54,7 +54,7 @@ playAlert = setInterval(function() {
 		success:function(data){
 			/* alert('성공'); */
 			/* $.each(data, function(){  */
-				console.log(data+"<<<ajax내부 success내부 data값")
+				/* console.log(data+"<<<ajax내부 success내부 data값") */
 				$('#total').html(data+"개 테이블");
 				
 				/* for(var i=0; i<2; i++){
@@ -74,7 +74,7 @@ playAlert = setInterval(function() {
 		success:function(data){
 			/* alert('성공'); */
 			/* $.each(data, function(){  */
-				console.log(data+"<<<ajax내부 success내부 today_total data값")
+				/* console.log(data+"<<<ajax내부 success내부 today_total data값") */
 				$('#today_total').html(data+"원");
 				
 				/* for(var i=0; i<2; i++){
@@ -87,7 +87,7 @@ playAlert = setInterval(function() {
 			/* }); */
 		}
 	});
-	console.log(table_count+"<<ajax 외부 table_count값");
+	/* console.log(table_count+"<<ajax 외부 table_count값"); */
 }, 600); 	
 });
 
@@ -165,7 +165,7 @@ playAlert = setInterval(function() {
                                 <div class="panel-body">
                			<script>
                 			$('#order').click(function(){
-                				window.open('${pageContext.request.contextPath}/order_table_input','popup','width=550,height=800,left=0,top=0,toolbar=no,locaton=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no');
+                				window.open('${pageContext.request.contextPath}/order_table_input','popup','width=400,height=300,left=0,top=0,toolbar=no,locaton=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no');
                 			});
                			 </script>                    
                                   
