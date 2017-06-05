@@ -10,7 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>폐기 목록</title>
-
+<%@ include file="../../modal/header.jsp" %>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#sangse_diply').css("display","none");
@@ -46,9 +46,18 @@
 				$('#food_name').val(data.food_name);
 				$('#drop_reason').val(data.drop_reason);
 				$('#drop_ea').val(data.drop_ea);
+				$('#in_drop_ea').val(data.drop_ea); // 폐기수량을 히든으로 하나 더 주어 수정시 계산식을 만듬
 				$('#staff_id').val(data.staff_id);
-				$('#ep_order_wh_ea').val(data.ep_order_wh_ea);
+				$('#food_nowquantity').val(data.food_nowquantity);
 				$('#ep_order_id').val(data.ep_order_id);
+				//초기 남은수량 히든 값에 넣어줌
+				var f_drop_ea = $('#in_drop_ea').val();
+				var f_food_nowquantity = $('#food_nowquantity').val();
+				var _f_drop_ea = parseInt(f_drop_ea);
+				var _f_food_nowquantity = parseInt(f_food_nowquantity);
+				var first = parseInt(_f_drop_ea + _f_food_nowquantity);
+// 				alert(first);
+				$('#first_food_nowquantity').val(first);
 			},
 			error : function(request,status,error){
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);			
@@ -56,16 +65,30 @@
 		})//ajax End
 	})// 상세보기 버튼 End	
 	
+	var first_food_nowquantity = $('#food_nowquantity').val();
 	// 상세보기 화면 - 수정 액션 요청
-	$(document).on('click','#sangse_up',function(){
-		var up_form_lize = $('#up_form').serialize(); // Form 태그내의 항목들을 자동으로 읽어와 queryString 형식으로 변환시켜 준다
-		var ep_order_wh_ea = $('#ep_order_wh_ea').val();
-		var _ep_order_wh_ea = parseInt(ep_order_wh_ea);
+	$(document).on('click','#sangse_up',function(){		
+		var food_nowquantity = $('#food_nowquantity').val();
+		var _food_nowquantity = parseInt(food_nowquantity);
+		//상세보기 초기 수정괎과 입력된 수정값의 차를 구함. 
+		var in_drop_ea = $('#in_drop_ea').val();
 		var drop_ea = $('#drop_ea').val();
-		var _drop_ra = parseInt(drop_ea);
+		var on_drop_ea = parseInt(drop_ea);
+		var _drop_ea = parseInt(in_drop_ea - drop_ea);
+		// 원래 남은수량 구함
+		var food_now_ea = $('#first_food_nowquantity').val();
+		var _food_now_ea = parseInt(food_now_ea);
+// 		alert(_food_now_ea);
+		$('#cha_drop_ea').val(_drop_ea);	
+		var up_form_lize = $('#up_form').serialize(); // Form 태그내의 항목들을 자동으로 읽어와 queryString 형식으로 변환시켜 준다
 // 		alert(_ep_order_wh_ea);
-		if(_drop_ra > _ep_order_wh_ea){
-			alert('폐기수량이 남은 수량보다 많습니다. [남은 수량 : '+_ep_order_wh_ea+']');
+		if(on_drop_ea > _food_now_ea){
+			alert('폐기수량이 남은 수량보다 많습니다. [남은 수량 : '+_food_now_ea+']');
+		}else if(on_drop_ea == 0){
+			alert('입력된 수량이 0입니다. 전체삭제를 원하시면 하단 전체삭제버튼을 클릭하세요.')
+			$('#drop_ea').val(in_drop_ea);
+// 			alert(in_drop_ea);
+			return false;
 		}else{
 			$.ajax({
 				type: "get",
@@ -86,19 +109,19 @@
 		}
 		
 	}) // 수정 버튼 End
-	sangse_del
+	
 	// 상세보기 - 폐기 삭제
 	$(document).on('click','#sangse_del',function(){
-// 		alert('폐기삭제');
+// 		alert('폐기 전체삭제');
 		var drop_id = $('#drop_id').val();
 		var food_id = $('#food_id').val();
 		var ep_order_id = $('#ep_order_id').val();
 		// 폐기된 갯수 + 남은 수량
-		var ep_order_wh_ea = $('#ep_order_wh_ea').val();
-		var _ep_order_wh_ea = parseInt(ep_order_wh_ea);
+		var food_nowquantity = $('#food_nowquantity').val();
+		var _food_nowquantity = parseInt(food_nowquantity);
 		var drop_ea = $('#drop_ea').val();
-		var _drop_ra = parseInt(drop_ea);
-		var re_dorder_wh_ea = _ep_order_wh_ea + _drop_ra; // 폐기된 갯수와 남은수량을 더하여 초기 갯수를 구해서 다시 ep_order_food_details테이블을 업데이트 시켜준다.
+		var _drop_ea = parseInt(drop_ea);
+		var re_dorder_wh_ea = _food_nowquantity + _drop_ea; // 폐기된 갯수와 남은수량을 더하여 초기 갯수를 구해서 다시 ep_order_food_details테이블을 업데이트 시켜준다.
 // 		alert(re_dorder_wh_ea);
 		var re = confirm('폐기 삭제를 하시면 해당 폐기등록된 상품이 취소됩니다. 계속 진행하시겠습니까?');
 		if(re){
@@ -126,7 +149,7 @@
 <%-- <%@ include file="../../modal/wide_menu.jsp" %> --%>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
+
 <h3>폐기 목록</h3>
 <div>전체 식자재 수 : ${dropcount}</div>
 	<br>
@@ -245,10 +268,11 @@
 				</center>
 			</div>
 			<input type="hidden" name="ep_order_id" id="ep_order_id"/>
-			<input type="hidden" name="ep_order_wh_ea" id="ep_order_wh_ea"/>
-			
+			<input type="hidden" name="food_nowquantity" id="food_nowquantity"/>
+			<input type="hidden" name="cha_drop_ea" id="cha_drop_ea">
+			<input type="hidden" id="in_drop_ea"/>
 		</form>
-		
+			<input type="hidden" id="first_food_nowquantity"/>
 	</div>
 </div>	
 </body>

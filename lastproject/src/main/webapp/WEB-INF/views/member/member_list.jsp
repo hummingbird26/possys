@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html max-width:auto;>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원 리스트</title>
@@ -10,42 +10,53 @@
  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
  <style>
-            .bu{
-               /*  display: inline-block; */
-                background-color: white;
-                color: black;
-            }
-            .bu{
-                color: black;
-            }
-            /* 마우스 오버(마우스 올렸을때) */
-            .bu:hover{
-                background-color: chocolate;
-            }
-            /* 마우스 클릭하고있을때 */
-            .bu:active{
-                background-color: aqua;
-            }
-            /* 마우스 한번클릭후 */
-            .bu:visited{
-                color: black;
-            	background-color:#FFD8D8;
-            }
-        
+::-webkit-scrollbar {width: 8px; height: 8px; border: 3px solid #fff; display:none;}
+::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {display: block; height: 10px; background: url(`./images/bg.png`) #efefef}
+::-webkit-scrollbar-track {background: #efefef; -webkit-border-radius: 10px; border-radius:10px; -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.2)}
+::-webkit-scrollbar-thumb {height: 50px; width: 50px; background: rgba(0,0,0,.2); -webkit-border-radius: 8px; border-radius: 8px; -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.1)}
+          
+          
+
 	        .adelet:link{color:#000000;}
 		    .adelet:hover{color:#ffff00;}
 		  /*   .adelet:active{color:#00ff00;} */
 		    .adelet:visited{color:#000000;}   
-				
+		
+		.table4_1 table {
+	width:100%;
+	margin:15px 0;
+	border:0;
+}
+.table4_1 th {
+	background-color:#F56E6E;
+	color:#FFFFFF
+}
+.table4_1,.table4_1 th,.table4_1 td {
+	font-size:0.95em;
+	text-align:center;
+	padding:4px;
+	border-collapse:collapse;
+}
+.table4_1 th,.table4_1 td {
+	border: 1px solid #f9acac;
+	border-width:1px 0 1px 0
+}
+.table4_1 tr {
+	border: 1px solid #f9acac;
+}
+.table4_1 tr:nth-child(odd){
+	background-color:#fbcece;
+}
+.table4_1 tr:nth-child(even){
+	background-color:#fdfdfd;
+}		
 	        
         </style>
- <%-- <%@ include file="../modal/wide_menu.jsp" %> --%>
-
-  <!-- start: Css -->
+ 
+ 
+<!-- start: Css -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/bootstrap.min.css">
 
       <!-- plugins -->
@@ -57,10 +68,75 @@
 	<!-- end: Css -->
 
 	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/asset/img/logomi.png">
+    <%@ include file="../modal/header.jsp" %>
    
+   <style>
+input{
+border:0px;
+background-color: transparent;
+}
+
+body{
+  text-align:left;
+
+}
+body:before{
+  content:'';
+  height:100%;
+  display:inline-block;
+  vertical-align:middle;
+}
+.bu{
+  background:#FF7171;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:auto;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+  border-radius: 10px;
+  width:auto;
+}
+.bu:hover{
+  background:#fff;
+  color:#ED9595;
+}
+.bu:before,.bu:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #FFFFB0;
+  transition:400ms ease all;
+}
+.bu:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.bu:hover:before,.bu:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+ .bu1{
+ 	background:#fff;
+  color:#ED9595;
+ } 
+ .bu1:hover{
+  background:#FFD9FA;
+  color:#fff;
+ } 
+   
+   
+   </style>
 </head>
 <body>
- <%@ include file="../modal/header.jsp" %>
 
 <div class="container">
 	<br/>
@@ -68,8 +144,9 @@
 	<br/>
 	<br/>
     <h1>MEMBER LIST</h1>
+	 <br/>
     <div class="member">전체회원 수 : ${memberCount}</div>
-    
+    <br/><br/><br/>
   
 	    <!-- 회원 상세정보 들어가는 div -->
 	    <div id="member_view" style="display:none">
@@ -89,8 +166,8 @@
 	   	<input type="button" id="member_update_btn" class ="bu" value="수정완료">
 	   	</div>
     	<!-- 회원 이용내역 나오는 폼 -->
-    	<div id="hidden_receipt" style="overflow:scroll; width:100%; height:200px; background-color:#D9E5FF;">
-    		<table>    		
+    	<div id="hidden_receipt" style="overflow:scroll; width:100%; height:200px;">
+    		<table class="table4_1">    		
 				
 
 				
@@ -114,7 +191,7 @@
     		</table>
     	</div>
     
-    <table class="table table-striped" id="member_list">
+    <table class="table table-striped table4_1" id="member_list" >
         <thead>
             <tr>
                 <th>member_phone</th>
@@ -135,7 +212,7 @@
                     <td>${m.member_point}</td>
                     <td>${m.member_sign}</td>
                     <td>${m.member_join}</td>
-                    <td><button class="list_up_btn bu" value="${m.member_phone}">상세보기</button></td>
+                    <td><button class="list_up_btn bu btn-5" value="${m.member_phone}">상세보기</button></td>
                      
                     <td>
                    
@@ -154,8 +231,8 @@
       
       	<c:forEach var="i" begin="${expage}" end="${lastpage}" step="1">
              <c:choose>
-                <c:when test="${i eq currentPage}"><li><a href="${pageContext.request.contextPath}/member_list?currentPage=${i}"><button class ="bu">${i}</button></a></li></c:when>
-                <c:otherwise><li><a href="${pageContext.request.contextPath}/member_list?currentPage=${i}" ><button class ="bu">${i}</button></a></li></c:otherwise>
+                <c:when test="${i eq currentPage}"><li><a href="${pageContext.request.contextPath}/member_list?currentPage=${i}"><button class ="bu1">${i}</button></a></li></c:when>
+                <c:otherwise><li><a href="${pageContext.request.contextPath}/member_list?currentPage=${i}" ><button class ="bu1">${i}</button></a></li></c:otherwise>
             </c:choose>
 
         </c:forEach>
@@ -309,22 +386,22 @@ $(document).ready(function(){
 				console.log(member_point+"<<<");
 				console.log(member_sign+"<<<");
 				
-				$('#member_name').html("<br><p><b>회원 가입 날짜</b> : "+" "+member_join+"</p>"
-										+"</br><p><b>회원 이름</b> : "+" "+member_name+"</p>"
-										+"</br><p><b>회원 연락처</b>: "+" "+member_phone+"</p>"
-										+"</br><p><b>보유 마일리지</b>: "+" "+member_point+"</p>"
-										+"</br><p><b>최근 방문일자</b>: "+" "+member_sign+"</p>");
+				$('#member_name').html("<br><div style='border-bottom:2px solid red; width:200px;'><p><b>회원 가입 날짜</b> : "+" "+member_join+"</p></div>"
+										+"</br><div style='border-bottom:2px solid red; width:200px;'><p><b>회원 이름</b> : "+" "+member_name+"</p></div>"
+										+"</br><div style='border-bottom:2px solid red; width:200px;'><p><b>회원 연락처</b>: "+" "+member_phone+"</p></div>"
+										+"</br><div style='border-bottom:2px solid red; width:200px;'><p><b>보유 마일리지</b>: "+" "+member_point+"</p></div>"
+										+"</br><div style='border-bottom:2px solid red; width:200px;'><p><b>최근 방문일자</b>: "+" "+member_sign+"</p></div>");
 				
 				
 				//회원 정보 화면이 나타난다.
 				$('#member_view').show(1800);
 				$('#member_update_btn').hide();
 				
-				$('#member_update_view').html("<p><b>회원 가입 날짜</b> : "+" "+'<input type="text" id="member_update_member_join" style="cursor:not-allowed;" readonly value="'+member_join+'">'+"</p>"
+				$('#member_update_view').html("<div class='form-style-8'><p><b>회원 가입 날짜</b> : "+" "+'<input type="text" id="member_update_member_join" style="cursor:not-allowed;" readonly value="'+member_join+'">'+"</p>"
 											+"<p><b>회원 이름</b> : "+" "+'<input type="text" id="member_update_member_name"  value="'+member_name+'">'+"</p>"
 											+"<p><b>회원 연락처</b> : "+" "+'<input type="text" id="member_update_member_phone" value="'+member_phone+'">'+"</p>"
 											+"<p><b>보유 마일리지</b> : "+" "+'<input type="text" id="member_update_member_point" style="cursor:not-allowed" readonly value="'+member_point+'">'+"</p>"
-											+"<p><b>최근 방문일자</b> : "+" "+'<input type="text" id="member_update_member_sign" style="cursor:not-allowed" readonly  value="'+member_sign+'">'+"</p>"
+											+"<p><b>최근 방문일자</b> : "+" "+'<input type="text" id="member_update_member_sign" style="cursor:not-allowed" readonly  value="'+member_sign+'">'+"</p></div>"
 											)
 			
 											
@@ -335,7 +412,7 @@ $(document).ready(function(){
 														$('#member_list').show(1800);
 														$('#ml_pager').show(1800);
 														$('#frm').show(1800);
-													  	$('#hidden_receipt').hide(1500);
+													  	$('#hidden_receipt').hide(1300);
 													  	$('.receipt_tr').remove();
 														});
 					
@@ -349,7 +426,10 @@ $(document).ready(function(){
 					//회원정보 수정 버튼
 					$('#member_list_up_btn').hide(1500);
 					//이용내역 조회 숨김
-					$('#hidden_receipt').hide(1500);
+					$('#hidden_receipt').hide(1300);
+					//이용내역 버튼 나타남
+					$('#receipt_list').show(1500);
+				
 				});
 						
 			}//ajax success
@@ -400,15 +480,17 @@ $('#member_update_btn').click(function(){
 
 </script>
 <script>
+//이용 내역 버튼 클릭시 작동
 $('#receipt_list').click(function(){
 	
-	$('#hidden_receipt').show(1500);
-	$('#member_update_view').hide(1500);
+	$('#hidden_receipt').show(1300);
+	$('#member_update_view').hide(1300);
 	//회원정보 수정 완료 버튼
 	$('#member_update_btn').hide(1800);
 	//회원정보 수정 버튼
 	$('#member_list_up_btn').show(1500);
-	
+	//이용내역 버튼 사라짐
+	$('#receipt_list').hide(1200);
 	
 	var hidden_val = $('#hidden_receipt_list').val();
 	var hidden_phone = {"member_phone":hidden_val}
@@ -457,7 +539,7 @@ $('#receipt_list').click(function(){
 });
 </script>
     <div>
- <form id="frm" name="frm" action="${pageContext.request.contextPath}/member_select" method="get">
+ <form class="form-style-8" id="frm" name="frm" action="${pageContext.request.contextPath}/member_select" method="get">
     	<select  id="selBox" name="selBox">
     	<option  value="0">-- 선택하세요--</option>
         <option  value="member_phone">핸드폰번호</option>
@@ -465,11 +547,29 @@ $('#receipt_list').click(function(){
         <option  value="member_sign">가입일자</option>
         <option  value="member_join">최근방문일자</option>
         </select>
-      	<input type="text" name="search2" id="search2">
+      	<input type="text" name="search2" id="search2" >
         <input type="button" name="ml_button" id="ml_button" class ="bu" value="검색">
      </form>
     </div>
-    
+<style>
+.form-style-8 input[type="text"]
+{
+   box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    outline: none;
+    display: block;
+    width: auto%;
+    padding: 7px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    background: transparent;
+    margin-bottom: 10px;
+    font: 16px Arial, Helvetica, sans-serif;
+    height: 45px; 
+}
+
+</style>    
    	
 </div>
 </body>

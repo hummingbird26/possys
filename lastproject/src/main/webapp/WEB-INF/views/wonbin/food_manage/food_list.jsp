@@ -7,9 +7,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <title>식자재 목록</title>
-<%-- <%@ include file="../../modal/wide_menu.jsp" %> --%>
+<%@ include file="../../modal/header.jsp" %>
+
 <script type="text/javascript">
 	$(document).ready(function(){
+		//식자재 추가시 새창
+		$(document).on('click','#add_food',function(){
+			window.open('${pageContext.request.contextPath}/food_add_form','popup','width=770,height=700,left=0,top=0,toolbar=no,locaton=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no');
+		});
+		
+// 		$('[data-toggle="tooltip"]').tooltip(); 
 		//검색 
 		$('#fbutton').click(function(){
 			
@@ -114,35 +121,59 @@
 		});
 		
 	});
+
 </script>
+<style type="text/css">
+.table th{
+	text-align:center;
+}
+.td_chk{	
+    width: 15px;
+    height: 15px;	
+}
+</style>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
-<h1>식자재 목록</h1>
-<div>전체 식자재 수 : ${foodcount}</div>
-	<form id="sel_list_sub" name="sel_list_sub" action="${pageContext.request.contextPath}/sel_list" method="get">
-		<select id="sel_list" name="sel_list" >
+<br>
+<br>
+<br>
+<br>
+<br>
+<h3>식자재 목록</h3>
+<div class="col-md-offset-11"><span style="font-size: 16px;">전체 식자재 수 : ${foodcount}</span></div>
+	<div>
+	<input class="btn btn-primary" id="ep_submit" type="button" value="발주업체 등록" data-toggle="tooltip" data-placement="bottom" title="발주업체 등록을 위해서는 아래 체크박스를 체크하시고 등록하셔야합니다."/>
+		<%-- <a href="${pageContext.request.contextPath}/food_add_form"> --%><button type="button" class="btn btn-primary" id="add_food">식자재 추가</button><!-- </a> -->
+	</div>
+	<br>
+	<form class="col-md-offset-10"id="sel_list_sub" name="sel_list_sub" action="${pageContext.request.contextPath}/sel_list" method="get">
+		<select class="form-control"id="sel_list" name="sel_list" style="padding-top: 0px; padding-bottom: 0px; height: 30px; width: 230px;">
 			<option  value="sel_all" <c:if test="${sel_list eq 'sel_all'}">selected</c:if>>전체보기</option> <!-- 선택된값 select 상태 남기기위한 jstl 적용 -->
 			<option value="sel_y" <c:if test="${sel_list eq 'sel_y'}">selected</c:if>>업체 등록 식재료보기</option>
 			<option value="sel_n" <c:if test="${sel_list eq 'sel_n'}">selected</c:if>>업체 미등록 식재료보기</option>
-		</select>
-	</form>
-	<form id="ep_chkbox" action="${pageContext.request.contextPath}/ep_chkbox" method="post">
-	<input id="ep_submit" type="button" value="발주업체 관리"/>
+		</select>		
+	</form>	
 	
-		<table class="chkclass" border=1>
+	<form id="ep_chkbox" action="${pageContext.request.contextPath}/ep_chkbox" method="post">
+	
+	
+		<table class="table table-hover" style="text-align:center">
 			<thead>
-				<th><input type="checkbox" id="food_chkall"/> ▼</th>
-				<th>번호</th>
-				<th>식재코드번호</th>
-				<th>상품명</th>
-				<th>규격</th>
-				<th>단위</th>
-				<th>유통기한</th>
-				<th>담당자</th>
-				<th>등록일자</th>
-				<th>수정</th>
-							
+				<tr>
+					<th><input type="checkbox" id="food_chkall" style=" width: 15px; height: 15px;"/>
+						<a href="#">
+		         			<span class="glyphicon glyphicon-chevron-down"></span>
+		        		</a>
+		        	</th>
+					<th>번호</th>
+					<th>식재코드번호</th>
+					<th>상품명</th>					
+					<th>단위</th>
+					<th>유통기한</th>
+					<th>담당자</th>
+					<th>등록일자</th>
+					<th>수정</th>
+				</tr>		
 			</thead>
 			<tbody>
 			
@@ -153,7 +184,6 @@
 					<td>${(foodcount-status.index)-((currentPage-1)*pageRow)}</td>
 					<td>${f.food_id}</td>
 					<td>${f.food_name}</td>
-					<td>${f.food_size}</td>
 					<td>${f.food_unit}</td>
 					<td>제조일로 부터 ${f.food_shelflife}일 까지</td>
 					<td>${f.staff_id}</td>
@@ -164,8 +194,9 @@
 			</tbody>
 		</table>
 	</form>
-	
-	<ul>
+	<div>
+	<center>
+	<ul class="pagination pagination-sm" style="text-align: center; width: 300px; margin-left: auto; margin-right: auto;">
 		<c:if test="${currentPage > 1}">
 			<li><a href="${pageContext.request.contextPath}/food_list?currentPage=${currentPage-1}">이전</a></li>
 		</c:if>
@@ -192,20 +223,20 @@
 			<li><a href="${pageContext.request.contextPath}/food_list?currentPage=${currentPage+1}">다음</a></li>
 		</c:if>
 	</ul>
-	<div>
-		<form id ="frm" name="frm" action="${pageContext.request.contextPath}/food_search" method="get">
-			<select id="selbox"name="selbox" size="1">
+	</center>
+	</div>
+	<div class="in-line">
+		<form class="col-sm-3"id ="frm" name="frm" action="${pageContext.request.contextPath}/food_search" method="get" style="padding-right: 1px;width: 354px;">
+			<select id="selbox"name="selbox" size="1" style="width: 172px;height: 30.22222px;padding-bottom: 0px;padding-top: 0px;">
 				<option value="food_id">식재코드번호</option>
 				<option value="food_name">상품명</option>
 			</select>
-			<input  size="16" name="keyWord" type="text">
-			<input id="fbutton" type="button" value="검색">
+			<input  size="16" name="keyWord" type="text" style="padding-bottom: 4px; padding-top: 6px; height: 31px;">			
 		</form>
+		<input id="fbutton" type="button" value="검색" style="padding-top: 4.5;padding-bottom: 4.5;padding-top: 4px;padding-bottom: 4px;">
 	</div>
 	
-	<div>
-		<a href="${pageContext.request.contextPath}/food_add_form"><button>식자재 추가</button></a>
-	</div>
+	
 	
 </body>
 </html>

@@ -4,10 +4,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<%@ include file="../modal/wide_menu.jsp" %>
+
+<%@ include file="../modal/header.jsp" %>
+<!-- jquery를 사용하기위한 CDN주소 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>메뉴 목록</title>
+
+
 <script type="text/javascript">
 	$(document).ready(function(){
 			
@@ -34,15 +39,22 @@
 		});
 	});
 </script>
+
+
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">홍락이짱</a></center></h1>
+
+</br></br></br></br></br>
+<center>
 <h1>메뉴 목록</h1>
-<div>전체 메뉴 목록 ${menucount}</div>
+<br>
+<br>
 <button class = "catebutton" id = "all"type = "button">전체</button>
 <button class = "catebutton" id = "bab"type = "button">밥</button>
 <button class = "catebutton" id = "chi"type = "button">치킨</button>
 <button class = "catebutton" id = "ham"type = "button">햄버거</button>
+<br>
+<br>
 	<table border=1>
 		<thead>
 			<th><h3>메뉴코드</h3></th>
@@ -55,6 +67,7 @@
 			<th><h3>식재별 소비</h3></th>
 			<th><h3>이미지</h3></th>			
 		</thead>
+
 		<tbody>
 			<c:forEach varStatus="status" var="m" items="${list}">
 			<tr class = "all ${m.menu_cate} ${m.menu_id}">			
@@ -82,9 +95,9 @@
 	</ul>
 	<div>
 	</div>
-	<div>
-		<a href="${pageContext.request.contextPath}/menu_add_form"><button><h3>메뉴 추가</h3></button></a>
+	<div class="col-sm-1 col-sm-offset-3">
+		<a href="${pageContext.request.contextPath}/menu_add_form"><button><h5>메뉴 추가</h5></button></a>
 	</div>
-	
+</center>
 </body>
 </html>

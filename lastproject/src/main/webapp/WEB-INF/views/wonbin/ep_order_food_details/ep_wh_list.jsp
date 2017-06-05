@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -9,29 +9,30 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<title>¹ßÁÖ¡¤ÀÔ°í ¸ñ·Ï</title>
+<title>ë°œì£¼Â·ì…ê³  ëª©ë¡</title>
+<%@ include file="../../modal/header.jsp" %>
 <script type="text/javascript">
-	/* »ó¼¼º¸±â Å¬¸¯½Ã ÇØ´ç »ó¼¼º¸±â Ã¢ ¶ç¿ì±â */
+	/* ìƒì„¸ë³´ê¸° í´ë¦­ì‹œ í•´ë‹¹ ìƒì„¸ë³´ê¸° ì°½ ë„ìš°ê¸° */
 	$(document).ready(function(){
 		$('#div_wh').css("display","none");
-// 		»ó¼¼º¸±â Å¬¸¯ ÀÌº¥Æ®
+// 		ìƒì„¸ë³´ê¸° í´ë¦­ ì´ë²¤íŠ¸
 		$(document).on('click','#wh_sangse',function(){
 			$('#div_wh').css("display","block");
-			$('.tr_reset').remove(); // ´Ù¸¥ ¹öÆ° Å¬¸¯½Ã append·Î Ãß°¡ µÆ´ø tr ±¸¹® »èÁ¦
+			$('.tr_reset').remove(); // ë‹¤ë¥¸ ë²„íŠ¼ í´ë¦­ì‹œ appendë¡œ ì¶”ê°€ ëë˜ tr êµ¬ë¬¸ ì‚­ì œ
 			var ep_o_id = $(this).val();
 // 			alert(ep_o_id);
-			$.ajax({ // ajax ÀÔ·Â µî·ÏÆû°ú ÀÏÄ¡ÇÏ´Â ¹æ½ÄÀÌ´Ï ep_wh_add_form À¸·Î º¸³¿
+			$.ajax({ // ajax ì…ë ¥ ë“±ë¡í¼ê³¼ ì¼ì¹˜í•˜ëŠ” ë°©ì‹ì´ë‹ˆ ep_wh_add_form ìœ¼ë¡œ ë³´ëƒ„
 			type : "GET",
 			url : "${pageContext.request.contextPath}/ajax/ep_wh_add_form",
 			data : "ep_order_id="+ep_o_id,
 			dataType : "JSON",
 			success : function(data){
-// 				alert('¼º°ø')
+// 				alert('ì„±ê³µ')
 				$.each(data,function(){
 // 					console.log(this.ep_id+"<<<<<");
 					ep_order_id = this.ep_order_id;
 // 					console.log(ep_order_id+'<<<< ep_order_id');
-					$('#ep_order_id').html("¹ßÁÖÄÚµå : "+ep_order_id);
+					$('#ep_order_id').html("ë°œì£¼ì½”ë“œ : "+ep_order_id);
 					ep_id = this.ep_id;
 					ep_name = this.ep_name;
 					food_id = this.food_id;
@@ -57,27 +58,27 @@
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);			
 			}
 			})//ajax end			
-		}); //»ó¼¼º¸±â Å¬¸¯ ÀÌº¥Æ® end
+		}); //ìƒì„¸ë³´ê¸° í´ë¦­ ì´ë²¤íŠ¸ end
 	});//ready End
 
 </script>
 </head>
 <body>
-<h1><center><a href="${pageContext.request.contextPath}/home">home</a></center></h1>
-<h1>¹ßÁÖ¡¤ÀÔ°í ¸ñ·Ï</h1>
+
+<h1>ë°œì£¼Â·ì…ê³  ëª©ë¡</h1>
 
 	<div class="col-sm-4">
-		<h4>¹ßÁÖ¡¤ÀÔ°í ¸ñ·Ï ¼ö : ${wh_count}</h4>
+		<h4>ë°œì£¼Â·ì…ê³  ëª©ë¡ ìˆ˜ : ${wh_count}</h4>
 		<br>
 		<div style="overflow:auto;height:500px;">
 		<table class="chkclass" border=1>
 			<thead>
 				<tr style='position:relative;top:expression(this.offsetParent.scrollTop);background:black;color:white;" align="left"'>
-					<th>¹øÈ£</th>
-					<th>¹ßÁÖÄÚµå</th>
-					<th>¹ßÁÖÀÏÀÚ</th>
-					<th>ÀÔ°íÀÏÀÚ</th>
-					<th>»ó¼¼º¸±â</th>
+					<th>ë²ˆí˜¸</th>
+					<th>ë°œì£¼ì½”ë“œ</th>
+					<th>ë°œì£¼ì¼ì</th>
+					<th>ì…ê³ ì¼ì</th>
+					<th>ìƒì„¸ë³´ê¸°</th>
 				</tr>
 			</thead>
 			<tbody style='width:100%;max-height:100px;overflow:auto;'>
@@ -87,14 +88,14 @@
 					<td>${w.ep_order_id}</td>
 					<td>${w.ep_order_date}</td>
 					<td>${w.ep_order_wh_date}</td>
-					<td><button class="wh_sangse" id="wh_sangse" type="button" value="${w.ep_order_id}">»ó¼¼º¸±â</button></td>
+					<td><button class="wh_sangse" id="wh_sangse" type="button" value="${w.ep_order_id}">ìƒì„¸ë³´ê¸°</button></td>
 				</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 		<ul>
 		<c:if test="${currentPage > 1}">
-			<li><a href="${pageContext.request.contextPath}/food_list?currentPage=${currentPage-1}">ÀÌÀü</a></li>
+			<li><a href="${pageContext.request.contextPath}/food_list?currentPage=${currentPage-1}">ì´ì „</a></li>
 		</c:if>
 		<c:forEach var="i" begin="${expage}" end="${lastPage}" step="1">
 			<c:choose>
@@ -103,30 +104,30 @@
 			</c:choose>
 		</c:forEach>
 		<c:if test="${currentPage < lastPage}">
-			<li><a href="${pageContext.request.contextPath}/ep_wh_list?currentPage=${currentPage+1}">´ÙÀ½</a></li>
+			<li><a href="${pageContext.request.contextPath}/ep_wh_list?currentPage=${currentPage+1}">ë‹¤ìŒ</a></li>
 		</c:if>
 		</ul>	
 		</div>	
-	</div> <!-- ¹ßÁÖ/ÀÔ°í¸ñ·Ï div³¡ -->
-<div id="div_wh" class="col-sm-6"> <!-- »ó¼¼º¸±â -->
-	<h4>»ó¼¼º¸±â</h4>
+	</div> <!-- ë°œì£¼/ì…ê³ ëª©ë¡ divë -->
+<div id="div_wh" class="col-sm-6"> <!-- ìƒì„¸ë³´ê¸° -->
+	<h4>ìƒì„¸ë³´ê¸°</h4>
 		<span id="ep_order_id"></span>
 		<div style="overflow:auto;height:500px;">
 		<table  border=1>
 			<thead>
 				<tr style='position:relative;top:expression(this.offsetParent.scrollTop);background:black;color:white;" align="left"'>
-					<th>¾÷Ã¼ÄÚµå</th>
-					<th>¾÷Ã¼¸í</th>
-					<th>½ÄÀçÄÚµå</th>
-					<th>»óÇ°¸í</th>
-					<th>¼ö·®</th>
-					<th>À¯Åë±âÇÑ</th>
-					<th>´Ü°¡</th>
-					<th>¼Ò°è</th>
+					<th>ì—…ì²´ì½”ë“œ</th>
+					<th>ì—…ì²´ëª…</th>
+					<th>ì‹ì¬ì½”ë“œ</th>
+					<th>ìƒí’ˆëª…</th>
+					<th>ìˆ˜ëŸ‰</th>
+					<th>ìœ í†µê¸°í•œ</th>
+					<th>ë‹¨ê°€</th>
+					<th>ì†Œê³„</th>
 				</tr>
 			</thead>
 			<tbody id="wh_body" style='width:100%;max-height:100px;overflow:auto;'>
-				<!-- ajax append µé¾î°¨ -->				
+				<!-- ajax append ë“¤ì–´ê° -->				
 			</tbody>
 		</table>			
 		</div>

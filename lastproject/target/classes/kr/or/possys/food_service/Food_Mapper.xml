@@ -3,7 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.possys.food_service.Food_Mapper">
 	<!-- 일련번호 관련 셋팅-->
-	<select id="s_Fnum">
+	<select id="s_Fnum" resultType="string">
 		select max(food_id)
 			from food_manage
 	</select>
@@ -12,25 +12,23 @@
 		insert into food_manage( 
 		food_id
 		,food_name
-		,food_size
 		,food_unit
 		,food_shelflife
 		,staff_id
 		,food_date)
-		select
-		concat('FN',(select date_format(sysdate(),'%y%m%d%s')))
+		value(
+		#{food_id}
 		,#{food_name}
-		,#{food_size}
 		,#{food_unit}
 		,#{food_shelflife}
-		,'staff'
+		,#{staff_id}
 		,sysdate()
+		)
 	</insert>
 	<!-- 업체 등록안된 식재료 목록 -->
 	<select id="foodn_list" parameterType="java.util.Map" resultType="kr.or.possys.food_service.Food">
 		select food_manage.food_id
 		,food_name
-		,food_size
 		,food_unit
 		,food_shelflife
 		,staff_id
@@ -46,7 +44,6 @@
 	<select id="foody_list" parameterType="java.util.Map" resultType="kr.or.possys.food_service.Food">
 		select food_manage.food_id
 		,food_name
-		,food_size
 		,food_unit
 		,food_shelflife
 		,staff_id
@@ -70,7 +67,6 @@
 	<select id="foodlist" parameterType="java.util.Map" resultType="kr.or.possys.food_service.Food">
 		select food_id
 			,food_name
-			,food_size
 			,food_unit
 			,food_shelflife
 			,staff_id
@@ -83,7 +79,6 @@
 	<select id="foodview" parameterType="string" resultType="kr.or.possys.food_service.Food">
 		select food_id
 		,food_name
-		,food_size
 		,food_unit
 		,food_shelflife
 		,staff_id
@@ -94,7 +89,6 @@
 	<update id="foodmodify" parameterType="kr.or.possys.food_service.Food">
 		update food_manage
 		set food_name = #{food_name}
-		,food_size= #{food_size}
 		,food_unit= #{food_unit}
 		,food_shelflife= #{food_shelflife}
 		,food_date= sysdate()
@@ -108,7 +102,6 @@
 	<select id="foodsearch" parameterType="java.util.Map"  resultType="kr.or.possys.food_service.Food">
 		select food_id
 		,food_name
-		,food_size
 		,food_unit
 		,food_shelflife
 		,staff_id

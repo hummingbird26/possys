@@ -5,6 +5,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<!-- start: Css -->
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/bootstrap.min.css">
+
+      <!-- plugins -->
+      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/plugins/font-awesome.min.css"/>
+      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/plugins/simple-line-icons.css"/>
+      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/plugins/animate.min.css"/>
+      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/plugins/fullcalendar.min.css"/>
+	<link href="${pageContext.request.contextPath}/resources/asset/css/style.css" rel="stylesheet">
+<!-- end: Css -->
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/asset/img/logomi.png">
+<!-- jquery를 사용하기위한 CDN주소 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ 
+<!-- bootstrap javascript소스를 사용하기 위한 CDN주소 -->
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 </head>
 <body>
    <!-- start: Header -->
@@ -68,6 +86,8 @@
 			          <li ><a href="${pageContext.request.contextPath}/real_time" title="link ">검색</a></li>
 			          <li ><a href="${pageContext.request.contextPath}/member_list" title="Link">회원목록(회원관리)</a></li>
 			          <li ><a href="#" id="btn" title="Link">주문내역 자동확인</a></li>
+			         <li><a href="${pageContext.request.contextPath}/expense_folios">월별 지출내역</a></li>
+			         
 			         <%--  <li ><a href="${pageContext.request.contextPath}/total_payment" title="Link">매출내역조회</a></li>
 			          <li ><a href="${pageContext.request.contextPath}/table" title="Link">테이블 목록</a></li> --%>
 			        </ul>
@@ -81,18 +101,24 @@
 			      </li>
 			      <li ><a href="#Link" title="Link">발주 관리</a>
 			        <ul >
-			          <li ><a href="${pageContext.request.contextPath}/food_list">발주 식품 관리</a>
+			          <li ><a href="#">식재료 관리</a>
 			          	<ul>
-			          		<li><a href="#">발주 식품 추가</a></li>
-			          		<li><a href="#">2</a></li>
-			          		<li><a href="#">3</a></li>
+			          		<li><a href="${pageContext.request.contextPath}/food_list">식재료 목록</a></li>
+			          		<li><a href="${pageContext.request.contextPath}/ep_manage_list">발주업체 목록</a></li>
+			          	</ul>
+			          </li>			          
+			          <li ><a href="#">식재료 현황 관리</a>
+			          	<ul>
+			          		<li><a href="${pageContext.request.contextPath}/ep_food_present">현황 및 발주/폐기 등록</a></li>
+			          		<li><a href="${pageContext.request.contextPath}/ep_order_list">발주신청 목록</a></li>
+			          		<li><a href="${pageContext.request.contextPath}/ep_wh_list">발주입고 목록</a></li>
 			          	</ul>
 			          </li>
-			          
-			          
-			          <li ><a href="${pageContext.request.contextPath}/ep_manage_list">발주 업체 관리</a></li>
-			          <li ><a href="#Link" title="Link">Link</a></li>
-			          <li ><a href="#Link" title=" Link"> Link</a></li>
+			          <li ><a href="#">식재료 폐기 관리</a>
+			          	<ul>
+			          		<li><a href="${pageContext.request.contextPath}/drop_list">폐기 목록</a></li>			          		
+			          	</ul>
+			          </li>			          
 			        </ul>
 			      </li>
 			      <li ><a href="#Link" title="Link">menu</a>
@@ -117,9 +143,8 @@
 			   		 <li ><a href="#Link" title="Link">매장현황</a>
 			      	 <ul>
 			          <li ><a href="${pageContext.request.contextPath}/test_index/table_state" >테이블 현황</a></li>
-			          <li ><a href="${pageContext.request.contextPath}/menu_chart">메뉴판매현황</a></li>
 			          <li ><a href="${pageContext.request.contextPath}/chartjs">매출현황</a></li>
-			          <li ><a href="${pageContext.request.contextPath}/staff_chart">직원통계</a></li>
+			          
 			         
 			        </ul>
 			        </li>	 				 	 

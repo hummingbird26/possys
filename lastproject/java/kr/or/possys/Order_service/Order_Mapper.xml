@@ -9,6 +9,16 @@
 		table_order_date 
 		from table_order
 	</select>
+
+ 	<select parameterType="java.util.Map" id="get_order_list" resultType="kr.or.possys.Order_service.Order"> 
+		select table_order_id,
+		table_order_num,
+		table_order_end,
+		table_order_date 
+		from table_order
+		ORDER BY table_order_id DESC LIMIT #{beginRow}, #{pagePerRow} 
+	</select>
+	
  	<select id="order_modify_form" parameterType = "String" resultType="kr.or.possys.Order_service.Order">
 		select table_order_id,
 		table_order_num,
@@ -18,13 +28,18 @@
 		where table_order_id = #{table_order_id}
 	</select>
 	
+		<select id="get_order_count" resultType="int"> 
+		SELECT COUNT(*) FROM table_order 
+		</select>
+	
 	 	<select id="order_detail" parameterType = "String" resultType="kr.or.possys.Order_service.Order">
 		select table_order_id,
 		menu_id,
 		menu_name,
 		order_detail_ea,
 		order_detail_sum,
-		order_detail_end
+		order_detail_end,
+		order_detail_end_ea
 		from order_detail where table_order_id= #{table_order_id}
 		</select>
 		
@@ -36,13 +51,21 @@
 		
 	<update id="order_end_t" parameterType="String">
 		update table_order
-		set table_order_end = 'T'
+		set table_order_end = 't'
 		where table_order_id = #{table_order_id}
 	</update>
 	
 	<update id="order_detail_end_t" parameterType="kr.or.possys.Order_service.Order">
 		update order_detail
-		set order_detail_end = 'T'
+		set order_detail_end = 't',
+		order_detail_end_ea = #{order_detail_ea}
+		where table_order_id = #{table_order_id}
+		and menu_id = #{menu_id}
+	</update>
+	
+	<update id="order_detail_end_ea" parameterType="kr.or.possys.Order_service.Order">
+		update order_detail
+		set order_detail_end_ea = #{order_detail_end_ea}
 		where table_order_id = #{table_order_id}
 		and menu_id = #{menu_id}
 	</update>
@@ -70,14 +93,16 @@
 		menu_name,
 		order_detail_ea,
 		order_detail_sum,
-		order_detail_end)
+		order_detail_end,
+		order_detail_end_ea)
 		values (
 		#{table_order_id},
 		#{menu_id},
 		#{menu_name},
 		#{order_detail_ea},
 		#{order_detail_sum},
-		#{order_detail_end}
+		#{order_detail_end},
+		#{order_detail_end_ea}
 		)
 		</insert>
 		
@@ -111,7 +136,7 @@
 		,menu_kcal
 		,newname
 		from menu
-		order by menu_id desc
+		order by menu_id asc
 		</select>
 		
 		<select id="order_fpm" parameterType = "String" resultType="kr.or.possys.Order_service.Order">
@@ -153,5 +178,21 @@
 		<select id="order_count" resultType="kr.or.possys.Order_service.Order">
 			select max(table_order_id) as order_count
 			from table_order
+		</select>
+		
+ 		<select id="order_fpm_all" resultType="kr.or.possys.Order_service.Order">
+		select menu.menu_id,
+		food_per_menu.food_id,
+		food_per_menu.fpm_ea
+		from menu,food_per_menu
+		where menu.menu_id = food_per_menu.menu_id
+		order by menu_id;
+		</select>
+		
+		<select id="order_nowquantity" parameterType = "String" resultType="kr.or.possys.Order_service.Order">
+		select 
+		SUM(food_nowquantity) as food_nowquantity
+		from ep_order_food_details
+		where food_id = #{food_id};
 		</select>
 </mapper>

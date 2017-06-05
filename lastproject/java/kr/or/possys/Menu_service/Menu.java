@@ -16,9 +16,17 @@ public class Menu {
 	private String newname;
 	
 	private MultipartFile order_file;
+	private String order_max_per;
 	
 	
+
 	
+	public String getOrder_max_per() {
+		return order_max_per;
+	}
+	public void setOrder_max_per(String order_max_per) {
+		this.order_max_per = order_max_per;
+	}
 	public String getOrgname() {
 		return orgname;
 	}
