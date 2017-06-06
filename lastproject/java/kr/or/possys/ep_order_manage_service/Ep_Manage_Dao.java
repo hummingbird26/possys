@@ -53,26 +53,49 @@ public class Ep_Manage_Dao {
 	public void insertep_m(List<Ep_Manage> list){
 		System.out.println("01_Ep_Manage_Dao.java->>insertep_m 실행 ");
 //		System.out.println(map.get("list")+"<<<< map dao");
-		for(Ep_Manage ep_m : list){
-			System.out.println(ep_m+" <<<=======epm 단일");
-			if(ep_m.getEp_id() == ""){
-//				System.out.println("ep_id는 null"); //새로운업체 등록시
-				int ep_mcount = sqlSessionTemplate.selectOne("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.ep_mcount");
-				if(ep_mcount == 0){
-					ep_m.setEp_id("e0001");
-					sqlSessionTemplate.insert("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.insertep_m",ep_m);
-					}else{
-					String ep_Mnum = sqlSessionTemplate.selectOne("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.ep_Mnum");
-					int s_Enum_count = Integer.parseInt(ep_Mnum.substring(1,5))+1;
-					String result_id = "e"+String.format("%04d", s_Enum_count);
+		
+		int ep_mcount = sqlSessionTemplate.selectOne("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.ep_mcount");
+		if(ep_mcount == 0){ // 초기업체 등록시
+			for(Ep_Manage ep_m : list){
+				ep_m.setEp_id("e0001");
+				System.out.println(ep_m+" <<<=======epm 단일");
+				sqlSessionTemplate.insert("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.insertep_m",ep_m);
+			}
+		}else{
+			String ep_Mnum = sqlSessionTemplate.selectOne("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.ep_Mnum");
+			int s_Enum_count = Integer.parseInt(ep_Mnum.substring(1,5))+1;
+			String result_id = "e"+String.format("%04d", s_Enum_count);
+			for(Ep_Manage ep_m : list){
+				if(ep_m.getEp_id() == ""){ // 새로운 업체 등록시
 					ep_m.setEp_id(result_id);
 					sqlSessionTemplate.insert("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.insertep_m",ep_m);
-					}
 				}else{
-				System.out.println("ep_id는 있다."); // 기존 업체 등록시
-				sqlSessionTemplate.insert("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.in_insertep_m",ep_m);
+					System.out.println("ep_id는 있다."); // 기존 업체 등록시
+					sqlSessionTemplate.insert("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.in_insertep_m",ep_m);
+				}
+				
 			}
 		}
+//		for(Ep_Manage ep_m : list){
+//			System.out.println(ep_m+" <<<=======epm 단일");
+//			if(ep_m.getEp_id() == ""){
+////				System.out.println("ep_id는 null"); //새로운업체 등록시
+//				int ep_mcount = sqlSessionTemplate.selectOne("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.ep_mcount");
+//				if(ep_mcount == 0){
+//					ep_m.setEp_id("e0001");
+//					sqlSessionTemplate.insert("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.insertep_m",ep_m);
+//					}else{
+//					String ep_Mnum = sqlSessionTemplate.selectOne("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.ep_Mnum");
+//					int s_Enum_count = Integer.parseInt(ep_Mnum.substring(1,5))+1;
+//					String result_id = "e"+String.format("%04d", s_Enum_count);
+//					ep_m.setEp_id(result_id);
+//					sqlSessionTemplate.insert("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.insertep_m",ep_m);
+//					}
+//				}else{
+//				System.out.println("ep_id는 있다."); // 기존 업체 등록시
+//				sqlSessionTemplate.insert("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.in_insertep_m",ep_m);
+//			}
+//		}
 	}
 	//###### 01_업체 입력액션과 동시에 발주현황 리스트에 발주코드, 식재코드, 업체코드 입력
 		public void insertep_o(List<Ep_Manage> list){

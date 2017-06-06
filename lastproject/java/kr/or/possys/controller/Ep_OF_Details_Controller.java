@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.sun.xml.internal.bind.v2.runtime.output.StAXExStreamWriterOutput;
 
 import kr.or.possys.ep_order_food_details_service.Ep_Order;
 import kr.or.possys.ep_order_food_details_service.Ep_Order_Dao;
@@ -198,31 +199,114 @@ public class Ep_OF_Details_Controller {
 			System.out.println("03_od_insert 실행 - Ep_OF_Details_Controller.java");
 			
 			String food_ids = order.getFood_id();
-			String ep_ids = order.getEp_id();
-			
+			String ep_ids = order.getEp_id();			
 //			System.out.println(food_ids);
 //			System.out.println(ep_ids);
 //			System.out.println(ep_order_ea);
-			//배열로 ","로 잘라서 문자열을 담는다.
-			
+			//배열로 ","로 잘라서 문자열을 담는다.			
 			String[] food_id = food_ids.split(",");
 			String[] ep_id = ep_ids.split(",");
-						
-			Ep_Order ep_o = new Ep_Order();
-			for(int i=0;i<food_id.length;i++){	
-					Ep_Order _ep_o = new Ep_Order(); 
+//			System.out.println(food_id+"<=======================food_id");
+			String de = dao.ep_default(); // 발주테이블 최대값이  default가 있는지 확인
+//			System.out.println(de);
+			String result_id = "";
+			if(de.equals("default")){
+				System.out.println("초기값임");
+			}else{
+				result_id = dao.result_id();
+			}
+			for(int i=0;i<food_id.length;i++){
+				if(de.equals("default")){
+					Ep_Order ep_o = new Ep_Order();
+					ep_o.setEp_order_id("eo0001");
 					ep_o.setEp_id(ep_id[i]);
 					ep_o.setFood_id(food_id[i]);
 					ep_o.setEp_order_ea(ep_order_ea.get(i));//i번째 값 뽑아옴
-					_ep_o = dao._ep_oinsert(ep_o);
-					String ep_order_id = _ep_o.getEp_order_id();
-					System.out.println(ep_order_id+"<===== ep_order_id 값 default 확인");
-					if(ep_order_id.equals("default")){
-						dao.default_up(ep_o);
-					}else{
-						dao.ep_oinsert(ep_o);
-					}
-			}		
+					dao.re_insert(ep_o);
+				}else{
+					System.out.println(ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]);
+					Ep_Order _ep_o = new Ep_Order();					
+					_ep_o.setEp_order_id(result_id);
+					_ep_o.setEp_id(ep_id[i]);
+					_ep_o.setFood_id(food_id[i]);
+					_ep_o.setEp_order_ea(ep_order_ea.get(i));//i번째 값 뽑아옴
+					dao.re_insert(_ep_o);
+				}
+			}
+//			if(de.equals("default")){
+//				System.out.println(de+"<===== ep_order_id 값 default 확인");
+//				List<Ep_Order> f_ep_o = new ArrayList<Ep_Order>();				
+//				for(int i=0;i<food_id.length;i++){
+//					Ep_Order ep_o = new Ep_Order();
+//					ep_o.setEp_order_id("eo0001");
+//					ep_o.setEp_id(ep_id[i]);
+//					ep_o.setFood_id(food_id[i]);
+//					ep_o.setEp_order_ea(ep_order_ea.get(i));//i번째 값 뽑아옴
+//					f_ep_o.add(ep_o);					
+//				}
+//				dao.re_insert(f_ep_o);
+//			}else if(de != "default"){
+//				System.out.println("최대값 디폴트 없음");
+//				String result_id = dao.result_id(); //일련번호를 구한값을 retrun 해준다.
+////				System.out.println(result_id+"<<======================result_id");				
+//				List<Ep_Order> _ep_o = new ArrayList<Ep_Order>();
+//				for(int i=0;i<food_id.length;i++){
+//					Ep_Order ep_o = new Ep_Order();
+//					ep_o.setEp_order_id(result_id);
+//					ep_o.setEp_id(ep_id[i]);
+//					ep_o.setFood_id(food_id[i]);
+//					ep_o.setEp_order_ea(ep_order_ea.get(i));//i번째 값 뽑아옴
+//					_ep_o.add(ep_o);					
+////					System.out.println(food_id[i]+"입력 시킴   "+result_id);
+//				}
+//				dao.re_insert(_ep_o);
+//			}
+//					System.out.println(food_id.length+"길이이이이이이이이이이이이");
+//					System.out.println(food_id[i]+"<=============================food_id");
+//					Ep_Order _ep_o = new Ep_Order();
+//					String s_de = dao.s_de(food_id[i], ep_id[i]);					
+//						if(s_de.equals("default")){
+//							_ep_o.setEp_order_id(result_id);
+//							_ep_o.setEp_id(ep_id[i]);
+//							_ep_o.setFood_id(food_id[i]);
+//							_ep_o.setEp_order_ea(ep_order_ea.get(i));//i번째 값 뽑아옴
+//							dao.default_up(_ep_o);
+//							System.out.println(food_id[i]+"업데이트 시킴   "+result_id);
+//						}else 
+//							if(s_de != null){
+//							ep_o.setEp_order_id(result_id);
+//							ep_o.setEp_id(ep_id[i]);
+//							ep_o.setFood_id(food_id[i]);
+//							ep_o.setEp_order_ea(ep_order_ea.get(i));//i번째 값 뽑아옴
+//							dao.re_insert(ep_o);
+//							System.out.println(food_id[i]+"입력 시킴   "+result_id);
+//						}
+//					}
+//				}
+//					ep_o.setEp_id(ep_id[i]);
+//					ep_o.setFood_id(food_id[i]);
+//					ep_o.setEp_order_ea(ep_order_ea.get(i));//i번째 값 뽑아옴
+//					dao.re_insert(ep_o);
+			
+			
+//			Ep_Order ep_o = new Ep_Order();
+//			for(int i=0;i<food_id.length;i++){	
+//					Ep_Order _ep_o = new Ep_Order(); 
+//					ep_o.setEp_id(ep_id[i]);
+//					ep_o.setFood_id(food_id[i]);
+//					ep_o.setEp_order_ea(ep_order_ea.get(i));//i번째 값 뽑아옴
+//					_ep_o = dao._ep_oinsert(ep_o);
+//					String ep_order_id = _ep_o.getEp_order_id();
+//					System.out.println(ep_order_id+"<===== ep_order_id 값 default 확인");
+//					if(ep_order_id.equals("default")){
+//						dao.default_up(ep_o);
+//					}else{
+//						 String result_id = dao.ep_oinsert(ep_o); //일련번호를 구한값을 retrun 해준다.
+//						 ep_o.setEp_order_id(result_id);
+//						 dao.re_insert(ep_o);
+//						 }						
+//					}
+					
 			return "redirect:/ep_food_present";
 		}
 }

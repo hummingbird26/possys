@@ -111,7 +111,7 @@ public class Ep_Manage_Controller {
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPage", lastPage);
 		model.addAttribute("list", list);
-		System.out.println("천재");
+//		System.out.println("천재");
 		return "/wonbin/ep_order_manage/ep_manage_list";
 	}
 	// @@@@@@?@@@@@@@ 발주업체 수정화면 요청
