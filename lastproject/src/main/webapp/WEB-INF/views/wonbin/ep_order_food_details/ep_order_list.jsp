@@ -14,10 +14,7 @@
 <title>발주·주문 목록</title>
 <%@ include file="../../modal/header.jsp" %>
 <style type="text/css">
-  [class*="col-"] {
-  padding: 8px;
-  border: 1px solid gray;  
-}
+  
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -388,11 +385,11 @@
 
 <h1>발주·주문 목록</h1>
 
-	<div class="col-sm-4">
+	<div class="col-sm-5">
 		<h4>발주·주문 목록 수 : ${_ep_o_count}</h4>
 		<br>
 		<div style="overflow:auto;height:500px;">
-		<table class="chkclass" border=1>
+		<table class="chkclass table table-hover" border=1>
 			<thead>
 				<tr style='position:relative;top:expression(this.offsetParent.scrollTop);background:black;color:white;" align="left"'>
 					<th>번호</th>
