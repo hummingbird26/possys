@@ -76,9 +76,10 @@ public class Ep_Order_Dao {
 		return food;		
 	}
 	
-	// 상세보기에서 발주취소 
+	// 상세보기에서 전체발주취소 
 	public void aj_sangse_cancel(String ep_order_id){
 		System.out.println(ep_order_id+"<== ep_order_id - 13_AJAX Ep_Manage_Dao -aj_sangse_cancel()실행");
+//		sqlSessionTemplate.update("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.aj_sangse_cancel",ep_order_id);
 		sqlSessionTemplate.delete("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.aj_sangse_cancel",ep_order_id);
 	}
 	
@@ -95,6 +96,13 @@ public class Ep_Order_Dao {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("ep_order_id", ep_order_id);
 			map.put("food_id", food_id);
+//			List<String> a = sqlSessionTemplate.selectList("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper",map);
+//			for(String b : a){
+//				if(b.equals("default")){
+//					sqlSessionTemplate.delete("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.aj_select_delA",map);
+//				}
+//			}
+//			sqlSessionTemplate.update("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.aj_select_del",map);
 			sqlSessionTemplate.delete("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.aj_select_del",map);
 		}
 		
@@ -149,42 +157,53 @@ public class Ep_Order_Dao {
 		return sqlSessionTemplate.selectOne("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.ep_o_count");
 	}
 	
-	// 발주등록 default 값 확인 update 쿼리
-	public void default_up(Ep_Order ep_o){
-		System.out.println("_05_01_default_up실행 - Ep_Order_Dao.java");
-//		System.out.println(ep_o.getEp_id());
-//		System.out.println(ep_o.getEp_order_ea());
-//		System.out.println(ep_o.getFood_id());
-		String ep_Onum = sqlSessionTemplate.selectOne("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.ep_Onum");
-		System.out.println(ep_Onum+"<=====ep_Onum");
-		if(ep_Onum.equals("default")){ // 테이블 row 중 default보다 큰값이 있으면 else문으로 이동
-			ep_o.setEp_order_id("eo0001");
-			sqlSessionTemplate.update("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.default_up",ep_o);
-		}else{
-			int s_ep_Onem = Integer.parseInt(ep_Onum.substring(2,6))+1;
-			String result_id = "eo"+String.format("%04d", s_ep_Onem);
-			System.out.println(result_id+"<<==result_id");
-			ep_o.setEp_order_id(result_id);
-			sqlSessionTemplate.update("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.default_up",ep_o);
-		}
-		}
+	// 발주등록 default 값 확인 update 쿼리  문제가 많아서 삭제함........
+//	public void default_up(Ep_Order ep_o){
+//		System.out.println("_05_01_default_up실행 - Ep_Order_Dao.java");
+////		System.out.println(ep_o.getEp_id());
+////		System.out.println(ep_o.getEp_order_ea());
+////		System.out.println(ep_o.getFood_id());
+//		String ep_Onum = sqlSessionTemplate.selectOne("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.ep_Onum");
+//		System.out.println(ep_Onum+"<=====ep_Onum");
+//		if(ep_Onum.equals("default")){ // 테이블 row 중 default보다 큰값이 있으면 else문으로 이동
+//			ep_o.setEp_order_id("eo0001");
+//			sqlSessionTemplate.update("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.default_up",ep_o);
+//		}else{
+//			int s_ep_Onem = Integer.parseInt(ep_Onum.substring(2,6))+1;
+//			String result_id = "eo"+String.format("%04d", s_ep_Onem);
+//			System.out.println(result_id+"<<==result_id");
+//			ep_o.setEp_order_id(result_id);
+//			sqlSessionTemplate.update("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.default_up",ep_o);
+//		}???????????????????????????????????????
+//		}
 	
 	// 발주등록시 default 확인하기 위한 select one
-	public Ep_Order _ep_oinsert(Ep_Order _ep_o){
-		System.out.println("_05_ep_oinsert실행 - Ep_Order_Dao.java");
-		Map<String,Object> map = new HashMap<String, Object>();
-		map.put("food_id", _ep_o.getFood_id());
-		map.put("ep_id", _ep_o.getEp_id());
-		return sqlSessionTemplate.selectOne("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper._ep_oinsert",map);
-	}	
-	// 발주등록 insert 
-	public void ep_oinsert(Ep_Order ep_o){
-		System.out.println("05_ep_oinsert실행 - Ep_Order_Dao.java");
+	public String ep_default(){
+		System.out.println("_05_ep_default실행 - Ep_Order_Dao.java");		
+		return sqlSessionTemplate.selectOne("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.ep_default");
+	}
+	// 발주등록시 해당 row가 default 인지 확인 // 문제가 많이 생겨서 없앴슴..
+//	public String s_de(String food_id, String ep_id){
+//		System.out.println("_05_02_s_de실행 - Ep_Order_Dao.java");
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("food_id", food_id);
+//		map.put("ep_id", ep_id);
+//		System.out.println(map.get("food_id")+"<===s_de - dao");
+//		System.out.println(map.get("ep_id")+"<===s_de - dao");
+//		
+//		String s_de = sqlSessionTemplate.selectOne("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.s_de",map);
+//		return s_de;
+//	}
+	
+	// 발주등록시 default 값이 아니면 최대값을 찾아서 +1 시킨다.
+	public String result_id(){
+		System.out.println("05_result_id실행 - Ep_Order_Dao.java");
 		String ep_Onum = sqlSessionTemplate.selectOne("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.ep_Onum");
 		int s_ep_Onem = Integer.parseInt(ep_Onum.substring(2,6))+1;
 		String result_id = "eo"+String.format("%04d", s_ep_Onem);
-		ep_o.setEp_order_id(result_id);
-		sqlSessionTemplate.insert("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.ep_oinsert",ep_o);
+//		ep_o.setEp_order_id(result_id);
+//		sqlSessionTemplate.insert("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.ep_oinsert",ep_o);
+		return result_id;
 //		String ep_id = ep_o.getEp_id();
 //		String food_id = ep_o.getFood_id();
 //		int ep_order_ea = ep_o.getEp_order_ea();
@@ -193,6 +212,14 @@ public class Ep_Order_Dao {
 //		System.out.println(ep_order_ea+" <===ep_order_ea");
 		
 	}
+	// 일련번호 받은 다음 식재료 insert
+	public void re_insert(Ep_Order ep_o){
+		System.out.println("05_01_re_insert실행 - Ep_Order_Dao.java");
+//		for(Ep_Order _ep_o : ep_o){
+			sqlSessionTemplate.insert("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.ep_oinsert",ep_o);
+//		}
+	}
+		
 	
 	// 식재자현황 중복없이 전체 count 요청
 	public int ep_ocount(){

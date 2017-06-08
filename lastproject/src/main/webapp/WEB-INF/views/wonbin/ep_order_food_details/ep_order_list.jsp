@@ -14,10 +14,7 @@
 <title>발주·주문 목록</title>
 <%@ include file="../../modal/header.jsp" %>
 <style type="text/css">
-  [class*="col-"] {
-  padding: 8px;
-  border: 1px solid gray;  
-}
+  
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -157,7 +154,12 @@
 					url : "${pageContext.request.contextPath}/ajax/aj_sangse_cancel",
 					data : "ep_order_id="+ep_order_id,
 					success : function(data){
-		// 					alert('성공');		
+							alert('해당 전체발주를 취소하였습니다.');
+							var cnt = 1;
+							if(cnt == 1) {
+							   location.reload(); // 한번 새로고침 시켜준다.
+							   cnt = 0;
+							}
 					},
 					error : function(request,status,error){
 						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);			
@@ -172,18 +174,24 @@
 	$(document).on('click','#order_del',function(){
 		var o_del = $(this).val(); //해당 버튼의 val()값
 // 		alert(o_del);
-		var re = confirm('해당 식재자 발주를 취소하시겠습니까?');
-		if(re){		
-			var sang_class = $('.sangse_input');
-			if(sang_class.length > 1){ 			
-				$(this).parent().parent().remove();		
-				$('.sangse_input').each(function(){ //input 클래스 반복문으로 this 그자리에 val()값을 가져옴
-					var o_in = $(this).val();
-	//	 			alert(o_in);				
-					if(o_del == o_in){ // 버튼 val()값과 input val()값이 같으면 삭제				
-						$(this).parent().remove();
-					}
-				})
+		var re = confirm('해당 식재료 발주를 취소하시겠습니까?');
+		if(re){
+			var today = new Date(); //현재시간 변수에 담기
+			var order_day = new Date(ep_order_date);
+			var chk_day = (today.getTime() - order_day.getTime())/1000/60/60/24;
+			if(chk_day > 1){
+				alert('발주 신청날의 1일이 지나서 취소가 불가능합니다.');
+			}else{
+				var sang_class = $('.sangse_input');
+				if(sang_class.length > 1){ 			
+					$(this).parent().parent().remove();		
+					$('.sangse_input').each(function(){ //input 클래스 반복문으로 this 그자리에 val()값을 가져옴
+						var o_in = $(this).val();
+		//	 			alert(o_in);				
+						if(o_del == o_in){ // 버튼 val()값과 input val()값이 같으면 삭제				
+							$(this).parent().remove();
+						}
+					})
 			//ajax 해당 식재 발주 취소시 DB 의 해당 발주주문이 삭제처리
 				$.ajax({
 					type: "post",
@@ -198,6 +206,7 @@
 					}						
 				})//ajax end			
 			}else{alert('발주 주문  1개 미만으론 삭제할수 없습니다.');}
+		} // 발주신청일 1일 확인
 		} // confirm 확인창 end
 	})// 상세보기 row삭제 end
 		
@@ -376,11 +385,11 @@
 
 <h1>발주·주문 목록</h1>
 
-	<div class="col-sm-4">
+	<div class="col-sm-5">
 		<h4>발주·주문 목록 수 : ${_ep_o_count}</h4>
 		<br>
 		<div style="overflow:auto;height:500px;">
-		<table class="chkclass" border=1>
+		<table class="chkclass table table-hover" border=1>
 			<thead>
 				<tr style='position:relative;top:expression(this.offsetParent.scrollTop);background:black;color:white;" align="left"'>
 					<th>번호</th>
