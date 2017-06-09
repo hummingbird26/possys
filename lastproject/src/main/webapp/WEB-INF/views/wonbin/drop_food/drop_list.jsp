@@ -168,7 +168,7 @@
 	<div class="col-sm-5">
 		<table class="table table-hover" style="text-align:center">
 			<thead>
-				<tr>
+				<tr style="background:black;color:white;">
 				<th>번호</th>
 				<th>폐기 번호</th>
 				<th>상품 번호</th>
@@ -194,6 +194,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<center><c:if test="${empty list}"><div><h4>등록된 폐기 식재료가 없습니다.</h4></div></c:if></center>
 		<center>
 		<ul class="pagination pagination-sm" style="text-align: center; width: 300px; margin-left: auto; margin-right: auto;">
 			<c:if test="${currentPage > 1}">

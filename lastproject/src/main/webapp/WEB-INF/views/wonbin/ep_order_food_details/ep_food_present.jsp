@@ -493,13 +493,13 @@
 		</table>
 		</div>
 	</form>
-		<div class="alert alert-success alert-dismissable">
+		<div class="alert alert-success alert-dismissable"  style="margin-top: 5px; margin-bottom: 5px; padding-bottom: 5px; padding-top: 5px;">
 		  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 		  <strong>알림 - </strong> 원하시는 식재료가 없는경우 해당 식재료의 업체가 등록되었는지 확인해주십시오.
 		</div>
-		<div class="alert alert-success alert-dismissable">
+		<div class="alert alert-success alert-dismissable"  style="margin-bottom: 5px; padding-bottom: 5px; padding-top: 5px;">
 		  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		  <strong>알림 - </strong> 발주등록은 체크박스를 통해 이용할수 있습니다.
+		  <strong>알림 - </strong> 발주등록은 체크박스를 통해 이용하실수 있습니다.
 		</div>
 	<div>
 		<form id ="frm" name="frm" action="${pageContext.request.contextPath}/food_DT_search" method="get">
