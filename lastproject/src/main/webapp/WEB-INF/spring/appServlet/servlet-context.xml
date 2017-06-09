@@ -42,7 +42,7 @@
 <!-- 	         <beans:property name="username" value="okjid"/>  -->
 <!-- 	         <beans:property name="password" value="okjpw"/>  -->
 <!--     	</beans:bean> -->
-    	<beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/lastproject?useUnicode=true&amp;characterEncoding=euckr"/> 
+    	<beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/okj?useUnicode=true&amp;characterEncoding=euckr"/> 
 	         <beans:property name="username" value="okjid"/> 
 	         <beans:property name="password" value="okjpw"/> 
 		</beans:bean>

@@ -207,16 +207,21 @@ public class Ep_OF_Details_Controller {
 			String[] food_id = food_ids.split(",");
 			String[] ep_id = ep_ids.split(",");
 //			System.out.println(food_id+"<=======================food_id");
+			System.out.println("test Ep_OF_Details_Controller.java");
 			String de = dao.ep_default(); // 발주테이블 최대값이  default가 있는지 확인
 //			System.out.println(de);
+			System.out.println(ep_order_ea.size() +"<--- 수량 길이");
 			String result_id = "";
-			if(de.equals("default")){
+			if("default".equals(de)){
 				System.out.println("초기값임");
 			}else{
 				result_id = dao.result_id();
+				
 			}
-			for(int i=0;i<food_id.length;i++){
-				if(de.equals("default")){
+			
+			for(int i=0;i<ep_order_ea.size();i++){
+				if("default".equals(de)){
+					System.out.println("if   test Ep_OF_Details_Controller.java");
 					Ep_Order ep_o = new Ep_Order();
 					ep_o.setEp_order_id("eo0001");
 					ep_o.setEp_id(ep_id[i]);
@@ -224,7 +229,8 @@ public class Ep_OF_Details_Controller {
 					ep_o.setEp_order_ea(ep_order_ea.get(i));//i번째 값 뽑아옴
 					dao.re_insert(ep_o);
 				}else{
-					System.out.println(ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]);
+					System.out.println(result_id + "<=== result_id" );
+//					System.out.println(ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]+ep_id[i]);
 					Ep_Order _ep_o = new Ep_Order();					
 					_ep_o.setEp_order_id(result_id);
 					_ep_o.setEp_id(ep_id[i]);

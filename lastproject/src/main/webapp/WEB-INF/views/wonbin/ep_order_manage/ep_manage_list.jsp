@@ -70,7 +70,7 @@
 			
 		</tbody>
 	</table>
-	<c:if test="${empty list}"><div><h4>등록된 업체가 없습니다.</h4></div></c:if>
+	<center><c:if test="${empty list}"><div><h4>등록된 업체가 없습니다.</h4></div></c:if></center>
 	<center>
 	<ul class="pagination pagination-sm" style="text-align: center; width: 300px; margin-left: auto; margin-right: auto;">
 		<c:if test="${currentPage > 1}">

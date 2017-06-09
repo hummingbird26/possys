@@ -8,12 +8,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>식자재 현황 목록</title>
 <%@ include file="../../modal/header.jsp" %>
-<style type="text/css">
-  
+<style type="text/css">  
+.table th{
+	text-align:center;
+}
 </style>
 <script type="text/javascript">
 		
@@ -228,14 +230,18 @@
 		$(document).on('click','#order_sibmit',function(){
 // 			alert('버튼');
 			var re = confirm('발주신청을 계속 진행하시겠습니까?');
+			
 			if(re){
+				var sub; // 등록이 다 되어 있으면 submit 을 위한 변수 선언
 				// 식재료가 업체 등록 되었는지 확인
 				$('.food_id').each(function(){ // 클래스 반복문 으로 각각의 val()값 확인
 					var food_id = $(this).val();
+					
 					$.ajax({
 						type: "post",
 						url : "${pageContext.request.contextPath}/ajax/ep_chck",
 						data : "food_id="+food_id,
+						async: false, // ajax를 동기방식으로 전역변수 sub에 값 세팅
 						contentType:"application/x-www-form-urlencoded; charset=UTF-8",
 						dataType : "JSON", //string 으로 리턴하기 때문에 
 						success : function(data){
@@ -246,18 +252,26 @@
 							if(data == 0){
 								alert('식재코드 ['+food_id+'] 는(은) 업체등록이 안되어있습니다. 업체등록후 발주신청해주십시오.');
 								count++
+								
 							}else if(count == 0){
-								order_add.submit();
+								sub = '없음';
 							}
+							
 						},
 						error : function(request,status,error){
 							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);			
 						}			
 						
 					})//ajax end
+					
 				});// food_id 클래스 반복문 end
-				
-			}else{/* order_add.submit(); */}
+// 				alert('등록');
+// 				alert(sub);
+				if(sub == '없음'){
+// 					alert('까꿍');
+				order_add.submit(); //등록이 다 되어 있으면 submit
+				}
+			}else{}
 		})
 		
 								// 식재자 상세보기 관련 jquery
@@ -505,7 +519,7 @@
 		<h4>발주 등록</h4>
 		<br>				
 					<div>
-						<form action="${pageContext.request.contextPath}/food_OD_insert" method="post" class="order_add" id="order_add" name="form_add" >
+						<form action="${pageContext.request.contextPath}/food_OD_insert" method="post" class="order_add" id="order_add" name="order_add" >
 						
 <!-- 						<span>식재료코드/상품명</span>							 -->
 <!-- 								<input type="hidden" id="chk2_food_id" name="chk2_food_id"/> -->

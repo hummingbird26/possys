@@ -8,9 +8,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <title>폐기 목록</title>
 <%@ include file="../../modal/header.jsp" %>
+<style type="text/css">
+.table th{
+	text-align:center;
+}
+</style>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#sangse_diply').css("display","none");
@@ -30,6 +35,7 @@
 		
 		//상세보기 관련
 	$(document).on('click','#bt_sangse',function(){
+		
 		$('#sangse_diply').show(100);
 		var drop_id =$(this).val();
 // 		alert(drop_id);
@@ -143,19 +149,26 @@
 			})//ajax End
 		}
 	})	
-	
+	$('#censel').click(function(){
+		$('#sangse_diply').hide(100);
+	});
 	}); // ready End
 </script>
 <%-- <%@ include file="../../modal/wide_menu.jsp" %> --%>
 </head>
 <body>
-
+<br>
+<br>
+<br>
+<br>
+<br>
 <h3>폐기 목록</h3>
 <div>전체 식자재 수 : ${dropcount}</div>
 	<br>
 	<div class="col-sm-5">
-		<table border=1>
+		<table class="table table-hover" style="text-align:center">
 			<thead>
+				<tr>
 				<th>번호</th>
 				<th>폐기 번호</th>
 				<th>상품 번호</th>
@@ -164,7 +177,7 @@
 				<th>담당자</th>
 				<th>폐기 일자</th>
 				<th>상세 보기</th>
-							
+				</tr>		
 			</thead>
 			<tbody>
 				<c:forEach varStatus="status" var="d" items="${list}">
@@ -181,7 +194,8 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<ul>
+		<center>
+		<ul class="pagination pagination-sm" style="text-align: center; width: 300px; margin-left: auto; margin-right: auto;">
 			<c:if test="${currentPage > 1}">
 				<li><a href="${pageContext.request.contextPath}/drop_list?currentPage=${currentPage-1}">이전</a></li>
 			</c:if>
@@ -208,14 +222,15 @@
 				<li><a href="${pageContext.request.contextPath}/drop_list?currentPage=${currentPage+1}">다음</a></li>
 			</c:if>
 		</ul>
+		</center>
 		<div>
 			<form id ="frm" name="frm" action="${pageContext.request.contextPath}/drop_search" method="get">
-				<select id="selbox"name="selbox" size="1">
+				<select id="selbox"name="selbox" size="1" style="width: 172px;height: 30.22222px;padding-bottom: 0px;padding-top: 0px;">
 					<option value="drop_id">폐기코드</option>
 					<option value="food_id">식재코드</option>
 				</select>
-				<input  size="16" name="keyWord" type="text">
-				<input id="dbutton" type="button" value="검색">
+				<input  size="16" name="keyWord" type="text" style="padding-bottom: 4px; padding-top: 6px; height: 31px;">
+				<input id="dbutton" type="button" value="검색" style="padding-top: 4.5;padding-bottom: 4.5;padding-top: 4px;padding-bottom: 4px;">
 			</form>
 		</div>
 	</div>
@@ -262,9 +277,9 @@
 			<br>
 			<div class="form-group col-sm-12">
 				<center>
-				<input class="btn btn-default" type="button" id="sangse_up" value="폐기 수정">
+				<input class="btn btn-primary" type="button" id="sangse_up" value="폐기 수정">
 				<input class="btn btn-default" type="button" id="sangse_del" value="폐기 삭제">
-				<button class="btn" type="button">취소</button>
+				<button class="btn btn-default" type="button" id="censel">취소</button>
 				</center>
 			</div>
 			<input type="hidden" name="ep_order_id" id="ep_order_id"/>

@@ -89,7 +89,10 @@ $(document).ready(function(){
 		}
 		
 	})
-		
+	//취소 버튼
+	$('#censel').click(function(){
+		self.close();
+	});
 	
 	
 	}) //ready End
@@ -149,7 +152,7 @@ $(document).ready(function(){
 			<div class="form-group col-sm-10">
 				<center>
 				<input class="btn btn-default" type="button" id="addsubmit" value="폐기등록">
-				<button class="btn" type="button">취소</button>
+				<button class="btn" type="button" id="censel">취소</button>
 				</center>
 			</div>
 			<input type="hidden" name="food_nowquantity" id="food_nowquantity"/>

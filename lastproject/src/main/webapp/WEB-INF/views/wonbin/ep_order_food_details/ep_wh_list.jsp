@@ -8,9 +8,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <title>발주·입고 목록</title>
 <%@ include file="../../modal/header.jsp" %>
+<style type="text/css">
+.table th{
+	text-align:center;
+}
+</style>
 <script type="text/javascript">
 	/* 상세보기 클릭시 해당 상세보기 창 띄우기 */
 	$(document).ready(function(){
@@ -28,6 +33,7 @@
 			dataType : "JSON",
 			success : function(data){
 // 				alert('성공')
+				var tot = 0;
 				$.each(data,function(){
 // 					console.log(this.ep_id+"<<<<<");
 					ep_order_id = this.ep_order_id;
@@ -41,6 +47,9 @@
 					ep_order_food_shelflife = this.ep_order_food_shelflife;
 					ep_order_unit_price = this.ep_order_unit_price;
 					ep_order_total_price = this.ep_order_total_price
+					
+					total = parseInt(ep_order_total_price) 
+					tot += parseInt(total)
 // 					alert(ep_order_wh_ea);
 					$('#wh_body').append("<tr class='tr_reset'>"
 							+"<td class='ep_id'>"+ep_id+"</td>"
@@ -51,27 +60,44 @@
 							+"<td class='ep_order_food_shelflife'>"+ep_order_food_shelflife+"</td>"
 							+"<td class='ep_order_unit_price'>"+ep_order_unit_price+"</td>"
 							+"<td class='ep_order_total_price'>"+ep_order_total_price+"</td>"
-							+"</tr>")
-				})				
+							+"</tr>");
+					})
+					$('#total').html('<h3>총 발주액 : '+tot+' 원</h3>');
 			},
 			error : function(request,status,error){
 				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);			
 			}
-			})//ajax end			
+			})//ajax end
+			// 총 발주입고액 구하기
+// 			alert('asd');
+// 		var total = Array(); 
+// // 		total = $('.ep_order_total_price').val();
+// 		$('.ep_order_total_price').each(function(){
+// 			var to = $(this).val();
+// 			alert(to);
+// 		})
+					
+// 					$('#total').html()
+			
 		}); //상세보기 클릭 이벤트 end
+		
 	});//ready End
 
 </script>
 </head>
 <body>
-
-<h1>발주·입고 목록</h1>
-
-	<div class="col-sm-4">
-		<h4>발주·입고 목록 수 : ${wh_count}</h4>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h3>발주·입고 목록</h3>
+<div class="col-md-offset-10"><span style="font-size: 16px;">발주·입고 목록 수 : ${wh_count}</span></div>
+	<div class="col-sm-5">
+		
 		<br>
 		<div style="overflow:auto;height:500px;">
-		<table class="chkclass" border=1>
+		<table class="chkclass table table-hover" style="text-align:center">
 			<thead>
 				<tr style='position:relative;top:expression(this.offsetParent.scrollTop);background:black;color:white;" align="left"'>
 					<th>번호</th>
@@ -93,7 +119,9 @@
 				</c:forEach>
 			</tbody>
 		</table>
-		<ul>
+		<center><c:if test="${empty list}"><div><h4>입고된 발주가 없습니다.</h4></div></c:if></center>
+		<center>
+		<ul class="pagination pagination-sm" style="text-align: center; width: 300px; margin-left: auto; margin-right: auto;">
 		<c:if test="${currentPage > 1}">
 			<li><a href="${pageContext.request.contextPath}/food_list?currentPage=${currentPage-1}">이전</a></li>
 		</c:if>
@@ -106,14 +134,15 @@
 		<c:if test="${currentPage < lastPage}">
 			<li><a href="${pageContext.request.contextPath}/ep_wh_list?currentPage=${currentPage+1}">다음</a></li>
 		</c:if>
-		</ul>	
+		</ul>
+		</center>	
 		</div>	
 	</div> <!-- 발주/입고목록 div끝 -->
 <div id="div_wh" class="col-sm-6"> <!-- 상세보기 -->
 	<h4>상세보기</h4>
 		<span id="ep_order_id"></span>
 		<div style="overflow:auto;height:500px;">
-		<table  border=1>
+		<table  class="table table-hover" style="text-align:center">
 			<thead>
 				<tr style='position:relative;top:expression(this.offsetParent.scrollTop);background:black;color:white;" align="left"'>
 					<th>업체코드</th>
@@ -129,7 +158,12 @@
 			<tbody id="wh_body" style='width:100%;max-height:100px;overflow:auto;'>
 				<!-- ajax append 들어감 -->				
 			</tbody>
-		</table>			
+		</table>
+		<center>
+			<div id = "total">
+			<h3>총 발주액 : </h3>
+			</div>
+		</center>		
 		</div>
 		
 	</div>

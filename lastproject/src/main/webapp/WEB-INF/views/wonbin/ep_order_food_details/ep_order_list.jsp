@@ -10,11 +10,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <title>발주·주문 목록</title>
 <%@ include file="../../modal/header.jsp" %>
 <style type="text/css">
-  
+.table th{
+	text-align:center;
+}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -91,9 +93,13 @@
 							+"<td class='food_id'>"+food_id+"</td>"
 							+"<td class='food_name'>"+food_name+"</td>"
 							+"<td>"
-							+'<input class="_ep_order_ea" id="_ep_order_ea" name="ep_order_ea" type="text" value="'+ep_order_ea+'">'
-							+'<button class="add" id="add" type="button" value="ep_order_ea">+</button>'
-							+'<button id="_del" type="button" value="ep_order_ea">-</button>'
+							+'<button id="del" type="button" value="ep_order_ea" class="btn btn-link" style="padding-top: 3px; padding-bottom: 3px;">'
+							+'<i class="fa fa-minus" style="font-size:15px;color:#489CFF"></i>'
+							+'</button>'
+							+'<input class="_ep_order_ea" id="_ep_order_ea" name="ep_order_ea" type="text" value="'+ep_order_ea+'" size="3" style="padding-top: 1px; padding-bottom: 3px;">'
+							+'<button id="add" type="button" value="ep_order_ea" class="btn btn-link" style="padding-top: 3px; padding-bottom: 3px;">'
+							+'<i class="fa fa-plus" style="font-size:15px;color:#489CFF"></i>'
+							+'</button>'							
 							+"</td>"
 							+"<td>"
 							+'<button id="order_del" type="button" value="'+ep_order_id+'/'+food_id+'">발주취소</button>'
@@ -272,18 +278,22 @@
 							+"<td class='food_id'>"+food_id+"</td>"
 							+"<td class='food_name'>"+food_name+"</td>"
 							+"<td>"
-							+'<input class="_ep_order_wh_ea" id="_ep_order_wh_ea" name="ep_order_wh_ea" type="text" value="'+ep_order_ea+'">'
-							+'<button class="add" id="add" type="button" value="ep_order_wh_ea">+</button>'
-							+'<button id="del" type="button" value="ep_order_wh_ea">-</button>'
-							+"</td>"
+							+'<button id="del" type="button" value="ep_order_wh_ea" class="btn btn-link" style="padding-top: 3px; padding-bottom: 3px;">'
+							+'<i class="fa fa-minus" style="font-size:15px;color:#489CFF"></i>'
+							+'</button>'
+							+'<input class="_ep_order_wh_ea" id="_ep_order_wh_ea" name="ep_order_wh_ea" type="text" value="'+ep_order_ea+'" size="3" style="padding-top: 1px; padding-bottom: 3px;"/>'
+							+'<button id="add" type="button" value="ep_order_wh_ea" class="btn btn-link" style="padding-top: 3px; padding-bottom: 3px;">'
+							+'<i class="fa fa-plus" style="font-size:15px;color:#489CFF"></i>'
+							+'</button>'							
+							+"</td>"							
 							+"<td>"
 							+'<input class="_ep_order_food_shelflife" id="_ep_order_food_shelflife" name="ep_order_food_shelflife" type="date"/>'
 							+"</td>"
 							+"<td>"
-							+'<input class="_ep_order_unit_price" type="text" value="0" id="_ep_order_unit_price" name="ep_order_unit_price"/>'
+							+'<input class="_ep_order_unit_price" type="text" value="0" id="_ep_order_unit_price" name="ep_order_unit_price" size="3" style="padding-top: 1px; padding-bottom: 3px;"/>'
 							+"</td>"
 							+"<td>"
-							+'<input class="_ep_order_total_price" type="text" value="0" id="_ep_order_total_price" name="ep_order_total_price"/>'
+							+'<input class="_ep_order_total_price" type="text" value="0" id="_ep_order_total_price" name="ep_order_total_price" size="4" style="padding-top: 1px; padding-bottom: 3px;"/>'
 							+"</td>"							
 							+"</tr>")
 						
@@ -334,6 +344,12 @@
 		}
 		wh_form.submit();		
 	})
+			//취소 버튼 클릭시 화면제거
+	$(document).on('click','#wh_cancel',function(){
+		$('.tr_reset').remove(); // 다른 버튼 클릭시 append로 추가 됐던 tr 구문 삭제
+		$('.in_reset').remove(); // 다른 버튼 클릭스 append로 추가 됐던 intup 구문 삭제
+		$('#div_wh').hide();
+	})
 	
 	
 	//"+","-" 버튼 클릭시 수량 증감
@@ -353,43 +369,46 @@
 			// 곱하기한값 삽입			
 	})
 	$(document).on('click','#del',function(){
-			var _del = $(this).prev().prev().val();
+			var _del = $(this).next().val();
 					//parseInt 로 숫자 인식
 			if(_del > 0){ // 0도 입력될수 있으니 0까지
-				$(this).prev().prev().val(parseInt(_del)-1);
+				$(this).next().val(parseInt(_del)-1);
 			}else{alert('더이상 감소 할수없습니다.');}
 			var unit = $(this).parent().next().next().children().val();
 			var multi = parseInt((parseInt(_del)-1) * unit);
 			$(this).parent().next().next().next().children().val(multi);
 	})
-	$(document).on('click','#_del',function(){
-			var _del = $(this).prev().prev().val();
-					//parseInt 로 숫자 인식
-			if(_del > 1){ // 1 이하로 삭제 불가
-				$(this).prev().prev().val(parseInt(_del)-1);
-			}else{alert('더이상 감소 할수없습니다.');}
-			var unit = $(this).parent().next().next().children().val();
-			var multi = parseInt((parseInt(_del)-1) * unit);
-			$(this).parent().next().next().next().children().val(multi);
-	}) // +,- End
+// 	$(document).on('click','#_del',function(){
+// 			var _del = $(this).next().val();
+// 					//parseInt 로 숫자 인식
+// 			if(_del > 1){ // 1 이하로 삭제 불가
+// 				$(this).next().val(parseInt(_del)-1);
+// 			}else{alert('더이상 감소 할수없습니다.');}
+// 			var unit = $(this).parent().next().next().children().val();
+// 			var multi = parseInt((parseInt(_del)-1) * unit);
+// 			$(this).parent().next().next().next().children().val(multi);
+// 	}) // +,- End
 	
 	
 	
 	
 	}); //ready
 	</script>
-</head>
+</head>	
 <body>
 <%-- <jsp:useBean id="today" class="java.util.Date"/> <!-- 현재 날짜 --> --%>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-
-<h1>발주·주문 목록</h1>
-
-	<div class="col-sm-5">
-		<h4>발주·주문 목록 수 : ${_ep_o_count}</h4>
+<h3>발주·주문 목록</h3>
+	<div class="col-md-offset-10"><span style="font-size: 16px;">발주·주문 목록 수 : ${_ep_o_count}</span></div>
+	<div class="col-sm-4">		
 		<br>
 		<div style="overflow:auto;height:500px;">
-		<table class="chkclass table table-hover" border=1>
+		<table class="chkclass table table-hover" style="text-align:center">
 			<thead>
 				<tr style='position:relative;top:expression(this.offsetParent.scrollTop);background:black;color:white;" align="left"'>
 					<th>번호</th>
@@ -413,13 +432,14 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<center><c:if test="${empty list}"><div><h4>발주 신청된 목록이 없습니다.</h4></div></c:if></center>
 		</div>	
 	</div> <!-- 발주/주문목록 div끝 -->
-	<div id="div_wh" class="col-sm-6">
+	<div id="div_wh" class="col-sm-8">
 	<h4>입고 등록</h4>
 		<span id="ep_order_id"></span>
 		<div style="overflow:auto;height:500px;">
-		<table  border=1>
+		<table  class="chkclass table table-hover" style="text-align:center">
 			<thead>
 				<tr style='position:relative;top:expression(this.offsetParent.scrollTop);background:black;color:white;" align="left"'>
 					<th>업체코드</th>
@@ -440,17 +460,22 @@
 <!-- 				hidden 처리 하고 값 보냄 // 업체코드,식재코드 등등 -->
 							
 			</form>
-			<button type="button" id="wh_submit" name="wh_submit" value="등록">등록</button>
-			<button type="button" id="wh_cancel" name="wh_cancel" value="취소">취소</button>
+			<div>
+				<center>
+				<button class="btn btn-primary" type="button" id="wh_submit">등록</button>
+				<button class="btn btn-default" type="button" id="wh_cancel">취소</button>
+				</center>
+			</div>
+			
 		</div>		
 	</div> <!-- 입고등록 폼 end -->
 	
 	<!-- 상세보기 보기 폼 start -->
-	<div id="div_sangse" class="col-sm-6">
+	<div id="div_sangse" class="col-sm-8">
 	<h4>상세보기</h4>
 		<span id="sangse_ep_order_id"></span>
 		<div style="overflow:auto;height:500px;">
-		<table  border=1>
+		<table class="chkclass table table-hover" style="text-align:center">
 			<thead>
 				<tr style='position:relative;top:expression(this.offsetParent.scrollTop);background:black;color:white;" align="left"'>
 					<th>업체코드</th>
@@ -470,9 +495,13 @@
 <!-- 				<input type="text" id="ep_order_id" name="ep_order_id"/> -->
 <!-- 				<input type="text" id="food_id" name="food_id"/> -->
 							
-			</form>
-			<button type="button" id="sangse_submit" name="sangse_submit">발주 재등록</button>
-			<button type="button" id="sangse_cancel" name="sangse_cancel">발주 취소</button>
+			</form>			
+			<div>
+			<center>
+			<button class="btn btn-primary" type="button" id="wh_submit" name="wh_submit">발주 재등록</button>
+			<button class="btn btn-default" type="button" id="wh_cancel" name="wh_cancel">전체 발주 취소</button>
+			</center>
+			</div>
 		</div>		
 	</div> <!-- 상세보기 end -->	
 			
