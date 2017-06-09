@@ -83,7 +83,8 @@
     </ul>
     <div>
         <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_form">결제취소정보입력</a>
-        <a href="${pageContext.request.contextPath}/tori/payment/payment_cancel_search_form" class="btn btn-primary">조건검색</a>
+        <a href="${pageContext.request.contextPath}/tori/payment/payment_cancel_list" class="btn btn-primary">결제취소목록</a>
+ <%--        <a href="${pageContext.request.contextPath}/tori/payment/payment_cancel_search_form" class="btn btn-primary">조건검색</a> --%>
     </div>
     <br><br>
     <div>

@@ -31,6 +31,20 @@
     <h1>Staff List</h1>
     <div>전체행의 수 : ${staffcount}</div>
     <br><br>
+    <div class="container">
+	<form id="form" name="form" class="form-inline" action="${pageContext.request.contextPath}/tori/staff/staff_search_list" method="get">
+		<select id="select" name="select" class="form-inline" value="선택하세요">
+			<option value="staff_id">직원아이디</option>
+			<option value="staff_name">직원이름</option>
+			<option value="staff_level">직급</option>
+			<option value="staff_gender">직원성별</option>
+		</select>
+		<input type="text" class="form-inline" name="keyWord" id="keyWord">
+		<input type="submit" class="form-inline btn btn-primary" name="search" id="search" value="조건별검색">
+	
+	</form>
+</div>
+    <br><br>
     <table class="table table-striped table-hover">
         <thead>
             <tr>
@@ -81,7 +95,7 @@
     </ul>
     <div>
         <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/staff/staff_add_form">직원가입화면</a>
-        <a href="${pageContext.request.contextPath}/tori/staff/staff_search_form" class="btn btn-primary">조건검색</a>
+        <%-- <a href="${pageContext.request.contextPath}/tori/staff/staff_search_form" class="btn btn-primary">조건검색</a> --%>
     </div>
     <br><br>
     <div>
