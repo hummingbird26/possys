@@ -31,6 +31,20 @@
     <h1>Payment Cancel List</h1>
     <div>전체행의 수 : ${paymentcancelcount}</div>
      <br><br>
+     <div class="container">
+	<form id="form" name="form" class="form-inline" action="${pageContext.request.contextPath}/tori/payment/payment_cancel_search_list" method="get">
+		<select id="select" name="select" class="form-control" value="선택하세요">
+			<option value="payment_cancel_id">거래취소코드별검색</option>
+			<option value="payment_id">거래코드별검색</option>
+			<option value="payment_cancel_date">결제취소일자별검색</option>
+			<option value="payment_cate">결제취소거래유형별검색</option>
+		</select>
+		<input type="text" class="form-control" name="keyWord" id="keyWord">
+		<input type="submit" class="btn btn-primary" name="search" id="search" value="조건별검색">
+		<!-- <div><input type="submit" class="form-control" name="search" id="search" value="조건별검색"></div> -->
+	</form>
+</div>
+     <br><br>
     <table class="table table-striped table-hover">
         <thead>
             <tr>
@@ -82,8 +96,8 @@
         </c:if>
     </ul>
     <div>
-        <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_form">결제취소정보입력</a>
-        <a href="${pageContext.request.contextPath}/tori/payment/payment_cancel_search_form" class="btn btn-primary">조건검색</a>
+        <%-- <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_cancel_form">결제취소정보입력</a> --%>
+        <%-- <a href="${pageContext.request.contextPath}/tori/payment/payment_cancel_search_form" class="btn btn-primary">조건검색</a> --%>
     </div>
     <br><br>
     <div>

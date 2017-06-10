@@ -21,7 +21,7 @@
 <script>
 $(document).ready(function(){
 
-	
+	$("#CARDADD").hide();
 	$("#ToMemberJoin").hide();
 	$("#paymentSave").hide();
 	$("#paymentLoad").hide();
@@ -196,7 +196,8 @@ function gotoCardAddForm(){
 
 	//$("#paymentSave").show();
 	//$("#paymentLoad").show();
-		 location.href = "${pageContext.request.contextPath}/tori/payment/payment_card_form"; 
+		 //location.href = "${pageContext.request.contextPath}/tori/payment/payment_card_form";
+		$("#CARDADD").show();
 
 }
 
@@ -235,6 +236,17 @@ window.onload = function(){
 	
 	
 	};
+	
+function paymentSelect(){
+	//iframe으로 소환된 카드결제화면에서 카드결제를 입력하고 405에러 등이 뜰 때 에려화면을 가려줌과 동시에 카드결제화면이 들어있는 iframe요소를 숨겨준다.
+	$('#CARDADD').hide();
+}
+
+function getCardId(){
+	//paymentSelect메서드를 실행하기에 앞서서 우선적으로 iframe의 값을 가져와본다.
+	var bringCardId = $('#CARDADD').contents().find('#card_id').val();
+	alert(bringCardId);
+}
 
 </script>
 
@@ -307,6 +319,12 @@ window.onload = function(){
 		&nbsp;&nbsp;
 		<input type="radio" name="payment_cate" id="payment_cate_cd" value="카드" onclick="javascript:gotoCardAddForm();">카드
 		<!-- <input class="form-control" size="auto" id="payment_cate" name="payment_cate" type="text"> -->
+		</td>
+		</tr>
+		<tr>
+		<td>
+		<iframe id="CARDADD" width="100%" height="100%" src="${pageContext.request.contextPath}/tori/payment/payment_card_form"></iframe>
+		<a href="#" onclick="javascript:getCardId();">TEST</a>
 		</td>
 		</tr>
 		<!-- <tr>

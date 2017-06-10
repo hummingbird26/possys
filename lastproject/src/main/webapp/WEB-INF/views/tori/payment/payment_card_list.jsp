@@ -32,6 +32,20 @@
     <h1>Payment Card List</h1>
     <div>전체행의 수 : ${paymentcardcount}</div>
      <br><br>
+     <div class="container">
+	<form id="form" name="form" class="form-inline" action="${pageContext.request.contextPath}/tori/payment/payment_card_search_list" method="get">
+		<select id="select" name="select" class="form-inline" value="선택하세요">
+			<option value="card_id">카드승인번호별검색</option>
+			<option value="payment_id">거래코드별검색</option>
+			<option value="card_date">카드결제일자별검색</option>
+			<option value="card_company">카드회사별검색</option>
+		</select>
+		<input type="text" class="form-control" name="keyWord" id="keyWord">
+		<input type="submit" class="btn btn-primary" name="search" id="search" value="조건별검색">
+		<!-- <div><input type="submit" class="form-control" name="search" id="search" value="조건별검색"></div> -->
+	</form>
+</div>
+     <br><br>
     <table class="table table-striped table-hover">
         <thead>
             <tr>
@@ -83,8 +97,8 @@
         </c:if>
     </ul>
     <div>
-        <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_card_form">카드거래입력</a>
-        <a href="${pageContext.request.contextPath}/tori/payment/payment_card_search_form" class="btn btn-primary">조건검색</a>
+        <%-- <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_card_form">카드거래입력</a> --%>
+  <%--       <a href="${pageContext.request.contextPath}/tori/payment/payment_card_search_form" class="btn btn-primary">조건검색</a> --%>
     </div>
     <br><br>
     <div>
