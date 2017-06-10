@@ -236,11 +236,6 @@ window.onload = function(){
 	
 	
 	};
-	
-function paymentSelect(){
-	//iframe으로 소환된 카드결제화면에서 카드결제를 입력하고 405에러 등이 뜰 때 에려화면을 가려줌과 동시에 카드결제화면이 들어있는 iframe요소를 숨겨준다.
-	$('#CARDADD').hide();
-}
 
 function getCardId(){
 	//paymentSelect메서드를 실행하기에 앞서서 우선적으로 iframe의 값을 가져와본다.
@@ -263,15 +258,18 @@ function getCardId(){
 	console.log(bringCardTotal);
 	console.log(bringCardPrice);
 	console.log(bringCardTax);
-	/* bringCardId = document.getElementById('card_id').val;
-	bringPaymentId = document.getElementById('payment_id').val;
-	bringCardApp = document.getElementById('card_app').val;
-	bringCardDetail = document.getElementById('card_detail').val;
-	bringCardDate = document.getElementById('card_date').val;
-	bringCardCompany = document.getElementById('card_company').val;
-	bringCardTotal = document.getElementById('card_total').val;
-	bringCardPrice = document.getElementById('card_price').val;
-	bringCardTax = document.getElementById('card_tax').val; */
+	document.getElementById('card_id').value = bringCardId;
+	document.getElementById('payment_id').value = bringPaymentId;
+	document.getElementById('card_app').value = bringCardApp;
+	document.getElementById('card_detail').value = bringCardDetail;
+	document.getElementById('card_date').value = bringCardDate;
+	document.getElementById('card_company').value = bringCardCompany;
+	document.getElementById('card_total').value = bringCardTotal;
+	document.getElementById('card_price').value = bringCardPrice;
+	document.getElementById('card_tax').value = bringCardTax;
+	
+	//iframe으로 소환된 카드결제화면에서 카드결제를 입력하고 405에러 등이 뜰 때 에려화면을 가려줌과 동시에 카드결제화면이 들어있는 iframe요소를 숨겨준다.
+	$('#CARDADD').hide();
 }
 
 </script>
@@ -348,9 +346,9 @@ function getCardId(){
 		</td>
 		</tr>
 		<tr>
-		<td>
+		<td colspan="2">
 		<iframe id="CARDADD" width="100%" height="100%" src="${pageContext.request.contextPath}/tori/payment/payment_card_form"></iframe>
-		<a href="#" onclick="javascript:getCardId();">TEST</a>
+		<a href="#" onclick="javascript:getCardId();">카드결제 입력 완료</a>
 		<input type="hidden" name="card_id" id="card_id" size="auto">
 		<input type="hidden" name="payment_id" id="payment_id" size="auto">
 		<input type="hidden" name="card_app" id="card_app" size="auto">
