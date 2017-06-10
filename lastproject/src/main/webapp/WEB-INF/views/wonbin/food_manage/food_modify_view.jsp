@@ -7,6 +7,42 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>수정 화면</title>
 <%@ include file="../../modal/header.jsp" %>
+<script type="text/javascript">
+	$(document).ready(function(){
+		//유효성 검사
+		$('#addfood').click(function(){
+			var food_unit = $('#food_unit').val();
+			var food_shelflife = $('#food_shelflife').val();
+			var num = /^[0-9]*$/;
+			if(!food_unit){				
+				var al = '<div class="alert alert-warning" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">'
+			  			+'단위를 입력해 주십시오.'
+						+'</div>'
+				$('#div_vaild').html(al);
+				$('#food_unit').focus();
+				 return false;
+			}else if(!food_shelflife){
+				var al = '<div class="alert alert-warning" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">'
+			  			+'유통기한를 입력해 주십시오.'
+						+'</div>'
+				$('#div_vaild').html(al);
+				$('#food_shelflife').focus();
+				 return false;
+			}else if(!num.test($('#food_shelflife').val())){
+				var al = '<div class="alert alert-warning" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">'
+		  				+'유통기한은 숫자만 입력할수 있습니다.'
+						+'</div>'
+				$('#div_vaild').html(al);
+				$('#food_shelflife').focus();
+				 return false;
+			}else{
+				addform.submit();
+			}
+		})
+		
+		
+	})// ready End
+</script>
 </head>
 <body>
 <br>
@@ -51,9 +87,15 @@
 			</div>
 		</div>		
 <br>
+		<div class="form-group"> <!-- 유효성 검사 html -->
+			<span class="col-sm-2"></span>
+			<div class="col-xs-7">
+				<div id="div_vaild"></div>
+			</div>
+		</div>
 		<div class="form-group col-sm-10">
 				<center>
-				<input class="btn btn-primary" type="submit" id="addfood" value="수정">
+				<input class="btn btn-primary" type="button" id="addfood" value="수정">
 				<a href="${pageContext.request.contextPath}/food_list"><button class="btn btn-default" type="button" id="censel">취소</button></a>
 				<a href="${pageContext.request.contextPath}/food_delete?food_id=${food.food_id}"><button class="btn btn-default" type="button" id="all_del">삭제</button></a>
 				</center>

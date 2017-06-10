@@ -121,11 +121,11 @@
 		<div class="form-group">
 			<span class="col-sm-2"></span>
 			<div class="col-xs-7">
-			<div id="div_vaild"></div>
+				<div id="div_vaild"></div>
 			</div>
 		</div>
 		<br>
-		<div id="div_vaild"></div>
+		
 		<div class="form-group col-sm-10">
 				<center>
 				<input class="btn btn-default" type="button" id="addfood" value="등록">

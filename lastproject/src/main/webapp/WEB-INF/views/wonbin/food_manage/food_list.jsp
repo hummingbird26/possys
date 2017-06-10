@@ -238,9 +238,9 @@
 			<input  size="16" name="keyWord" type="text" style="padding-bottom: 4px; padding-top: 6px; height: 31px;">			
 		</form>
 		<input class="col-sm-1"id="fbutton" type="button" value="검색" style="padding-top: 4.5;padding-bottom: 4.5;padding-top: 4px;padding-bottom: 4px;width: 64px;padding-right: 5px;padding-left: 5px;">
-		<div class="alert alert-success alert-dismissable col-sm-offset-6"  style="margin-top: 5px; margin-bottom: 5px; padding-bottom: 5px; padding-top: 5px;">
+		<div class="alert alert-info alert-dismissable col-sm-offset-6"  style="margin-top: 5px; margin-bottom: 5px; padding-bottom: 5px; padding-top: 5px;">
 		  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		  <strong>알림 - </strong> 체크박스를 통해 업체등록을 하실수 있습니다. / "전체보기" 선택창을 통해 등록,미등록된 식재료를 확인하실수있습니다.
+		  <strong>도움말 - </strong> 체크박스를 통해 업체등록을 하실수 있습니다. / "전체보기" 선택창을 통해 등록,미등록된 식재료를 확인하실수있습니다.
 		</div>
 	</div>
 	
