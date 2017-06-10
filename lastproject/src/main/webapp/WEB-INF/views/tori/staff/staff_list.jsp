@@ -40,7 +40,7 @@
 			<option value="staff_gender">직원성별</option>
 		</select>
 		<input type="text" class="form-inline" name="keyWord" id="keyWord">
-		<input type="submit" class="form-inline btn btn-primary" name="search" id="search" value="조건별검색">
+		<input type="submit" class="form-inline btn btn-primary" name="search" id="keypress" value="조건별검색">
 	
 	</form>
 </div>

@@ -23,6 +23,33 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <%@ include file="../../modal/header.jsp" %>
+
+<style type="text/css">
+
+.mono_table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 3px;
+    border: outset;
+    color: black;
+}
+
+.td {
+   padding: 15px;
+    border: outset;
+    border-left: 5px solid #C03;
+    border-bottom: 1px solid #DDD;
+    background: #FCF0F3;
+    font-weight: normal;
+    text-align:center;
+    text-shadow: 0 1px #FFF;
+    vertical-align: middle;
+
+
+	}
+ 
+
+</style>
 </head>
 <body>
 </br></br></br></br></br>
@@ -34,7 +61,7 @@
 	
 	</div>
 	<div class="col-sm-6">
-		<table class="table table-hover table-stripped">
+		<table class="table table-hover table-stripped mono_table">
 		<caption>직원관리기본정보</caption>
 			<tr>
 			<td>직원ID
@@ -78,7 +105,7 @@
 </div>
 <br><br>
 <div class="container">
-	<table class="table table-stripped table-hover">
+	<table class="table table-stripped table-hover mono_table">
 	<caption>추가정보</caption>
 			<tr>
 			<td>직원비밀번호
