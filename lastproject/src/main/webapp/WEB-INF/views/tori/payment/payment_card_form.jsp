@@ -241,17 +241,17 @@ function addCardId(){
 					</td>
 				</tr>
 				</table>
-		<input type="submit" class="btn btn-primary btn-sm" id="paymentCardAdd" name="paymentCardAdd" value="카드거래입력">
+		<!-- <input type="submit" class="btn btn-primary btn-sm" id="paymentCardAdd" name="paymentCardAdd" value="카드거래입력"> -->
 		<input type="reset" class="btn btn-primary btn-sm" id="paymentCancel" name="paymentCancel" value="다시입력">
 		<%-- <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_card_list">글목록</a> --%>
 		<input type="button" class="btn btn-primary btn-sm" value="리턴하기" onclick="javascript:returnform();"/>
 		<input type="button" class="btn btn-primary btn-sm" value="승인번호중복체크" onclick="javascript:chkDupCardId();"/>
 		</form>
 		<br><br>
-			<div>
-			<!-- ID 체크 확인용 -->
+			<!-- <div>
+			ID 체크 확인용
 			<input type="hidden" id="idChk" value="N"/>
-			</div>
+			</div> -->
 	</div>
 </body>
 </html>

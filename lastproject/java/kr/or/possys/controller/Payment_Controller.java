@@ -606,8 +606,8 @@ public class Payment_Controller {
 			
 			
 			cpdao.insertCardPayment(card_payment);
-			return "redirect:/tori/payment/payment_card_action";
-			//return "redirect:/tori/payment/payment_card_list";
+			//return "redirect:/tori/payment/payment_card_action";
+			return "redirect:/tori/payment/payment_card_list";
 			
 		}
 		

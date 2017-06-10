@@ -245,7 +245,33 @@ function paymentSelect(){
 function getCardId(){
 	//paymentSelect메서드를 실행하기에 앞서서 우선적으로 iframe의 값을 가져와본다.
 	var bringCardId = $('#CARDADD').contents().find('#card_id').val();
-	alert(bringCardId);
+	var bringPaymentId = $('#CARDADD').contents().find('#payment_id').val();
+	var bringCardApp = $('#CARDADD').contents().find('#card_app').val();
+	var bringCardDetail = $('#CARDADD').contents().find('#card_detail').val();
+	var bringCardDate = $('#CARDADD').contents().find('#card_date').val();
+	var bringCardCompany = $('#CARDADD').contents().find('#card_company').val();
+	var bringCardTotal = $('#CARDADD').contents().find('#card_total').val();
+	var bringCardPrice = $('#CARDADD').contents().find('#card_price').val();
+	var bringCardTax = $('#CARDADD').contents().find('#card_tax').val();
+	//alert(bringCardId,bringPaymentId,bringCardApp,bringCardDetail,bringCardDate,bringCardCompany,bringCardTotal,bringCardPrice,bringCardTax);
+	console.log(bringCardId);
+	console.log(bringPaymentId);
+	console.log(bringCardApp);
+	console.log(bringCardDetail);
+	console.log(bringCardDate);
+	console.log(bringCardCompany);
+	console.log(bringCardTotal);
+	console.log(bringCardPrice);
+	console.log(bringCardTax);
+	/* bringCardId = document.getElementById('card_id').val;
+	bringPaymentId = document.getElementById('payment_id').val;
+	bringCardApp = document.getElementById('card_app').val;
+	bringCardDetail = document.getElementById('card_detail').val;
+	bringCardDate = document.getElementById('card_date').val;
+	bringCardCompany = document.getElementById('card_company').val;
+	bringCardTotal = document.getElementById('card_total').val;
+	bringCardPrice = document.getElementById('card_price').val;
+	bringCardTax = document.getElementById('card_tax').val; */
 }
 
 </script>
@@ -325,6 +351,15 @@ function getCardId(){
 		<td>
 		<iframe id="CARDADD" width="100%" height="100%" src="${pageContext.request.contextPath}/tori/payment/payment_card_form"></iframe>
 		<a href="#" onclick="javascript:getCardId();">TEST</a>
+		<input type="hidden" name="card_id" id="card_id" size="auto">
+		<input type="hidden" name="payment_id" id="payment_id" size="auto">
+		<input type="hidden" name="card_app" id="card_app" size="auto">
+		<input type="hidden" name="card_detail" id="card_detail" size="auto">
+		<input type="hidden" name="card_date" id="card_date" size="auto">
+		<input type="hidden" name="card_company" id="card_company" size="auto">
+		<input type="hidden" name="card_total" id="card_total" size="auto">
+		<input type="hidden" name="card_price" id="card_price" size="auto">
+		<input type="hidden" name="card_tax" id="card_tax" size="auto">
 		</td>
 		</tr>
 		<!-- <tr>
