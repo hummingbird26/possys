@@ -176,6 +176,16 @@ function addCardId(){
 		
 		document.getElementById('card_id').value = cardId;
 }
+
+function loadCardTotal(){
+	//부모프레임인 결제폼에 접근하여 카드결제금액을 가져온다
+	var ffrom = parent.document.paymentForm;
+	var fto = document.paymentForm;
+	for(var i = 0; i < ffrom.elements.length; ++i){
+		var fId = ffrom.elements[i]
+		fto.elements[fId.payment_pay].value=fId.value;
+	}
+}
 </script>
  
 </head>
@@ -225,7 +235,7 @@ function addCardId(){
 				<tr>
 					<td>카드결제금액 :
 					</td>
-					<td><input type="text" class="form-control" name="card_total" id="card_total" size="auto" placeholder="결제금액을 입력해 주세요">
+					<td><input type="text" class="form-control" name="card_total" id="card_total" size="auto" onclick="javascript:loadCardTotal()" placeholder="결제금액을 입력해 주세요">
 					</td>
 				</tr>
 				<tr>
@@ -243,8 +253,8 @@ function addCardId(){
 				</table>
 		<!-- <input type="submit" class="btn btn-primary btn-sm" id="paymentCardAdd" name="paymentCardAdd" value="카드거래입력"> -->
 		<input type="reset" class="btn btn-primary btn-sm" id="paymentCancel" name="paymentCancel" value="다시입력">
-		<%-- <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_card_list">글목록</a> --%>
-		<input type="button" class="btn btn-primary btn-sm" value="리턴하기" onclick="javascript:returnform();"/>
+		<%-- <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_card_list">글목록</a>
+		<input type="button" class="btn btn-primary btn-sm" value="리턴하기" onclick="javascript:returnform();"/> --%>
 		<input type="button" class="btn btn-primary btn-sm" value="승인번호중복체크" onclick="javascript:chkDupCardId();"/>
 		</form>
 		<br><br>
