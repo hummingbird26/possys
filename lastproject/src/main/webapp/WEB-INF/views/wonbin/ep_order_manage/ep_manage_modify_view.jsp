@@ -67,15 +67,25 @@
 				$('#ep_address').focus();
 				return false;
 			}else{
-				addform.submit();
+				var re = confirm('취소하신 식재료가 있다면 해당 식재료를 다시 설정해주셔야합니다. 수정을 계속 진행하시겠습니까?');
+				if(re){
+					addform.submit();
+				}
 			}
 		}) // 유효성 검사 End
 		// 식재료 취소 버튼
 		$(document).on('click','#f_del_bt',function(){
-			var re = confirm('해당 식재료를 취소하시면 관련 식재료를 다시 설정해주셔야합니다. 계속 진행하시겠습니까?');
-			if(re){
-				
-			}		
+			var food_id = $(this).val();
+			var f_tr = $('.f_tr').length;			
+// 			alert(f_tr+'식재료 갯수');
+			if(f_tr > 1){			
+// 			alert(food_id);
+					$(this).parent().parent().remove();
+					var food_hide = '<input id="food_id" name="food_id" type="hidden" value="'+food_id+'"/>';
+					$('#div_hide').append(food_hide);				
+			}else{ // tr갯수 확인 if문
+				alert('식재료 1개 이하로 취소하실수 없습니다. 업체전체 삭제를 원하시면 하단의 전체삭제를 이용해주십시오.');
+			}
 		})
 	});//jquery ready
 
@@ -113,17 +123,18 @@
 			<table class="table table-hover" style="text-align:center">
 				<thead>
 				<tr>
-					<th>식재 코드번호</th>
+					<th>식재료 코드번호</th>
 					<th>상품명</th>
 					<th>삭제</th>
 				</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="f" items="${ep_m_fv}">
-					<tr>						
+					<tr class="f_tr">						
 						<td>${f.food_id}</td>
 						<td>${f.food_name}</td>
-						<td><a class="snagse" href="${pageContext.request.contextPath}/f_del_bt?food_id=${f.food_id}&ep_id=${ep_m.ep_id}"><input type="button" id="f_del_bt" value="취소"/></a></td>
+						<td><button type="button" id="f_del_bt" value="${f.food_id}">삭제</button></td>
+<%-- 						<td><a class="snagse" href="${pageContext.request.contextPath}/f_del_bt?food_id=${f.food_id}&ep_id=${ep_m.ep_id}"><input type="button" id="f_del_bt" value="취소"/></a></td> --%>
 					</tr>
 					</c:forEach>
 				</tbody>
@@ -169,6 +180,9 @@
 				<input  class="sel_view form-control" name ="ep_text" id ="ep_text" type ="text" value="${ep_m.ep_text}"/>
 			</div>
 		</div>
+		<div id="div_hide">
+			<!-- append hide 추가 -->			
+		</div>
 		<br>
 		<br>
 		<div class="form-group"> <!-- 유효성 검사 html -->
@@ -182,7 +196,7 @@
 				<input class="btn btn-primary" type="button" id="addsubmit" value="수정">
 				<a href="${pageContext.request.contextPath}/ep_manage_list"><button class="btn btn-default" type="button" id="censel">취소</button></a>
 				</center>
-		</div>			
+		</div>		
 	</form>
 	<form id="fm_del" action="${pageContext.request.contextPath}/ep_manage_list"method="GET">
 		<button class="btn btn-danger" id="all_del" type="button" name="ep_id" value="${ep_m.ep_id}">전체 삭제</button>

@@ -14,6 +14,11 @@ import org.springframework.stereotype.Repository;
 public class Ep_Order_Dao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
+	// 입고 수정 - 입고취소 액션
+		public void aj_ep_wh_cancel(String ep_order_id){
+			System.out.println(ep_order_id+"<=== ep_order_id - 16_AJAX Ep_Manage_Dao -aj_ep_wh_cancel실행");
+			sqlSessionTemplate.update("kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper.aj_ep_wh_cancel",ep_order_id);
+		}
 	
 	// 상세보기 폼 화면 table 관련 - ajax
 		public Food_Present_Sangse_VO aj_sangse_table(String food_id){

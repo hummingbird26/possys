@@ -30,22 +30,22 @@ public class Ep_Manage_Dao {
 	
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@	AJAX DAO
 	
-	//업체리스트 상세보기에서 식재료 삭제 요청
-	public void f_del(String food_id, Ep_Order oder){
-		System.out.println(oder);
+	//업체리스트 상세보기 수정시 식재료 삭제 요청
+	public void f_del(String food_id){
+//		System.out.println(oder);
 		
 //			System.out.println(o.getEp_order_id()+"<--------oder id");
-			String oder_id = oder.getEp_order_id();
-			if(oder_id.equals("default")){
+//			String oder_id = oder.getEp_order_id();
+//			if(oder_id.equals("default")){
 //				System.out.println("아이디 디폴트"); // 발주리스트도 동시 삭제
 				sqlSessionTemplate.delete("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.f_del",food_id);
 				sqlSessionTemplate.delete("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.f_del_o",food_id);
-			}else{
-				System.out.println("아이디 있음");
-				sqlSessionTemplate.delete("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.f_del",food_id);
-			}
+//			}else{
+//				System.out.println("아이디 있음");
+//				sqlSessionTemplate.delete("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.f_del",food_id);
+//			}
 		
-		System.out.println(food_id+"<----- Ep_Manage_Dao - f_del()실행 food_id ");
+//		System.out.println(food_id+"<----- Ep_Manage_Dao - f_del()실행 food_id ");
 //		sqlSessionTemplate.delete("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.f_del",food_id);
 	}
 	
@@ -172,7 +172,7 @@ public class Ep_Manage_Dao {
 	//업체 수정액션 요청
 	public int ep_mmodify(Ep_Manage ep_m){
 		System.out.println("05_Ep_Manage_Dao->>ep_mmodify 실행");
-		System.out.println(ep_m.getEp_id());
+//		System.out.println(ep_m.getEp_id());
 		return sqlSessionTemplate.update("kr.or.possys.ep_order_manage_service.Ep_Manage_Mapper.ep_mmodify",ep_m);
 		
 	}
