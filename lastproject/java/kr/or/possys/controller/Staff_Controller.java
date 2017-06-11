@@ -25,7 +25,16 @@ public class Staff_Controller {
 	@Autowired
 	private Staff_Dao sdao;
 	
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String main() {
+		System.out.println("메인 화면 나오는 메서드 실행 Staff_Controller.java");
+		
+		return "main";
+	}
+	
+	
+	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String home() {
 		System.out.println(" index 화면(로그인화면) 나오는 메서드 실행 Staff_Controller.java");
 		
@@ -88,17 +97,17 @@ public class Staff_Controller {
 							
 							else{
 								
-								returnURL = "redirect:/";
+								returnURL = "redirect:/join";
 							}
 						
 				}else{
 				System.out.println(" 로그인 정보 일치하지 않음 로그인창 이동 Staff_Controller.java");
-				returnURL = "redirect:/"; // 일치하지 않으면 로그인페이지 재이동
+				returnURL = "redirect:/join"; // 일치하지 않으면 로그인페이지 재이동
 				}
 		
 		}else {
 			System.out.println(" 로그인 정보 일치하지 않음 로그인창 이동 Staff_Controller.java");
-			returnURL = "redirect:/"; // 일치하지 않으면 로그인페이지 재이동
+			returnURL = "redirect:/join"; // 일치하지 않으면 로그인페이지 재이동
 			
 		}
 		
