@@ -23,6 +23,30 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <%@ include file="../../modal/header.jsp" %>
+
+<style>
+h1, table { text-align: center; }
+
+table {border-collapse: collapse;  width: 70%; margin: 0 auto 5rem;}
+
+th, td { padding: 1.5rem; font-size: 1.3rem; }
+
+tr {background: hsl(50, 50%, 80%); }
+
+tr, td { transition: .4s ease-in; } 
+
+/* tr:first-child {background: hsla(12, 100%, 40%, 0.5); } */
+
+tr:nth-child(even) { background: hsla(50, 50%, 80%, 0.7); }
+
+td:empty {background: hsla(50, 25%, 60%, 0.7); }
+
+/* tr:hover:not(#firstrow), tr:hover td:empty {background: #ff0; pointer-events: visible;}
+
+tr:hover:not(#firstrow) { transform: scale(1.2); font-weight: 700; box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.5);} */
+.f_td {background: hsl(50, 50%, 80%);}
+.s_td {background: hsla(50, 25%, 60%, 0.7);}
+</style>
 </head>
 <body>
 <br><br><br>
@@ -80,7 +104,7 @@
     </ul>
    <div>
         <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/staff/staff_add_form">직원가입화면</a>
-        <a href="${pageContext.request.contextPath}/tori/staff/staff_search_form" class="btn btn-primary">조건검색</a>
+        <%-- <a href="${pageContext.request.contextPath}/tori/staff/staff_search_form" class="btn btn-primary">조건검색</a> --%>
     </div>
     <br><br>
     <div>	

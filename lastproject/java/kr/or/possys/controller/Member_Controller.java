@@ -66,31 +66,54 @@ public class Member_Controller {
 		List<Ep_Order> o_list = Mdao.expense_folios();
 		List<Payment> sum_payment = Mdao.sum_payment();
 		
+		System.out.println(o_list);
+		System.out.println(sum_payment.size()+"<<<<sum_payment.size()");
 		//for문을 사용하여 expense_folios dto로 선언한 객체를 만들면서 
 		//변수에 담겨있던 값을 담아준다.
-		for (int i = 0; i < o_list.size(); i++){
-			
-			int p_total = sum_payment.get(i).getPayment_total();
-			int o_total = o_list.get(i).getEp_order_total_price();
-			//두 금액의 차를 구하여 결과값을 변수에 담아준다.
-			int total_result = (p_total-o_total);
-			//반복 할때마다 새로운 객체 생성(값이 중복 안되게 해준다.)
-			expense_folios expense_folios = new expense_folios();
-			
-			expense_folios.setPayment_date(sum_payment.get(i).getPayment_date());
-			expense_folios.setPayment_total(p_total);
-			
-			
-			expense_folios.setEp_order_wh_date(o_list.get(i).getEp_order_wh_date());
-			expense_folios.setEp_order_total_price(o_total);
-			//dto에 변수생성하고 거기에 위에서 변수에 담은 값을 셋팅  해준다.
-			expense_folios.setTotal_result(total_result);
-			
-			
-			arr.add(expense_folios);
-			System.out.println("olist"+i+"번 반복 expense_folios_action 메서드 Member_Controller.java");
-		}
 		
+			
+		if(o_list.size()==0){
+			for (int i = 0; i < sum_payment.size(); i++){
+				int p_total = sum_payment.get(i).getPayment_total();
+				expense_folios expense_folios = new expense_folios();
+			
+				int total_result = p_total;
+				
+				expense_folios.setPayment_date(sum_payment.get(i).getPayment_date());
+				expense_folios.setPayment_total(p_total);
+				expense_folios.setTotal_result(total_result);
+				
+				arr.add(expense_folios);
+				System.out.println("if 문 olist"+i+"번 반복 expense_folios_action 메서드 Member_Controller.java");
+				}
+			}
+		if(o_list.size()>0){
+			for (int i = 0; i < sum_payment.size(); i++){
+				int p_total = sum_payment.get(i).getPayment_total();
+				
+				int o_total = o_list.get(i).getEp_order_total_price();
+				
+				//두 금액의 차를 구하여 결과값을 변수에 담아준다.
+				int total_result = (p_total-o_total);
+				//반복 할때마다 새로운 객체 생성(값이 중복 안되게 해준다.)
+				expense_folios expense_folios = new expense_folios();
+				
+				expense_folios.setPayment_date(sum_payment.get(i).getPayment_date());
+				expense_folios.setPayment_total(p_total);
+				
+				
+				expense_folios.setEp_order_wh_date(o_list.get(i).getEp_order_wh_date());
+				expense_folios.setEp_order_total_price(o_total);
+				//dto에 변수생성하고 거기에 위에서 변수에 담은 값을 셋팅  해준다.
+				expense_folios.setTotal_result(total_result);
+				
+				
+				arr.add(expense_folios);
+				System.out.println("else if 문 olist"+i+"번 반복 expense_folios_action 메서드 Member_Controller.java");
+		
+			
+			}
+		}
 		model.addAttribute("expense_folios", arr);
 		
 		/*광진이형

@@ -16,10 +16,7 @@
 			window.open('${pageContext.request.contextPath}/food_add_form','popup','width=770,height=700,left=0,top=0,toolbar=no,locaton=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no');
 		});
 		//식자재 수정시 새창
-		$(document).on('click','#add_food',function(){
-			
-		});
-		
+				
 // 		$('[data-toggle="tooltip"]').tooltip(); 
 		//검색 
 		$('#fbutton').click(function(){
@@ -144,12 +141,12 @@
 <br>
 <br>
 <h3>식자재 목록</h3>
+
 <div class="col-md-offset-11"><span style="font-size: 16px;">전체 식재료 수 : ${foodcount}</span></div>
 	<div>
 	<input class="btn btn-primary" id="ep_submit" type="button" value="발주업체 등록" data-toggle="tooltip" data-placement="bottom" title="발주업체 등록을 위해서는 아래 체크박스를 체크하시고 등록하셔야합니다."/>
 		<%-- <a href="${pageContext.request.contextPath}/food_add_form"> --%><button type="button" class="btn btn-primary" id="add_food">식자재 추가</button><!-- </a> -->
-	</div>
-	<br>
+	</div>	
 	<form class="col-md-offset-10"id="sel_list_sub" name="sel_list_sub" action="${pageContext.request.contextPath}/sel_list" method="get">
 		<select class="form-control"id="sel_list" name="sel_list" style="padding-top: 0px; padding-bottom: 0px; height: 30px; width: 230px;">
 			<option  value="sel_all" <c:if test="${sel_list eq 'sel_all'}">selected</c:if>>전체보기</option> <!-- 선택된값 select 상태 남기기위한 jstl 적용 -->
@@ -163,7 +160,7 @@
 	
 		<table class="table table-hover" style="text-align:center">
 			<thead>
-				<tr>
+				<tr style="background:black;color:white;">
 					<th><input type="checkbox" id="food_chkall" style=" width: 15px; height: 15px;"/>
 						<a href="#">
 		         			<span class="glyphicon glyphicon-chevron-down"></span>
@@ -237,7 +234,11 @@
 			</select>
 			<input  size="16" name="keyWord" type="text" style="padding-bottom: 4px; padding-top: 6px; height: 31px;">			
 		</form>
-		<input id="fbutton" type="button" value="검색" style="padding-top: 4.5;padding-bottom: 4.5;padding-top: 4px;padding-bottom: 4px;">
+		<input class="col-sm-1"id="fbutton" type="button" value="검색" style="padding-top: 4.5;padding-bottom: 4.5;padding-top: 4px;padding-bottom: 4px;width: 64px;padding-right: 5px;padding-left: 5px;">
+		<div class="alert alert-info alert-dismissable col-sm-offset-6"  style="margin-top: 5px; margin-bottom: 5px; padding-bottom: 5px; padding-top: 5px;">
+		  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		  <strong>도움말 - </strong> 체크박스를 통해 업체등록을 하실수 있습니다. / "전체보기" 선택창을 통해 등록,미등록된 식재료를 확인하실수있습니다.
+		</div>
 	</div>
 	
 	

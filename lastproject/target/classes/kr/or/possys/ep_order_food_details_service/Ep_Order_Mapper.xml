@@ -2,7 +2,17 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper">
-	
+	<!-- 입고 수정 - 입고취소 액션 -->
+	<update id="aj_ep_wh_cancel" parameterType="string">
+		update ep_order_food_details set ep_order_wh_date = null
+		,ep_order_wh_ea = null
+		,ep_order_food_shelflife = null
+		,ep_order_unit_price = null
+		,ep_order_total_price = null
+		,food_nowquantity = null
+		,ea_order_statement = '발주신청'
+		where ep_order_id = #{ep_order_id}
+	</update>
 	<!-- AJAX 상세보기 폼 화면 table 관련 -->
 		<!-- 최근 -->
 	<select	id="aj_sangse_rctable" parameterType="string" resultType="kr.or.possys.ep_order_food_details_service.Ep_Order">
@@ -49,12 +59,19 @@
 	
 	<!-- AJAX 상세보기에서 발주취소 -->
 	<delete id="aj_sangse_cancel" parameterType="string">
-		delete from ep_order_food_details where ep_order_id=#{ep_order_id}
+		delete from ep_order_food_details
+		where ep_order_id = #{ep_order_id} <!-- in (#{ep_order_id}) --> <!-- id값이 여러개일시 전부다 update -->
 	</delete>
-		
+			
 	<!-- AJAX 발주 주문목록 상세보기 폼에서 해당 식재 발주 취소시 DB 의 해당 발주주문이 삭제처리 -->
+	<!-- 발주취소시 row에 중복되는 값이 있으면 삭제 하기위한 중복카운트 -->
+<!-- 	<select id="aj_sel_count" parameterType="java.util.Map" resultType="string"> -->
+<!-- 		select ep_order_id from ep_order_food_details  -->
+<!-- 		where food_id=#{food_id} -->
+<!-- 	</select> -->
 	<delete id="aj_select_del" parameterType="java.util.Map">
-		delete from ep_order_food_details where ep_order_id=#{ep_order_id} and food_id=#{food_id}
+		delete from ep_order_food_details		
+		where ep_order_id=#{ep_order_id} and food_id=#{food_id}
 	</delete>
 	
 	<!-- AJAX 발주등록시 식재자가 업체의 등록이 되었는지 확인 -->
@@ -155,10 +172,14 @@
 		select count(distinct ep_order_id) from ep_order_food_details where ea_order_statement = '발주신청'
 	</select>
 	<!-- default 값 확인위해 select -->
-	<select id="_ep_oinsert" parameterType="java.util.Map" resultType="kr.or.possys.ep_order_food_details_service.Ep_Order">
-		select * from ep_order_food_details
-		where food_id = #{food_id} and ep_id = #{ep_id}
+	<select id="ep_default" resultType="string">
+		select max(ep_order_id) from ep_order_food_details
 	</select>
+	<!-- 발주등록시 해당 row가 default 인지 확인 -->
+	<select id="s_de" parameterType="java.util.Map" resultType="string">
+		select min(ep_order_id) from ep_order_food_details where food_id =#{food_id} and ep_id=#{ep_id}
+	</select>
+	
 	
 	<select	id="ep_Onum" resultType="String">
 		select max(ep_order_id)
@@ -170,7 +191,7 @@
 		,ep_order_date = sysdate()
 		,ep_order_ea = #{ep_order_ea}
 		,ea_order_statement = '발주신청'
-		where food_id = #{food_id} and ep_id = #{ep_id}
+		where food_id = #{food_id} and ep_id = #{ep_id} and ep_order_id='default' <!-- 무결성 오류로인해 계속 오류가 났었다  ep_order_id를 추가해줌-->
 	</update>
 	<!-- default가 아닌  발주등록 (추가) -->
 	<insert id="ep_oinsert" parameterType="kr.or.possys.ep_order_food_details_service.Ep_Order">

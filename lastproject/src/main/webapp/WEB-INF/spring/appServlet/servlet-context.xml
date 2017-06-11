@@ -29,10 +29,6 @@
 		<beans:property name="defaultEncoding" value="UTF-8" />
 		</beans:bean>
 
-
-
-
-	
 	<context:component-scan base-package="kr.or.possys" />
 	<!-- 커넥션 풀 설정 -->
 	 <beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
@@ -42,21 +38,20 @@
         <beans:property name="username" value="art9000"/>
         <beans:property name="password" value="tkdgns12"/> -->
 
-        <beans:property name="url" value="jdbc:mysql://umj64-006.cafe24.com:3306/hummingbird26?useUnicode=true&amp;characterEncoding=euckr"/>
-        <beans:property name="username" value="hummingbird26"/>
-        <beans:property name="password" value="ruddls12!@"/>
+<!-- 		<beans:property name="url" value="jdbc:mysql://127.0.0.1:3308/lastproject?useUnicode=true&amp;characterEncoding=euckr"/> -->
+<!-- 	         <beans:property name="username" value="okjid"/>  -->
+<!-- 	         <beans:property name="password" value="okjpw"/>  -->
+<!--     	</beans:bean> -->
+    	<beans:property name="url" value="jdbc:mysql://umj64-006.cafe24.com:3306/hummingbird26?useUnicode=true&amp;characterEncoding=euckr"/>
+	         <beans:property name="username" value="hummingbird26"/> 
+	         <beans:property name="password" value="ruddls12!@"/> 
+		</beans:bean>
 
-<!-- 
-         <beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/dade?useUnicode=true&amp;characterEncoding=euckr"/> 
-
-
-        <beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/dade?useUnicode=true&amp;characterEncoding=euckr"/> 
-
-         <beans:property name="username" value="dadeid"/> 
-         <beans:property name="password" value="dadepw"/> 
-          -->
-
-    </beans:bean>
+<!--        	<beans:property name="url" value="jdbc:mysql://127.0.0.1:3308/dade?useUnicode=true&amp;characterEncoding=euckr&amp;allowMultiQueries=true"/>
+	         <beans:property name="username" value="dadeid"/> 
+	         <beans:property name="password" value="dadepw"/>
+	         allowMultiQueries=true 는 mapper에서 다중 쿼리 제한을 뚫어주는 역할을 할 것이다? 
+    	</beans:bean> -->
 	
 	<!-- mybatis설정 1. SqlSessionFactory -->
     <beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

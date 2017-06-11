@@ -111,7 +111,7 @@ public class Ep_Manage_Controller {
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPage", lastPage);
 		model.addAttribute("list", list);
-		System.out.println("천재");
+//		System.out.println("천재");
 		return "/wonbin/ep_order_manage/ep_manage_list";
 	}
 	// @@@@@@?@@@@@@@ 발주업체 수정화면 요청
@@ -131,8 +131,23 @@ public class Ep_Manage_Controller {
 	}
 	// 발주업체 수정액션 요청
 	@RequestMapping(value="/ep_manage_modify", method = RequestMethod.POST)
-	public String ep_mmodify(Ep_Manage ep_m){
+	public String ep_mmodify(Ep_Manage ep_m
+							,@RequestParam(value="food_id", required=false,defaultValue="no") String food_id){
 		System.out.println("05_Ep_Manage_Controller.java ->>ep_mmodify 요청");
+//		System.out.println(food_id+" <==== food_id");
+		if(food_id.equals("no")){
+//			System.out.println("no다");			
+		}else{
+//			System.out.println("no아니다");
+			String[] food_id_arr = food_id.split(",");
+//			String ep_id = ep_m.getEp_id();
+			for(int i=0; i<food_id_arr.length; i++){
+//				System.out.println(food_id_arr[i]);
+//				System.out.println(ep_id);
+				String f_id = food_id_arr[i];
+				dao.f_del(f_id);			
+			}
+		}
 		dao.ep_mmodify(ep_m);
 		return "redirect:/ep_manage_list";
 		
@@ -141,20 +156,21 @@ public class Ep_Manage_Controller {
 	@RequestMapping(value="/ep_manage_delete", method = RequestMethod.GET)
 	public String ep_mdelete(@RequestParam(value="ep_id", required=true) String ep_id){
 //		System.out.println(ep_id +"<----asd");
+		// 식재자현황 테이블도 삭제시키기 위한 default 값 확인
 		List<Ep_Order> order = dao.chk_alldel(ep_id);
 		dao.ep_mdelete(ep_id, order);
 		return "redirect:/ep_manage_list";
 	}
 	//업체 상세보기에서 식재료 삭제버튼
-		@RequestMapping(value="/f_del_bt", method = RequestMethod.GET)
-		public String f_del_bt(@RequestParam(value="food_id") String food_id
-								,@RequestParam(value="ep_id") String ep_id){
-			System.out.println("Ep_Manage_Controller - f_del_bt() 실행");
-			Ep_Order oder = dao.chk_del(food_id);
-			dao.f_del(food_id,oder);
-			return "redirect:/ep_manage_modify_view?ep_id="+ep_id;
-			//redirect : 컨트롤러 value 
-		}
+//		@RequestMapping(value="/f_del_bt", method = RequestMethod.GET)
+//		public String f_del_bt(@RequestParam(value="food_id") String food_id
+//								,@RequestParam(value="ep_id") String ep_id){
+//			System.out.println("Ep_Manage_Controller - f_del_bt() 실행");
+////			Ep_Order oder = dao.chk_del(food_id);
+//			dao.f_del(food_id,ep_id);
+//			return "redirect:/ep_manage_modify_view?ep_id="+ep_id;
+//			//redirect : 컨트롤러 value 
+//		}
 	
 	
 	//발주업체 검색 요청

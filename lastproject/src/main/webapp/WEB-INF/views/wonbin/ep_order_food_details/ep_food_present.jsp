@@ -8,12 +8,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <title>식자재 현황 목록</title>
 <%@ include file="../../modal/header.jsp" %>
-<style type="text/css">
-  
+<style type="text/css">  
+.table th{
+	text-align:center;
+}
 </style>
 <script type="text/javascript">
 		
@@ -47,11 +49,17 @@
 // // 				alert('asd');
 // 			}
 // 		});
-		
+
+		//상세보기 확인 버튼 클릭시
+		$(document).on('click','#success',function(){
+			$('.snagse_re').remove();
+			$('#div_displ_snangse').hide();
+		})
 		//체크박스 전체 선택/해제
 		$("#food_chkall").click(function(){
 			$('.snagse_re').remove();
 			$('.div_span').remove();
+			$('._all').remove();
 			$('#div_displ_snangse').hide();
 			if($("#food_chkall").prop("checked")){
 				if($("input[name=food_id]").prop("checked",true)){
@@ -73,11 +81,19 @@
 						var add_input = '<div class="_all"><span style="display:inline-block; width:200px; background-color:#CCCC">'+one+'/'+two+'</span>'						
 						+'<input class="food_id" type="hidden" id="food_id" name="food_id" value="'+one+'"/>'
 						+'<input type="hidden" id="ep_id" name="ep_id" value="'+the+'"/>'
-						+'&nbsp&nbsp&nbsp<span>수량: </span>' 
-						+'<input type="text" id="ep_order_ea" name="ep_order_ea" value="1" size="3">'
-						+'<button class="add" id="add" type="button" value="1">+</button><button id="del" type="button" value="1">-</button>'
-						+'&nbsp&nbsp&nbsp<button class="ap_chk" type="button" id="o_del" name="o_del" value="'+test1+'">X</button></div>';
-					$('.order_add').append(add_input);					
+						+'&nbsp&nbsp&nbsp'
+						+'<button id="del" value="1" type="button" class="btn btn-link" style="padding-top: 3px; padding-bottom: 3px;">'
+						+'<i class="fa fa-minus" style="font-size:15px;color:#489CFF"></i>'
+						+'</button>'
+						+'<input type="text" class="order_ea" id="ep_order_ea" name="ep_order_ea" value="1" size="3" style="padding-top: 1px; padding-bottom: 3px;">'
+						+'<button id="add" value="1" type="button" class="btn btn-link" style="padding-top: 3px; padding-bottom: 3px;">'
+						+'<i class="fa fa-plus" style="font-size:15px;color:#489CFF"></i>'
+						+'</button>'						
+						+'&nbsp&nbsp&nbsp'
+						+'<button class="ap_chk btn btn-link" type="button" id="o_del" name="o_del" value="'+test1+'" style="padding-top: 3px; padding-bottom: 3px;"><i class="fa fa-close" style="font-size:15px;color:red"></i></button>'
+									
+					$('.order_add').append(add_input);
+					
 // 						console.log(one);						
 // 					  console.log(test1);
 // 					  console.log(test1Array[0]);
@@ -93,9 +109,10 @@
 			}
 			/* 체크박스 해제시 해당 input 도 같이 삭제 */
 			$(document).on('change','.td_chk',function(){
+// 				alert('변환');
 				if($(this).is(':checked') == false){ 
 					var test1 = $(this).val();
-// 					alert(test2+'<<<');
+// 					alert(test1+'<<<');
 					$('.ap_chk').each(function(){
 						var ap_chk = $(this).val()
 						if(test1 == ap_chk){
@@ -127,13 +144,28 @@
 					//alert(test2);
 // 					alert(food_id[0]);
 										//span syle 가로 길이 설정
-					var add_input = '<div class="_all" ><span style="display:inline-block; width:200px; background-color:#CCCC">'+food_id[0]+'/'+food_id[1]+'</span>'						
-						+'<input class="food_id" type="hidden" id="food_id" name="food_id" value="'+food_id[0]+'"/>'
-						+'<input type="hidden" id="ep_id" name="ep_id" value="'+food_id[2]+'"/>'
-						+'&nbsp&nbsp&nbsp<span>수량: </span>' 
-						+'<input class="ep_order_ea" type="text" id="ep_order_ea" name="ep_order_ea" value="1" size="3">'
-						+'<button class="add" id="add" type="button" value="1">+</button><button id="del" type="button" value="1">-</button>'
-						+'&nbsp&nbsp&nbsp<button class="ap_chk" type="button" id="o_del" name="o_del" value="'+test2+'">X</button></div>';
+					var add_input = '<div class="_all"><span style="display:inline-block; width:200px; background-color:#CCCC">'+food_id[0]+'/'+food_id[1]+'</span>'						
+					+'<input class="food_id" type="hidden" id="food_id" name="food_id" value="'+food_id[0]+'"/>'
+					+'<input type="hidden" id="ep_id" name="ep_id" value="'+food_id[2]+'"/>'
+					+'&nbsp&nbsp&nbsp'
+					+'<button id="del" value="1" type="button" class="btn btn-link" style="padding-top: 3px; padding-bottom: 3px;">'
+					+'<i class="fa fa-minus" style="font-size:15px;color:#489CFF"></i>'
+					+'</button>'
+					+'<input type="text" class="order_ea" id="ep_order_ea" name="ep_order_ea" value="1" size="3" style="padding-top: 1px; padding-bottom: 3px;">'
+					+'<button id="add" value="1" type="button" class="btn btn-link" style="padding-top: 3px; padding-bottom: 3px;">'
+					+'<i class="fa fa-plus" style="font-size:15px;color:#489CFF"></i>'
+					+'</button>'						
+					+'&nbsp&nbsp&nbsp'
+					+'<button class="ap_chk btn btn-link" type="button" id="o_del" name="o_del" value="'+test2+'" style="padding-top: 3px; padding-bottom: 3px;"><i class="fa fa-close" style="font-size:15px;color:red"></i></button>'	
+						
+						
+// 					var add_input = '<div class="_all" ><span style="display:inline-block; width:200px; background-color:#CCCC">'+food_id[0]+'/'+food_id[1]+'</span>'						
+// 						+'<input class="food_id" type="hidden" id="food_id" name="food_id" value="'+food_id[0]+'"/>'
+// 						+'<input type="hidden" id="ep_id" name="ep_id" value="'+food_id[2]+'"/>'
+// 						+'&nbsp&nbsp&nbsp<span>수량: </span>' 
+// 						+'<input class="ep_order_ea" type="text" id="ep_order_ea" name="ep_order_ea" value="1" size="3">'
+// 						+'<button class="add" id="add" type="button" value="1">+</button><button id="del" type="button" value="1">-</button>'
+// 						+'&nbsp&nbsp&nbsp<button class="ap_chk" type="button" id="o_del" name="o_del" value="'+test2+'">X</button></div>';
 					$('.order_add').append(add_input);
 // 						console.log(add_input);
 				}
@@ -163,10 +195,10 @@
 // 			console.log(_add);
 		})
 		$(document).on('click','#del',function(){
-				var _del = $(this).prev().prev().val();				
+				var _del = $(this).next().val();				
 					//parseInt 로 숫자 인식
 				if(_del > 1){
-					$(this).prev().prev().val(parseInt(_del)-1);
+					$(this).next().val(parseInt(_del)-1);
 				}else{alert('더이상 감소 할수없습니다.');}
 				})
 		//"X"버튼 클릭시 추가한 해당태그 삭제
@@ -195,17 +227,45 @@
 			$('#div_displ').css("display","none");
 		})
 		// 등록버튼 클릭시 발주 등록
-		$(document).on('click','#order_sibmit',function(){
+		$(document).on('click','#order_submit',function(){
 // 			alert('버튼');
+			// 정규식 검사
+			var num = /^[0-9]*$/;
+				// 입력 수량을 반복문돌려서 정규식 확인
+			var success = 0;
+// 			alert(success+'첫');
+			$('.order_ea').each(function(){
+				var ep_order_ea = $(this).val();
+// 				alert(ep_order_ea);
+				if(!num.test(ep_order_ea)){
+					var al = '<div class="alert alert-warning" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">'
+		  					+'발주 수량은 숫자만 입력 가능합니다.'
+							+'</div>'
+					$('#div_vaild').html(al);
+					$(this).focus();
+					success = 0;
+// 					alert(success+'X둘');
+					return false;
+				}else{
+					success = 1;
+// 					alert(success+'둘');
+				}
+			})
+// 			alert(success+'셋');
+			if(success == 1){ // 1이면 발주 진행
 			var re = confirm('발주신청을 계속 진행하시겠습니까?');
+			
 			if(re){
+				var sub; // 등록이 다 되어 있으면 submit 을 위한 변수 선언
 				// 식재료가 업체 등록 되었는지 확인
 				$('.food_id').each(function(){ // 클래스 반복문 으로 각각의 val()값 확인
 					var food_id = $(this).val();
+					
 					$.ajax({
 						type: "post",
 						url : "${pageContext.request.contextPath}/ajax/ep_chck",
 						data : "food_id="+food_id,
+						async: false, // ajax를 동기방식으로 전역변수 sub에 값 세팅
 						contentType:"application/x-www-form-urlencoded; charset=UTF-8",
 						dataType : "JSON", //string 으로 리턴하기 때문에 
 						success : function(data){
@@ -216,18 +276,27 @@
 							if(data == 0){
 								alert('식재코드 ['+food_id+'] 는(은) 업체등록이 안되어있습니다. 업체등록후 발주신청해주십시오.');
 								count++
+								
 							}else if(count == 0){
-								order_add.submit();
+								sub = '없음';
 							}
+							
 						},
 						error : function(request,status,error){
 							alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);			
 						}			
 						
 					})//ajax end
+					
 				});// food_id 클래스 반복문 end
-				
-			}else{/* order_add.submit(); */}
+// 				alert('등록');
+// 				alert(sub);
+				if(sub == '없음'){
+// 					alert('까꿍');
+				order_add.submit(); //등록이 다 되어 있으면 submit
+				}
+			}else{}
+			} //정규식 if 조건문 end
 		})
 		
 								// 식재자 상세보기 관련 jquery
@@ -409,14 +478,14 @@
 <%-- 			<option value="sel_n" <c:if test="${sel_list eq 'sel_n'}">selected</c:if>>업체 미등록 식재료보기</option> --%>
 <!-- 		</select> -->
 <!-- 	</form> -->
-	<div class="col-sm-4">
+	<div class="col-sm-5">
 	<form id="ep_chkbox" action="${pageContext.request.contextPath}/ep_chkbox" method="post">
 <!-- 	<input id="ep_submit" type="button" value="발주업체 관리"/> -->
 		<i class="fa fa-cloud" style="font-size:24px;color:lightblue;" data-placement="right" data-toggle="tooltip" title="발주등록은 체크박스로 이용하실수 있습니다."></i>
 		<br>		
 		<div style="overflow:auto;height:500px;">
 		
-		<table class="chkclass" border=1>
+		<table class="chkclass table table-hover" style="text-align:center">
 			<thead>
 				<tr style='position:relative;top:expression(this.offsetParent.scrollTop);background:black;color:white;" align="left"'>
 					<th><input type="checkbox" id="food_chkall"/> ▼</th>
@@ -425,7 +494,6 @@
 					<th>상품명</th>
 					<th>최근 입고일자</th>
 					<th>현재수량</th>
-					<th>상태</th>
 					<th>상세보기</th>
 					<!-- style="display:none"으로 th,td 숨기기 -->
 					<th style="display:none">업체코드</th>
@@ -440,7 +508,6 @@
 					<td>${o.food_name}</td>
 					<td>${o.ep_order_wh_date}</td>
 					<td>${o.food_nowquantity}</td>
-					<td><span>미구현</span></td>
 					<td><button id="bt_sangse" type="button" value="${o.food_id}">상세보기</button></td>
 					<td style="display:none">${o.ep_id}</td>					
 				</tr>
@@ -449,40 +516,55 @@
 		</table>
 		</div>
 	</form>
-		<div class="alert alert-success alert-dismissable">
+		<div class="alert alert-success alert-dismissable"  style="margin-top: 5px; margin-bottom: 5px; padding-bottom: 5px; padding-top: 5px;">
 		  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		  <strong>알림 - </strong> 발주등록은 체크박스를 통해 이용할수 있습니다.
+		  <strong>알림 - </strong> 원하시는 식재료가 없는경우 해당 식재료의 업체가 등록되었는지 확인해주십시오.
+		</div>
+		<div class="alert alert-success alert-dismissable"  style="margin-bottom: 5px; padding-bottom: 5px; padding-top: 5px;">
+		  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		  <strong>알림 - </strong> 발주등록은 체크박스를 통해 이용하실수 있습니다.
 		</div>
 	<div>
 		<form id ="frm" name="frm" action="${pageContext.request.contextPath}/food_DT_search" method="get">
-			<select id="selbox"name="selbox" size="1">
+			<select id="selbox"name="selbox" style="width: 172px;height: 30.22222px;padding-bottom: 0px;padding-top: 0px;">
 				<option value="food_id">식재코드번호</option>
 				<option value="food_name">상품명</option>
 			</select>
-			<input  size="16" name="keyWord" type="text">
-			<input id="fbutton" type="button" value="검색">
+			<input  size="16" name="keyWord" type="text" style="padding-bottom: 4px; padding-top: 6px; height: 31px;">
+			<input id="fbutton" type="button" value="검색" style="padding-top: 4.5;padding-bottom: 4.5;padding-top: 4px;padding-bottom: 4px;">
 		</form>
 	</div>
 	</div>	
 	<!-- 발주 등록 폼 ajax --> 
 	
 	<div id="div_displ">
-		<div class="col-sm-8">		
+		<div class="col-sm-7">		
 		<h4>발주 등록</h4>
 		<br>				
 					<div>
-						<form action="${pageContext.request.contextPath}/food_OD_insert" method="post" class="order_add" id="order_add" name="form_add" >
+						<form action="${pageContext.request.contextPath}/food_OD_insert" method="post" class="order_add" id="order_add" name="order_add" >
+						
 <!-- 						<span>식재료코드/상품명</span>							 -->
 <!-- 								<input type="hidden" id="chk2_food_id" name="chk2_food_id"/> -->
-<!-- 								&nbsp&nbsp&nbsp<span>수량: </span>  -->
-<!-- 								<input type="text" name="ep_order_ea" value="1" size="3" onchange="change();"> -->
-<!-- 								<input type="button" value=" + " onclick="add();"><input type="button" value=" - " onclick="del();"> -->
-<!-- 								&nbsp&nbsp&nbsp<button type="button" id="o_del" name="o_del">X</button> -->
+<!-- 								<button type="button" class="btn btn-link" style="padding-top: 3px; padding-bottom: 3px;"> -->
+<!-- 								<i class="fa fa-minus" style="font-size:15px;color:#489CFF"></i> -->
+<!-- 								</button> -->
+<!-- 								<input type="text" name="ep_order_ea" value="1" size="3" style="padding-top: 3px; padding-bottom: 3px;"> -->
+<!-- 								<button type="button" class="btn btn-link" style="padding-top: 3px; padding-bottom: 3px;"> -->
+<!-- 								<i class="fa fa-plus" style="font-size:15px;color:#489CFF"></i> -->
+<!-- 								</button> -->
+<!-- 								&nbsp&nbsp&nbsp<button class="btn btn-link" type="button" id="o_del" name="o_del" style="padding-top: 3px; padding-bottom: 3px;"><i class="fa fa-close" style="font-size:15px;color:red"></i></button> -->
+						
 						</form>
 					</div>
-					<div>					
-					<button type="button" id="order_sibmit">등록</button>
-					<button type="button" id="order_alldel">전체 삭제</button>
+					<br>
+					<br>
+					<div id="div_vaild">						
+					</div>
+					<div class="col-md-offset-4">
+					<span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>					
+					<button class="btn btn-primary" type="button" id="order_submit">등록</button>
+					<button class="btn btn-default" type="button" id="order_alldel">전체 삭제</button>
 					</div>			
 		<br>
 		</div>
@@ -490,7 +572,7 @@
 	
 	<!-- 상세보기 폼 ajax -->
 	<div id="div_displ_snangse">
-		<div class="col-sm-8">
+		<div class="col-sm-7">
 			<h4>상세보기</h4>
 			<div id="sangse_span">
 <!-- 				<span>식재코드/식재이름</span><br><span>업체코드/업체이름</span> -->
@@ -525,7 +607,7 @@
 					<!-- append table -->
 				</tbody>
 			</table>
-			<center><button class="btn btn-success btn-md" style="margin-right: 5px;">확인</button><button class="btn btn-md">폐기목록</button></center>		
+			<center><button id="success" class="btn btn-success btn-md" style="margin-right: 5px;">확인</button><a href="${pageContext.request.contextPath}/drop_list"><button class="btn btn-default">폐기목록</button></a></center>		
 		</div>
 		<input type="hidden" id="drop_bt_f_id"/>
 		<input type="hidden" id="drop_bt_o_id"/>
