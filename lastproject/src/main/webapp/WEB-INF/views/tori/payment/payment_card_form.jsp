@@ -211,7 +211,7 @@ function loadCardTotal(){
 					</td>
 					<td>
 					<input type="radio" name="card_app" id="card_app" value="정상(승인)" size="auto">정상
-					<input type="radio" name="card_app" id="card_app" value="취소" size="auto">승인
+					<input type="radio" name="card_app" id="card_app" value="취소" size="auto">취소
 					</td>
 				</tr>
 				<tr>
