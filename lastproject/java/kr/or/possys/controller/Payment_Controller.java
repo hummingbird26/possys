@@ -222,9 +222,6 @@ public class Payment_Controller {
 		//cpdao.insertCardPayment(card);
 		}
 		
-		String id2 = Payment.getPayment_id();
-		System.out.println(id2);
-		
 		/*return "redirect:/tori/payment/payment_list";*/
 		return "redirect:/receipt?member_phone="+member_phone+"&table_order_id="+table_order_id;
 		
