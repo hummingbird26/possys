@@ -47,7 +47,7 @@
 	         <beans:property name="password" value="okjpw"/> 
 		</beans:bean> -->
 
-       	<beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/dade?useUnicode=true&amp;characterEncoding=euckr"/>
+       	<beans:property name="url" value="jdbc:mysql://127.0.0.1:3308/dade?useUnicode=true&amp;characterEncoding=euckr"/>
 	         <beans:property name="username" value="dadeid"/> 
 	         <beans:property name="password" value="dadepw"/> 
     	</beans:bean>

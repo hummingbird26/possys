@@ -44,10 +44,11 @@
     text-align:center;
     text-shadow: 0 1px #FFF;
     vertical-align: middle;
-
-
 	}
- 
+	
+ .nomargin {
+	 border:none; border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;
+}
 
 </style>
 </head>
@@ -110,7 +111,7 @@
 			<tr>
 			<td>직원비밀번호
 			</td>
-			<td>${staff.staff_pw}
+			<td><input type="password" class="nomargin" value="${staff.staff_pw}" readonly>
 			</td>
 			</tr>
 			<tr>

@@ -196,7 +196,7 @@ INSERT IGNORE INTO payment(payment_id
  , sysdate()
  , #{payment_cate}
  , '정상'
- FROM table_order, member, order_detail;
+ FROM table_order, member, order_detail
  
   INSERT IGNORE INTO card(card_id
  , payment_id
