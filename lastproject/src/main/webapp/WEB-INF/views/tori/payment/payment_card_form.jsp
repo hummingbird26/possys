@@ -176,7 +176,16 @@ function addCardId(){
 
 function loadCardTotal(){
 	//부모프레임인 결제폼에 접근하여 카드결제금액을 가져온다
-	window.parent.moneySave();
+	//window.parent.moneySave();
+	//alert("실행됩니까?");
+	var cardTotal = $("#payment_pay",parent.document).val();
+	alert(cardTotal);
+	cardTotal = Number(cardTotal);
+	cardPrice = cardTotal * 10/11;
+	cardTax = cardTotal * 1/11;
+	document.getElementById('card_total').value = cardTotal;
+	document.getElementById('card_price').value = cardPrice.toFixed(0);
+	document.getElementById('card_tax').value = cardTax.toFixed(0);
 	/* var ffrom = parent.document.paymentForm;
 	var fto = document.paymentForm;
 	for(var i = 0; i < ffrom.elements.length; ++i){
@@ -237,18 +246,18 @@ function loadCardTotal(){
 					<td><input type="text" class="form-control" name="card_total" id="card_total" size="auto" onclick="javascript:loadCardTotal()" placeholder="결제금액을 입력해 주세요">
 					</td>
 				</tr>
-				<!-- <tr>
+				<tr>
 					<td>공급가액: 
 					</td>
-					<td><input type="text" class="form-control" name="card_price" id="card_price" size="auto" placeholder="공급가액을 입력해 주세요">
+					<td><input type="text" class="form-control" name="card_price" id="card_price" size="auto" placeholder="공급가액을 입력해 주세요" readonly>
 					</td>
 				</tr>
 				<tr>
 					<td>부가세 : 
 					</td>
-					<td><input type="text" class="form-control" name="card_tax" id="card_tax" size="auto" placeholder="부가세를 입력해 주세요">
+					<td><input type="text" class="form-control" name="card_tax" id="card_tax" size="auto" placeholder="부가세를 입력해 주세요" readonly>
 					</td>
-				</tr> -->
+				</tr>
 				</table>
 		<!-- <input type="submit" class="btn btn-primary btn-sm" id="paymentCardAdd" name="paymentCardAdd" value="카드거래입력"> -->
 		<input type="reset" class="btn btn-primary btn-sm" id="paymentCancel" name="paymentCancel" value="다시입력">

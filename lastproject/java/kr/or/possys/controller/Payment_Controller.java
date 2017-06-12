@@ -394,6 +394,7 @@ public class Payment_Controller {
 		pdao.PaymentUpdate(payment_id);
 		pdao.insertPaymentCancel(payment_id);
 		pdao.deletePayment(payment_id);
+		cpdao.deleteCard(payment_id);
 		
 		/*System.out.println(model);*/
 		return "redirect:/tori/payment/payment_cancel_list";

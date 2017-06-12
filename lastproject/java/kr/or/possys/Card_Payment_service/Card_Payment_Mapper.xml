@@ -45,6 +45,10 @@ DELETE FROM card WHERE card_id = #{card_id} </delete>
 	LIMIT #{beginRow}, #{pagePerRow}
  </select>
 
+<delete parameterType="kr.or.possys.Card_Payment_service.Card_Payment" id="deleteCard" >
+DELETE FROM card WHERE payment_id = #{payment_id}
+</delete>
+
 
 <select parameterType="String" id="getCardPayment" resultType="kr.or.possys.Card_Payment_service.Card_Payment"> 
 SELECT * FROM card WHERE card_id = #{card_id}</select>
