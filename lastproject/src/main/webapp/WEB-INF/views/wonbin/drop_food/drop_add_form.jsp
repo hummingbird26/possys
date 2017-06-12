@@ -50,12 +50,36 @@ $(document).ready(function(){
 		
 	$(document).on('click','#addsubmit', function(){
 // 		alert('click');
+		var num = /^[0-9]*$/;
 		var food_nowquantity = $('#food_nowquantity').val();
 		var drop_ea = $('#drop_ea').val();
 		var _drop_ea = parseInt(drop_ea);
 		var _food_nowquantity = parseInt(food_nowquantity);
 // 		alert(ep_order_wh_ea);
-		if(_drop_ea <= _food_nowquantity){
+		//유효성 /정규식
+		var drop_reason = $('#drop_reason').val();
+		if(!drop_reason){
+			var al = '<div class="alert alert-warning" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">'
+		  		+'폐기사유를 입력해 주십시오.'
+				+'</div>'
+				$('#div_vaild').html(al);
+				$('#drop_reason').focus();
+				  return false;
+		}else if(!drop_ea){
+			var al = '<div class="alert alert-warning" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">'
+		  		+'폐기수량을 입력해 주십시오.'
+				+'</div>'
+				$('#div_vaild').html(al);
+				$('#drop_ea').focus();
+				  return false;
+		}else if(!num.test(drop_ea)){
+			var al = '<div class="alert alert-warning" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">'
+		  		+'폐기수량은 숫자만 입력 하실수 있습니다.'
+				+'</div>'
+				$('#div_vaild').html(al);
+				$('#drop_ea').focus();
+				  return false;
+		}else if(_drop_ea <= _food_nowquantity){
 			var re = confirm('폐기등록을 계속 진행하시겠습니까?');
 			if(re){
 // 			alert('보낼수있음');
@@ -148,6 +172,12 @@ $(document).ready(function(){
 					<input  class="form-control" name ="staff_id" id ="staff_id" type ="text" value="${sessionScope.admin.admin_id}"readonly="readonly"/>
 				</div>
 			</div>
+				<div class="form-group">
+					<span class="col-sm-2"></span>
+					<div class="col-xs-7">
+						<div id="div_vaild"></div>
+				</div>
+			<br>
 			<br>
 			<div class="form-group col-sm-10">
 				<center>
@@ -156,6 +186,8 @@ $(document).ready(function(){
 				</center>
 			</div>
 			<input type="hidden" name="food_nowquantity" id="food_nowquantity"/>
+			
+		</div>
 		</form>
 		
 		

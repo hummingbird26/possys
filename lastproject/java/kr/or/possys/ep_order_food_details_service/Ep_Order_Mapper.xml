@@ -2,7 +2,17 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.possys.ep_order_food_details_service.Ep_Order_Mapper">
-	
+	<!-- 입고 수정 - 입고취소 액션 -->
+	<update id="aj_ep_wh_cancel" parameterType="string">
+		update ep_order_food_details set ep_order_wh_date = null
+		,ep_order_wh_ea = null
+		,ep_order_food_shelflife = null
+		,ep_order_unit_price = null
+		,ep_order_total_price = null
+		,food_nowquantity = null
+		,ea_order_statement = '발주신청'
+		where ep_order_id = #{ep_order_id}
+	</update>
 	<!-- AJAX 상세보기 폼 화면 table 관련 -->
 		<!-- 최근 -->
 	<select	id="aj_sangse_rctable" parameterType="string" resultType="kr.or.possys.ep_order_food_details_service.Ep_Order">

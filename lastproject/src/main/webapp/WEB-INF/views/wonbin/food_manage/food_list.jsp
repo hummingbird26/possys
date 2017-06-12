@@ -16,10 +16,7 @@
 			window.open('${pageContext.request.contextPath}/food_add_form','popup','width=770,height=700,left=0,top=0,toolbar=no,locaton=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no');
 		});
 		//식자재 수정시 새창
-		$(document).on('click','#add_food',function(){
-			
-		});
-		
+				
 // 		$('[data-toggle="tooltip"]').tooltip(); 
 		//검색 
 		$('#fbutton').click(function(){

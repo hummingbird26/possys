@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>회원 검색</title>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
@@ -60,7 +60,11 @@
 }
 .table4_1 tr:nth-child(even){
 	background-color:#fdfdfd;
-}		
+}
+
+tr{
+font-size: 15px;
+}  		
 </style>
 
  <!-- start: Css -->
@@ -330,7 +334,7 @@ $(document).ready(function () {
 
 
 
-     <h1>실시간 검색</h1>
+     <h1>회원 검색</h1>
   <div class="member">전체행의 수 : ${memberCount}</div>
     <label for="tags">검색어를 입력하세요: </label>  
   <input type="text" id="tags" />

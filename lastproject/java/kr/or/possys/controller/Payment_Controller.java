@@ -221,6 +221,7 @@ public class Payment_Controller {
 		//cpdao.insertCardPayment(card_payment);
 		//cpdao.insertCardPayment(card);
 		}
+		
 		/*return "redirect:/tori/payment/payment_list";*/
 		return "redirect:/receipt?member_phone="+member_phone+"&table_order_id="+table_order_id;
 		
@@ -393,6 +394,7 @@ public class Payment_Controller {
 		pdao.PaymentUpdate(payment_id);
 		pdao.insertPaymentCancel(payment_id);
 		pdao.deletePayment(payment_id);
+		cpdao.deleteCard(payment_id);
 		
 		/*System.out.println(model);*/
 		return "redirect:/tori/payment/payment_cancel_list";

@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sun.xml.internal.bind.v2.runtime.output.StAXExStreamWriterOutput;
 
@@ -26,6 +27,46 @@ import kr.or.possys.ep_order_food_details_service.Ep_Order_Dao;
 public class Ep_OF_Details_Controller {
 	@Autowired
 	Ep_Order_Dao dao = new Ep_Order_Dao();
+	
+	// 입고 수정 액션
+	@ResponseBody
+	@RequestMapping(value="ep_wh_mody",method=RequestMethod.POST) // 배열방식 or 입력방식이 아니라 그런지 get으로 받음
+	public void ep_wh_mody(@RequestParam(value="ep_order_id") String[] ep_order_id
+							,@RequestParam(value="food_id") String[] food_id
+							,@RequestParam(value="ep_order_wh_ea") int[] ep_order_wh_ea
+							,@RequestParam(value="ep_order_food_shelflife") String[] ep_order_food_shelflife
+							,@RequestParam(value="ep_order_unit_price") int[] ep_order_unit_price
+							,@RequestParam(value="ep_order_total_price") int[] ep_order_total_price
+							){
+		System.out.println("00_02_ep_wh_mody 실행 - Ep_OF_Details_Controller.java");
+		List<Ep_Order> list = new ArrayList<Ep_Order>();		
+		for(int i=0; i<ep_order_id.length; i++){
+			Ep_Order ep_o = new Ep_Order(); // 반복문으로 list.add에 세팅후 다시 생성자메서드로 Dto 생성
+			ep_o.setEp_order_id(ep_order_id[i]);
+			ep_o.setFood_id(food_id[i]);
+			ep_o.setEp_order_wh_ea(ep_order_wh_ea[i]);
+			ep_o.setEp_order_food_shelflife(ep_order_food_shelflife[i]);
+			ep_o.setEp_order_unit_price(ep_order_unit_price[i]);
+			ep_o.setEp_order_total_price(ep_order_total_price[i]);
+//			System.out.println(ep_order_total_price[i]+"<<"+i+"번째 합계");
+			list.add(ep_o);	
+//			System.out.println(list.get(i)+"<<< list 담긴값");
+		// 이방식으로 해도 되지만 일일이 dao로 보내야한다. 
+//		for(String ep_o_id : ep_order_id){
+//			System.out.println(ep_o_id+"<<ep_order_id");
+//			ep_o.setEp_order_id(ep_o_id);			
+		}
+		dao.ep_o_wh_update(list);
+		
+	}
+	
+	// 입고 수정 폼 새창
+	@RequestMapping(value="/ep_wh_modify_view", method = RequestMethod.GET)
+	public String ep_wh_modify_view(){
+		System.out.println("00_01_Ep_OF_Details_Controller.java ->>ep_wh_modify_view 폼 요청");
+		return "/wonbin/ep_order_food_details/ep_wh_modify_view";
+	}
+	
 	
 	// 발주주문 목록에서 상세보기 - 발주 재등록시 update
 	@RequestMapping(value="ep_order_update",method=RequestMethod.POST)

@@ -85,7 +85,7 @@
 						+'<button id="del" value="1" type="button" class="btn btn-link" style="padding-top: 3px; padding-bottom: 3px;">'
 						+'<i class="fa fa-minus" style="font-size:15px;color:#489CFF"></i>'
 						+'</button>'
-						+'<input type="text" id="ep_order_ea" name="ep_order_ea" value="1" size="3" style="padding-top: 1px; padding-bottom: 3px;">'
+						+'<input type="text" class="order_ea" id="ep_order_ea" name="ep_order_ea" value="1" size="3" style="padding-top: 1px; padding-bottom: 3px;">'
 						+'<button id="add" value="1" type="button" class="btn btn-link" style="padding-top: 3px; padding-bottom: 3px;">'
 						+'<i class="fa fa-plus" style="font-size:15px;color:#489CFF"></i>'
 						+'</button>'						
@@ -151,7 +151,7 @@
 					+'<button id="del" value="1" type="button" class="btn btn-link" style="padding-top: 3px; padding-bottom: 3px;">'
 					+'<i class="fa fa-minus" style="font-size:15px;color:#489CFF"></i>'
 					+'</button>'
-					+'<input type="text" id="ep_order_ea" name="ep_order_ea" value="1" size="3" style="padding-top: 1px; padding-bottom: 3px;">'
+					+'<input type="text" class="order_ea" id="ep_order_ea" name="ep_order_ea" value="1" size="3" style="padding-top: 1px; padding-bottom: 3px;">'
 					+'<button id="add" value="1" type="button" class="btn btn-link" style="padding-top: 3px; padding-bottom: 3px;">'
 					+'<i class="fa fa-plus" style="font-size:15px;color:#489CFF"></i>'
 					+'</button>'						
@@ -227,8 +227,32 @@
 			$('#div_displ').css("display","none");
 		})
 		// 등록버튼 클릭시 발주 등록
-		$(document).on('click','#order_sibmit',function(){
+		$(document).on('click','#order_submit',function(){
 // 			alert('버튼');
+			// 정규식 검사
+			var num = /^[0-9]*$/;
+				// 입력 수량을 반복문돌려서 정규식 확인
+			var success = 0;
+// 			alert(success+'첫');
+			$('.order_ea').each(function(){
+				var ep_order_ea = $(this).val();
+// 				alert(ep_order_ea);
+				if(!num.test(ep_order_ea)){
+					var al = '<div class="alert alert-warning" style="padding-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">'
+		  					+'발주 수량은 숫자만 입력 가능합니다.'
+							+'</div>'
+					$('#div_vaild').html(al);
+					$(this).focus();
+					success = 0;
+// 					alert(success+'X둘');
+					return false;
+				}else{
+					success = 1;
+// 					alert(success+'둘');
+				}
+			})
+// 			alert(success+'셋');
+			if(success == 1){ // 1이면 발주 진행
 			var re = confirm('발주신청을 계속 진행하시겠습니까?');
 			
 			if(re){
@@ -272,6 +296,7 @@
 				order_add.submit(); //등록이 다 되어 있으면 submit
 				}
 			}else{}
+			} //정규식 if 조건문 end
 		})
 		
 								// 식재자 상세보기 관련 jquery
@@ -469,7 +494,6 @@
 					<th>상품명</th>
 					<th>최근 입고일자</th>
 					<th>현재수량</th>
-					<th>상태</th>
 					<th>상세보기</th>
 					<!-- style="display:none"으로 th,td 숨기기 -->
 					<th style="display:none">업체코드</th>
@@ -484,7 +508,6 @@
 					<td>${o.food_name}</td>
 					<td>${o.ep_order_wh_date}</td>
 					<td>${o.food_nowquantity}</td>
-					<td><span>미구현</span></td>
 					<td><button id="bt_sangse" type="button" value="${o.food_id}">상세보기</button></td>
 					<td style="display:none">${o.ep_id}</td>					
 				</tr>
@@ -536,9 +559,11 @@
 					</div>
 					<br>
 					<br>
+					<div id="div_vaild">						
+					</div>
 					<div class="col-md-offset-4">
 					<span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>					
-					<button class="btn btn-primary" type="button" id="order_sibmit">등록</button>
+					<button class="btn btn-primary" type="button" id="order_submit">등록</button>
 					<button class="btn btn-default" type="button" id="order_alldel">전체 삭제</button>
 					</div>			
 		<br>

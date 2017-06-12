@@ -64,6 +64,7 @@ SET payment.payment_state = '취소'
 , member.member_point = member.member_point - payment.payment_addmileage 
 , table_order.table_order_end = 'f' 
 WHERE payment_id =  #{payment_id}
+
 </update>
 
 
@@ -198,7 +199,28 @@ INSERT IGNORE INTO payment(payment_id
  , '정상'
  FROM table_order, member, order_detail;
  
-  INSERT IGNORE INTO card(card_id
+ INSERT IGNORE INTO card(card_id
+ , payment_id
+ , card_app
+ , card_detail
+ , card_date
+ , card_company
+ , card_total
+ , card_price
+ , card_tax)
+ SELECT
+  #{card_id} 
+ , payment.payment_id
+ , #{card_app} 
+ , #{card_detail} 
+ , payment.payment_date
+ , #{card_company}
+ , #{payment_pay}
+ , #{card_price}
+ , #{card_tax}
+ FROM payment WHERE payment_cate='카드' AND payment_id = payment.payment_id AND payment_date = payment.payment_date;
+ 
+ <!-- INSERT IGNORE INTO card(card_id
  , payment_id
  , card_app
  , card_detail
@@ -217,7 +239,7 @@ INSERT IGNORE INTO payment(payment_id
  , #{card_total}
  , #{card_price}
  , #{card_tax}
- FROM payment WHERE payment_cate='카드' AND payment_id = payment.payment_id;
+ FROM payment WHERE payment_cate='카드' AND payment_id = payment.payment_id; -->
  
  <!-- INSERT INTO payment(payment_id
  , table_order_id 

@@ -272,6 +272,14 @@ function getCardId(){
 	$('#CARDADD').hide();
 }
 
+function dateSave(){
+	var paymentDate = $("#payment_date").val();
+}
+
+function moneySave(){
+	var paymentPay = $("#payment_pay").val();
+}
+
 </script>
 
 </head>

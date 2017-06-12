@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.possys.Cancel_Payment_service.Payment_Cancel;
+import kr.or.possys.Payment_service.Payment;
 
 @Repository
 public class Card_Payment_Dao {
@@ -59,6 +60,14 @@ public class Card_Payment_Dao {
 		return sqlSessionTemplate.selectList("kr.or.possys.Card_Payment_service.Card_Payment_Mapper.CPSsearch",map);
 	}
 	    
+		public int deleteCard(String payment_id) {
+			System.out.println("deleteCard");
+			System.out.println(payment_id);
+	        Card_Payment card = new Card_Payment();
+	        card.setPayment_id(payment_id);
+			return sqlSessionTemplate.delete("kr.or.possys.Card_Payment_service.Card_Payment_Mapper.deleteCard", card);
+		}
+	
 	    public Card_Payment getCardPayment(String card_id) {
 	    	System.out.println("getCardPayment");
 	        return sqlSessionTemplate.selectOne("kr.or.possys.Card_Payment_service.Card_Payment_Mapper.getCardPayment", card_id);

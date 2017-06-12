@@ -10,9 +10,9 @@
 	<meta name="author" content="Isna Nur Azis">
 	<meta name="keyword" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Miminium</title>
+    <title>관리자페이지</title>
  
-    <!-- start: Css -->
+     <!-- start: Css -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/bootstrap.min.css">
 
       <!-- plugins -->
@@ -24,10 +24,13 @@
 	<!-- end: Css -->
 
 	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/asset/img/logomi.png">
-   
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+ 
+ 
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+ <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 
+<%@ include file="../modal/header.jsp" %>
  <script type="text/javascript">
  $(document).ready(function(){
 	 //배상훈 블로그 주소
@@ -57,7 +60,7 @@
  <body id="mimin" class="dashboard" >
 
 
-   <%@ include file="../modal/header.jsp" %>
+   
 
       <div class="container-fluid mimin-wrapper">
   	<%@ include file="../modal/left.jsp" %>
@@ -66,14 +69,32 @@
                 <div class="panel">
                   <div class="panel-body">
                       <div class="col-md-6 col-sm-12">
-                        <h3 class="animated fadeInLeft">개인 블로그 주소</h3>
-                        <p class="animated fadeInDown"><span class="fa  fa-map-marker"></span>서울</p>
-
+                        <h3 class="animated fadeInLeft"><b>개인 블로그 주소</b></h3>
+                      
                         <ul class="nav navbar-nav">
+                           <li class="dropdown avatar-dropdown">
+                  		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+               			   </li>
                             <li><a id="hki" href="" >홍경인</a></li>
+                           
+                            <li class="dropdown avatar-dropdown">
+                  		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+               			   </li>
                             <li><a id="ogj" href="" class="active">오광진</a></li>
+                            
+                            <li class="dropdown avatar-dropdown">
+                  		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+               			   </li>
                             <li><a id="bsh" href="">배상훈</a></li>
+                            
+                            <li class="dropdown avatar-dropdown">
+                  		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+               			   </li>
                             <li><a href="">최홍락</a></li>
+                            
+                             <li class="dropdown avatar-dropdown">
+                  		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+               			   </li>
                             <li><a id="bsw" href="">백승욱</a></li>
                         </ul>
                     </div>
@@ -1239,6 +1260,9 @@
         //  end:  Chart =============
 			
         // start: Calendar =========
+        	
+        
+        
          var sysdate =  $('#date').val($.datepicker.formatDate($.datepicker.ATOM, new Date()));
         	$('.dashboard .calendar').fullCalendar({
             header: {
@@ -1251,8 +1275,14 @@
             editable: true,
             events: [
                 {
-                    title: '팀프 발표',
+                    title: '팀프발표(x)',
                     start: '2017-06-05',
+                    constraint: 'availableForMeeting', // defined below
+                    color: '#20C572'
+                },
+                {
+                    title: '팀프발표(x)',
+                    start: '2017-06-12',
                     constraint: 'availableForMeeting', // defined below
                     color: '#20C572'
                 },
@@ -1260,7 +1290,10 @@
                     title: '수료',
                     start: '2017-06-15'
                 },
-
+                {
+                    title: '팀프 발표',
+                    start: '2017-06-13'
+                },
                 // areas where "Meeting" must be dropped
                 {
                     id: 'availableForMeeting',
@@ -1313,6 +1346,8 @@
 
       })(jQuery);
      </script>
+     
+    
   <!-- end: Javascript -->
   </body>
 </html>
