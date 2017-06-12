@@ -473,4 +473,14 @@ public class Order_Controller{
 		odao.order_cancel(table_order_id);
 		return "redirect:/order_list";
 	}
+	
+	
+	@RequestMapping(value="/portfolio", method = RequestMethod.GET)
+	public String pot(Model model){
+
+		
+		return "/order/portfolio";
+	}
+	
+	
 }
