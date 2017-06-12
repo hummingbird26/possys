@@ -171,7 +171,7 @@ function phonecheck(){
 	
 }
 
-function paymentsave(){
+/* function paymentsave(){
 	//카드폼으로 이동하고 카드폼 입력 이전에 작성했던 데이터값을 받아놓는다.
 	alert("실행이 되는가?");
 	var reservePhone = $("#member_phone").val();
@@ -189,7 +189,7 @@ function paymentload(){
 	
 	alert(paymentsave.apply(reservePhone));
 
-}
+} */
 
 // 라디오버튼의 값이 카드일때 카드결제폼으로 이동한다.
 function gotoCardAddForm(){
