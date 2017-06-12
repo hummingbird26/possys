@@ -10,9 +10,9 @@
 	<meta name="author" content="Isna Nur Azis">
 	<meta name="keyword" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Miminium</title>
+    <title>관리자페이지</title>
  
-    <!-- start: Css -->
+     <!-- start: Css -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/asset/css/bootstrap.min.css">
 
       <!-- plugins -->
@@ -24,10 +24,13 @@
 	<!-- end: Css -->
 
 	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/asset/img/logomi.png">
-   
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+ 
+ 
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+ <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 
+<%@ include file="../modal/header.jsp" %>
  <script type="text/javascript">
  $(document).ready(function(){
 	 //배상훈 블로그 주소
@@ -57,7 +60,7 @@
  <body id="mimin" class="dashboard" >
 
 
-   <%@ include file="../modal/header.jsp" %>
+   
 
       <div class="container-fluid mimin-wrapper">
   	<%@ include file="../modal/left.jsp" %>
@@ -1251,7 +1254,7 @@
             editable: true,
             events: [
                 {
-                    title: '팀프 발표',
+                    title: '팀프 발표(취소)',
                     start: '2017-06-05',
                     constraint: 'availableForMeeting', // defined below
                     color: '#20C572'
@@ -1260,7 +1263,10 @@
                     title: '수료',
                     start: '2017-06-15'
                 },
-
+                {
+                    title: '팀프 발표',
+                    start: '2017-06-13'
+                },
                 // areas where "Meeting" must be dropped
                 {
                     id: 'availableForMeeting',
