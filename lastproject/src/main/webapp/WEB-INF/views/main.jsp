@@ -249,7 +249,7 @@ Mybatis(mapper)
 					<p> - 회원 검색</p>
 					
 					<h2>담당자:백승욱</h2>
-					<p>결제관리 </p>
+					
 					<p> - 직원관리 : 직원목록</p>
 				</div>
 						<a href="#shop" class="button style2 down anchored">Next</a>

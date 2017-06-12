@@ -5,12 +5,46 @@
 <html>
 <head>
 	<style>
-	/* .panel-body{
-	position:fixed;
-	top:30px;
-	width:100%;
-	height:100%;
-	} */
+	.bu{
+  background:#FF7171;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:auto;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+  border-radius: 10px;
+  width:auto;
+}
+.bu:hover{
+  background:#fff;
+  color:#ED9595;
+}
+.bu:before,.bu:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #FFFFB0;
+  transition:400ms ease all;
+}
+
+.bu:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+
+.bu:hover:before,.bu:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
 	</style>
 	<meta charset="utf-8">
 	<meta name="description" content="Miminium Admin Template v.1">
@@ -161,7 +195,7 @@ playAlert = setInterval(function() {
 
                             <div class="col-md-12 padding-0">
                               <div class="panel box-v3">
-  								<input type="button" id="order" value="주문신청">
+  								<center><input type="button" id="order" class="bu" value="주문신청"></center>
                                 <div class="panel-body">
                			<script>
                 			$('#order').click(function(){

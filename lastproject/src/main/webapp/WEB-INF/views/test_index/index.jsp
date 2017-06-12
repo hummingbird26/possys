@@ -69,14 +69,32 @@
                 <div class="panel">
                   <div class="panel-body">
                       <div class="col-md-6 col-sm-12">
-                        <h3 class="animated fadeInLeft">개인 블로그 주소</h3>
-                        <p class="animated fadeInDown"><span class="fa  fa-map-marker"></span>서울</p>
-
+                        <h3 class="animated fadeInLeft"><b>개인 블로그 주소</b></h3>
+                      
                         <ul class="nav navbar-nav">
+                           <li class="dropdown avatar-dropdown">
+                  		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+               			   </li>
                             <li><a id="hki" href="" >홍경인</a></li>
+                           
+                            <li class="dropdown avatar-dropdown">
+                  		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+               			   </li>
                             <li><a id="ogj" href="" class="active">오광진</a></li>
+                            
+                            <li class="dropdown avatar-dropdown">
+                  		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+               			   </li>
                             <li><a id="bsh" href="">배상훈</a></li>
+                            
+                            <li class="dropdown avatar-dropdown">
+                  		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+               			   </li>
                             <li><a href="">최홍락</a></li>
+                            
+                             <li class="dropdown avatar-dropdown">
+                  		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+               			   </li>
                             <li><a id="bsw" href="">백승욱</a></li>
                         </ul>
                     </div>
@@ -1242,6 +1260,9 @@
         //  end:  Chart =============
 			
         // start: Calendar =========
+        	
+        
+        
          var sysdate =  $('#date').val($.datepicker.formatDate($.datepicker.ATOM, new Date()));
         	$('.dashboard .calendar').fullCalendar({
             header: {
@@ -1254,8 +1275,14 @@
             editable: true,
             events: [
                 {
-                    title: '팀프 발표(취소)',
+                    title: '팀프발표(x)',
                     start: '2017-06-05',
+                    constraint: 'availableForMeeting', // defined below
+                    color: '#20C572'
+                },
+                {
+                    title: '팀프발표(x)',
+                    start: '2017-06-12',
                     constraint: 'availableForMeeting', // defined below
                     color: '#20C572'
                 },
@@ -1319,6 +1346,8 @@
 
       })(jQuery);
      </script>
+     
+    
   <!-- end: Javascript -->
   </body>
 </html>
