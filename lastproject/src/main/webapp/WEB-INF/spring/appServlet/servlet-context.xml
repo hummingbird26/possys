@@ -47,10 +47,16 @@
 	         <beans:property name="password" value="okjpw"/> 
 		</beans:bean> -->
 
-       	<beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/dade?useUnicode=true&amp;characterEncoding=euckr"/>
+<!--        	<beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/dade?useUnicode=true&amp;characterEncoding=euckr"/>
 	         <beans:property name="username" value="dadeid"/> 
 	         <beans:property name="password" value="dadepw"/> 
-    	</beans:bean>
+    	</beans:bean> -->
+    	
+    	   	<beans:property name="url" value="jdbc:mysql://umj64-006.cafe24.com:3306/hummingbird26?useUnicode=true&amp;characterEncoding=euckr"/>
+        <beans:property name="username" value="hummingbird26"/>
+        <beans:property name="password" value="ruddls12!@"/>
+        </beans:bean>
+    	
 	
 	<!-- mybatis설정 1. SqlSessionFactory -->
     <beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
