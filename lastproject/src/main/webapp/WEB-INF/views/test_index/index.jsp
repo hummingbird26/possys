@@ -75,27 +75,27 @@
                            <li class="dropdown avatar-dropdown">
                   		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                			   </li>
-                            <li><a id="hki" href="" >홍경인</a></li>
+                            <li><a id="hki" href="" >홍경인(Team github)</a></li>
                            
                             <li class="dropdown avatar-dropdown">
                   		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                			   </li>
-                            <li><a id="ogj" href="" class="active">오광진</a></li>
+                            <li><a id="ogj" href="" class="active">오광진(blog)</a></li>
                             
                             <li class="dropdown avatar-dropdown">
                   		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                			   </li>
-                            <li><a id="bsh" href="">배상훈</a></li>
+                            <li><a id="bsh" href="">배상훈(blog)</a></li>
                             
                             <li class="dropdown avatar-dropdown">
                   		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                			   </li>
-                            <li><a href="">최홍락</a></li>
+                            <li><a href=""><del>최홍락</del></a></li>
                             
                              <li class="dropdown avatar-dropdown">
                   		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                			   </li>
-                            <li><a id="bsw" href="">백승욱</a></li>
+                            <li><a id="bsw" href="">백승욱(blog)</a></li>
                         </ul>
                     </div>
                     <div class="col-md-6 col-sm-12">
@@ -207,10 +207,10 @@
                                   </div>
                                   <div class="panel-body">
                                     <div class="col-md-12 padding-0 text-center">
-                                      <div class="col-md-4 col-sm-4 col-xs-6 padding-0">
-                                          <h3>연봉</h3>
-                                          <p>10.000</p>
+                                    <div style="width: 70px" class="col-md-4 col-sm-4 col-xs-6 padding-0">
+                                        
                                       </div>
+                                      
                                       <div class="col-md-4 col-sm-4 col-xs-6 padding-0">
                                           <h3>직급</h3>
                                           <p>${sessionScope.admin.admin_level}</p>
