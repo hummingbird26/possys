@@ -23,6 +23,33 @@
 
 <%@ include file="../../modal/header.jsp" %>
 <%-- <%@ include file="../../modal/header.jsp" %> --%>
+
+<style type="text/css">
+
+.mono_table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 3px;
+    border: outset;
+    color: black;
+}
+
+.td {
+   padding: 15px;
+    border: outset;
+    border-left: 5px solid #C03;
+    border-bottom: 1px solid #DDD;
+    background: #FCF0F3;
+    font-weight: normal;
+    text-align:center;
+    text-shadow: 0 1px #FFF;
+    vertical-align: middle;
+
+
+	}
+ 
+
+</style>
 </head>
 <body>
 </br></br></br></br></br>
@@ -31,11 +58,11 @@
 <br><br>
 <div>
 	<div class="col-sm-6">
-		<img src="" height="auto" width="auto" alt="카드결제정보">
+		<img src="${pageContext.request.contextPath}/resources/asset/img/pos-systems.jpg" height="300px" width="500px" alt="카드결제정보">
 	
 	</div>
 	<div class="col-sm-6">
-		<table class="table table-hover table-stripped">
+		<table class="table table-hover table-stripped mono_table">
 		<caption>카드결제기본정보</caption>
 			<tr>
 			<td>승인번호
@@ -85,7 +112,7 @@
 </div>
 <br><br>
 <div class="container">
-	<table class="table table-stripped table-hover">
+	<table class="table table-stripped table-hover mono_table">
 	<caption>추가정보</caption>
 			<tr>
 			<td>세부사항

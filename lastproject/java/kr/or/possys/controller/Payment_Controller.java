@@ -221,6 +221,7 @@ public class Payment_Controller {
 		//cpdao.insertCardPayment(card_payment);
 		//cpdao.insertCardPayment(card);
 		}
+		
 		/*return "redirect:/tori/payment/payment_list";*/
 		return "redirect:/receipt?member_phone="+member_phone+"&table_order_id="+table_order_id;
 		
@@ -265,7 +266,7 @@ public class Payment_Controller {
 		return "/tori/payment/payment_view";
 	}
 	
-	//검색버튼을 클릭한 후 검색화면으로 넘어간다
+	//검색버튼을 클릭한 후 검색화면으로 넘어간다(구현안하는쪽으로 수정)
 	@RequestMapping(value={"/tori/payment/payment_search_form"}, method = RequestMethod.GET)
 	public String paymentsearch(){
 		System.out.println("04 Payment_Controller.java -> paymentsearch");
@@ -393,6 +394,7 @@ public class Payment_Controller {
 		pdao.PaymentUpdate(payment_id);
 		pdao.insertPaymentCancel(payment_id);
 		pdao.deletePayment(payment_id);
+		cpdao.deleteCard(payment_id);
 		
 		/*System.out.println(model);*/
 		return "redirect:/tori/payment/payment_cancel_list";
@@ -606,6 +608,7 @@ public class Payment_Controller {
 			
 			
 			cpdao.insertCardPayment(card_payment);
+			//return "redirect:/tori/payment/payment_card_action";
 			return "redirect:/tori/payment/payment_card_list";
 			
 		}

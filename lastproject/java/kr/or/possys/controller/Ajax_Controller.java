@@ -35,6 +35,17 @@ public class Ajax_Controller {
 	@Autowired
 	private Drop_Dao drop_dao;
 	
+	// 입고 수정 - 입고취소 액션
+		@RequestMapping(value="/ep_wh_cancel")
+		@ResponseBody
+		public void aj_ep_wh_cancel(@RequestParam(value="ep_order_id", required=true) String ep_order_id
+										,HttpServletResponse response) throws Exception {
+		System.out.println(ep_order_id+"<== ep_order_id - 11_aj_ep_wh_cancel실행 -Ep_OF_Details_Controller.java");
+		ep_odao.aj_ep_wh_cancel(ep_order_id);
+		
+	}
+	
+	
 	// 상세보기 폐기삭제 액션
 		@RequestMapping(value="/aj_sangse_del")
 		@ResponseBody

@@ -39,6 +39,7 @@
 					ep_order_id = this.ep_order_id;
 // 					console.log(ep_order_id+'<<<< ep_order_id');
 					$('#ep_order_id').html("발주코드 : "+ep_order_id);
+					$('#wh_mody').val(ep_order_id);
 					ep_id = this.ep_id;
 					ep_name = this.ep_name;
 					food_id = this.food_id;
@@ -77,9 +78,17 @@
 // 			alert(to);
 // 		})
 					
-// 					$('#total').html()
-			
+// 					$('#total').html()			
 		}); //상세보기 클릭 이벤트 end
+		var wh_mody;
+		$('#wh_mody').click(function(){
+			var ep_order_id = $(this).val();
+// 			var wh_mody = $('#wh_mody').val();
+// 			alert(wh_mody);
+			wh_mody = window.open('${pageContext.request.contextPath}/ep_wh_modify_view','popup','width=1050,height=700,left=0,top=0,toolbar=no,locaton=no,directories=no,status=no,menubar=no,resizable=no,scrollbars=no,copyhistory=no');
+			wh_mody.document.getElementById("wh_mody").value = $('#wh_mody').val(); // id몇이 같아야함
+			
+		})
 		
 	});//ready End
 
@@ -159,6 +168,11 @@
 				<!-- ajax append 들어감 -->				
 			</tbody>
 		</table>
+		<center>
+			<div>
+			<button class="btn btn-primary" type="button" id="wh_mody" style="width: 91.9375px;height: 30px;padding-top: 5px;padding-bottom: 5px;">수정</button>
+			</div>
+		</center>
 		<center>
 			<div id = "total">
 			<h3>총 발주액 : </h3>

@@ -29,6 +29,29 @@ Optional theme
 
 <%-- <%@ include file="../../modal/wide_menu.jsp" %> --%>
 <%@ include file="../../modal/header.jsp" %>
+<style>
+h1, table { text-align: center; }
+
+table {border-collapse: collapse;  width: 70%; margin: 0 auto 5rem;}
+
+th, td { padding: 1.5rem; font-size: 1.3rem; }
+
+tr {background: hsl(50, 50%, 80%); }
+
+tr, td { transition: .4s ease-in; } 
+
+/* tr:first-child {background: hsla(12, 100%, 40%, 0.5); } */
+
+tr:nth-child(even) { background: hsla(50, 50%, 80%, 0.7); }
+
+td:empty {background: hsla(50, 25%, 60%, 0.7); }
+
+/* tr:hover:not(#firstrow), tr:hover td:empty {background: #ff0; pointer-events: visible;}
+
+tr:hover:not(#firstrow) { transform: scale(1.2); font-weight: 700; box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.5);} */
+.f_td {background: hsl(50, 50%, 80%);}
+.s_td {background: hsla(50, 25%, 60%, 0.7);}
+</style>
 </head>
 <body>
 <br><br><br>
@@ -70,7 +93,7 @@ Optional theme
         <c:forEach var="i" begin="${expage}" end="${lastPage}" step="1">
         	<c:choose>
         		<c:when test="${i eq currentPage}"><li><a href="${pageContext.request.contextPath}/tori/payment/payment_search_list?currentPage=${i}">[${i}]</a></li></c:when>
-        		<c:otherwise><li><a href="${pageContext.request.contextPath}/tori/payment/payment_search_list?currentPage=${i}">[${i}]</a></li>></c:otherwise>
+        		<c:otherwise><li><a href="${pageContext.request.contextPath}/tori/payment/payment_search_list?currentPage=${i}">[${i}]</a></li></c:otherwise>
         	</c:choose>
         </c:forEach>
         </c:if>
@@ -88,7 +111,8 @@ Optional theme
     </ul>
     <div>
         <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_add_form">결제정보입력</a>
-        <a href="${pageContext.request.contextPath}/tori/payment/payment_search_form" class="btn btn-primary">조건검색</a>
+        <a href="${pageContext.request.contextPath}/tori/payment/payment_list" class="btn btn-primary">결제목록</a>
+      <%--   <a href="${pageContext.request.contextPath}/tori/payment/payment_search_form" class="btn btn-primary">조건검색</a> --%>
     </div>
     <br><br>
     <div>

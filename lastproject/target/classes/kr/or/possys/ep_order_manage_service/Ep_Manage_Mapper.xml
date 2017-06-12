@@ -80,7 +80,7 @@
 	</insert>
 					<!-- @@@@@ 업체 삭제시 발주테이블에 발주id값이 있나 확인할려고 하는 발주리스트 목록 불러오기 -->
 	<select id="chk_del" parameterType="string" resultType="kr.or.possys.ep_order_food_details_service.Ep_Order">
-		select * from ep_order_food_details where food_id = #{food_id}		
+		select * from ep_order_food_details where food_id = #{food_id}	
 	</select>
 	<select id="chk_alldel" parameterType="string" resultType="kr.or.possys.ep_order_food_details_service.Ep_Order">
 		select * from ep_order_food_details where ep_id = #{ep_id}		
@@ -153,7 +153,7 @@
 	</delete>
 	<!-- 발주업체 디폴트id 삭제 -->
 	<delete id="f_del_o" parameterType="string">
-		delete from ep_order_food_details where food_id=#{food_id}
+		delete from ep_order_food_details where food_id=#{food_id} and ep_order_id ='default'
 	</delete>
 	<delete id="f_del_oall" parameterType="java.util.Map">
 		delete from ep_order_food_details where ep_id=#{ep_id} and ep_order_id=#{ep_order_id}
