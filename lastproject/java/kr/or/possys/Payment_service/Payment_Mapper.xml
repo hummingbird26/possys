@@ -197,9 +197,9 @@ INSERT IGNORE INTO payment(payment_id
  , sysdate()
  , #{payment_cate}
  , '정상'
- FROM table_order, member, order_detail;
+ FROM table_order, member, order_detail
  
- INSERT IGNORE INTO card(card_id
+ <!-- INSERT IGNORE INTO card(card_id
  , payment_id
  , card_app
  , card_detail
@@ -218,7 +218,7 @@ INSERT IGNORE INTO payment(payment_id
  , #{payment_pay}
  , #{card_price}
  , #{card_tax}
- FROM payment WHERE payment_cate='카드' AND payment_id = payment.payment_id AND payment_date = payment.payment_date;
+ FROM payment WHERE payment_cate='카드' AND payment_id = payment.payment_id AND payment_date = payment.payment_date; -->
  
  <!-- INSERT IGNORE INTO card(card_id
  , payment_id

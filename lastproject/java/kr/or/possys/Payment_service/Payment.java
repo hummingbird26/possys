@@ -13,7 +13,7 @@ public class Payment {
 	private String payment_cate;
 	private String payment_state;
 	
-	private String card_id;
+	/*private String card_id;
 	//private String payment_id;
 	private String card_app;
 	private String card_detail;
@@ -21,7 +21,7 @@ public class Payment {
 	private String card_company;
 	private int card_total;
 	private int card_price;
-	private int card_tax;
+	private int card_tax;*/
 	public String getPayment_id() {
 		return payment_id;
 	}
@@ -82,7 +82,7 @@ public class Payment {
 	public void setPayment_state(String payment_state) {
 		this.payment_state = payment_state;
 	}
-	public String getCard_id() {
+	/*public String getCard_id() {
 		return card_id;
 	}
 	public void setCard_id(String card_id) {
@@ -129,7 +129,7 @@ public class Payment {
 	}
 	public void setCard_tax(int card_tax) {
 		this.card_tax = card_tax;
-	}
+	}*/
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub

@@ -60,7 +60,11 @@
 }
 .table4_1 tr:nth-child(even){
 	background-color:#fdfdfd;
-}		
+}
+
+tr{
+font-size: 15px;
+}  		
 </style>
 
  <!-- start: Css -->

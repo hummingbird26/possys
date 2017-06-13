@@ -133,7 +133,9 @@ body:before{
   color:#fff;
  } 
    
-   
+tr{
+font-size: 15px;
+}  
    </style>
 </head>
 <body>
@@ -225,9 +227,7 @@ body:before{
         
     </table>
     <ul class="pager" id="ml_pager">
-        <c:if test="${currentPage < lastpage}">
-            <li class="previous"><a href="${pageContext.request.contextPath}/member_list?currentPage=${currentPage-1}">이전</a></li>
-        </c:if>
+       
       
       	<c:forEach var="i" begin="${expage}" end="${lastpage}" step="1">
              <c:choose>

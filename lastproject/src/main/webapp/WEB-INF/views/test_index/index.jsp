@@ -69,14 +69,39 @@
                 <div class="panel">
                   <div class="panel-body">
                       <div class="col-md-6 col-sm-12">
-                        <h3 class="animated fadeInLeft">개인 블로그 주소</h3>
-                        <p class="animated fadeInDown"><span class="fa  fa-map-marker"></span>서울</p>
-
+                        <h3 class="animated fadeInLeft"><b>개인 블로그 주소</b></h3>
+                      
                         <ul class="nav navbar-nav">
+<<<<<<< HEAD
                             <li><a id="hki" href="" >홍경인(Team github)</a></li>
                             <li><a id="ogj" href="" class="active">오광진(blog)</a></li>
                             <li><a id="bsh" href="">배상훈(blog)</a></li>
                             <li><a href=""><del>최홍락</del></a></li>
+=======
+                           <li class="dropdown avatar-dropdown">
+                  		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+               			   </li>
+                            <li><a id="hki" href="" >홍경인(Team github)</a></li>
+                           
+                            <li class="dropdown avatar-dropdown">
+                  		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+               			   </li>
+                            <li><a id="ogj" href="" class="active">오광진(blog)</a></li>
+                            
+                            <li class="dropdown avatar-dropdown">
+                  		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+               			   </li>
+                            <li><a id="bsh" href="">배상훈(blog)</a></li>
+                            
+                            <li class="dropdown avatar-dropdown">
+                  		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+               			   </li>
+                            <li><a href=""><del>최홍락</del></a></li>
+                            
+                             <li class="dropdown avatar-dropdown">
+                  		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+               			   </li>
+>>>>>>> branch 'master' of https://github.com/hummingbird26/possys.git
                             <li><a id="bsw" href="">백승욱(blog)</a></li>
                         </ul>
                     </div>
@@ -189,10 +214,10 @@
                                   </div>
                                   <div class="panel-body">
                                     <div class="col-md-12 padding-0 text-center">
-                                      <div class="col-md-4 col-sm-4 col-xs-6 padding-0">
-                                          <h3>연봉</h3>
-                                          <p>10.000</p>
+                                    <div style="width: 70px" class="col-md-4 col-sm-4 col-xs-6 padding-0">
+                                        
                                       </div>
+                                      
                                       <div class="col-md-4 col-sm-4 col-xs-6 padding-0">
                                           <h3>직급</h3>
                                           <p>${sessionScope.admin.admin_level}</p>
@@ -1242,6 +1267,9 @@
         //  end:  Chart =============
 			
         // start: Calendar =========
+        	
+        
+        
          var sysdate =  $('#date').val($.datepicker.formatDate($.datepicker.ATOM, new Date()));
         	$('.dashboard .calendar').fullCalendar({
             header: {
@@ -1254,8 +1282,14 @@
             editable: true,
             events: [
                 {
-                    title: '팀프 발표(취소)',
+                    title: '팀프발표(x)',
                     start: '2017-06-05',
+                    constraint: 'availableForMeeting', // defined below
+                    color: '#20C572'
+                },
+                {
+                    title: '팀프발표(x)',
+                    start: '2017-06-12',
                     constraint: 'availableForMeeting', // defined below
                     color: '#20C572'
                 },
@@ -1319,6 +1353,8 @@
 
       })(jQuery);
      </script>
+     
+    
   <!-- end: Javascript -->
   </body>
 </html>

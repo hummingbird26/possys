@@ -29,22 +29,18 @@
         <nav class="navbar navbar-default header navbar-fixed-top">
           <div class="col-md-12 nav-wrapper">
             <div class="navbar-header" style="width:100%;">
-              <div class="opener-left-menu is-open">
-                <span class="top"></span>
-                <span class="middle"></span>
-                <span class="bottom"></span>
-              </div>
+             
                 <a href="${pageContext.request.contextPath}/test_index/index" class="navbar-brand"> 
                  <b>POS_SYSEM</b>
                 </a>
 				
 							
               <ul class="nav navbar-nav navbar-right user-nav">
-                <li class="user-name"><span>${sessionScope.admin.admin_name}</span></li>
+                <li class="user-name"><span>사용자 : ${sessionScope.admin.admin_name}</span></li>
                 <!-- 로그아웃 버튼 -->
                  <li><a href="${pageContext.request.contextPath}/logout"><span class="fa fa-power-off "></span></a></li>
                  
-                  <li class="dropdown avatar-dropdown">
+<%--                   <li class="dropdown avatar-dropdown">
                    <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                    <ul class="dropdown-menu user-dropdown">
                      <li><a href="#"><span class="fa fa-user"></span> My Profile</a></li>
@@ -54,13 +50,13 @@
                       <ul>
                         <li><a href=""><span class="fa fa-cogs"></span></a></li>
                         <li><a href=""><span class="fa fa-lock"></span></a></li>
-                        <%-- <li><a href="${pageContext.request.contextPath}/logout"><span class="fa fa-power-off "></span></a></li> --%>
+                        <li><a href="${pageContext.request.contextPath}/logout"><span class="fa fa-power-off "></span></a></li>
                       </ul>
                     </li>
                   </ul>
                 </li>
                 <li ><a href="#" class="opener-right-menu"><span class="fa fa-coffee"></span></a></li>
-              
+               --%>
               </ul>			
 			 <!-- 네비바 영역 각자 보여줄 페이지 추가(기능 시작 페이지) -->
 				
