@@ -1,6 +1,8 @@
 package kr.or.possys.Member_sevice;
 
 public class Member {
+	String p_member_phone;
+	
 	String member_phone;
 	String member_name;
 	int member_point;
@@ -10,6 +12,14 @@ public class Member {
 	
 	int sum_total;
 	
+	
+	
+	public String getP_member_phone() {
+		return p_member_phone;
+	}
+	public void setP_member_phone(String p_member_phone) {
+		this.p_member_phone = p_member_phone;
+	}
 	public int getSum_total() {
 		return sum_total;
 	}

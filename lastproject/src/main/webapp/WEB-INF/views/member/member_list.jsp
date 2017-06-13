@@ -386,7 +386,7 @@ $(document).ready(function(){
 				console.log(member_phone+"<<<");
 				console.log(member_point+"<<<");
 				console.log(member_sign+"<<<");
-				
+				//회원 상세정보
 				$('#member_name').html("<br><div style='border-bottom:2px solid red; width:200px;'><p><b>회원 가입 날짜</b> : "+" "+member_join+"</p></div>"
 										+"</br><div style='border-bottom:2px solid red; width:200px;'><p><b>회원 이름</b> : "+" "+member_name+"</p></div>"
 										+"</br><div style='border-bottom:2px solid red; width:200px;'><p><b>회원 연락처</b>: "+" "+member_phone+"</p></div>"
@@ -400,6 +400,7 @@ $(document).ready(function(){
 				
 				$('#member_update_view').html("<div class='form-style-8'><p><b>회원 가입 날짜</b> : "+" "+'<input type="text" id="member_update_member_join" style="cursor:not-allowed;" readonly value="'+member_join+'">'+"</p>"
 											+"<p><b>회원 이름</b> : "+" "+'<input type="text" id="member_update_member_name"  value="'+member_name+'">'+"</p>"
+											+'<input type="hidden" id="member_update_p_member_phone" value="'+member_phone+'">'
 											+"<p><b>회원 연락처</b> : "+" "+'<input type="text" id="member_update_member_phone" value="'+member_phone+'">'+"</p>"
 											+"<p><b>보유 마일리지</b> : "+" "+'<input type="text" id="member_update_member_point" style="cursor:not-allowed" readonly value="'+member_point+'">'+"</p>"
 											+"<p><b>최근 방문일자</b> : "+" "+'<input type="text" id="member_update_member_sign" style="cursor:not-allowed" readonly  value="'+member_sign+'">'+"</p></div>"
@@ -452,13 +453,15 @@ $('#member_update_btn').click(function(){
 	var member_update_member_phone = $('#member_update_member_phone').val();
 	var member_update_member_point = $('#member_update_member_point').val();
 	var member_update_member_sign = $('#member_update_member_sign').val();
+	var member_update_p_member_phone = $('#member_update_p_member_phone').val();
 	
 	
 	var member_update = {"member_join":member_update_member_join
 						,"member_name":member_update_member_name
 						,"member_phone":member_update_member_phone
 						,"member_point":member_update_member_point
-						,"member_sign":member_update_member_sign}
+						,"member_sign":member_update_member_sign
+						,"p_member_phone":member_update_p_member_phone}
 
 	console.log(member_update)
 	$.ajax({
