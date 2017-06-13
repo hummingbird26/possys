@@ -73,11 +73,11 @@
                         <p class="animated fadeInDown"><span class="fa  fa-map-marker"></span>서울</p>
 
                         <ul class="nav navbar-nav">
-                            <li><a id="hki" href="" >홍경인</a></li>
-                            <li><a id="ogj" href="" class="active">오광진</a></li>
-                            <li><a id="bsh" href="">배상훈</a></li>
-                            <li><a href="">최홍락</a></li>
-                            <li><a id="bsw" href="">백승욱</a></li>
+                            <li><a id="hki" href="" >홍경인(Team github)</a></li>
+                            <li><a id="ogj" href="" class="active">오광진(blog)</a></li>
+                            <li><a id="bsh" href="">배상훈(blog)</a></li>
+                            <li><a href=""><del>최홍락</del></a></li>
+                            <li><a id="bsw" href="">백승욱(blog)</a></li>
                         </ul>
                     </div>
                     <div class="col-md-6 col-sm-12">
