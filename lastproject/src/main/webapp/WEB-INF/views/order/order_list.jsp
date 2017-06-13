@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>OrderList</title>
+<title>주문 리스트</title>
 <%@ include file="../modal/header.jsp" %>
 <script type="text/javascript">
 	$(document).ready(function(){

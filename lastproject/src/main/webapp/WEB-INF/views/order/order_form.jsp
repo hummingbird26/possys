@@ -385,7 +385,7 @@ body {font-family: Verdana,sans-serif;margin:0}
 </style>
   
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>주문수정</title>
+<title>주문</title>
 <%@ include file="../modal/wide_menu_order.jsp" %>
 <script type="text/javascript">
 

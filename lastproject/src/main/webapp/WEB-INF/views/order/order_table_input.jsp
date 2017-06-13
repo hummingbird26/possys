@@ -137,7 +137,7 @@ a {
 	border: 0;
 }
 </style>
-<title>Insert title here</title>
+<title>테이블 번호를 입력해 주세요</title>
 </head>
 <body>
 <input type = text id = "table_num_count" value = '${table_num_count}' hidden = 'hidden'/>
