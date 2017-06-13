@@ -69,6 +69,7 @@
 	<form id="frm" action="${pageContext.request.contextPath}/member_update" method="post">
         <div class="form-group">전화번호 :
             <input class="form-control" name="member_phone" id ="member_phone" value="${Member.member_phone}" type="text" readonly="readonly"/>
+            <input class="form-control" name="p_member_phone" id ="p_member_phone" value="${Member.member_phone}" type="hidden" readonly="readonly"/>
         </div>
         <div id="phone_re" style="display:none;"></div> 
         <div class="form-group">

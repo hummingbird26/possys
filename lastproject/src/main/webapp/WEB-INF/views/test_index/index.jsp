@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -73,6 +73,7 @@
                       
                         <ul class="nav navbar-nav">
 
+                         
                            <li class="dropdown avatar-dropdown">
                   		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                			   </li>
@@ -81,22 +82,22 @@
                             <li class="dropdown avatar-dropdown">
                   		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                			   </li>
-                            <li><a id="ogj" href="" class="active">오광진(blog)</a></li>
+                            <li><a id="ogj" href="" class="active">오광진</a></li>
                             
                             <li class="dropdown avatar-dropdown">
                   		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                			   </li>
-                            <li><a id="bsh" href="">배상훈(blog)</a></li>
-                            
-                            <li class="dropdown avatar-dropdown">
-                  		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
-               			   </li>
-                            <li><a href=""><del>최홍락</del></a></li>
-                            
+                            <li><a id="bsh" href="">배상훈</a></li>
+                           
                              <li class="dropdown avatar-dropdown">
                   		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                			   </li>
-                            <li><a id="bsw" href="">백승욱(blog)</a></li>
+                            <li><a id="bsw" href="">백승욱</a></li>
+                            <%-- 
+                                <li class="dropdown avatar-dropdown">
+                  		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+               			   </li> --%>
+                            <li><a href=""><del>최홍락</del></a></li>
                         </ul>
                     </div>
                     <div class="col-md-6 col-sm-12">
@@ -1351,4 +1352,5 @@
     
   <!-- end: Javascript -->
   </body>
+
 </html>

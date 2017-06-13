@@ -774,14 +774,16 @@ public class Member_Controller {
 					,@RequestParam(value="member_name")String member_name
 					,@RequestParam(value="member_phone")String member_phone
 					,@RequestParam(value="member_point")int member_point
-					,@RequestParam(value="member_sign")String member_sign){
+					,@RequestParam(value="member_sign")String member_sign
+					,@RequestParam(value="p_member_phone")String p_member_phone){
 			System.out.println("ajax_update_Action 메서드 실행");
 		/*	System.out.println(member_join+"member_join Member_Controller.java");
 			System.out.println(member_name+"member_name Member_Controller.java");
 			System.out.println(member_phone+"Member_Controller.java");
 			System.out.println(member_point+"Member_Controller.java");
 			System.out.println(member_sign+"Member_Controller.java");*/
-			
+			System.out.println(member_phone+"<<<member_phone  수정처리 입력 값 Member_Controller.java");
+			System.out.println(p_member_phone+"<<<p_member_phone  조회할 핸드폰 번호 Member_Controller.java");
 			Member m = new Member();
 			m.setMember_join(member_join);
 			m.setMember_name(member_name);
@@ -789,8 +791,9 @@ public class Member_Controller {
 			m.setMember_point(member_point);
 			m.setMember_sign(member_sign);
 			
-			
-			System.out.println(m.getMember_phone()+"<=-----------");
+			m.setP_member_phone(p_member_phone);
+			System.out.println(m.getMember_phone()+"입력받은 핸드폰 번호<=-----------");
+			System.out.println(m.getMember_phone()+"조회할 핸드폰 번호<=-----------");
 			Mdao.Mupdate(m);
 		
 		}

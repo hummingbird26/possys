@@ -43,13 +43,27 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-	if($('#pbtn').val()==null){
+	if($('#pbtn').val()=="null"){
 		/* alert('조회하실 목록을 선택하세요'); */
-		 $('#container').remove(); 
-		 $('#C_container').remove();
+		 $('#container').hide(); 
+		 $('#C_container').hide();
 		 
 	}
 	$('#pbtn').change(function(){
+		
+			var pbtn_val = $('#pbtn').val();
+			
+		//셀렉트 박스가 변할때 선택없음 이면 다 지워라
+		if(pbtn_val=="null"){
+			 
+			 $('#container').hide(); 
+			 $('#C_container').hide();
+			 
+		}else{
+			 $('#container').show(); 
+			 $('#C_container').show();
+			
+		}
 	var selbox = $('#pbtn').val();
 	 /* alert(selbox+'pbtn 실행 확인'); */
 	var input ={"selbox":selbox};
@@ -427,6 +441,8 @@ $(document).ready(function(){
                         </div>
                     </div> -->
                  <div class="panel chart-title">
+                        <b><span style="color: red">셀렉트 박스를 선택하세요</span></b>
+                        </br>
                         
                       	<select id="pbtn">
 						<option value="null">선택하세요</option>
