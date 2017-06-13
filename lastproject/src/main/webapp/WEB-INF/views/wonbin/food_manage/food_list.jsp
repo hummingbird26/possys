@@ -142,7 +142,7 @@
 <br>
 <h3>식자재 목록</h3>
 
-<div class="col-md-offset-11"><span style="font-size: 16px;">전체 식재료 수 : ${foodcount}</span></div>
+<div class="col-md-offset-10"><span style="font-size: 16px;">전체 식재료 수 : ${foodcount}</span></div>
 	<div>
 	<input class="btn btn-primary" id="ep_submit" type="button" value="발주업체 등록" data-toggle="tooltip" data-placement="bottom" title="발주업체 등록을 위해서는 아래 체크박스를 체크하시고 등록하셔야합니다."/>
 		<%-- <a href="${pageContext.request.contextPath}/food_add_form"> --%><button type="button" class="btn btn-primary" id="add_food">식자재 추가</button><!-- </a> -->
