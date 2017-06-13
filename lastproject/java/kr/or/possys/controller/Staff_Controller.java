@@ -55,14 +55,14 @@ public class Staff_Controller {
 		String id = request.getParameter("usercode");
 		String pw = request.getParameter("password");
 			
-		System.out.println(id+"id값");
-		System.out.println(pw+"pw값");
+		/*System.out.println(id+"id값");
+		System.out.println(pw+"pw값");*/
 		Staff s = sdao.loginSelect(id);
 		
-		System.out.println(s.getStaff_date()+"<< 입사날짜");
-		
+		/*System.out.println(s.getStaff_date()+"<< 입사날짜");
+		*/
 		String Staff_date = s.getStaff_date().substring(0, 10);
-		System.out.println(s+"<<<리턴값 확인");
+		/*System.out.println(s+"<<<리턴값 확인");*/
 		String returnURL = "";
 		
 		//폼에서 받은 아이디 패스워드 일치시 admin 세션 key 생성

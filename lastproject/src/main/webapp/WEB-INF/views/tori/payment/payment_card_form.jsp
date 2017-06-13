@@ -174,7 +174,7 @@ function addCardId(){
 		document.getElementById('card_id').value = cardId;
 }
 
-function loadCardTotal(){
+/* function loadCardTotal(){
 	//부모프레임인 결제폼에 접근하여 카드결제금액을 가져온다
 	//window.parent.moneySave();
 	//alert("실행됩니까?");
@@ -191,8 +191,8 @@ function loadCardTotal(){
 	for(var i = 0; i < ffrom.elements.length; ++i){
 		var fId = ffrom.elements[i]
 		fto.elements[fId.payment_pay].value=fId.value;
-	} */
-}
+	} 
+} */
 
 </script>
  
@@ -208,12 +208,12 @@ function loadCardTotal(){
 					<td><input type="text" class="form-control" name="card_id" id="card_id" size="auto" placeholder="승인번호를 입력해주세요" onclick="javascript:addCardId();">
 					</td>
 				</tr>
-				<!-- <tr>
+				<tr>
 					<td>결제번호 : 
 					</td>
 					<td><input type="text" class="form-control" name="payment_id" id="payment_id" size="auto" placeholder="결제아이디를 입력해주세요">
 					</td>
-				</tr> -->
+				</tr>
 				<tr>
 					<td>승인구분 : 
 					</td>
@@ -228,12 +228,13 @@ function loadCardTotal(){
 					<td><input type="text" class="form-control" name="card_detail" id="card_detail" size="auto" placeholder="결제상세내역을 입력해 주세요">
 					</td>
 				</tr>
-				<!-- <tr>
+				<tr>
 					<td>승인날짜 : 
 					</td>
-					<td><input type="date" class="form-control" name="card_date" id="card_date" size="auto" onclick="javascript:loadCardDate();">
+					<td><input type="date" class="form-control" name="card_date" id="card_date" size="auto">
+					<!-- <input type="date" class="form-control" name="card_date" id="card_date" size="auto" onclick="javascript:loadCardDate();"> -->
 					</td>
-				</tr> -->
+				</tr>
 				<tr>
 					<td>카드사 : 
 					</td>
@@ -243,26 +244,27 @@ function loadCardTotal(){
 				<tr>
 					<td>카드결제금액 :
 					</td>
-					<td><input type="text" class="form-control" name="card_total" id="card_total" size="auto" onclick="javascript:loadCardTotal()" placeholder="결제금액을 입력해 주세요">
+					<td><input type="text" class="form-control" name="card_total" id="card_total" size="auto"  placeholder="결제금액을 입력해 주세요">
+					<!-- <input type="text" class="form-control" name="card_total" id="card_total" size="auto" onclick="javascript:loadCardTotal()" placeholder="결제금액을 입력해 주세요"> -->
 					</td>
 				</tr>
 				<tr>
 					<td>공급가액: 
 					</td>
-					<td><input type="text" class="form-control" name="card_price" id="card_price" size="auto" placeholder="공급가액을 입력해 주세요" readonly>
+					<td><input type="text" class="form-control" name="card_price" id="card_price" size="auto" placeholder="공급가액을 입력해 주세요">
 					</td>
 				</tr>
 				<tr>
 					<td>부가세 : 
 					</td>
-					<td><input type="text" class="form-control" name="card_tax" id="card_tax" size="auto" placeholder="부가세를 입력해 주세요" readonly>
+					<td><input type="text" class="form-control" name="card_tax" id="card_tax" size="auto" placeholder="부가세를 입력해 주세요">
 					</td>
 				</tr>
 				</table>
-		<!-- <input type="submit" class="btn btn-primary btn-sm" id="paymentCardAdd" name="paymentCardAdd" value="카드거래입력"> -->
+		<input type="submit" class="btn btn-primary btn-sm" id="paymentCardAdd" name="paymentCardAdd" value="카드거래입력">
 		<input type="reset" class="btn btn-primary btn-sm" id="paymentCancel" name="paymentCancel" value="다시입력">
-		<%-- <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/payment/payment_card_list">글목록</a>
-		<input type="button" class="btn btn-primary btn-sm" value="리턴하기" onclick="javascript:returnform();"/> --%>
+		<a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/tori/payment/payment_card_list">글목록</a>
+		<!-- <input type="button" class="btn btn-primary btn-sm" value="리턴하기" onclick="javascript:returnform();"/> -->
 		<input type="button" class="btn btn-primary btn-sm" value="승인번호중복체크" onclick="javascript:chkDupCardId();"/>
 		</form>
 		<br><br>

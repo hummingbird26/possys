@@ -346,7 +346,7 @@ UPDATE member SET
 member_phone= #{member_phone}
  ,member_name= #{member_name}
  ,member_point= #{member_point}
- WHERE member_phone= #{member_phone}
+ WHERE member_phone= #{p_member_phone}
 </update>
 
 <delete id="deleteMember" parameterType="String">

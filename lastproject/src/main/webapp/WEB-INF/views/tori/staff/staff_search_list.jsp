@@ -104,6 +104,7 @@ tr:hover:not(#firstrow) { transform: scale(1.2); font-weight: 700; box-shadow: 0
     </ul>
    <div>
         <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/staff/staff_add_form">직원가입화면</a>
+        <a class="btn btn-primary" href="${pageContext.request.contextPath}/tori/staff/staff_list">직원목록화면</a>
         <%-- <a href="${pageContext.request.contextPath}/tori/staff/staff_search_form" class="btn btn-primary">조건검색</a> --%>
     </div>
     <br><br>
