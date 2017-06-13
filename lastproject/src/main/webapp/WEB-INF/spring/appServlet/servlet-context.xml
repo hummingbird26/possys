@@ -39,27 +39,19 @@
         <beans:property name="password" value="tkdgns12"/> -->
 
 		<beans:property name="url" value="jdbc:mysql://umj64-006.cafe24.com:3306/hummingbird26?useUnicode=true&amp;characterEncoding=euckr"/>
-	         <beans:property name="username" value="hummingbird26"/> 
-	         <beans:property name="password" value="ruddls12!@"/> 
-    	</beans:bean>
+ 	         <beans:property name="username" value="hummingbird26"/>
+ 	         <beans:property name="password" value="ruddls12!@"/> 
+     	</beans:bean>
 <!--     	<beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/okj?useUnicode=true&amp;characterEncoding=euckr"/>  -->
 <!-- 	         <beans:property name="username" value="okjid"/>  -->
 <!-- 	         <beans:property name="password" value="okjpw"/>  -->
-<<<<<<< HEAD
 <!-- 		</beans:bean> -->
-=======
+
 <!--     	</beans:bean> -->
     	<!-- <beans:property name="url" value="jdbc:mysql://umj64-006.cafe24.com:3306/hummingbird26?useUnicode=true&amp;characterEncoding=euckr"/>
 	         <beans:property name="username" value="hummingbird26"/> 
 	         <beans:property name="password" value="ruddls12!@"/> 
 		</beans:bean> -->
->>>>>>> branch 'master' of https://github.com/hummingbird26/possys.git
-
-       	<beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/dade?useUnicode=true&amp;characterEncoding=euckr&amp;allowMultiQueries=true"/>
-	         <beans:property name="username" value="dadeid"/> 
-	         <beans:property name="password" value="dadepw"/>
-	        <!--  allowMultiQueries=true 는 mapper에서 다중 쿼리 제한을 뚫어주는 역할을 할 것이다?  -->
-    	</beans:bean>
 	
 	<!-- mybatis설정 1. SqlSessionFactory -->
     <beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -68,60 +60,33 @@
         <!-- mybatis 세션생성후 쿼리를 실행시킬때 사용할 쿼리위치(메퍼)설정 -->
         <beans:property name="mapperLocations">
             <beans:list>
-            	<!-- 원빈 -->
+            	<!-- 발주 관리 -->
                 <beans:value>classpath:kr/or/possys/food_service/Food_Mapper.xml</beans:value>
                 <beans:value>classpath:kr/or/possys/drop_food_service/Drop_Mapper.xml</beans:value>
                 <beans:value>classpath:kr/or/possys/ep_order_manage_service/Ep_Manage_Mapper.xml</beans:value>
                 <beans:value>classpath:kr/or/possys/ep_order_food_details_service/Ep_Order_Mapper.xml</beans:value>
-                <!-- 원빈 끝 -->
-
-                <!-- 원빈 끝 -->
-
-                <!-- 주문 -->
+                <!-- 주문 관리 -->
                 <beans:value>classpath:kr/or/possys/Order_service/Order_Mapper.xml</beans:value>
-
-                
                 <beans:value>classpath:kr/or/possys/Order_service/Order_Mapper.xml</beans:value>
-
-
-                
-
-                <!-- 결제 -->
+                <!-- 결제 관리 -->
                 <beans:value>classpath:kr/or/possys/Payment_service/Payment_Mapper.xml</beans:value>
                 <beans:value>classpath:kr/or/possys/Cancel_Payment_service/Payment_Cancel_Mapper.xml</beans:value>
                 <beans:value>classpath:kr/or/possys/Card_Payment_service/Card_Payment_Mapper.xml</beans:value>
                 <!-- 직원&로그인 -->
-
-                 <beans:value>classpath:kr/or/possys/Staff_service/Staff_Mapper.xml</beans:value>
-
+                <beans:value>classpath:kr/or/possys/Staff_service/Staff_Mapper.xml</beans:value>
                 <beans:value>classpath:kr/or/possys/Member_sevice/Member_Mapper.xml</beans:value>
-
                 <beans:value>classpath:kr/or/possys/Member_sevice/Member_Mapper.xml</beans:value>
-
                 <!-- 메뉴 -->
-
-                
-
                 <beans:value>classpath:kr/or/possys/Menu_service/Per_Mapper.xml</beans:value>
-               	<!-- <beans:value>classpath:kr/or/possys/Menu_service/Per_Mapper.xml</beans:value> -->
-                <beans:value>classpath:kr/or/possys/Menu_service/Menu_Mapper.xml</beans:value>
-                
-
-               	<!-- <beans:value>classpath:kr/or/possys/Menu_service/Per_Mapper.xml</beans:value> -->
-
-            
-
-
-		</beans:list>
-
+               	<beans:value>classpath:kr/or/possys/Menu_service/Menu_Mapper.xml</beans:value>
+               	
+   		</beans:list>
         </beans:property>
 	    </beans:bean>
 	    <!-- mybatis설정 2. SqlSessionTemplate-->
 	    <beans:bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 	        <beans:constructor-arg index="0" ref="sqlSessionFactory" />
 	    </beans:bean>
-
-
 <!-- 로그인 인터셉터 테스트 -->
 		<interceptors>
 		<interceptor>
@@ -137,9 +102,7 @@
 		<mapping path="/home"/>
 			<beans:bean class="kr.or.possys.Staff_service.Staff_interceptor"></beans:bean>
 		</interceptor>
-		</interceptors>
-	
-	
+		</interceptors>	
 	<!-- 로그아웃 인터셉터(캐쉬날리기) -->
 	<interceptors>
 	<beans:bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
@@ -155,7 +118,6 @@
 		      </property>
 		--> 
     	</beans:bean>
-		</interceptors>
-		
+		</interceptors>		
 
 </beans:beans>

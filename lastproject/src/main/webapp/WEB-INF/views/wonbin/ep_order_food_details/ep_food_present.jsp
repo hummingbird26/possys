@@ -492,7 +492,6 @@
 					<th>번호</th>
 					<th>식재코드번호</th>
 					<th>상품명</th>
-					<th>최근 입고일자</th>
 					<th>현재수량</th>
 					<th>상세보기</th>
 					<!-- style="display:none"으로 th,td 숨기기 -->
@@ -506,7 +505,6 @@
 					<td>${(ep_ocount-status.index)}</td>
 					<td>${o.food_id}</td>
 					<td>${o.food_name}</td>
-					<td>${o.ep_order_wh_date}</td>
 					<td>${o.food_nowquantity}</td>
 					<td><button id="bt_sangse" type="button" value="${o.food_id}">상세보기</button></td>
 					<td style="display:none">${o.ep_id}</td>					
