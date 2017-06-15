@@ -15,12 +15,32 @@
 		<!--[if lte IE 9]><link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main_assets/css/ie9.css" /><![endif]-->
 	</head>
 	<body>
-
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+ <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+	
+	
+<script>
+$(document).ready(function(){
+	//새창으로 깃허브 열기
+	$('#git_hub').click(function(){
+		window.open('https://github.com/hummingbird26/possys','newWindow')
+	});
+	//완료 보고서 다운받기
+	$('#sucess').click(function(){
+		//다운받기 로직 만들어 주세요!!
+		
+	});
+});
+</script>
 		<!-- Header -->
 			<header id="header">
-				<h1>POS SYS</h1>
+				<h1>POS SYS</h1>   
 				<nav>
 					<ul>
+					<li><b><a id="sucess" href="" >완료 보고서(한글파일)</a></b></li>
+					<li><b><a id="git_hub" href="" >Team github 주소</a></b></li>
+					<li><b><a href="#work" style="color: red;">시작하기</a></b></li>
+					
 						<li><a href="#intro">소개</a></li>
 						<li><a href="#order">주문관리</a></li>
 						<li><a href="#one">발주관리</a></li>
@@ -34,45 +54,36 @@
 
 		<!-- 소개 -->
 			<section id="intro" class="main style1 dark fullscreen">
-				<div class="content">
+				<div class="content" style="height: 300px;">
 					<header>
-						<h2>팀 프로젝트 소개입니다.</h2>
-</br></br>
+						<h3>팀 프로젝트 소개입니다.</h3>
+</br>
 <h3>
 웹 화면개발언어
 </h3>
-
 <font>
 - java Script
-</br>
 - JQuery
 </font>
-</br>
 <h3>
 웹 Server측 개발언어
 </h3>
 
 <font>
 - java
-</br>
 - JSP
-</br>
 - Servlet 
 </font>
 
-
-</br>
 <h3>
-Framework: 
+Framework
 </h3>
 
 <font>
 -Spring
-</br>
 -Mybatis
 </font>
 
-</br>
 <h3>
 DBMS
 </h3>
@@ -81,7 +92,6 @@ DBMS
 -Mysql
 </font>
 
-</br>
 <h3>
 OS
 </h3>
@@ -107,22 +117,12 @@ Mybatis(mapper)
 </br>
 주요기능:
 휴대 기기를 사용하여 메뉴를 주문하고 테이블 현황에서 신청한 주문에 대한 정보를 확인 및 관리 할 수 있다.
-</br>
-<p>
 테이블 현황에서 메뉴 주문 및 수정 결제시 해당 테이블에 대한 관련 정보를 화면 전환 없이 실시간으로 db 조회하여 확인 할 수 있다.
-</p>
-<p>
 메뉴 주문후 결제완료 시점에서 소비된 식자재를 파악하여 
-</p>
-<p>
 부족한 품목을 발주신청하여 보충할 수 있다
-</p>
-<p>
 회원 개인별로 이용한 내역을 확인 할 수 있다.
-</p>
-<p>
 매장의 매출과 발주시 소비한 금액을 계산하여 순 이익을 확인 할 수 있다.
-</p>
+
 </font>
 </div>
 <style>
