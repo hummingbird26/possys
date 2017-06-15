@@ -51,7 +51,7 @@
 		
 		$('.catebutton').click(function(){
 			var cls = "."+this.id;
-			alert(cls+"히든");
+			
 			$('.all').hide();
 			$(cls).show();
 			

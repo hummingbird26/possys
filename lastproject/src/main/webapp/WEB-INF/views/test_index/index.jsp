@@ -82,17 +82,17 @@
                             <li class="dropdown avatar-dropdown">
                   		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                			   </li>
-                            <li><a id="ogj" href="" class="active">오광진(blog)</a></li>
+                            <li><a id="ogj" href="" class="active">오광진</a></li>
                             
                             <li class="dropdown avatar-dropdown">
                   		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                			   </li>
-                            <li><a id="bsh" href="">배상훈(blog)</a></li>
+                            <li><a id="bsh" href="">배상훈</a></li>
                            
                              <li class="dropdown avatar-dropdown">
                   		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                			   </li>
-                            <li><a id="bsw" href="">백승욱(blog)</a></li>
+                            <li><a id="bsw" href="">백승욱</a></li>
                             <%-- 
                                 <li class="dropdown avatar-dropdown">
                   		 <img src="${pageContext.request.contextPath}/resources/asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
@@ -1352,4 +1352,5 @@
     
   <!-- end: Javascript -->
   </body>
+
 </html>
